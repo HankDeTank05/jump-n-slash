@@ -63,7 +63,7 @@ p1 = {
 	x = 16, y = 100,
 	dx = 0, -- delta x, since there's no horizontal acceleration
 	y_vel = 0, -- y-velocity, since there is vertical acceleration
-	w = 8, h = 16,
+	w = 8, h = 8,
 	lft = nil, -- left x
 	rgt = nil, -- right x
 	top = nil, -- top y
@@ -126,54 +126,48 @@ function p1_horizontal_collision()
 	-- 4. vel ray
 	cand_tx = p1.lft
 	cand_ty = p1.top
-	cand_mx = p1.lft
-	cand_my = p1.mdl
 	cand_bx = p1.lft
 	cand_by = p1.btm
 
 	if p1.dx > 0 then
 		-- cast rays to right
+
 		-- top ray
 		while fget(mget((cand_tx / 8) + rooms[room_num].x, (cand_ty / 8) + rooms[room_num].y), 4) == false do
 			cand_tx += 1
 		end
 		cand_tx -= p1.w
-		-- middle ray
-		while fget(mget((cand_mx / 8) + rooms[room_num].x, (cand_my / 8) + rooms[room_num].y), 4) == false do
-			cand_mx+=1
-		end
-		cand_mx -= p1.w
+
 		-- bottom ray
 		while fget(mget((cand_bx / 8) + rooms[room_num].x, (cand_by / 8) + rooms[room_num].y), 4) == false do
 			cand_bx += 1
 		end
 		cand_bx -= p1.w
+
 	elseif p1.dx < 0 then
 		-- cast rays to left
+
 		-- top ray
 		while fget(mget((cand_tx / 8) + rooms[room_num].x, (cand_ty / 8) + rooms[room_num].y), 4) == false do
 			cand_tx -= 1
 		end
 		cand_tx += 1
-		-- middle ray
-		while fget(mget((cand_mx / 8) + rooms[room_num].x, (cand_my / 8) + rooms[room_num].y), 4) == false do
-			cand_mx -= 1
-		end
-		cand_mx += 1
+		
 		-- bottom ray
 		while fget(mget((cand_bx / 8) + rooms[room_num].x, (cand_by / 8) + rooms[room_num].y), 4) == false do
 			cand_bx -= 1
 		end
 		cand_bx += 1
+
 	end
 	cand_vx = p1.x + p1.dx
 	
 	if p1.dx > 0 then
 		-- facing right, so pick the smallest (leftmost number)
-		p1.x = min(cand_vx, min(cand_mx, min(cand_tx, cand_bx)))
+		p1.x = min(cand_vx, min(cand_tx, cand_bx))
 	elseif p1.dx < 0 then
 		-- facing left, so pick the largest (rightmost number)
-		p1.x = max(cand_vx, max(cand_mx, max(cand_tx, cand_bx)))
+		p1.x = max(cand_vx, max(cand_tx, cand_bx))
 	end
 end
 
@@ -287,23 +281,20 @@ function p1_draw(debug)
 		if true then
 			-- print numbers
 			print(cand_tx,10,10,15)
-			print(cand_mx,10,16,15)
-			print(cand_vx,10,22,15)
-			print(cand_bx,10,28,15)
+			print(cand_vx,10,16,15)
+			print(cand_bx,10,22,15)
 			
 			-- draw rays
 			if p1.dx>0 then
 				--moving right
-				line(p1.rgt,p1.top,cand_tx+p1.w-1,cand_ty,11)
-				line(p1.rgt,p1.mdl,cand_mx+p1.w-1,cand_my,11)
-				line(p1.rgt,(p1.mdl+p1.btm)/2,cand_vx+p1.w-1,(p1.mdl+p1.btm)/2,11)
-				line(p1.rgt,p1.btm,cand_bx+p1.w-1,cand_by,11)
+				line(p1.rgt, p1.top, cand_tx + p1.w - 1, cand_ty, 11)
+				line(p1.rgt, (p1.mdl + p1.btm) / 2, cand_vx + p1.w - 1, (p1.mdl + p1.btm) / 2, 11)
+				line(p1.rgt, p1.btm, cand_bx + p1.w - 1, cand_by, 11)
 			elseif p1.dx<0 then
 				--moving left
-				line(p1.lft,p1.top,cand_tx,cand_ty,11)
-				line(p1.lft,p1.mdl,cand_mx,cand_my,11)
-				line(p1.lft,(p1.mdl+p1.btm)/2,cand_vx,(p1.mdl+p1.btm)/2,11)
-				line(p1.lft,p1.btm,cand_bx,cand_by,11)
+				line(p1.lft, p1.top, cand_tx, cand_ty, 11)
+				line(p1.lft, (p1.mdl + p1.btm) / 2, cand_vx, (p1.mdl + p1.btm) / 2, 11)
+				line(p1.lft, p1.btm, cand_bx, cand_by, 11)
 			end
 		end
 		
