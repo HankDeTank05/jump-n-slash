@@ -6,22 +6,31 @@ __lua__
 --programmed by henry holman
 
 function _init()
+	rooms = {
+		{x = 0, y = 0}, -- room 1 (the test room)
+		{x = 16, y = 0}, -- room 2
+		{x = 32, y = 0}, -- room 3
+		{x = 48, y = 0}, -- room 4
+		{x = 64, y = 0}, -- room 5
+		{x = 80, y = 0}, -- room 6
+	}
+	room_num = 1
 end
 
 function _update60()
-	p1.update()
+	p1_update()
 end
 
 function _draw()
 	cls() --clear screen
 	
 	--draw the map
-	map(0,0,
-	    0,0,
-	    16,16)
+	map(rooms[room_num].x, rooms[room_num].y,
+	    0, 0, -- x,y position to draw on screen
+	    16, 16) -- w,h in tiles
 	
 	--draw the player
-	p1.draw(true)
+	p1_draw(true)
 end
 -->8
 --tab 1: reference
@@ -44,238 +53,193 @@ num | hex  | color  | meaning
 -->8
 --tab 2: player
 
-p1={
-	x=16,y=100,
-	dx=0,y_vel=0,
-	w=8,h=16,
-	lft=nil,--left x
-	rgt=nil,--right x
-	top=nil,--top y
-	btm=nil,--bottom y
-	ctr=nil,--center x
-	mdl=nil,--middle y
-	facing=1, --1=right, -1=left
-	bonked=false,
-	landed=false,
+p1 = {
+	x = 16, y = 100,
+	dx = 0, -- delta x, since there's no horizontal acceleration
+	y_vel = 0, -- y-velocity, since there is vertical acceleration
+	w = 8, h = 16,
+	lft = nil, -- left x
+	rgt = nil, -- right x
+	top = nil, -- top y
+	btm = nil, -- bottom y
+	ctr = nil, -- center x
+	mdl = nil, -- middle y
+	facing = 1, -- 1=right, -1=left
+	bonked = false, -- did you bonk your head on a ceiling?
+	landed = false, -- did you land on the ground?
 }
-jump_height=-4
-walk_speed=1
-gravity=0.2
+jump_height = -4
+walk_speed = 1
+gravity = 0.2
 
-function p1.update()
-	p1.read_inputs()
+function p1_update()
+	p1_read_inputs()
 	
-	p1.platform_collision()
+	p1_collision()
 	
-	--apply forces
-	p1.move()
+	p1_move()
 	
-	p1.update_landmarks()
+	p1_update_landmarks()
 	
 end
 
-function p1.read_inputs()
-	--read for inputs
-	if btnp(⬆️) and p1.landed==true then
-		p1.y_vel=jump_height
-		p1.landed=false
+function p1_read_inputs()
+	-- read for inputs
+	if btnp(⬆️) and p1.landed == true then
+		p1.y_vel = jump_height
+		p1.landed = false
 	end
 	
-	p1.dx=0
+	p1.dx = 0
 	if btn(➡️) then
-		p1.dx+=walk_speed
-		if p1.facing<0 then
-			p1.facing*=-1
+		p1.dx += walk_speed
+		if p1.facing < 0 then
+			p1.facing *= -1
 		end
 	end
 	if btn(⬅️) then
-	 p1.dx-=walk_speed
-	 if p1.facing>0 then
-	 	p1.facing*=-1
+	 p1.dx -= walk_speed
+	 if p1.facing > 0 then
+	 	p1.facing *= -1
 	 end
 	end
 	
-	p1.update_landmarks()
+	p1_update_landmarks()
 end
 
-function p1.platform_collision()
-
-	--check if you bonked your
-	--head if you're on your
-	--way up
-	if p1.y_vel<0 then
-		--check both top corners
-	end
-	
-	--check if you landed on a
-	--platform if you're on your
-	--way down
-	if p1.y_vel>=0 then
-		--check both btm corners
-		p1.landed=p1.land_detection()
-	end
-	
+function p1_collision()
+	p1_horizontal_collision()
+	p1_vertical_collision()
 end
 
-function p1.land_detection()
-	--checks the row below the
-	--bottom of the sprite
-	local tile_id_l=mget(p1.lft/8,(p1.btm+1)/8)
-	local tile_id_r=mget(p1.rgt/8,(p1.btm+1)/8)
-	return fget(tile_id_l,3) or fget(tile_id_r,3)
-end
+function p1_horizontal_collision()
+	-- determine wall collision with four candidates
+	-- 1. top ray
+	-- 2. mid ray
+	-- 3. btm ray
+	-- 4. vel ray
+	cand_tx = p1.lft
+	cand_ty = p1.top
+	cand_mx = p1.lft
+	cand_my = p1.mdl
+	cand_bx = p1.lft
+	cand_by = p1.btm
 
-
-function p1.stand_detection()
-	--checks the bottom row of the
-	--sprite
-	local tile_id_l=mget(p1.lft/8,p1.btm/8)
-	local tile_id_r=mget(p1.rgt/8,p1.btm/8)
-	return not(fget(tile_id_l,3) or fget(tile_id_r,3))
-end
-
-function p1.move()
-	--determine wall collision
-	--with four candidates
-	--1. top ray
-	--2. mid ray
-	--3. btm ray
-	--4. vel ray
-	cand_tx=p1.lft
-	cand_ty=p1.top
-	cand_mx=p1.lft
-	cand_my=p1.mdl
-	cand_bx=p1.lft
-	cand_by=p1.btm
-	if p1.dx>0 then
-		--cast rays to right
-		--top ray
-		while fget(mget(cand_tx/8,cand_ty/8),4)==false do
-			cand_tx+=1
+	if p1.dx > 0 then
+		-- cast rays to right
+		-- top ray
+		while fget(mget(cand_tx / 8, cand_ty / 8), 4) == false do
+			cand_tx += 1
 		end
-		cand_tx-=p1.w
-		--mdl ray
-		while fget(mget(cand_mx/8,cand_my/8),4)==false do
+		cand_tx -= p1.w
+		-- middle ray
+		while fget(mget(cand_mx / 8, cand_my / 8), 4) == false do
 			cand_mx+=1
 		end
-		cand_mx-=p1.w
-		--btm ray
-		while fget(mget(cand_bx/8,cand_by/8),4)==false do
-			cand_bx+=1
+		cand_mx -= p1.w
+		-- bottom ray
+		while fget(mget(cand_bx / 8, cand_by / 8), 4) == false do
+			cand_bx += 1
 		end
-		cand_bx-=p1.w
-	elseif p1.dx<0 then
-		--cast rays to left
-		--top ray
-		while fget(mget(cand_tx/8,cand_ty/8),4)==false do
-			cand_tx-=1
+		cand_bx -= p1.w
+	elseif p1.dx < 0 then
+		-- cast rays to left
+		-- top ray
+		while fget(mget(cand_tx / 8, cand_ty / 8), 4) == false do
+			cand_tx -= 1
 		end
-		cand_tx+=1
-		--mdl ray
-		while fget(mget(cand_mx/8,cand_my/8),4)==false do
-			cand_mx-=1
+		cand_tx += 1
+		-- middle ray
+		while fget(mget(cand_mx / 8, cand_my / 8), 4) == false do
+			cand_mx -= 1
 		end
-		cand_mx+=1
-		--btm ray
-		while fget(mget(cand_bx/8,cand_by/8),4)==false do
-			cand_bx-=1
+		cand_mx += 1
+		-- bottom ray
+		while fget(mget(cand_bx / 8, cand_by / 8), 4) == false do
+			cand_bx -= 1
 		end
-		cand_bx+=1
+		cand_bx += 1
 	end
-	cand_vx=p1.x+p1.dx
+	cand_vx = p1.x + p1.dx
 	
-	if p1.dx>0 then
-		--facing right, so pick the
-		--smallest (leftmost number)
-		p1.x=min(cand_vx,min(cand_mx,min(cand_tx,cand_bx)))
-	elseif p1.dx<0 then
-		--facing left, so pick the
-		--largest (rightmost number)
-		p1.x=max(cand_vx,max(cand_mx,max(cand_tx,cand_bx)))
-	end
-	
-	--this is the landing algo.
-	--it ensures you never pass
-	--through platforms no matter
-	--how fast you're falling.
-	
-	--every frame, two rays are
-	--cast straight downwards from
-	--both the left and right
-	--edges of the sprite.
-	
-	--from each of these rays, a
-	--"candidate" landing height
-	--is determined
-	
-	--we also determine a third
-	--candidate landing height
-	--based on the current y-pos
-	--and y-vel.
-	
-	--the highest candidate height
-	--(vertically nearest below
-	--the sprite) is chosen
-	
-	--this way, if you're falling
-	--faster than 8 pix/frame you
-	--will not pass through a
-	--one-tile-tall platform
-	
-	--determine candidate l
-	--using raycasting
-	cand_lx=p1.lft
-	cand_ly=p1.top
-	if p1.y_vel>=0 then
-		while fget(mget(cand_lx/8,(cand_ly+p1.h)/8),3)==false do
-			cand_ly+=1
-		end
-	else
-		while fget(mget(cand_lx/8,cand_ly/8),5)==false do
-			cand_ly-=1
-		end
-		cand_ly+=1
-	end
-	
-	--determine candidate r
-	--using raycasting
-	cand_rx=p1.rgt
-	cand_ry=p1.top
-	if p1.y_vel>=0 then
-		while fget(mget(cand_rx/8,(cand_ry+p1.h)/8),3)==false do
-			cand_ry+=1
-		end
-	else
-		while fget(mget(cand_rx/8,cand_ry/8),5)==false do
-			cand_ry-=1
-		end
-		cand_ry+=1
-	end
-	
-	--determine candidate v
-	--using velocity
-	cand_vy=p1.y+p1.y_vel
-	
-	if p1.y_vel>=0 then
-		p1.y=min(cand_vy,min(cand_ly,cand_ry))
-	else
-		p1.y=max(cand_vy,max(cand_ly,cand_ry))
-		if p1.y==cand_ly or p1.y==cand_ry then
-			p1.y_vel=0
-		end
-	end
-	
-	if p1.landed==true then
-		p1.y_vel=0
-	elseif p1.bonked==true then
-		p1.y_vel=0
-		p1.bonked=false
-	else
-		p1.y_vel+=gravity
+	if p1.dx > 0 then
+		-- facing right, so pick the smallest (leftmost number)
+		p1.x = min(cand_vx, min(cand_mx, min(cand_tx, cand_bx)))
+	elseif p1.dx < 0 then
+		-- facing left, so pick the largest (rightmost number)
+		p1.x = max(cand_vx, max(cand_mx, max(cand_tx, cand_bx)))
 	end
 end
 
-function p1.update_landmarks()
+function p1_vertical_collision()
+	
+	-- this is the landing algo. it ensures you never pass through platforms no matter how fast you're falling.
+	-- every frame, two rays are cast straight downwards from both the left and right edges of the sprite.
+	-- from each of these rays, a "candidate" landing height is determined
+	-- we also determine a third candidate landing height based on the current y-pos and y-vel.
+	-- the highest candidate height (vertically nearest below the sprite) is chosen
+	-- this way, if you're falling faster than 8 pix/frame you will not pass through a one-tile-tall platform
+	
+	-- determine candidate l using raycasting
+	cand_lx = p1.lft
+	cand_ly = p1.top
+	if p1.y_vel >= 0 then
+		while fget(mget((cand_lx / 8) + rooms[room_num].x, ((cand_ly + p1.h) / 8) + rooms[room_num].y), 3) == false do
+			cand_ly += 1
+		end
+	else
+		while fget(mget((cand_lx / 8) + rooms[room_num].x, (cand_ly / 8) + rooms[room_num].y), 5) == false do
+			cand_ly -= 1
+		end
+		cand_ly += 1
+	end
+	
+	-- determine candidate r using raycasting
+	cand_rx = p1.rgt
+	cand_ry = p1.top
+	if p1.y_vel >= 0 then
+		while fget(mget((cand_rx / 8) + rooms[room_num].x, ((cand_ry + p1.h) / 8) + rooms[room_num].y), 3) == false do
+			cand_ry += 1
+		end
+	else
+		while fget(mget((cand_rx / 8) + rooms[room_num].x, (cand_ry / 8) + rooms[room_num].y), 5) == false do
+			cand_ry -= 1
+		end
+		cand_ry += 1
+	end
+	
+	-- determine candidate v using velocity
+	cand_vy = p1.y + p1.y_vel
+	
+	-- reset the landed flag to false
+	p1.landed = false
+
+	if p1.y_vel >= 0 then
+		p1.y = min(cand_vy, min(cand_ly, cand_ry))
+		if p1.y == cand_ly or p1.y == cand_ry then
+			p1.landed = true
+		end
+	else
+		p1.y = max(cand_vy, max(cand_ly, cand_ry))
+		if p1.y == cand_ly or p1.y == cand_ry then
+			p1.bonked = true
+		end
+	end
+end
+
+function p1_move()
+	
+	if p1.landed == true then
+		p1.y_vel = 0
+	elseif p1.bonked == true then
+		p1.y_vel = 0
+		p1.bonked = false
+	else
+		p1.y_vel += gravity
+	end
+end
+
+function p1_update_landmarks()
 	p1.lft=p1.x
 	p1.rgt=p1.x+p1.w-1
 	p1.top=p1.y
@@ -283,26 +247,49 @@ function p1.update_landmarks()
 	p1.ctr=(p1.lft+p1.rgt)/2
 	p1.mdl=(p1.top+p1.btm)/2
 end
+
+function p1.get_left()
+	return p1.x
+end
+
+function p1.get_right()
+	return p1.x + p1.w - 1
+end
+
+function p1.get_top()
+	return p1.y
+end
+
+function p1.get_bottom()
+	return p1.y + p1.h - 1
+end
+
+function p1.get_center_x()
+	return (p1.get_left() + p1.get_right()) / 2
+end
+
+function p1.get_middle_y()
+	return (p1.get_top() + p1.get_bottom()) / 2
+end
 	
-function p1.draw(debug)
-	sspr(8,0,
-	     8,16,
-	     p1.x,p1.y,
-	     8,16,
-	     p1.facing==-1,false)
+function p1_draw(debug)
+	sspr(8, 0, -- x,y of top left pixel on spritesheet
+	     8, 16, -- w,h in pixels on spritesheet
+	     p1.x, p1.y, -- x,y position to draw on screen
+	     8, 16, -- w,h to draw on screen
+	     p1.facing == -1, false) -- bool flags to mirror in x,y directions when drawn
 	
 	if debug then
 		
+		-- print/draw wall detection
 		if false then
-			--print/draw wall detection
-			
-			--print numbers
+			-- print numbers
 			print(cand_tx,10,10,15)
 			print(cand_mx,10,16,15)
 			print(cand_vx,10,22,15)
 			print(cand_bx,10,28,15)
 			
-			--draw rays
+			-- draw rays
 			if p1.dx>0 then
 				--moving right
 				line(p1.rgt,p1.top,cand_tx+p1.w-1,cand_ty,11)
@@ -318,26 +305,27 @@ function p1.draw(debug)
 			end
 		end
 		
-		if false then
-			--print/draw bonk/land
-			--detection
+		-- print/draw bonk/land detection
+		if true then
+			-- print velocity
+			print(p1.y_vel, 30, 10, 15)
 			
-			--print numbers
-			print(cand_ly,30,30,15)--lft
-			print(cand_vy,40,36,15)--vel
-			print(cand_ry,50,42,15)--rgt
+			-- print numbers
+			print(cand_ly, 30, 30, 15) -- left
+			print(cand_vy, 40, 36, 15) -- velocity
+			print(cand_ry, 50, 42, 15) -- right
 			
-			--draw rays
+			-- draw rays
 			if p1.y_vel>0 then
-				--falling
-				line(p1.lft,p1.btm,cand_lx,cand_ly+p1.h-1,11)
-				line(p1.ctr,p1.btm,p1.ctr,cand_vy+p1.h-1,11)
-				line(p1.rgt,p1.btm,cand_rx,cand_ry+p1.h-1,11)
+				-- falling
+				line(p1.lft, p1.btm, cand_lx, cand_ly + p1.h - 1, 11)
+				line(p1.ctr, p1.btm, p1.ctr, cand_vy + p1.h - 1, 11)
+				line(p1.rgt, p1.btm, cand_rx, cand_ry + p1.h - 1, 11)
 			elseif p1.y_vel<0 then
-				--rising
-				line(p1.lft,p1.top,cand_lx,cand_ly,11)
-				line(p1.ctr,p1.top,p1.ctr,cand_vy,11)
-				line(p1.rgt,p1.top,cand_rx,cand_ry,11)
+				-- rising
+				line(p1.lft, p1.top, cand_lx, cand_ly, 11)
+				line(p1.ctr, p1.top, p1.ctr, cand_vy, 11)
+				line(p1.rgt, p1.top, cand_rx, cand_ry, 11)
 			end
 		end
 		
