@@ -15,6 +15,7 @@ f = 1 -- frame count
 
 function _init()
 	init_rooms()
+	init_player()
 end
 
 function _update60()

@@ -6,29 +6,34 @@ __lua__
     this is the file for all code concerning the player character
 ]]
 
-p1 = {
-	sprite = 1, -- the sprite to draw
-	x = 16, y = 100,
-	dx = 0, -- delta x, since there's no horizontal acceleration
-	y_vel = 0, -- y-velocity, since there is vertical acceleration
-	w = 8, h = 8,
-	lft = nil, -- left x
-	rgt = nil, -- right x
-	top = nil, -- top y
-	btm = nil, -- bottom y
-	ctr = nil, -- center x
-	mdl = nil, -- middle y
-	facing = 1, -- 1=right, -1=left
-	bonked = false, -- did you bonk your head on a ceiling?
-	landed = false, -- did you land on the ground?
-}
-jump_height = -4
-walk_speed = 1
-gravity = 0.2
+function init_player()
+    -- assumes rooms have already been initialized
+    assert(get_current_room().start_x != nil)
+    assert(get_current_room().start_y != nil)
+    p1 = {
+        sprite = 1, -- the sprite to draw
+        x = get_current_room().start_x, y = get_current_room().start_y,
+        dx = 0, -- delta x, since there's no horizontal acceleration
+        y_vel = 0, -- y-velocity, since there is vertical acceleration
+        w = 8, h = 8, -- width and height of the sprite
+        lft = nil, -- left x
+        rgt = nil, -- right x
+        top = nil, -- top y
+        btm = nil, -- bottom y
+        ctr = nil, -- center x
+        mdl = nil, -- middle y
+        facing = 1, -- 1=right, -1=left
+        bonked = false, -- did you bonk your head on a ceiling?
+        landed = false, -- did you land on the ground?
+    }
+    jump_height = -4
+    walk_speed = 1
+    gravity = 0.2
 
-debug_horizontal_collision = true
-debug_vertical_collision = true
-debug_landmarks = false
+    debug_horizontal_collision = true
+    debug_vertical_collision = true
+    debug_landmarks = false
+end
 
 function p1_update()
 	p1_read_inputs()
@@ -328,7 +333,10 @@ function p1_update_landmarks()
 end
 	
 function p1_draw(_debug)
-	spr(p1.sprite, p1.x, p1.y)
+	spr(p1.sprite, -- sprite number to draw
+        p1.x, p1.y, -- position to draw at
+        1, 1, -- number of tiles wide/tall
+        p1.facing == -1, false) -- whether or not to flip on x,y axis respectively
 	
 	if _debug then
 
