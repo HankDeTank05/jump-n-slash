@@ -12,7 +12,7 @@ function init_player()
     assert(get_current_room().start_y != nil)
     p1 = {
         sprite = 1, -- the sprite to draw
-        x = get_current_room().start_x, y = get_current_room().start_y,
+        x = get_current_room().start_x, y = get_current_room().start_y, -- get starting x,y position based on what the starting room defines it to be
         dx = 0, -- delta x, since there's no horizontal acceleration
         y_vel = 0, -- y-velocity, since there is vertical acceleration
         w = 8, h = 8, -- width and height of the sprite
@@ -22,16 +22,15 @@ function init_player()
         btm = nil, -- bottom y
         ctr = nil, -- center x
         mdl = nil, -- middle y
-        facing = 1, -- 1=right, -1=left
-        bonked = false, -- did you bonk your head on a ceiling?
+        facing = 1, -- 1 = right, -1 = left
         landed = false, -- did you land on the ground?
     }
     jump_height = -4
     walk_speed = 1
     gravity = 0.2
 
-    debug_horizontal_collision = true
-    debug_vertical_collision = true
+    debug_horizontal_collision = false
+    debug_vertical_collision = false
     debug_landmarks = false
 end
 
@@ -79,7 +78,8 @@ function set_y_velocity(_new_vel)
     p1.y_vel = _new_vel
 end
 
--- currently unused!
+-- currently unused
+-- currently not implemented
 function cast_ray(_start_x, _start_y, _x_dir, _y_dir, _flag_num)
     -- cast a ray from a starting position, in a given direction, until it hits a map tile with the given flag
     -- note: raycast can only be in one of the four cardinal directions

@@ -88,10 +88,12 @@ function set_current_room(_num)
 end
 
 function get_current_room()
+    assert(curr_room != nil) -- ensure the rooms have been initialized before doing anything
     return rooms[curr_room]
 end
 
 function get_current_room_num()
+    assert(curr_room != nil) -- ensure the rooms have been initialized before doing anything
     return curr_room
 end
 
