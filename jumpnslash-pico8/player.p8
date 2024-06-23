@@ -74,6 +74,7 @@ function set_y_velocity(_new_vel)
     p1.y_vel = _new_vel
 end
 
+-- currently unused!
 function cast_ray(_start_x, _start_y, _x_dir, _y_dir, _flag_num)
     -- cast a ray from a starting position, in a given direction, until it hits a map tile with the given flag
     -- note: raycast can only be in one of the four cardinal directions
@@ -114,46 +115,46 @@ function p1_horizontal_collision()
 	cand_ty = p1.top
 	cand_by = p1.btm
 
-	if p1.dx > 0 then
-		-- cast rays to right
+    -- edge case #1
+    -- if the player is not enclosed in solid tiles, the raycasting while loop will run forever.
+    -- in order to avoid this, there needs to be a second (fallback) condition that stops casting the ray when it
+    -- hits the edge of the screen.
 
-		-- top ray
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false do
+    -- note: we're actually gonna allow it to go one pixel off the edge of the screen to allow it to trigger
+    -- a screen transition
+
+	if p1.dx > 0 then -- cast rays to right
+        --                                                      account for edge case #1
+		-- top ray                                                vvvvvvvvvvvvv
+		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx <= 128 do -- allows screen transition when on the right edge of the screen
 			cand_tx += 1
 		end
 		cand_tx -= p1.w
 
-		-- bottom ray
-		while check_for_flag_at(cand_bx, cand_by, 4) == false do
+        --                                                      account for edge case #1
+		-- bottom ray                                             vvvvvvvvvvvvv
+		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx <= 128 do -- allows screen transition when on the right edge of the screen
 			cand_bx += 1
 		end
 		cand_bx -= p1.w
 
-	elseif p1.dx < 0 then
-		-- cast rays to left
-
-		-- top ray
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false do
+	elseif p1.dx < 0 then -- cast rays to left
+        --                                                      account for edge case #1
+		-- top ray                                                vvvvvvvvvvvv
+		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx >= -1 do -- allows screen transition when on left edge of the screen
 			cand_tx -= 1
 		end
 		cand_tx += 1
 		
-		-- bottom ray
-		while check_for_flag_at(cand_bx, cand_by, 4) == false do
+        --                                                      account for edge case #1
+		-- bottom ray                                             vvvvvvvvvvvv
+		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx >= -1 do -- allows screen transition when on left edge of the screen
 			cand_bx -= 1
 		end
 		cand_bx += 1
 
 	end
 	cand_vx = p1.x + p1.dx
-	
-	if p1.dx > 0 then
-		-- facing right, so pick the smallest (leftmost number)
-		p1.x = min(cand_vx, min(cand_tx, cand_bx))
-	elseif p1.dx < 0 then
-		-- facing left, so pick the largest (rightmost number)
-		p1.x = max(cand_vx, max(cand_tx, cand_bx))
-	end
 end
 
 function p1_vertical_collision()
@@ -173,31 +174,69 @@ function p1_vertical_collision()
 	cand_ly = p1.top
 	cand_ry = p1.top
 
-	if p1.y_vel >= 0 then
-        -- cast rays downwards
+    -- edge case #1
+    -- if the player is not enclosed in solid tiles, the raycasting while loop will run forever.
+    -- in order to avoid this, there needs to be a second (fallback) condition that stops casting the ray when it
+    -- hits the edge of the screen.
+
+	if p1.y_vel >= 0 then -- cast rays downwards
+        -- if we're casting downwards, start from the bottom of the sprite rather than the top
+        cand_ly += p1.h - 1
+        cand_ry += p1.h - 1
+
+        -- edge case #2
+        -- if we're inside a semisolid platform, the rays will start from inside a landable tile and never be cast.
+        -- if this is the case, we need to cast them until they're outside of the tile they started inside of, and
+        -- then resume casting like normal
 
         -- left ray
-		while check_for_flag_at(cand_lx, cand_ly, 3) == false do
+
+        -- account for edge case #2 with left ray
+        if check_for_flag_at(cand_lx, cand_ly, 3) then
+            printh("edge case, left ray")
+            -- cast until the ray is below the block
+            while check_for_flag_at(cand_lx, cand_ly, 3) == true do
+                cand_ly += 1
+            end
+            assert(check_for_flag_at(cand_lx, cand_ly, 3) == false) -- make sure it works properly
+        end
+
+        --                                                      account for edge case #1
+        -- cast left ray                                          vvvvvvvvvvvvv
+		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly < 128 do
 			cand_ly += 1
 		end
         cand_ly -= p1.h
 
         -- right ray
-		while check_for_flag_at(cand_rx, cand_ry, 3) == false do
+
+        -- account for edge case #2 with right ray
+        if check_for_flag_at(cand_rx, cand_ry, 3) then
+            printh("edge case, right ray")
+            -- cast until the ray is below the block
+            while check_for_flag_at(cand_rx, cand_ry, 3) == true do
+                cand_ry += 1
+            end
+            assert(check_for_flag_at(cand_rx, cand_ry, 3) == false) -- make sure it works properly
+        end
+
+        --                                                      account for edge case #1
+        -- cast right ray                                         vvvvvvvvvvvvv
+		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry < 128 do
 			cand_ry += 1
 		end
         cand_ry -= p1.h
-	else
-        -- cast rays upwards
-
-        -- left ray
-		while check_for_flag_at(cand_lx, cand_ly, 5) == false do
+    else -- cast rays upwards
+        --                                                      account for edge case #1
+        -- left ray                                               vvvvvvvvvvvv
+		while check_for_flag_at(cand_lx, cand_ly, 5) == false and cand_ly >= 0 do
 			cand_ly -= 1
 		end
 		cand_ly += 1
 
-        -- right ray
-		while check_for_flag_at(cand_rx, cand_ry, 5) == false do
+        --                                                      account for edge case #1
+        -- right ray                                              vvvvvvvvvvvv
+		while check_for_flag_at(cand_rx, cand_ry, 5) == false and cand_ry >= 0 do
 			cand_ry -= 1
 		end
 		cand_ry += 1
@@ -205,33 +244,78 @@ function p1_vertical_collision()
 	
 	-- determine candidate v using velocity
 	cand_vy = p1.y + p1.y_vel
-	
-	-- reset the landed flag to false
-	p1.landed = false
-
-	if p1.y_vel >= 0 then
-		p1.y = min(cand_vy, min(cand_ly, cand_ry))
-		if p1.y == cand_ly or p1.y == cand_ry then
-			p1.landed = true
-		end
-	else
-		p1.y = max(cand_vy, max(cand_ly, cand_ry))
-		if p1.y == cand_ly or p1.y == cand_ry then
-			p1.bonked = true
-		end
-	end
 end
 
 function p1_move()
 	
-	if p1.landed == true then
-		set_y_velocity(0)
-	elseif p1.bonked == true then
-		set_y_velocity(0)
-		p1.bonked = false
-	else
-		p1.y_vel += gravity
+    -- move player horizontally
+	if p1.dx > 0 then
+		-- facing right, so pick the smallest (leftmost number)
+		p1.x = min(cand_vx, min(cand_tx, cand_bx))
+	elseif p1.dx < 0 then
+		-- facing left, so pick the largest (rightmost number)
+		p1.x = max(cand_vx, max(cand_tx, cand_bx))
 	end
+
+	-- move player vertically
+	if p1.y_vel >= 0 then
+        -- move player
+		p1.y = min(cand_vy, min(cand_ly, cand_ry))
+
+        -- determine if they landed or not
+		if p1.y == cand_ly or p1.y == cand_ry then
+			p1.landed = true
+		    set_y_velocity(0)
+        else
+            p1.landed = false
+            p1_apply_gravity()
+		end
+	else
+        -- move player
+		p1.y = max(cand_vy, max(cand_ly, cand_ry))
+
+        -- determine if they bonked their head or not
+		if p1.y == cand_ly or p1.y == cand_ry then
+		    set_y_velocity(0)
+        else
+            p1_apply_gravity()
+		end
+	end
+
+    -- check if player is positioned to trigger screen transitions
+    if p1.y < 0 then -- move up
+        move_player_to_room_up()
+    elseif p1.y + p1.h - 1 > 127 then -- move down
+        move_player_to_room_down()
+    elseif p1.x < 0 then -- move left
+        move_player_to_room_left()
+    elseif p1.x + p1.w - 1 > 127 then -- move right
+        move_player_to_room_right()
+    end
+end
+
+function p1_apply_gravity()
+    p1.y_vel += gravity
+end
+
+function move_player_to_room_up()
+    trans_room_up()
+    p1.y = 127 - (p1.h - 1)
+end
+
+function move_player_to_room_down()
+    trans_room_down()
+    p1.y = 0
+end
+
+function move_player_to_room_left()
+    trans_room_left()
+    p1.x = 127 - (p1.w - 1)
+end
+
+function move_player_to_room_right()
+    trans_room_right()
+    p1.x = 0
 end
 
 function p1_update_landmarks()
@@ -247,6 +331,8 @@ function p1_draw(_debug)
 	spr(p1.sprite, p1.x, p1.y)
 	
 	if _debug then
+
+        p1_update_landmarks()
 		
 		-- print/draw wall detection
 		if debug_horizontal_collision then
@@ -282,9 +368,9 @@ function p1_draw(_debug)
 			-- draw rays
 			if p1.y_vel>0 then
 				-- falling
-				line(p1.lft, p1.top, cand_lx, cand_ly, 11) -- left
+				line(p1.lft, p1.top + p1.h - 1, cand_lx, cand_ly, 11) -- left
 				line(p1.ctr, p1.top, p1.ctr, cand_vy, 11) -- velocity
-				line(p1.rgt, p1.top, cand_rx, cand_ry, 11) -- right
+				line(p1.rgt, p1.top + p1.h - 1, cand_rx, cand_ry, 11) -- right
 			elseif p1.y_vel<0 then
 				-- rising
 				line(p1.lft, p1.top, cand_lx, cand_ly, 11) -- left
