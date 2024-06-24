@@ -11,7 +11,13 @@ function init_player()
     assert(get_current_room().start_mx != nil)
     assert(get_current_room().start_my != nil)
     p1 = {
-        sprite = 1, -- the sprite to draw
+		sprs = { -- lists of sprites for animation
+			neutral = {16,},
+			walk = {17, 18, 19, 20, 21, 22, 23,},
+		},
+		spr_state = nil, -- assigned p1.sprs.<sublist>
+        spr_n = 1, -- the index of the sprite to draw
+		anim_spd = 10, -- speed control for animations, higher number = slower
         x = get_current_room().start_mx * 8, y = get_current_room().start_my * 8, -- get starting x,y position based on what the starting room defines it to be
         dx = 0, -- delta x, since there's no horizontal acceleration
         y_vel = 0, -- y-velocity, since there is vertical acceleration
@@ -43,6 +49,8 @@ function p1_update()
 	p1_collision()
 	
 	p1_move()
+
+	p1_animate()
 	
 	p1_update_landmarks()
 	
@@ -334,6 +342,17 @@ function p1_move()
     end
 end
 
+function p1_animate()
+	-- set animation state
+	if p1.dx != 0 then
+		p1.spr_state = p1.sprs.walk
+	else
+		p1.spr_state = p1.sprs.neutral
+	end
+
+	p1.spr_n = (flr(f / p1.anim_spd) % #p1.spr_state) + 1
+end
+
 function p1_apply_gravity()
     p1.y_vel += gravity
 end
@@ -368,7 +387,7 @@ function p1_update_landmarks()
 end
 	
 function p1_draw(_debug)
-	spr(p1.sprite, -- sprite number to draw
+	spr(p1.spr_state[p1.spr_n], -- sprite number to draw
         p1.x, p1.y, -- position to draw at
         1, 1, -- number of tiles wide/tall
         p1.facing == -1, false) -- whether or not to flip on x,y axis respectively
