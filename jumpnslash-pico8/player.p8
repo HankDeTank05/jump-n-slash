@@ -14,6 +14,8 @@ function init_player()
 		sprs = { -- lists of sprites for animation
 			neutral = {16,},
 			walk = {17, 18, 19, 20, 21, 22, 23,},
+			jump = {1, 2, 3, 4, 5, 6, 7,},
+			fall = {33, 34, 35, 36, 37, 38, 39,},
 		},
 		spr_state = nil, -- assigned p1.sprs.<sublist>
         spr_n = 1, -- the index of the sprite to draw
@@ -344,7 +346,11 @@ end
 
 function p1_animate()
 	-- set animation state
-	if p1.dx != 0 then
+	if p1.y_vel < 0 then
+		p1.spr_state = p1.sprs.jump
+	elseif p1.y_vel > 0 then
+		p1.spr_state = p1.sprs.fall
+	elseif p1.dx != 0 then
 		p1.spr_state = p1.sprs.walk
 	else
 		p1.spr_state = p1.sprs.neutral
