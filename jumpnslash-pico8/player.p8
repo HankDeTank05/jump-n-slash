@@ -24,8 +24,11 @@ function init_player()
         mdl = nil, -- middle y
         facing = 1, -- 1 = right, -1 = left
         landed = false, -- did you land on the ground?
+		jump_btn_frames = 0, -- how many frames the jump button has been held for
+		jump_btn_released = true,
     }
-    jump_height = -4
+    jump_vel = -2 -- the jump velocity
+	max_jump_frames = 15 -- the longest
     walk_speed = 1
     gravity = 0.2
 
@@ -47,9 +50,24 @@ end
 
 function p1_read_inputs()
 	-- read for inputs
-	if btnp(⬆️) and p1.landed == true then
-		set_y_velocity(jump_height)
-		p1.landed = false
+	if btn(⬆️) -- if the jump button is down
+	and p1.y_vel <= 0 -- and the player is not falling (aka vertically not moving, or moving upwards)
+	and p1.jump_btn_frames < max_jump_frames then -- and the button has been held for less than the max allowed num of frames
+		
+		if (p1.jump_btn_frames == 0 and p1.jump_btn_released == true) -- case 1: it is the first frame the button is being pressed
+		or (p1.jump_btn_frames > 0 and p1.jump_btn_released == false) then -- case 2: the button has been held for more than one frame
+			p1.jump_btn_released = false
+			p1.jump_btn_frames += 1
+			set_y_velocity(jump_vel)
+			p1.landed = false
+		end
+
+	elseif btn(⬆️) == false then
+		p1.jump_btn_released = true
+		
+		if p1.landed == true then
+			p1.jump_btn_frames = 0
+		end
 	end
 	
 	p1.dx = 0
