@@ -8,11 +8,11 @@ __lua__
 
 function init_player()
     -- assumes rooms have already been initialized
-    assert(get_current_room().start_x != nil)
-    assert(get_current_room().start_y != nil)
+    assert(get_current_room().start_mx != nil)
+    assert(get_current_room().start_my != nil)
     p1 = {
         sprite = 1, -- the sprite to draw
-        x = get_current_room().start_x, y = get_current_room().start_y, -- get starting x,y position based on what the starting room defines it to be
+        x = get_current_room().start_mx * 8, y = get_current_room().start_my * 8, -- get starting x,y position based on what the starting room defines it to be
         dx = 0, -- delta x, since there's no horizontal acceleration
         y_vel = 0, -- y-velocity, since there is vertical acceleration
         w = 8, h = 8, -- width and height of the sprite
@@ -50,10 +50,12 @@ end
 
 function p1_read_inputs()
 	-- read for inputs
+
+	-- variable height jumping
 	if btn(⬆️) -- if the jump button is down
 	and p1.y_vel <= 0 -- and the player is not falling (aka vertically not moving, or moving upwards)
 	and p1.jump_btn_frames < max_jump_frames then -- and the button has been held for less than the max allowed num of frames
-		
+
 		if (p1.jump_btn_frames == 0 and p1.jump_btn_released == true) -- case 1: it is the first frame the button is being pressed
 		or (p1.jump_btn_frames > 0 and p1.jump_btn_released == false) then -- case 2: the button has been held for more than one frame
 			p1.jump_btn_released = false
@@ -63,20 +65,25 @@ function p1_read_inputs()
 		end
 
 	elseif btn(⬆️) == false then
+
 		p1.jump_btn_released = true
-		
 		if p1.landed == true then
 			p1.jump_btn_frames = 0
 		end
+
 	end
 	
+
+	-- walk left/right
 	p1.dx = 0
+	-- walk right?
 	if btn(➡️) then
 		p1.dx += walk_speed
 		if p1.facing < 0 then
 			p1.facing *= -1
 		end
 	end
+	-- walk left?
 	if btn(⬅️) then
 	 p1.dx -= walk_speed
 	 if p1.facing > 0 then
@@ -88,8 +95,18 @@ function p1_read_inputs()
 end
 
 function p1_collision()
+	p1_tile_collision()
+	p1_enemy_collision()
+end
+
+function p1_tile_collision()
 	p1_horizontal_collision()
 	p1_vertical_collision()
+end
+
+-- currently does nothing
+function p1_enemy_collision()
+	-- code goes here
 end
 
 function set_y_velocity(_new_vel)
@@ -97,7 +114,7 @@ function set_y_velocity(_new_vel)
 end
 
 -- currently unused
--- currently not implemented
+-- currently does nothing
 function cast_ray(_start_x, _start_y, _x_dir, _y_dir, _flag_num)
     -- cast a ray from a starting position, in a given direction, until it hits a map tile with the given flag
     -- note: raycast can only be in one of the four cardinal directions
@@ -149,14 +166,14 @@ function p1_horizontal_collision()
 	if p1.dx > 0 then -- cast rays to right
         --                                                      account for edge case #1
 		-- top ray                                                vvvvvvvvvvvvv
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx <= 128 do -- allows screen transition when on the right edge of the screen
+		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx <= 128 do -- 128 allows screen transition when on the right edge of the screen
 			cand_tx += 1
 		end
 		cand_tx -= p1.w
 
         --                                                      account for edge case #1
 		-- bottom ray                                             vvvvvvvvvvvvv
-		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx <= 128 do -- allows screen transition when on the right edge of the screen
+		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx <= 128 do -- 128 allows screen transition when on the right edge of the screen
 			cand_bx += 1
 		end
 		cand_bx -= p1.w
@@ -164,14 +181,14 @@ function p1_horizontal_collision()
 	elseif p1.dx < 0 then -- cast rays to left
         --                                                      account for edge case #1
 		-- top ray                                                vvvvvvvvvvvv
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx >= -1 do -- allows screen transition when on left edge of the screen
+		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx >= -1 do -- -1 allows screen transition when on left edge of the screen
 			cand_tx -= 1
 		end
 		cand_tx += 1
 		
         --                                                      account for edge case #1
 		-- bottom ray                                             vvvvvvvvvvvv
-		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx >= -1 do -- allows screen transition when on left edge of the screen
+		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx >= -1 do -- -1 allows screen transition when on left edge of the screen
 			cand_bx -= 1
 		end
 		cand_bx += 1
@@ -226,7 +243,7 @@ function p1_vertical_collision()
 
         --                                                      account for edge case #1
         -- cast left ray                                          vvvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly < 128 do
+		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly < 128 do -- 128 allows screen transition when on bottom edge of screen
 			cand_ly += 1
 		end
         cand_ly -= p1.h
@@ -245,21 +262,21 @@ function p1_vertical_collision()
 
         --                                                      account for edge case #1
         -- cast right ray                                         vvvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry < 128 do
+		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry < 128 do -- 128 allows screen transition when on bottom edge of screen
 			cand_ry += 1
 		end
         cand_ry -= p1.h
     else -- cast rays upwards
         --                                                      account for edge case #1
         -- left ray                                               vvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 5) == false and cand_ly >= 0 do
+		while check_for_flag_at(cand_lx, cand_ly, 5) == false and cand_ly >= -1 do -- -1 allows screen transition when on top edge of screen
 			cand_ly -= 1
 		end
 		cand_ly += 1
 
         --                                                      account for edge case #1
         -- right ray                                              vvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 5) == false and cand_ry >= 0 do
+		while check_for_flag_at(cand_rx, cand_ry, 5) == false and cand_ry >= -1 do -- -1 allows screen transition when on top edge of screen
 			cand_ry -= 1
 		end
 		cand_ry += 1
