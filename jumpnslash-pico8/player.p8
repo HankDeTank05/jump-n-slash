@@ -12,7 +12,7 @@ function init_player()
     assert(get_current_room().start_my != nil)
     p1 = {
 		sprs = { -- lists of sprites for animation
-			neutral = {16,},
+			neutral = {16, 32,},
 			walk = {17, 18, 19, 20, 21, 22, 23,},
 			jump = {1, 2, 3, 4, 5, 6, 7,},
 			fall = {33, 34, 35, 36, 37, 38, 39,},
@@ -20,7 +20,8 @@ function init_player()
 		spr_state = nil, -- assigned p1.sprs.<sublist>
         spr_n = 1, -- the index of the sprite to draw
 		anim_spd = 10, -- speed control for animations, higher number = slower
-        x = get_current_room().start_mx * 8, y = get_current_room().start_my * 8, -- get starting x,y position based on what the starting room defines it to be
+		anim_fcount = 0, -- frame counter for animation
+        x = (get_current_room().start_mx - 1) * 8, y = (get_current_room().start_my - 1) * 8, -- get starting x,y position based on what the starting room defines it to be
         dx = 0, -- delta x, since there's no horizontal acceleration
         y_vel = 0, -- y-velocity, since there is vertical acceleration
         w = 8, h = 8, -- width and height of the sprite
@@ -41,7 +42,7 @@ function init_player()
     gravity = 0.2
 
     debug_horizontal_collision = false
-    debug_vertical_collision = false
+    debug_vertical_collision = true
     debug_landmarks = false
 end
 
@@ -253,7 +254,7 @@ function p1_vertical_collision()
 
         --                                                      account for edge case #1
         -- cast left ray                                          vvvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly < 128 do -- 128 allows screen transition when on bottom edge of screen
+		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly < 129 do -- 129 allows screen transition when on bottom edge of screen
 			cand_ly += 1
 		end
         cand_ly -= p1.h
@@ -272,10 +273,11 @@ function p1_vertical_collision()
 
         --                                                      account for edge case #1
         -- cast right ray                                         vvvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry < 128 do -- 128 allows screen transition when on bottom edge of screen
+		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry < 129 do -- 129 allows screen transition when on bottom edge of screen
 			cand_ry += 1
 		end
         cand_ry -= p1.h
+	
     else -- cast rays upwards
         --                                                      account for edge case #1
         -- left ray                                               vvvvvvvvvvvv
@@ -347,34 +349,31 @@ end
 function p1_animate()
 	-- set animation state
 	if p1.y_vel < 0 then
-		if p1.spr_state != p1.sprs.jump then -- reset the anim sprite if this is the first frame we're changing to this state
-			p1.spr_n = 1
-		end
-		p1.spr_state = p1.sprs.jump
+		p1_set_animation(p1.sprs.jump)
 	elseif p1.y_vel > 0 then
-		if p1.spr_state != p1.sprs.fall then
-			p1.spr_n = 1
-		end
-		p1.spr_state = p1.sprs.fall
+		p1_set_animation(p1.sprs.fall)
 	elseif p1.dx != 0 then
-		if p1.spr_state != p1.sprs.walk then
-			p1.spr_n = 1
-		end
-		p1.spr_state = p1.sprs.walk
+		p1_set_animation(p1.sprs.walk)
 	else
-		if p1.spr_state != p1.sprs.neutral then
-			p1.spr_n = 1
-		end
-		p1.spr_state = p1.sprs.neutral
+		p1_set_animation(p1.sprs.neutral)
 	end
 
-	--p1.spr_n = (flr(f / p1.anim_spd) % #p1.spr_state) + 1
-	if flr(f / p1.anim_spd) % #p1.spr_state == 0 then
-		p1.spr_n += 1
-		if p1.spr_n > #p1.spr_state then
-			p1.spr_n = 1
-		end
+	p1.spr_n = (flr(p1.anim_fcount / p1.anim_spd) % #p1.spr_state) + 1
+
+	p1.anim_fcount += 1
+end
+
+function p1_reset_animation()
+	p1.spr_n = 1
+	p1.anim_fcount = 0
+end
+
+function p1_set_animation(_anim)
+	assert(#_anim > 0)
+	if p1.spr_state != _anim then -- reset the anim sprite if this is the first frame we're changing to this state
+		p1_reset_animation()
 	end
+	p1.spr_state = _anim
 end
 
 function p1_apply_gravity()
@@ -419,6 +418,8 @@ function p1_draw(_debug)
 	if _debug then
 
         p1_update_landmarks()
+
+		print("("..p1.x..", "..p1.y..")")
 		
 		-- print/draw wall detection
 		if debug_horizontal_collision then

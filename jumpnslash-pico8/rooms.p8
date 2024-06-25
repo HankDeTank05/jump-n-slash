@@ -82,8 +82,8 @@ function init_rooms()
     --]]
 
     -- room 1
-    add_room(0, 16, 16/8, 100/8)
-    set_connections(1, nil, nil, nil, 2)
+    add_room(0, 16, 3, 15)
+    set_connections(1, 9, nil, nil, 2)
 
     -- room 2
     add_room(16, 16, nil, nil)
@@ -112,6 +112,10 @@ function init_rooms()
     -- room 8
     add_room(80, 32, nil, nil)
     set_connections(8, 6, nil, nil, nil)
+
+    -- room 9
+    add_room(0, 0, nil, nil)
+    set_connections(9, nil, 1, nil, nil)
 
     set_current_room(1)
 end
