@@ -347,16 +347,34 @@ end
 function p1_animate()
 	-- set animation state
 	if p1.y_vel < 0 then
+		if p1.spr_state != p1.sprs.jump then -- reset the anim sprite if this is the first frame we're changing to this state
+			p1.spr_n = 1
+		end
 		p1.spr_state = p1.sprs.jump
 	elseif p1.y_vel > 0 then
+		if p1.spr_state != p1.sprs.fall then
+			p1.spr_n = 1
+		end
 		p1.spr_state = p1.sprs.fall
 	elseif p1.dx != 0 then
+		if p1.spr_state != p1.sprs.walk then
+			p1.spr_n = 1
+		end
 		p1.spr_state = p1.sprs.walk
 	else
+		if p1.spr_state != p1.sprs.neutral then
+			p1.spr_n = 1
+		end
 		p1.spr_state = p1.sprs.neutral
 	end
 
-	p1.spr_n = (flr(f / p1.anim_spd) % #p1.spr_state) + 1
+	--p1.spr_n = (flr(f / p1.anim_spd) % #p1.spr_state) + 1
+	if flr(f / p1.anim_spd) % #p1.spr_state == 0 then
+		p1.spr_n += 1
+		if p1.spr_n > #p1.spr_state then
+			p1.spr_n = 1
+		end
+	end
 end
 
 function p1_apply_gravity()
