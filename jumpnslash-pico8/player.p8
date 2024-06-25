@@ -21,7 +21,7 @@ function init_player()
         spr_n = 1, -- the index of the sprite to draw
 		anim_spd = 10, -- speed control for animations, higher number = slower
 		anim_fcount = 0, -- frame counter for animation
-        x = (get_current_room().start_mx - 1) * 8, y = (get_current_room().start_my - 1) * 8, -- get starting x,y position based on what the starting room defines it to be
+        x = get_current_room().start_mx * 8, y = get_current_room().start_my * 8, -- get starting x,y position based on what the starting room defines it to be
         dx = 0, -- delta x, since there's no horizontal acceleration
         y_vel = 0, -- y-velocity, since there is vertical acceleration
         w = 8, h = 8, -- width and height of the sprite
@@ -41,8 +41,9 @@ function init_player()
     walk_speed = 1
     gravity = 0.2
 
+	debug_position = false
     debug_horizontal_collision = false
-    debug_vertical_collision = true
+    debug_vertical_collision = false
     debug_landmarks = false
 end
 
@@ -419,7 +420,13 @@ function p1_draw(_debug)
 
         p1_update_landmarks()
 
-		print("("..p1.x..", "..p1.y..")")
+		if true then
+			print(temp_offset)
+		end
+
+		if debug_position then
+			print("("..p1.x..", "..p1.y..")")
+		end
 		
 		-- print/draw wall detection
 		if debug_horizontal_collision then

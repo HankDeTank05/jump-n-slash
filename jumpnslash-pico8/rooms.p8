@@ -6,83 +6,15 @@ __lua__
     this is the file for all code concerning the rooms
 ]]
 
-rooms = {} -- holds all the rooms in a list
-curr_room = nil -- the index of the current room
 
 function init_rooms()
-    --[[
-    rooms = {
-		{ -- room  1 (the test room)
-            x = 0, y = 0,
-            start_x = 2, start_y = 14,
-            -- connections to other rooms
-            connections = {
-                u = nil, 
-                d = nil, 
-                l = nil, 
-                r = 2,   
-            }
-        },
-		{ -- room  2
-            x = 16, y = 0,
-            start_x = nil, start_y = nil,
-            -- connections to other rooms
-            connections = {
-                u = nil, -- connection when exiting up
-                d = nil, -- connection when exiting down
-                l = 1, -- connection when exiting left
-                r = 3, -- connection when exiting right
-            }
-        },
-		{ -- room  3
-            x = 32, y = 0,
-            start_x = nil, start_y = nil,
-            -- connections to other rooms
-            connections = {
-                u = nil, -- connection when exiting up
-                d = nil, -- connection when exiting down
-                l = 2, -- connection when exiting left
-                r = 4, -- connection when exiting right
-            }
-        },
-		{ -- room  4
-            x = 48, y = 0,
-            start_x = nil, start_y = nil,
-            -- connections to other rooms
-            connections = {
-                u = nil, -- connection when exiting up
-                d = nil, -- connection when exiting down
-                l = 3, -- connection when exiting left
-                r = 5, -- connection when exiting right
-            }
-        },
-		{ -- room  5
-            x = 64, y = 0,
-            start_x = nil, start_y = nil,
-            -- connections to other rooms
-            connections = {
-                u = nil, -- connection when exiting up
-                d = nil, -- connection when exiting down
-                l = 4, -- connection when exiting left
-                r = 6, -- connection when exiting right
-            }
-        },
-		{ -- room  6
-            x = 80, y = 0,
-            start_x = nil, start_y = nil,
-            -- connections to other rooms
-            connections = {
-                u = nil, -- connection when exiting up
-                d = nil, -- connection when exiting down
-                l = 5, -- connection when exiting left
-                r = nil, -- connection when exiting right
-            }
-        },
-	}
-    --]]
+    rooms = {} -- holds all the rooms in a list
+    curr_room = nil -- the index of the current room
+    scroll_x_offset = 0
+    scroll_y_offset = 0
 
     -- room 1
-    add_room(0, 16, 3, 15)
+    add_room(0, 16, 2, 14)
     set_connections(1, 9, nil, nil, 2)
 
     -- room 2
@@ -123,15 +55,17 @@ end
 function add_room(_map_x, _map_y, _start_x, _start_y)
     -- _map_x: the x-coordinate of the top-left of the room to be added
     -- _map_y: the y-coordinate of the top-left of the room to be added
-    -- _start_x: the map x-coordinate where the player should start
-    -- _start_y: the map y-coordinate where the player should start
+    -- _start_x: the map x-coordinate where the player should start (set to nil if this room should not be a checkpoint)
+    -- _start_y: the map y-coordinate where the player should start (set to nil if this room should not be a checkpoint)
     local room = {
         mx = _map_x,
         my = _map_y,
         start_mx = _start_x,
         start_my = _start_y,
-        scroll_v = false, -- does this room scroll vertically?
-        scroll_h = false, -- does this room scroll horizontally?
+        scroll_x = false, -- does this room scroll horizontally?
+        scroll_y = false, -- does this room scroll vertically?
+        mx_end = nil,
+        my_end = nil,
         connections = {
             u = nil, -- connection when exiting up
             d = nil, -- connection when exiting down
@@ -161,6 +95,13 @@ function set_current_room(_num)
     assert(_num > 0) -- ensure we have a valid room number
     assert(_num <= #rooms) -- ^^what he said^^
     curr_room = _num
+    
+    if get_current_room().scroll_x == false then
+        scroll_x_offset = 0
+    end
+    if get_current_room().scroll_y == false then
+        scroll_y_offset = 0
+    end
 end
 
 function get_current_room()
