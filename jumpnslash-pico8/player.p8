@@ -10,32 +10,34 @@ function init_player()
     -- assumes rooms have already been initialized
     assert(get_current_room().start_mx != nil)
     assert(get_current_room().start_my != nil)
-    p1 = {
-		sprs = { -- lists of sprites for animation
-			neutral = {16, 32,},
-			walk = {17, 18, 19, 20, 21, 22, 23,},
-			jump = {1, 2, 3, 4, 5, 6, 7,},
-			fall = {33, 34, 35, 36, 37, 38, 39,},
-		},
-		spr_state = nil, -- assigned p1.sprs.<sublist>
-        spr_n = 1, -- the index of the sprite to draw
-		anim_spd = 10, -- speed control for animations, higher number = slower
-		anim_fcount = 0, -- frame counter for animation
-        x = get_current_room().start_mx * 8, y = get_current_room().start_my * 8, -- get starting x,y position based on what the starting room defines it to be
-        dx = 0, -- delta x, since there's no horizontal acceleration
-        y_vel = 0, -- y-velocity, since there is vertical acceleration
-        w = 8, h = 8, -- width and height of the sprite
-        lft = nil, -- left x
-        rgt = nil, -- right x
-        top = nil, -- top y
-        btm = nil, -- bottom y
-        ctr = nil, -- center x
-        mdl = nil, -- middle y
-        facing = 1, -- 1 = right, -1 = left
-        landed = false, -- did you land on the ground?
-		jump_btn_frames = 0, -- how many frames the jump button has been held for
-		jump_btn_released = true,
-    }
+	p1_sprs = { -- lists of sprites for animation
+		neutral = {16, 32,},
+		walk = {17, 18, 19, 20, 21, 22, 23,},
+		jump = {1, 2, 3, 4, 5, 6, 7,},
+		fall = {33, 34, 35, 36, 37, 38, 39,},
+	}
+	p1_spr_state = nil -- assigned p1_sprs.<sublist>
+	p1_spr_n = 1 -- the index of the sprite to draw
+	p1_anim_spd = 10 -- speed control for animations, higher number = slower
+	p1_anim_fcount = 0 -- frame counter for animation
+	p1_x = get_current_room().start_mx * 8 -- get starting x position based on what the starting room defines it to be
+	p1_y = get_current_room().start_my * 8 -- get starting y position based on what the starting room defines it to be
+	p1_dx = 0 -- delta x, since there's no horizontal acceleration
+	p1_y_vel = 0 -- y-velocity, since there is vertical acceleration
+	p1_w = 8 -- width of the sprite
+	p1_h = 8 -- height of the sprite
+	p1_lft = nil -- left x
+	p1_rgt = nil -- right x
+	p1_top = nil -- top y
+	p1_btm = nil -- bottom y
+	p1_ctr = nil -- center x
+	p1_mdl = nil -- middle y
+	p1_facing = 1 -- 1 = right, -1 = left
+	p1_landed = false -- did you land on the ground?
+	p1_jump_btn_frames = 0 -- how many frames the jump button has been held for
+	p1_jump_btn_released = true
+	
+
     jump_vel = -2 -- the jump velocity
 	max_jump_frames = 15 -- the longest
     walk_speed = 1
@@ -65,41 +67,41 @@ function p1_read_inputs()
 
 	-- variable height jumping
 	if btn(⬆️) -- if the jump button is down
-	and p1.y_vel <= 0 -- and the player is not falling (aka vertically not moving, or moving upwards)
-	and p1.jump_btn_frames < max_jump_frames then -- and the button has been held for less than the max allowed num of frames
+	and p1_y_vel <= 0 -- and the player is not falling (aka vertically not moving, or moving upwards)
+	and p1_jump_btn_frames < max_jump_frames then -- and the button has been held for less than the max allowed num of frames
 
-		if (p1.jump_btn_frames == 0 and p1.jump_btn_released == true) -- case 1: it is the first frame the button is being pressed
-		or (p1.jump_btn_frames > 0 and p1.jump_btn_released == false) then -- case 2: the button has been held for more than one frame
-			p1.jump_btn_released = false
-			p1.jump_btn_frames += 1
+		if (p1_jump_btn_frames == 0 and p1_jump_btn_released == true) -- case 1: it is the first frame the button is being pressed
+		or (p1_jump_btn_frames > 0 and p1_jump_btn_released == false) then -- case 2: the button has been held for more than one frame
+			p1_jump_btn_released = false
+			p1_jump_btn_frames += 1
 			set_y_velocity(jump_vel)
-			p1.landed = false
+			p1_landed = false
 		end
 
 	elseif btn(⬆️) == false then
 
-		p1.jump_btn_released = true
-		if p1.landed == true then
-			p1.jump_btn_frames = 0
+		p1_jump_btn_released = true
+		if p1_landed == true then
+			p1_jump_btn_frames = 0
 		end
 
 	end
 	
 
 	-- walk left/right
-	p1.dx = 0
+	p1_dx = 0
 	-- walk right?
 	if btn(➡️) then
-		p1.dx += walk_speed
-		if p1.facing < 0 then
-			p1.facing *= -1
+		p1_dx += walk_speed
+		if p1_facing < 0 then
+			p1_facing *= -1
 		end
 	end
 	-- walk left?
 	if btn(⬅️) then
-	 p1.dx -= walk_speed
-	 if p1.facing > 0 then
-	 	p1.facing *= -1
+	 p1_dx -= walk_speed
+	 if p1_facing > 0 then
+	 	p1_facing *= -1
 	 end
 	end
 	
@@ -122,7 +124,7 @@ function p1_enemy_collision()
 end
 
 function set_y_velocity(_new_vel)
-    p1.y_vel = _new_vel
+    p1_y_vel = _new_vel
 end
 
 -- currently unused
@@ -161,11 +163,11 @@ function p1_horizontal_collision()
 
     p1_update_landmarks()
 
-	cand_tx = p1.lft
-	cand_bx = p1.lft
+	cand_tx = p1_lft
+	cand_bx = p1_lft
 
-	cand_ty = p1.top
-	cand_by = p1.btm
+	cand_ty = p1_top
+	cand_by = p1_btm
 
     -- edge case #1
     -- if the player is not enclosed in solid tiles, the raycasting while loop will run forever.
@@ -175,22 +177,22 @@ function p1_horizontal_collision()
     -- note: we're actually gonna allow it to go one pixel off the edge of the screen to allow it to trigger
     -- a screen transition
 
-	if p1.dx > 0 then -- cast rays to right
+	if p1_dx > 0 then -- cast rays to right
         --                                                      account for edge case #1
 		-- top ray                                                vvvvvvvvvvvvv
 		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx <= 128 do -- 128 allows screen transition when on the right edge of the screen
 			cand_tx += 1
 		end
-		cand_tx -= p1.w
+		cand_tx -= p1_w
 
         --                                                      account for edge case #1
 		-- bottom ray                                             vvvvvvvvvvvvv
 		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx <= 128 do -- 128 allows screen transition when on the right edge of the screen
 			cand_bx += 1
 		end
-		cand_bx -= p1.w
+		cand_bx -= p1_w
 
-	elseif p1.dx < 0 then -- cast rays to left
+	elseif p1_dx < 0 then -- cast rays to left
         --                                                      account for edge case #1
 		-- top ray                                                vvvvvvvvvvvv
 		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx >= -1 do -- -1 allows screen transition when on left edge of the screen
@@ -206,7 +208,7 @@ function p1_horizontal_collision()
 		cand_bx += 1
 
 	end
-	cand_vx = p1.x + p1.dx
+	cand_vx = p1_x + p1_dx
 end
 
 function p1_vertical_collision()
@@ -220,21 +222,21 @@ function p1_vertical_collision()
 
     p1_update_landmarks()
     
-	cand_lx = p1.lft
-	cand_rx = p1.rgt
+	cand_lx = p1_lft
+	cand_rx = p1_rgt
 
-	cand_ly = p1.top
-	cand_ry = p1.top
+	cand_ly = p1_top
+	cand_ry = p1_top
 
     -- edge case #1
     -- if the player is not enclosed in solid tiles, the raycasting while loop will run forever.
     -- in order to avoid this, there needs to be a second (fallback) condition that stops casting the ray when it
     -- hits the edge of the screen.
 
-	if p1.y_vel >= 0 then -- cast rays downwards
+	if p1_y_vel >= 0 then -- cast rays downwards
         -- if we're casting downwards, start from the bottom of the sprite rather than the top
-        cand_ly += p1.h - 1
-        cand_ry += p1.h - 1
+        cand_ly += p1_h - 1
+        cand_ry += p1_h - 1
 
         -- edge case #2
         -- if we're inside a semisolid platform, the rays will start from inside a landable tile and never be cast.
@@ -258,7 +260,7 @@ function p1_vertical_collision()
 		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly < 129 do -- 129 allows screen transition when on bottom edge of screen
 			cand_ly += 1
 		end
-        cand_ly -= p1.h
+        cand_ly -= p1_h
 
         -- right ray
 
@@ -277,7 +279,7 @@ function p1_vertical_collision()
 		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry < 129 do -- 129 allows screen transition when on bottom edge of screen
 			cand_ry += 1
 		end
-        cand_ry -= p1.h
+        cand_ry -= p1_h
 	
     else -- cast rays upwards
         --                                                      account for edge case #1
@@ -296,39 +298,39 @@ function p1_vertical_collision()
 	end
 	
 	-- determine candidate v using velocity
-	cand_vy = p1.y + p1.y_vel
+	cand_vy = p1_y + p1_y_vel
 end
 
 function p1_move()
 	
     -- move player horizontally
-	if p1.dx > 0 then
+	if p1_dx > 0 then
 		-- facing right, so pick the smallest (leftmost number)
-		p1.x = min(cand_vx, min(cand_tx, cand_bx))
-	elseif p1.dx < 0 then
+		p1_x = min(cand_vx, min(cand_tx, cand_bx))
+	elseif p1_dx < 0 then
 		-- facing left, so pick the largest (rightmost number)
-		p1.x = max(cand_vx, max(cand_tx, cand_bx))
+		p1_x = max(cand_vx, max(cand_tx, cand_bx))
 	end
 
 	-- move player vertically
-	if p1.y_vel >= 0 then
+	if p1_y_vel >= 0 then
         -- move player
-		p1.y = min(cand_vy, min(cand_ly, cand_ry))
+		p1_y = min(cand_vy, min(cand_ly, cand_ry))
 
         -- determine if they landed or not
-		if p1.y == cand_ly or p1.y == cand_ry then
-			p1.landed = true
+		if p1_y == cand_ly or p1_y == cand_ry then
+			p1_landed = true
 		    set_y_velocity(0)
         else
-            p1.landed = false
+            p1_landed = false
             p1_apply_gravity()
 		end
 	else
         -- move player
-		p1.y = max(cand_vy, max(cand_ly, cand_ry))
+		p1_y = max(cand_vy, max(cand_ly, cand_ry))
 
         -- determine if they bonked their head or not
-		if p1.y == cand_ly or p1.y == cand_ry then
+		if p1_y == cand_ly or p1_y == cand_ry then
 		    set_y_velocity(0)
         else
             p1_apply_gravity()
@@ -336,85 +338,85 @@ function p1_move()
 	end
 
     -- check if player is positioned to trigger screen transitions
-    if p1.y < 0 then -- move up
+    if p1_y < 0 then -- move up
         move_player_to_room_up()
-    elseif p1.y + p1.h - 1 > 127 then -- move down
+    elseif p1_y + p1_h - 1 > 127 then -- move down
         move_player_to_room_down()
-    elseif p1.x < 0 then -- move left
+    elseif p1_x < 0 then -- move left
         move_player_to_room_left()
-    elseif p1.x + p1.w - 1 > 127 then -- move right
+    elseif p1_x + p1_w - 1 > 127 then -- move right
         move_player_to_room_right()
     end
 end
 
 function p1_animate()
 	-- set animation state
-	if p1.y_vel < 0 then
-		p1_set_animation(p1.sprs.jump)
-	elseif p1.y_vel > 0 then
-		p1_set_animation(p1.sprs.fall)
-	elseif p1.dx != 0 then
-		p1_set_animation(p1.sprs.walk)
+	if p1_y_vel < 0 then
+		p1_set_animation(p1_sprs.jump)
+	elseif p1_y_vel > 0 then
+		p1_set_animation(p1_sprs.fall)
+	elseif p1_dx != 0 then
+		p1_set_animation(p1_sprs.walk)
 	else
-		p1_set_animation(p1.sprs.neutral)
+		p1_set_animation(p1_sprs.neutral)
 	end
 
-	p1.spr_n = (flr(p1.anim_fcount / p1.anim_spd) % #p1.spr_state) + 1
+	p1_spr_n = (flr(p1_anim_fcount / p1_anim_spd) % #p1_spr_state) + 1
 
-	p1.anim_fcount += 1
+	p1_anim_fcount += 1
 end
 
 function p1_reset_animation()
-	p1.spr_n = 1
-	p1.anim_fcount = 0
+	p1_spr_n = 1
+	p1_anim_fcount = 0
 end
 
 function p1_set_animation(_anim)
 	assert(#_anim > 0)
-	if p1.spr_state != _anim then -- reset the anim sprite if this is the first frame we're changing to this state
+	if p1_spr_state != _anim then -- reset the anim sprite if this is the first frame we're changing to this state
 		p1_reset_animation()
 	end
-	p1.spr_state = _anim
+	p1_spr_state = _anim
 end
 
 function p1_apply_gravity()
-    p1.y_vel += gravity
+    p1_y_vel += gravity
 end
 
 function move_player_to_room_up()
     trans_room_up()
-    p1.y = 127 - (p1.h - 1)
+    p1_y = 127 - (p1_h - 1)
 end
 
 function move_player_to_room_down()
     trans_room_down()
-    p1.y = 0
+    p1_y = 0
 end
 
 function move_player_to_room_left()
     trans_room_left()
-    p1.x = 127 - (p1.w - 1)
+    p1_x = 127 - (p1_w - 1)
 end
 
 function move_player_to_room_right()
     trans_room_right()
-    p1.x = 0
+    p1_x = 0
 end
 
 function p1_update_landmarks()
-	p1.lft=p1.x
-	p1.rgt=p1.x+p1.w-1
-	p1.top=p1.y
-	p1.btm=p1.y+p1.h-1
-	p1.ctr=(p1.lft+p1.rgt)/2
-	p1.mdl=(p1.top+p1.btm)/2
+	p1_lft=p1_x
+	p1_rgt=p1_x+p1_w-1
+	p1_top=p1_y
+	p1_btm=p1_y+p1_h-1
+	p1_ctr=(p1_lft+p1_rgt)/2
+	p1_mdl=(p1_top+p1_btm)/2
 end
 	
 function p1_draw(_debug)
-	spr(p1.spr_state[p1.spr_n], -- sprite number to draw
-        p1.x, p1.y, -- position to draw at
+	spr(p1_spr_state[p1_spr_n], -- sprite number to draw
+        p1_x, p1_y, -- position to draw at
         1, 1, -- number of tiles wide/tall
-        p1.facing == -1, false) -- whether or not to flip on x,y axis respectively
+        p1_facing == -1, false) -- whether or not to flip on x,y axis respectively
 	
 	if _debug then
 
@@ -425,7 +427,7 @@ function p1_draw(_debug)
 		end
 
 		if debug_position then
-			print("("..p1.x..", "..p1.y..")")
+			print("("..p1_x..", "..p1_y..")")
 		end
 		
 		-- print/draw wall detection
@@ -436,23 +438,23 @@ function p1_draw(_debug)
 			print(cand_bx,10,22,15) -- bottom
 			
 			-- draw rays
-			if p1.dx>0 then
+			if p1_dx>0 then
 				--moving right
-				line(p1.lft, p1.top, cand_tx, cand_ty, 11) -- top
-				line(p1.lft, p1.mdl, cand_vx, p1.mdl, 11) -- velocity
-				line(p1.lft, p1.btm, cand_bx, cand_by, 11) -- bottom
-			elseif p1.dx<0 then
+				line(p1_lft, p1_top, cand_tx, cand_ty, 11) -- top
+				line(p1_lft, p1_mdl, cand_vx, p1_mdl, 11) -- velocity
+				line(p1_lft, p1_btm, cand_bx, cand_by, 11) -- bottom
+			elseif p1_dx<0 then
 				--moving left
-				line(p1.lft, p1.top, cand_tx, cand_ty, 11) -- top
-				line(p1.lft, p1.mdl, cand_vx, p1.mdl, 11) -- velocity
-				line(p1.lft, p1.btm, cand_bx, cand_by, 11) -- bottom
+				line(p1_lft, p1_top, cand_tx, cand_ty, 11) -- top
+				line(p1_lft, p1_mdl, cand_vx, p1_mdl, 11) -- velocity
+				line(p1_lft, p1_btm, cand_bx, cand_by, 11) -- bottom
 			end
 		end
 		
 		-- print/draw bonk/land detection
 		if debug_vertical_collision then
 			-- print velocity
-			print(p1.y_vel, 30, 10, 15)
+			print(p1_y_vel, 30, 10, 15)
 			
 			-- print numbers
 			print(cand_ly, 30, 30, 15) -- left
@@ -460,16 +462,16 @@ function p1_draw(_debug)
 			print(cand_ry, 50, 42, 15) -- right
 			
 			-- draw rays
-			if p1.y_vel>0 then
+			if p1_y_vel>0 then
 				-- falling
-				line(p1.lft, p1.top + p1.h - 1, cand_lx, cand_ly, 11) -- left
-				line(p1.ctr, p1.top, p1.ctr, cand_vy, 11) -- velocity
-				line(p1.rgt, p1.top + p1.h - 1, cand_rx, cand_ry, 11) -- right
-			elseif p1.y_vel<0 then
+				line(p1_lft, p1_top + p1_h - 1, cand_lx, cand_ly, 11) -- left
+				line(p1_ctr, p1_top, p1_ctr, cand_vy, 11) -- velocity
+				line(p1_rgt, p1_top + p1_h - 1, cand_rx, cand_ry, 11) -- right
+			elseif p1_y_vel<0 then
 				-- rising
-				line(p1.lft, p1.top, cand_lx, cand_ly, 11) -- left
-				line(p1.ctr, p1.top, p1.ctr, cand_vy, 11) -- velocity
-				line(p1.rgt, p1.top, cand_rx, cand_ry, 11) -- right
+				line(p1_lft, p1_top, cand_lx, cand_ly, 11) -- left
+				line(p1_ctr, p1_top, p1_ctr, cand_vy, 11) -- velocity
+				line(p1_rgt, p1_top, cand_rx, cand_ry, 11) -- right
 			end
 		end
 		
@@ -477,38 +479,38 @@ function p1_draw(_debug)
 		if debug_landmarks then
 			local pcol=8
 			--draw top left corner pixel
-			pset(p1.lft,
-			     p1.top,
+			pset(p1_lft,
+			     p1_top,
 			     pcol)
 			--draw top center pixel
-			pset(p1.ctr,
-			     p1.top,
+			pset(p1_ctr,
+			     p1_top,
 			     pcol)
 			--draw top right corner pixel
-			pset(p1.rgt,
-			     p1.top,
+			pset(p1_rgt,
+			     p1_top,
 			     pcol)
 			
 			--draw left middle pixel
-			pset(p1.lft,
-			     p1.mdl,
+			pset(p1_lft,
+			     p1_mdl,
 			     pcol)
 			--draw right middle pixel
-			pset(p1.rgt,
-			     p1.mdl,
+			pset(p1_rgt,
+			     p1_mdl,
 			     pcol)
 			
 			--draw btm left corner pixel
-			pset(p1.lft,
-			     p1.btm,
+			pset(p1_lft,
+			     p1_btm,
 			     pcol)
 			--draw btm center pixel
-			pset(p1.ctr,
-			     p1.btm,
+			pset(p1_ctr,
+			     p1_btm,
 			     pcol)
 			--draw btm right corner pixel
-			pset(p1.rgt,
-			     p1.btm,
+			pset(p1_rgt,
+			     p1_btm,
 			     pcol)
 		end
 	end
