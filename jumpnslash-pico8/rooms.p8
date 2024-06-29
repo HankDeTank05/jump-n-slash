@@ -7,14 +7,21 @@ __lua__
 ]]
 
 
+
 function init_rooms()
     rooms = {} -- holds all the rooms in a list
     curr_room = nil -- the index of the current room
     scroll_x_offset = 0
     scroll_y_offset = 0
 
+    debug_room_number = true
+    map_max_tile_x = 127
+    map_max_tile_y = 63
+    map_max_pix_x = (map_max_tile_x * 8) - 1
+    map_max_pix_y = (map_max_tile_y * 8) - 1
+
     -- room 1
-    add_room(0, 16, 2, 14)
+    add_room(0, 16, 2, 30)
     --set_connections(1, 9, nil, nil, 2)
     set_connection_up(1, 9)
     set_connection_right(1, 2)
@@ -71,10 +78,10 @@ function init_rooms()
 end
 
 function add_room(_map_x, _map_y, _start_x, _start_y)
-    -- _map_x: the x-coordinate of the top-left of the room to be added
-    -- _map_y: the y-coordinate of the top-left of the room to be added
-    -- _start_x: the map x-coordinate where the player should start (set to nil if this room should not be a checkpoint)
-    -- _start_y: the map y-coordinate where the player should start (set to nil if this room should not be a checkpoint)
+    -- _map_x: the tile x-coordinate of the top-left of the room to be added
+    -- _map_y: the tile y-coordinate of the top-left of the room to be added
+    -- _start_x: the map tile x-coordinate where the player should start (set to nil if this room should not be a checkpoint)
+    -- _start_y: the map tile y-coordinate where the player should start (set to nil if this room should not be a checkpoint)
     local room = {
         mx = _map_x,
         my = _map_y,
@@ -115,8 +122,9 @@ function set_connection_generic(_room_num, _conn_dir, _conn_num)
 end
 
 function validate_room_num(_room_num)
-    assert(_room_num > 0)
-    assert(_room_num <= #rooms)
+    local msg = "_room_num=".._room_num
+    assert(_room_num > 0, msg)
+    assert(_room_num <= #rooms, msg)
 end
 
 function validate_direction_index(_conn_dir)
@@ -154,20 +162,8 @@ function get_current_room_num()
     return curr_room
 end
 
-function screen_x_to_map_x(_screen_x)
-    -- convert from a screen x-pos to a tile x-pos on the map
-    -- note: the map x-pos will be based on the current room
-    return (_screen_x / 8) + get_current_room().mx
-end
-
-function screen_y_to_map_y(_screen_y)
-    -- convert from a screen y-pos to a tile y-pos on the map
-    -- note: the map x-pos will be based on the current room
-    return (_screen_y / 8) + get_current_room().my
-end
-
-function check_for_flag_at(_screen_x, _screen_y, _flag)
-    return fget(mget(screen_x_to_map_x(_screen_x), screen_y_to_map_y(_screen_y)), _flag)
+function check_for_flag_at(_map_pix_x, _map_pix_y, _flag)
+    return fget(mget(_map_pix_x / 8, _map_pix_y / 8), _flag)
 end
 
 -- currently does nothing
@@ -175,21 +171,23 @@ function update_room()
     -- code goes here
 end
 
--- currently does nothing
 function trans_room_up()
+    printh("trans room up")
     trans_room_generic(1)
 end
 
--- not yet implemented
 function trans_room_down()
+    printh("trans room down")
     trans_room_generic(2)
 end
 
 function trans_room_left()
+    printh("trans room left")
     trans_room_generic(3)
 end
 
 function trans_room_right()
+    printh("trans room right")
     trans_room_generic(4)
 end
 
@@ -209,6 +207,9 @@ function draw_room(_debug)
 	    16, 16) -- w,h in tiles
 
     if _debug then
-        -- code goes here
+        
+        if debug_room_number then
+            print("room num: "..curr_room, 0, 12, 6)
+        end
     end
 end
