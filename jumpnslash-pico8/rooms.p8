@@ -15,39 +15,57 @@ function init_rooms()
 
     -- room 1
     add_room(0, 16, 2, 14)
-    set_connections(1, 9, nil, nil, 2)
+    --set_connections(1, 9, nil, nil, 2)
+    set_connection_up(1, 9)
+    set_connection_right(1, 2)
 
     -- room 2
     add_room(16, 16, nil, nil)
-    set_connections(2, nil, nil, 1, 3)
+    --set_connections(2, nil, nil, 1, 3)
+    set_connection_left(2, 1)
+    set_connection_right(2, 3)
 
     -- room 3
     add_room(32, 16, nil, nil)
-    set_connections(3, nil, nil, 2, 4)
+    --set_connections(3, nil, nil, 2, 4)
+    set_connection_left(3, 2)
+    set_connection_right(3, 4)
 
     -- room 4
     add_room(48, 16, nil, nil)
-    set_connections(4, nil, nil, 3, 5)
+    --set_connections(4, nil, nil, 3, 5)
+    set_connection_left(4, 3)
+    set_connection_right(4, 5)
 
     -- room 5
     add_room(64, 16, nil, nil)
-    set_connections(5, nil, nil, 4, 6)
+    --set_connections(5, nil, nil, 4, 6)
+    set_connection_left(5, 4)
+    set_connection_right(5, 6)
 
     -- room 6
     add_room(80, 16, nil, nil)
-    set_connections(6, 7, 8, 5, nil)
+    --set_connections(6, 7, 8, 5, nil)
+    set_connection_up(6, 7)
+    set_connection_down(6, 8)
+    set_connection_left(6, 5)
 
     -- room 7
     add_room(80, 0, nil, nil)
-    set_connections(7, nil, 6, nil, nil)
+    --set_connections(7, nil, 6, nil, nil)
+    set_connection_down(7, 6)
 
     -- room 8
     add_room(80, 32, nil, nil)
-    set_connections(8, 6, nil, nil, nil)
+    --set_connections(8, 6, nil, nil, nil)
+    set_connection_up(8, 6)
 
     -- room 9
     add_room(0, 0, nil, nil)
-    set_connections(9, nil, 1, nil, nil)
+    --set_connections(9, nil, 1, nil, nil)
+    set_connection_down(9, 1)
+
+    validate_room_connections() -- note: room connections are validate at the end, so you can set connections ahead of time without crashing the program
 
     set_current_room(1)
 end
@@ -66,34 +84,57 @@ function add_room(_map_x, _map_y, _start_x, _start_y)
         scroll_y = false, -- does this room scroll vertically?
         mx_end = nil,
         my_end = nil,
-        connections = {
-            u = nil, -- connection when exiting up
-            d = nil, -- connection when exiting down
-            l = nil, -- connection when exiting left
-            r = nil, -- connection when exiting right
-        }
+
+        -- direction    U    D    L    R
+        -- index        1    2    3    4
+        connections = {nil, nil, nil, nil},
     }
     add(rooms, room)
 end
 
-function set_connections(_room_num, _up_conn, _down_conn, _left_conn, _right_conn)
+function set_connection_up(_room_num, _conn_num)
+    set_connection_generic(_room_num, 1, _conn_num)
+end
+
+function set_connection_down(_room_num, _conn_num)
+    set_connection_generic(_room_num, 2, _conn_num)
+end
+
+function set_connection_left(_room_num, _conn_num)
+    set_connection_generic(_room_num, 3, _conn_num)
+end
+
+function set_connection_right(_room_num, _conn_num)
+    set_connection_generic(_room_num, 4, _conn_num)
+end
+
+function set_connection_generic(_room_num, _conn_dir, _conn_num)
+    validate_room_num(_room_num)
+    validate_direction_index(_conn_dir)
+    rooms[_room_num].connections[_conn_dir] = _conn_num
+end
+
+function validate_room_num(_room_num)
     assert(_room_num > 0)
     assert(_room_num <= #rooms)
+end
 
-    assert(_up_conn != _room_num)
-    assert(_down_conn != _room_num)
-    assert(_left_conn != _room_num)
-    assert(_right_conn != _room_num)
+function validate_direction_index(_conn_dir)
+    assert(_conn_dir > 0)
+    assert(_conn_dir <= 4)
+end
 
-    rooms[_room_num].connections.u = _up_conn
-    rooms[_room_num].connections.d = _down_conn
-    rooms[_room_num].connections.l = _left_conn
-    rooms[_room_num].connections.r = _right_conn
+function validate_room_connections()
+    for rm in all(rooms) do
+        for conn_dir=1,4 do
+            local conn_num = rm.connections[conn_dir]
+            if conn_num != nil then validate_room_num(conn_num) end
+        end
+    end
 end
 
 function set_current_room(_num)
-    assert(_num > 0) -- ensure we have a valid room number
-    assert(_num <= #rooms) -- ^^what he said^^
+    validate_room_num(_num)
     curr_room = _num
     
     if get_current_room().scroll_x == false then
@@ -105,8 +146,7 @@ function set_current_room(_num)
 end
 
 function get_current_room()
-    assert(curr_room != nil) -- ensure the rooms have been initialized before doing anything
-    return rooms[curr_room]
+    return rooms[get_current_room_num()]
 end
 
 function get_current_room_num()
@@ -137,32 +177,34 @@ end
 
 -- currently does nothing
 function trans_room_up()
-    assert(get_current_room().connections.u != nil)
-    set_current_room(get_current_room().connections.u)
-    -- code goes here
+    trans_room_generic(1)
 end
 
 -- not yet implemented
 function trans_room_down()
-    assert(get_current_room().connections.d != nil)
-    set_current_room(get_current_room().connections.d)
-    -- code goes here
+    trans_room_generic(2)
 end
 
 function trans_room_left()
-    assert(get_current_room().connections.l != nil)
-    set_current_room(get_current_room().connections.l)
+    trans_room_generic(3)
 end
 
 function trans_room_right()
-    assert(get_current_room().connections.r != nil)
-    set_current_room(get_current_room().connections.r)
+    trans_room_generic(4)
+end
+
+function trans_room_generic(_conn_dir)
+    validate_direction_index(_conn_dir)
+    local conn_num = get_current_room().connections[_conn_dir]
+    validate_room_num(conn_num)
+    set_current_room(conn_num)
 end
 
 function draw_room(_debug)
 	
 	--draw the map
-	map(rooms[curr_room].mx, rooms[curr_room].my,
+    local rm = get_current_room()
+	map(rm.mx, rm.my,
 	    0, 0, -- x,y position to draw on screen
 	    16, 16) -- w,h in tiles
 
