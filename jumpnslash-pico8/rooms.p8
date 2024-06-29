@@ -21,54 +21,54 @@ function init_rooms()
     map_max_pix_y = (map_max_tile_y * 8) - 1
 
     -- room 1
-    add_room(0, 16, 2, 30)
+    add_room(0, 16, 16, 16, 2, 30)
     --set_connections(1, 9, nil, nil, 2)
     set_connection_up(1, 9)
     set_connection_right(1, 2)
 
     -- room 2
-    add_room(16, 16, nil, nil)
+    add_room(16, 16, 16, 16, nil, nil)
     --set_connections(2, nil, nil, 1, 3)
     set_connection_left(2, 1)
     set_connection_right(2, 3)
 
     -- room 3
-    add_room(32, 16, nil, nil)
+    add_room(32, 16, 16, 16, nil, nil)
     --set_connections(3, nil, nil, 2, 4)
     set_connection_left(3, 2)
     set_connection_right(3, 4)
 
     -- room 4
-    add_room(48, 16, nil, nil)
+    add_room(48, 16, 16, 16, nil, nil)
     --set_connections(4, nil, nil, 3, 5)
     set_connection_left(4, 3)
     set_connection_right(4, 5)
 
     -- room 5
-    add_room(64, 16, nil, nil)
+    add_room(64, 16, 16, 16, nil, nil)
     --set_connections(5, nil, nil, 4, 6)
     set_connection_left(5, 4)
     set_connection_right(5, 6)
 
     -- room 6
-    add_room(80, 16, nil, nil)
+    add_room(80, 16, 16, 16, nil, nil)
     --set_connections(6, 7, 8, 5, nil)
     set_connection_up(6, 7)
     set_connection_down(6, 8)
     set_connection_left(6, 5)
 
     -- room 7
-    add_room(80, 0, nil, nil)
+    add_room(80, 0, 16, 16, nil, nil)
     --set_connections(7, nil, 6, nil, nil)
     set_connection_down(7, 6)
 
     -- room 8
-    add_room(80, 32, nil, nil)
+    add_room(80, 32, 16, 16, nil, nil)
     --set_connections(8, 6, nil, nil, nil)
     set_connection_up(8, 6)
 
     -- room 9
-    add_room(0, 0, nil, nil)
+    add_room(0, 0, 32, 16, nil, nil)
     --set_connections(9, nil, 1, nil, nil)
     set_connection_down(9, 1)
 
@@ -77,14 +77,22 @@ function init_rooms()
     set_current_room(1)
 end
 
-function add_room(_map_x, _map_y, _start_x, _start_y)
+function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
     -- _map_x: the tile x-coordinate of the top-left of the room to be added
     -- _map_y: the tile y-coordinate of the top-left of the room to be added
+    -- _tile_width: the width of the room in number of tiles
+    -- _tile_height: the height of the room in number of tiles
     -- _start_x: the map tile x-coordinate where the player should start (set to nil if this room should not be a checkpoint)
     -- _start_y: the map tile y-coordinate where the player should start (set to nil if this room should not be a checkpoint)
     local room = {
         mx = _map_x,
         my = _map_y,
+
+        mpx_min = _map_x * 8,
+        mpx_max = (_map_x + _tile_width) * 8,
+        mpy_min = _map_y * 8,
+        mpy_max = (_map_y + _tile_height) * 8,
+
         start_mx = _start_x,
         start_my = _start_y,
         scroll_x = false, -- does this room scroll horizontally?
@@ -160,6 +168,22 @@ end
 function get_current_room_num()
     assert(curr_room != nil) -- ensure the rooms have been initialized before doing anything
     return curr_room
+end
+
+function get_current_left_bounds()
+    return get_current_room().mpx_min
+end
+
+function get_current_right_bounds()
+    return get_current_room().mpx_max
+end
+
+function get_current_top_bounds()
+    return get_current_room().mpy_min
+end
+
+function get_current_bottom_bounds()
+    return get_current_room().mpy_max
 end
 
 function check_for_flag_at(_map_pix_x, _map_pix_y, _flag)

@@ -366,13 +366,16 @@ function p1_move()
 	update_screen_pos()
 
     -- check if player is positioned to trigger screen transitions
-    if p1_sy <= 0 then -- move up
+    if p1_y < get_current_top_bounds() then -- move up
         move_player_to_room_up()
-    elseif p1_sy >= 120 then -- move down
+
+    elseif p1_y + (p1_h - 1) >= get_current_bottom_bounds() then -- move down
         move_player_to_room_down()
-    elseif p1_sx == 0 then -- move left
+
+    elseif p1_x < get_current_left_bounds() then -- move left
         move_player_to_room_left()
-    elseif p1_sx == 120 then -- move right
+
+    elseif p1_x + (p1_w - 1) >= get_current_right_bounds() then -- move right
         move_player_to_room_right()
     end
 
@@ -417,27 +420,27 @@ end
 function move_player_to_room_up()
 	printh("move player to room up")
     trans_room_up()
-    p1_y -= p1_h + 1
+    p1_y -= p1_h - 1
 end
 
 -- needs to be fixed
 function move_player_to_room_down()
 	printh("move player to room down")
     trans_room_down()
-    p1_y += p1_h + 1
+    p1_y += p1_h - 1
 end
 
 function move_player_to_room_left()
 	printh("move player to room left")
     trans_room_left()
-	p1_x -= p1_w + 1
+	p1_x -= p1_w - 1
 
 end
 
 function move_player_to_room_right()
 	printh("move player to room right")
     trans_room_right()
-    p1_x += p1_w + 1
+    p1_x += p1_w - 1
 end
 
 function p1_update_landmarks()
