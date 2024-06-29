@@ -61,17 +61,26 @@ function init_player()
 	max_jump_frames = 15 -- the longest
     walk_speed = 1
     gravity = 0.2
-
-	debug_position = true
-    debug_horizontal_collision = true
-    debug_vertical_collision = true
-    debug_landmarks = false
 end
 
 function update_screen_pos()
 	-- note: this math is done to allow the sprite to go one pixel off the screen in all four directions to allow for screen transitions, but otherwise keep the sprite on screen
-	p1_sx = p1_x % 128
-	p1_sy = p1_y % 128
+	if get_scrollability_horizontal() == true and get_scrollability_vertical() == false then
+		if get_scroll_left_bounds() <= p1_x and p1_x < get_scroll_right_bounds() then
+			p1_sx = get_scroll_left_bounds()
+		else
+			p1_sx = p1_x % 128
+		end
+		p1_sy = p1_y % 128
+
+	elseif get_scrollability_horizontal() == false and get_scrollability_vertical() == true then
+		-- code goes here
+	elseif get_scrollability_horizontal() == true and get_scrollability_vertical() == true then
+		-- code goes here
+	else
+		p1_sx = p1_x % 128
+		p1_sy = p1_y % 128
+	end
 end
 
 function p1_update()
@@ -362,8 +371,6 @@ function p1_move()
             p1_apply_gravity()
 		end
 	end
-	
-	update_screen_pos()
 
     -- check if player is positioned to trigger screen transitions
     if p1_y < get_current_top_bounds() then -- move up
@@ -377,9 +384,33 @@ function p1_move()
 
     elseif p1_x + (p1_w - 1) >= get_current_right_bounds() then -- move right
         move_player_to_room_right()
-    end
+	--[[
+	else
 
-	update_screen_pos()
+		-- case 1: horizontal scrolling only
+		if get_scrollability_horizontal() and not(get_scrollability_vertical()) then
+			printh("horizontal scrolling only room")
+			if p1_x + (p1_w - 1) < get_scroll_left_bounds() then -- case 1: player is in left zone
+				-- minimum (zero) x-offset for drawing the room
+
+			elseif p1_x > get_scroll_right_bounds() then -- case 2: player is in right zone
+				-- maximum (amt=???) x-offset for drawing the room
+
+			else -- case 3: player is in center zone
+				-- code goes here
+			end
+
+		end
+
+		-- case 2: vertical scrolling only
+		if get_scrollability_vertical() and not(get_scrollability_horizontal()) then
+			printh("vertical scrolling only room")
+			-- case 1: player is in top zone
+			-- case 2: player is in bottom zone
+			-- case 3: player is in middle zone
+		end
+	--]]
+    end
 end
 
 function p1_animate()
@@ -416,14 +447,12 @@ function p1_apply_gravity()
     p1_y_vel += gravity
 end
 
--- needs to be fixed
 function move_player_to_room_up()
 	printh("move player to room up")
     trans_room_up()
     p1_y -= p1_h - 1
 end
 
--- needs to be fixed
 function move_player_to_room_down()
 	printh("move player to room down")
     trans_room_down()
@@ -458,8 +487,26 @@ function p1_update_landmarks()
 	p1_s_ctr = p1_ctr % 128
 	p1_s_mdl = p1_mdl % 128
 end
+
+function p1_get_mpx()
+	return p1_x
+end
+
+function p1_get_mpy()
+	return p1_y
+end
+
+function p1_get_sx()
+	return p1_sx
+end
+
+function p1_get_sy()
+	return p1_sy
+end
 	
 function p1_draw(_debug)
+
+	update_screen_pos()
 
 	spr(p1_spr_state[p1_spr_n], -- sprite number to draw
         p1_sx, p1_sy, -- position to draw at
@@ -469,10 +516,6 @@ function p1_draw(_debug)
 	if _debug then
 
         p1_update_landmarks()
-
-		if true then
-			print(temp_offset)
-		end
 
 		if debug_position then
 			print("world pos: ("..p1_x..", "..p1_y..")", 0, 0 ,6)

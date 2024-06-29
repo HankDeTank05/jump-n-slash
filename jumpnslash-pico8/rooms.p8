@@ -13,63 +13,54 @@ function init_rooms()
     curr_room = nil -- the index of the current room
     scroll_x_offset = 0
     scroll_y_offset = 0
-
-    debug_room_number = true
+    
     map_max_tile_x = 127
     map_max_tile_y = 63
     map_max_pix_x = (map_max_tile_x * 8) - 1
     map_max_pix_y = (map_max_tile_y * 8) - 1
-
+    
     -- room 1
     add_room(0, 16, 16, 16, 2, 30)
-    --set_connections(1, 9, nil, nil, 2)
     set_connection_up(1, 9)
     set_connection_right(1, 2)
 
     -- room 2
     add_room(16, 16, 16, 16, nil, nil)
-    --set_connections(2, nil, nil, 1, 3)
+    set_connection_up(2, 9)
     set_connection_left(2, 1)
     set_connection_right(2, 3)
 
     -- room 3
     add_room(32, 16, 16, 16, nil, nil)
-    --set_connections(3, nil, nil, 2, 4)
     set_connection_left(3, 2)
     set_connection_right(3, 4)
 
     -- room 4
     add_room(48, 16, 16, 16, nil, nil)
-    --set_connections(4, nil, nil, 3, 5)
     set_connection_left(4, 3)
     set_connection_right(4, 5)
 
     -- room 5
     add_room(64, 16, 16, 16, nil, nil)
-    --set_connections(5, nil, nil, 4, 6)
     set_connection_left(5, 4)
     set_connection_right(5, 6)
 
     -- room 6
     add_room(80, 16, 16, 16, nil, nil)
-    --set_connections(6, 7, 8, 5, nil)
     set_connection_up(6, 7)
     set_connection_down(6, 8)
     set_connection_left(6, 5)
 
     -- room 7
     add_room(80, 0, 16, 16, nil, nil)
-    --set_connections(7, nil, 6, nil, nil)
     set_connection_down(7, 6)
 
     -- room 8
     add_room(80, 32, 16, 16, nil, nil)
-    --set_connections(8, 6, nil, nil, nil)
     set_connection_up(8, 6)
 
     -- room 9
     add_room(0, 0, 32, 16, nil, nil)
-    --set_connections(9, nil, 1, nil, nil)
     set_connection_down(9, 1)
 
     validate_room_connections() -- note: room connections are validate at the end, so you can set connections ahead of time without crashing the program
@@ -84,21 +75,39 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
     -- _tile_height: the height of the room in number of tiles
     -- _start_x: the map tile x-coordinate where the player should start (set to nil if this room should not be a checkpoint)
     -- _start_y: the map tile y-coordinate where the player should start (set to nil if this room should not be a checkpoint)
+
+    -- make sure rooms are no smaller than 16x16 tiles
+    assert(_tile_width >= 16)
+    assert(_tile_height >= 16)
+    
+    -- make sure rooms dimensions are multiples of 16
+    assert(_tile_width % 16 == 0)
+    assert(_tile_height % 16 == 0)
+
     local room = {
         mx = _map_x,
         my = _map_y,
+        mw = _tile_width,
+        mh = _tile_height,
 
+        -- pixel boundaries: when player crosses these boundaries, trigger screen transition
         mpx_min = _map_x * 8,
         mpx_max = (_map_x + _tile_width) * 8,
         mpy_min = _map_y * 8,
         mpy_max = (_map_y + _tile_height) * 8,
 
+        -- spawn point in room (not every room needs to have one)
         start_mx = _start_x,
         start_my = _start_y,
-        scroll_x = false, -- does this room scroll horizontally?
-        scroll_y = false, -- does this room scroll vertically?
-        mx_end = nil,
-        my_end = nil,
+
+        scroll_h = _tile_width > 16, -- does this room scroll horizontally?
+        scroll_v = _tile_height > 16, -- does this room scroll vertically?
+
+        -- pixel boundaries for screen scrolling: when player crosses these boundaries, start/end screen scrolling
+        scroll_h_min_mpx = (_map_x + 8) * 8,
+        scroll_h_max_mpx = (_map_x + _tile_width - 8) * 8,
+        scroll_v_min_mpy = (_map_y + 8) * 8,
+        scroll_v_max_mpy = (_map_y + _tile_height - 8) * 8,
 
         -- direction    U    D    L    R
         -- index        1    2    3    4
@@ -153,10 +162,10 @@ function set_current_room(_num)
     validate_room_num(_num)
     curr_room = _num
     
-    if get_current_room().scroll_x == false then
+    if get_current_room().scroll_h == false then
         scroll_x_offset = 0
     end
-    if get_current_room().scroll_y == false then
+    if get_current_room().scroll_v == false then
         scroll_y_offset = 0
     end
 end
@@ -186,13 +195,49 @@ function get_current_bottom_bounds()
     return get_current_room().mpy_max
 end
 
+function get_scrollability_horizontal()
+    return get_current_room().scroll_h
+end
+
+function get_scrollability_vertical()
+    return get_current_room().scroll_v
+end
+
+function get_scroll_left_bounds()
+    return get_current_room().scroll_h_min_mpx
+end
+
+function get_scroll_right_bounds()
+    return get_current_room().scroll_h_max_mpx
+end
+
+function get_scroll_top_bounds()
+    return get_current_room().scroll_v_min_mpx
+end
+
+function get_scroll_bottom_bounds()
+    return get_current_room().scroll_v_max_mpx
+end
+
 function check_for_flag_at(_map_pix_x, _map_pix_y, _flag)
     return fget(mget(_map_pix_x / 8, _map_pix_y / 8), _flag)
 end
 
 -- currently does nothing
 function update_room()
-    -- code goes here
+
+    -- if there is horizontal scrolling and no vertical scrolling...
+    if get_scrollability_horizontal() and not(get_scrollability_vertical()) then
+
+        if p1_get_mpx() <= get_scroll_left_bounds() then
+            scroll_x_offset = 0
+        elseif get_scroll_left_bounds() < p1_get_mpx() and p1_get_mpx() <= get_scroll_right_bounds() then
+            scroll_x_offset = -(p1_get_mpx() - get_scroll_left_bounds())
+        elseif get_scroll_right_bounds() < p1_get_mpx() then
+            scroll_x_offset = -(get_scroll_right_bounds() - get_scroll_left_bounds())
+        end
+    end
+
 end
 
 function trans_room_up()
@@ -227,13 +272,38 @@ function draw_room(_debug)
 	--draw the map
     local rm = get_current_room()
 	map(rm.mx, rm.my,
-	    0, 0, -- x,y position to draw on screen
-	    16, 16) -- w,h in tiles
+	    scroll_x_offset, 0, -- x,y position to draw on screen
+	    rm.mw, rm.mh) -- w,h in tiles
 
     if _debug then
         
         if debug_room_number then
             print("room num: "..curr_room, 0, 12, 6)
+        end
+
+        if debug_scroll_bounds then
+            if get_scrollability_horizontal() then
+                local col = 9 -- orange
+
+                local left_bound_draw_x = get_scroll_left_bounds() + scroll_x_offset
+                local right_bound_draw_x = get_scroll_right_bounds() + scroll_x_offset
+
+                -- draw left line if it's on the screen
+                line(left_bound_draw_x, 0, left_bound_draw_x, 127, col)
+                print("l: "..get_scroll_left_bounds(), left_bound_draw_x + 2, 64)
+                
+                -- draw right line of it's on the scren
+                line(right_bound_draw_x, 0, right_bound_draw_x, 127, col)
+                print("r: "..get_scroll_right_bounds(), right_bound_draw_x + 2, 64)
+
+                col = 2 -- maroon
+
+                -- draw player distance from/between scroll bounds
+                line(left_bound_draw_x, p1_get_sy(), p1_get_sx(), p1_get_sy(), col)
+                local dist_l = abs(scroll_x_offset)
+                local dist_l_print_x = max(left_bound_draw_x + 2, 2)
+                print("dist: "..dist_l, dist_l_print_x, p1_get_sy() - 6, col)
+            end
         end
     end
 end
