@@ -11,6 +11,7 @@ __lua__
 function init_rooms()
     rooms = {} -- holds all the rooms in a list
     curr_room = nil -- the index of the current room
+
     scroll_x_offset = 0
     scroll_y_offset = 0
     
@@ -18,52 +19,49 @@ function init_rooms()
     map_max_tile_y = 63
     map_max_pix_x = (map_max_tile_x * 8) - 1
     map_max_pix_y = (map_max_tile_y * 8) - 1
+
+    --[[
+
+    layout:
+
+    +----+----+----+----+----+----+
+    |  1 =  2 =  3 =  4 =  5 =  6 |
+    +-||-+-||-+----+----+----+-||-+
+    |    8    =    |         |  7 |
+    +---------+  9 |         +----+
+    |         =    |
+    |    10   +----+
+    |         |
+    +---------+
+
+    --]]
     
     -- room 1
-    add_room(0, 16, 16, 16, 2, 30)
-    set_connection_up(1, 9)
-    set_connection_right(1, 2)
+    add_room(0, 0, 16, 16, 2, 14)
 
     -- room 2
-    add_room(16, 16, 16, 16, nil, nil)
-    set_connection_up(2, 9)
-    set_connection_left(2, 1)
-    set_connection_right(2, 3)
+    add_room(16, 0, 16, 16, nil, nil)
 
     -- room 3
-    add_room(32, 16, 16, 16, nil, nil)
-    set_connection_left(3, 2)
-    set_connection_right(3, 4)
+    add_room(32, 0, 16, 16, nil, nil)
 
     -- room 4
-    add_room(48, 16, 16, 16, nil, nil)
-    set_connection_left(4, 3)
-    set_connection_right(4, 5)
+    add_room(48, 0, 16, 16, nil, nil)
 
     -- room 5
-    add_room(64, 16, 16, 16, nil, nil)
-    set_connection_left(5, 4)
-    set_connection_right(5, 6)
+    add_room(64, 0, 16, 16, nil, nil)
 
     -- room 6
-    add_room(80, 16, 16, 16, nil, nil)
-    set_connection_up(6, 7)
-    set_connection_down(6, 8)
-    set_connection_left(6, 5)
+    add_room(80, 0, 16, 16, nil, nil)
 
     -- room 7
-    add_room(80, 0, 16, 16, nil, nil)
-    set_connection_down(7, 6)
+    add_room(80, 16, 16, 16, nil, nil)
 
     -- room 8
-    add_room(80, 32, 16, 16, nil, nil)
-    set_connection_up(8, 6)
+    add_room(0, 16, 32, 16, nil, nil)
 
     -- room 9
-    add_room(0, 0, 32, 16, nil, nil)
-    set_connection_down(9, 1)
-
-    validate_room_connections() -- note: room connections are validate at the end, so you can set connections ahead of time without crashing the program
+    add_room(32, 16, 16, 32, nil, nil)
 
     set_current_room(1)
 end
@@ -108,54 +106,14 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
         scroll_h_max_mpx = (_map_x + _tile_width - 8) * 8,
         scroll_v_min_mpy = (_map_y + 8) * 8,
         scroll_v_max_mpy = (_map_y + _tile_height - 8) * 8,
-
-        -- direction    U    D    L    R
-        -- index        1    2    3    4
-        connections = {nil, nil, nil, nil},
     }
     add(rooms, room)
-end
-
-function set_connection_up(_room_num, _conn_num)
-    set_connection_generic(_room_num, 1, _conn_num)
-end
-
-function set_connection_down(_room_num, _conn_num)
-    set_connection_generic(_room_num, 2, _conn_num)
-end
-
-function set_connection_left(_room_num, _conn_num)
-    set_connection_generic(_room_num, 3, _conn_num)
-end
-
-function set_connection_right(_room_num, _conn_num)
-    set_connection_generic(_room_num, 4, _conn_num)
-end
-
-function set_connection_generic(_room_num, _conn_dir, _conn_num)
-    validate_room_num(_room_num)
-    validate_direction_index(_conn_dir)
-    rooms[_room_num].connections[_conn_dir] = _conn_num
 end
 
 function validate_room_num(_room_num)
     local msg = "_room_num=".._room_num
     assert(_room_num > 0, msg)
     assert(_room_num <= #rooms, msg)
-end
-
-function validate_direction_index(_conn_dir)
-    assert(_conn_dir > 0)
-    assert(_conn_dir <= 4)
-end
-
-function validate_room_connections()
-    for rm in all(rooms) do
-        for conn_dir=1,4 do
-            local conn_num = rm.connections[conn_dir]
-            if conn_num != nil then validate_room_num(conn_num) end
-        end
-    end
 end
 
 function set_current_room(_num)
@@ -226,45 +184,43 @@ end
 -- currently does nothing
 function update_room()
 
-    -- if there is horizontal scrolling and no vertical scrolling...
-    if get_scrollability_horizontal() and not(get_scrollability_vertical()) then
+    if get_scrollability_horizontal() == true and get_scrollability_vertical() == false then -- horizontal scrolling only
 
-        if p1_get_mpx() <= get_scroll_left_bounds() then
+        if p1_get_mpx() < get_scroll_left_bounds() then -- if left of scroll zone
             scroll_x_offset = 0
-        elseif get_scroll_left_bounds() < p1_get_mpx() and p1_get_mpx() <= get_scroll_right_bounds() then
+
+        elseif get_scroll_left_bounds() <= p1_get_mpx() and p1_get_mpx() < get_scroll_right_bounds() then -- if inside scroll zone
             scroll_x_offset = -(p1_get_mpx() - get_scroll_left_bounds())
-        elseif get_scroll_right_bounds() < p1_get_mpx() then
-            scroll_x_offset = -(get_scroll_right_bounds() - get_scroll_left_bounds())
+            
+        elseif get_scroll_right_bounds() <= p1_get_mpx() then
+            scroll_x_offset = -(get_scroll_right_bounds() - get_scroll_left_bounds()) -- if right of scroll zone
+
+        end
+    
+    elseif get_scrollability_horizontal() == false and get_scrollability_vertical() == true then -- vertical scrolling only
+        
+        if p1_get_mpy() < get_scroll_top_bounds() then -- if above scroll zone
+            scroll_y_offset = 0
+
+        elseif get_scroll_top_bounds() <= p1_get_mpy() and p1_get_mpy() < get_scroll_bottom_bounds() then -- if inside scroll zone
+            scroll_y_offset = -(p1_get_mpy() - get_scroll_top_bounds())
+
+        elseif get_scroll_bottom_bounds() <= p1_get_mpy() then -- if below scroll zone
+            scroll_y_offset = -(get_scroll_bottom_bounds() - get_scroll_top_bounds())
+
         end
     end
 
 end
 
-function trans_room_up()
-    printh("trans room up")
-    trans_room_generic(1)
-end
-
-function trans_room_down()
-    printh("trans room down")
-    trans_room_generic(2)
-end
-
-function trans_room_left()
-    printh("trans room left")
-    trans_room_generic(3)
-end
-
-function trans_room_right()
-    printh("trans room right")
-    trans_room_generic(4)
-end
-
-function trans_room_generic(_conn_dir)
-    validate_direction_index(_conn_dir)
-    local conn_num = get_current_room().connections[_conn_dir]
-    validate_room_num(conn_num)
-    set_current_room(conn_num)
+function change_rooms()
+    local i = 0
+    local rm = nil
+    repeat
+        i += 1
+        rm = rooms[i]
+    until rm.mpx_min <= p1_get_mpx() and p1_get_mpx() < rm.mpx_max and rm.mpy_min <= p1_get_mpy() and p1_get_mpy() < rm.mpy_max
+    set_current_room(i)
 end
 
 function draw_room(_debug)

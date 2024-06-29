@@ -66,18 +66,31 @@ end
 function update_screen_pos()
 	-- note: this math is done to allow the sprite to go one pixel off the screen in all four directions to allow for screen transitions, but otherwise keep the sprite on screen
 	if get_scrollability_horizontal() == true and get_scrollability_vertical() == false then
+		-- set screen x
 		if get_scroll_left_bounds() <= p1_x and p1_x < get_scroll_right_bounds() then
 			p1_sx = get_scroll_left_bounds()
 		else
 			p1_sx = p1_x % 128
 		end
+
+		-- set screen y
 		p1_sy = p1_y % 128
 
 	elseif get_scrollability_horizontal() == false and get_scrollability_vertical() == true then
-		-- code goes here
+		-- set screen x
+		p1_sx = p1_x % 128
+
+		-- set screen y
+		if get_scroll_top_bounds() <= p1_y and p1_y < get_scroll_bottom_bounds() then
+			p1_sy = get_scroll_top_bounds()
+		else
+			p1_sy = p1_y % 128
+		end
+
 	elseif get_scrollability_horizontal() == true and get_scrollability_vertical() == true then
 		-- code goes here
 	else
+		-- set screen x and y
 		p1_sx = p1_x % 128
 		p1_sy = p1_y % 128
 	end
@@ -449,27 +462,27 @@ end
 
 function move_player_to_room_up()
 	printh("move player to room up")
-    trans_room_up()
     p1_y -= p1_h - 1
+	change_rooms()
 end
 
 function move_player_to_room_down()
 	printh("move player to room down")
-    trans_room_down()
     p1_y += p1_h - 1
+	change_rooms()
 end
 
 function move_player_to_room_left()
 	printh("move player to room left")
-    trans_room_left()
 	p1_x -= p1_w - 1
+	change_rooms()
 
 end
 
 function move_player_to_room_right()
 	printh("move player to room right")
-    trans_room_right()
     p1_x += p1_w - 1
+	change_rooms()
 end
 
 function p1_update_landmarks()
