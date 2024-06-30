@@ -20,18 +20,37 @@ function init_player()
 	p1_spr_n = 1 -- the index of the sprite to draw
 	p1_anim_spd = 10 -- speed control for animations, higher number = slower
 	p1_anim_fcount = 0 -- frame counter for animation
+
+	-- the following coordinates are in map pixels (*not* tiles)
 	p1_x = get_current_room().start_mx * 8 -- get starting x position based on what the starting room defines it to be
 	p1_y = get_current_room().start_my * 8 -- get starting y position based on what the starting room defines it to be
+
+	-- the following coordinates are in screen pixels
+	p1_sx = nil
+	p1_sy = nil
+	update_screen_pos()
+
 	p1_dx = 0 -- delta x, since there's no horizontal acceleration
 	p1_y_vel = 0 -- y-velocity, since there is vertical acceleration
 	p1_w = 8 -- width of the sprite
 	p1_h = 8 -- height of the sprite
+
+	-- sprite landmarks (in map pixels)
 	p1_lft = nil -- left x
 	p1_rgt = nil -- right x
 	p1_top = nil -- top y
 	p1_btm = nil -- bottom y
 	p1_ctr = nil -- center x
 	p1_mdl = nil -- middle y
+
+	-- sprite landmarks (in screen pixels)
+	p1_s_lft = nil
+	p1_s_rgt = nil
+	p1_s_top = nil
+	p1_s_btm = nil
+	p1_s_ctr = nil
+	p1_s_mdl = nil
+
 	p1_facing = 1 -- 1 = right, -1 = left
 	p1_landed = false -- did you land on the ground?
 	p1_jump_btn_frames = 0 -- how many frames the jump button has been held for
@@ -42,11 +61,22 @@ function init_player()
 	max_jump_frames = 15 -- the longest
     walk_speed = 1
     gravity = 0.2
+end
 
-	debug_position = false
-    debug_horizontal_collision = false
-    debug_vertical_collision = false
-    debug_landmarks = false
+function update_screen_pos()
+	
+	if get_scrollability_horizontal() and get_scroll_left_bounds() <= p1_x and p1_x < get_scroll_right_bounds() then
+		p1_sx = get_scroll_left_bounds() - (get_current_map_x() * 8)
+	else
+		p1_sx = p1_x % 128
+	end
+
+	if get_scrollability_vertical() and get_scroll_top_bounds() <= p1_y and p1_y < get_scroll_bottom_bounds() then
+		p1_sy = get_scroll_top_bounds() - (get_current_map_y() * 8)
+	else
+		p1_sy = p1_y % 128
+	end
+
 end
 
 function p1_update()
@@ -170,39 +200,39 @@ function p1_horizontal_collision()
 	cand_by = p1_btm
 
     -- edge case #1
-    -- if the player is not enclosed in solid tiles, the raycasting while loop will run forever.
+    -- if the player is not enclosed in solid tiles, the raycasting "while" loop will run forever.
     -- in order to avoid this, there needs to be a second (fallback) condition that stops casting the ray when it
-    -- hits the edge of the screen.
+    -- hits the edge of the map.
 
     -- note: we're actually gonna allow it to go one pixel off the edge of the screen to allow it to trigger
     -- a screen transition
 
 	if p1_dx > 0 then -- cast rays to right
-        --                                                      account for edge case #1
-		-- top ray                                                vvvvvvvvvvvvv
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx <= 128 do -- 128 allows screen transition when on the right edge of the screen
+        --                                                        account for edge case #1
+		-- top ray                                                vvvvvvvvvvvvvvvvvvvvvvvv
+		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx <= map_max_pix_x do
 			cand_tx += 1
 		end
 		cand_tx -= p1_w
 
-        --                                                      account for edge case #1
-		-- bottom ray                                             vvvvvvvvvvvvv
-		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx <= 128 do -- 128 allows screen transition when on the right edge of the screen
+        --                                                        account for edge case #1
+		-- bottom ray                                             vvvvvvvvvvvvvvvvvvvvvvvv
+		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx <= map_max_pix_x do
 			cand_bx += 1
 		end
 		cand_bx -= p1_w
 
 	elseif p1_dx < 0 then -- cast rays to left
-        --                                                      account for edge case #1
+        --                                                        account for edge case #1
 		-- top ray                                                vvvvvvvvvvvv
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx >= -1 do -- -1 allows screen transition when on left edge of the screen
+		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx >= 0 do
 			cand_tx -= 1
 		end
 		cand_tx += 1
 		
-        --                                                      account for edge case #1
+        --                                                        account for edge case #1
 		-- bottom ray                                             vvvvvvvvvvvv
-		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx >= -1 do -- -1 allows screen transition when on left edge of the screen
+		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx >= 0 do
 			cand_bx -= 1
 		end
 		cand_bx += 1
@@ -222,6 +252,7 @@ function p1_vertical_collision()
 
     p1_update_landmarks()
     
+	-- these coords are all in map pixels
 	cand_lx = p1_lft
 	cand_rx = p1_rgt
 
@@ -229,7 +260,7 @@ function p1_vertical_collision()
 	cand_ry = p1_top
 
     -- edge case #1
-    -- if the player is not enclosed in solid tiles, the raycasting while loop will run forever.
+    -- if the player is not enclosed in solid tiles, the raycasting "while" loop will run forever.
     -- in order to avoid this, there needs to be a second (fallback) condition that stops casting the ray when it
     -- hits the edge of the screen.
 
@@ -255,9 +286,9 @@ function p1_vertical_collision()
             assert(check_for_flag_at(cand_lx, cand_ly, 3) == false) -- make sure it works properly
         end
 
-        --                                                      account for edge case #1
-        -- cast left ray                                          vvvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly < 129 do -- 129 allows screen transition when on bottom edge of screen
+        --                                                        account for edge case #1
+        -- cast left ray                                          vvvvvvvvvvvvvvvvvvvvvvvv
+		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly <= map_max_pix_y do
 			cand_ly += 1
 		end
         cand_ly -= p1_h
@@ -274,24 +305,24 @@ function p1_vertical_collision()
             assert(check_for_flag_at(cand_rx, cand_ry, 3) == false) -- make sure it works properly
         end
 
-        --                                                      account for edge case #1
-        -- cast right ray                                         vvvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry < 129 do -- 129 allows screen transition when on bottom edge of screen
+        --                                                        account for edge case #1
+        -- cast right ray                                         vvvvvvvvvvvvvvvvvvvvvvvv
+		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry <= map_max_pix_y do
 			cand_ry += 1
 		end
         cand_ry -= p1_h
 	
     else -- cast rays upwards
-        --                                                      account for edge case #1
+        --                                                        account for edge case #1
         -- left ray                                               vvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 5) == false and cand_ly >= -1 do -- -1 allows screen transition when on top edge of screen
+		while check_for_flag_at(cand_lx, cand_ly, 5) == false and cand_ly >= 0 do
 			cand_ly -= 1
 		end
 		cand_ly += 1
 
-        --                                                      account for edge case #1
+        --                                                        account for edge case #1
         -- right ray                                              vvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 5) == false and cand_ry >= -1 do -- -1 allows screen transition when on top edge of screen
+		while check_for_flag_at(cand_rx, cand_ry, 5) == false and cand_ry >= 0 do
 			cand_ry -= 1
 		end
 		cand_ry += 1
@@ -338,14 +369,43 @@ function p1_move()
 	end
 
     -- check if player is positioned to trigger screen transitions
-    if p1_y < 0 then -- move up
+    if p1_y < get_current_top_bounds() then -- move up
         move_player_to_room_up()
-    elseif p1_y + p1_h - 1 > 127 then -- move down
+
+    elseif p1_y + (p1_h - 1) >= get_current_bottom_bounds() then -- move down
         move_player_to_room_down()
-    elseif p1_x < 0 then -- move left
+
+    elseif p1_x < get_current_left_bounds() then -- move left
         move_player_to_room_left()
-    elseif p1_x + p1_w - 1 > 127 then -- move right
+
+    elseif p1_x + (p1_w - 1) >= get_current_right_bounds() then -- move right
         move_player_to_room_right()
+	--[[
+	else
+
+		-- case 1: horizontal scrolling only
+		if get_scrollability_horizontal() and not(get_scrollability_vertical()) then
+			printh("horizontal scrolling only room")
+			if p1_x + (p1_w - 1) < get_scroll_left_bounds() then -- case 1: player is in left zone
+				-- minimum (zero) x-offset for drawing the room
+
+			elseif p1_x > get_scroll_right_bounds() then -- case 2: player is in right zone
+				-- maximum (amt=???) x-offset for drawing the room
+
+			else -- case 3: player is in center zone
+				-- code goes here
+			end
+
+		end
+
+		-- case 2: vertical scrolling only
+		if get_scrollability_vertical() and not(get_scrollability_horizontal()) then
+			printh("vertical scrolling only room")
+			-- case 1: player is in top zone
+			-- case 2: player is in bottom zone
+			-- case 3: player is in middle zone
+		end
+	--]]
     end
 end
 
@@ -384,23 +444,28 @@ function p1_apply_gravity()
 end
 
 function move_player_to_room_up()
-    trans_room_up()
-    p1_y = 127 - (p1_h - 1)
+	printh("move player to room up")
+    p1_y -= p1_h - 1
+	change_rooms()
 end
 
 function move_player_to_room_down()
-    trans_room_down()
-    p1_y = 0
+	printh("move player to room down")
+    p1_y += p1_h - 1
+	change_rooms()
 end
 
 function move_player_to_room_left()
-    trans_room_left()
-    p1_x = 127 - (p1_w - 1)
+	printh("move player to room left")
+	p1_x -= p1_w - 1
+	change_rooms()
+
 end
 
 function move_player_to_room_right()
-    trans_room_right()
-    p1_x = 0
+	printh("move player to room right")
+    p1_x += p1_w - 1
+	change_rooms()
 end
 
 function p1_update_landmarks()
@@ -410,11 +475,37 @@ function p1_update_landmarks()
 	p1_btm=p1_y+p1_h-1
 	p1_ctr=(p1_lft+p1_rgt)/2
 	p1_mdl=(p1_top+p1_btm)/2
+
+	p1_s_lft = p1_lft % 128
+	p1_s_rgt = p1_rgt % 128
+	p1_s_top = p1_top % 128
+	p1_s_btm = p1_btm % 128
+	p1_s_ctr = p1_ctr % 128
+	p1_s_mdl = p1_mdl % 128
+end
+
+function p1_get_mpx()
+	return p1_x
+end
+
+function p1_get_mpy()
+	return p1_y
+end
+
+function p1_get_sx()
+	return p1_sx
+end
+
+function p1_get_sy()
+	return p1_sy
 end
 	
 function p1_draw(_debug)
+
+	update_screen_pos()
+
 	spr(p1_spr_state[p1_spr_n], -- sprite number to draw
-        p1_x, p1_y, -- position to draw at
+        p1_sx, p1_sy, -- position to draw at
         1, 1, -- number of tiles wide/tall
         p1_facing == -1, false) -- whether or not to flip on x,y axis respectively
 	
@@ -422,32 +513,29 @@ function p1_draw(_debug)
 
         p1_update_landmarks()
 
-		if true then
-			print(temp_offset)
-		end
-
 		if debug_position then
-			print("("..p1_x..", "..p1_y..")")
+			print("world pos: ("..p1_x..", "..p1_y..")", 0, 0 ,6)
+			print("scren pos: ("..p1_sx..", "..p1_sy..")", 0, 6, 6)
 		end
 		
 		-- print/draw wall detection
 		if debug_horizontal_collision then
 			-- print numbers
-			print(cand_tx,10,10,15) -- top
-			print(cand_vx,10,16,15) -- velocity
-			print(cand_bx,10,22,15) -- bottom
+			print(cand_tx, 10, 6 * 6, 15) -- top
+			print(cand_vx, 10, 7 * 6, 15) -- velocity
+			print(cand_bx, 10, 8 * 6, 15) -- bottom
 			
 			-- draw rays
 			if p1_dx>0 then
 				--moving right
-				line(p1_lft, p1_top, cand_tx, cand_ty, 11) -- top
-				line(p1_lft, p1_mdl, cand_vx, p1_mdl, 11) -- velocity
-				line(p1_lft, p1_btm, cand_bx, cand_by, 11) -- bottom
+				line(p1_s_lft, p1_s_top, cand_tx % 128, cand_ty % 128, 11) -- top
+				line(p1_s_lft, p1_s_mdl, cand_vx % 128, p1_s_mdl, 11) -- velocity
+				line(p1_s_lft, p1_s_btm, cand_bx % 128, cand_by % 128, 11) -- bottom
 			elseif p1_dx<0 then
 				--moving left
-				line(p1_lft, p1_top, cand_tx, cand_ty, 11) -- top
-				line(p1_lft, p1_mdl, cand_vx, p1_mdl, 11) -- velocity
-				line(p1_lft, p1_btm, cand_bx, cand_by, 11) -- bottom
+				line(p1_s_lft, p1_s_top, cand_tx % 128, cand_ty % 128, 11) -- top
+				line(p1_s_lft, p1_s_mdl, cand_vx % 128, p1_s_mdl, 11) -- velocity
+				line(p1_s_lft, p1_s_btm, cand_bx % 128, cand_by % 128, 11) -- bottom
 			end
 		end
 		
@@ -464,14 +552,14 @@ function p1_draw(_debug)
 			-- draw rays
 			if p1_y_vel>0 then
 				-- falling
-				line(p1_lft, p1_top + p1_h - 1, cand_lx, cand_ly, 11) -- left
-				line(p1_ctr, p1_top, p1_ctr, cand_vy, 11) -- velocity
-				line(p1_rgt, p1_top + p1_h - 1, cand_rx, cand_ry, 11) -- right
+				line(p1_s_lft, p1_s_top + p1_h - 1, cand_lx % 128, cand_ly % 128, 11) -- left
+				line(p1_s_ctr, p1_s_top, p1_s_ctr, cand_vy % 128, 11) -- velocity
+				line(p1_s_rgt, p1_s_top + p1_h - 1, cand_rx % 128, cand_ry % 128, 11) -- right
 			elseif p1_y_vel<0 then
 				-- rising
-				line(p1_lft, p1_top, cand_lx, cand_ly, 11) -- left
-				line(p1_ctr, p1_top, p1_ctr, cand_vy, 11) -- velocity
-				line(p1_rgt, p1_top, cand_rx, cand_ry, 11) -- right
+				line(p1_s_lft, p1_s_top, cand_lx % 128, cand_ly % 128, 11) -- left
+				line(p1_s_ctr, p1_s_top, p1_s_ctr, cand_vy % 128, 11) -- velocity
+				line(p1_s_rgt, p1_s_top, cand_rx % 128, cand_ry % 128, 11) -- right
 			end
 		end
 		
