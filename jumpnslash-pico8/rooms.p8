@@ -85,6 +85,18 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
     assert(_tile_width % 16 == 0)
     assert(_tile_height % 16 == 0)
 
+    -- make sure _start_x and _start_y are matching
+    -- they must either be (both a number) or (both nil)!!
+    assert((_start_x != nil and _start_y != nil) or (_start_x == nil and _start_y == nil))
+
+    -- make sure the spawn point for this room is actually inside the room
+    if _start_x != nil then
+        assert(_map_x < _start_x)
+        assert(_start_x < _map_x + _tile_width - 1)
+        assert(_map_y < _start_y)
+        assert(_start_y < _map_y + _tile_height - 1)
+    end
+
     local room = {
         mx = _map_x,
         my = _map_y,
