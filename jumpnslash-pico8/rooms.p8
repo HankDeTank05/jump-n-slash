@@ -199,7 +199,7 @@ end
 -- currently does nothing
 function update_room()
 
-    if get_scrollability_horizontal() == true and get_scrollability_vertical() == false then -- horizontal scrolling only
+    if get_scrollability_horizontal() then -- horizontal scrolling only
 
         if p1_get_mpx() < get_scroll_left_bounds() then -- if left of scroll zone
             scroll_x_offset = 0
@@ -211,14 +211,16 @@ function update_room()
             scroll_x_offset = -(get_scroll_right_bounds() - get_scroll_left_bounds()) -- if right of scroll zone
             
         end
+
+    end
         
-    elseif get_scrollability_horizontal() == false and get_scrollability_vertical() == true then -- vertical scrolling only
+    if get_scrollability_vertical() then -- vertical scrolling only
         
         if p1_get_mpy() < get_scroll_top_bounds() then -- if above scroll zone
             scroll_y_offset = 0
 
         elseif get_scroll_top_bounds() <= p1_get_mpy() and p1_get_mpy() < get_scroll_bottom_bounds() then -- if inside scroll zone
-            scroll_y_offset = -(p1_get_mpy() - get_scroll_top_bounds())
+            scroll_y_offset = -flr(p1_get_mpy() - get_scroll_top_bounds())
 
         elseif get_scroll_bottom_bounds() <= p1_get_mpy() then -- if below scroll zone
             scroll_y_offset = -(get_scroll_bottom_bounds() - get_scroll_top_bounds())
