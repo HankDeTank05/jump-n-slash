@@ -12,9 +12,10 @@ function init_player()
     assert(get_current_room().start_my != nil)
 	p1_sprs = { -- lists of sprites for animation
 		neutral = {16, 32,},
-		walk = {17, 18, 19, 20, 21, 22, 23,},
-		jump = {1, 2, 3, 4, 5, 6, 7,},
-		fall = {33, 34, 35, 36, 37, 38, 39,},
+		walk = {17, 18, 19, 20,},
+		jump = {1, 2, 3, 4,},
+		fall = {33, 34, 35, 36,},
+		attack = {49, 50, 51, 52,}
 	}
 	p1_spr_state = nil -- assigned p1_sprs.<sublist>
 	p1_spr_n = 1 -- the index of the sprite to draw
@@ -55,7 +56,7 @@ function init_player()
 	p1_landed = false -- did you land on the ground?
 	p1_jump_btn_frames = 0 -- how many frames the jump button has been held for
 	p1_jump_btn_released = true
-	
+	p1_weapon = "sword"
 
     jump_vel = -2 -- the jump velocity
 	max_jump_frames = 15 -- the longest
@@ -94,6 +95,10 @@ end
 
 function p1_read_inputs()
 	-- read for inputs
+
+	if btnp(❎) then
+		p1_attack()
+	end
 
 	-- variable height jumping
 	if btn(⬆️) -- if the jump button is down
@@ -136,6 +141,12 @@ function p1_read_inputs()
 	end
 	
 	p1_update_landmarks()
+end
+
+function p1_attack()
+	if p1_weapon == "sword" then
+		-- code goes here
+	end
 end
 
 function p1_collision()
@@ -507,7 +518,7 @@ function p1_draw(_debug)
 	spr(p1_spr_state[p1_spr_n], -- sprite number to draw
         p1_sx, p1_sy, -- position to draw at
         1, 1, -- number of tiles wide/tall
-        p1_facing == -1, false) -- whether or not to flip on x,y axis respectively
+        p1_facing == -1, false) -- whether or not to flip on x,y axis
 	
 	if _debug then
 
