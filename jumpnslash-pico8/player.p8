@@ -145,7 +145,7 @@ end
 
 function p1_attack()
 	if p1_weapon == "sword" then
-		-- code goes here
+		sword_activate()
 	end
 end
 
@@ -509,6 +509,10 @@ end
 
 function p1_get_sy()
 	return p1_sy
+end
+
+function p1_get_facing()
+	return p1_facing
 end
 	
 function p1_draw(_debug)

@@ -7,14 +7,14 @@ function init_sword()
         neutral = {},
         swing = {5, 21, 37, 53,},
     }
-    sword_spr_state = nil -- assigned sword_sprs.<sublist>
+    sword_spr_state = sword_sprs.neutral -- assigned sword_sprs.<sublist>
     sword_spr_n = 1 -- the index of the sprite to draw
     sword_anim_spd = 10 -- speed control for animations, higher number = slower
     sword_anim_fcount = 0 -- frame counter for animation
     sword_active = false
 end
 
-function update_sword()
+function sword_update()
     sword_collision()
 
     sword_animate()
@@ -52,9 +52,11 @@ function sword_reset_animation()
     sword_anim_fcount = 0
 end
 
-function draw_sword()
-    spr(sword_spr_state[sword_spr_n], -- sprite number to draw
-        p1_get_sx() + 8, p1_get_sy(), -- position to draw at
-        1, 1, -- number of tiles wide/tall
-        p1_get_facing() == -1, false) -- whether or not to flip on x,y axis
+function sword_draw()
+    if #sword_spr_state > 0 then
+        spr(sword_spr_state[sword_spr_n], -- sprite number to draw
+            p1_get_sx() + 8, p1_get_sy(), -- position to draw at
+            1, 1, -- number of tiles wide/tall
+            p1_get_facing() == -1, false) -- whether or not to flip on x,y axis
+    end
 end
