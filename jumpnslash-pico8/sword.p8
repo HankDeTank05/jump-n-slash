@@ -57,6 +57,6 @@ function sword_draw()
         spr(sword_spr_state[sword_spr_n], -- sprite number to draw
             p1_get_sx() + 8, p1_get_sy(), -- position to draw at
             1, 1, -- number of tiles wide/tall
-            p1_get_facing() == -1, false) -- whether or not to flip on x,y axis
+            false, false) -- whether or not to flip on x,y axis
     end
 end

@@ -145,7 +145,7 @@ end
 
 function p1_attack()
 	if p1_weapon == "sword" then
-		sword_activate()
+		--sword_activate()
 	end
 end
 
@@ -289,7 +289,7 @@ function p1_vertical_collision()
 
         -- account for edge case #2 with left ray
         if check_for_flag_at(cand_lx, cand_ly, 3) then
-            printh("edge case, left ray")
+            if debug_printh then printh("edge case, left ray") end
             -- cast until the ray is below the block
             while check_for_flag_at(cand_lx, cand_ly, 3) == true do
                 cand_ly += 1
@@ -308,7 +308,7 @@ function p1_vertical_collision()
 
         -- account for edge case #2 with right ray
         if check_for_flag_at(cand_rx, cand_ry, 3) then
-            printh("edge case, right ray")
+            if debug_printh then printh("edge case, right ray") end
             -- cast until the ray is below the block
             while check_for_flag_at(cand_rx, cand_ry, 3) == true do
                 cand_ry += 1
@@ -391,32 +391,6 @@ function p1_move()
 
     elseif p1_x + (p1_w - 1) >= get_current_right_bounds() then -- move right
         move_player_to_room_right()
-	--[[
-	else
-
-		-- case 1: horizontal scrolling only
-		if get_scrollability_horizontal() and not(get_scrollability_vertical()) then
-			printh("horizontal scrolling only room")
-			if p1_x + (p1_w - 1) < get_scroll_left_bounds() then -- case 1: player is in left zone
-				-- minimum (zero) x-offset for drawing the room
-
-			elseif p1_x > get_scroll_right_bounds() then -- case 2: player is in right zone
-				-- maximum (amt=???) x-offset for drawing the room
-
-			else -- case 3: player is in center zone
-				-- code goes here
-			end
-
-		end
-
-		-- case 2: vertical scrolling only
-		if get_scrollability_vertical() and not(get_scrollability_horizontal()) then
-			printh("vertical scrolling only room")
-			-- case 1: player is in top zone
-			-- case 2: player is in bottom zone
-			-- case 3: player is in middle zone
-		end
-	--]]
     end
 end
 
@@ -455,26 +429,26 @@ function p1_apply_gravity()
 end
 
 function move_player_to_room_up()
-	printh("move player to room up")
+	if debug_printh then printh("move player to room up") end
     p1_y -= p1_h - 1
 	change_rooms()
 end
 
 function move_player_to_room_down()
-	printh("move player to room down")
+	if debug_printh then printh("move player to room down") end
     p1_y += p1_h - 1
 	change_rooms()
 end
 
 function move_player_to_room_left()
-	printh("move player to room left")
+	if debug_printh then printh("move player to room left") end
 	p1_x -= p1_w - 1
 	change_rooms()
 
 end
 
 function move_player_to_room_right()
-	printh("move player to room right")
+	if debug_printh then printh("move player to room right") end
     p1_x += p1_w - 1
 	change_rooms()
 end

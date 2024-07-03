@@ -211,7 +211,7 @@ end
 -- currently does nothing
 function update_room()
 
-    if get_scrollability_horizontal() then -- horizontal scrolling only
+    if get_scrollability_horizontal() then -- horizontal scrolling
 
         if p1_get_mpx() < get_scroll_left_bounds() then -- if left of scroll zone
             scroll_x_offset = 0
@@ -226,7 +226,7 @@ function update_room()
 
     end
         
-    if get_scrollability_vertical() then -- vertical scrolling only
+    if get_scrollability_vertical() then -- vertical scrolling
         
         if p1_get_mpy() < get_scroll_top_bounds() then -- if above scroll zone
             scroll_y_offset = 0
@@ -243,14 +243,27 @@ function update_room()
 end
 
 function change_rooms()
+    local room_i = get_room_from_tile(p1_get_mpx(), p1_get_mpy())
+    assert(room_i != nil)
+    printh("changing to room "..room_i)
+    set_current_room(room_i)
+end
+
+function get_room_from_tile(_tile_x, _tile_y)
+    -- algo to determine which room a given tile is in. returns nil if given tile is not in a room
+
     local i = 0
     local rm = nil
     repeat
         i += 1
         rm = rooms[i]
-    until rm.mpx_min <= p1_get_mpx() and p1_get_mpx() < rm.mpx_max and rm.mpy_min <= p1_get_mpy() and p1_get_mpy() < rm.mpy_max
-    printh("changing to room "..i)
-    set_current_room(i)
+    until (i > #rooms) or (rm.mpx_min <= _tile_x and _tile_x < rm.mpx_max and rm.mpy_min <= _tile_y and _tile_y < rm.mpy_max)
+
+    if i <= #rooms then
+        return i
+    else
+        return nil
+    end
 end
 
 function draw_room(_debug)
