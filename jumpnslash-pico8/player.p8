@@ -7,7 +7,7 @@ __lua__
 ]]
 
 function init_player()
-    -- assumes rooms have already been initialized
+    -- assumes rooms have already been initialized and that the starting room has a spawn point defined
     assert(get_current_room().start_mx != nil)
     assert(get_current_room().start_my != nil)
 	p1_sprs = { -- lists of sprites for animation
