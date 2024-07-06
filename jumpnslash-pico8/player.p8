@@ -96,12 +96,12 @@ end
 function p1_read_inputs()
 	-- read for inputs
 
-	if btnp(❎) then
+	if btnp(controls.attack) then
 		p1_attack()
 	end
 
 	-- variable height jumping
-	if btn(⬆️) -- if the jump button is down
+	if btn(controls.jump) -- if the jump button is down
 	and p1_y_vel <= 0 -- and the player is not falling (aka vertically not moving, or moving upwards)
 	and p1_jump_btn_frames < max_jump_frames then -- and the button has been held for less than the max allowed num of frames
 
@@ -113,7 +113,7 @@ function p1_read_inputs()
 			p1_landed = false
 		end
 
-	elseif btn(⬆️) == false then
+	elseif btn(controls.jump) == false then
 
 		p1_jump_btn_released = true
 		if p1_landed == true then
@@ -126,14 +126,14 @@ function p1_read_inputs()
 	-- walk left/right
 	p1_dx = 0
 	-- walk right?
-	if btn(➡️) then
+	if btn(controls.walk_right) then
 		p1_dx += walk_speed
 		if p1_facing < 0 then
 			p1_facing *= -1
 		end
 	end
 	-- walk left?
-	if btn(⬅️) then
+	if btn(controls.walk_left) then
 	 p1_dx -= walk_speed
 	 if p1_facing > 0 then
 	 	p1_facing *= -1

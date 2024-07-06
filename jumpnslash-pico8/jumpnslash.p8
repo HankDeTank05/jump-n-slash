@@ -10,6 +10,7 @@ __lua__
 #include rooms.p8
 #include sword.p8
 #include enemy.p8
+#include designer_controls.p8
 
 f = 1 -- frame count
 

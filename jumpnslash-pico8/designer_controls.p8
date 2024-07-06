@@ -7,6 +7,19 @@ __lua__
 --------------------
 -- player options --
 --------------------
+-- 0 = ⬅️ = left arrow key
+-- 1 = ➡️ = right arrow key
+-- 2 = ⬆️ = up arrow key
+-- 3 = ⬇️ = down arrow key
+-- 4 = 🅾️ = z key on keyboard
+-- 5 = ❎ = x key on keyboard
+controls = {
+    walk_left = 0,
+    walk_right = 1,
+    jump = 2,
+    attack = 5,
+}
+
 jump_vel = -2 -- the jump velocity
 -- this must always be a negative number (does not need to be an integer)
 -- this velocity is applied as long as the player is holding the jump button
