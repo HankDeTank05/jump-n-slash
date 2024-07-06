@@ -4,6 +4,7 @@ __lua__
 
 -- debug master flag (must be enabled for all other debug flags to work)
 debug_all = false
+debug_printh = true
 
 -- debug options for player
 debug_position = false

@@ -7,14 +7,15 @@ __lua__
 ]]
 
 function init_player()
-    -- assumes rooms have already been initialized
+    -- assumes rooms have already been initialized and that the starting room has a spawn point defined
     assert(get_current_room().start_mx != nil)
     assert(get_current_room().start_my != nil)
 	p1_sprs = { -- lists of sprites for animation
 		neutral = {16, 32,},
-		walk = {17, 18, 19, 20, 21, 22, 23,},
-		jump = {1, 2, 3, 4, 5, 6, 7,},
-		fall = {33, 34, 35, 36, 37, 38, 39,},
+		walk = {17, 18, 19, 20,},
+		jump = {1, 2, 3, 4,},
+		fall = {33, 34, 35, 36,},
+		attack = {49, 50, 51, 52,}
 	}
 	p1_spr_state = nil -- assigned p1_sprs.<sublist>
 	p1_spr_n = 1 -- the index of the sprite to draw
@@ -55,7 +56,7 @@ function init_player()
 	p1_landed = false -- did you land on the ground?
 	p1_jump_btn_frames = 0 -- how many frames the jump button has been held for
 	p1_jump_btn_released = true
-	
+	p1_weapon = "sword"
 
     jump_vel = -2 -- the jump velocity
 	max_jump_frames = 15 -- the longest
@@ -94,6 +95,10 @@ end
 
 function p1_read_inputs()
 	-- read for inputs
+
+	if btnp(❎) then
+		p1_attack()
+	end
 
 	-- variable height jumping
 	if btn(⬆️) -- if the jump button is down
@@ -136,6 +141,12 @@ function p1_read_inputs()
 	end
 	
 	p1_update_landmarks()
+end
+
+function p1_attack()
+	if p1_weapon == "sword" then
+		--sword_activate()
+	end
 end
 
 function p1_collision()
@@ -278,7 +289,7 @@ function p1_vertical_collision()
 
         -- account for edge case #2 with left ray
         if check_for_flag_at(cand_lx, cand_ly, 3) then
-            printh("edge case, left ray")
+            if debug_printh then printh("edge case, left ray") end
             -- cast until the ray is below the block
             while check_for_flag_at(cand_lx, cand_ly, 3) == true do
                 cand_ly += 1
@@ -297,7 +308,7 @@ function p1_vertical_collision()
 
         -- account for edge case #2 with right ray
         if check_for_flag_at(cand_rx, cand_ry, 3) then
-            printh("edge case, right ray")
+            if debug_printh then printh("edge case, right ray") end
             -- cast until the ray is below the block
             while check_for_flag_at(cand_rx, cand_ry, 3) == true do
                 cand_ry += 1
@@ -380,32 +391,6 @@ function p1_move()
 
     elseif p1_x + (p1_w - 1) >= get_current_right_bounds() then -- move right
         move_player_to_room_right()
-	--[[
-	else
-
-		-- case 1: horizontal scrolling only
-		if get_scrollability_horizontal() and not(get_scrollability_vertical()) then
-			printh("horizontal scrolling only room")
-			if p1_x + (p1_w - 1) < get_scroll_left_bounds() then -- case 1: player is in left zone
-				-- minimum (zero) x-offset for drawing the room
-
-			elseif p1_x > get_scroll_right_bounds() then -- case 2: player is in right zone
-				-- maximum (amt=???) x-offset for drawing the room
-
-			else -- case 3: player is in center zone
-				-- code goes here
-			end
-
-		end
-
-		-- case 2: vertical scrolling only
-		if get_scrollability_vertical() and not(get_scrollability_horizontal()) then
-			printh("vertical scrolling only room")
-			-- case 1: player is in top zone
-			-- case 2: player is in bottom zone
-			-- case 3: player is in middle zone
-		end
-	--]]
     end
 end
 
@@ -444,26 +429,26 @@ function p1_apply_gravity()
 end
 
 function move_player_to_room_up()
-	printh("move player to room up")
+	if debug_printh then printh("move player to room up") end
     p1_y -= p1_h - 1
 	change_rooms()
 end
 
 function move_player_to_room_down()
-	printh("move player to room down")
+	if debug_printh then printh("move player to room down") end
     p1_y += p1_h - 1
 	change_rooms()
 end
 
 function move_player_to_room_left()
-	printh("move player to room left")
+	if debug_printh then printh("move player to room left") end
 	p1_x -= p1_w - 1
 	change_rooms()
 
 end
 
 function move_player_to_room_right()
-	printh("move player to room right")
+	if debug_printh then printh("move player to room right") end
     p1_x += p1_w - 1
 	change_rooms()
 end
@@ -499,6 +484,10 @@ end
 function p1_get_sy()
 	return p1_sy
 end
+
+function p1_get_facing()
+	return p1_facing
+end
 	
 function p1_draw(_debug)
 
@@ -507,7 +496,7 @@ function p1_draw(_debug)
 	spr(p1_spr_state[p1_spr_n], -- sprite number to draw
         p1_sx, p1_sy, -- position to draw at
         1, 1, -- number of tiles wide/tall
-        p1_facing == -1, false) -- whether or not to flip on x,y axis respectively
+        p1_facing == -1, false) -- whether or not to flip on x,y axis
 	
 	if _debug then
 
