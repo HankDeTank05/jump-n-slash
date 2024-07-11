@@ -17,7 +17,7 @@ f = 1 -- frame count
 function _init()
 	init_rooms()
 	init_player()
-	--init_sword()
+	init_sword()
 	init_enemies()
 
 	set_state_game()
@@ -30,7 +30,7 @@ end
 
 function update_game_state()
 	p1_update()
-	--sword_update()
+	sword_update()
 	enemies_update()
 	update_room()
 end
@@ -41,7 +41,7 @@ function draw_game_state()
 	draw_room(debug_all)
 	enemies_draw()
 	p1_draw(debug_all)
-	--sword_draw(debug_all)
+	sword_draw(debug_all)
 
 	f += 1 -- increment frame counter
 end

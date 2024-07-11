@@ -62,7 +62,6 @@ function init_player()
 
 	-- state functions
 	p1_animate = p1_animate_neutral
-	p1_prev_anim = nil
 
     jump_vel = -2 -- the jump velocity
 	max_jump_frames = 15 -- the longest
@@ -153,7 +152,7 @@ function p1_attack()
 	if p1_spr_state != p1_sprs.attack then
 		printh("attacking")
 		if p1_weapon == "sword" then
-			--sword_activate()
+			sword_activate()
 			printh("\twith sword")
 		end
 		p1_attacking = true
@@ -537,7 +536,6 @@ function p1_reset_animation()
 end
 
 function p1_set_animation(_anim)
-	p1_prev_anim = p1_animate
 	p1_animate = _anim
 	p1_reset_animation()
 end
