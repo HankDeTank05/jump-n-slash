@@ -49,18 +49,19 @@ end
 function sword_animate_neutral()
     sword_spr_n %= #sword_sprs.neutral
     sword_spr_n += 1
-    
+
     sword_draw_spr = sword_sprs.neutral[sword_spr_n]
 end
 
 function sword_animate_swing()
-    sword_spr_n += 1
-
+    
     -- determine next state
-    if sword_spr_n > #sword_sprs.swing then
+    if sword_anim_fcount >= p1_attack_frames then
         sword_set_animation(sword_animate_neutral)
         sword_active = false
     else
+        sword_spr_n = flr((sword_anim_fcount / p1_attack_frames) * #sword_sprs.swing)
+        sword_spr_n += 1
         sword_draw_spr = sword_sprs.swing[sword_spr_n]
     end
 end
