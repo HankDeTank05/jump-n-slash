@@ -19,52 +19,36 @@ function init_rooms()
     map_max_tile_y = 63
     map_max_pix_x = (map_max_tile_x * 8) - 1
     map_max_pix_y = (map_max_tile_y * 8) - 1
-
-    --[[
-
-    layout:
-
-    +----+----+----+----+----+----+
-    |  1 =  2 =  3 =  4 =  5 =  6 |
-    +-||-+-||-+----+----+----+-||-+
-    |    8    =    |         |  7 |
-    +---------+  9 |         +----+
-    |         =    |
-    |    10   +----+
-    |         |
-    +---------+
-
-    --]]
     
     -- room 1
-    add_room(0, 0, 16, 16, 2, 14)
+    add_room(0, 0, 16, 16)
 
     -- room 2
-    add_room(16, 0, 16, 16, nil, nil)
+    add_room(16, 0, 16, 16)
 
     -- room 3
-    add_room(32, 0, 16, 16, nil, nil)
+    add_room(32, 0, 16, 16)
 
     -- room 4
-    add_room(48, 0, 16, 16, nil, nil)
+    add_room(48, 0, 16, 16)
 
     -- room 5
-    add_room(64, 0, 16, 16, nil, nil)
+    add_room(64, 0, 16, 16)
 
     -- room 6
-    add_room(80, 0, 16, 16, nil, nil)
+    add_room(80, 0, 16, 16)
 
     -- room 7
-    add_room(80, 16, 16, 16, nil, nil)
+    add_room(80, 16, 16, 16)
 
     -- room 8
-    add_room(0, 16, 32, 16, nil, nil)
+    add_room(0, 16, 32, 16)
 
     -- room 9
-    add_room(32, 16, 16, 32, nil, nil)
+    add_room(32, 16, 16, 32)
 
     -- room 10
-    add_room(0, 32, 32, 32, nil, nil)
+    add_room(0, 32, 32, 32)
 
     set_current_room(1)
 end
@@ -110,8 +94,8 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
         mpy_max = (_map_y + _tile_height) * 8,
 
         -- spawn point in room (not every room needs to have one)
-        start_mx = _start_x,
-        start_my = _start_y,
+        start_mx = nil,
+        start_my = nil,
 
         scroll_h = _tile_width > 16, -- does this room scroll horizontally?
         scroll_v = _tile_height > 16, -- does this room scroll vertically?
@@ -122,6 +106,21 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
         scroll_v_min_mpy = (_map_y + 8) * 8,
         scroll_v_max_mpy = (_map_y + _tile_height - 8) * 8,
     }
+
+    -- search for any player spawn markers in the defined room
+    local player_spawn_left = 22
+    local player_spawn_right = 23
+    for my = room.my, room.my + room.mh - 1 do
+        for mx = room.mx, room.mx + room.mw - 1 do
+            local tile_spr_num = mget(mx, my)
+            if tile_spr_num == player_spawn_left or tile_spr_num == player_spawn_right then
+                room.start_mx = mx
+                room.start_my = my
+                -- replace the spawn point tile with a blank tile, cuz the player shouldn't see this
+                mset(mx, my, 0)
+            end
+        end
+    end
 
     add(rooms, room)
     printh("room "..#rooms)

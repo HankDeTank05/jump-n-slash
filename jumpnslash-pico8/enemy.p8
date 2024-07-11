@@ -31,6 +31,8 @@ function init_enemies()
             
             if tile_spr == enemy_spawn_left or tile_spr == enemy_spawn_right then
                 spawn_enemy(tx, ty, get_room_from_tile(tx, ty))
+                -- replace enemy spawn point tile with blank tile, cuz the player shouldn't see this
+                mset(tx, ty, 0)
             end
 
         end
