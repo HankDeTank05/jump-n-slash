@@ -15,7 +15,7 @@ function init_player()
 		walk = {17, 18, 19, 20,},
 		jump = {1, 2, 3, 4,},
 		fall = {33, 34, 35, 36,},
-		attack = {49, 50, 51, 52,}
+		attack = {48, 49, 50, 51,}
 	}
 	p1_spr_state = nil -- assigned p1_sprs.<sublist>
 	p1_spr_n = 1 -- the index of the sprite to draw

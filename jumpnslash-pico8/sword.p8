@@ -4,7 +4,7 @@ __lua__
 
 function init_sword()
     sword_sprs = { -- lists of sprites for animation
-        neutral = {},
+        neutral = {52,},
         swing = {5, 21, 37, 53,},
     }
     sword_spr_state = sword_sprs.neutral -- assigned sword_sprs.<sublist>
@@ -47,7 +47,10 @@ function sword_update_animation()
 end
 
 function sword_animate_neutral()
-    sword_draw_spr = 0
+    sword_spr_n %= #sword_sprs.neutral
+    sword_spr_n += 1
+    
+    sword_draw_spr = sword_sprs.neutral[sword_spr_n]
 end
 
 function sword_animate_swing()
@@ -74,7 +77,7 @@ end
 
 function sword_draw()
     spr(sword_draw_spr, -- sprite number to draw
-        p1_get_sx() + 8, p1_get_sy(), -- position to draw at
+        p1_get_sx() + 8 * p1_get_facing(), p1_get_sy(), -- position to draw at
         1, 1, -- number of tiles wide/tall
-        false, false) -- whether or not to flip on x,y axis
+        p1_get_facing() == -1, false) -- whether or not to flip on x,y axis
 end
