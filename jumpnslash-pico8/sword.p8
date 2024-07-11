@@ -40,15 +40,14 @@ function sword_update_animation()
     --]]
 
     sword_spr_n = flr(sword_anim_fcount / sword_anim_spd)
+    
+    sword_animate()
 
     sword_anim_fcount += 1
-
-    sword_animate()
 end
 
 function sword_animate_neutral()
-    sword_spr_n %= #sword_sprs.neutral
-    sword_spr_n += 1
+    sword_spr_n = index_loop_animation(sword_anim_fcount, sword_anim_spd, #sword_sprs.neutral)
 
     sword_draw_spr = sword_sprs.neutral[sword_spr_n]
 end
@@ -60,8 +59,7 @@ function sword_animate_swing()
         sword_set_animation(sword_animate_neutral)
         sword_active = false
     else
-        sword_spr_n = flr((sword_anim_fcount / p1_attack_frames) * #sword_sprs.swing)
-        sword_spr_n += 1
+        sword_spr_n = index_animation_noloop(sword_anim_fcount, p1_attack_frames, #sword_sprs.swing)
         sword_draw_spr = sword_sprs.swing[sword_spr_n]
     end
 end

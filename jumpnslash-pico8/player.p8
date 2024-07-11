@@ -420,17 +420,14 @@ function p1_update_animation()
 		p1_set_animation(p1_sprs.neutral)
 	end
 	--]]
-
-	p1_spr_n = flr(p1_anim_fcount / p1_anim_spd)
+	
+	p1_animate()
 
 	p1_anim_fcount += 1
-
-	p1_animate()
 end
 
 function p1_animate_neutral()
-	p1_spr_n %= #p1_sprs.neutral
-	p1_spr_n += 1
+	p1_spr_n = index_loop_animation(p1_anim_fcount, p1_anim_spd, #p1_sprs.neutral)
 	p1_draw_spr = p1_sprs.neutral[p1_spr_n]
 
 	-- determine next state
@@ -450,8 +447,7 @@ function p1_animate_neutral()
 end
 
 function p1_animate_walk()
-	p1_spr_n %= #p1_sprs.walk
-	p1_spr_n += 1
+	p1_spr_n = index_loop_animation(p1_anim_fcount, p1_anim_spd, #p1_sprs.walk)
 	p1_draw_spr = p1_sprs.walk[p1_spr_n]
 
 	-- determine next state
@@ -471,8 +467,7 @@ function p1_animate_walk()
 end
 
 function p1_animate_jump()
-	p1_spr_n %= #p1_sprs.jump
-	p1_spr_n += 1
+	p1_spr_n = index_loop_animation(p1_anim_fcount, p1_anim_spd, #p1_sprs.jump)
 	p1_draw_spr = p1_sprs.jump[p1_spr_n]
 
 	-- determine next state
@@ -486,8 +481,7 @@ function p1_animate_jump()
 end
 
 function p1_animate_fall()
-	p1_spr_n %= #p1_sprs.fall
-	p1_spr_n += 1
+	p1_spr_n = index_loop_animation(p1_anim_fcount, p1_anim_spd, #p1_sprs.fall)
 	p1_draw_spr = p1_sprs.fall[p1_spr_n]
 	
 	-- determine next state
@@ -527,8 +521,7 @@ function p1_animate_attack()
 		end
 	else
 		-- use a different method of calculating animation frame
-		p1_spr_n = flr((p1_anim_fcount / p1_attack_frames) * #p1_sprs.attack)
-		p1_spr_n += 1
+		p1_spr_n = index_animation_noloop(p1_anim_fcount, p1_attack_frames, #p1_sprs.attack)
 		p1_draw_spr = p1_sprs.attack[p1_spr_n]
 	end
 end
