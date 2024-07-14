@@ -64,10 +64,6 @@ function init_player()
 	-- state functions
 	p1_animate = p1_animate_neutral
 
-    jump_vel = -2 -- the jump velocity
-	max_jump_frames = 15 -- the longest
-    walk_speed = 1
-    gravity = 0.2
 end
 
 function update_screen_pos()
