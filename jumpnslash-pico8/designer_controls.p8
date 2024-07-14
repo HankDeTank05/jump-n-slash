@@ -37,6 +37,10 @@ walk_speed = 1 -- horizontal movement speed
 -- pixels per frame
 -- screen res is 128x128
 
+p1_attack_frames = 10 -- number of frames that attack hitbox is active for
+-- this must always be a positive integer
+-- assume 60fps
+
 -------------------
 -- enemy options --
 -------------------

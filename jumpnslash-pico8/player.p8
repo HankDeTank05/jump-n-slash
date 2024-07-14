@@ -15,12 +15,14 @@ function init_player()
 		walk = {17, 18, 19, 20,},
 		jump = {1, 2, 3, 4,},
 		fall = {33, 34, 35, 36,},
-		attack = {49, 50, 51, 52,}
+		attack = {48, 49, 50, 51,}
 	}
 	p1_spr_state = nil -- assigned p1_sprs.<sublist>
 	p1_spr_n = 1 -- the index of the sprite to draw
 	p1_anim_spd = 10 -- speed control for animations, higher number = slower
+	assert(p1_attack_frames > 0)
 	p1_anim_fcount = 0 -- frame counter for animation
+	p1_draw_spr = nil -- the sprite to draw in the current frame
 
 	-- the following coordinates are in map pixels (*not* tiles)
 	p1_x = get_current_room().start_mx * 8 -- get starting x position based on what the starting room defines it to be
@@ -57,6 +59,10 @@ function init_player()
 	p1_jump_btn_frames = 0 -- how many frames the jump button has been held for
 	p1_jump_btn_released = true
 	p1_weapon = "sword"
+	p1_attacking = false
+
+	-- state functions
+	p1_animate = p1_animate_neutral
 
     jump_vel = -2 -- the jump velocity
 	max_jump_frames = 15 -- the longest
@@ -87,7 +93,7 @@ function p1_update()
 	
 	p1_move()
 
-	p1_animate()
+	p1_update_animation()
 	
 	p1_update_landmarks()
 	
@@ -144,8 +150,13 @@ function p1_read_inputs()
 end
 
 function p1_attack()
-	if p1_weapon == "sword" then
-		--sword_activate()
+	if p1_spr_state != p1_sprs.attack then
+		printh("attacking")
+		if p1_weapon == "sword" then
+			sword_activate()
+			printh("\twith sword")
+		end
+		p1_attacking = true
 	end
 end
 
@@ -394,9 +405,12 @@ function p1_move()
     end
 end
 
-function p1_animate()
+function p1_update_animation()
+	--[[
 	-- set animation state
-	if p1_y_vel < 0 then
+	if p1_attacking == true then
+		p1_set_animation(p1_sprs.attack)
+	elseif p1_y_vel < 0 then
 		p1_set_animation(p1_sprs.jump)
 	elseif p1_y_vel > 0 then
 		p1_set_animation(p1_sprs.fall)
@@ -405,10 +419,111 @@ function p1_animate()
 	else
 		p1_set_animation(p1_sprs.neutral)
 	end
-
-	p1_spr_n = (flr(p1_anim_fcount / p1_anim_spd) % #p1_spr_state) + 1
+	--]]
+	
+	p1_animate()
 
 	p1_anim_fcount += 1
+end
+
+function p1_animate_neutral()
+	p1_spr_n = index_loop_animation(p1_anim_fcount, p1_anim_spd, #p1_sprs.neutral)
+	p1_draw_spr = p1_sprs.neutral[p1_spr_n]
+
+	-- determine next state
+	if p1_attacking == true then
+		printh("neutral --> attack")
+		p1_set_animation(p1_animate_attack)
+	elseif p1_dx != 0 then
+		printh("neutral --> walk")
+		p1_set_animation(p1_animate_walk)
+	elseif p1_y_vel < 0 then
+		printh("neutral --> jump")
+		p1_set_animation(p1_animate_jump)
+	elseif p1_y_vel > 0 then
+		printh("neutral --> fall")
+		p1_set_animation(p1_animate_fall)
+	end
+end
+
+function p1_animate_walk()
+	p1_spr_n = index_loop_animation(p1_anim_fcount, p1_anim_spd, #p1_sprs.walk)
+	p1_draw_spr = p1_sprs.walk[p1_spr_n]
+
+	-- determine next state
+	if p1_attacking == true then
+		printh("walk --> attack")
+		p1_set_animation(p1_animate_attack)
+	elseif p1_dx == 0 then
+		printh("walk --> neutral")
+		p1_set_animation(p1_animate_neutral)
+	elseif p1_y_vel < 0 then
+		printh("walk --> jump")
+		p1_set_animation(p1_animate_jump)
+	elseif p1_y_vel > 0 then
+		printh("walk --> fall")
+		p1_set_animation(p1_animate_fall)
+	end
+end
+
+function p1_animate_jump()
+	p1_spr_n = index_loop_animation(p1_anim_fcount, p1_anim_spd, #p1_sprs.jump)
+	p1_draw_spr = p1_sprs.jump[p1_spr_n]
+
+	-- determine next state
+	if p1_attacking == true then
+		printh("jump --> attack")
+		p1_set_animation(p1_animate_attack)
+	elseif p1_y_vel > 0 then
+		printh("jump --> fall")
+		p1_set_animation(p1_animate_fall)
+	end
+end
+
+function p1_animate_fall()
+	p1_spr_n = index_loop_animation(p1_anim_fcount, p1_anim_spd, #p1_sprs.fall)
+	p1_draw_spr = p1_sprs.fall[p1_spr_n]
+	
+	-- determine next state
+	if p1_attacking == true then
+		printh("fall --> attack")
+		p1_set_animation(p1_animate_attack)
+	elseif p1_y_vel == 0 then
+		if p1_dx != 0 then
+			printh("fall --> walk")
+			p1_set_animation(p1_animate_walk)
+		elseif p1_dx == 0 then
+			printh("fall --> neutral")
+			p1_set_animation(p1_animate_neutral)
+		end
+	elseif p1_y_vel < 0 then
+		printh("fall --> jump")
+		p1_set_animation(p1_animate_jump)
+	end
+end
+
+function p1_animate_attack()
+	
+	if p1_anim_fcount >= p1_attack_frames then
+		p1_attacking = false
+		if p1_y_vel < 0 then
+			printh("attack --> jump")
+			p1_set_animation(p1_animate_jump)
+		elseif p1_y_vel > 0 then
+			printh("attack --> fall")
+			p1_set_animation(p1_animate_fall)
+		elseif p1_dx != 0 then
+			printh("attack --> walk")
+			p1_set_animation(p1_animate_walk)
+		else
+			printh("attack --> neutral")
+			p1_set_animation(p1_animate_neutral)
+		end
+	else
+		-- use a different method of calculating animation frame
+		p1_spr_n = index_animation_noloop(p1_anim_fcount, p1_attack_frames, #p1_sprs.attack)
+		p1_draw_spr = p1_sprs.attack[p1_spr_n]
+	end
 end
 
 function p1_reset_animation()
@@ -417,11 +532,8 @@ function p1_reset_animation()
 end
 
 function p1_set_animation(_anim)
-	assert(#_anim > 0)
-	if p1_spr_state != _anim then -- reset the anim sprite if this is the first frame we're changing to this state
-		p1_reset_animation()
-	end
-	p1_spr_state = _anim
+	p1_animate = _anim
+	p1_reset_animation()
 end
 
 function p1_apply_gravity()
@@ -493,7 +605,12 @@ function p1_draw(_debug)
 
 	update_screen_pos()
 
-	spr(p1_spr_state[p1_spr_n], -- sprite number to draw
+	if p1_draw_spr == nil then
+		printh(p1_spr_n)
+	end
+	assert(p1_draw_spr != nil)
+
+	spr(p1_draw_spr, -- sprite number to draw
         p1_sx, p1_sy, -- position to draw at
         1, 1, -- number of tiles wide/tall
         p1_facing == -1, false) -- whether or not to flip on x,y axis
