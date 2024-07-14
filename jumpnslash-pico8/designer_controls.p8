@@ -16,11 +16,11 @@ __lua__
 controls = {
     walk_left = 0,
     walk_right = 1,
-    jump = 2,
+    jump = 4,
     attack = 5,
 }
 
-jump_vel = -2 -- the jump velocity
+jump_vel = -4 -- the jump velocity
 -- this must always be a negative number (does not need to be an integer)
 -- this velocity is applied as long as the player is holding the jump button
 
