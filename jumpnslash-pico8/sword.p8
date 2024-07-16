@@ -14,25 +14,61 @@ function init_sword()
     sword_active = false
     sword_draw_spr = nil
 
+    sword_x = nil
+    sword_y = nil
+
+    sword_sx = nil
+    sword_sy = nil
+
+    sword_w = 8
+    sword_h = 8
+
     -- state functions
     sword_animate = sword_animate_neutral
 end
 
 function sword_update()
-    sword_collision()
+    sword_move()
+
+    if sword_active == true then
+        sword_collision()
+    end
 
     sword_update_animation()
 end
 
+function sword_move()
+    sword_x = p1_get_mpx() + 8 * p1_get_facing()
+    sword_y = p1_get_mpy()
+end
+
+function sword_update_screen_pos()
+    sword_sx = sword_x % 128
+    sword_sy = sword_y % 128
+end
+
 function sword_collision()
     -- check for collision with enemies
-    
-    -- check for collision with breakable blocks
+    local rn = get_current_room_num()
+    local enemy_list = get_enemies_in_room(rn)
+    if #enemy_list > 0 then
+        for enemy_i = 1, #enemy_list do
+            -- TODO: sword arguments should accessed with a get function!!
+            local enemy = enemy_list[enemy_i]
+            local collision = rectangle_overlap(sword_x, sword_y, sword_w, sword_h, enemy.x, enemy.y, enemy.w, enemy.h)
+            if collision == true then
+                --printh("sword collision with enemy")
+                set_enemy_collision_with_sword(rn, enemy_i)
+            end
+        end
+    end
 
+    -- check for collision with breakable blocks
 end
 
 function sword_activate()
     sword_set_animation(sword_animate_swing)
+    sword_active = true
 end
 
 function sword_update_animation()
@@ -79,8 +115,11 @@ function sword_reset_animation()
 end
 
 function sword_draw()
+
+    sword_update_screen_pos()
+
     spr(sword_draw_spr, -- sprite number to draw
-        p1_get_sx() + 8 * p1_get_facing(), p1_get_sy(), -- position to draw at
+        sword_sx, sword_sy, -- position to draw at
         1, 1, -- number of tiles wide/tall
         p1_get_facing() == -1, false) -- whether or not to flip on x,y axis
 end

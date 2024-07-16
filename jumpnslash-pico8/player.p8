@@ -31,7 +31,7 @@ function init_player()
 	-- the following coordinates are in screen pixels
 	p1_sx = nil
 	p1_sy = nil
-	update_screen_pos()
+	p1_update_screen_pos()
 
 	p1_dx = 0 -- delta x, since there's no horizontal acceleration
 	p1_y_vel = 0 -- y-velocity, since there is vertical acceleration
@@ -63,14 +63,9 @@ function init_player()
 
 	-- state functions
 	p1_animate = p1_animate_neutral
-
-    jump_vel = -2 -- the jump velocity
-	max_jump_frames = 15 -- the longest
-    walk_speed = 1
-    gravity = 0.2
 end
 
-function update_screen_pos()
+function p1_update_screen_pos()
 	
 	if get_scrollability_horizontal() and get_scroll_left_bounds() <= p1_x and p1_x < get_scroll_right_bounds() then
 		p1_sx = get_scroll_left_bounds() - (get_current_map_x() * 8)
@@ -566,13 +561,15 @@ function move_player_to_room_right()
 end
 
 function p1_update_landmarks()
-	p1_lft=p1_x
-	p1_rgt=p1_x+p1_w-1
-	p1_top=p1_y
-	p1_btm=p1_y+p1_h-1
-	p1_ctr=(p1_lft+p1_rgt)/2
-	p1_mdl=(p1_top+p1_btm)/2
+	-- update map-pixel landmarks
+	p1_lft = p1_x
+	p1_rgt = p1_x + p1_w - 1
+	p1_top = p1_y
+	p1_btm = p1_y + p1_h - 1
+	p1_ctr = (p1_lft + p1_rgt) / 2
+	p1_mdl = (p1_top + p1_btm) / 2
 
+	-- update screen-pixel landmarks
 	p1_s_lft = p1_lft % 128
 	p1_s_rgt = p1_rgt % 128
 	p1_s_top = p1_top % 128
@@ -603,7 +600,7 @@ end
 	
 function p1_draw(_debug)
 
-	update_screen_pos()
+	p1_update_screen_pos()
 
 	if p1_draw_spr == nil then
 		printh(p1_spr_n)

@@ -29,6 +29,7 @@ function init_enemies()
         for tx = 1, map_max_tile_x do
             local tile_spr = mget(tx, ty)
             
+            -- TODO: fix this so enemy spawns in proper facing direction
             if tile_spr == enemy_spawn_left or tile_spr == enemy_spawn_right then
                 spawn_enemy(tx, ty, get_room_from_tile(tx, ty))
                 -- replace enemy spawn point tile with blank tile, cuz the player shouldn't see this
@@ -49,8 +50,15 @@ function spawn_enemy(_tile_x, _tile_y, _room_num)
 
         x = _tile_x * 8,
         y = _tile_y * 8,
+
+        w = 8,
+        h = 8,
+
+        prev_frame_sword_collision = false,
+        this_frame_sword_collision = false,
     }
     add(enemies[_room_num], enemy)
+    enemy_update_landmarks(_room_num, #enemies[_room_num])
 end
 
 function enemies_update()
@@ -59,8 +67,10 @@ function enemies_update()
     for enemy_i = 1, #enemies[rn] do
         -- update ai
         enemy_update_ai(rn, enemy_i)
-        -- check for collision
+        -- check for collision with other objects
         enemy_check_collision(rn, enemy_i)
+        -- react to other objects colliding with it
+        enemy_receive_collision(rn, enemy_i)
         -- move
         enemy_move(rn, enemy_i)
         -- animate
@@ -82,8 +92,62 @@ end
 -- currently does nothing
 function enemy_check_collision(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
-
+    
     -- code goes here
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+function enemy_receive_collision(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+    
+    -- do things on first frame of collision
+    if enemy.prev_frame_sword_collision == false and enemy.this_frame_sword_collision == true then
+        enemy_collision_with_sword_enter(_room_num, _enemy_i)
+    elseif enemy.prev_frame_sword_collision == true and enemy.this_frame_sword_collision == true then
+        enemy_collision_with_sword_during(_room_num, _enemy_i)
+    elseif enemy.prev_frame_sword_collision == true and enemy.this_frame_sword_collision == false then
+        enemy_collision_with_sword_exit(_room_num, _enemy_i)
+    end
+        
+    -- prep for next frame
+    enemy.prev_frame_sword_collision = enemy.this_frame_sword_collision
+    enemy.this_frame_sword_collision = false -- reset in case of no collision on next frame
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+function set_enemy_collision_with_sword(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    enemy.this_frame_sword_collision = true
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_sword_enter(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    printh("enemy collision with sword (enter)")
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_sword_during(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    printh("enemy collision with sword (during)")
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_sword_exit(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    printh("enemy collision with sword (exit)")
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -129,7 +193,16 @@ end
 
 -- currently does nothing
 function enemy_update_landmarks(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+    
     -- code goes here
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+function get_enemies_in_room(_room_num)
+    validate_room_num(_room_num)
+    return enemies[_room_num]
 end
 
 function enemies_draw()

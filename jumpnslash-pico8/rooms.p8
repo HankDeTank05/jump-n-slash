@@ -53,13 +53,11 @@ function init_rooms()
     set_current_room(1)
 end
 
-function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
+function add_room(_map_x, _map_y, _tile_width, _tile_height)
     -- _map_x: the tile x-coordinate of the top-left of the room to be added
     -- _map_y: the tile y-coordinate of the top-left of the room to be added
     -- _tile_width: the width of the room in number of tiles
     -- _tile_height: the height of the room in number of tiles
-    -- _start_x: the map tile x-coordinate where the player should start (set to nil if this room should not be a checkpoint)
-    -- _start_y: the map tile y-coordinate where the player should start (set to nil if this room should not be a checkpoint)
 
     -- make sure rooms are no smaller than 16x16 tiles
     assert(_tile_width >= 16)
@@ -69,6 +67,7 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
     assert(_tile_width % 16 == 0)
     assert(_tile_height % 16 == 0)
 
+    --[[
     -- make sure _start_x and _start_y are matching
     -- they must either be (both a number) or (both nil)!!
     assert((_start_x != nil and _start_y != nil) or (_start_x == nil and _start_y == nil))
@@ -80,6 +79,7 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
         assert(_map_y < _start_y)
         assert(_start_y < _map_y + _tile_height - 1)
     end
+    --]]
 
     local room = {
         mx = _map_x,
@@ -110,9 +110,11 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
     -- search for any player spawn markers in the defined room
     local player_spawn_left = 22
     local player_spawn_right = 23
+
     for my = room.my, room.my + room.mh - 1 do
         for mx = room.mx, room.mx + room.mw - 1 do
             local tile_spr_num = mget(mx, my)
+            -- TODO: fix this so player spawns in proper facing direction
             if tile_spr_num == player_spawn_left or tile_spr_num == player_spawn_right then
                 room.start_mx = mx
                 room.start_my = my
@@ -207,7 +209,6 @@ function check_for_flag_at(_map_pix_x, _map_pix_y, _flag)
     return fget(mget(_map_pix_x / 8, _map_pix_y / 8), _flag)
 end
 
--- currently does nothing
 function update_room()
 
     if get_scrollability_horizontal() then -- horizontal scrolling
@@ -248,8 +249,8 @@ function change_rooms()
     set_current_room(room_i)
 end
 
+-- algo to determine which room a given tile is in. returns nil if given tile is not in any room
 function get_room_from_tile(_tile_x, _tile_y)
-    -- algo to determine which room a given tile is in. returns nil if given tile is not in a room
 
     local i = 0
     local rm = nil

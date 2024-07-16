@@ -10,6 +10,7 @@ __lua__
 #include rooms.p8
 #include sword.p8
 #include enemy.p8
+#include breakables.p8
 #include util.p8
 #include designer_controls.p8
 
@@ -63,7 +64,7 @@ num | hex  | color  | meaning
  4  | 0x10 | blue   | player cannot pass horizontally thru sides
  5  | 0x20 | gray   | player cannot pass upwards thru bottom
  6  | 0x40 | pink   |
- 7  | 0x80 | tan    |	destructible
+ 7  | 0x80 | tan    | destructible
 --]]
 
 --[[
