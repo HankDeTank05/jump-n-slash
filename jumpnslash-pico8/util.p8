@@ -79,3 +79,32 @@ function rectangle_overlap(_r1x, _r1y, _r1w, _r1h, _r2x, _r2y, _r2w, _r2h)
         return overlap_on_x and overlap_on_y
     end
 end
+
+function point_in_rectangle(_px, _py, _rx, _ry, _rw, _rh)
+    -- _px: the x-coordinate of the point
+    -- _py: the y-coordinate of the point
+    -- _rx: the x-coordinate of the top-left of the rectangle
+    -- _ry: the y-coordinate of the top-left of the rectangle
+    -- _rw: the width of the rectangle
+    -- _rh: the height of the rectangle
+
+    assert(_px >= 0)
+    assert(_py >= 0)
+
+    assert(_rx >= 0)
+    assert(_ry >= 0)
+    assert(_rw > 0)
+    assert(_rh > 0)
+
+    local r_lft_x = _rx
+    local r_rgt_x = _rx + _rw - 1
+    
+    local contained_x = r_lft_x <= _px and _px <= r_rgt_x
+    
+    local r_top_y = _ry
+    local r_btm_y = _ry + _rh - 1
+
+    local contained_y = r_top_y <= _py and _py <= r_btm_y
+
+    return contained_x and contained_y
+end

@@ -52,6 +52,7 @@ sword_damage_per_swing = 1 -- CURRENTLY DOES NOTHING!!
 -- enemy options --
 -------------------
 enemy_base_health = 1 -- CURRENTLY DOES NOTHING!!
+enemy_walk_speed = 1
 
 -----------------------
 -- breakable options --

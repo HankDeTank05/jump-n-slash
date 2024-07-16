@@ -3,7 +3,7 @@ version 42
 __lua__
 
 -- debug master flag (must be enabled for all other debug flags to work)
-debug_all = false
+debug_all = true
 debug_printh = true
 
 -- debug options for player
@@ -15,3 +15,6 @@ debug_landmarks = false
 -- debug options for rooms
 debug_room_number = false
 debug_scroll_bounds = false
+
+-- debug options for enemies
+debug_ai = true

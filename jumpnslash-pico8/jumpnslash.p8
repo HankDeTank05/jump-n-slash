@@ -43,7 +43,7 @@ function draw_game_state()
 	cls() -- clear screen
 
 	draw_room(debug_all)
-	enemies_draw()
+	enemies_draw(debug_all)
 	p1_draw(debug_all)
 	sword_draw(debug_all)
 

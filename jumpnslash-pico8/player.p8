@@ -175,6 +175,7 @@ end
 
 -- currently does nothing
 function p1_receive_collision()
+	-- code goes here
 end
 
 function set_y_velocity(_new_vel)
