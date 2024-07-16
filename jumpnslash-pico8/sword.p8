@@ -43,8 +43,8 @@ function sword_move()
 end
 
 function sword_update_screen_pos()
-    sword_sx = sword_x % 128
-    sword_sy = sword_y % 128
+    sword_sx = p1_get_sx() + 8 * p1_get_facing()
+    sword_sy = p1_get_sy()
 end
 
 function sword_collision()

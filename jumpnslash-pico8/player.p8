@@ -20,7 +20,7 @@ function init_player()
 	p1_spr_state = nil -- assigned p1_sprs.<sublist>
 	p1_spr_n = 1 -- the index of the sprite to draw
 	p1_anim_spd = 10 -- speed control for animations, higher number = slower
-	assert(p1_attack_frames > 0)
+	assert(p1_attack_frames > 0) -- defined in designer_controls.p8
 	p1_anim_fcount = 0 -- frame counter for animation
 	p1_draw_spr = nil -- the sprite to draw in the current frame
 
@@ -106,13 +106,14 @@ function p1_read_inputs()
 	-- variable height jumping
 	if btn(controls.jump) -- if the jump button is down
 	and p1_y_vel <= 0 -- and the player is not falling (aka vertically not moving, or moving upwards)
-	and p1_jump_btn_frames < max_jump_frames then -- and the button has been held for less than the max allowed num of frames
+	--                       vvvvvvvvvvvvvvvvvv defined in designer_controls.p8
+	and p1_jump_btn_frames < p1_max_jump_frames then -- and the button has been held for less than the max allowed num of frames
 
 		if (p1_jump_btn_frames == 0 and p1_jump_btn_released == true) -- case 1: it is the first frame the button is being pressed
 		or (p1_jump_btn_frames > 0 and p1_jump_btn_released == false) then -- case 2: the button has been held for more than one frame
 			p1_jump_btn_released = false
 			p1_jump_btn_frames += 1
-			set_y_velocity(jump_vel)
+			set_y_velocity(p1_jump_vel) -- defined in designer_controls.p8
 			p1_landed = false
 		end
 
@@ -130,14 +131,14 @@ function p1_read_inputs()
 	p1_dx = 0
 	-- walk right?
 	if btn(controls.walk_right) then
-		p1_dx += walk_speed
+		p1_dx += p1_walk_speed -- defined in designer_controls.p8
 		if p1_facing < 0 then
 			p1_facing *= -1
 		end
 	end
 	-- walk left?
 	if btn(controls.walk_left) then
-	 p1_dx -= walk_speed
+	 p1_dx -= p1_walk_speed -- defined in designer_controls.p8
 	 if p1_facing > 0 then
 	 	p1_facing *= -1
 	 end
@@ -505,6 +506,7 @@ end
 
 function p1_animate_attack()
 	
+	--                   vvvvvvvvvvvvvvvv defined in designer_controls.p8
 	if p1_anim_fcount >= p1_attack_frames then
 		p1_attacking = false
 		if p1_y_vel < 0 then
@@ -522,6 +524,7 @@ function p1_animate_attack()
 		end
 	else
 		-- use a different method of calculating animation frame
+		--                                                vvvvvvvvvvvvvvvv defined in designer_controls.p8
 		p1_spr_n = index_animation_noloop(p1_anim_fcount, p1_attack_frames, #p1_sprs.attack)
 		p1_draw_spr = p1_sprs.attack[p1_spr_n]
 	end
@@ -538,7 +541,7 @@ function p1_set_animation(_anim)
 end
 
 function p1_apply_gravity()
-    p1_y_vel += gravity
+    p1_y_vel += p1_gravity -- defined in designer_controls.p8
 end
 
 function move_player_to_room_up()
