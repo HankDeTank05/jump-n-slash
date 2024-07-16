@@ -84,7 +84,9 @@ end
 function p1_update()
 	p1_read_inputs()
 	
-	p1_collision()
+	p1_check_collision() -- check for collision with other objects
+
+	p1_receive_collision() -- react to other objects colliding with it
 	
 	p1_move()
 
@@ -155,7 +157,7 @@ function p1_attack()
 	end
 end
 
-function p1_collision()
+function p1_check_collision()
 	p1_tile_collision()
 	p1_enemy_collision()
 end
@@ -168,6 +170,10 @@ end
 -- currently does nothing
 function p1_enemy_collision()
 	-- code goes here
+end
+
+-- currently does nothing
+function p1_receive_collision()
 end
 
 function set_y_velocity(_new_vel)

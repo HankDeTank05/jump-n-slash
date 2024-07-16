@@ -64,6 +64,18 @@ function sword_collision()
     end
 
     -- check for collision with breakable blocks
+    local breakable_list = get_breakables_in_room(rn)
+    if #breakable_list > 0 then
+        for breakable_i = 1, #breakable_list do
+            -- TODO: breakable arguments should be accessed with a get function!!
+            local breakable = breakable_list[breakable_i]
+            local collision = rectangle_overlap(sword_x, sword_y, sword_w, sword_h, breakable.x, breakable.y, breakable.w, breakable.h)
+            if collision == true then
+                --printh("sword collision with breakable")
+                set_breakable_collision_with_sword(rn, breakable_i)
+            end
+        end
+    end
 end
 
 function sword_activate()

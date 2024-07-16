@@ -21,6 +21,7 @@ function _init()
 	init_player()
 	init_sword()
 	init_enemies()
+	init_breakables()
 
 	set_state_game()
 end
@@ -34,6 +35,7 @@ function update_game_state()
 	p1_update()
 	sword_update()
 	enemies_update()
+	update_breakables()
 	update_room()
 end
 

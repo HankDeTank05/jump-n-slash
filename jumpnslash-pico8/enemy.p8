@@ -25,8 +25,8 @@ function init_enemies()
     enemy_spawn_left = 6 -- sprite number for a spawn point for an enemy starting facing left
     enemy_spawn_right = 7-- sprite number for a spawn point for an enemy starting facing right
 
-    for ty = 1, map_max_tile_y do
-        for tx = 1, map_max_tile_x do
+    for ty = 0, map_max_tile_y do
+        for tx = 0, map_max_tile_x do
             local tile_spr = mget(tx, ty)
             
             -- TODO: fix this so enemy spawns in proper facing direction
@@ -104,8 +104,12 @@ function enemy_receive_collision(_room_num, _enemy_i)
     -- do things on first frame of collision
     if enemy.prev_frame_sword_collision == false and enemy.this_frame_sword_collision == true then
         enemy_collision_with_sword_enter(_room_num, _enemy_i)
+
+    -- do things on middle frames of collision
     elseif enemy.prev_frame_sword_collision == true and enemy.this_frame_sword_collision == true then
         enemy_collision_with_sword_during(_room_num, _enemy_i)
+
+    -- do things after the last frame of collision
     elseif enemy.prev_frame_sword_collision == true and enemy.this_frame_sword_collision == false then
         enemy_collision_with_sword_exit(_room_num, _enemy_i)
     end
