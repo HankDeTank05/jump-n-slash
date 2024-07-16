@@ -25,6 +25,10 @@ function sword_update()
 end
 
 function sword_collision()
+    -- check for collision with enemies
+    
+    -- check for collision with breakable blocks
+
 end
 
 function sword_activate()
