@@ -10,6 +10,7 @@ __lua__
 #include rooms.p8
 #include sword.p8
 #include enemy.p8
+#include breakables.p8
 #include util.p8
 #include designer_controls.p8
 
@@ -20,6 +21,7 @@ function _init()
 	init_player()
 	init_sword()
 	init_enemies()
+	init_breakables()
 
 	set_state_game()
 end
@@ -33,6 +35,7 @@ function update_game_state()
 	p1_update()
 	sword_update()
 	enemies_update()
+	update_breakables()
 	update_room()
 end
 
@@ -40,7 +43,7 @@ function draw_game_state()
 	cls() -- clear screen
 
 	draw_room(debug_all)
-	enemies_draw()
+	enemies_draw(debug_all)
 	p1_draw(debug_all)
 	sword_draw(debug_all)
 
@@ -59,11 +62,11 @@ num | hex  | color  | meaning
  0  | 0x1  | red    | hurts player
  1  | 0x2  | orange |
  2  | 0x4  | yellow | 
- 3  | 0x8  | green  | player can land on top of
- 4  | 0x10 | blue   | player cannot pass horizontally thru sides
- 5  | 0x20 | gray   | player cannot pass upwards thru bottom
+ 3  | 0x8  | green  | tile is solid on top (can be landed on)
+ 4  | 0x10 | blue   | tile is solid on sides (cannot be passed thru horizontally)
+ 5  | 0x20 | gray   | tile is solid on underside (cannot pass thru bottom)
  6  | 0x40 | pink   |
- 7  | 0x80 | tan    |	destructible
+ 7  | 0x80 | tan    | destructible
 --]]
 
 --[[

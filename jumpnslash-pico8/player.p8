@@ -20,7 +20,7 @@ function init_player()
 	p1_spr_state = nil -- assigned p1_sprs.<sublist>
 	p1_spr_n = 1 -- the index of the sprite to draw
 	p1_anim_spd = 10 -- speed control for animations, higher number = slower
-	assert(p1_attack_frames > 0)
+	assert(p1_attack_frames > 0) -- defined in designer_controls.p8
 	p1_anim_fcount = 0 -- frame counter for animation
 	p1_draw_spr = nil -- the sprite to draw in the current frame
 
@@ -31,7 +31,7 @@ function init_player()
 	-- the following coordinates are in screen pixels
 	p1_sx = nil
 	p1_sy = nil
-	update_screen_pos()
+	p1_update_screen_pos()
 
 	p1_dx = 0 -- delta x, since there's no horizontal acceleration
 	p1_y_vel = 0 -- y-velocity, since there is vertical acceleration
@@ -63,14 +63,9 @@ function init_player()
 
 	-- state functions
 	p1_animate = p1_animate_neutral
-
-    jump_vel = -2 -- the jump velocity
-	max_jump_frames = 15 -- the longest
-    walk_speed = 1
-    gravity = 0.2
 end
 
-function update_screen_pos()
+function p1_update_screen_pos()
 	
 	if get_scrollability_horizontal() and get_scroll_left_bounds() <= p1_x and p1_x < get_scroll_right_bounds() then
 		p1_sx = get_scroll_left_bounds() - (get_current_map_x() * 8)
@@ -89,7 +84,9 @@ end
 function p1_update()
 	p1_read_inputs()
 	
-	p1_collision()
+	p1_check_collision() -- check for collision with other objects
+
+	p1_receive_collision() -- react to other objects colliding with it
 	
 	p1_move()
 
@@ -109,13 +106,14 @@ function p1_read_inputs()
 	-- variable height jumping
 	if btn(controls.jump) -- if the jump button is down
 	and p1_y_vel <= 0 -- and the player is not falling (aka vertically not moving, or moving upwards)
-	and p1_jump_btn_frames < max_jump_frames then -- and the button has been held for less than the max allowed num of frames
+	--                       vvvvvvvvvvvvvvvvvv defined in designer_controls.p8
+	and p1_jump_btn_frames < p1_max_jump_frames then -- and the button has been held for less than the max allowed num of frames
 
 		if (p1_jump_btn_frames == 0 and p1_jump_btn_released == true) -- case 1: it is the first frame the button is being pressed
 		or (p1_jump_btn_frames > 0 and p1_jump_btn_released == false) then -- case 2: the button has been held for more than one frame
 			p1_jump_btn_released = false
 			p1_jump_btn_frames += 1
-			set_y_velocity(jump_vel)
+			set_y_velocity(p1_jump_vel) -- defined in designer_controls.p8
 			p1_landed = false
 		end
 
@@ -133,14 +131,14 @@ function p1_read_inputs()
 	p1_dx = 0
 	-- walk right?
 	if btn(controls.walk_right) then
-		p1_dx += walk_speed
+		p1_dx += p1_walk_speed -- defined in designer_controls.p8
 		if p1_facing < 0 then
 			p1_facing *= -1
 		end
 	end
 	-- walk left?
 	if btn(controls.walk_left) then
-	 p1_dx -= walk_speed
+	 p1_dx -= p1_walk_speed -- defined in designer_controls.p8
 	 if p1_facing > 0 then
 	 	p1_facing *= -1
 	 end
@@ -160,7 +158,7 @@ function p1_attack()
 	end
 end
 
-function p1_collision()
+function p1_check_collision()
 	p1_tile_collision()
 	p1_enemy_collision()
 end
@@ -172,6 +170,11 @@ end
 
 -- currently does nothing
 function p1_enemy_collision()
+	-- code goes here
+end
+
+-- currently does nothing
+function p1_receive_collision()
 	-- code goes here
 end
 
@@ -504,6 +507,7 @@ end
 
 function p1_animate_attack()
 	
+	--                   vvvvvvvvvvvvvvvv defined in designer_controls.p8
 	if p1_anim_fcount >= p1_attack_frames then
 		p1_attacking = false
 		if p1_y_vel < 0 then
@@ -521,6 +525,7 @@ function p1_animate_attack()
 		end
 	else
 		-- use a different method of calculating animation frame
+		--                                                vvvvvvvvvvvvvvvv defined in designer_controls.p8
 		p1_spr_n = index_animation_noloop(p1_anim_fcount, p1_attack_frames, #p1_sprs.attack)
 		p1_draw_spr = p1_sprs.attack[p1_spr_n]
 	end
@@ -537,7 +542,7 @@ function p1_set_animation(_anim)
 end
 
 function p1_apply_gravity()
-    p1_y_vel += gravity
+    p1_y_vel += p1_gravity -- defined in designer_controls.p8
 end
 
 function move_player_to_room_up()
@@ -566,13 +571,15 @@ function move_player_to_room_right()
 end
 
 function p1_update_landmarks()
-	p1_lft=p1_x
-	p1_rgt=p1_x+p1_w-1
-	p1_top=p1_y
-	p1_btm=p1_y+p1_h-1
-	p1_ctr=(p1_lft+p1_rgt)/2
-	p1_mdl=(p1_top+p1_btm)/2
+	-- update map-pixel landmarks
+	p1_lft = p1_x
+	p1_rgt = p1_x + p1_w - 1
+	p1_top = p1_y
+	p1_btm = p1_y + p1_h - 1
+	p1_ctr = (p1_lft + p1_rgt) / 2
+	p1_mdl = (p1_top + p1_btm) / 2
 
+	-- update screen-pixel landmarks
 	p1_s_lft = p1_lft % 128
 	p1_s_rgt = p1_rgt % 128
 	p1_s_top = p1_top % 128
@@ -603,7 +610,7 @@ end
 	
 function p1_draw(_debug)
 
-	update_screen_pos()
+	p1_update_screen_pos()
 
 	if p1_draw_spr == nil then
 		printh(p1_spr_n)
