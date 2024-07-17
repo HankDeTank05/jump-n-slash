@@ -25,10 +25,10 @@ function init_player()
 	assert(0 <= controls.attack and controls.attack <= 5)
 
 	-- p1_jump_velocity must always be negative
-	assert(p1_jump_velocity < 0)
+	assert(p1_jump_velocity < 0) -- make sure it's negative
 
 	-- p1_gravity must always be positive
-	assert(p1_gravity > 0)
+	assert(p1_gravity > 0) -- make sure it's positive
 
 	-- p1_max_jump_frames must always be a positive integer
 	assert(p1_max_jump_frames > 0) -- make sure it's positive
@@ -41,6 +41,10 @@ function init_player()
 	-- p1_attack_frames must always be a positive integer
 	assert(p1_attack_frames > 0) -- make sure it's positive
 	assert(p1_attack_frames % 1 == 0) -- make sure it's an integer
+
+	-- p1_health must always be a positive integer
+	assert(p1_health > 0) -- make sure it's positive
+	assert(p1_health % 1 == 0) -- make sure it's an integer
 
 	-----------------
 	-- begin setup --
@@ -91,6 +95,7 @@ function init_player()
 
 	p1_facing = 1 -- 1 = right, -1 = left
 	p1_landed = false -- did you land on the ground?
+	p1_head_bonked = false -- did you bonk your head on a ceiling?
 	p1_jump_btn_frames = 0 -- how many frames the jump button has been held for
 	p1_jump_btn_released = true
 	p1_weapon = "sword"
@@ -141,8 +146,8 @@ function p1_read_inputs()
 	-- variable height jumping
 	if btn(controls.jump) -- if the jump button is down
 	and p1_y_vel <= 0 -- and the player is not falling (aka vertically not moving, or moving upwards)
-	--                       vvvvvvvvvvvvvvvvvv defined in designer_controls.p8
-	and p1_jump_btn_frames < p1_max_jump_frames then -- and the button has been held for less than the max allowed num of frames
+	and p1_jump_btn_frames < p1_max_jump_frames -- and the button has been held for less than the max allowed num of frames
+	and p1_head_bonked == false then -- and the player has not bonked their head on the ceiling
 
 		if (p1_jump_btn_frames == 0 and p1_jump_btn_released == true) -- case 1: it is the first frame the button is being pressed
 		or (p1_jump_btn_frames > 0 and p1_jump_btn_released == false) then -- case 2: the button has been held for more than one frame
@@ -159,6 +164,10 @@ function p1_read_inputs()
 			p1_jump_btn_frames = 0
 		end
 
+	end
+
+	if p1_head_bonked == true then
+		p1_head_bonked = false
 	end
 	
 
@@ -218,7 +227,6 @@ function set_y_velocity(_new_vel)
 end
 
 -- currently unused
--- currently does nothing
 function cast_ray(_start_x, _start_y, _x_dir, _y_dir, _flag_num)
     -- cast a ray from a starting position, in a given direction, until it hits a map tile with the given flag
     -- note: raycast can only be in one of the four cardinal directions
@@ -392,6 +400,11 @@ function p1_vertical_collision()
 	cand_vy = p1_y + p1_y_vel
 end
 
+-- currently does nothing
+function p1_trigger_death()
+	printh("ur ded lmao")
+end
+
 function p1_move()
 	
     -- move player horizontally
@@ -422,6 +435,7 @@ function p1_move()
 
         -- determine if they bonked their head or not
 		if p1_y == cand_ly or p1_y == cand_ry then
+			p1_head_bonked = true
 		    set_y_velocity(0)
         else
             p1_apply_gravity()
@@ -542,7 +556,6 @@ end
 
 function p1_animate_attack()
 	
-	--                   vvvvvvvvvvvvvvvv defined in designer_controls.p8
 	if p1_anim_fcount >= p1_attack_frames then
 		p1_attacking = false
 		if p1_y_vel < 0 then
@@ -560,7 +573,6 @@ function p1_animate_attack()
 		end
 	else
 		-- use a different method of calculating animation frame
-		--                                                vvvvvvvvvvvvvvvv defined in designer_controls.p8
 		p1_spr_n = index_animation_noloop(p1_anim_fcount, p1_attack_frames, #p1_sprs.attack)
 		p1_draw_spr = p1_sprs.attack[p1_spr_n]
 	end

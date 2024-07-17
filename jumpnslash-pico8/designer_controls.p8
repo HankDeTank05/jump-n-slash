@@ -42,7 +42,8 @@ p1_attack_frames = 10 -- number of frames that attack hitbox is active for
 -- this must always be a positive integer
 -- assume 60fps
 
-p1_health = 1 -- CURRENTLY DOES NOTHING!!
+p1_health = 1 -- amount of damage required to kill the player
+-- this must always be a positive integer
 
 -------------------
 -- sword options --
