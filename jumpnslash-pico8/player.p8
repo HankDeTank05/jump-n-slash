@@ -66,6 +66,7 @@ function init_player()
 	-- the following coordinates are in map pixels (*not* tiles)
 	p1_x = get_current_room().start_mx * 8 -- get starting x position based on what the starting room defines it to be
 	p1_y = get_current_room().start_my * 8 -- get starting y position based on what the starting room defines it to be
+	p1_facing = get_current_room().start_facing -- 1 = right, -1 = left
 
 	-- the following coordinates are in screen pixels
 	p1_sx = nil
@@ -93,7 +94,6 @@ function init_player()
 	p1_s_ctr = nil
 	p1_s_mdl = nil
 
-	p1_facing = 1 -- 1 = right, -1 = left
 	p1_landed = false -- did you land on the ground?
 	p1_head_bonked = false -- did you bonk your head on a ceiling?
 	p1_jump_btn_frames = 0 -- how many frames the jump button has been held for
@@ -319,14 +319,14 @@ function p1_horizontal_collision()
 	if p1_dx > 0 then -- cast rays to right
         --                                                        account for edge case #1
 		-- top ray                                                vvvvvvvvvvvvvvvvvvvvvvvv
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx <= map_max_pix_x do
+		while check_for_flag_at_pix(cand_tx, cand_ty, 4) == false and cand_tx <= map_max_pix_x do
 			cand_tx += 1
 		end
 		cand_tx -= p1_w
 
         --                                                        account for edge case #1
 		-- bottom ray                                             vvvvvvvvvvvvvvvvvvvvvvvv
-		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx <= map_max_pix_x do
+		while check_for_flag_at_pix(cand_bx, cand_by, 4) == false and cand_bx <= map_max_pix_x do
 			cand_bx += 1
 		end
 		cand_bx -= p1_w
@@ -334,14 +334,14 @@ function p1_horizontal_collision()
 	elseif p1_dx < 0 then -- cast rays to left
         --                                                        account for edge case #1
 		-- top ray                                                vvvvvvvvvvvv
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx >= 0 do
+		while check_for_flag_at_pix(cand_tx, cand_ty, 4) == false and cand_tx >= 0 do
 			cand_tx -= 1
 		end
 		cand_tx += 1
 		
         --                                                        account for edge case #1
 		-- bottom ray                                             vvvvvvvvvvvv
-		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx >= 0 do
+		while check_for_flag_at_pix(cand_bx, cand_by, 4) == false and cand_bx >= 0 do
 			cand_bx -= 1
 		end
 		cand_bx += 1
@@ -386,18 +386,18 @@ function p1_vertical_collision()
         -- left ray
 
         -- account for edge case #2 with left ray
-        if check_for_flag_at(cand_lx, cand_ly, 3) then
+        if check_for_flag_at_pix(cand_lx, cand_ly, 3) then
             if debug_vertical_collision then printh("edge case, left ray") end
             -- cast until the ray is below the block
-            while check_for_flag_at(cand_lx, cand_ly, 3) == true do
+            while check_for_flag_at_pix(cand_lx, cand_ly, 3) == true do
                 cand_ly += 1
             end
-            assert(check_for_flag_at(cand_lx, cand_ly, 3) == false) -- make sure it works properly
+            assert(check_for_flag_at_pix(cand_lx, cand_ly, 3) == false) -- make sure it works properly
         end
 
         --                                                        account for edge case #1
         -- cast left ray                                          vvvvvvvvvvvvvvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly <= map_max_pix_y do
+		while check_for_flag_at_pix(cand_lx, cand_ly, 3) == false and cand_ly <= map_max_pix_y do
 			cand_ly += 1
 		end
         cand_ly -= p1_h
@@ -405,18 +405,18 @@ function p1_vertical_collision()
         -- right ray
 
         -- account for edge case #2 with right ray
-        if check_for_flag_at(cand_rx, cand_ry, 3) then
+        if check_for_flag_at_pix(cand_rx, cand_ry, 3) then
             if debug_vertical_collision then printh("edge case, right ray") end
             -- cast until the ray is below the block
-            while check_for_flag_at(cand_rx, cand_ry, 3) == true do
+            while check_for_flag_at_pix(cand_rx, cand_ry, 3) == true do
                 cand_ry += 1
             end
-            assert(check_for_flag_at(cand_rx, cand_ry, 3) == false) -- make sure it works properly
+            assert(check_for_flag_at_pix(cand_rx, cand_ry, 3) == false) -- make sure it works properly
         end
 
         --                                                        account for edge case #1
         -- cast right ray                                         vvvvvvvvvvvvvvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry <= map_max_pix_y do
+		while check_for_flag_at_pix(cand_rx, cand_ry, 3) == false and cand_ry <= map_max_pix_y do
 			cand_ry += 1
 		end
         cand_ry -= p1_h
@@ -424,14 +424,14 @@ function p1_vertical_collision()
     else -- cast rays upwards
         --                                                        account for edge case #1
         -- left ray                                               vvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 5) == false and cand_ly >= 0 do
+		while check_for_flag_at_pix(cand_lx, cand_ly, 5) == false and cand_ly >= 0 do
 			cand_ly -= 1
 		end
 		cand_ly += 1
 
         --                                                        account for edge case #1
         -- right ray                                              vvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 5) == false and cand_ry >= 0 do
+		while check_for_flag_at_pix(cand_rx, cand_ry, 5) == false and cand_ry >= 0 do
 			cand_ry -= 1
 		end
 		cand_ry += 1
@@ -455,7 +455,7 @@ function p1_move()
 		p1_x = min(cand_vx, min(cand_tx, cand_bx))
 
 		-- determine if you walked into a hazard or not
-		if check_for_flag_at(p1_x + p1_w, p1_y + 4, 0) == true then
+		if check_for_flag_at_pix(p1_x + p1_w, p1_y + 4, 0) == true then
 			p1_health = 0
 		end
 	elseif p1_dx < 0 then
@@ -463,7 +463,7 @@ function p1_move()
 		p1_x = max(cand_vx, max(cand_tx, cand_bx))
 
 		-- determine if you walked into a hazard or not
-		if check_for_flag_at(p1_x - 1, p1_y + 4, 0) == true then
+		if check_for_flag_at_pix(p1_x - 1, p1_y + 4, 0) == true then
 			p1_health = 0
 		end
 	end
@@ -478,7 +478,7 @@ function p1_move()
 			p1_landed = true
 		    set_y_velocity(0)
 			-- determine if you landed on a hazard or not
-			if check_for_flag_at(p1_x + 4, p1_y + 8, 0) == true then
+			if check_for_flag_at_pix(p1_x + 4, p1_y + 8, 0) == true then
 				p1_health = 0
 			end
         else
@@ -494,7 +494,7 @@ function p1_move()
 			p1_head_bonked = true
 		    set_y_velocity(0)
 			-- determine if you bonked your head on a hazard or not
-			if check_for_flag_at(p1_x + 4, p1_y - 1, 0) == true then
+			if check_for_flag_at_pix(p1_x + 4, p1_y - 1, 0) == true then
 				p1_health = 0
 			end
         else

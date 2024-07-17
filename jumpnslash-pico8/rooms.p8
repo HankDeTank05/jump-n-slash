@@ -19,36 +19,55 @@ function init_rooms()
     map_max_tile_y = 63
     map_max_pix_x = (map_max_tile_x * 8) - 1
     map_max_pix_y = (map_max_tile_y * 8) - 1
+
+    -- automagically detect rooms
+    local corner_txs = {}
+    local corner_tys = {}
+
+    local starting_tx = nil
+    local starting_ty = nil
     
-    -- room 1
-    add_room(0, 0, 16, 16)
+    for tx = 0, map_max_tile_x do
+        for ty = 0, map_max_tile_y do
+            if check_for_flag_at_tile(tx, ty, 6) then
+                starting_tx = tx
+                starting_ty = ty
+            end
+            if check_for_flag_at_tile(tx, ty, 1) then
+                add(corner_txs, tx)
+                add(corner_tys, ty)
+            end
+        end
+    end
 
-    -- room 2
-    add_room(16, 0, 16, 16)
+    assert(starting_tx != nil) -- if either of these are triggered it means
+    assert(starting_ty != nil) -- you never defined the starting room!!
 
-    -- room 3
-    add_room(32, 0, 16, 16)
+    assert(#corner_txs == #corner_tys)
+    printh(#corner_txs)
+    for i = 1, #corner_txs do
+        local origin_tx = corner_txs[i]
+        local origin_ty = corner_tys[i]
 
-    -- room 4
-    add_room(48, 0, 16, 16)
+        -- iterate right to find h bounds
+        local right_bounds_tx = origin_tx
+        while check_for_flag_at_tile(right_bounds_tx, origin_ty, 2) == false do
+            right_bounds_tx += 1
+            printh("searching width at x = "..right_bounds_tx)
+            assert(right_bounds_tx <= map_max_tile_x) -- if this gets triggered then you misplaced or forgot your room width tile!
+        end
 
-    -- room 5
-    add_room(64, 0, 16, 16)
+        -- iterate down to find v bounds
+        local bottom_bounds_ty = origin_ty
+        while check_for_flag_at_tile(origin_tx, bottom_bounds_ty, 2) == false do
+            bottom_bounds_ty += 1
+            printh("searching height at y = "..bottom_bounds_ty)
+            assert(bottom_bounds_ty <= map_max_tile_y) -- if this gets triggered then you misplaced or forgot your room height tile!
+        end
 
-    -- room 6
-    add_room(80, 0, 16, 16)
-
-    -- room 7
-    add_room(80, 16, 16, 16)
-
-    -- room 8
-    add_room(0, 16, 32, 16)
-
-    -- room 9
-    add_room(32, 16, 16, 32)
-
-    -- room 10
-    add_room(0, 32, 32, 32)
+        -- determine room dimensions and add it to the list
+        add_room(origin_tx, origin_ty, (right_bounds_tx - origin_tx) + 1, (bottom_bounds_ty - origin_ty) + 1)
+    end
 
     set_current_room(1)
 end
@@ -82,6 +101,7 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height)
         -- spawn point in room (not every room needs to have one)
         start_mx = nil,
         start_my = nil,
+        start_facing = nil,
 
         scroll_h = _tile_width > 16, -- does this room scroll horizontally?
         scroll_v = _tile_height > 16, -- does this room scroll vertically?
@@ -104,6 +124,13 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height)
             if tile_spr_num == player_spawn_left or tile_spr_num == player_spawn_right then
                 room.start_mx = mx
                 room.start_my = my
+                
+                if tile_spr_num == player_spawn_left then
+                    room.start_facing = -1
+                elseif tile_spr_num == player_spawn_right then
+                    room.start_facing = 1
+                end
+
                 -- replace the spawn point tile with a blank tile, cuz the player shouldn't see this
                 mset(mx, my, 0)
             end
@@ -192,8 +219,12 @@ function get_current_map_y()
     return get_current_room().my
 end
 
-function check_for_flag_at(_map_pix_x, _map_pix_y, _flag)
+function check_for_flag_at_pix(_map_pix_x, _map_pix_y, _flag)
     return fget(mget(_map_pix_x / 8, _map_pix_y / 8), _flag)
+end
+
+function check_for_flag_at_tile(_tile_x, _tile_y, _flag)
+    return fget(mget(_tile_x, _tile_y), _flag)
 end
 
 function update_room()

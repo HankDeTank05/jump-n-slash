@@ -35,8 +35,8 @@ function init_enemies()
     end
 
     -- populate enemy subarrays
-    enemy_spawn_left = 6 -- sprite number for a spawn point for an enemy starting facing left
-    enemy_spawn_right = 7-- sprite number for a spawn point for an enemy starting facing right
+    enemy_spawn_left = 6 -- spawn point for an enemy starting facing left
+    enemy_spawn_right = 7 -- spawn point for an enemy starting facing right
 
     for ty = 0, map_max_tile_y do
         for tx = 0, map_max_tile_x do
@@ -151,7 +151,7 @@ function enemy_update_ai(_room_num, _enemy_i)
     end
     assert(ray_x != nil)
 
-    while check_for_flag_at(ray_x, ray_y, 4) == false and 0 <= ray_x and ray_x <= map_max_pix_x do
+    while check_for_flag_at_pix(ray_x, ray_y, 4) == false and 0 <= ray_x and ray_x <= map_max_pix_x do
 
         if point_in_rectangle(ray_x, ray_y, p1_get_mpx(), p1_get_mpy(), p1_w, p1_h) then
             --         vvvvvvvvvvvvvvvv defined in designer_controls.p8
