@@ -17,7 +17,13 @@ function init_player()
     assert(get_current_room().start_my != nil)
 
 	-- assertions for designer controls
-	
+
+	-- make sure the controls use a valid button code
+	assert(0 <= controls.walk_left and controls.walk_left <= 5)
+	assert(0 <= controls.walk_right and controls.walk_right <= 5)
+	assert(0 <= controls.jump and controls.jump <= 5)
+	assert(0 <= controls.attack and controls.attack <= 5)
+
 	-- p1_jump_velocity must always be negative
 	assert(p1_jump_velocity < 0)
 
