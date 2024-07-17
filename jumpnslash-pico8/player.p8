@@ -411,9 +411,19 @@ function p1_move()
 	if p1_dx > 0 then
 		-- facing right, so pick the smallest (leftmost number)
 		p1_x = min(cand_vx, min(cand_tx, cand_bx))
+
+		-- determine if you walked into a hazard or not
+		if check_for_flag_at(p1_x + p1_w, p1_y + 4, 0) == true then
+			p1_trigger_death()
+		end
 	elseif p1_dx < 0 then
 		-- facing left, so pick the largest (rightmost number)
 		p1_x = max(cand_vx, max(cand_tx, cand_bx))
+
+		-- determine if you walked into a hazard or not
+		if check_for_flag_at(p1_x - 1, p1_y + 4, 0) == true then
+			p1_trigger_death()
+		end
 	end
 
 	-- move player vertically
@@ -425,6 +435,10 @@ function p1_move()
 		if p1_y == cand_ly or p1_y == cand_ry then
 			p1_landed = true
 		    set_y_velocity(0)
+			-- determine if you landed on a hazard or not
+			if check_for_flag_at(p1_x + 4, p1_y + 8, 0) == true then
+				p1_trigger_death()
+			end
         else
             p1_landed = false
             p1_apply_gravity()
@@ -437,6 +451,10 @@ function p1_move()
 		if p1_y == cand_ly or p1_y == cand_ry then
 			p1_head_bonked = true
 		    set_y_velocity(0)
+			-- determine if you bonked your head on a hazard or not
+			if check_for_flag_at(p1_x + 4, p1_y - 1, 0) == true then
+				p1_trigger_death()
+			end
         else
             p1_apply_gravity()
 		end
@@ -458,21 +476,6 @@ function p1_move()
 end
 
 function p1_update_animation()
-	--[[
-	-- set animation state
-	if p1_attacking == true then
-		p1_set_animation(p1_sprs.attack)
-	elseif p1_y_vel < 0 then
-		p1_set_animation(p1_sprs.jump)
-	elseif p1_y_vel > 0 then
-		p1_set_animation(p1_sprs.fall)
-	elseif p1_dx != 0 then
-		p1_set_animation(p1_sprs.walk)
-	else
-		p1_set_animation(p1_sprs.neutral)
-	end
-	--]]
-	
 	p1_animate()
 
 	p1_anim_fcount += 1
