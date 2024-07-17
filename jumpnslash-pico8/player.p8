@@ -103,6 +103,10 @@ function init_player()
 
 	-- state functions
 	p1_animate = p1_animate_neutral
+
+	-- collision flags
+	p1_prev_frame_collision_with_enemy = false
+	p1_this_frame_collision_with_enemy = false
 end
 
 function p1_update_screen_pos()
@@ -193,10 +197,10 @@ end
 
 function p1_attack()
 	if p1_spr_state != p1_sprs.attack then
-		printh("attacking")
+		if debug_attacking then printh("attacking") end
 		if p1_weapon == "sword" then
 			sword_activate()
-			printh("\twith sword")
+			if debug_attacking then printh("\twith sword") end
 		end
 		p1_attacking = true
 	end
@@ -212,14 +216,48 @@ function p1_tile_collision()
 	p1_vertical_collision()
 end
 
--- currently does nothing
 function p1_enemy_collision()
-	-- code goes here
+	collision_check_with_enemies_in_room(p1_x, p1_y, p1_w, p1_h, set_enemy_collision_with_player, set_player_collision_with_enemy)
 end
 
 -- currently does nothing
 function p1_receive_collision()
-	-- code goes here
+
+	-- do things on first frame of collision
+	if p1_prev_frame_collision_with_enemy == false and p1_this_frame_collision_with_enemy == true then
+		p1_collision_with_enemy_enter()
+
+	-- do things on middle frames of collision
+	elseif p1_prev_frame_collision_with_enemy == true and p1_this_frame_collision_with_enemy == true then
+		p1_collision_with_enemy_during()
+
+	-- do things the frame after the last frame of collision
+	elseif p1_prev_frame_collision_with_enemy == true and p1_this_frame_collision_with_enemy == false then
+		p1_collision_with_enemy_exit()
+	end
+
+	-- prep for next frame
+	p1_prev_frame_collision_with_enemy = p1_this_frame_collision_with_enemy
+	p1_this_frame_collision_with_enemy = false -- reset in case of no collision next frame
+end
+
+function set_player_collision_with_enemy()
+	p1_this_frame_collision_with_enemy = true
+end
+
+-- currently does nothing
+function p1_collision_with_enemy_enter()
+	if debug_player_collision then printh("player collision with enemy (enter)") end
+end
+
+-- currently does nothing
+function p1_collision_with_enemy_during()
+	if debug_player_collision then printh("player collision with enemy (during)") end
+end
+
+-- currently does nothing
+function p1_collision_with_enemy_exit()
+	if debug_player_collision then printh("player collision with enemy (exit)") end
 end
 
 function set_y_velocity(_new_vel)
@@ -346,7 +384,7 @@ function p1_vertical_collision()
 
         -- account for edge case #2 with left ray
         if check_for_flag_at(cand_lx, cand_ly, 3) then
-            if debug_printh then printh("edge case, left ray") end
+            if debug_vertical_collision then printh("edge case, left ray") end
             -- cast until the ray is below the block
             while check_for_flag_at(cand_lx, cand_ly, 3) == true do
                 cand_ly += 1
@@ -365,7 +403,7 @@ function p1_vertical_collision()
 
         -- account for edge case #2 with right ray
         if check_for_flag_at(cand_rx, cand_ry, 3) then
-            if debug_printh then printh("edge case, right ray") end
+            if debug_vertical_collision then printh("edge case, right ray") end
             -- cast until the ray is below the block
             while check_for_flag_at(cand_rx, cand_ry, 3) == true do
                 cand_ry += 1
@@ -402,7 +440,7 @@ end
 
 -- currently does nothing
 function p1_trigger_death()
-	printh("ur ded lmao")
+	if debug_player_death then printh("ur ded lmao") end
 end
 
 function p1_move()
@@ -487,16 +525,16 @@ function p1_animate_neutral()
 
 	-- determine next state
 	if p1_attacking == true then
-		printh("neutral --> attack")
+		if debug_player_animation_state then printh("neutral --> attack") end
 		p1_set_animation(p1_animate_attack)
 	elseif p1_dx != 0 then
-		printh("neutral --> walk")
+		if debug_player_animation_state then printh("neutral --> walk") end
 		p1_set_animation(p1_animate_walk)
 	elseif p1_y_vel < 0 then
-		printh("neutral --> jump")
+		if debug_player_animation_state then printh("neutral --> jump") end
 		p1_set_animation(p1_animate_jump)
 	elseif p1_y_vel > 0 then
-		printh("neutral --> fall")
+		if debug_player_animation_state then printh("neutral --> fall") end
 		p1_set_animation(p1_animate_fall)
 	end
 end
@@ -507,16 +545,16 @@ function p1_animate_walk()
 
 	-- determine next state
 	if p1_attacking == true then
-		printh("walk --> attack")
+		if debug_player_animation_state then printh("walk --> attack") end
 		p1_set_animation(p1_animate_attack)
 	elseif p1_dx == 0 then
-		printh("walk --> neutral")
+		if debug_player_animation_state then printh("walk --> neutral") end
 		p1_set_animation(p1_animate_neutral)
 	elseif p1_y_vel < 0 then
-		printh("walk --> jump")
+		if debug_player_animation_state then printh("walk --> jump") end
 		p1_set_animation(p1_animate_jump)
 	elseif p1_y_vel > 0 then
-		printh("walk --> fall")
+		if debug_player_animation_state then printh("walk --> fall") end
 		p1_set_animation(p1_animate_fall)
 	end
 end
@@ -527,10 +565,10 @@ function p1_animate_jump()
 
 	-- determine next state
 	if p1_attacking == true then
-		printh("jump --> attack")
+		if debug_player_animation_state then printh("jump --> attack") end
 		p1_set_animation(p1_animate_attack)
 	elseif p1_y_vel > 0 then
-		printh("jump --> fall")
+		if debug_player_animation_state then printh("jump --> fall") end
 		p1_set_animation(p1_animate_fall)
 	end
 end
@@ -541,18 +579,18 @@ function p1_animate_fall()
 	
 	-- determine next state
 	if p1_attacking == true then
-		printh("fall --> attack")
+		if debug_player_animation_state then printh("fall --> attack") end
 		p1_set_animation(p1_animate_attack)
 	elseif p1_y_vel == 0 then
 		if p1_dx != 0 then
-			printh("fall --> walk")
+			if debug_player_animation_state then printh("fall --> walk") end
 			p1_set_animation(p1_animate_walk)
 		elseif p1_dx == 0 then
-			printh("fall --> neutral")
+			if debug_player_animation_state then printh("fall --> neutral") end
 			p1_set_animation(p1_animate_neutral)
 		end
 	elseif p1_y_vel < 0 then
-		printh("fall --> jump")
+		if debug_player_animation_state then printh("fall --> jump") end
 		p1_set_animation(p1_animate_jump)
 	end
 end
@@ -562,16 +600,16 @@ function p1_animate_attack()
 	if p1_anim_fcount >= p1_attack_frames then
 		p1_attacking = false
 		if p1_y_vel < 0 then
-			printh("attack --> jump")
+			if debug_player_animation_state then printh("attack --> jump") end
 			p1_set_animation(p1_animate_jump)
 		elseif p1_y_vel > 0 then
-			printh("attack --> fall")
+			if debug_player_animation_state then printh("attack --> fall") end
 			p1_set_animation(p1_animate_fall)
 		elseif p1_dx != 0 then
-			printh("attack --> walk")
+			if debug_player_animation_state then printh("attack --> walk") end
 			p1_set_animation(p1_animate_walk)
 		else
-			printh("attack --> neutral")
+			if debug_player_animation_state then printh("attack --> neutral") end
 			p1_set_animation(p1_animate_neutral)
 		end
 	else
@@ -596,26 +634,26 @@ function p1_apply_gravity()
 end
 
 function move_player_to_room_up()
-	if debug_printh then printh("move player to room up") end
+	if debug_player_room_transition then printh("move player to room up") end
     p1_y -= p1_h - 1
 	change_rooms()
 end
 
 function move_player_to_room_down()
-	if debug_printh then printh("move player to room down") end
+	if debug_player_room_transition then printh("move player to room down") end
     p1_y += p1_h - 1
 	change_rooms()
 end
 
 function move_player_to_room_left()
-	if debug_printh then printh("move player to room left") end
+	if debug_player_room_transition then printh("move player to room left") end
 	p1_x -= p1_w - 1
 	change_rooms()
 
 end
 
 function move_player_to_room_right()
-	if debug_printh then printh("move player to room right") end
+	if debug_player_room_transition then printh("move player to room right") end
     p1_x += p1_w - 1
 	change_rooms()
 end
@@ -658,13 +696,17 @@ function p1_get_facing()
 	return p1_facing
 end
 	
-function p1_draw(_debug)
+function p1_draw()
 
 	p1_update_screen_pos()
 
-	if p1_draw_spr == nil then
-		printh(p1_spr_n)
+	-- print sprite index
+	if debug_player_draw then
+		if p1_draw_spr == nil then
+			printh(p1_spr_n)
+		end
 	end
+
 	assert(p1_draw_spr != nil)
 
 	spr(p1_draw_spr, -- sprite number to draw
@@ -672,10 +714,9 @@ function p1_draw(_debug)
         1, 1, -- number of tiles wide/tall
         p1_facing == -1, false) -- whether or not to flip on x,y axis
 	
-	if _debug then
+	if debug_player_draw then
 
-        p1_update_landmarks()
-
+		-- print screen and world positions
 		if debug_position then
 			print("world pos: ("..p1_x..", "..p1_y..")", 0, 0 ,6)
 			print("scren pos: ("..p1_sx..", "..p1_sy..")", 0, 6, 6)
@@ -728,6 +769,8 @@ function p1_draw(_debug)
 		
 		--draw landmark pixels
 		if debug_landmarks then
+        	p1_update_landmarks()
+			
 			local pcol=8
 			--draw top left corner pixel
 			pset(p1_lft,

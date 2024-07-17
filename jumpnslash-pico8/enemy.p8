@@ -92,6 +92,13 @@ function spawn_enemy(_tile_x, _tile_y, _room_num, _facing_dir)
         s_ctr = nil,
         s_mdl = nil,
 
+        -- collision flags
+
+        -- player
+        prev_frame_player_collision = false,
+        this_frame_player_collision = false,
+        
+        -- sword
         prev_frame_sword_collision = false,
         this_frame_sword_collision = false,
     }
@@ -149,7 +156,7 @@ function enemy_update_ai(_room_num, _enemy_i)
         if point_in_rectangle(ray_x, ray_y, p1_get_mpx(), p1_get_mpy(), p1_w, p1_h) then
             --         vvvvvvvvvvvvvvvv defined in designer_controls.p8
             enemy.dx = enemy_walk_speed * enemy.facing
-            printh("enemy ".._enemy_i.." can see the player")
+            if debug_ai then printh("enemy ".._enemy_i.." can see the player") end
             break
         else
             enemy.dx = 0
@@ -175,26 +182,87 @@ end
 
 function enemy_receive_collision(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
+
+    -- player: do things on first frame of collision
+    if enemy.prev_frame_player_collision == false and enemy.this_frame_player_collision == true then
+        enemy_collision_with_player_enter(_room_num, _enemy_i)
+
+    -- player: do things on middle frames of collision
+    elseif enemy.prev_frame_player_collision == true and enemy.this_frame_player_collision == true then
+        enemy_collision_with_player_during(_room_num, _enemy_i)
+
+    -- player: do things the frame after last frame of collision
+    elseif enemy.prev_frame_player_collision == true and enemy.this_frame_player_collision == false then
+        enemy_collision_with_player_exit(_room_num, _enemy_i)
+    end
     
-    -- do things on first frame of collision
+    -- sword: do things on first frame of collision
     if enemy.prev_frame_sword_collision == false and enemy.this_frame_sword_collision == true then
         enemy_collision_with_sword_enter(_room_num, _enemy_i)
 
-    -- do things on middle frames of collision
+    -- sword: do things on middle frames of collision
     elseif enemy.prev_frame_sword_collision == true and enemy.this_frame_sword_collision == true then
         enemy_collision_with_sword_during(_room_num, _enemy_i)
 
-    -- do things after the last frame of collision
+    -- sword: do things the frame after the last frame of collision
     elseif enemy.prev_frame_sword_collision == true and enemy.this_frame_sword_collision == false then
         enemy_collision_with_sword_exit(_room_num, _enemy_i)
     end
         
     -- prep for next frame
+    -- player
+    enemy.prev_frame_player_collision = enemy.this_frame_player_collision
+    enemy.this_frame_player_collision = false -- reset in case of no collision next frame
+    
+    -- sword
     enemy.prev_frame_sword_collision = enemy.this_frame_sword_collision
     enemy.this_frame_sword_collision = false -- reset in case of no collision on next frame
 
     enemies[_room_num][_enemy_i] = enemy
 end
+
+--------------------------------
+-- player collision functions --
+--------------------------------
+
+function set_enemy_collision_with_player(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    enemy.this_frame_player_collision = true
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_player_enter(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with player (enter)") end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_player_during(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with player (during)") end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_player_exit(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with player (exit)") end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-------------------------------
+-- sword collision functions --
+-------------------------------
 
 function set_enemy_collision_with_sword(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
@@ -208,7 +276,7 @@ end
 function enemy_collision_with_sword_enter(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
-    printh("enemy collision with sword (enter)")
+    if debug_enemy_collision then printh("enemy collision with sword (enter)") end
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -217,7 +285,7 @@ end
 function enemy_collision_with_sword_during(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
-    printh("enemy collision with sword (during)")
+    if debug_enemy_collision then printh("enemy collision with sword (during)") end
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -226,7 +294,7 @@ end
 function enemy_collision_with_sword_exit(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
-    printh("enemy collision with sword (exit)")
+    if debug_enemy_collision then printh("enemy collision with sword (exit)") end
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -236,7 +304,7 @@ function enemy_move(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
     enemy.x += enemy.dx
-    --printh("enemy ".._enemy_i.." dx = "..enemy.dx)
+    if debug_enemy_movement then printh("enemy ".._enemy_i.." dx = "..enemy.dx) end
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -299,7 +367,7 @@ function get_enemies_in_room(_room_num)
     return enemies[_room_num]
 end
 
-function enemies_draw(_debug)
+function enemies_draw()
 
     pal(1, 9)
     pal(12, 10)
@@ -311,7 +379,7 @@ function enemies_draw(_debug)
         local enemy = enemies[rn][enemy_i]
 
         spr(enemy.spr_state[enemy.spr_n], enemy.sx, enemy.sy)
-        if _debug then
+        if debug_enemy_draw then
             if debug_ai then
                 line(enemy.s_ctr, enemy.s_mdl, enemy.ray_x, enemy.ray_y, 11)
             end

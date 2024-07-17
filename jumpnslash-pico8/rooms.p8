@@ -67,20 +67,6 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height)
     assert(_tile_width % 16 == 0)
     assert(_tile_height % 16 == 0)
 
-    --[[
-    -- make sure _start_x and _start_y are matching
-    -- they must either be (both a number) or (both nil)!!
-    assert((_start_x != nil and _start_y != nil) or (_start_x == nil and _start_y == nil))
-
-    -- make sure the spawn point for this room is actually inside the room
-    if _start_x != nil then
-        assert(_map_x < _start_x)
-        assert(_start_x < _map_x + _tile_width - 1)
-        assert(_map_y < _start_y)
-        assert(_start_y < _map_y + _tile_height - 1)
-    end
-    --]]
-
     local room = {
         mx = _map_x,
         my = _map_y,
@@ -125,12 +111,13 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height)
     end
 
     add(rooms, room)
-    printh("room "..#rooms)
-    printh("\tscroll_v_min_mpy: "..room.scroll_v_min_mpy)
-    printh("\tscroll_v_max_mpy: "..room.scroll_v_max_mpy)
+    if debug_room_creation then printh("room "..#rooms) end
+    if debug_scroll_bounds then printh("\tscroll_v_min_mpy: "..room.scroll_v_min_mpy) end
+    if debug_scroll_bounds then printh("\tscroll_v_max_mpy: "..room.scroll_v_max_mpy) end
 end
 
 function validate_room_num(_room_num)
+    assert(_room_num != nil)
     local msg = "_room_num=".._room_num
     assert(_room_num > 0, msg)
     assert(_room_num <= #rooms, msg)
@@ -245,7 +232,7 @@ end
 function change_rooms()
     local room_i = get_room_from_tile(p1_get_mpx(), p1_get_mpy())
     assert(room_i != nil)
-    printh("changing to room "..room_i)
+    if debug_room_switching then printh("changing to room "..room_i) end
     set_current_room(room_i)
 end
 
@@ -266,7 +253,7 @@ function get_room_from_tile(_tile_x, _tile_y)
     end
 end
 
-function draw_room(_debug)
+function draw_room()
 	
 	--draw the map
     local rm = get_current_room()
@@ -274,7 +261,7 @@ function draw_room(_debug)
 	    scroll_x_offset, scroll_y_offset, -- x,y position to draw on screen
 	    rm.mw, rm.mh) -- w,h in tiles
 
-    if _debug then
+    if debug_room_draw then
         
         if debug_room_number then
             print("room num: "..curr_room, 0, 12, 6)

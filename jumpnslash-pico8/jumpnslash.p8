@@ -11,12 +11,14 @@ __lua__
 #include sword.p8
 #include enemy.p8
 #include breakables.p8
+#include collision.p8
 #include util.p8
 #include designer_controls.p8
 
 f = 1 -- frame count
 
 function _init()
+	if debug_all then printh("\n\n\nrestarted\n\n") end
 	init_rooms()
 	init_player()
 	init_sword()
@@ -42,10 +44,10 @@ end
 function draw_game_state()
 	cls() -- clear screen
 
-	draw_room(debug_all)
-	enemies_draw(debug_all)
-	p1_draw(debug_all)
-	sword_draw(debug_all)
+	draw_room()
+	enemies_draw()
+	p1_draw()
+	sword_draw()
 
 	f += 1 -- increment frame counter
 end

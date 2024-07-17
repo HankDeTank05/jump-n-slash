@@ -49,21 +49,10 @@ end
 
 function sword_collision()
     -- check for collision with enemies
-    local rn = get_current_room_num()
-    local enemy_list = get_enemies_in_room(rn)
-    if #enemy_list > 0 then
-        for enemy_i = 1, #enemy_list do
-            -- TODO: sword arguments should accessed with a get function!!
-            local enemy = enemy_list[enemy_i]
-            local collision = rectangle_overlap(sword_x, sword_y, sword_w, sword_h, enemy.x, enemy.y, enemy.w, enemy.h)
-            if collision == true then
-                --printh("sword collision with enemy")
-                set_enemy_collision_with_sword(rn, enemy_i)
-            end
-        end
-    end
-
+    collision_check_with_enemies_in_room(sword_x, sword_y, sword_w, sword_h, set_enemy_collision_with_sword)
+    
     -- check for collision with breakable blocks
+    local rn = get_current_room_num()
     local breakable_list = get_breakables_in_room(rn)
     if #breakable_list > 0 then
         for breakable_i = 1, #breakable_list do
@@ -71,7 +60,7 @@ function sword_collision()
             local breakable = breakable_list[breakable_i]
             local collision = rectangle_overlap(sword_x, sword_y, sword_w, sword_h, breakable.x, breakable.y, breakable.w, breakable.h)
             if collision == true then
-                --printh("sword collision with breakable")
+                if debug_sword_collision then printh("sword collision with breakable") end
                 set_breakable_collision_with_sword(rn, breakable_i)
             end
         end

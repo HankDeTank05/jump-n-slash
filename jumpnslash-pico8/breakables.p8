@@ -113,7 +113,8 @@ end
 function breakable_collision_with_sword_enter(_room_num, _breakable_i)
     local breakable = breakables[_room_num][_breakable_i]
 
-    --printh("breakable collision with sword (enter)")
+    if debug_breakable_collision then printh("breakable collision with sword (enter)") end
+    
     breakable.hp -= 1
     if breakable.hp <= 0 then
         breakable_flag_for_destruction(_room_num, _breakable_i)
@@ -126,7 +127,7 @@ end
 function breakable_collision_with_sword_during(_room_num, _breakable_i)
     local breakable = breakables[_room_num][_breakable_i]
 
-    --printh("breakable collision with sword (during)")
+    if debug_breakable_collision then printh("breakable collision with sword (during)") end
 
     breakables[_room_num][_breakable_i] = breakable
 end
@@ -135,7 +136,7 @@ end
 function breakable_collision_with_sword_exit(_room_num, _breakable_i)
     local breakable = breakables[_room_num][_breakable_i]
 
-    --printh("breakable collision with sword (exit)")
+    if debug_breakable_collision then printh("breakable collision with sword (exit)") end
 
     breakables[_room_num][_breakable_i] = breakable
 end

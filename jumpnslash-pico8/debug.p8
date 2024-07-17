@@ -4,17 +4,34 @@ __lua__
 
 -- debug master flag (must be enabled for all other debug flags to work)
 debug_all = true
-debug_printh = true
 
 -- debug options for player
 debug_position = false
 debug_horizontal_collision = false
 debug_vertical_collision = false
 debug_landmarks = false
+debug_player_room_transition = false
+debug_attacking = false
+debug_player_death = true
+debug_player_animation_state = false
+debug_player_draw = false
 
 -- debug options for rooms
 debug_room_number = false
+debug_room_creation = false
+debug_room_switching = false
 debug_scroll_bounds = false
+debug_room_draw = true
 
 -- debug options for enemies
 debug_ai = true
+debug_enemy_movement = true
+debug_enemy_animation = true
+debug_enemy_draw = false
+
+-- debug options for collision
+debug_generic_collision = false
+debug_player_collision = false
+debug_sword_collision = false
+debug_enemy_collision = false
+debug_breakable_collision = true
