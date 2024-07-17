@@ -231,13 +231,13 @@ function update_room()
 
     if get_scrollability_horizontal() then -- horizontal scrolling
 
-        if p1_get_mpx() < get_scroll_left_bounds() then -- if left of scroll zone
+        if p1_get_x() < get_scroll_left_bounds() then -- if left of scroll zone
             scroll_x_offset = 0
             
-        elseif get_scroll_left_bounds() <= p1_get_mpx() and p1_get_mpx() < get_scroll_right_bounds() then -- if inside scroll zone
-            scroll_x_offset = -(p1_get_mpx() - get_scroll_left_bounds())
+        elseif get_scroll_left_bounds() <= p1_get_x() and p1_get_x() < get_scroll_right_bounds() then -- if inside scroll zone
+            scroll_x_offset = -(p1_get_x() - get_scroll_left_bounds())
             
-        elseif get_scroll_right_bounds() <= p1_get_mpx() then
+        elseif get_scroll_right_bounds() <= p1_get_x() then
             scroll_x_offset = -(get_scroll_right_bounds() - get_scroll_left_bounds()) -- if right of scroll zone
             
         end
@@ -246,13 +246,13 @@ function update_room()
         
     if get_scrollability_vertical() then -- vertical scrolling
         
-        if p1_get_mpy() < get_scroll_top_bounds() then -- if above scroll zone
+        if p1_get_y() < get_scroll_top_bounds() then -- if above scroll zone
             scroll_y_offset = 0
 
-        elseif get_scroll_top_bounds() <= p1_get_mpy() and p1_get_mpy() < get_scroll_bottom_bounds() then -- if inside scroll zone
-            scroll_y_offset = -flr(p1_get_mpy() - get_scroll_top_bounds())
+        elseif get_scroll_top_bounds() <= p1_get_y() and p1_get_y() < get_scroll_bottom_bounds() then -- if inside scroll zone
+            scroll_y_offset = -flr(p1_get_y() - get_scroll_top_bounds())
 
-        elseif get_scroll_bottom_bounds() <= p1_get_mpy() then -- if below scroll zone
+        elseif get_scroll_bottom_bounds() <= p1_get_y() then -- if below scroll zone
             scroll_y_offset = -(get_scroll_bottom_bounds() - get_scroll_top_bounds())
 
         end
@@ -261,7 +261,7 @@ function update_room()
 end
 
 function change_rooms()
-    local room_i = get_room_from_tile(p1_get_mpx(), p1_get_mpy())
+    local room_i = get_room_from_tile(p1_get_x(), p1_get_y())
     assert(room_i != nil)
     if debug_room_switching then printh("changing to room "..room_i) end
     set_current_room(room_i)

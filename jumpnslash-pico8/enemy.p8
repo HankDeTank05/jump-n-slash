@@ -153,7 +153,7 @@ function enemy_update_ai(_room_num, _enemy_i)
 
     while check_for_flag_at_pix(ray_x, ray_y, 4) == false and 0 <= ray_x and ray_x <= map_max_pix_x do
 
-        if point_in_rectangle(ray_x, ray_y, p1_get_mpx(), p1_get_mpy(), p1_w, p1_h) then
+        if point_in_rectangle(ray_x, ray_y, p1_get_x(), p1_get_y(), p1_w, p1_h) then
             --         vvvvvvvvvvvvvvvv defined in designer_controls.p8
             enemy.dx = enemy_walk_speed * enemy.facing
             if debug_ai then printh("enemy ".._enemy_i.." can see the player") end

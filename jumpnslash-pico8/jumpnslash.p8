@@ -1,9 +1,10 @@
 pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
---jump 'n' slash
---designed by joseph turzitti
---programmed by henry holman
+-- jump 'n' slash
+-- designed by joseph turzitti
+-- lead programmer - henry holman
+-- programmers - katie holman
 
 #include debug.p8
 #include player.p8

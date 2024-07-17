@@ -38,8 +38,8 @@ function sword_update()
 end
 
 function sword_move()
-    sword_x = p1_get_mpx() + 8 * p1_get_facing()
-    sword_y = p1_get_mpy()
+    sword_x = p1_get_x() + 8 * p1_get_facing()
+    sword_y = p1_get_y()
 end
 
 function sword_update_screen_pos()
