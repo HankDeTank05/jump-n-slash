@@ -20,7 +20,7 @@ controls = {
     attack = 5,
 }
 
-p1_jump_vel = -4 -- the jump velocity
+p1_jump_velocity = -4 -- the jump velocity
 -- this must always be a negative number (does not need to be an integer)
 -- this velocity is applied as long as the player is holding the jump button
 
@@ -36,6 +36,7 @@ p1_walk_speed = 1 -- horizontal movement speed
 -- this must always be a positive integer
 -- pixels per frame
 -- screen res is 128x128
+-- assume 60fps
 
 p1_attack_frames = 10 -- number of frames that attack hitbox is active for
 -- this must always be a positive integer
@@ -51,8 +52,13 @@ sword_damage_per_swing = 1 -- CURRENTLY DOES NOTHING!!
 -------------------
 -- enemy options --
 -------------------
+enemy_walk_speed = 1 -- horizontal movement speed
+-- this must always be a positive integer
+-- pixels per frame
+-- screen res is 128x128
+-- assume 60fps
+
 enemy_base_health = 1 -- CURRENTLY DOES NOTHING!!
-enemy_walk_speed = 1
 
 -----------------------
 -- breakable options --

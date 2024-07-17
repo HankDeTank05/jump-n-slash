@@ -7,9 +7,39 @@ __lua__
 ]]
 
 function init_player()
+
+	----------------------
+	-- pre-setup checks --
+	----------------------
+
     -- assumes rooms have already been initialized and that the starting room has a spawn point defined
     assert(get_current_room().start_mx != nil)
     assert(get_current_room().start_my != nil)
+
+	-- assertions for designer controls
+	
+	-- p1_jump_velocity must always be negative
+	assert(p1_jump_velocity < 0)
+
+	-- p1_gravity must always be positive
+	assert(p1_gravity > 0)
+
+	-- p1_max_jump_frames must always be a positive integer
+	assert(p1_max_jump_frames > 0) -- make sure it's positive
+	assert(p1_max_jump_frames % 1 == 0) -- make sure it's an integer
+
+	-- p1_walk_speed must always be a positive integer
+	assert(p1_walk_speed > 0) -- make sure it's positive
+	assert(p1_walk_speed % 1 == 0) -- make sure it's an integer
+
+	-- p1_attack_frames must always be a positive integer
+	assert(p1_attack_frames > 0) -- make sure it's positive
+	assert(p1_attack_frames % 1 == 0) -- make sure it's an integer
+
+	-----------------
+	-- begin setup --
+	-----------------
+
 	p1_sprs = { -- lists of sprites for animation
 		neutral = {16, 32,},
 		walk = {17, 18, 19, 20,},
@@ -20,7 +50,6 @@ function init_player()
 	p1_spr_state = nil -- assigned p1_sprs.<sublist>
 	p1_spr_n = 1 -- the index of the sprite to draw
 	p1_anim_spd = 10 -- speed control for animations, higher number = slower
-	assert(p1_attack_frames > 0) -- defined in designer_controls.p8
 	p1_anim_fcount = 0 -- frame counter for animation
 	p1_draw_spr = nil -- the sprite to draw in the current frame
 
@@ -113,7 +142,7 @@ function p1_read_inputs()
 		or (p1_jump_btn_frames > 0 and p1_jump_btn_released == false) then -- case 2: the button has been held for more than one frame
 			p1_jump_btn_released = false
 			p1_jump_btn_frames += 1
-			set_y_velocity(p1_jump_vel) -- defined in designer_controls.p8
+			set_y_velocity(p1_jump_velocity) -- defined in designer_controls.p8
 			p1_landed = false
 		end
 

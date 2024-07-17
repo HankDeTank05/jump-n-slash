@@ -3,10 +3,23 @@ version 42
 __lua__
 
 function init_enemies()
-    assert(get_current_room_num() != nil) -- make sure rooms have been set up first
-    enemies = {}
 
+    ----------------------
+    -- pre-setup checks --
+    ----------------------
+
+    assert(get_current_room_num() != nil) -- make sure rooms have been set up first
     assert(p1_sprs != nil)
+
+    -- enemy_walk_speed must always be a positive integer
+    assert(enemy_walk_speed > 0) -- make sure it's positive
+    assert(enemy_walk_speed % 1 == 0) -- make sure it's an integer
+    
+    -----------------
+    -- begin setup --
+    -----------------
+    
+    enemies = {}
     enemy_sprs = { -- lists of sprites for animation
 		neutral = {16, 32,},
 		walk = {17, 18, 19, 20,},

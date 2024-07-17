@@ -3,7 +3,23 @@ version 42
 __lua__
 
 function init_breakables()
+
+    ----------------------
+    -- pre-setup checks --
+    ----------------------
+
     assert(get_current_room_num() != nil) -- make sure rooms have been set up first
+
+    -- assertions for designer controls
+
+    -- breakable_durability must always be a positive integer
+    assert(breakable_durability > 0) -- make sure it's positive
+    assert(breakable_durability % 1 == 0) -- make sure it's an integer
+
+    -----------------
+    -- begin setup --
+    -----------------
+
     breakables = {}
 
     -- establish subarrays for room-based grouping
