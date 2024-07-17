@@ -18,7 +18,7 @@ debug_player_draw = false
 
 -- debug options for rooms
 debug_room_number = false
-debug_room_creation = false
+debug_room_creation = true
 debug_room_switching = false
 debug_scroll_bounds = false
 debug_room_draw = true

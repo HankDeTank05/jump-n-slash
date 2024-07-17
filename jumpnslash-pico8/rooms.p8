@@ -44,8 +44,10 @@ function init_rooms()
     assert(starting_ty != nil) -- you never defined the starting room!!
 
     assert(#corner_txs == #corner_tys)
-    printh(#corner_txs)
-    for i = 1, #corner_txs do
+    if debug_room_creation then printh(#corner_txs) end
+
+    local loop_max = #corner_txs -- do this because we'll be modifying the list during the loop
+    for i = 1, loop_max do
         local origin_tx = corner_txs[i]
         local origin_ty = corner_tys[i]
 
@@ -53,20 +55,37 @@ function init_rooms()
         local right_bounds_tx = origin_tx
         while check_for_flag_at_tile(right_bounds_tx, origin_ty, 2) == false do
             right_bounds_tx += 1
-            printh("searching width at x = "..right_bounds_tx)
+            --if debug_room_creation then printh("searching width at x = "..right_bounds_tx) end
             assert(right_bounds_tx <= map_max_tile_x) -- if this gets triggered then you misplaced or forgot your room width tile!
+            assert(check_for_flag_at_tile(right_bounds_tx, origin_ty, 1) == false) -- if this gets triggered, you put a corner tile before your right-edge tile!
         end
+
+        -- add the corner coords to be replaced later
+        add(corner_txs, right_bounds_tx)
+        add(corner_tys, origin_ty)
+        if debug_room_creation then printh("right: "..right_bounds_tx..", "..origin_ty) end
 
         -- iterate down to find v bounds
         local bottom_bounds_ty = origin_ty
         while check_for_flag_at_tile(origin_tx, bottom_bounds_ty, 2) == false do
             bottom_bounds_ty += 1
-            printh("searching height at y = "..bottom_bounds_ty)
+            --if debug_room_creation then printh("searching height at y = "..bottom_bounds_ty) end
             assert(bottom_bounds_ty <= map_max_tile_y) -- if this gets triggered then you misplaced or forgot your room height tile!
+            assert(check_for_flag_at_tile(origin_tx, bottom_bounds_ty, 1) == false) -- if this gets triggered, you put a corner tile before your bottom-edge tile!
         end
+
+        -- add the corner coords to be replaced later
+        add(corner_txs, origin_tx)
+        add(corner_tys, bottom_bounds_ty)
+        if debug_room_creation then printh("bottom: "..origin_tx..", "..bottom_bounds_ty) end
 
         -- determine room dimensions and add it to the list
         add_room(origin_tx, origin_ty, (right_bounds_tx - origin_tx) + 1, (bottom_bounds_ty - origin_ty) + 1)
+    end
+
+    assert(#corner_txs == #corner_tys)
+    for i = 1, #corner_txs do
+        mset(corner_txs[i], corner_tys[i], 8) -- set the corner sprites to the default block sprite, player shouldn't see these
     end
 
     set_current_room(1)

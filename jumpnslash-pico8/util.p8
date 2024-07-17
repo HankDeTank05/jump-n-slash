@@ -22,14 +22,6 @@ function index_animation_noloop(_anim_fcount, _anim_max_frames, _num_frames)
 end
 
 function rectangle_overlap(_r1x, _r1y, _r1w, _r1h, _r2x, _r2y, _r2w, _r2h)
-    -- _r1x: the x-position of the top-left of the 1st rectangle (in map pixels)
-    -- _r1y: the y-position of the top-left of the 1st rectangle (in map pixels)
-    -- _r1w: the width of the 1st rectangle
-    -- _r1h: the height of the 1st rectangle
-    -- _r2x: the x-position of the top-left of the 2nd rectangle (in map pixels)
-    -- _r2y: the y-position of the top-left of the 2nd rectangle (in map pixels)
-    -- _r2w: the width of the 2nd rectangle
-    -- _r2h: the height of the 2nd rectangle
 
     -- ensure valid dimensions for rectangle 1
     assert(_r1x >= 0)
