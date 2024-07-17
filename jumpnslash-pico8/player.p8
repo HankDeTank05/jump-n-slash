@@ -42,9 +42,9 @@ function init_player()
 	assert(p1_attack_frames > 0) -- make sure it's positive
 	assert(p1_attack_frames % 1 == 0) -- make sure it's an integer
 
-	-- p1_health must always be a positive integer
-	assert(p1_health > 0) -- make sure it's positive
-	assert(p1_health % 1 == 0) -- make sure it's an integer
+	-- p1_max_health must always be a positive integer
+	assert(p1_max_health > 0) -- make sure it's positive
+	assert(p1_max_health % 1 == 0) -- make sure it's an integer
 
 	-----------------
 	-- begin setup --
@@ -100,6 +100,8 @@ function init_player()
 	p1_jump_btn_released = true
 	p1_weapon = "sword"
 	p1_attacking = false
+
+	p1_health = p1_max_health
 
 	-- state functions
 	p1_animate = p1_animate_neutral
@@ -248,6 +250,7 @@ end
 -- currently does nothing
 function p1_collision_with_enemy_enter()
 	if debug_player_collision then printh("player collision with enemy (enter)") end
+	p1_health = 0
 end
 
 -- currently does nothing
@@ -441,6 +444,7 @@ end
 -- currently does nothing
 function p1_trigger_death()
 	if debug_player_death then printh("ur ded lmao") end
+	-- set death animation
 end
 
 function p1_move()
@@ -452,7 +456,7 @@ function p1_move()
 
 		-- determine if you walked into a hazard or not
 		if check_for_flag_at(p1_x + p1_w, p1_y + 4, 0) == true then
-			p1_trigger_death()
+			p1_health = 0
 		end
 	elseif p1_dx < 0 then
 		-- facing left, so pick the largest (rightmost number)
@@ -460,7 +464,7 @@ function p1_move()
 
 		-- determine if you walked into a hazard or not
 		if check_for_flag_at(p1_x - 1, p1_y + 4, 0) == true then
-			p1_trigger_death()
+			p1_health = 0
 		end
 	end
 
@@ -475,7 +479,7 @@ function p1_move()
 		    set_y_velocity(0)
 			-- determine if you landed on a hazard or not
 			if check_for_flag_at(p1_x + 4, p1_y + 8, 0) == true then
-				p1_trigger_death()
+				p1_health = 0
 			end
         else
             p1_landed = false
@@ -491,7 +495,7 @@ function p1_move()
 		    set_y_velocity(0)
 			-- determine if you bonked your head on a hazard or not
 			if check_for_flag_at(p1_x + 4, p1_y - 1, 0) == true then
-				p1_trigger_death()
+				p1_health = 0
 			end
         else
             p1_apply_gravity()
@@ -511,6 +515,11 @@ function p1_move()
     elseif p1_x + (p1_w - 1) >= get_current_right_bounds() then -- move right
         move_player_to_room_right()
     end
+
+	-- check for player death
+	if p1_health <= 0 then
+		p1_trigger_death()
+	end
 end
 
 function p1_update_animation()
@@ -770,7 +779,7 @@ function p1_draw()
 		--draw landmark pixels
 		if debug_landmarks then
         	p1_update_landmarks()
-			
+
 			local pcol=8
 			--draw top left corner pixel
 			pset(p1_lft,
