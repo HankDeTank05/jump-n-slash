@@ -149,15 +149,18 @@ end
 function breakable_flag_for_destruction(_room_num, _breakable_i)
     local breakable = breakables[_room_num][_breakable_i]
     
+    if debug_breakable_destruction then printh("breakable ".._breakable_i.." has been flagged for destruction") end
+
     breakable.flagged_for_destruction = true
 
     breakables[_room_num][_breakable_i] = breakable
 end
 
--- currently does nothing
 function breakable_destroy(_room_num, _breakable_i)
     local breakable = breakables[_room_num][_breakable_i]
     
+    if debug_breakable_destruction then printh("breakable ".._breakable_i.." has been destroyed") end
+
     mset(breakable.tx, breakable.ty, 0)
     deli(breakables[_room_num], _breakable_i)
 end
