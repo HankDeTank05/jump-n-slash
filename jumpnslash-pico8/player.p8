@@ -368,8 +368,8 @@ function p1_vertical_collision()
             assert(check_for_flag_at_pix(cand_lx, cand_ly, 3) == false) -- make sure it works properly
         end
 
-        --                                                        account for edge case #1
-        -- cast left ray                                          vvvvvvvvvvvvvvvvvvvvvvvv
+        --                                                            account for edge case #1
+        -- cast left ray                                              vvvvvvvvvvvvvvvvvvvvvvvv
 		while check_for_flag_at_pix(cand_lx, cand_ly, 3) == false and cand_ly <= map_max_pix_y do
 			cand_ly += 1
 		end
@@ -387,8 +387,8 @@ function p1_vertical_collision()
             assert(check_for_flag_at_pix(cand_rx, cand_ry, 3) == false) -- make sure it works properly
         end
 
-        --                                                        account for edge case #1
-        -- cast right ray                                         vvvvvvvvvvvvvvvvvvvvvvvv
+        --                                                            account for edge case #1
+        -- cast right ray                                             vvvvvvvvvvvvvvvvvvvvvvvv
 		while check_for_flag_at_pix(cand_rx, cand_ry, 3) == false and cand_ry <= map_max_pix_y do
 			cand_ry += 1
 		end

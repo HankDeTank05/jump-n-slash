@@ -35,7 +35,9 @@ function init_breakables()
             local tile_spr = mget(tx, ty)
 
             if tile_spr == breakable_spr then
-                create_breakable(tx, ty, get_room_from_tile(tx, ty))
+                local rn = get_room_from_tile(tx, ty)
+                if debug_breakable_creation then printh("creating a breakable block at "..tx..", "..ty.." in room "..rn) end
+                create_breakable(tx, ty, rn)
             end
         end
     end

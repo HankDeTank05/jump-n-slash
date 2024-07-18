@@ -17,8 +17,8 @@ function init_rooms()
     
     map_max_tile_x = 127
     map_max_tile_y = 63
-    map_max_pix_x = (map_max_tile_x * 8) - 1
-    map_max_pix_y = (map_max_tile_y * 8) - 1
+    map_max_pix_x = ((map_max_tile_x + 1) * 8) - 1
+    map_max_pix_y = ((map_max_tile_y + 1) * 8) - 1
 
     -- automagically detect rooms
     local corner_txs = {}
@@ -47,9 +47,15 @@ function init_rooms()
     if debug_room_creation then printh(#corner_txs) end
 
     local loop_max = #corner_txs -- do this because we'll be modifying the list during the loop
+    local starting_i = nil
     for i = 1, loop_max do
         local origin_tx = corner_txs[i]
         local origin_ty = corner_tys[i]
+
+        -- set the index of the starting room
+        if origin_tx == starting_tx and origin_ty == starting_ty then
+            starting_i = i
+        end
 
         -- iterate right to find h bounds
         local right_bounds_tx = origin_tx
@@ -82,20 +88,17 @@ function init_rooms()
         -- determine room dimensions and add it to the list
         add_room(origin_tx, origin_ty, (right_bounds_tx - origin_tx) + 1, (bottom_bounds_ty - origin_ty) + 1)
     end
+    assert(starting_i != nil)
 
     assert(#corner_txs == #corner_tys)
     for i = 1, #corner_txs do
         mset(corner_txs[i], corner_tys[i], 8) -- set the corner sprites to the default block sprite, player shouldn't see these
     end
 
-    set_current_room(1)
+    set_current_room(starting_i)
 end
 
 function add_room(_map_x, _map_y, _tile_width, _tile_height)
-    -- _map_x: the tile x-coordinate of the top-left of the room to be added
-    -- _map_y: the tile y-coordinate of the top-left of the room to be added
-    -- _tile_width: the width of the room in number of tiles
-    -- _tile_height: the height of the room in number of tiles
 
     -- make sure rooms are no smaller than 16x16 tiles
     assert(_tile_width >= 16)
@@ -239,7 +242,7 @@ function get_current_map_y()
 end
 
 function check_for_flag_at_pix(_map_pix_x, _map_pix_y, _flag)
-    return fget(mget(_map_pix_x / 8, _map_pix_y / 8), _flag)
+    return fget(mget(flr(_map_pix_x / 8), flr(_map_pix_y / 8)), _flag)
 end
 
 function check_for_flag_at_tile(_tile_x, _tile_y, _flag)
@@ -280,10 +283,29 @@ function update_room()
 end
 
 function change_rooms()
-    local room_i = get_room_from_tile(p1_get_x(), p1_get_y())
+    local room_i = get_room_from_pix(p1_get_x(), p1_get_y())
     assert(room_i != nil)
     if debug_room_switching then printh("changing to room "..room_i) end
     set_current_room(room_i)
+end
+
+-- algo to determine which room a given pixel is in. returns nil if given tile is not in any room
+function get_room_from_pix(_pixel_x, _pixel_y)
+
+    local i = 0
+    local rm = nil
+    repeat
+        i += 1
+        rm = rooms[i]
+    until (i > #rooms) or (rm.mpx_min <= _pixel_x and _pixel_x < rm.mpx_max and rm.mpy_min <= _pixel_y and _pixel_y < rm.mpy_max)
+
+    assert(i <= #rooms) -- the room was not found
+
+    if i <= #rooms then
+        return i
+    else
+        return nil
+    end
 end
 
 -- algo to determine which room a given tile is in. returns nil if given tile is not in any room
@@ -294,7 +316,9 @@ function get_room_from_tile(_tile_x, _tile_y)
     repeat
         i += 1
         rm = rooms[i]
-    until (i > #rooms) or (rm.mpx_min <= _tile_x and _tile_x < rm.mpx_max and rm.mpy_min <= _tile_y and _tile_y < rm.mpy_max)
+    until (i > #rooms) or (rm.mx <= _tile_x and _tile_x < rm.mx + rm.mw and rm.my <= _tile_y and _tile_y < rm.my + rm.mh)
+
+    assert(i <= #rooms) -- the room was not found
 
     if i <= #rooms then
         return i

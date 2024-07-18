@@ -73,12 +73,6 @@ function rectangle_overlap(_r1x, _r1y, _r1w, _r1h, _r2x, _r2y, _r2w, _r2h)
 end
 
 function point_in_rectangle(_px, _py, _rx, _ry, _rw, _rh)
-    -- _px: the x-coordinate of the point
-    -- _py: the y-coordinate of the point
-    -- _rx: the x-coordinate of the top-left of the rectangle
-    -- _ry: the y-coordinate of the top-left of the rectangle
-    -- _rw: the width of the rectangle
-    -- _rh: the height of the rectangle
 
     assert(_px >= 0)
     assert(_py >= 0)

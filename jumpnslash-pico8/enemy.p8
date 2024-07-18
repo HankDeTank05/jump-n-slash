@@ -105,13 +105,25 @@ function spawn_enemy(_tile_x, _tile_y, _room_num, _facing_dir)
     add(enemies[_room_num], enemy)
     enemy_update_screen_pos(_room_num, #enemies[_room_num])
     enemy_update_landmarks(_room_num, #enemies[_room_num])
+    if debug_enemy_creation then printh("created an enemy in room ".._room_num) end
 end
 
 function enemy_update_screen_pos(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
+	
+	if get_scrollability_horizontal() and get_scroll_left_bounds() <= enemy.x and enemy.x < get_scroll_right_bounds() then
+		enemy.sx = scroll_x_offset + (enemy.x - get_scroll_left_bounds()) + 64
+        if debug_enemy_screen_pos then printh("enemy sx = "..enemy.sx) end
+	else
+		enemy.sx = enemy.x % 128
+        if debug_enemy_screen_pos then printh("enemy not in scroll zone x") end
+	end
 
-    enemy.sx = enemy.x % 128
-    enemy.sy = enemy.y % 128
+	if get_scrollability_vertical() and get_scroll_top_bounds() <= enemy.y and enemy.y < get_scroll_bottom_bounds() then
+		enemy.sy = get_scroll_top_bounds() - (get_current_map_y() * 8)
+	else
+		enemy.sy = enemy.y % 128
+	end
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -135,7 +147,6 @@ function enemies_update()
     end
 end
 
--- currently does nothing
 function enemy_update_ai(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
@@ -154,7 +165,6 @@ function enemy_update_ai(_room_num, _enemy_i)
     while check_for_flag_at_pix(ray_x, ray_y, 4) == false and 0 <= ray_x and ray_x <= map_max_pix_x do
 
         if point_in_rectangle(ray_x, ray_y, p1_get_x(), p1_get_y(), p1_w, p1_h) then
-            --         vvvvvvvvvvvvvvvv defined in designer_controls.p8
             enemy.dx = enemy_walk_speed * enemy.facing
             if debug_ai then printh("enemy ".._enemy_i.." can see the player") end
             break
@@ -173,11 +183,6 @@ end
 
 -- currently does nothing
 function enemy_check_collision(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-    
-    -- code goes here
-
-    enemies[_room_num][_enemy_i] = enemy
 end
 
 function enemy_receive_collision(_room_num, _enemy_i)
@@ -221,10 +226,6 @@ function enemy_receive_collision(_room_num, _enemy_i)
     enemies[_room_num][_enemy_i] = enemy
 end
 
---------------------------------
--- player collision functions --
---------------------------------
-
 function set_enemy_collision_with_player(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
@@ -235,34 +236,18 @@ end
 
 -- currently does nothing
 function enemy_collision_with_player_enter(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-
     if debug_enemy_collision then printh("enemy collision with player (enter)") end
-
-    enemies[_room_num][_enemy_i] = enemy
 end
 
 -- currently does nothing
 function enemy_collision_with_player_during(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-
     if debug_enemy_collision then printh("enemy collision with player (during)") end
-
-    enemies[_room_num][_enemy_i] = enemy
 end
 
 -- currently does nothing
 function enemy_collision_with_player_exit(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-
     if debug_enemy_collision then printh("enemy collision with player (exit)") end
-
-    enemies[_room_num][_enemy_i] = enemy
 end
-
--------------------------------
--- sword collision functions --
--------------------------------
 
 function set_enemy_collision_with_sword(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
@@ -274,32 +259,19 @@ end
 
 -- currently does nothing
 function enemy_collision_with_sword_enter(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-
     if debug_enemy_collision then printh("enemy collision with sword (enter)") end
-
-    enemies[_room_num][_enemy_i] = enemy
 end
 
 -- currently does nothing
 function enemy_collision_with_sword_during(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-
     if debug_enemy_collision then printh("enemy collision with sword (during)") end
-
-    enemies[_room_num][_enemy_i] = enemy
 end
 
 -- currently does nothing
 function enemy_collision_with_sword_exit(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-
     if debug_enemy_collision then printh("enemy collision with sword (exit)") end
-
-    enemies[_room_num][_enemy_i] = enemy
 end
 
--- currently does nothing
 function enemy_move(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
@@ -373,15 +345,15 @@ function enemies_draw()
     pal(12, 10)
     local rn = get_current_room_num()
     for enemy_i = 1, #enemies[rn] do
-        enemy_update_landmarks(rn, enemy_i)
         enemy_update_screen_pos(rn, enemy_i)
+        enemy_update_landmarks(rn, enemy_i)
 
         local enemy = enemies[rn][enemy_i]
 
         spr(enemy.spr_state[enemy.spr_n], enemy.sx, enemy.sy)
         if debug_enemy_draw then
             if debug_ai then
-                line(enemy.s_ctr, enemy.s_mdl, enemy.ray_x, enemy.ray_y, 11)
+                line(enemy.s_ctr, enemy.s_mdl, enemy.ray_x % 128, enemy.ray_y % 128, 11)
             end
         end
     end
