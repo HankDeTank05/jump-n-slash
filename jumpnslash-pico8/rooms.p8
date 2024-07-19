@@ -2,11 +2,9 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 
---[[
-    this is the file for all code concerning the rooms
-]]
-
-
+--------------------
+-- core functions --
+--------------------
 
 function init_rooms()
     rooms = {} -- holds all the rooms in a list
@@ -165,12 +163,113 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height)
     if debug_scroll_bounds then printh("\tscroll_v_max_mpy: "..room.scroll_v_max_mpy) end
 end
 
+function update_room()
+
+    if get_scrollability_horizontal() then -- horizontal scrolling
+
+        if p1_get_x() < get_scroll_left_bounds() then -- if left of scroll zone
+            scroll_x_offset = 0
+            
+        elseif get_scroll_left_bounds() <= p1_get_x() and p1_get_x() < get_scroll_right_bounds() then -- if inside scroll zone
+            scroll_x_offset = -(p1_get_x() - get_scroll_left_bounds())
+            
+        elseif get_scroll_right_bounds() <= p1_get_x() then
+            scroll_x_offset = -(get_scroll_right_bounds() - get_scroll_left_bounds()) -- if right of scroll zone
+            
+        end
+
+    end
+        
+    if get_scrollability_vertical() then -- vertical scrolling
+        
+        if p1_get_y() < get_scroll_top_bounds() then -- if above scroll zone
+            scroll_y_offset = 0
+
+        elseif get_scroll_top_bounds() <= p1_get_y() and p1_get_y() < get_scroll_bottom_bounds() then -- if inside scroll zone
+            scroll_y_offset = -flr(p1_get_y() - get_scroll_top_bounds())
+
+        elseif get_scroll_bottom_bounds() <= p1_get_y() then -- if below scroll zone
+            scroll_y_offset = -(get_scroll_bottom_bounds() - get_scroll_top_bounds())
+
+        end
+    end
+
+end
+
+function draw_room()
+	
+	--draw the map
+    local rm = get_current_room()
+	map(rm.mx, rm.my,
+	    scroll_x_offset, scroll_y_offset, -- x,y position to draw on screen
+	    rm.mw, rm.mh) -- w,h in tiles
+
+    if debug_room_draw then
+        
+        if debug_room_number then
+            print("room num: "..curr_room, 0, 12, 6)
+        end
+
+        if debug_scroll_bounds then
+            if get_scrollability_horizontal() then
+                local col = 9 -- orange
+
+                local left_bound_draw_x = get_scroll_left_bounds() + scroll_x_offset - (get_current_room().mx * 8)
+                local right_bound_draw_x = get_scroll_right_bounds() + scroll_x_offset - (get_current_room().mx * 8)
+
+                -- draw left line if it's on the screen
+                line(left_bound_draw_x, 0, left_bound_draw_x, 127, col)
+                print("l: "..get_scroll_left_bounds(), left_bound_draw_x + 2, 66)
+                
+                -- draw right line of it's on the scren
+                line(right_bound_draw_x, 0, right_bound_draw_x, 127, col)
+                print("r: "..get_scroll_right_bounds(), right_bound_draw_x + 2, 66)
+
+                col = 6 -- gray
+
+                -- draw the scroll x offset
+                line(left_bound_draw_x, 64, left_bound_draw_x - scroll_x_offset, 64, col)
+                print("xoff: "..scroll_x_offset, max(left_bound_draw_x + 2, 1), 64 - 6, col)
+            end
+
+            if get_scrollability_vertical() then
+                local col = 10
+
+                local top_bound_draw_y = get_scroll_top_bounds() + scroll_y_offset - (get_current_room().my * 8)
+                local bottom_bound_draw_y = get_scroll_bottom_bounds() + scroll_y_offset - (get_current_room().my * 8)
+
+                -- draw top line if it's on screen
+                line(0, top_bound_draw_y, 127, top_bound_draw_y, col)
+                print("t: "..get_scroll_top_bounds(), 64 + 2, top_bound_draw_y + 2)
+
+                -- draw bottom line if it's on screen
+                line(0, bottom_bound_draw_y, 127, bottom_bound_draw_y, col)
+                print("b: "..get_scroll_bottom_bounds(), 64 + 2, bottom_bound_draw_y + 2)
+
+                col = 7 -- white
+
+                -- draw the scroll y offset
+                line(64, top_bound_draw_y, 64, top_bound_draw_y - scroll_y_offset, col)
+                print("yoff: "..scroll_y_offset, 64 + 2, max(top_bound_draw_y + 8, 12), col)
+            end
+        end
+    end
+end
+
+-------------------
+-- sanity checks --
+-------------------
+
 function validate_room_num(_room_num)
     assert(_room_num != nil)
     local msg = "_room_num=".._room_num
     assert(_room_num > 0, msg)
     assert(_room_num <= #rooms, msg)
 end
+
+----------------------
+-- mutators/setters --
+----------------------
 
 function set_current_room(_num)
     validate_room_num(_num)
@@ -183,6 +282,17 @@ function set_current_room(_num)
         scroll_y_offset = 0
     end
 end
+
+function change_rooms()
+    local room_i = get_room_from_pix(p1_get_x(), p1_get_y())
+    assert(room_i != nil)
+    if debug_room_switching then printh("changing to room "..room_i) end
+    set_current_room(room_i)
+end
+
+-----------------------
+-- accessors/getters --
+-----------------------
 
 function get_current_room()
     return rooms[get_current_room_num()]
@@ -249,46 +359,6 @@ function check_for_flag_at_tile(_tile_x, _tile_y, _flag)
     return fget(mget(_tile_x, _tile_y), _flag)
 end
 
-function update_room()
-
-    if get_scrollability_horizontal() then -- horizontal scrolling
-
-        if p1_get_x() < get_scroll_left_bounds() then -- if left of scroll zone
-            scroll_x_offset = 0
-            
-        elseif get_scroll_left_bounds() <= p1_get_x() and p1_get_x() < get_scroll_right_bounds() then -- if inside scroll zone
-            scroll_x_offset = -(p1_get_x() - get_scroll_left_bounds())
-            
-        elseif get_scroll_right_bounds() <= p1_get_x() then
-            scroll_x_offset = -(get_scroll_right_bounds() - get_scroll_left_bounds()) -- if right of scroll zone
-            
-        end
-
-    end
-        
-    if get_scrollability_vertical() then -- vertical scrolling
-        
-        if p1_get_y() < get_scroll_top_bounds() then -- if above scroll zone
-            scroll_y_offset = 0
-
-        elseif get_scroll_top_bounds() <= p1_get_y() and p1_get_y() < get_scroll_bottom_bounds() then -- if inside scroll zone
-            scroll_y_offset = -flr(p1_get_y() - get_scroll_top_bounds())
-
-        elseif get_scroll_bottom_bounds() <= p1_get_y() then -- if below scroll zone
-            scroll_y_offset = -(get_scroll_bottom_bounds() - get_scroll_top_bounds())
-
-        end
-    end
-
-end
-
-function change_rooms()
-    local room_i = get_room_from_pix(p1_get_x(), p1_get_y())
-    assert(room_i != nil)
-    if debug_room_switching then printh("changing to room "..room_i) end
-    set_current_room(room_i)
-end
-
 -- algo to determine which room a given pixel is in. returns nil if given tile is not in any room
 function get_room_from_pix(_pixel_x, _pixel_y)
 
@@ -324,65 +394,5 @@ function get_room_from_tile(_tile_x, _tile_y)
         return i
     else
         return nil
-    end
-end
-
-function draw_room()
-	
-	--draw the map
-    local rm = get_current_room()
-	map(rm.mx, rm.my,
-	    scroll_x_offset, scroll_y_offset, -- x,y position to draw on screen
-	    rm.mw, rm.mh) -- w,h in tiles
-
-    if debug_room_draw then
-        
-        if debug_room_number then
-            print("room num: "..curr_room, 0, 12, 6)
-        end
-
-        if debug_scroll_bounds then
-            if get_scrollability_horizontal() then
-                local col = 9 -- orange
-
-                local left_bound_draw_x = get_scroll_left_bounds() + scroll_x_offset - (get_current_room().mx * 8)
-                local right_bound_draw_x = get_scroll_right_bounds() + scroll_x_offset - (get_current_room().mx * 8)
-
-                -- draw left line if it's on the screen
-                line(left_bound_draw_x, 0, left_bound_draw_x, 127, col)
-                print("l: "..get_scroll_left_bounds(), left_bound_draw_x + 2, 66)
-                
-                -- draw right line of it's on the scren
-                line(right_bound_draw_x, 0, right_bound_draw_x, 127, col)
-                print("r: "..get_scroll_right_bounds(), right_bound_draw_x + 2, 66)
-
-                col = 6 -- gray
-
-                -- draw the scroll x offset
-                line(left_bound_draw_x, 64, left_bound_draw_x - scroll_x_offset, 64, col)
-                print("xoff: "..scroll_x_offset, max(left_bound_draw_x + 2, 1), 64 - 6, col)
-            end
-
-            if get_scrollability_vertical() then
-                local col = 10
-
-                local top_bound_draw_y = get_scroll_top_bounds() + scroll_y_offset - (get_current_room().my * 8)
-                local bottom_bound_draw_y = get_scroll_bottom_bounds() + scroll_y_offset - (get_current_room().my * 8)
-
-                -- draw top line if it's on screen
-                line(0, top_bound_draw_y, 127, top_bound_draw_y, col)
-                print("t: "..get_scroll_top_bounds(), 64 + 2, top_bound_draw_y + 2)
-
-                -- draw bottom line if it's on screen
-                line(0, bottom_bound_draw_y, 127, bottom_bound_draw_y, col)
-                print("b: "..get_scroll_bottom_bounds(), 64 + 2, bottom_bound_draw_y + 2)
-
-                col = 7 -- white
-
-                -- draw the scroll y offset
-                line(64, top_bound_draw_y, 64, top_bound_draw_y - scroll_y_offset, col)
-                print("yoff: "..scroll_y_offset, 64 + 2, max(top_bound_draw_y + 8, 12), col)
-            end
-        end
     end
 end

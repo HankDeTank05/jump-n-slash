@@ -2,6 +2,10 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 
+--------------------
+-- core functions --
+--------------------
+
 function init_enemies()
 
     ----------------------
@@ -108,26 +112,6 @@ function spawn_enemy(_tile_x, _tile_y, _room_num, _facing_dir)
     if debug_enemy_creation then printh("created an enemy in room ".._room_num) end
 end
 
-function enemy_update_screen_pos(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-	
-	if get_scrollability_horizontal() and get_scroll_left_bounds() <= enemy.x and enemy.x < get_scroll_right_bounds() then
-		enemy.sx = scroll_x_offset + (enemy.x - get_scroll_left_bounds()) + 64
-        if debug_enemy_screen_pos then printh("enemy sx = "..enemy.sx) end
-	else
-		enemy.sx = enemy.x % 128
-        if debug_enemy_screen_pos then printh("enemy not in scroll zone x") end
-	end
-
-	if get_scrollability_vertical() and get_scroll_top_bounds() <= enemy.y and enemy.y < get_scroll_bottom_bounds() then
-		enemy.sy = get_scroll_top_bounds() - (get_current_map_y() * 8)
-	else
-		enemy.sy = enemy.y % 128
-	end
-
-    enemies[_room_num][_enemy_i] = enemy
-end
-
 function enemies_update()
     -- only update enemies in the current room
     local rn = get_current_room_num()
@@ -146,6 +130,34 @@ function enemies_update()
         enemy_update_landmarks(rn, enemy_i)
     end
 end
+
+function enemies_draw()
+
+    pal(1, 9)
+    pal(12, 10)
+    local rn = get_current_room_num()
+    for enemy_i = 1, #enemies[rn] do
+        enemy_update_screen_pos(rn, enemy_i)
+        enemy_update_landmarks(rn, enemy_i)
+
+        local enemy = enemies[rn][enemy_i]
+
+        spr(enemy.spr_state[enemy.spr_n],
+            enemy.sx, enemy.sy,
+            1, 1,
+            enemy.facing == -1, false)
+        if debug_enemy_draw then
+            if debug_ai then
+                line(enemy.s_ctr, enemy.s_mdl, enemy.ray_x % 128, enemy.ray_y % 128, 11)
+            end
+        end
+    end
+    pal()
+end
+
+--------
+-- ai --
+--------
 
 function enemy_update_ai(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
@@ -180,6 +192,65 @@ function enemy_update_ai(_room_num, _enemy_i)
 
     enemies[_room_num][_enemy_i] = enemy
 end
+
+-----------------------
+-- movement/position --
+-----------------------
+
+function enemy_update_screen_pos(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+	
+	if get_scrollability_horizontal() and get_scroll_left_bounds() <= enemy.x and enemy.x < get_scroll_right_bounds() then
+		enemy.sx = scroll_x_offset + (enemy.x - get_scroll_left_bounds()) + 64
+        if debug_enemy_screen_pos then printh("enemy sx = "..enemy.sx) end
+	else
+		enemy.sx = enemy.x % 128
+        if debug_enemy_screen_pos then printh("enemy not in scroll zone x") end
+	end
+
+	if get_scrollability_vertical() and get_scroll_top_bounds() <= enemy.y and enemy.y < get_scroll_bottom_bounds() then
+		enemy.sy = scroll_y_offset + (enemy.y - get_scroll_top_bounds()) + 64
+	else
+		enemy.sy = enemy.y % 128
+	end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+function enemy_move(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    enemy.x += enemy.dx
+    if debug_enemy_movement then printh("enemy ".._enemy_i.." dx = "..enemy.dx) end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+function enemy_update_landmarks(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+	-- update map-pixel landmarks
+	enemy.lft = enemy.x
+	enemy.rgt = enemy.x + enemy.w - 1
+	enemy.top = enemy.y
+	enemy.btm = enemy.y + enemy.h - 1
+	enemy.ctr = (enemy.lft + enemy.rgt) / 2
+	enemy.mdl = (enemy.top + enemy.btm) / 2
+
+	-- update screen-pixel landmarks
+	enemy.s_lft = enemy.lft % 128
+	enemy.s_rgt = enemy.rgt % 128
+	enemy.s_top = enemy.top % 128
+	enemy.s_btm = enemy.btm % 128
+	enemy.s_ctr = enemy.ctr % 128
+	enemy.s_mdl = enemy.mdl % 128
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+---------------
+-- collision --
+---------------
 
 -- currently does nothing
 function enemy_check_collision(_room_num, _enemy_i)
@@ -272,14 +343,9 @@ function enemy_collision_with_sword_exit(_room_num, _enemy_i)
     if debug_enemy_collision then printh("enemy collision with sword (exit)") end
 end
 
-function enemy_move(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-
-    enemy.x += enemy.dx
-    if debug_enemy_movement then printh("enemy ".._enemy_i.." dx = "..enemy.dx) end
-
-    enemies[_room_num][_enemy_i] = enemy
-end
+---------------
+-- animation --
+---------------
 
 function enemy_animate(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
@@ -311,51 +377,11 @@ function enemy_reset_animation(_room_num, _enemy_i)
     enemies[_room_num][_enemy_i] = enemy
 end
 
--- currently does nothing
-function enemy_update_landmarks(_room_num, _enemy_i)
-    local enemy = enemies[_room_num][_enemy_i]
-
-	-- update map-pixel landmarks
-	enemy.lft = enemy.x
-	enemy.rgt = enemy.x + enemy.w - 1
-	enemy.top = enemy.y
-	enemy.btm = enemy.y + enemy.h - 1
-	enemy.ctr = (enemy.lft + enemy.rgt) / 2
-	enemy.mdl = (enemy.top + enemy.btm) / 2
-
-	-- update screen-pixel landmarks
-	enemy.s_lft = enemy.lft % 128
-	enemy.s_rgt = enemy.rgt % 128
-	enemy.s_top = enemy.top % 128
-	enemy.s_btm = enemy.btm % 128
-	enemy.s_ctr = enemy.ctr % 128
-	enemy.s_mdl = enemy.mdl % 128
-
-    enemies[_room_num][_enemy_i] = enemy
-end
+---------------
+-- accessors --
+---------------
 
 function get_enemies_in_room(_room_num)
     validate_room_num(_room_num)
     return enemies[_room_num]
-end
-
-function enemies_draw()
-
-    pal(1, 9)
-    pal(12, 10)
-    local rn = get_current_room_num()
-    for enemy_i = 1, #enemies[rn] do
-        enemy_update_screen_pos(rn, enemy_i)
-        enemy_update_landmarks(rn, enemy_i)
-
-        local enemy = enemies[rn][enemy_i]
-
-        spr(enemy.spr_state[enemy.spr_n], enemy.sx, enemy.sy)
-        if debug_enemy_draw then
-            if debug_ai then
-                line(enemy.s_ctr, enemy.s_mdl, enemy.ray_x % 128, enemy.ray_y % 128, 11)
-            end
-        end
-    end
-    pal()
 end
