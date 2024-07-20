@@ -19,63 +19,45 @@ function init_rooms()
     map_max_tile_y = 63
     map_max_pix_x = (map_max_tile_x * 8) - 1
     map_max_pix_y = (map_max_tile_y * 8) - 1
-
-    --[[
-
-    layout:
-
-    +----+----+----+----+----+----+
-    |  1 =  2 =  3 =  4 =  5 =  6 |
-    +-||-+-||-+----+----+----+-||-+
-    |    8    =    |         |  7 |
-    +---------+  9 |         +----+
-    |         =    |
-    |    10   +----+
-    |         |
-    +---------+
-
-    --]]
     
     -- room 1
-    add_room(0, 0, 16, 16, 2, 14)
+    add_room(0, 0, 16, 16)
 
     -- room 2
-    add_room(16, 0, 16, 16, nil, nil)
+    add_room(16, 0, 16, 16)
 
     -- room 3
-    add_room(32, 0, 16, 16, nil, nil)
+    add_room(32, 0, 16, 16)
 
     -- room 4
-    add_room(48, 0, 16, 16, nil, nil)
+    add_room(48, 0, 16, 16)
 
     -- room 5
-    add_room(64, 0, 16, 16, nil, nil)
+    add_room(64, 0, 16, 16)
 
     -- room 6
-    add_room(80, 0, 16, 16, nil, nil)
+    add_room(80, 0, 16, 16)
 
     -- room 7
-    add_room(80, 16, 16, 16, nil, nil)
+    add_room(80, 16, 16, 16)
 
     -- room 8
-    add_room(0, 16, 32, 16, nil, nil)
+    add_room(0, 16, 32, 16)
 
     -- room 9
-    add_room(32, 16, 16, 32, nil, nil)
+    add_room(32, 16, 16, 32)
 
     -- room 10
-    add_room(0, 32, 32, 32, nil, nil)
+    add_room(0, 32, 32, 32)
 
     set_current_room(1)
 end
 
-function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
+function add_room(_map_x, _map_y, _tile_width, _tile_height)
     -- _map_x: the tile x-coordinate of the top-left of the room to be added
     -- _map_y: the tile y-coordinate of the top-left of the room to be added
     -- _tile_width: the width of the room in number of tiles
     -- _tile_height: the height of the room in number of tiles
-    -- _start_x: the map tile x-coordinate where the player should start (set to nil if this room should not be a checkpoint)
-    -- _start_y: the map tile y-coordinate where the player should start (set to nil if this room should not be a checkpoint)
 
     -- make sure rooms are no smaller than 16x16 tiles
     assert(_tile_width >= 16)
@@ -84,18 +66,6 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
     -- make sure rooms dimensions are multiples of 16
     assert(_tile_width % 16 == 0)
     assert(_tile_height % 16 == 0)
-
-    -- make sure _start_x and _start_y are matching
-    -- they must either be (both a number) or (both nil)!!
-    assert((_start_x != nil and _start_y != nil) or (_start_x == nil and _start_y == nil))
-
-    -- make sure the spawn point for this room is actually inside the room
-    if _start_x != nil then
-        assert(_map_x < _start_x)
-        assert(_start_x < _map_x + _tile_width - 1)
-        assert(_map_y < _start_y)
-        assert(_start_y < _map_y + _tile_height - 1)
-    end
 
     local room = {
         mx = _map_x,
@@ -110,8 +80,8 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
         mpy_max = (_map_y + _tile_height) * 8,
 
         -- spawn point in room (not every room needs to have one)
-        start_mx = _start_x,
-        start_my = _start_y,
+        start_mx = nil,
+        start_my = nil,
 
         scroll_h = _tile_width > 16, -- does this room scroll horizontally?
         scroll_v = _tile_height > 16, -- does this room scroll vertically?
@@ -123,13 +93,31 @@ function add_room(_map_x, _map_y, _tile_width, _tile_height, _start_x, _start_y)
         scroll_v_max_mpy = (_map_y + _tile_height - 8) * 8,
     }
 
+    -- search for any player spawn markers in the defined room
+    local player_spawn_left = 22
+    local player_spawn_right = 23
+
+    for my = room.my, room.my + room.mh - 1 do
+        for mx = room.mx, room.mx + room.mw - 1 do
+            local tile_spr_num = mget(mx, my)
+            -- TODO: fix this so player spawns in proper facing direction
+            if tile_spr_num == player_spawn_left or tile_spr_num == player_spawn_right then
+                room.start_mx = mx
+                room.start_my = my
+                -- replace the spawn point tile with a blank tile, cuz the player shouldn't see this
+                mset(mx, my, 0)
+            end
+        end
+    end
+
     add(rooms, room)
-    printh("room "..#rooms)
-    printh("\tscroll_v_min_mpy: "..room.scroll_v_min_mpy)
-    printh("\tscroll_v_max_mpy: "..room.scroll_v_max_mpy)
+    if debug_room_creation then printh("room "..#rooms) end
+    if debug_scroll_bounds then printh("\tscroll_v_min_mpy: "..room.scroll_v_min_mpy) end
+    if debug_scroll_bounds then printh("\tscroll_v_max_mpy: "..room.scroll_v_max_mpy) end
 end
 
 function validate_room_num(_room_num)
+    assert(_room_num != nil)
     local msg = "_room_num=".._room_num
     assert(_room_num > 0, msg)
     assert(_room_num <= #rooms, msg)
@@ -208,7 +196,6 @@ function check_for_flag_at(_map_pix_x, _map_pix_y, _flag)
     return fget(mget(_map_pix_x / 8, _map_pix_y / 8), _flag)
 end
 
--- currently does nothing
 function update_room()
 
     if get_scrollability_horizontal() then -- horizontal scrolling
@@ -245,12 +232,12 @@ end
 function change_rooms()
     local room_i = get_room_from_tile(p1_get_mpx(), p1_get_mpy())
     assert(room_i != nil)
-    printh("changing to room "..room_i)
+    if debug_room_switching then printh("changing to room "..room_i) end
     set_current_room(room_i)
 end
 
+-- algo to determine which room a given tile is in. returns nil if given tile is not in any room
 function get_room_from_tile(_tile_x, _tile_y)
-    -- algo to determine which room a given tile is in. returns nil if given tile is not in a room
 
     local i = 0
     local rm = nil
@@ -266,7 +253,7 @@ function get_room_from_tile(_tile_x, _tile_y)
     end
 end
 
-function draw_room(_debug)
+function draw_room()
 	
 	--draw the map
     local rm = get_current_room()
@@ -274,7 +261,7 @@ function draw_room(_debug)
 	    scroll_x_offset, scroll_y_offset, -- x,y position to draw on screen
 	    rm.mw, rm.mh) -- w,h in tiles
 
-    if _debug then
+    if debug_room_draw then
         
         if debug_room_number then
             print("room num: "..curr_room, 0, 12, 6)
