@@ -49,8 +49,12 @@ function init_rooms()
 
     -- room 10
     add_room(0, 32, 32, 32)
+    -- room 11
+    add_room(48, 32, 80, 16)
+    -- room 12
+    add_room(32, 48, 96, 16)
 
-    set_current_room(1)
+    set_current_room(11)
 end
 
 function add_room(_map_x, _map_y, _tile_width, _tile_height)

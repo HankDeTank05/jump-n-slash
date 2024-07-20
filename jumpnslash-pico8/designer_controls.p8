@@ -20,7 +20,7 @@ controls = {
     attack = 5,
 }
 
-p1_jump_velocity = -4 -- the jump velocity
+p1_jump_velocity = -1.75 -- the jump velocity
 -- this must always be a negative number (does not need to be an integer)
 -- this velocity is applied as long as the player is holding the jump button
 
