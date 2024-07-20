@@ -3,10 +3,23 @@ version 42
 __lua__
 
 function init_enemies()
-    assert(get_current_room_num() != nil) -- make sure rooms have been set up first
-    enemies = {}
 
+    ----------------------
+    -- pre-setup checks --
+    ----------------------
+
+    assert(get_current_room_num() != nil) -- make sure rooms have been set up first
     assert(p1_sprs != nil)
+
+    -- enemy_walk_speed must always be a positive integer
+    assert(enemy_walk_speed > 0) -- make sure it's positive
+    assert(enemy_walk_speed % 1 == 0) -- make sure it's an integer
+    
+    -----------------
+    -- begin setup --
+    -----------------
+    
+    enemies = {}
     enemy_sprs = { -- lists of sprites for animation
 		neutral = {16, 32,},
 		walk = {17, 18, 19, 20,},
@@ -25,12 +38,17 @@ function init_enemies()
     enemy_spawn_left = 6 -- sprite number for a spawn point for an enemy starting facing left
     enemy_spawn_right = 7-- sprite number for a spawn point for an enemy starting facing right
 
-    for ty = 1, map_max_tile_y do
-        for tx = 1, map_max_tile_x do
+    for ty = 0, map_max_tile_y do
+        for tx = 0, map_max_tile_x do
             local tile_spr = mget(tx, ty)
             
-            if tile_spr == enemy_spawn_left or tile_spr == enemy_spawn_right then
-                spawn_enemy(tx, ty, get_room_from_tile(tx, ty))
+            -- TODO: fix this so enemy spawns in proper facing direction
+            if tile_spr == enemy_spawn_left  then
+                spawn_enemy(tx, ty, get_room_from_tile(tx, ty), -1)
+                -- replace enemy spawn point tile with blank tile, cuz the player shouldn't see this
+                mset(tx, ty, 0)
+            elseif tile_spr == enemy_spawn_right then
+                spawn_enemy(tx, ty, get_room_from_tile(tx, ty), 1)
                 -- replace enemy spawn point tile with blank tile, cuz the player shouldn't see this
                 mset(tx, ty, 0)
             end
@@ -39,7 +57,7 @@ function init_enemies()
     end
 end
 
-function spawn_enemy(_tile_x, _tile_y, _room_num)
+function spawn_enemy(_tile_x, _tile_y, _room_num, _facing_dir)
     assert(#enemies == #rooms)
     validate_room_num(_room_num)
     local enemy = {
@@ -49,8 +67,53 @@ function spawn_enemy(_tile_x, _tile_y, _room_num)
 
         x = _tile_x * 8,
         y = _tile_y * 8,
+        sx = nil,
+        sy = nil,
+        w = 8,
+        h = 8,
+
+        dx = 0,
+
+        facing = _facing_dir, -- 1 = right, -1 = left
+
+        -- sprite landmarks (in map pixels)
+        lft = nil, -- left x
+        rgt = nil, -- right x
+        top = nil, -- top y
+        btm = nil, -- bottom y
+        ctr = nil, -- center x
+        mdl = nil, -- middle y
+
+        -- sprite landmarks (in screen pixels)
+        s_lft = nil,
+        s_rgt = nil,
+        s_top = nil,
+        s_btm = nil,
+        s_ctr = nil,
+        s_mdl = nil,
+
+        -- collision flags
+
+        -- player
+        prev_frame_player_collision = false,
+        this_frame_player_collision = false,
+        
+        -- sword
+        prev_frame_sword_collision = false,
+        this_frame_sword_collision = false,
     }
     add(enemies[_room_num], enemy)
+    enemy_update_screen_pos(_room_num, #enemies[_room_num])
+    enemy_update_landmarks(_room_num, #enemies[_room_num])
+end
+
+function enemy_update_screen_pos(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    enemy.sx = enemy.x % 128
+    enemy.sy = enemy.y % 128
+
+    enemies[_room_num][_enemy_i] = enemy
 end
 
 function enemies_update()
@@ -59,8 +122,10 @@ function enemies_update()
     for enemy_i = 1, #enemies[rn] do
         -- update ai
         enemy_update_ai(rn, enemy_i)
-        -- check for collision
+        -- check for collision with other objects
         enemy_check_collision(rn, enemy_i)
+        -- react to other objects colliding with it
+        enemy_receive_collision(rn, enemy_i)
         -- move
         enemy_move(rn, enemy_i)
         -- animate
@@ -74,7 +139,34 @@ end
 function enemy_update_ai(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
-    -- code goes here
+    local ray_y = enemy.mdl
+    -- cast a ray forward until it hits a wall or the edge of the map
+    -- if that ray hits the player, stop casting and walk forward
+    
+    local ray_x = nil
+    if enemy.facing == 1 then
+        ray_x = enemy.x + enemy.h - 1
+    else
+        ray_x = enemy.x
+    end
+    assert(ray_x != nil)
+
+    while check_for_flag_at(ray_x, ray_y, 4) == false and 0 <= ray_x and ray_x <= map_max_pix_x do
+
+        if point_in_rectangle(ray_x, ray_y, p1_get_mpx(), p1_get_mpy(), p1_w, p1_h) then
+            --         vvvvvvvvvvvvvvvv defined in designer_controls.p8
+            enemy.dx = enemy_walk_speed * enemy.facing
+            if debug_ai then printh("enemy ".._enemy_i.." can see the player") end
+            break
+        else
+            enemy.dx = 0
+        end
+
+        ray_x += enemy.facing
+    end
+
+    enemy.ray_x = ray_x
+    enemy.ray_y = ray_y
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -82,8 +174,127 @@ end
 -- currently does nothing
 function enemy_check_collision(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
-
+    
     -- code goes here
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+function enemy_receive_collision(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    -- player: do things on first frame of collision
+    if enemy.prev_frame_player_collision == false and enemy.this_frame_player_collision == true then
+        enemy_collision_with_player_enter(_room_num, _enemy_i)
+
+    -- player: do things on middle frames of collision
+    elseif enemy.prev_frame_player_collision == true and enemy.this_frame_player_collision == true then
+        enemy_collision_with_player_during(_room_num, _enemy_i)
+
+    -- player: do things the frame after last frame of collision
+    elseif enemy.prev_frame_player_collision == true and enemy.this_frame_player_collision == false then
+        enemy_collision_with_player_exit(_room_num, _enemy_i)
+    end
+    
+    -- sword: do things on first frame of collision
+    if enemy.prev_frame_sword_collision == false and enemy.this_frame_sword_collision == true then
+        enemy_collision_with_sword_enter(_room_num, _enemy_i)
+
+    -- sword: do things on middle frames of collision
+    elseif enemy.prev_frame_sword_collision == true and enemy.this_frame_sword_collision == true then
+        enemy_collision_with_sword_during(_room_num, _enemy_i)
+
+    -- sword: do things the frame after the last frame of collision
+    elseif enemy.prev_frame_sword_collision == true and enemy.this_frame_sword_collision == false then
+        enemy_collision_with_sword_exit(_room_num, _enemy_i)
+    end
+        
+    -- prep for next frame
+    -- player
+    enemy.prev_frame_player_collision = enemy.this_frame_player_collision
+    enemy.this_frame_player_collision = false -- reset in case of no collision next frame
+    
+    -- sword
+    enemy.prev_frame_sword_collision = enemy.this_frame_sword_collision
+    enemy.this_frame_sword_collision = false -- reset in case of no collision on next frame
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+--------------------------------
+-- player collision functions --
+--------------------------------
+
+function set_enemy_collision_with_player(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    enemy.this_frame_player_collision = true
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_player_enter(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with player (enter)") end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_player_during(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with player (during)") end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_player_exit(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with player (exit)") end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-------------------------------
+-- sword collision functions --
+-------------------------------
+
+function set_enemy_collision_with_sword(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    enemy.this_frame_sword_collision = true
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_sword_enter(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with sword (enter)") end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_sword_during(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with sword (during)") end
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+-- currently does nothing
+function enemy_collision_with_sword_exit(_room_num, _enemy_i)
+    local enemy = enemies[_room_num][_enemy_i]
+
+    if debug_enemy_collision then printh("enemy collision with sword (exit)") end
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -92,7 +303,8 @@ end
 function enemy_move(_room_num, _enemy_i)
     local enemy = enemies[_room_num][_enemy_i]
 
-    -- code goes here
+    enemy.x += enemy.dx
+    if debug_enemy_movement then printh("enemy ".._enemy_i.." dx = "..enemy.dx) end
 
     enemies[_room_num][_enemy_i] = enemy
 end
@@ -129,14 +341,49 @@ end
 
 -- currently does nothing
 function enemy_update_landmarks(_room_num, _enemy_i)
-    -- code goes here
+    local enemy = enemies[_room_num][_enemy_i]
+
+	-- update map-pixel landmarks
+	enemy.lft = enemy.x
+	enemy.rgt = enemy.x + enemy.w - 1
+	enemy.top = enemy.y
+	enemy.btm = enemy.y + enemy.h - 1
+	enemy.ctr = (enemy.lft + enemy.rgt) / 2
+	enemy.mdl = (enemy.top + enemy.btm) / 2
+
+	-- update screen-pixel landmarks
+	enemy.s_lft = enemy.lft % 128
+	enemy.s_rgt = enemy.rgt % 128
+	enemy.s_top = enemy.top % 128
+	enemy.s_btm = enemy.btm % 128
+	enemy.s_ctr = enemy.ctr % 128
+	enemy.s_mdl = enemy.mdl % 128
+
+    enemies[_room_num][_enemy_i] = enemy
+end
+
+function get_enemies_in_room(_room_num)
+    validate_room_num(_room_num)
+    return enemies[_room_num]
 end
 
 function enemies_draw()
+
     pal(1, 9)
     pal(12, 10)
-    for enemy in all(enemies[get_current_room_num()]) do
-        spr(enemy.spr_state[enemy.spr_n], enemy.x, enemy.y)
+    local rn = get_current_room_num()
+    for enemy_i = 1, #enemies[rn] do
+        enemy_update_landmarks(rn, enemy_i)
+        enemy_update_screen_pos(rn, enemy_i)
+
+        local enemy = enemies[rn][enemy_i]
+
+        spr(enemy.spr_state[enemy.spr_n], enemy.sx, enemy.sy)
+        if debug_enemy_draw then
+            if debug_ai then
+                line(enemy.s_ctr, enemy.s_mdl, enemy.ray_x, enemy.ray_y, 11)
+            end
+        end
     end
     pal()
 end
