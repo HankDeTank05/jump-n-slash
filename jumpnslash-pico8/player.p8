@@ -6,6 +6,10 @@ __lua__
     this is the file for all code concerning the player character
 ]]
 
+--------------------
+-- core functions --
+--------------------
+
 function init_player()
 
 	----------------------
@@ -66,6 +70,7 @@ function init_player()
 	-- the following coordinates are in map pixels (*not* tiles)
 	p1_x = get_current_room().start_mx * 8 -- get starting x position based on what the starting room defines it to be
 	p1_y = get_current_room().start_my * 8 -- get starting y position based on what the starting room defines it to be
+	p1_facing = get_current_room().start_facing -- 1 = right, -1 = left
 
 	-- the following coordinates are in screen pixels
 	p1_sx = nil
@@ -93,7 +98,6 @@ function init_player()
 	p1_s_ctr = nil
 	p1_s_mdl = nil
 
-	p1_facing = 1 -- 1 = right, -1 = left
 	p1_landed = false -- did you land on the ground?
 	p1_head_bonked = false -- did you bonk your head on a ceiling?
 	p1_jump_btn_frames = 0 -- how many frames the jump button has been held for
@@ -111,22 +115,6 @@ function init_player()
 	p1_this_frame_collision_with_enemy = false
 end
 
-function p1_update_screen_pos()
-	
-	if get_scrollability_horizontal() and get_scroll_left_bounds() <= p1_x and p1_x < get_scroll_right_bounds() then
-		p1_sx = get_scroll_left_bounds() - (get_current_map_x() * 8)
-	else
-		p1_sx = p1_x % 128
-	end
-
-	if get_scrollability_vertical() and get_scroll_top_bounds() <= p1_y and p1_y < get_scroll_bottom_bounds() then
-		p1_sy = get_scroll_top_bounds() - (get_current_map_y() * 8)
-	else
-		p1_sy = p1_y % 128
-	end
-
-end
-
 function p1_update()
 	p1_read_inputs()
 	
@@ -141,6 +129,124 @@ function p1_update()
 	p1_update_landmarks()
 	
 end
+	
+function p1_draw()
+
+	p1_update_screen_pos()
+
+	-- print sprite index
+	if debug_player_draw then
+		if p1_draw_spr == nil then
+			printh(p1_spr_n)
+		end
+	end
+
+	assert(p1_draw_spr != nil)
+
+	spr(p1_draw_spr, -- sprite number to draw
+        p1_sx, p1_sy, -- position to draw at
+        1, 1, -- number of tiles wide/tall
+        p1_facing == -1, false) -- whether or not to flip on x,y axis
+	
+	if debug_player_draw then
+
+		-- print screen and world positions
+		if debug_position then
+			print("world pos: ("..p1_x..", "..p1_y..")", 0, 0 ,6)
+			print("scren pos: ("..p1_sx..", "..p1_sy..")", 0, 6, 6)
+		end
+		
+		-- print/draw wall detection
+		if debug_horizontal_collision then
+			-- print numbers
+			print(cand_tx, 10, 6 * 6, 15) -- top
+			print(cand_vx, 10, 7 * 6, 15) -- velocity
+			print(cand_bx, 10, 8 * 6, 15) -- bottom
+			
+			-- draw rays
+			if p1_dx>0 then
+				--moving right
+				line(p1_s_lft, p1_s_top, cand_tx % 128, cand_ty % 128, 11) -- top
+				line(p1_s_lft, p1_s_mdl, cand_vx % 128, p1_s_mdl, 11) -- velocity
+				line(p1_s_lft, p1_s_btm, cand_bx % 128, cand_by % 128, 11) -- bottom
+			elseif p1_dx<0 then
+				--moving left
+				line(p1_s_lft, p1_s_top, cand_tx % 128, cand_ty % 128, 11) -- top
+				line(p1_s_lft, p1_s_mdl, cand_vx % 128, p1_s_mdl, 11) -- velocity
+				line(p1_s_lft, p1_s_btm, cand_bx % 128, cand_by % 128, 11) -- bottom
+			end
+		end
+		
+		-- print/draw bonk/land detection
+		if debug_vertical_collision then
+			-- print velocity
+			print(p1_y_vel, 30, 10, 15)
+			
+			-- print numbers
+			print(cand_ly, 30, 30, 15) -- left
+			print(cand_vy, 40, 36, 15) -- velocity
+			print(cand_ry, 50, 42, 15) -- right
+			
+			-- draw rays
+			if p1_y_vel>0 then
+				-- falling
+				line(p1_s_lft, p1_s_top + p1_h - 1, cand_lx % 128, cand_ly % 128, 11) -- left
+				line(p1_s_ctr, p1_s_top, p1_s_ctr, cand_vy % 128, 11) -- velocity
+				line(p1_s_rgt, p1_s_top + p1_h - 1, cand_rx % 128, cand_ry % 128, 11) -- right
+			elseif p1_y_vel<0 then
+				-- rising
+				line(p1_s_lft, p1_s_top, cand_lx % 128, cand_ly % 128, 11) -- left
+				line(p1_s_ctr, p1_s_top, p1_s_ctr, cand_vy % 128, 11) -- velocity
+				line(p1_s_rgt, p1_s_top, cand_rx % 128, cand_ry % 128, 11) -- right
+			end
+		end
+		
+		--draw landmark pixels
+		if debug_landmarks then
+        	p1_update_landmarks()
+
+			local pcol=8
+			--draw top left corner pixel
+			pset(p1_lft,
+			     p1_top,
+			     pcol)
+			--draw top center pixel
+			pset(p1_ctr,
+			     p1_top,
+			     pcol)
+			--draw top right corner pixel
+			pset(p1_rgt,
+			     p1_top,
+			     pcol)
+			
+			--draw left middle pixel
+			pset(p1_lft,
+			     p1_mdl,
+			     pcol)
+			--draw right middle pixel
+			pset(p1_rgt,
+			     p1_mdl,
+			     pcol)
+			
+			--draw btm left corner pixel
+			pset(p1_lft,
+			     p1_btm,
+			     pcol)
+			--draw btm center pixel
+			pset(p1_ctr,
+			     p1_btm,
+			     pcol)
+			--draw btm right corner pixel
+			pset(p1_rgt,
+			     p1_btm,
+			     pcol)
+		end
+	end
+end
+
+------------------------
+-- inputs and actions --
+------------------------
 
 function p1_read_inputs()
 	-- read for inputs
@@ -208,6 +314,16 @@ function p1_attack()
 	end
 end
 
+-- currently does nothing
+function p1_trigger_death()
+	if debug_player_death then printh("ur ded lmao") end
+	-- set death animation
+end
+
+---------------
+-- collision --
+---------------
+
 function p1_check_collision()
 	p1_tile_collision()
 	p1_enemy_collision()
@@ -263,35 +379,103 @@ function p1_collision_with_enemy_exit()
 	if debug_player_collision then printh("player collision with enemy (exit)") end
 end
 
-function set_y_velocity(_new_vel)
-    p1_y_vel = _new_vel
-end
+-----------------------
+-- movement/position --
+-----------------------
 
--- currently unused
-function cast_ray(_start_x, _start_y, _x_dir, _y_dir, _flag_num)
-    -- cast a ray from a starting position, in a given direction, until it hits a map tile with the given flag
-    -- note: raycast can only be in one of the four cardinal directions
-    -- return the screen x,y position where the raycast ended
+function p1_move()
+	
+    -- move player horizontally
+	if p1_dx > 0 then
+		-- facing right, so pick the smallest (leftmost number)
+		p1_x = min(cand_vx, min(cand_tx, cand_bx))
 
-    -- _start_x: the x-pos to start from on the screen
-    -- _start_y: the y-pos to start from on the screen
-    -- _x_dir: the direction to move along the x-axis
-    -- _y_dir: the direction to move along the y-axis
-    -- _flag_num: stop casting the ray when you reach a map tile with this flag number
+		-- determine if you walked into a hazard or not
+		if check_for_flag_at_pix(p1_x + p1_w, p1_y + 4, 0) == true then
+			p1_health = 0
+		end
+	elseif p1_dx < 0 then
+		-- facing left, so pick the largest (rightmost number)
+		p1_x = max(cand_vx, max(cand_tx, cand_bx))
 
-    assert(_x_dir == 0 or _y_dir == 0) -- make sure we're not casting diagonally
-    assert(_x_dir != _y_dir) -- but also make sure the raycast will go in *some* direction
+		-- determine if you walked into a hazard or not
+		if check_for_flag_at_pix(p1_x - 1, p1_y + 4, 0) == true then
+			p1_health = 0
+		end
+	end
 
-    -- make sure we will be moving one pixel at a time
-    if _x_dir != 0 then
-        assert(_x_dir == 1 or _x_dir == -1)
-    elseif _y_dir != 0 then
-        assert(_y_dir == 1 or _y_dir == -1)
+	-- move player vertically
+	if p1_y_vel >= 0 then
+        -- move player
+		p1_y = min(cand_vy, min(cand_ly, cand_ry))
+
+        -- determine if they landed or not
+		if p1_y == cand_ly or p1_y == cand_ry then
+			p1_landed = true
+		    set_y_velocity(0)
+			-- determine if you landed on a hazard or not
+			if check_for_flag_at_pix(p1_x + 4, p1_y + 8, 0) == true then
+				p1_health = 0
+			end
+        else
+            p1_landed = false
+            p1_apply_gravity()
+		end
+	else
+        -- move player
+		p1_y = max(cand_vy, max(cand_ly, cand_ry))
+
+        -- determine if they bonked their head or not
+		if p1_y == cand_ly or p1_y == cand_ry then
+			p1_head_bonked = true
+		    set_y_velocity(0)
+			-- determine if you bonked your head on a hazard or not
+			if check_for_flag_at_pix(p1_x + 4, p1_y - 1, 0) == true then
+				p1_health = 0
+			end
+        else
+            p1_apply_gravity()
+		end
+	end
+
+    -- check if player is positioned to trigger screen transitions
+    if p1_y < get_current_top_bounds() then -- move up
+        move_player_to_room_up()
+
+    elseif p1_y + (p1_h - 1) >= get_current_bottom_bounds() then -- move down
+        move_player_to_room_down()
+
+    elseif p1_x < get_current_left_bounds() then -- move left
+        move_player_to_room_left()
+
+    elseif p1_x + (p1_w - 1) >= get_current_right_bounds() then -- move right
+        move_player_to_room_right()
     end
 
-    local x, y = _start_x, _start_y
+	-- check for player death
+	if p1_health <= 0 then
+		p1_trigger_death()
+	end
+end
 
-    -- while loop goes here
+function p1_update_screen_pos()
+	
+	if get_scrollability_horizontal() and get_scroll_left_bounds() <= p1_x and p1_x < get_scroll_right_bounds() then
+		p1_sx = get_scroll_left_bounds() - (get_current_map_x() * 8)
+	else
+		p1_sx = p1_x % 128
+	end
+
+	if get_scrollability_vertical() and get_scroll_top_bounds() <= p1_y and p1_y < get_scroll_bottom_bounds() then
+		p1_sy = get_scroll_top_bounds() - (get_current_map_y() * 8)
+	else
+		p1_sy = p1_y % 128
+	end
+
+end
+
+function set_y_velocity(_new_vel)
+    p1_y_vel = _new_vel
 end
 
 function p1_horizontal_collision()
@@ -319,14 +503,14 @@ function p1_horizontal_collision()
 	if p1_dx > 0 then -- cast rays to right
         --                                                        account for edge case #1
 		-- top ray                                                vvvvvvvvvvvvvvvvvvvvvvvv
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx <= map_max_pix_x do
+		while check_for_flag_at_pix(cand_tx, cand_ty, 4) == false and cand_tx <= map_max_pix_x do
 			cand_tx += 1
 		end
 		cand_tx -= p1_w
 
         --                                                        account for edge case #1
 		-- bottom ray                                             vvvvvvvvvvvvvvvvvvvvvvvv
-		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx <= map_max_pix_x do
+		while check_for_flag_at_pix(cand_bx, cand_by, 4) == false and cand_bx <= map_max_pix_x do
 			cand_bx += 1
 		end
 		cand_bx -= p1_w
@@ -334,14 +518,14 @@ function p1_horizontal_collision()
 	elseif p1_dx < 0 then -- cast rays to left
         --                                                        account for edge case #1
 		-- top ray                                                vvvvvvvvvvvv
-		while check_for_flag_at(cand_tx, cand_ty, 4) == false and cand_tx >= 0 do
+		while check_for_flag_at_pix(cand_tx, cand_ty, 4) == false and cand_tx >= 0 do
 			cand_tx -= 1
 		end
 		cand_tx += 1
 		
         --                                                        account for edge case #1
 		-- bottom ray                                             vvvvvvvvvvvv
-		while check_for_flag_at(cand_bx, cand_by, 4) == false and cand_bx >= 0 do
+		while check_for_flag_at_pix(cand_bx, cand_by, 4) == false and cand_bx >= 0 do
 			cand_bx -= 1
 		end
 		cand_bx += 1
@@ -386,18 +570,18 @@ function p1_vertical_collision()
         -- left ray
 
         -- account for edge case #2 with left ray
-        if check_for_flag_at(cand_lx, cand_ly, 3) then
+        if check_for_flag_at_pix(cand_lx, cand_ly, 3) then
             if debug_vertical_collision then printh("edge case, left ray") end
             -- cast until the ray is below the block
-            while check_for_flag_at(cand_lx, cand_ly, 3) == true do
+            while check_for_flag_at_pix(cand_lx, cand_ly, 3) == true do
                 cand_ly += 1
             end
-            assert(check_for_flag_at(cand_lx, cand_ly, 3) == false) -- make sure it works properly
+            assert(check_for_flag_at_pix(cand_lx, cand_ly, 3) == false) -- make sure it works properly
         end
 
-        --                                                        account for edge case #1
-        -- cast left ray                                          vvvvvvvvvvvvvvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 3) == false and cand_ly <= map_max_pix_y do
+        --                                                            account for edge case #1
+        -- cast left ray                                              vvvvvvvvvvvvvvvvvvvvvvvv
+		while check_for_flag_at_pix(cand_lx, cand_ly, 3) == false and cand_ly <= map_max_pix_y do
 			cand_ly += 1
 		end
         cand_ly -= p1_h
@@ -405,18 +589,18 @@ function p1_vertical_collision()
         -- right ray
 
         -- account for edge case #2 with right ray
-        if check_for_flag_at(cand_rx, cand_ry, 3) then
+        if check_for_flag_at_pix(cand_rx, cand_ry, 3) then
             if debug_vertical_collision then printh("edge case, right ray") end
             -- cast until the ray is below the block
-            while check_for_flag_at(cand_rx, cand_ry, 3) == true do
+            while check_for_flag_at_pix(cand_rx, cand_ry, 3) == true do
                 cand_ry += 1
             end
-            assert(check_for_flag_at(cand_rx, cand_ry, 3) == false) -- make sure it works properly
+            assert(check_for_flag_at_pix(cand_rx, cand_ry, 3) == false) -- make sure it works properly
         end
 
-        --                                                        account for edge case #1
-        -- cast right ray                                         vvvvvvvvvvvvvvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 3) == false and cand_ry <= map_max_pix_y do
+        --                                                            account for edge case #1
+        -- cast right ray                                             vvvvvvvvvvvvvvvvvvvvvvvv
+		while check_for_flag_at_pix(cand_rx, cand_ry, 3) == false and cand_ry <= map_max_pix_y do
 			cand_ry += 1
 		end
         cand_ry -= p1_h
@@ -424,14 +608,14 @@ function p1_vertical_collision()
     else -- cast rays upwards
         --                                                        account for edge case #1
         -- left ray                                               vvvvvvvvvvvv
-		while check_for_flag_at(cand_lx, cand_ly, 5) == false and cand_ly >= 0 do
+		while check_for_flag_at_pix(cand_lx, cand_ly, 5) == false and cand_ly >= 0 do
 			cand_ly -= 1
 		end
 		cand_ly += 1
 
         --                                                        account for edge case #1
         -- right ray                                              vvvvvvvvvvvv
-		while check_for_flag_at(cand_rx, cand_ry, 5) == false and cand_ry >= 0 do
+		while check_for_flag_at_pix(cand_rx, cand_ry, 5) == false and cand_ry >= 0 do
 			cand_ry -= 1
 		end
 		cand_ry += 1
@@ -441,86 +625,56 @@ function p1_vertical_collision()
 	cand_vy = p1_y + p1_y_vel
 end
 
--- currently does nothing
-function p1_trigger_death()
-	if debug_player_death then printh("ur ded lmao") end
-	-- set death animation
+function p1_apply_gravity()
+    p1_y_vel += p1_gravity -- defined in designer_controls.p8
 end
 
-function p1_move()
-	
-    -- move player horizontally
-	if p1_dx > 0 then
-		-- facing right, so pick the smallest (leftmost number)
-		p1_x = min(cand_vx, min(cand_tx, cand_bx))
-
-		-- determine if you walked into a hazard or not
-		if check_for_flag_at(p1_x + p1_w, p1_y + 4, 0) == true then
-			p1_health = 0
-		end
-	elseif p1_dx < 0 then
-		-- facing left, so pick the largest (rightmost number)
-		p1_x = max(cand_vx, max(cand_tx, cand_bx))
-
-		-- determine if you walked into a hazard or not
-		if check_for_flag_at(p1_x - 1, p1_y + 4, 0) == true then
-			p1_health = 0
-		end
-	end
-
-	-- move player vertically
-	if p1_y_vel >= 0 then
-        -- move player
-		p1_y = min(cand_vy, min(cand_ly, cand_ry))
-
-        -- determine if they landed or not
-		if p1_y == cand_ly or p1_y == cand_ry then
-			p1_landed = true
-		    set_y_velocity(0)
-			-- determine if you landed on a hazard or not
-			if check_for_flag_at(p1_x + 4, p1_y + 8, 0) == true then
-				p1_health = 0
-			end
-        else
-            p1_landed = false
-            p1_apply_gravity()
-		end
-	else
-        -- move player
-		p1_y = max(cand_vy, max(cand_ly, cand_ry))
-
-        -- determine if they bonked their head or not
-		if p1_y == cand_ly or p1_y == cand_ry then
-			p1_head_bonked = true
-		    set_y_velocity(0)
-			-- determine if you bonked your head on a hazard or not
-			if check_for_flag_at(p1_x + 4, p1_y - 1, 0) == true then
-				p1_health = 0
-			end
-        else
-            p1_apply_gravity()
-		end
-	end
-
-    -- check if player is positioned to trigger screen transitions
-    if p1_y < get_current_top_bounds() then -- move up
-        move_player_to_room_up()
-
-    elseif p1_y + (p1_h - 1) >= get_current_bottom_bounds() then -- move down
-        move_player_to_room_down()
-
-    elseif p1_x < get_current_left_bounds() then -- move left
-        move_player_to_room_left()
-
-    elseif p1_x + (p1_w - 1) >= get_current_right_bounds() then -- move right
-        move_player_to_room_right()
-    end
-
-	-- check for player death
-	if p1_health <= 0 then
-		p1_trigger_death()
-	end
+function move_player_to_room_up()
+	if debug_player_room_transition then printh("move player to room up") end
+    p1_y -= p1_h - 1
+	change_rooms()
 end
+
+function move_player_to_room_down()
+	if debug_player_room_transition then printh("move player to room down") end
+    p1_y += p1_h - 1
+	change_rooms()
+end
+
+function move_player_to_room_left()
+	if debug_player_room_transition then printh("move player to room left") end
+	p1_x -= p1_w - 1
+	change_rooms()
+
+end
+
+function move_player_to_room_right()
+	if debug_player_room_transition then printh("move player to room right") end
+    p1_x += p1_w - 1
+	change_rooms()
+end
+
+function p1_update_landmarks()
+	-- update map-pixel landmarks
+	p1_lft = p1_x
+	p1_rgt = p1_x + p1_w - 1
+	p1_top = p1_y
+	p1_btm = p1_y + p1_h - 1
+	p1_ctr = (p1_lft + p1_rgt) / 2
+	p1_mdl = (p1_top + p1_btm) / 2
+
+	-- update screen-pixel landmarks
+	p1_s_lft = p1_lft % 128
+	p1_s_rgt = p1_rgt % 128
+	p1_s_top = p1_top % 128
+	p1_s_btm = p1_btm % 128
+	p1_s_ctr = p1_ctr % 128
+	p1_s_mdl = p1_mdl % 128
+end
+
+---------------
+-- animation --
+---------------
 
 function p1_update_animation()
 	p1_animate()
@@ -638,58 +792,15 @@ function p1_set_animation(_anim)
 	p1_reset_animation()
 end
 
-function p1_apply_gravity()
-    p1_y_vel += p1_gravity -- defined in designer_controls.p8
-end
+-----------------------
+-- accessors/getters --
+-----------------------
 
-function move_player_to_room_up()
-	if debug_player_room_transition then printh("move player to room up") end
-    p1_y -= p1_h - 1
-	change_rooms()
-end
-
-function move_player_to_room_down()
-	if debug_player_room_transition then printh("move player to room down") end
-    p1_y += p1_h - 1
-	change_rooms()
-end
-
-function move_player_to_room_left()
-	if debug_player_room_transition then printh("move player to room left") end
-	p1_x -= p1_w - 1
-	change_rooms()
-
-end
-
-function move_player_to_room_right()
-	if debug_player_room_transition then printh("move player to room right") end
-    p1_x += p1_w - 1
-	change_rooms()
-end
-
-function p1_update_landmarks()
-	-- update map-pixel landmarks
-	p1_lft = p1_x
-	p1_rgt = p1_x + p1_w - 1
-	p1_top = p1_y
-	p1_btm = p1_y + p1_h - 1
-	p1_ctr = (p1_lft + p1_rgt) / 2
-	p1_mdl = (p1_top + p1_btm) / 2
-
-	-- update screen-pixel landmarks
-	p1_s_lft = p1_lft % 128
-	p1_s_rgt = p1_rgt % 128
-	p1_s_top = p1_top % 128
-	p1_s_btm = p1_btm % 128
-	p1_s_ctr = p1_ctr % 128
-	p1_s_mdl = p1_mdl % 128
-end
-
-function p1_get_mpx()
+function p1_get_x()
 	return p1_x
 end
 
-function p1_get_mpy()
+function p1_get_y()
 	return p1_y
 end
 
@@ -703,118 +814,4 @@ end
 
 function p1_get_facing()
 	return p1_facing
-end
-	
-function p1_draw()
-
-	p1_update_screen_pos()
-
-	-- print sprite index
-	if debug_player_draw then
-		if p1_draw_spr == nil then
-			printh(p1_spr_n)
-		end
-	end
-
-	assert(p1_draw_spr != nil)
-
-	spr(p1_draw_spr, -- sprite number to draw
-        p1_sx, p1_sy, -- position to draw at
-        1, 1, -- number of tiles wide/tall
-        p1_facing == -1, false) -- whether or not to flip on x,y axis
-	
-	if debug_player_draw then
-
-		-- print screen and world positions
-		if debug_position then
-			print("world pos: ("..p1_x..", "..p1_y..")", 0, 0 ,6)
-			print("scren pos: ("..p1_sx..", "..p1_sy..")", 0, 6, 6)
-		end
-		
-		-- print/draw wall detection
-		if debug_horizontal_collision then
-			-- print numbers
-			print(cand_tx, 10, 6 * 6, 15) -- top
-			print(cand_vx, 10, 7 * 6, 15) -- velocity
-			print(cand_bx, 10, 8 * 6, 15) -- bottom
-			
-			-- draw rays
-			if p1_dx>0 then
-				--moving right
-				line(p1_s_lft, p1_s_top, cand_tx % 128, cand_ty % 128, 11) -- top
-				line(p1_s_lft, p1_s_mdl, cand_vx % 128, p1_s_mdl, 11) -- velocity
-				line(p1_s_lft, p1_s_btm, cand_bx % 128, cand_by % 128, 11) -- bottom
-			elseif p1_dx<0 then
-				--moving left
-				line(p1_s_lft, p1_s_top, cand_tx % 128, cand_ty % 128, 11) -- top
-				line(p1_s_lft, p1_s_mdl, cand_vx % 128, p1_s_mdl, 11) -- velocity
-				line(p1_s_lft, p1_s_btm, cand_bx % 128, cand_by % 128, 11) -- bottom
-			end
-		end
-		
-		-- print/draw bonk/land detection
-		if debug_vertical_collision then
-			-- print velocity
-			print(p1_y_vel, 30, 10, 15)
-			
-			-- print numbers
-			print(cand_ly, 30, 30, 15) -- left
-			print(cand_vy, 40, 36, 15) -- velocity
-			print(cand_ry, 50, 42, 15) -- right
-			
-			-- draw rays
-			if p1_y_vel>0 then
-				-- falling
-				line(p1_s_lft, p1_s_top + p1_h - 1, cand_lx % 128, cand_ly % 128, 11) -- left
-				line(p1_s_ctr, p1_s_top, p1_s_ctr, cand_vy % 128, 11) -- velocity
-				line(p1_s_rgt, p1_s_top + p1_h - 1, cand_rx % 128, cand_ry % 128, 11) -- right
-			elseif p1_y_vel<0 then
-				-- rising
-				line(p1_s_lft, p1_s_top, cand_lx % 128, cand_ly % 128, 11) -- left
-				line(p1_s_ctr, p1_s_top, p1_s_ctr, cand_vy % 128, 11) -- velocity
-				line(p1_s_rgt, p1_s_top, cand_rx % 128, cand_ry % 128, 11) -- right
-			end
-		end
-		
-		--draw landmark pixels
-		if debug_landmarks then
-        	p1_update_landmarks()
-
-			local pcol=8
-			--draw top left corner pixel
-			pset(p1_lft,
-			     p1_top,
-			     pcol)
-			--draw top center pixel
-			pset(p1_ctr,
-			     p1_top,
-			     pcol)
-			--draw top right corner pixel
-			pset(p1_rgt,
-			     p1_top,
-			     pcol)
-			
-			--draw left middle pixel
-			pset(p1_lft,
-			     p1_mdl,
-			     pcol)
-			--draw right middle pixel
-			pset(p1_rgt,
-			     p1_mdl,
-			     pcol)
-			
-			--draw btm left corner pixel
-			pset(p1_lft,
-			     p1_btm,
-			     pcol)
-			--draw btm center pixel
-			pset(p1_ctr,
-			     p1_btm,
-			     pcol)
-			--draw btm right corner pixel
-			pset(p1_rgt,
-			     p1_btm,
-			     pcol)
-		end
-	end
 end

@@ -2,6 +2,10 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 
+--------------------
+-- core functions --
+--------------------
+
 function init_breakables()
 
     ----------------------
@@ -35,7 +39,9 @@ function init_breakables()
             local tile_spr = mget(tx, ty)
 
             if tile_spr == breakable_spr then
-                create_breakable(tx, ty, get_room_from_tile(tx, ty))
+                local rn = get_room_from_tile(tx, ty)
+                if debug_breakable_creation then printh("creating a breakable block at "..tx..", "..ty.." in room "..rn) end
+                create_breakable(tx, ty, rn)
             end
         end
     end
@@ -79,6 +85,13 @@ function update_breakables()
 end
 
 -- currently does nothing
+function draw_breakables()
+end
+
+---------------
+-- collision --
+---------------
+
 function breakable_receive_collision(_room_num, _breakable_i)
     local breakable = breakables[_room_num][_breakable_i]
     
@@ -141,10 +154,9 @@ function breakable_collision_with_sword_exit(_room_num, _breakable_i)
     breakables[_room_num][_breakable_i] = breakable
 end
 
-function get_breakables_in_room(_room_num)
-    validate_room_num(_room_num)
-    return breakables[_room_num]
-end
+-----------------
+-- destruction --
+-----------------
 
 function breakable_flag_for_destruction(_room_num, _breakable_i)
     local breakable = breakables[_room_num][_breakable_i]
@@ -165,5 +177,11 @@ function breakable_destroy(_room_num, _breakable_i)
     deli(breakables[_room_num], _breakable_i)
 end
 
-function draw_breakables()
+-----------------------
+-- accessors/getters --
+-----------------------
+
+function get_breakables_in_room(_room_num)
+    validate_room_num(_room_num)
+    return breakables[_room_num]
 end

@@ -2,6 +2,10 @@ pico-8 cartridge // http://www.pico-8.com
 version 42
 __lua__
 
+--------------------
+-- core functions --
+--------------------
+
 function init_sword()
     sword_sprs = { -- lists of sprites for animation
         neutral = {52,},
@@ -37,15 +41,38 @@ function sword_update()
     sword_update_animation()
 end
 
+function sword_draw()
+
+    sword_update_screen_pos()
+
+    spr(sword_draw_spr, -- sprite number to draw
+        sword_sx, sword_sy, -- position to draw at
+        1, 1, -- number of tiles wide/tall
+        p1_get_facing() == -1, false) -- whether or not to flip on x,y axis
+end
+
+function sword_activate()
+    sword_set_animation(sword_animate_swing)
+    sword_active = true
+end
+
+-----------------------
+-- movement/position --
+-----------------------
+
 function sword_move()
-    sword_x = p1_get_mpx() + 8 * p1_get_facing()
-    sword_y = p1_get_mpy()
+    sword_x = p1_get_x() + 8 * p1_get_facing()
+    sword_y = p1_get_y()
 end
 
 function sword_update_screen_pos()
     sword_sx = p1_get_sx() + 8 * p1_get_facing()
     sword_sy = p1_get_sy()
 end
+
+---------------
+-- collision --
+---------------
 
 function sword_collision()
     -- check for collision with enemies
@@ -67,10 +94,9 @@ function sword_collision()
     end
 end
 
-function sword_activate()
-    sword_set_animation(sword_animate_swing)
-    sword_active = true
-end
+---------------
+-- animation --
+---------------
 
 function sword_update_animation()
     --[[
@@ -113,14 +139,4 @@ end
 function sword_reset_animation()
     sword_spr_n = 1
     sword_anim_fcount = 0
-end
-
-function sword_draw()
-
-    sword_update_screen_pos()
-
-    spr(sword_draw_spr, -- sprite number to draw
-        sword_sx, sword_sy, -- position to draw at
-        1, 1, -- number of tiles wide/tall
-        p1_get_facing() == -1, false) -- whether or not to flip on x,y axis
 end
