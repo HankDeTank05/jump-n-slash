@@ -12,10 +12,14 @@ Joseph Turzitti
 
 ## Programming
 
-### Lead Programmer
+### Game Programming Lead
 
 Henry Holman
 
-### Programmer
+### Game Programming
 
 Katie Holman
+
+### Tools Development
+
+Len Jensen
