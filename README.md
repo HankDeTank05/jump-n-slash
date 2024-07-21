@@ -2,7 +2,7 @@
 
 An action/platforming game we're developing for fun in our free time!
 
-Currently, we're working on prototyping in PICO-8. After prototyping is finished, we plan to develop in Unreal Engine.
+We began prototyping in PICO-8, and are currently prototyping using Love2D. After prototyping is finished, we plan to develop in Unreal Engine.
 
 # Credits
 
