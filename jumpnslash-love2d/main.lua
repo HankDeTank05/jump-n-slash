@@ -10,24 +10,24 @@ function love.load()
 
 	-- load game
 	init_map()
-	init_player()
+	InitPlayer()
 	-- init sword
 	-- init enemies
 	-- init breakables
 
-	game_set_starting_state()
+	Game_SetStartingState()
 end
 
-function update_state(_dt)
+function UpdateState(_dt)
 end
 
-function draw_state()
+function DrawState()
 end
 
 function love.update(_dt)
-	update_state(_dt)
+	UpdateState(_dt)
 end
 
 function love.draw()
-	draw_state()
+	DrawState()
 end

@@ -1,46 +1,46 @@
 
-function game_set_starting_state()
-	game_set_state_play()
+function Game_SetStartingState()
+	Game_SetStatePlay()
 end
 
 ------------------------------
 -- game state: title screen --
 ------------------------------
 
-function game_set_state_title()
-	update_state = state_title_update
-	draw_state = state_title_draw
+function Game_SetStateTitle()
+	UpdateState = StateTitleUpdate
+	DrawState = StateTitleDraw
 end
 
-function state_title_update(_dt)
+function StateTitleUpdate(_dt)
 end
 
-function state_title_draw()
+function StateTitleDraw()
 end
 
 ----------------------
 -- game state: play --
 ----------------------
 
-function game_set_state_play()
-	update_state = state_play_update
-	draw_state = state_play_draw
+function Game_SetStatePlay()
+	UpdateState = StatePlayUpdate
+	DrawState = StatePlayDraw
 end
 
-function state_play_update(_dt)
-	update_player(_dt)
+function StatePlayUpdate(_dt)
+	UpdatePlayer(_dt)
 	-- update sword
 	-- update enemies
 	-- update breakables
 	-- update map
 end
 
-function state_play_draw()
+function StatePlayDraw()
 	love.graphics.print("hello world", 64, 64)
 
 	draw_map()
 	-- draw enemies
-	draw_player()
+	DrawPlayer()
 	-- draw sword
 end
 
@@ -48,28 +48,28 @@ end
 -- game state: pause --
 -----------------------
 
-function game_set_state_pause()
-	update_state = state_pause_update
-	draw_state = state_pause_draw
+function Game_SetStatePause()
+	UpdateState = StatePauseUpdate
+	DrawState = StatePauseDraw
 end
 
-function state_pause_update(_dt)
+function StatePauseUpdate(_dt)
 end
 
-function state_pause_draw()
+function StatePauseDraw()
 end
 
 ---------------------------
 -- game state: game over --
 ---------------------------
 
-function game_set_state_gameover()
-	update_state = state_gameover_update
-	draw_state = state_gameover_draw
+function Game_SetStateGameover()
+	UpdateState = StateGameoverUpdate
+	DrawState = StateGameoverDraw
 end
 
-function state_gameover_update(_dt)
+function StateGameoverUpdate(_dt)
 end
 
-function state_gameover_draw()
+function StateGameoverDraw()
 end
