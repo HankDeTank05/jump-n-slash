@@ -38,7 +38,7 @@ end
 function StatePlayDraw()
 	love.graphics.print("hello world", 64, 64)
 
-	draw_map()
+	DrawMap()
 	-- draw enemies
 	DrawPlayer()
 	-- draw sword

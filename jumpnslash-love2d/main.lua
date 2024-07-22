@@ -9,7 +9,7 @@ function love.load()
 	love.graphics.setDefaultFilter("linear", "nearest")
 
 	-- load game
-	init_map()
+	InitMap()
 	InitPlayer()
 	-- init sword
 	-- init enemies
