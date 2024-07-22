@@ -42,15 +42,19 @@ end
 function map_get_current_room_num()
 end
 
+-- returns the x-position of the left edge of the current room (in world space)
 function map_get_current_left_bounds()
 end
 
+-- returns the x-position of the right edge of the current room (in world space)
 function map_get_current_right_bounds()
 end
 
+-- returns the y-position of the top edge of the current room (in world space)
 function map_get_current_top_bounds()
 end
 
+-- returns the y-position of the top edge of the current room (in world space)
 function map_get_current_bottom_bounds()
 end
 
