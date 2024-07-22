@@ -1,5 +1,20 @@
 require("designer_controls")
 
+-------------------------------
+-- player "member" variables --
+-------------------------------
+
+local player_sprite
+local player_x
+local player_y
+local player_facing
+local player_screenX
+local player_screenY
+local player_dx
+local player_yVel
+local player_width
+local player_height
+
 ------------------------
 -- inputs and actions --
 ------------------------
@@ -10,19 +25,19 @@ local function Player_ReadInputs(_dt)
 	-- read for jumping
 
 	-- walk right/left
-	p1_dx = 0
+	player_dx = 0
 	-- walk right?
 	if love.keyboard.isDown(p1_controls.walk_right) then
 		print("walking right")
-		p1_dx = p1_dx + p1_walk_speed * _dt-- defined in designer controls
-		p1_facing = 1
+		player_dx = player_dx + p1_walk_speed * _dt-- defined in designer controls
+		Player_facing = 1
 	end
 
 	-- walk left?
 	if love.keyboard.isDown(p1_controls.walk_left) then
 		print("walking left")
-		p1_dx = p1_dx - p1_walk_speed * _dt
-		p1_facing = -1
+		player_dx = player_dx - p1_walk_speed * _dt
+		Player_facing = -1
 	end
 end
 
@@ -75,12 +90,12 @@ end
 -----------------------
 
 local function Player_UpdateScreenPos()
-	p1_sx = p1_x
-	p1_sy = p1_y
+	Player_screenX = player_x
+	Player_screenY = player_y
 end
 
 local function Player_Move(_dt)
-	p1_x = p1_x + p1_dx
+	player_x = player_x + player_dx
 
 	Player_UpdateScreenPos()
 end
@@ -136,23 +151,23 @@ end
 -----------------------
 
 function Player_GetX()
-	return p1_x
+	return player_x
 end
 
 function Player_GetY()
-	return p1_y
+	return player_y
 end
 
 function Player_GetScreenX()
-	return p1_sx
+	return Player_screenX
 end
 
 function Player_GetScreenY()
-	return p1_sy
+	return Player_screenY
 end
 
 function Player_GetFacingDir()
-	return p1_facing
+	return Player_facing
 end
 
 --------------------
@@ -196,20 +211,20 @@ function InitPlayer()
 	-----------------
 
 	-- load player sprites
-	p1_sprite = love.graphics.newImage("assets/sprites/player/idle_1.png")
+	player_sprite = love.graphics.newImage("assets/sprites/player/idle_1.png")
 
-	p1_x = 64  -- world position x
-	p1_y = 64  -- world position y
-	p1_facing = 1 -- 1=right, -1=left
+	player_x = 64  -- world position x
+	player_y = 64  -- world position y
+	player_facing = 1 -- 1=right, -1=left
 
-	p1_sx = nil -- screen position x
-	p1_sy = nil -- screen position y
-	p1_update_screen_pos()
+	player_screenX = nil -- screen position x
+	player_screenY = nil -- screen position y
+	Player_UpdateScreenPos()
 
-	p1_dx = 0 -- delta x, since there's no horizontal acceleration
-	p1_y_vel = 0 -- y-velocity, since there is vertical acceleration
-	p1_w = 8  -- width of the sprite
-	p1_h = 8  -- height of the sprite
+	player_dx = 0 -- delta x, since there's no horizontal acceleration
+	player_yVel = 0 -- y-velocity, since there is vertical acceleration
+	player_width = 8  -- width of the sprite
+	player_height = 8  -- height of the sprite
 end
 
 function UpdatePlayer(_dt)
@@ -227,5 +242,5 @@ function UpdatePlayer(_dt)
 end
 
 function DrawPlayer()
-	love.graphics.draw(p1_sprite, p1_sx, p1_sy, 0, SCREEN_SCALE, SCREEN_SCALE)
+	love.graphics.draw(player_sprite, player_screenX, player_screenY, 0, SCREEN_SCALE, SCREEN_SCALE)
 end
