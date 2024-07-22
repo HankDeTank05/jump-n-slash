@@ -4,6 +4,14 @@
 --------------------
 
 function init_map()
+	local cwd = love.filesystem.getWorkingDirectory()
+	print(cwd)
+	local level_fnames = {}
+	for i = 1, #level_fnames do
+		print(cwd..level_fnames[i])
+		local iterator = love.filesystem.lines(cwd..level_fnames[i])
+		-- do stuff with the file (see https://love2d.org/wiki/love.filesystem.lines for example code)
+	end
 end
 
 function add_room(_map_x, _map_y, _tile_width, _tile_height)
