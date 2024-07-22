@@ -1,5 +1,7 @@
 require("constants")
 require("player")
+require("map")
+require("game_states")
 
 function love.load()
 	-- set up the display
@@ -7,14 +9,25 @@ function love.load()
 	love.graphics.setDefaultFilter("linear", "nearest")
 
 	-- load game
+	init_map()
 	init_player()
+	-- init sword
+	-- init enemies
+	-- init breakables
+
+	game_set_starting_state()
+end
+
+function update_state(_dt)
+end
+
+function draw_state()
 end
 
 function love.update(_dt)
-	update_player(_dt)
+	update_state(_dt)
 end
 
 function love.draw()
-	love.graphics.print("hello world", 64, 64)
-	draw_player()
+	draw_state()
 end
