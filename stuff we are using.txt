@@ -1,2 +1,0 @@
-pico-8 version: 0.2.6b
-python version: 3.12
