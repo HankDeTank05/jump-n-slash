@@ -1,4 +1,4 @@
 -- general constants
 SCREEN_WIDTH = 128
 SCREEN_HEIGHT = 128
-SCREEN_SCALE = 1
+SCREEN_SCALE = 4

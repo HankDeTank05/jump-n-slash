@@ -15,6 +15,10 @@ local player_yVel
 local player_width
 local player_height
 
+-- flags
+local player_atkBtnHeldPrevFrame
+local player_atkBtnReleased
+
 ------------------------
 -- inputs and actions --
 ------------------------
@@ -23,21 +27,29 @@ local function Player_ReadInputs(_dt)
 	-- read for attack
 
 	-- read for jumping
+	if love.keyboard.isDown(p1_controls.attack) then
+		if player_atkBtnReleased == true then
+			print("attack")
+		end
+		player_atkBtnReleased = false
+	else
+		player_atkBtnReleased = true
+	end
 
 	-- walk right/left
 	player_dx = 0
 	-- walk right?
 	if love.keyboard.isDown(p1_controls.walk_right) then
-		print("walking right")
+		--print("walking right")
 		player_dx = player_dx + p1_walk_speed * _dt-- defined in designer controls
-		Player_facing = 1
+		player_facing = 1
 	end
 
 	-- walk left?
 	if love.keyboard.isDown(p1_controls.walk_left) then
-		print("walking left")
+		--print("walking left")
 		player_dx = player_dx - p1_walk_speed * _dt
-		Player_facing = -1
+		player_facing = -1
 	end
 end
 
@@ -90,8 +102,12 @@ end
 -----------------------
 
 local function Player_UpdateScreenPos()
-	Player_screenX = player_x
-	Player_screenY = player_y
+	if player_facing > 0 then
+		player_screenX = player_x * SCREEN_SCALE
+	else
+		player_screenX = (player_x + player_width) * SCREEN_SCALE
+	end
+	player_screenY = player_y
 end
 
 local function Player_Move(_dt)
@@ -228,6 +244,7 @@ function InitPlayer()
 end
 
 function UpdatePlayer(_dt)
+
 	Player_ReadInputs(_dt)
 
 	Player_CheckCollision() -- check for collision with other objects
@@ -242,5 +259,6 @@ function UpdatePlayer(_dt)
 end
 
 function DrawPlayer()
-	love.graphics.draw(player_sprite, player_screenX, player_screenY, 0, SCREEN_SCALE, SCREEN_SCALE)
+	--print(player_facing)
+	love.graphics.draw(player_sprite, player_screenX, player_screenY, 0, SCREEN_SCALE * player_facing, SCREEN_SCALE)
 end
