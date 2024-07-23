@@ -95,9 +95,21 @@ end
 function InitMap()
 	local cwd = love.filesystem.getWorkingDirectory()
 	print(cwd)
-	local level_fnames = {}
+	
+	local dir = cwd.."/assets"
+	print(dir)
+	local dirInfo = love.filesystem.getInfo(dir)
+	assert(dirInfo.type == "directory") -- if this gets triggered, the assets folder was not found
+
+	dir = dir.."/leveldata"
+	print(dir)
+	dirInfo = love.filesystem.getInfo(dir)
+	assert(dirInfo.type == "directory") -- if this gets triggered, the assets\leveldata folder was not found
+	
+	local level_fnames = love.filesystem.getDirectoryItems(dir)
+	
 	for i = 1, #level_fnames do
-		print(cwd .. level_fnames[i])
+		print(dir..level_fnames[i])
 		local iterator = love.filesystem.lines(cwd .. level_fnames[i])
 		-- do stuff with the file (see https://love2d.org/wiki/love.filesystem.lines for example code)
 	end
