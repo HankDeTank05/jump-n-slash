@@ -1,19 +1,36 @@
+require("util")
 require("designer_controls")
 
 -------------------------------
 -- player "member" variables --
 -------------------------------
 
+-- drawing
 local player_sprite
-local player_x
-local player_y
-local player_facing
 local player_screenX
 local player_screenY
-local player_dx
-local player_yVel
+
+-- position and movement
+local player_x
+local player_y
 local player_width
 local player_height
+local player_facing
+local player_dx
+local player_yVel
+
+-- animation lists
+local player_animIdle
+local player_animWalk
+local player_animJump
+local player_animFall
+local player_animAttack
+
+-- animation
+local player_animFPS -- frames per second
+local player_animSPF -- seconds per frame
+local player_animTime
+local player_animIndex
 
 -- flags
 local player_atkBtnHeldPrevFrame
@@ -165,13 +182,34 @@ end
 -- animation --
 ---------------
 
+-- callback
+local function Player_Animate()
+end
+
 local function Player_UpdateAnimation()
+	Player_Animate()
+
+	player_animTime = player_animTime + love.timer.getDelta()
 end
 
 function Player_AnimStateIdle()
+	player_animIndex = IndexLoopedAnimation(player_animTime, player_animSPF, #player_animIdle)
+	player_sprite = player_animIdle[player_animIndex]
+
+	-- determine next state
+	if player_dx ~= 0 then
+		Player_SetAnimation(Player_AnimStateWalk)
+	end
 end
 
 function Player_AnimStateWalk()
+	player_animIndex = IndexLoopedAnimation(player_animTime, player_animSPF, #player_animWalk)
+	player_sprite = player_animWalk[player_animIndex]
+
+	-- determine next state
+	if player_dx == 0 then
+		Player_SetAnimation(Player_AnimStateIdle)
+	end
 end
 
 function Player_AnimStateJump()
@@ -184,9 +222,13 @@ function Player_AnimStateAttack()
 end
 
 function Player_ResetAnimation()
+	player_animIndex = 1
+	player_animTime = 0
 end
 
-function Player_SetAnimation(_anim)
+function Player_SetAnimation(_anim_function)
+	Player_Animate = _anim_function
+	Player_ResetAnimation()
 end
 
 -----------------------
@@ -254,7 +296,23 @@ function InitPlayer()
 	-----------------
 
 	-- load player sprites
-	player_sprite = love.graphics.newImage("assets/sprites/player/idle_1.png")
+	local spritePath = "assets/sprites/player/"
+	player_animIdle = {
+		love.graphics.newImage(spritePath.."idle_1.png"),
+		love.graphics.newImage(spritePath.."idle_2.png"),
+	}
+	player_animWalk = {
+		love.graphics.newImage(spritePath.."walk_1.png"),
+		love.graphics.newImage(spritePath.."walk_2.png"),
+		love.graphics.newImage(spritePath.."walk_3.png"),
+		love.graphics.newImage(spritePath.."walk_4.png"),
+	}
+	player_animAttack = {
+		love.graphics.newImage(spritePath.."attack_1.png"),
+		love.graphics.newImage(spritePath.."attack_2.png"),
+		love.graphics.newImage(spritePath.."attack_3.png"),
+		love.graphics.newImage(spritePath.."attack_4.png"),
+	}
 
 	player_x = (3 - 1) * TILE_WIDTH -- world position x
 	player_y = (15 - 1) * TILE_HEIGHT -- world position y
@@ -268,6 +326,11 @@ function InitPlayer()
 	player_yVel = 0 -- y-velocity, since there is vertical acceleration
 	player_width = 8  -- width of the sprite
 	player_height = 8  -- height of the sprite
+
+	Player_Animate = Player_AnimStateIdle
+	player_animFPS = 6
+	player_animSPF = 1 / player_animFPS
+	player_animTime = 0
 end
 
 function UpdatePlayer(_dt)
@@ -292,12 +355,5 @@ function DrawPlayer()
 	-- debug stuff
 	if true then
 		love.graphics.points(player_screenX, player_screenY)
-
-		-- draw bounds
-		love.graphics.line(player_screenX, player_screenY,
-							player_screenX + player_facing * player_width, player_screenY,
-							player_screenX + player_facing * player_width, player_screenY + player_height,
-							player_screenX, player_screenY + player_height,
-							player_screenX, player_screenY)
 	end
 end

@@ -1,4 +1,8 @@
 
+function IndexLoopedAnimation(_animTime, _animSPF, _numFrames)
+	return (math.floor(_animTime / _animSPF) % _numFrames) + 1
+end
+
 function CheckRectangleOverlap(_rect1X, _rect1Y, _rect1Width, _rect1Height, _rect2X, _rect2Y, _rect2Width, _rect2Height)
 	assert(_rect1Width > 0)
 	assert(_rect1Height > 0)
