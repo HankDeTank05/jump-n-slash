@@ -29,5 +29,6 @@ function love.update(_dt)
 end
 
 function love.draw()
+	love.graphics.scale(SCREEN_SCALE)
 	DrawState()
 end

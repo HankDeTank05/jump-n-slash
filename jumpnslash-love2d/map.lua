@@ -1,4 +1,6 @@
 
+local map
+
 -------------------
 -- sanity checks --
 -------------------
@@ -93,6 +95,7 @@ local function AddRoom(_map_x, _map_y, _tile_width, _tile_height)
 end
 
 function InitMap()
+	--[[
 	local cwd = love.filesystem.getWorkingDirectory()
 	print(cwd)
 	
@@ -113,10 +116,64 @@ function InitMap()
 		local iterator = love.filesystem.lines(cwd .. level_fnames[i])
 		-- do stuff with the file (see https://love2d.org/wiki/love.filesystem.lines for example code)
 	end
+	]]
+
+	-- load all the sprites
+	local tile_path = "assets/sprites/leveltiles/"
+	local tile_fnames = {
+		"solid_block.png",
+		"semisolid_platform.png",
+		"hazard_block.png",
+		"breakable_block.png",
+		"start_room_origin_indicator.png",
+		"room_origin_indicator.png",
+		"room_width_indicator.png",
+		"room_height_indicator.png",
+	}
+	tiles = {}
+	for i = 1, #tile_fnames do
+		tiles[i] = love.graphics.newImage(tile_path..tile_fnames[i])
+	end
+
+	-- create the map
+	map = {
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 2, 2, 2, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	}
 end
 
 function UpdateMap()
 end
 
 function DrawMap()
+	for y = 1, #map do
+		for x = 1, #map[y] do
+			local tileIndex = map[y][x]
+			if tileIndex > 0 then
+				local tile = tiles[tileIndex]
+				local drawX = (x - 1) * TILE_WIDTH
+				local drawY = (y - 1) * TILE_HEIGHT
+				love.graphics.draw(tile, drawX, drawY)
+
+				-- debug stuff
+				if true then
+					love.graphics.points(drawX, drawY)
+				end
+			end
+		end
+	end
 end

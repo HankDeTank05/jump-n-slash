@@ -36,8 +36,6 @@ function StatePlayUpdate(_dt)
 end
 
 function StatePlayDraw()
-	love.graphics.print("hello world", 64, 64)
-
 	DrawMap()
 	-- draw enemies
 	DrawPlayer()

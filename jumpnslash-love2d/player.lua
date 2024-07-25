@@ -25,8 +25,6 @@ local player_atkBtnReleased
 
 local function Player_ReadInputs(_dt)
 	-- read for attack
-
-	-- read for jumping
 	if love.keyboard.isDown(p1_controls.attack) then
 		if player_atkBtnReleased == true then
 			print("attack")
@@ -35,6 +33,8 @@ local function Player_ReadInputs(_dt)
 	else
 		player_atkBtnReleased = true
 	end
+	
+	-- read for jumping
 
 	-- walk right/left
 	player_dx = 0
@@ -78,10 +78,37 @@ end
 local function Player_ReceiveCollision()
 end
 
+local function Player_CastRay(_start_x, _start_y, _end_x, _end_y)
+end
+
 local function Player_CheckTileCollisionHorizontal()
+
+	-- edge case #1
+	-- if the player is not enclosed in solid tiles, the raycasting "while" loop will run forever
+	-- in order to avoid this, there needs to be a second (fallback) condition that stops casting the ray when it
+	-- hits the edge of the room
+
+	if player_dx > 0 then -- cast rays to right
+		-- code goes here
+	elseif player_dx < 0 then -- cast rays to left
+		-- code goes here
+	end
+
 end
 
 local function Player_CheckTileCollisionVertical()
+
+	-- edge case #1
+	-- if the player is not enclosed in solid tiles, the raycasting "while" loop will run forever
+	-- in order to avoid this, there needs to be a second (fallback) condition that stops casting the ray when it
+	-- hits the edge of the room
+
+	if player_yVel >= 0 then -- cast ray downwards
+		-- code goes here
+	else -- cast ray upwards
+		-- code goes here
+	end
+
 end
 
 local function Player_CheckEnemyCollision()
@@ -103,9 +130,9 @@ end
 
 local function Player_UpdateScreenPos()
 	if player_facing > 0 then
-		player_screenX = player_x * SCREEN_SCALE
+		player_screenX = player_x
 	else
-		player_screenX = (player_x + player_width) * SCREEN_SCALE
+		player_screenX = player_x + player_width
 	end
 	player_screenY = player_y
 end
@@ -229,8 +256,8 @@ function InitPlayer()
 	-- load player sprites
 	player_sprite = love.graphics.newImage("assets/sprites/player/idle_1.png")
 
-	player_x = 64  -- world position x
-	player_y = 64  -- world position y
+	player_x = (3 - 1) * TILE_WIDTH -- world position x
+	player_y = (15 - 1) * TILE_HEIGHT -- world position y
 	player_facing = 1 -- 1=right, -1=left
 
 	player_screenX = nil -- screen position x
@@ -260,5 +287,17 @@ end
 
 function DrawPlayer()
 	--print(player_facing)
-	love.graphics.draw(player_sprite, player_screenX, player_screenY, 0, SCREEN_SCALE * player_facing, SCREEN_SCALE)
+	love.graphics.draw(player_sprite, player_screenX, player_screenY, 0, player_facing, 1)
+
+	-- debug stuff
+	if true then
+		love.graphics.points(player_screenX, player_screenY)
+
+		-- draw bounds
+		love.graphics.line(player_screenX, player_screenY,
+							player_screenX + player_facing * player_width, player_screenY,
+							player_screenX + player_facing * player_width, player_screenY + player_height,
+							player_screenX, player_screenY + player_height,
+							player_screenX, player_screenY)
+	end
 end
