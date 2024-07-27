@@ -1,0 +1,6 @@
+json_generator.py will read any files in the /jump-n-slash/jumpnslash-love2d/assets/sprites/leveltiles folder.
+
+NOTE: if files are added, removed, or renamed in folder listed above, you must re-run the the json_generator.py file in order for formatting_rules.json to reflect those changes
+
+NOTE: tiles must follow the naming convention (specified in the naming_convention.txt file in the folder listed above)
+NOTE: assuming tiles are following the naming convention, only tiles of a specified size and with a specified file extension will be included in the generated .json file
