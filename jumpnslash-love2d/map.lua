@@ -120,19 +120,20 @@ function InitMap()
 
 	-- load all the sprites
 	local tile_path = "assets/sprites/leveltiles/"
+	local suffix = "_32.png"
 	local tile_fnames = {
-		"solid_block.png",
-		"semisolid_platform.png",
-		"hazard_block.png",
-		"breakable_block.png",
-		"start_room_origin_indicator.png",
-		"room_origin_indicator.png",
-		"room_width_indicator.png",
-		"room_height_indicator.png",
+		"solid_block",
+		"semisolid_platform",
+		"hazard_block",
+		"breakable_block",
+		"start_room_origin_indicator",
+		"room_origin_indicator",
+		"room_width_indicator",
+		"room_height_indicator",
 	}
 	tiles = {}
 	for i = 1, #tile_fnames do
-		tiles[i] = love.graphics.newImage(tile_path..tile_fnames[i])
+		tiles[i] = love.graphics.newImage(tile_path..tile_fnames[i]..suffix)
 	end
 
 	-- create the map
@@ -165,8 +166,8 @@ function DrawMap()
 			local tileIndex = map[y][x]
 			if tileIndex > 0 then
 				local tile = tiles[tileIndex]
-				local drawX = (x - 1) * TILE_WIDTH
-				local drawY = (y - 1) * TILE_HEIGHT
+				local drawX = (x - 1) * TILE_SIZE
+				local drawY = (y - 1) * TILE_SIZE
 				love.graphics.draw(tile, drawX, drawY)
 
 				-- debug stuff

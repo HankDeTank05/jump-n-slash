@@ -22,7 +22,7 @@ p1_gravity = 0.2 -- vertical acceleration per frame
 p1_max_jump_secs = 0.25 -- the max number of seconds a player can hold jump for
 -- this must always be a positive number (does not need to be an integer)
 
-p1_walk_speed = 30 -- horizontal movement speed
+p1_walk_speed = 100 -- horizontal movement speed
 -- this must always be a positive number (does not need to be an integer)
 
 p1_attack_secs = 0.167 -- number of seconds that attack hitbox is active for
