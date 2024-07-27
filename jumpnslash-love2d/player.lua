@@ -297,25 +297,28 @@ function InitPlayer()
 
 	-- load player sprites
 	local spritePath = "assets/sprites/player/"
+	local suffix = "_32.png"
 	player_animIdle = {
-		love.graphics.newImage(spritePath.."idle_1.png"),
-		love.graphics.newImage(spritePath.."idle_2.png"),
+		love.graphics.newImage(spritePath.."idle_1"..suffix),
+		love.graphics.newImage(spritePath.."idle_2"..suffix),
+		love.graphics.newImage(spritePath.."idle_3"..suffix),
+		love.graphics.newImage(spritePath.."idle_4"..suffix),
 	}
 	player_animWalk = {
-		love.graphics.newImage(spritePath.."walk_1.png"),
-		love.graphics.newImage(spritePath.."walk_2.png"),
-		love.graphics.newImage(spritePath.."walk_3.png"),
-		love.graphics.newImage(spritePath.."walk_4.png"),
+		love.graphics.newImage(spritePath.."walk_1"..suffix),
+		love.graphics.newImage(spritePath.."walk_2"..suffix),
+		love.graphics.newImage(spritePath.."walk_3"..suffix),
+		love.graphics.newImage(spritePath.."walk_4"..suffix),
 	}
 	player_animAttack = {
-		love.graphics.newImage(spritePath.."attack_1.png"),
-		love.graphics.newImage(spritePath.."attack_2.png"),
-		love.graphics.newImage(spritePath.."attack_3.png"),
-		love.graphics.newImage(spritePath.."attack_4.png"),
+		love.graphics.newImage(spritePath.."attack_1"..suffix),
+		love.graphics.newImage(spritePath.."attack_2"..suffix),
+		love.graphics.newImage(spritePath.."attack_3"..suffix),
+		love.graphics.newImage(spritePath.."attack_4"..suffix),
 	}
 
-	player_x = (3 - 1) * TILE_WIDTH -- world position x
-	player_y = (15 - 1) * TILE_HEIGHT -- world position y
+	player_x = (3 - 1) * TILE_SIZE -- world position x
+	player_y = (15 - 1) * TILE_SIZE -- world position y
 	player_facing = 1 -- 1=right, -1=left
 
 	player_screenX = nil -- screen position x
@@ -324,8 +327,8 @@ function InitPlayer()
 
 	player_dx = 0 -- delta x, since there's no horizontal acceleration
 	player_yVel = 0 -- y-velocity, since there is vertical acceleration
-	player_width = 8  -- width of the sprite
-	player_height = 8  -- height of the sprite
+	player_width = 32  -- width of the sprite
+	player_height = 32  -- height of the sprite
 
 	Player_Animate = Player_AnimStateIdle
 	player_animFPS = 6
@@ -354,6 +357,6 @@ function DrawPlayer()
 
 	-- debug stuff
 	if true then
-		love.graphics.points(player_screenX, player_screenY)
+		love.graphics.points(player_x, player_y)
 	end
 end
