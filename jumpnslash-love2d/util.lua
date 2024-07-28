@@ -68,93 +68,89 @@ local function ReadJsonLine(_line)
 end
 
 function ReadJsonFile(_filePath)
-	local json = {}
-
-	-- define string patterns
-	local indentPattern = "%s+"
-	local keyPattern = "\"%g+\""
-	local valuePattern = ": %g+"
-	local sublistEndPattern = "}[,]?"
+	local jsonLines = {}
+	local jsonData = {}
 
 	local keyStack = {}
 	-- push with table.insert(keyStack, key)
 	-- pop with table.remove(keyStack)
 
 	for line in love.filesystem.lines(_filePath) do
-		if line == "{" then
-			print("Json file start")
+		table.insert(jsonLines, line)
+		io.write(line)
+		io.write("\n")
+	end
 
-		elseif line == "}" then
-			print("Json file end")
+	-- define string patterns
+	local indentPattern = "%s+"
+	local keyPattern = "\"%g+\""
+	local valPattern = ": %g+"
+	local sublistEndPattern = "}[,]?"
+
+	-- don't need to deal with the first and last lines
+	assert(jsonLines[1] == "{")
+	table.remove(jsonLines, 1) -- remove the first line
+	assert(jsonLines[#jsonLines] == "}")
+	table.remove(jsonLines) -- remove the last line
+	
+	local tableStack = {}   -- keep track of the parent tables when we create subtables
+	local currentSubtable = jsonData
+
+	-- parse the json for data
+	for i = 1, #jsonLines do
+		local line = jsonLines[i]
+
+		if string.match(line, "{") ~= nil then
+			-- begin a new subtable
+
+			-- find the key first
+			local key = string.match(line, keyPattern)
+			assert(key ~= nil)
+			--io.write("starting a new subtable with the following key: " .. key .. "\n")
+
+			-- create the subtable with the key
+			currentSubtable[key] = {}
+			table.insert(tableStack, currentSubtable)
+			currentSubtable = currentSubtable[key]
+			--io.write("tableStack size = " .. #tableStack .. "\n")
+
+		elseif string.match(line, "}") ~= nil then
+			-- return to the parent table
+			--io.write("returning to the parent table\n")
+			assert(#tableStack > 0)
+			currentSubtable = table.remove(tableStack)
 
 		else
-			local whitespace = string.match(line, indentPattern)
-			assert(#whitespace % 4 == 0) -- indenting happens in multiples of four spaces, NOT with tab characters!
-			assert(#whitespace > 0) -- if it's not indented, then it's the first or last line of the file
-			local indentLevel = #whitespace / 4
+			assert(currentSubtable ~= nil)
+			-- deal with key/value pairs
+			
+			local key = string.match(line, keyPattern)
+			assert(key ~= nil)
 
-			-- find the key
-			local keyMatch = string.match(line, keyPattern)
-			if keyMatch ~= nil then
-				print("key:" .. keyMatch)
+			local val = string.match(line, valPattern)
+			assert(val ~= nil)
 
-				-- find the value
-				local valMatch = string.match(line, valuePattern)
-				if valMatch ~= nil then
-					-- get rid of the leading ": "
-					valMatch = string.sub(valMatch, 3)
+			currentSubtable[key] = val
 
-					-- get rid of the trailing "," if it exists
-					if string.sub(valMatch, -1) == "," then
-						valMatch = string.sub(valMatch, 1, -2)
-					end
-
-					-- TODO: deal with file paths here
-					--[[
-					-- replace "\\" with "/"
-					valMatch = string.gsub(valMatch, "\\\\", "/")
-					]]
-
-					print("val:" .. valMatch)
-
-					if valMatch == "{" then
-						table.insert(keyStack, { key = keyMatch })
-						print("begin sublist")
-						json[keyMatch] = {}
-					else
-						if #keyStack == 0 then
-							json[keyMatch] = valMatch
-						else
-							assert(#keyStack == 1)
-							local stackKey = keyStack[#keyStack].key
-							json[stackKey][keyMatch] = valMatch
-						end
-					end
-				end
-			else
-				assert(string.match(line, sublistEndPattern) ~= nil)
-				print("end sublist")
-				table.remove(keyStack)
-			end
-
-			--print(_line)
 		end
-		print()
 	end
-	PrintTable(json)
+
+	PrintTable(jsonData)
 end
 
 function PrintTable(_table, _indent)
 	if _indent == nil then _indent = 0 end
 
 	for k, v in pairs(_table) do
+		-- indent your shit properly
+		for t = 1, _indent do
+			io.write("\t")
+		end
+
 		if type(v) == "table" then
 			io.write(k .. " = (table)\n")
 			PrintTable(v, _indent + 1)
 		else
-			for t = 1, _indent do
-				io.write("\t")
-			end
 			io.write(k .. " = " .. v .. "\n")
 		end
 	end
