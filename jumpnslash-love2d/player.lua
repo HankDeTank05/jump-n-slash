@@ -114,6 +114,12 @@ local function Player_CheckTileCollisionHorizontal()
 end
 
 local function Player_CheckTileCollisionVertical()
+	-- TODO: global for debugging purposes
+	candLX = Player_GetX()
+	candLY = Player_GetY()
+
+	candRX = Player_GetX() + Player_GetWidth()
+	candRY = Player_GetY()
 
 	-- edge case #1
 	-- if the player is not enclosed in solid tiles, the raycasting "while" loop will run forever
@@ -121,7 +127,10 @@ local function Player_CheckTileCollisionVertical()
 	-- hits the edge of the room
 
 	if player_yVel >= 0 then -- cast ray downwards
-		-- code goes here
+		candLY = candLY + Player_GetHeight()
+		candRY = candRY + Player_GetHeight()
+		-- left ray
+		
 	else -- cast ray upwards
 		-- code goes here
 	end
