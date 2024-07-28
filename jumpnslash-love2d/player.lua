@@ -243,6 +243,14 @@ function Player_GetY()
 	return player_y
 end
 
+function Player_GetWidth()
+	return player_width
+end
+
+function Player_GetHeight()
+	return player_height
+end
+
 function Player_GetScreenX()
 	return player_screenX
 end
