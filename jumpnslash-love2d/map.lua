@@ -1,6 +1,8 @@
 
 local map
 
+local rooms
+
 -------------------
 -- sanity checks --
 -------------------
@@ -91,7 +93,17 @@ end
 -- core functions --
 --------------------
 
-local function AddRoom(_map_x, _map_y, _tile_width, _tile_height)
+local function AddRoom(_mapX, _mapY, _tileWidth, _tileHeight)
+	local room = {
+		x = _mapX,
+		y = _mapY,
+		w = _tileWidth,
+		h = _tileHeight,
+		startX = nil,
+		startY = nil,
+		startFacing = nil,
+	}
+	table.insert(rooms, room)
 end
 
 function InitMap()
