@@ -122,14 +122,14 @@ function InitMap()
 	local tile_path = "assets/sprites/leveltiles/"
 	local suffix = "_32.png"
 	local tile_fnames = {
-		"solid_block",
-		"semisolid_platform",
-		"hazard_block",
-		"breakable_block",
-		"start_room_origin_indicator",
-		"room_origin_indicator",
-		"room_width_indicator",
-		"room_height_indicator",
+		"block_solid",
+		"platform_semisolid",
+		"block_hazard",
+		"block_breakable",
+		"indicator_room_origin_start",
+		"indicator_room_origin",
+		"indicator_room_width",
+		"indicator_room_height",
 	}
 	tiles = {}
 	for i = 1, #tile_fnames do
