@@ -244,11 +244,11 @@ function Player_GetY()
 end
 
 function Player_GetScreenX()
-	return Player_screenX
+	return player_screenX
 end
 
 function Player_GetScreenY()
-	return Player_screenY
+	return player_screenY
 end
 
 function Player_GetFacingDir()
