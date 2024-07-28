@@ -1,8 +1,8 @@
 
-local map
-local rooms
-local tiles
-local tileProps -- properties
+local map_tileArray
+local map_rooms
+local map_tiles
+local map_tileProps -- properties
 
 -------------------
 -- sanity checks --
@@ -79,8 +79,28 @@ end
 function Map_CheckForFlagAtWorldPos(_world_x, _world_y, _flag)
 end
 
--- formerly known as "check_for_flag_at_tile(_tile_x, _tile_y, _flag)"
-function Map_CheckForFlagAtTile(_tile_x, _tile_y, _flag)
+function Map_IsTileSolidTop(_tileX, _tileY)
+	-- _tileX: x-index of the tile to get the solidTop property of
+	-- _tileY: y-index of the tile to get the solidTop property of
+	return map_tileProps[map_tileArray[_tileY][_tileX]].solidTop
+end
+
+function Map_IsTileSolidSide(_tileX, _tileY)
+	-- _tileX: x-index of the tile to get the solidSide property of
+	-- _tileY: y-index of the tile to get the solidSide property of
+	return map_tileProps[map_tileArray[_tileY][_tileX]].solidSide
+end
+
+function Map_IsTileSolidBottom(_tileX, _tileY)
+	-- _tileX: x-index of the tile to get the solidBottom property of
+	-- _tileY: y-index of the tile to get the solidBottom property of
+	return map_tileProps[map_tileArray[_tileY][_tileX]].solidBottom
+end
+
+function Map_IsTileBreakable(_tileX, _tileY)
+	-- _tileX: x-index of the tile to get the breakable property of
+	-- _tileY: y-index of the tile to get the breakable property of
+	return map_tileProps[map_tileArray[_tileY][_tileX]].breakable
 end
 
 -- formerly known as "get_room_from_pixel(_pixel_x, _pixel_y)"
@@ -104,7 +124,7 @@ local function AddRoom(_mapX, _mapY, _tileWidth, _tileHeight)
 		startY = nil,
 		startFacing = nil,
 	}
-	table.insert(rooms, room)
+	table.insert(map_rooms, room)
 end
 
 function InitMap()
@@ -144,15 +164,15 @@ function InitMap()
 		"indicator_room_width",
 		"indicator_room_height",
 	}
-	tiles = {}
-	tileProps = {}
+	map_tiles = {}
+	map_tileProps = {}
 
 	-- initialize tiles with undefined properties
 	for i = 1, #tile_fnames do
-		tiles[i] = love.graphics.newImage(tile_path .. tile_fnames[i] .. suffix)
+		map_tiles[i] = love.graphics.newImage(tile_path .. tile_fnames[i] .. suffix)
 		if i == 1 then
 			-- solid block
-			tileProps[i] = {
+			map_tileProps[i] = {
 				solidTop = true,
 				solidSide = true,
 				solidBottom = true,
@@ -160,7 +180,7 @@ function InitMap()
 			}
 		elseif i == 2 then
 			-- semisolid platform
-			tileProps[i] = {
+			map_tileProps[i] = {
 				solidTop = true,
 				solidSide = false,
 				solidBottom = false,
@@ -168,7 +188,7 @@ function InitMap()
 			}
 		elseif i == 3 then
 			-- hazard block
-			tileProps[i] = {
+			map_tileProps[i] = {
 				solidTop = true,
 				solidSide = true,
 				solidBottom = true,
@@ -176,7 +196,7 @@ function InitMap()
 			}
 		elseif i == 4 then
 			-- breakable block
-			tileProps[i] = {
+			map_tileProps[i] = {
 				solidTop = true,
 				solidSide = true,
 				solidBottom = true,
@@ -186,7 +206,7 @@ function InitMap()
 	end
 
 	-- create the map
-	map = {
+	map_tileArray = {
 		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
 		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -210,11 +230,11 @@ function UpdateMap()
 end
 
 function DrawMap()
-	for y = 1, #map do
-		for x = 1, #map[y] do
-			local tileIndex = map[y][x]
+	for y = 1, #map_tileArray do
+		for x = 1, #map_tileArray[y] do
+			local tileIndex = map_tileArray[y][x]
 			if tileIndex > 0 then
-				local tile = tiles[tileIndex]
+				local tile = map_tiles[tileIndex]
 				local drawX = (x - 1) * TILE_SIZE
 				local drawY = (y - 1) * TILE_SIZE
 				love.graphics.draw(tile, drawX, drawY)
