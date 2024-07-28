@@ -43,24 +43,37 @@ def add_file_data_to_dict(_files, _data):
             tile_id = "0" + tile_id
         assert(len(tile_id) == 2) # sanity check
 
-        _data["tile:id"][files[i]] = tile_id
-        _data["id:tile"][tile_id] = files[i]
+        _data["editorInfo"]["encodeTiles"][files[i]] = tile_id
+        _data["gameInfo"]["decodeTiles"][tile_id] = files[i]
 
 
-tile_read_path = os.path.join("..", "assets", "sprites", "leveltiles")
-level_write_path = os.path.join("..", "assets", "leveldata")
+editor_tile_read_path = os.path.join("..", "assets", "sprites", "leveltiles")
+editor_level_write_path = os.path.join("..", "assets", "leveldata")
+game_tile_read_path = os.path.join("assets", "sprites", "leveltiles")
+game_level_read_path = os.path.join("assets", "leveldata")
 tile_size = 32
 tile_extension = ".png"
+level_extension = ".txt"
 
 data = {
-    "tileReadPath": tile_read_path,
-    "levelWritePath": level_write_path,
-    "tileSize": tile_size,
-    "tile:id": {},
-    "id:tile": {}
+    "editorInfo": {
+        "tileReadPath": editor_tile_read_path,  # NOTE: RELATIVE PATH IS DIFFERENT THAN FOR GAME!!
+        "levelWritePath": editor_level_write_path,  # NOTE: RELATIVE PATH IS DIFFERENT THAN FOR GAME!!
+        "encodeTiles": {}  # stored as: key = filename, value = 2-digit id
+    },
+    "gameInfo": {
+        "tileReadPath": "",  # NOTE: RELATIVE PATH IS DIFFERENT THAN FOR EDITOR!!
+        "levelReadPath": "",  # NOTE: RELATIVE PATH IS DIFFERENT THAN FOR EDITOR!!
+        "decodeTiles": {}  # stored as: key = 2-digit id, value = filename
+    },
+    "genericInfo": {
+        "tileSize": tile_size,
+        "tileFileExt": tile_extension,
+        "levelFileExt": level_extension
+    }
 }
 
-files = get_tile_files(tile_read_path, tile_size, tile_extension)
+files = get_tile_files(editor_tile_read_path, tile_size, tile_extension)
 add_file_data_to_dict(files, data)
 
 with open("formatting_rules.json", "w") as json_file:
