@@ -1,3 +1,4 @@
+require("util")
 
 local map_tileArray
 local map_rooms
@@ -150,6 +151,8 @@ function InitMap()
 		-- do stuff with the file (see https://love2d.org/wiki/love.filesystem.lines for example code)
 	end
 	]]
+
+	ReadJsonFile("tools/formatting_rules.json")
 
 	-- load all the sprites
 	local tile_path = "assets/sprites/leveltiles/"
