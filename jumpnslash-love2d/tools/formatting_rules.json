@@ -1,25 +1,35 @@
 {
-    "tileReadPath": "..\\assets\\sprites\\leveltiles",
-    "levelWritePath": "..\\assets\\leveldata",
-    "tileSize": 32,
-    "tile:id": {
-        "block_breakable_32.png": "01",
-        "block_hazard_32.png": "02",
-        "block_solid_32.png": "03",
-        "indicator_room_height_32.png": "04",
-        "indicator_room_origin_32.png": "05",
-        "indicator_room_origin_start_32.png": "06",
-        "indicator_room_width_32.png": "07",
-        "platform_semisolid_32.png": "08"
+    "editorInfo": {
+        "tileReadPath": "..\\assets\\sprites\\leveltiles",
+        "levelWritePath": "..\\assets\\leveldata",
+        "encodeTiles": {
+            "block_breakable_32.png": "01",
+            "block_hazard_32.png": "02",
+            "block_solid_32.png": "03",
+            "indicator_room_height_32.png": "04",
+            "indicator_room_origin_32.png": "05",
+            "indicator_room_origin_start_32.png": "06",
+            "indicator_room_width_32.png": "07",
+            "platform_semisolid_32.png": "08"
+        }
     },
-    "id:tile": {
-        "01": "block_breakable_32.png",
-        "02": "block_hazard_32.png",
-        "03": "block_solid_32.png",
-        "04": "indicator_room_height_32.png",
-        "05": "indicator_room_origin_32.png",
-        "06": "indicator_room_origin_start_32.png",
-        "07": "indicator_room_width_32.png",
-        "08": "platform_semisolid_32.png"
+    "gameInfo": {
+        "tileReadPath": "",
+        "levelReadPath": "",
+        "decodeTiles": {
+            "01": "block_breakable_32.png",
+            "02": "block_hazard_32.png",
+            "03": "block_solid_32.png",
+            "04": "indicator_room_height_32.png",
+            "05": "indicator_room_origin_32.png",
+            "06": "indicator_room_origin_start_32.png",
+            "07": "indicator_room_width_32.png",
+            "08": "platform_semisolid_32.png"
+        }
+    },
+    "genericInfo": {
+        "tileSize": 32,
+        "tileFileExt": ".png",
+        "levelFileExt": ".txt"
     }
 }
