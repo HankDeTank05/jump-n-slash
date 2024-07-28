@@ -1,7 +1,8 @@
 
 local map
-
 local rooms
+local tiles
+local tileProps -- properties
 
 -------------------
 -- sanity checks --
@@ -144,8 +145,44 @@ function InitMap()
 		"indicator_room_height",
 	}
 	tiles = {}
+	tileProps = {}
+
+	-- initialize tiles with undefined properties
 	for i = 1, #tile_fnames do
-		tiles[i] = love.graphics.newImage(tile_path..tile_fnames[i]..suffix)
+		tiles[i] = love.graphics.newImage(tile_path .. tile_fnames[i] .. suffix)
+		if i == 1 then
+			-- solid block
+			tileProps[i] = {
+				solidTop = true,
+				solidSide = true,
+				solidBottom = true,
+				breakable = false,
+			}
+		elseif i == 2 then
+			-- semisolid platform
+			tileProps[i] = {
+				solidTop = true,
+				solidSide = false,
+				solidBottom = false,
+				breakable = false,
+			}
+		elseif i == 3 then
+			-- hazard block
+			tileProps[i] = {
+				solidTop = true,
+				solidSide = true,
+				solidBottom = true,
+				breakable = false,
+			}
+		elseif i == 4 then
+			-- breakable block
+			tileProps[i] = {
+				solidTop = true,
+				solidSide = true,
+				solidBottom = true,
+				breakable = true,
+			}
+		end
 	end
 
 	-- create the map
