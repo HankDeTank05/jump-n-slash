@@ -85,25 +85,25 @@ end
 function Map_IsTileSolidTop(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidTop property of
 	-- _tileY: y-index of the tile to get the solidTop property of
-	return map_tileProps[map_tileArray[_tileY][_tileX]].solidTop
+	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].solidTop
 end
 
 function Map_IsTileSolidSide(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidSide property of
 	-- _tileY: y-index of the tile to get the solidSide property of
-	return map_tileProps[map_tileArray[_tileY][_tileX]].solidSide
+	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].solidSide
 end
 
 function Map_IsTileSolidBottom(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidBottom property of
 	-- _tileY: y-index of the tile to get the solidBottom property of
-	return map_tileProps[map_tileArray[_tileY][_tileX]].solidBottom
+	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].solidBottom
 end
 
 function Map_IsTileBreakable(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the breakable property of
 	-- _tileY: y-index of the tile to get the breakable property of
-	return map_tileProps[map_tileArray[_tileY][_tileX]].breakable
+	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].breakable
 end
 
 -- formerly known as "get_room_from_pixel(_pixel_x, _pixel_y)"
@@ -215,28 +215,35 @@ function InitMap()
 	-- initialize tiles with undefined properties
 	for i = 1, #tileFileNames do
 		table.insert(map_tiles, love.graphics.newImage(tilePath .. tileFileNames[i]))
-		if i == map_tileLookupByName["block_breakable"] then
-			map_tileProps[i].solidTop = true
-			map_tileProps[i].solidSide = true
-			map_tileProps[i].solidBottom = true
-			map_tileProps[i].breakable = true
-		elseif i == map_tileLookupByName["block_hazard"] then
-			map_tileProps[i].solidTop = true
-			map_tileProps[i].solidSide = true
-			map_tileProps[i].solidBottom = true
-			map_tileProps[i].breakable = false
-		elseif i == map_tileLookupByName["block_solid"] then
-			map_tileProps[i].solidTop = true
-			map_tileProps[i].solidSide = true
-			map_tileProps[i].solidBottom = true
-			map_tileProps[i].breakable = false
-		elseif i == map_tileLookupByName["platform_semisolid"] then
-			map_tileProps[i].solidTop = true
-			map_tileProps[i].solidSide = false
-			map_tileProps[i].solidBottom = false
-			map_tileProps[i].breakable = false
-		end
 	end
+
+	map_tileProps["block_breakable"] = {
+		solidTop = true,
+		solidSide = true,
+		solidBottom = true,
+		breakable = true,
+	}
+
+	map_tileProps["block_hazard"] = {
+		solidTop = true,
+		solidSide = true,
+		solidBottom = true,
+		breakable = false,
+	}
+
+	map_tileProps["block_solid"] = {
+		solidTop = true,
+		solidSide = true,
+		solidBottom = true,
+		breakable = false,
+	}
+
+	map_tileProps["platform_semisolid"] = {
+		solidTop = true,
+		solidSide = false,
+		solidBottom = false,
+		breakable = false,
+	}
 
 	-- populate the tileArray map
 	map_tileArray = {}
