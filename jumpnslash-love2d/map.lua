@@ -4,6 +4,8 @@ local map_tileArray
 local map_rooms
 local map_tiles
 local map_tileProps -- properties
+local map_tileLookupByID
+local map_tileLookupByName
 
 -------------------
 -- sanity checks --
@@ -108,125 +110,222 @@ end
 function Map_GetRoomFromWorldPos(_world_x, _world_y)
 end
 
-function Map_GetRoomFromTile(_tile_x, _tile_y)
+function Map_GetRoomFromTile(_tileX, _tileY)
+	assert(#map_rooms > 0)
+	for i = 1, #map_rooms do
+		local room = map_rooms[i]
+		if room.x <= _tileX and _tileX <= room.x + room.w - 1 and room.y <= _tileY and _tileY <= room.y + room.h - 1 then
+			return i
+		end
+	end
+	return nil
 end
 
 --------------------
 -- core functions --
 --------------------
 
-local function AddRoom(_mapX, _mapY, _tileWidth, _tileHeight)
+local function AddRoom(_mapX, _mapY, _tileWidth, _tileHeight, _startX, _startY, _startFacing)
+	if _startX == nil or _startY == nil or _startFacing == nil then -- if one of them is nil, all of them should be
+		assert(_startX == nil)
+		assert(_startY == nil)
+		assert(_startFacing == nil)
+	else
+		assert(_mapX <= _startX and _startX <= _mapX + _tileWidth - 1) -- if this gets triggered, your spawn point is outside the room (along the x-axis)
+		assert(_mapY <= _startY and _startY <= _mapY + _tileHeight - 1) -- if this gets triggered, your spawn point is outside the room (along the y-axis)
+		assert(_startFacing == 1 or _startFacing == -1) -- how tf did you trigger this one?
+	end
+
 	local room = {
 		x = _mapX,
 		y = _mapY,
 		w = _tileWidth,
 		h = _tileHeight,
-		startX = nil,
-		startY = nil,
-		startFacing = nil,
+		startX = _startX,
+		startY = _startY,
+		startFacing = _startFacing,
 	}
 	table.insert(map_rooms, room)
+	io.write("created a room at (" .. room.x .. ", " ..	room.y .. "), " .. room.w .. " tiles tall and " .. room.h .. " tiles wide")
+	if _startX ~= nil then
+		io.write(" with a spawn point ")
+	end
+	io.write("\n")
 end
 
 function InitMap()
-	--[[
-	local cwd = love.filesystem.getWorkingDirectory()
-	print(cwd)
-	
-	local dir = cwd.."/assets"
-	print(dir)
-	local dirInfo = love.filesystem.getInfo(dir)
-	assert(dirInfo.type == "directory") -- if this gets triggered, the assets folder was not found
 
-	dir = dir.."/leveldata"
-	print(dir)
-	dirInfo = love.filesystem.getInfo(dir)
-	assert(dirInfo.type == "directory") -- if this gets triggered, the assets\leveldata folder was not found
-	
-	local level_fnames = love.filesystem.getDirectoryItems(dir)
-	
-	for i = 1, #level_fnames do
-		print(dir..level_fnames[i])
-		local iterator = love.filesystem.lines(cwd .. level_fnames[i])
-		-- do stuff with the file (see https://love2d.org/wiki/love.filesystem.lines for example code)
-	end
-	]]
+	local jsonData = ReadJsonFile("tools/formatting_rules.json")
 
-	ReadJsonFile("tools/formatting_rules.json")
+	assert(jsonData.editorInfo ~= nil) -- make sure the data in the editorInfo section exists
+	assert(jsonData.editorInfo.encodeTiles ~= nil) -- make sure the tile encoding table exists
+	
+	assert(jsonData.gameInfo ~= nil) -- make sure the data in the gameInfo section exists
+	assert(jsonData.gameInfo.tileReadPath ~= nil) -- make sure the tile read path exists
+	assert(#jsonData.gameInfo.tileReadPath > 0) -- make sure the tile read path isn't an empty string
+	assert(jsonData.gameInfo.levelReadPath ~= nil) -- make sure the level read path exists
+	assert(#jsonData.gameInfo.levelReadPath > 0) -- make sure the level read path isn't an empty string
+	assert(jsonData.gameInfo.decodeTiles ~= nil) -- make sure the tile decoding table exists
+
+	assert(jsonData.genericInfo ~= nil) -- make sure the genericInfo section exists
+	assert(jsonData.genericInfo.tileSize ~= nil) -- make sure the tile size exists
+	assert(jsonData.genericInfo.tileSize > 0) -- make sure the tile size is a positive number
+	assert(jsonData.genericInfo.tileFileExt ~= nil) -- make sure the tile file extension exists
+	assert(#jsonData.genericInfo.tileFileExt > 1) -- make sure the tile file extension is an actual extension
 
 	-- load all the sprites
-	local tile_path = "assets/sprites/leveltiles/"
-	local suffix = "_32.png"
-	local tile_fnames = {
-		"block_solid",
-		"platform_semisolid",
-		"block_hazard",
-		"block_breakable",
-		"indicator_room_origin_start",
-		"indicator_room_origin",
-		"indicator_room_width",
-		"indicator_room_height",
-	}
-	map_tiles = {}
-	map_tileProps = {}
-
-	-- initialize tiles with undefined properties
-	for i = 1, #tile_fnames do
-		map_tiles[i] = love.graphics.newImage(tile_path .. tile_fnames[i] .. suffix)
-		if i == 1 then
-			-- solid block
-			map_tileProps[i] = {
-				solidTop = true,
-				solidSide = true,
-				solidBottom = true,
-				breakable = false,
-			}
-		elseif i == 2 then
-			-- semisolid platform
-			map_tileProps[i] = {
-				solidTop = true,
-				solidSide = false,
-				solidBottom = false,
-				breakable = false,
-			}
-		elseif i == 3 then
-			-- hazard block
-			map_tileProps[i] = {
-				solidTop = true,
-				solidSide = true,
-				solidBottom = true,
-				breakable = false,
-			}
-		elseif i == 4 then
-			-- breakable block
-			map_tileProps[i] = {
-				solidTop = true,
-				solidSide = true,
-				solidBottom = true,
-				breakable = true,
-			}
+	local tilePath = jsonData.gameInfo.tileReadPath .. "/"
+	local suffix = "_" .. jsonData.genericInfo.tileSize .. jsonData.genericInfo.tileFileExt
+	--io.write("suffix = " .. suffix .. "\n")
+	--io.write(#suffix .. "\n")
+	local tileIDs = {}
+	local tileFileNames = {}
+	for k, _ in pairs(jsonData.gameInfo.decodeTiles) do
+		table.insert(tileIDs, k)
+	end
+	-- tiles are not necessarily in sorted order by tileID, so we need to sort them
+	-- lets do bubble sort cuz this function doesn't have to be optimal XD
+	local sorted = false
+	while not sorted do
+		-- check if it's sorted or not
+		sorted = true
+		for i = 2, #tileIDs do
+			if tonumber(tileIDs[i-1]) >= tonumber(tileIDs[i]) then
+				sorted = false
+				local temp = tileIDs[i-1]
+				tileIDs[i-1] = tileIDs[i]
+				tileIDs[i] = temp
+			end
 		end
 	end
 
-	-- create the map
-	map_tileArray = {
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 2, 2, 2, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-	}
+	map_tileLookupByID = {}
+	map_tileLookupByName = {}
+	for i = 1, #tileIDs do
+		local fileName = jsonData.gameInfo.decodeTiles[tileIDs[i]]
+		table.insert(tileFileNames, fileName)
+		local tileName = string.sub(fileName, 1, -#suffix - 1)
+		--io.write("tile name: " .. tileName .. "\n")
+		map_tileLookupByID[tonumber(tileIDs[i])] = tileName
+		map_tileLookupByName[tileName] = tonumber(tileIDs[i])
+	end
+
+	map_tiles = {}
+
+	-- initialize tiles with undefined properties
+	for i = 1, #tileFileNames do
+		table.insert(map_tiles, love.graphics.newImage(tilePath .. tileFileNames[i]))
+	end
+
+	-- populate the tileArray map
+	map_tileArray = {}
+	local levelPath = jsonData.gameInfo.levelReadPath .. "/"
+	local levelFileName = "test.txt"
+	local textLines = ReadTxtFile(levelPath .. levelFileName)
+	local tileIDPattern = "%d%d"
+	for y = 1, #textLines do
+		local line = textLines[y]
+		table.insert(map_tileArray, {})
+		for tileID in string.gmatch(line, tileIDPattern) do
+			--io.write(tileID .. " ")
+			table.insert(map_tileArray[y], tonumber(tileID))
+		end
+		--io.write("\n")
+	end
+
+	map_rooms = {}
+	-- populate the map_rooms array
+	local processing = true
+	local startingRoomIndex = nil
+	local roomOriginID = map_tileLookupByName["indicator_room_origin"]
+	local startRoomOriginID = map_tileLookupByName["indicator_room_origin_start"]
+	local roomWidthID = map_tileLookupByName["indicator_room_width"]
+	local roomHeightID = map_tileLookupByName["indicator_room_height"]
+	local currentX = 1
+	local currentY = 1
+	while processing do
+		local nextX = nil
+		local nextY = nil
+		-- search for room origin tiles
+		local currentID = map_tileArray[currentY][currentX]
+		--io.write("current ID = " .. currentID .. "\n")
+		if currentID == roomOriginID or currentID == startRoomOriginID then
+			-- search for width indicator
+			local iSearch = currentX
+			local foundWidth = false
+			while iSearch < #map_tileArray[currentY] and not foundWidth do
+				iSearch = iSearch + 1
+				local searchID = map_tileArray[currentY][iSearch]
+				local foundSomethingElse = searchID == roomOriginID or searchID == startRoomOriginID or searchID == roomHeightID
+				assert(foundSomethingElse == false) -- if this gets triggered, some other indicator is in between the origin and the width indicators, or you forgot your width indicator
+				foundWidth = searchID == roomWidthID
+				nextX = iSearch
+			end
+			assert(iSearch <= #map_tileArray[currentY]) -- if this gets triggered, no width indicator was found between the origin indicator and the right edge of the map
+
+			iSearch = currentY
+			local foundHeight = false
+			while iSearch < #map_tileArray and not foundHeight do
+				iSearch = iSearch + 1
+				local searchID = map_tileArray[iSearch][currentX]
+				local foundSomethingElse = searchID == roomOriginID or searchID == startRoomOriginID or searchID == roomWidthID
+				assert(foundSomethingElse == false) -- if this gets triggered, some other indicator is in between the origin and the height indicators, or you forgot your height indicator
+				foundHeight = searchID == roomHeightID
+				nextY = iSearch
+			end
+			assert(iSearch <= #map_tileArray) -- if this gets triggered, no height indicator was found between the origin indicator and the bottom edge of the map
+
+			assert(foundWidth and foundHeight)
+
+			local width = nextX - (currentX - 1)
+			local height = nextY - (currentY - 1)
+
+			local startX = nil
+			local startY = nil
+			local startFacing = nil
+
+			local spawnLeft = map_tileLookupByName["indicator_spawn_player_left"]
+			local spawnRight = map_tileLookupByName["indicator_spawn_player_right"]
+			-- search for a player spawn indicator
+			for y = currentY, currentY + height - 1 do
+				for x = currentX, currentX + width - 1 do
+					local spawnID = map_tileArray[y][x]
+					if spawnID == spawnLeft or spawnID == spawnRight then
+						startX = x
+						startY = y
+						if spawnID == spawnLeft then
+							startFacing = -1
+						else
+							startFacing = 1
+						end
+					end
+				end
+			end
+
+			if currentID == startRoomOriginID then
+				assert(startingRoomIndex == nil) -- if this gets triggered, you have more than one starting room origin indcator in your level
+				startingRoomIndex = #map_rooms + 1
+
+				assert(startX ~= nil and startY ~= nil and startFacing ~= nil) -- if this gets triggered, you have no spawn point in your starting room
+			end
+			AddRoom(currentX, currentY, width, height, startX, startY, startFacing)
+
+			io.write("\n")
+		end
+		while Map_GetRoomFromTile(currentX, currentY) ~= nil do
+			currentX = currentX + 1
+		end
+		if currentX > #map_tileArray[currentY] then
+			currentX = 1
+			while Map_GetRoomFromTile(currentX, currentY) ~= nil do
+				currentY = currentY + 1
+			end
+			if currentY > #map_tileArray then
+				processing = false
+			end
+		end
+	end
+	assert(startingRoomIndex ~= nil)
 end
 
 function UpdateMap()

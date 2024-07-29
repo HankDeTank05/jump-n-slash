@@ -10,12 +10,16 @@
             "indicator_room_origin_32.png": "05",
             "indicator_room_origin_start_32.png": "06",
             "indicator_room_width_32.png": "07",
-            "platform_semisolid_32.png": "08"
+            "indicator_spawn_enemy_left_32.png": "08",
+            "indicator_spawn_enemy_right_32.png": "09",
+            "indicator_spawn_player_left_32.png": "10",
+            "indicator_spawn_player_right_32.png": "11",
+            "platform_semisolid_32.png": "12"
         }
     },
     "gameInfo": {
-        "tileReadPath": "",
-        "levelReadPath": "",
+        "tileReadPath": "assets\\sprites\\leveltiles",
+        "levelReadPath": "assets\\leveldata",
         "decodeTiles": {
             "01": "block_breakable_32.png",
             "02": "block_hazard_32.png",
@@ -24,7 +28,11 @@
             "05": "indicator_room_origin_32.png",
             "06": "indicator_room_origin_start_32.png",
             "07": "indicator_room_width_32.png",
-            "08": "platform_semisolid_32.png"
+            "08": "indicator_spawn_enemy_left_32.png",
+            "09": "indicator_spawn_enemy_right_32.png",
+            "10": "indicator_spawn_player_left_32.png",
+            "11": "indicator_spawn_player_right_32.png",
+            "12": "platform_semisolid_32.png"
         }
     },
     "genericInfo": {

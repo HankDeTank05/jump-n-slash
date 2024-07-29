@@ -62,8 +62,8 @@ data = {
         "encodeTiles": {}  # stored as: key = filename, value = 2-digit id
     },
     "gameInfo": {
-        "tileReadPath": "",  # NOTE: RELATIVE PATH IS DIFFERENT THAN FOR EDITOR!!
-        "levelReadPath": "",  # NOTE: RELATIVE PATH IS DIFFERENT THAN FOR EDITOR!!
+        "tileReadPath": game_tile_read_path,  # NOTE: RELATIVE PATH IS DIFFERENT THAN FOR EDITOR!!
+        "levelReadPath": game_level_read_path,  # NOTE: RELATIVE PATH IS DIFFERENT THAN FOR EDITOR!!
         "decodeTiles": {}  # stored as: key = 2-digit id, value = filename
     },
     "genericInfo": {

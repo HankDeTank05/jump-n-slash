@@ -75,17 +75,18 @@ function ReadJsonFile(_filePath)
 	-- push with table.insert(keyStack, key)
 	-- pop with table.remove(keyStack)
 
+	-- read all the lines into a table
 	for line in love.filesystem.lines(_filePath) do
 		table.insert(jsonLines, line)
-		io.write(line)
-		io.write("\n")
+		--io.write(line)
+		--io.write("\n")
 	end
 
 	-- define string patterns
-	local indentPattern = "%s+"
 	local keyPattern = "\"%g+\""
-	local valPattern = ": %g+"
-	local sublistEndPattern = "}[,]?"
+	local valPattern = ": [\"]?%g+[\"]?[,]?"
+	local stringTypePattern = "\"[%g%s]*\""
+	local numTypePattern = "[%d]+"
 
 	-- don't need to deal with the first and last lines
 	assert(jsonLines[1] == "{")
@@ -100,42 +101,64 @@ function ReadJsonFile(_filePath)
 	for i = 1, #jsonLines do
 		local line = jsonLines[i]
 
-		if string.match(line, "{") ~= nil then
-			-- begin a new subtable
-
-			-- find the key first
-			local key = string.match(line, keyPattern)
-			assert(key ~= nil)
-			--io.write("starting a new subtable with the following key: " .. key .. "\n")
-
-			-- create the subtable with the key
-			currentSubtable[key] = {}
-			table.insert(tableStack, currentSubtable)
-			currentSubtable = currentSubtable[key]
-			--io.write("tableStack size = " .. #tableStack .. "\n")
-
-		elseif string.match(line, "}") ~= nil then
-			-- return to the parent table
+		if string.match(line, "}") ~= nil then -- return to the parent table
 			--io.write("returning to the parent table\n")
 			assert(#tableStack > 0)
 			currentSubtable = table.remove(tableStack)
-
-		else
-			assert(currentSubtable ~= nil)
-			-- deal with key/value pairs
 			
+		else -- either deal with k,v pairs or a new subtable
+			-- find the key first
 			local key = string.match(line, keyPattern)
 			assert(key ~= nil)
 
-			local val = string.match(line, valPattern)
-			assert(val ~= nil)
+			-- remove leading and trailing quotation marks from the key
+			assert(string.match(key, stringTypePattern) ~= nil)
+			key = string.sub(key, 2, -2)
 
-			currentSubtable[key] = val
+			if string.match(line, "{") ~= nil then -- begin a new subtable
+				--io.write("starting a new subtable with the following key: " .. key .. "\n")
+		
+				-- create the subtable with the key
+				currentSubtable[key] = {}
+				table.insert(tableStack, currentSubtable)
+				currentSubtable = currentSubtable[key]
+				--io.write("tableStack size = " .. #tableStack .. "\n")
+			
+			else -- deal with key/value pairs
+				assert(currentSubtable ~= nil)
 
+				local val = string.match(line, valPattern)
+				assert(val ~= nil)
+
+				-- remove leading ": " and trailing "," if it exists
+				val = string.sub(val, 3)
+				if string.sub(val, -1) == "," then
+					val = string.sub(val, 1, -2)
+				end
+
+				-- deal with filepath strings
+				if string.match(val, "\\\\") ~= nil then
+					val = string.gsub(val, "\\\\", "/")
+				end
+
+				-- remove leading and trialing quotation marks from every string variable, and process non-string data accordingly
+				--io.write("val=" .. val .. "\n")
+				--string.sub(val, 1, 1) == "\"" and string.sub(val, -1, -1) == "\""
+				if string.match(val, stringTypePattern) then
+					val = string.sub(val, 2, -2)
+				elseif string.match(val, numTypePattern) then
+					val = tonumber(val)
+				else
+					assert(false) -- if this gets triggered it's because you don't have an if condition to deal with that data type
+				end
+
+				currentSubtable[key] = val
+			end
 		end
 	end
 
-	PrintTable(jsonData)
+	--PrintTable(jsonData)
+	return jsonData
 end
 
 function PrintTable(_table, _indent)
@@ -157,4 +180,9 @@ function PrintTable(_table, _indent)
 end
 
 function ReadTxtFile(_filePath)
+	local textLines = {}
+	for line in love.filesystem.lines(_filePath) do
+		table.insert(textLines, line)
+	end
+	return textLines
 end

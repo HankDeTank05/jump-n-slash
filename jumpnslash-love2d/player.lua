@@ -201,7 +201,7 @@ local function Player_UpdateAnimation()
 	player_animTime = player_animTime + love.timer.getDelta()
 end
 
-local function Player_AnimStateIdle()
+function Player_AnimStateIdle()
 	player_animIndex = IndexLoopedAnimation(player_animTime, player_animSPF, #player_animIdle)
 	player_sprite = player_animIdle[player_animIndex]
 
@@ -211,7 +211,7 @@ local function Player_AnimStateIdle()
 	end
 end
 
-local function Player_AnimStateWalk()
+function Player_AnimStateWalk()
 	player_animIndex = IndexLoopedAnimation(player_animTime, player_animSPF, #player_animWalk)
 	player_sprite = player_animWalk[player_animIndex]
 
@@ -221,21 +221,21 @@ local function Player_AnimStateWalk()
 	end
 end
 
-local function Player_AnimStateJump()
+function Player_AnimStateJump()
 end
 
-local function Player_AnimStateFall()
+function Player_AnimStateFall()
 end
 
-local function Player_AnimStateAttack()
+function Player_AnimStateAttack()
 end
 
-local function Player_ResetAnimation()
+function Player_ResetAnimation()
 	player_animIndex = 1
 	player_animTime = 0
 end
 
-local function Player_SetAnimation(_anim_function)
+function Player_SetAnimation(_anim_function)
 	Player_Animate = _anim_function
 	Player_ResetAnimation()
 end
