@@ -1,3 +1,5 @@
+require("map")
+
 require("util")
 require("designer_controls")
 
@@ -115,11 +117,15 @@ end
 
 local function Player_CheckTileCollisionVertical()
 	-- TODO: global for debugging purposes
-	candLX = Player_GetX()
-	candLY = Player_GetY()
+	candLX = math.floor(Player_GetX())
+	candLY = math.floor(Player_GetY())
+	candLXStart = candLX
+	candLYStart = candLY
 
-	candRX = Player_GetX() + Player_GetWidth()
-	candRY = Player_GetY()
+	candRX = math.floor(Player_GetX() + Player_GetWidth())
+	candRY = math.floor(Player_GetY())
+	candRXStart = candRX
+	candRYStart = candRY
 
 	-- edge case #1
 	-- if the player is not enclosed in solid tiles, the raycasting "while" loop will run forever
@@ -129,8 +135,19 @@ local function Player_CheckTileCollisionVertical()
 	if player_yVel >= 0 then -- cast ray downwards
 		candLY = candLY + Player_GetHeight()
 		candRY = candRY + Player_GetHeight()
+
 		-- left ray
-		
+		while Map_IsTileSolidTop(candLX, candLY) == false do
+			candLY = candLY + 1
+		end
+		candLY = candLY - 1
+
+		-- right ray
+		while Map_IsTileSolidTop(candRX, candRY) == false do
+			candRY = candRY + 1
+		end
+		candRY = candRY - 1
+
 	else -- cast ray upwards
 		-- code goes here
 	end
@@ -374,5 +391,7 @@ function DrawPlayer()
 	-- debug stuff
 	if true then
 		love.graphics.points(player_x, player_y)
+		love.graphics.line(candLXStart, candLYStart, candLX, candLY)
+		love.graphics.line(candRXStart, candRYStart, candRX, candRY)
 	end
 end

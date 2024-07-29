@@ -11,7 +11,28 @@ local map_tileLookupByName
 -- sanity checks --
 -------------------
 
-function Map_ValidateRoomNumber(_room_num)
+function Map_ValidateRoomNumber(_roomNum)
+	assert(1 <= _roomNum)
+	assert(_roomNum <= #map_rooms)
+end
+
+function Map_ValidateIndices(_tileX, _tileY)
+	assert(_tileX % 1 == 0) -- if triggered, tile x-index is not an int
+	assert(_tileY % 1 == 0) -- if triggered, tile y-index is not an int
+
+	assert(1 <= _tileY) -- if triggered, tile y-index is too low
+	assert(_tileY <= #map_tileArray) -- if triggered, tile y-index is too high
+
+	assert(1 <= _tileX) -- if triggered, tile x-index is too low
+	assert(_tileX <= #map_tileArray[_tileY]) -- if triggered, tile x-index is too high
+end
+
+function Map_ValidateCoordinates(_posX, _posY)
+	assert(1 <= _posY) -- if triggered, y-position is above the map
+	assert(_posY < #map_tileArray + 1) -- if triggered, y-position is below the map
+
+	assert(1 <= _posX) -- if triggered, x-position is outside the left bounds of the map
+	assert(_posX < #map_tileArray[math.floor(_posY)] + 1) -- if triggered, x-position is outside the right bounds of the map
 end
 
 ----------------------
@@ -85,24 +106,34 @@ end
 function Map_IsTileSolidTop(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidTop property of
 	-- _tileY: y-index of the tile to get the solidTop property of
-	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].solidTop
+	Map_ValidateIndices(_tileX, _tileY)
+	local idFromMap = map_tileArray[_tileY][_tileX]
+	io.write(idFromMap .. "\n")
+	local idLookupResult = map_tileLookupByID[idFromMap]
+	io.write(idLookupResult .. "\n")
+	local property = map_tileProps[idLookupResult].solidTop
+	io.write(property .. "\n")
+	return property
 end
 
 function Map_IsTileSolidSide(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidSide property of
 	-- _tileY: y-index of the tile to get the solidSide property of
+	Map_ValidateIndices(_tileX, _tileY)
 	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].solidSide
 end
 
 function Map_IsTileSolidBottom(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidBottom property of
 	-- _tileY: y-index of the tile to get the solidBottom property of
+	Map_ValidateIndices(_tileX, _tileY)
 	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].solidBottom
 end
 
 function Map_IsTileBreakable(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the breakable property of
 	-- _tileY: y-index of the tile to get the breakable property of
+	Map_ValidateIndices(_tileX, _tileY)
 	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].breakable
 end
 
@@ -112,6 +143,8 @@ end
 
 function Map_GetRoomFromTile(_tileX, _tileY)
 	assert(#map_rooms > 0)
+	assert(_tileX % 1 == 0)
+	assert(_tileY % 1 == 0)
 	for i = 1, #map_rooms do
 		local room = map_rooms[i]
 		if room.x <= _tileX and _tileX <= room.x + room.w - 1 and room.y <= _tileY and _tileY <= room.y + room.h - 1 then
@@ -131,8 +164,8 @@ local function AddRoom(_mapX, _mapY, _tileWidth, _tileHeight, _startX, _startY, 
 		assert(_startY == nil)
 		assert(_startFacing == nil)
 	else
-		assert(_mapX <= _startX and _startX <= _mapX + _tileWidth - 1) -- if this gets triggered, your spawn point is outside the room (along the x-axis)
-		assert(_mapY <= _startY and _startY <= _mapY + _tileHeight - 1) -- if this gets triggered, your spawn point is outside the room (along the y-axis)
+		assert(_mapX <= _startX and _startX <= _mapX + _tileWidth - 1) -- if triggered, your spawn point is outside the room (along the x-axis)
+		assert(_mapY <= _startY and _startY <= _mapY + _tileHeight - 1) -- if triggered, your spawn point is outside the room (along the y-axis)
 		assert(_startFacing == 1 or _startFacing == -1) -- how tf did you trigger this one?
 	end
 
@@ -211,6 +244,7 @@ function InitMap()
 	end
 
 	map_tiles = {}
+	map_tileProps = {}
 
 	-- initialize tiles with undefined properties
 	for i = 1, #tileFileNames do
@@ -245,7 +279,7 @@ function InitMap()
 		breakable = false,
 	}
 
-	-- populate the tileArray map
+	-- populate the tileArray table
 	map_tileArray = {}
 	local levelPath = jsonData.gameInfo.levelReadPath .. "/"
 	local levelFileName = "test.txt"
@@ -260,6 +294,14 @@ function InitMap()
 		end
 		--io.write("\n")
 	end
+	--[[
+	for y = 1, #map_tileArray do
+		for x = 1, #map_tileArray[y] do
+			io.write(map_tileArray[y][x] .. " ")
+		end
+		io.write("\n")
+	end
+	--]]
 
 	map_rooms = {}
 	-- populate the map_rooms array
@@ -285,11 +327,11 @@ function InitMap()
 				iSearch = iSearch + 1
 				local searchID = map_tileArray[currentY][iSearch]
 				local foundSomethingElse = searchID == roomOriginID or searchID == startRoomOriginID or searchID == roomHeightID
-				assert(foundSomethingElse == false) -- if this gets triggered, some other indicator is in between the origin and the width indicators, or you forgot your width indicator
+				assert(foundSomethingElse == false) -- if triggered, some other indicator is in between the origin and the width indicators, or you forgot your width indicator
 				foundWidth = searchID == roomWidthID
 				nextX = iSearch
 			end
-			assert(iSearch <= #map_tileArray[currentY]) -- if this gets triggered, no width indicator was found between the origin indicator and the right edge of the map
+			assert(iSearch <= #map_tileArray[currentY]) -- if triggered, no width indicator was found between the origin indicator and the right edge of the map
 
 			iSearch = currentY
 			local foundHeight = false
@@ -297,11 +339,11 @@ function InitMap()
 				iSearch = iSearch + 1
 				local searchID = map_tileArray[iSearch][currentX]
 				local foundSomethingElse = searchID == roomOriginID or searchID == startRoomOriginID or searchID == roomWidthID
-				assert(foundSomethingElse == false) -- if this gets triggered, some other indicator is in between the origin and the height indicators, or you forgot your height indicator
+				assert(foundSomethingElse == false) -- if triggered, some other indicator is in between the origin and the height indicators, or you forgot your height indicator
 				foundHeight = searchID == roomHeightID
 				nextY = iSearch
 			end
-			assert(iSearch <= #map_tileArray) -- if this gets triggered, no height indicator was found between the origin indicator and the bottom edge of the map
+			assert(iSearch <= #map_tileArray) -- if triggered, no height indicator was found between the origin indicator and the bottom edge of the map
 
 			assert(foundWidth and foundHeight)
 
@@ -331,10 +373,10 @@ function InitMap()
 			end
 
 			if currentID == startRoomOriginID then
-				assert(startingRoomIndex == nil) -- if this gets triggered, you have more than one starting room origin indcator in your level
+				assert(startingRoomIndex == nil) -- if triggered, you have more than one starting room origin indcator in your level
 				startingRoomIndex = #map_rooms + 1
 
-				assert(startX ~= nil and startY ~= nil and startFacing ~= nil) -- if this gets triggered, you have no spawn point in your starting room
+				assert(startX ~= nil and startY ~= nil and startFacing ~= nil) -- if triggered, you have no spawn point in your starting room
 			end
 			AddRoom(currentX, currentY, width, height, startX, startY, startFacing)
 
@@ -356,7 +398,7 @@ function InitMap()
 	assert(startingRoomIndex ~= nil)
 end
 
-function UpdateMap()
+function UpdateMap(_dt)
 end
 
 function DrawMap()
