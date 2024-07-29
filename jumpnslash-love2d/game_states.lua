@@ -1,3 +1,5 @@
+require("map")
+require("player")
 
 function Game_SetStartingState()
 	Game_SetStatePlay()
@@ -32,7 +34,7 @@ function StatePlayUpdate(_dt)
 	-- update sword
 	-- update enemies
 	-- update breakables
-	-- update map
+	UpdateMap(_dt)
 end
 
 function StatePlayDraw()
