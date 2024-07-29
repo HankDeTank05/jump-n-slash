@@ -269,7 +269,7 @@ function Player_GetScreenY()
 end
 
 function Player_GetFacingDir()
-	return Player_facing
+	return player_facing
 end
 
 --------------------

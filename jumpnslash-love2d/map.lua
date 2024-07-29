@@ -215,6 +215,27 @@ function InitMap()
 	-- initialize tiles with undefined properties
 	for i = 1, #tileFileNames do
 		table.insert(map_tiles, love.graphics.newImage(tilePath .. tileFileNames[i]))
+		if i == map_tileLookupByName["block_breakable"] then
+			map_tileProps[i].solidTop = true
+			map_tileProps[i].solidSide = true
+			map_tileProps[i].solidBottom = true
+			map_tileProps[i].breakable = true
+		elseif i == map_tileLookupByName["block_hazard"] then
+			map_tileProps[i].solidTop = true
+			map_tileProps[i].solidSide = true
+			map_tileProps[i].solidBottom = true
+			map_tileProps[i].breakable = false
+		elseif i == map_tileLookupByName["block_solid"] then
+			map_tileProps[i].solidTop = true
+			map_tileProps[i].solidSide = true
+			map_tileProps[i].solidBottom = true
+			map_tileProps[i].breakable = false
+		elseif i == map_tileLookupByName["platform_semisolid"] then
+			map_tileProps[i].solidTop = true
+			map_tileProps[i].solidSide = false
+			map_tileProps[i].solidBottom = false
+			map_tileProps[i].breakable = false
+		end
 	end
 
 	-- populate the tileArray map
