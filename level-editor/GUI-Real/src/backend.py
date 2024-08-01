@@ -41,7 +41,7 @@ class Backend(QObject):
         print("Level data saved.")
 
     @pyqtSlot()
-    def loadFromFile(self):
+    def loadFromFile(self):#want to make this better, choose file maybe?
         with open('path_to_file/level_data.txt', 'r') as f:
             for row_idx, line in enumerate(f):
                 colors = line.strip().split()
