@@ -351,8 +351,8 @@ function InitPlayer()
 		love.graphics.newImage(spritePath.."attack_4"..suffix),
 	}
 
-	player_x = (3 - 1) * TILE_SIZE -- world position x
-	player_y = (15 - 1) * TILE_SIZE -- world position y
+	player_x = (3 - 1) -- world position x
+	player_y = (15 - 1) -- world position y
 	player_facing = 1 -- 1=right, -1=left
 
 	player_screenX = nil -- screen position x
