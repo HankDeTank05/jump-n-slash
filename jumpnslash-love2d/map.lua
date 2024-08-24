@@ -21,6 +21,7 @@ function Map_ValidateIndices(_tileX, _tileY)
 	assert(_tileY % 1 == 0) -- if triggered, tile y-index is not an int
 
 	assert(1 <= _tileY) -- if triggered, tile y-index is too low
+	io.write(#map_tileArray .. "\n")
 	assert(_tileY <= #map_tileArray) -- if triggered, tile y-index is too high
 
 	assert(1 <= _tileX) -- if triggered, tile x-index is too low
@@ -106,9 +107,17 @@ end
 function Map_IsTileSolidTop(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidTop property of
 	-- _tileY: y-index of the tile to get the solidTop property of
+	io.write(_tileX .. " " .. _tileY .. "\n")
 	Map_ValidateIndices(_tileX, _tileY)
 	local idFromMap = map_tileArray[_tileY][_tileX]
-	io.write(idFromMap .. "\n")
+	for y = 1, #map_tileArray do
+		io.write(y .. ": ")
+		for x = 1, #map_tileArray[y] do
+			io.write(map_tileArray[y][x] .. " ")
+		end
+		io.write("\n")
+	end
+	io.write("idFromMap=" .. idFromMap .. "\n")
 	local idLookupResult = map_tileLookupByID[idFromMap]
 	io.write(idLookupResult .. "\n")
 	local property = map_tileProps[idLookupResult].solidTop
@@ -242,6 +251,7 @@ function InitMap()
 		map_tileLookupByID[tonumber(tileIDs[i])] = tileName
 		map_tileLookupByName[tileName] = tonumber(tileIDs[i])
 	end
+	--PrintTable(map_tileLookupByID)
 
 	map_tiles = {}
 	map_tileProps = {}
