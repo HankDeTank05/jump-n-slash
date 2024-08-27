@@ -11,11 +11,19 @@ local map_tileLookupByName
 -- sanity checks --
 -------------------
 
+--[[
+make sure a given room number is a valid index
+this is just a manual index-out-of-bounds check
+]]
 function Map_ValidateRoomNumber(_roomNum)
 	assert(1 <= _roomNum)
 	assert(_roomNum <= #map_rooms)
 end
 
+--[[
+make sure a given x/y position on the tile grid has valid indices
+this is just a manual index-out-of-bounds check on two indices for a 2D array
+]]
 function Map_ValidateIndices(_tileX, _tileY)
 	assert(_tileX % 1 == 0) -- if triggered, tile x-index is not an int
 	assert(_tileY % 1 == 0) -- if triggered, tile y-index is not an int
@@ -28,6 +36,9 @@ function Map_ValidateIndices(_tileX, _tileY)
 	assert(_tileX <= #map_tileArray[_tileY]) -- if triggered, tile x-index is too high
 end
 
+--[[
+MIGHT GET RID OF THIS FUNCTION
+]]
 function Map_ValidateCoordinates(_posX, _posY)
 	assert(1 <= _posY) -- if triggered, y-position is above the map
 	assert(_posY < #map_tileArray + 1) -- if triggered, y-position is below the map
@@ -40,10 +51,19 @@ end
 -- mutators/setters --
 ----------------------
 
-function Map_SetCurrentRoom(_room_num)
+--[[
+used to set the current room based on room number
+]]
+function Map_SetCurrentRoom(_roomNum)
+	Map_VallidateRoomNumber(_roomNum)
 end
 
+--[[
+this function automatically determines which room should be the current room based on player position
+]]
 function Map_ChangeRooms()
+	-- do some logic based on player position
+	-- call Map_SetCurrentRoom()
 end
 
 -----------------------
@@ -56,54 +76,93 @@ end
 function Map_GetCurrentRoomNum()
 end
 
--- returns the x-position of the left edge of the current room (in world space)
+--[[
+returns the x-position of the left edge of the current room (in world space)
+]]
 function Map_GetCurrentLeftBounds()
 end
 
--- returns the x-position of the right edge of the current room (in world space)
+--[[
+returns the x-position of the right edge of the current room (in world space)
+]]
 function Map_GetCurrentRightBounds()
 end
 
--- returns the y-position of the top edge of the current room (in world space)
+--[[
+returns the y-position of the top edge of the current room (in world space)
+]]
 function Map_GetCurrentTopBounds()
 end
 
--- returns the y-position of the top edge of the current room (in world space)
+--[[
+returns the y-position of the top edge of the current room (in world space)
+]]
 function Map_GetCurrentBottomBounds()
 end
 
 -- formerly known as "get_scrollability_horizontal()"
+--[[
+returns true or false based on whether the room at the given room number has horizontal scrolling
+]]
 function Map_IsHorizontalScrolling()
 end
 
 -- formerly known as "get_scrollability_vertical()"
+--[[
+returns true or false based on whether the room at the given room number has vertical scrolling
+]]
 function Map_IsVerticalScrolling()
 end
 
+--[[
+get the left-x boundary of the camera when horizontal scrolling is available
+]]
 function Map_GetScrollLeftBounds()
 end
 
+--[[
+get the right-x boundary of the camera when horizontal scrolling is available
+]]
 function Map_GetScrollRightBounds()
 end
 
+--[[
+get the top-y boundary of the camera when vertical scrolling is available
+]]
 function Map_GetScrollTopBounds()
 end
 
+--[[
+get the bottom-y boundary of the camera when vertical scrolling is available
+]]
 function Map_GetScrollBottomBounds()
 end
 
 -- formerly known as "get_current_map_x()"
+--[[
+get the x-index of the top-left tile in the current room
+]]
 function Map_GetCurrentRoomOriginX()
 end
 
 -- formerly known as "get_current_map_y()"
+--[[
+get the y-index of the top-left tile in the current room
+]]
 function Map_GetCurrentRoomOriginY()
 end
 
 -- formerly known as "check_for_flag_at_pix(_map_pix_x, _map_pix_y, _flag)"
+--[[
+get the properties of a tile at a given world position
+]]
 function Map_CheckForFlagAtWorldPos(_world_x, _world_y, _flag)
 end
 
+--[[
+returns true or false based on whether the tile at the given x/y index is solid on top.
+"can it be landed on?"
+]]
 function Map_IsTileSolidTop(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidTop property of
 	-- _tileY: y-index of the tile to get the solidTop property of
@@ -125,6 +184,10 @@ function Map_IsTileSolidTop(_tileX, _tileY)
 	return property
 end
 
+--[[
+returns true or false based on whether the tile at the given x/y index is solid on the sides.
+"will it prevent horizontal movement?"
+]]
 function Map_IsTileSolidSide(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidSide property of
 	-- _tileY: y-index of the tile to get the solidSide property of
@@ -132,6 +195,10 @@ function Map_IsTileSolidSide(_tileX, _tileY)
 	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].solidSide
 end
 
+--[[
+returns true or false based on whether the tile at the given x/y index is solid on the underside
+"will I hit my head if it's above me when I jump?"
+]]
 function Map_IsTileSolidBottom(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidBottom property of
 	-- _tileY: y-index of the tile to get the solidBottom property of
@@ -139,6 +206,10 @@ function Map_IsTileSolidBottom(_tileX, _tileY)
 	return map_tileProps[map_tileLookupByID[map_tileArray[_tileY][_tileX]]].solidBottom
 end
 
+--[[
+returns true or false based on whether the tile at the given x/y index is breakable with a sword slash
+"will it break when I slash it with my sword?"
+]]
 function Map_IsTileBreakable(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the breakable property of
 	-- _tileY: y-index of the tile to get the breakable property of
@@ -147,13 +218,19 @@ function Map_IsTileBreakable(_tileX, _tileY)
 end
 
 -- formerly known as "get_room_from_pixel(_pixel_x, _pixel_y)"
+--[[
+returns the room number the given coordinates are in. returns nil if the coordinates are not in any room.
+]]
 function Map_GetRoomFromWorldPos(_world_x, _world_y)
 end
 
+--[[
+returns the number of the room containing the tile at the given x/y indices
+]]
 function Map_GetRoomFromTile(_tileX, _tileY)
 	assert(#map_rooms > 0)
-	assert(_tileX % 1 == 0)
-	assert(_tileY % 1 == 0)
+	assert(_tileX % 1 == 0) -- replace with a sanity check function
+	assert(_tileY % 1 == 0) -- ^^^ what he said ^^^
 	for i = 1, #map_rooms do
 		local room = map_rooms[i]
 		if room.x <= _tileX and _tileX <= room.x + room.w - 1 and room.y <= _tileY and _tileY <= room.y + room.h - 1 then
@@ -167,6 +244,9 @@ end
 -- core functions --
 --------------------
 
+--[[
+called by the InitMap function at the beginning of the game
+]]
 local function AddRoom(_mapX, _mapY, _tileWidth, _tileHeight, _startX, _startY, _startFacing)
 	if _startX == nil or _startY == nil or _startFacing == nil then -- if one of them is nil, all of them should be
 		assert(_startX == nil)
@@ -195,6 +275,9 @@ local function AddRoom(_mapX, _mapY, _tileWidth, _tileHeight, _startX, _startY, 
 	io.write("\n")
 end
 
+--[[
+the initialization function. called at the beginning of the game
+]]
 function InitMap()
 
 	local jsonData = ReadJsonFile("tools/formatting_rules.json")
@@ -408,9 +491,15 @@ function InitMap()
 	assert(startingRoomIndex ~= nil)
 end
 
+--[[
+the update function. contains all the behaviors of the map
+]]
 function UpdateMap(_dt)
 end
 
+--[[
+the draw function. contains all the logic involved in rendering the map
+]]
 function DrawMap()
 	for y = 1, #map_tileArray do
 		for x = 1, #map_tileArray[y] do
