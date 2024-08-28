@@ -29,7 +29,6 @@ function Map_ValidateIndices(_tileX, _tileY)
 	assert(_tileY % 1 == 0) -- if triggered, tile y-index is not an int
 
 	assert(1 <= _tileY) -- if triggered, tile y-index is too low
-	io.write(#map_tileArray .. "\n")
 	assert(_tileY <= #map_tileArray) -- if triggered, tile y-index is too high
 
 	assert(1 <= _tileX) -- if triggered, tile x-index is too low
@@ -169,6 +168,7 @@ function Map_IsTileSolidTop(_tileX, _tileY)
 	io.write(_tileX .. " " .. _tileY .. "\n")
 	Map_ValidateIndices(_tileX, _tileY)
 	local idFromMap = map_tileArray[_tileY][_tileX]
+	--[[
 	for y = 1, #map_tileArray do
 		io.write(y .. ": ")
 		for x = 1, #map_tileArray[y] do
@@ -177,11 +177,20 @@ function Map_IsTileSolidTop(_tileX, _tileY)
 		io.write("\n")
 	end
 	io.write("idFromMap=" .. idFromMap .. "\n")
-	local idLookupResult = map_tileLookupByID[idFromMap]
-	io.write(idLookupResult .. "\n")
-	local property = map_tileProps[idLookupResult].solidTop
-	io.write(property .. "\n")
-	return property
+	--]]
+	if idFromMap == 0 then
+		return false
+	else
+		local idLookupResult = map_tileLookupByID[idFromMap]
+		--io.write(idLookupResult .. "\n")
+		local property = map_tileProps[idLookupResult].solidTop
+		--[[
+		if property == true then io.write("true\n")
+		elseif property == false then io.write("false\n")
+		else assert(False) end
+		--]]
+		return property
+	end
 end
 
 --[[
