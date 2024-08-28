@@ -12,7 +12,7 @@ p1_controls = {
 }
 
 -- NOT CURRENTLY WORKING
-p1_jump_velocity = -1.75 -- the jump velocity
+p1_jump_velocity = -1 -- the jump velocity
 -- this must always be a negative number (does not need to be an integer)
 -- this velocity is applied as long as the player is holding the jump button
 
@@ -25,7 +25,7 @@ p1_gravity = 0.2 -- vertical acceleration per frame
 p1_max_jump_secs = 0.25 -- the max number of seconds a player can hold jump for
 -- this must always be a positive number (does not need to be an integer)
 
-p1_walk_speed = 100 -- horizontal movement speed
+p1_walk_speed = 10 -- horizontal movement speed
 -- this must always be a positive number (does not need to be an integer)
 
 -- NOT CURRENTLY WORKING

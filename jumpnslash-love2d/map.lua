@@ -165,7 +165,7 @@ returns true or false based on whether the tile at the given x/y index is solid 
 function Map_IsTileSolidTop(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidTop property of
 	-- _tileY: y-index of the tile to get the solidTop property of
-	io.write(_tileX .. " " .. _tileY .. "\n")
+	--io.write(_tileX .. " " .. _tileY .. "\n")
 	Map_ValidateIndices(_tileX, _tileY)
 	local idFromMap = map_tileArray[_tileY][_tileX]
 	--[[

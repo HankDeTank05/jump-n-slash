@@ -54,6 +54,10 @@ local function Player_ReadInputs(_dt)
 	end
 	
 	-- read for jumping
+	if love.keyboard.isDown(p1_controls.jump) then
+		io.write("jumping\n")
+		player_yVel = p1_jump_velocity
+	end
 
 	-- walk right/left
 	player_dx = 0
@@ -140,13 +144,13 @@ local function Player_CheckTileCollisionVertical()
 		while Map_IsTileSolidTop(candLX, candLY) == false do
 			candLY = candLY + 1
 		end
-		candLY = candLY - 1
+		candLY = candLY - 2
 
 		-- right ray
 		while Map_IsTileSolidTop(candRX, candRY) == false do
 			candRY = candRY + 1
 		end
-		candRY = candRY - 1
+		candRY = candRY - 2
 
 	else -- cast ray upwards
 		-- code goes here
@@ -176,20 +180,11 @@ updates "player_screenX" and "player_screenY" using data from "player_x" and "pl
 ]]
 local function Player_UpdateScreenPos()
 	if player_facing > 0 then
-		player_screenX = player_x
+		player_screenX = player_x * TILE_SIZE
 	else
-		player_screenX = player_x + player_width
+		player_screenX = (player_x + player_width) * TILE_SIZE
 	end
-	player_screenY = player_y
-end
-
---[[
-updates "player_x" and "player_y"
-]]
-local function Player_Move(_dt)
-	player_x = player_x + player_dx
-
-	Player_UpdateScreenPos()
+	player_screenY = player_y * TILE_SIZE
 end
 
 --[[
@@ -197,6 +192,24 @@ CURRENTLY EMPTY
 applies gravity to "player_y" variable
 ]]
 local function Player_ApplyGravity()
+	player_yVel = player_yVel + p1_gravity
+end
+
+--[[
+updates "player_x" and "player_y"
+]]
+local function Player_Move(_dt)
+	player_x = player_x + player_dx
+	Player_ApplyGravity()
+	candVY = player_y + player_yVel
+	io.write(candLY .. " " .. candVY .. " " .. candRY .. "\n")
+	player_y = math.min( candLY, candVY, candRY )
+	if player_y == candLY or player_y == candRY then
+		player_yVel = 0
+	end
+	
+
+	Player_UpdateScreenPos()
 end
 
 --[[
@@ -471,8 +484,8 @@ function InitPlayer()
 
 	player_dx = 0 -- delta x, since there's no horizontal acceleration
 	player_yVel = 0 -- y-velocity, since there is vertical acceleration
-	player_width = 32  -- width of the sprite
-	player_height = 32  -- height of the sprite
+	player_width = 1  -- width in number of tiles
+	player_height = 1  -- height in number of tiles
 
 	Player_Animate = Player_AnimStateIdle
 	player_animFPS = 6
