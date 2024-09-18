@@ -19,18 +19,24 @@
     <Filter Include="Source Files\Engine Code\Core Files">
       <UniqueIdentifier>{e281a2b2-0b8e-45d7-8f1a-da49f41ab154}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code">
+      <UniqueIdentifier>{bf26bac0-2770-4ba3-a82e-47dfee402125}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="JumpSlashEngine.cpp">
+    <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Engine Code\main.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="JumpSlashEngine.h">
+    <ClInclude Include="Engine Code\JumpSlashEngine.h">
       <Filter>Source Files\Engine Code\Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Constants.h">
+      <Filter>Source Files\Game Code</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
