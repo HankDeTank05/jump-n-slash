@@ -38,6 +38,10 @@ local player_animIndex
 local player_atkBtnHeldPrevFrame
 local player_atkBtnReleased
 
+-- jumping
+local player_jumpBtnTime -- amount of time the jump button has been held for
+local player_jumpBtnReleased
+
 ------------------------
 -- inputs and actions --
 ------------------------
@@ -145,13 +149,12 @@ local function Player_CheckTileCollisionVertical()
 			candLY = candLY + 1
 		end
 		candLY = candLY - 2
-
+		
 		-- right ray
 		while Map_IsTileSolidTop(candRX, candRY) == false do
 			candRY = candRY + 1
 		end
 		candRY = candRY - 2
-
 	else -- cast ray upwards
 		-- code goes here
 	end
@@ -475,7 +478,7 @@ function InitPlayer()
 	}
 
 	player_x = (3 - 1) -- world position x
-	player_y = (15 - 1) -- world position y
+	player_y = (13 - 1) -- world position y
 	player_facing = 1 -- 1=right, -1=left
 
 	player_screenX = nil -- screen position x
