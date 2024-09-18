@@ -165,9 +165,9 @@ returns true or false based on whether the tile at the given x/y index is solid 
 function Map_IsTileSolidTop(_tileX, _tileY)
 	-- _tileX: x-index of the tile to get the solidTop property of
 	-- _tileY: y-index of the tile to get the solidTop property of
-	--io.write(_tileX .. " " .. _tileY .. "\n")
+	--io.write("(" .. _tileX .. ", " .. _tileY .. ")\n")
 	Map_ValidateIndices(_tileX, _tileY)
-	local idFromMap = map_tileArray[_tileY][_tileX]
+	local tileID = map_tileArray[_tileY][_tileX]
 	--[[
 	for y = 1, #map_tileArray do
 		io.write(y .. ": ")
@@ -176,14 +176,14 @@ function Map_IsTileSolidTop(_tileX, _tileY)
 		end
 		io.write("\n")
 	end
-	io.write("idFromMap=" .. idFromMap .. "\n")
+	io.write("tileID=" .. tileID .. "\n")
 	--]]
-	if idFromMap == 0 then
+	if tileID == 0 then
 		return false
 	else
-		local idLookupResult = map_tileLookupByID[idFromMap]
-		--io.write(idLookupResult .. "\n")
-		local property = map_tileProps[idLookupResult].solidTop
+		local tileName = map_tileLookupByID[tileID]
+		--io.write(tileName .. "\n")
+		local property = map_tileProps[tileName].solidTop
 		--[[
 		if property == true then io.write("true\n")
 		elseif property == false then io.write("false\n")
@@ -521,7 +521,34 @@ function DrawMap()
 
 				-- debug stuff
 				if true then
-					love.graphics.points(drawX, drawY)
+					--love.graphics.points(drawX, drawY)
+					if (0 < tileIndex and tileIndex < 4) or tileIndex == 12 then -- only the visible tiles
+						local x1, y1, x2, y2
+						if Map_IsTileSolidTop(x, y) == true then
+							x1 = (x - 1) * TILE_SIZE
+							y1 = (y - 1) * TILE_SIZE
+							x2 = x1 + TILE_SIZE
+							y2 = y1
+							love.graphics.line(x1, y1, x2, y2)
+						end
+						if Map_IsTileSolidSide(x, y) == true then
+							x1 = (x - 1) * TILE_SIZE
+							y1 = (y - 1) * TILE_SIZE
+							x2 = x1
+							y2 = y1 + TILE_SIZE
+							love.graphics.line(x1, y1, x2, y2)
+							x1 = (x - 1 + 1) * TILE_SIZE
+							x2 = x1
+							love.graphics.line(x1, y1, x2, y2)
+						end
+						if Map_IsTileSolidBottom(x, y) == true then
+							x1 = (x - 1) * TILE_SIZE
+							y1 = (y - 1) * TILE_SIZE
+							x2 = x1 + TILE_SIZE
+							y2 = y1
+							love.graphics.line(x1, y1, x2, y2)
+						end
+					end
 				end
 			end
 		end
