@@ -25,19 +25,20 @@ sf::Texture* TextureManager::GetTexture(std::string key)
 
 void TextureManager::privLoadTexture(std::string key, std::string filename)
 {
-	assert(textures.count(key) == 0); // Invalid Key: Key already exists!
+	assert(textures.count(key) == 0); // Invalid Key: texture key already exists!
 
 	std::string relativePath = FOLDER_NAME + filename;
 
 	sf::Texture* pTex = new sf::Texture();
-	assert(pTex->loadFromFile(relativePath));
+	//pTex->loadFromFile(relativePath) // uncomment this to see the error message if the assert gets triggered
+	assert(pTex->loadFromFile(relativePath)); // File not found, probably.
 	
 	textures.emplace(key, pTex);
 }
 
 sf::Texture* TextureManager::privGetTexture(std::string key)
 {
-	assert(textures.count(key) > 0); // Invalid Key: Key not found!
+	assert(textures.count(key) > 0); // Invalid Key: texture key not found!
 
 	return textures.at(key);
 }

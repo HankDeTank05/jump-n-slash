@@ -1,0 +1,4 @@
+tile_X.ext
+
+X = the size of the square tile, in pixels
+ext = the file extension, such as jpg, png, or gif

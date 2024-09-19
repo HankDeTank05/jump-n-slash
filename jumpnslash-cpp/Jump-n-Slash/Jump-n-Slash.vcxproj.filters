@@ -25,8 +25,11 @@
     <Filter Include="Source Files\Engine Code\Asset Managers">
       <UniqueIdentifier>{a45ba797-c505-4449-b8ba-2e9a1f927bb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Core Files">
+    <Filter Include="Source Files\Game Code\Files Required by Engine">
       <UniqueIdentifier>{798ced98-09a1-4b3d-bb75-6288a3728d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Player">
+      <UniqueIdentifier>{d4d9b932-9159-4522-b400-752ee235dc87}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +43,16 @@
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\GameInitialize.cpp">
-      <Filter>Source Files\Game Code\Core Files</Filter>
+      <Filter>Source Files\Game Code\Files Required by Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\LoadResources.cpp">
+      <Filter>Source Files\Game Code\Files Required by Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Player.cpp">
+      <Filter>Source Files\Game Code\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +63,12 @@
       <Filter>Source Files\Game Code</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\TextureManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Player.h">
+      <Filter>Source Files\Game Code\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteManager.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -63,20 +63,26 @@ void JumpSlashEngine::Initialize()
 
 void JumpSlashEngine::LoadContent()
 {
-	// TODO: engine loadcontent function body
+	LoadResources();
 }
 
 void JumpSlashEngine::Update(float deltaTime)
 {
-	// TODO: engine update function body
+	// TODO: engine update system
 }
 
 void JumpSlashEngine::Draw()
 {
 	window.clear();
+
+	// TODO: engine draw system
+
+	// the following will be replaced with the engine draw system
 	sf::CircleShape shape(64.0f);
 	shape.setFillColor(sf::Color::Green);
 	window.draw(shape);
+	// the preceding will be replaced with the engine draw system
+
 	window.display();
 }
 

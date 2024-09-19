@@ -1,0 +1,201 @@
+\doxysection{Sprite\+Manager Class Reference}
+\hypertarget{class_sprite_manager}{}\label{class_sprite_manager}\index{SpriteManager@{SpriteManager}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Load\+Sprite}} (std\+::string key, sf\+::\+Texture \texorpdfstring{$\ast$}{*}p\+Tex)
+\begin{DoxyCompactList}\small\item\em Load a sprite into the engine with a texture pointer, using the whole texture. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_sprite_manager_a00207b5bbb4d8a84f2d178bcb0435963}{Load\+Sprite}} (std\+::string key, sf\+::\+Texture \texorpdfstring{$\ast$}{*}p\+Tex, sf\+::\+Int\+Rect sprite\+Rect)
+\begin{DoxyCompactList}\small\item\em Load a sprite into the engine with a texture pointer, using a part of the texture. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_sprite_manager_a4b5bf4e2c546345d5cdf7e7e22dfcb36}{Load\+Sprite}} (std\+::string key, std\+::string tex\+Key)
+\begin{DoxyCompactList}\small\item\em Load a sprite into the engine with a texture key, using the whole texture. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_sprite_manager_a7659a651abfd8ce4a3078c02986a8d07}{Load\+Sprite}} (std\+::string key, std\+::string tex\+Key, sf\+::\+Int\+Rect sprite\+Rect)
+\begin{DoxyCompactList}\small\item\em Load a sprite into the engine with a texture key, using a part of the texture. \end{DoxyCompactList}\item 
+static sf\+::\+Sprite \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Get\+Sprite}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get a sprite which has already been loaded into the engine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}\index{SpriteManager@{SpriteManager}!GetSprite@{GetSprite}}
+\index{GetSprite@{GetSprite}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{GetSprite()}{GetSprite()}}
+{\footnotesize\ttfamily \label{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5} 
+sf\+::\+Sprite \texorpdfstring{$\ast$}{*} Sprite\+Manager\+::\+Get\+Sprite (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get a sprite which has already been loaded into the engine. 
+
+Get a sprite from the engine. In order to get a sprite from the engine, it must already be loaded into the engine.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the sprite. This is the same key used when loading the texture.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to an SFML sprite.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, sf\+::\+Texture\texorpdfstring{$\ast$}{*} p\+Tex)} 
+
+\doxylink{class_sprite_manager_a00207b5bbb4d8a84f2d178bcb0435963}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, sf\+::\+Texture\texorpdfstring{$\ast$}{*} p\+Tex, sf\+::\+Int\+Rect sprite\+Rect)} 
+
+\doxylink{class_sprite_manager_a4b5bf4e2c546345d5cdf7e7e22dfcb36}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, std\+::string tex\+Key)} 
+
+\doxylink{class_sprite_manager_a7659a651abfd8ce4a3078c02986a8d07}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, std\+::string tex\+Key, sf\+::\+Int\+Rect sprite\+Rect)}
+
+\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture} 
+
+\doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture} 
+\end{DoxySeeAlso}
+\Hypertarget{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}\index{SpriteManager@{SpriteManager}!LoadSprite@{LoadSprite}}
+\index{LoadSprite@{LoadSprite}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{LoadSprite()}{LoadSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631} 
+void Sprite\+Manager\+::\+Load\+Sprite (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{, }\item[{sf\+::\+Texture \texorpdfstring{$\ast$}{*}}]{p\+Tex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load a sprite into the engine with a texture pointer, using the whole texture. 
+
+Load a sprite into the engine. You must specify a key with which to identify the sprite, and provide a pointer to an existing texture.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the sprite. (Duplicate keys are not allowed!) \\
+\hline
+\mbox{\texttt{ in}}  & {\em p\+Tex} & A pointer to the texture with which to create the sprite. The entire texture will be used.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_sprite_manager_a00207b5bbb4d8a84f2d178bcb0435963}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, sf\+::\+Texture\texorpdfstring{$\ast$}{*} p\+Tex, sf\+::\+Int\+Rect sprite\+Rect)} 
+
+\doxylink{class_sprite_manager_a4b5bf4e2c546345d5cdf7e7e22dfcb36}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, std\+::string tex\+Key)} 
+
+\doxylink{class_sprite_manager_a7659a651abfd8ce4a3078c02986a8d07}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, std\+::string tex\+Key, sf\+::\+Int\+Rect sprite\+Rect)} 
+
+\doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite}
+
+\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture} 
+
+\doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture} 
+\end{DoxySeeAlso}
+\Hypertarget{class_sprite_manager_a00207b5bbb4d8a84f2d178bcb0435963}\index{SpriteManager@{SpriteManager}!LoadSprite@{LoadSprite}}
+\index{LoadSprite@{LoadSprite}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{LoadSprite()}{LoadSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{class_sprite_manager_a00207b5bbb4d8a84f2d178bcb0435963} 
+void Sprite\+Manager\+::\+Load\+Sprite (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{, }\item[{sf\+::\+Texture \texorpdfstring{$\ast$}{*}}]{p\+Tex}{, }\item[{sf\+::\+Int\+Rect}]{sprite\+Rect}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load a sprite into the engine with a texture pointer, using a part of the texture. 
+
+Load a sprite into the engine. You must specify a key with which to identify the sprite, provide a pointer to an existing texture, and provide an sf\+::\+Int\+Rect specifying the area of the texture to be used in the sprite.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the sprite. (Duplicate keys are not allowed!) \\
+\hline
+\mbox{\texttt{ in}}  & {\em p\+Tex} & A pointer to the texture with which to create the sprite. Only the portion of the texture specified by the sprite\+Rect will be used. \\
+\hline
+\mbox{\texttt{ in}}  & {\em sprite\+Rect} & The rectangle defining the area of the texture to be used in the sprite. This area can be smaller than the texture, or larger than it.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, sf\+::\+Texture\texorpdfstring{$\ast$}{*} p\+Tex)} 
+
+\doxylink{class_sprite_manager_a4b5bf4e2c546345d5cdf7e7e22dfcb36}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, std\+::string tex\+Key)} 
+
+\doxylink{class_sprite_manager_a7659a651abfd8ce4a3078c02986a8d07}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, std\+::string tex\+Key, sf\+::\+Int\+Rect sprite\+Rect)} 
+
+\doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite}
+
+\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture} 
+
+\doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture} 
+\end{DoxySeeAlso}
+\Hypertarget{class_sprite_manager_a4b5bf4e2c546345d5cdf7e7e22dfcb36}\index{SpriteManager@{SpriteManager}!LoadSprite@{LoadSprite}}
+\index{LoadSprite@{LoadSprite}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{LoadSprite()}{LoadSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{class_sprite_manager_a4b5bf4e2c546345d5cdf7e7e22dfcb36} 
+void Sprite\+Manager\+::\+Load\+Sprite (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{, }\item[{std\+::string}]{tex\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load a sprite into the engine with a texture key, using the whole texture. 
+
+Load a sprite into the engine. You must specify a key with which to identify the sprite, and provide the key of a texture loaded into the engine.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the sprite. (Duplicate keys are not allowed!) \\
+\hline
+\mbox{\texttt{ in}}  & {\em tex\+Key} & The key of the texture with which to create the sprite. The entire texture will be used. (The texture must already be loaded into the engine when this function is called.)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, sf\+::\+Texture\texorpdfstring{$\ast$}{*} p\+Tex)} 
+
+\doxylink{class_sprite_manager_a00207b5bbb4d8a84f2d178bcb0435963}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, sf\+::\+Texture\texorpdfstring{$\ast$}{*} p\+Tex, sf\+::\+Int\+Rect sprite\+Rect)} 
+
+\doxylink{class_sprite_manager_a7659a651abfd8ce4a3078c02986a8d07}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, std\+::string tex\+Key, sf\+::\+Int\+Rect sprite\+Rect)} 
+
+\doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite}
+
+\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture} 
+
+\doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture} 
+\end{DoxySeeAlso}
+\Hypertarget{class_sprite_manager_a7659a651abfd8ce4a3078c02986a8d07}\index{SpriteManager@{SpriteManager}!LoadSprite@{LoadSprite}}
+\index{LoadSprite@{LoadSprite}!SpriteManager@{SpriteManager}}
+\doxysubsubsection{\texorpdfstring{LoadSprite()}{LoadSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{class_sprite_manager_a7659a651abfd8ce4a3078c02986a8d07} 
+void Sprite\+Manager\+::\+Load\+Sprite (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{, }\item[{std\+::string}]{tex\+Key}{, }\item[{sf\+::\+Int\+Rect}]{sprite\+Rect}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load a sprite into the engine with a texture key, using a part of the texture. 
+
+Load a sprite into the engine. You must specify a key with which to identify the sprite, provide the key of a texture loaded into the engine, and provide an sf\+::\+Int\+Rect specifying the area of the texture to be used in the sprite.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the sprite. (Duplicate keys are not allowed!) \\
+\hline
+\mbox{\texttt{ in}}  & {\em tex\+Key} & The key of the texture with which to create the sprite. Only the portion of the texture specified by the sprite\+Rect will be used. (The texture must already be loaded into the engine when this function is called.) \\
+\hline
+\mbox{\texttt{ in}}  & {\em sprite\+Rect} & The rectangle defining the area of the texture to be used in the sprite. This area can be smaller than the texture, or larger than it.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, sf\+::\+Texture\texorpdfstring{$\ast$}{*} p\+Tex)} 
+
+\doxylink{class_sprite_manager_a00207b5bbb4d8a84f2d178bcb0435963}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, sf\+::\+Texture\texorpdfstring{$\ast$}{*} p\+Tex, sf\+::\+Int\+Rect sprite\+Rect)} 
+
+\doxylink{class_sprite_manager_a4b5bf4e2c546345d5cdf7e7e22dfcb36}{Sprite\+Manager\+::\+Load\+Sprite(std\+::string key, std\+::string tex\+Key)} 
+
+\doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite}
+
+\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture} 
+
+\doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Jump-\/n-\/\+Slash/\+Engine Code/Sprite\+Manager.\+h\item 
+Jump-\/n-\/\+Slash/\+Engine Code/Sprite\+Manager.\+cpp\end{DoxyCompactItemize}

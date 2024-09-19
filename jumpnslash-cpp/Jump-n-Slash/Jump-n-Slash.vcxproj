@@ -21,13 +21,18 @@
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp" />
     <ClCompile Include="Engine Code\main.cpp" />
+    <ClCompile Include="Engine Code\SpriteManager.cpp" />
     <ClCompile Include="Engine Code\TextureManager.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
+    <ClCompile Include="Game Code\LoadResources.cpp" />
+    <ClCompile Include="Game Code\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h" />
+    <ClInclude Include="Engine Code\SpriteManager.h" />
     <ClInclude Include="Engine Code\TextureManager.h" />
     <ClInclude Include="Game Code\Constants.h" />
+    <ClInclude Include="Game Code\Player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

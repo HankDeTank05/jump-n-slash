@@ -6,13 +6,7 @@
 static void \mbox{\hyperlink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Load\+Texture}} (std\+::string key, std\+::string filename)
 \begin{DoxyCompactList}\small\item\em Load a texture into the engine. \end{DoxyCompactList}\item 
 static sf\+::\+Texture \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Get\+Texture}} (std\+::string key)
-\begin{DoxyCompactList}\small\item\em Get a texture from the engine which has already been loaded. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Friends}
-\begin{DoxyCompactItemize}
-\item 
-\Hypertarget{class_texture_manager_aa8b9bb729fef86d58e00f6670e40efd2}\label{class_texture_manager_aa8b9bb729fef86d58e00f6670e40efd2} 
-class {\bfseries Texture\+Manager\+Attorney}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get a texture which has already been loaded into the engine. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
@@ -24,9 +18,9 @@ sf\+::\+Texture \texorpdfstring{$\ast$}{*} Texture\+Manager\+::\+Get\+Texture (\
 
 
 
-Get a texture from the engine which has already been loaded. 
+Get a texture which has already been loaded into the engine. 
 
-Get a texture from the engine. In order to get a texture from the engine, you must have already loaded it into the engine.
+Get a texture from the engine. In order to get a texture from the engine, it must already be loaded it into the engine.
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -37,7 +31,11 @@ Get a texture from the engine. In order to get a texture from the engine, you mu
 Returns a pointer to an SFML texture.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See also}
-\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture} 
+\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture}
+
+\doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite} 
+
+\doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite} 
 \end{DoxySeeAlso}
 \Hypertarget{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}\index{TextureManager@{TextureManager}!LoadTexture@{LoadTexture}}
 \index{LoadTexture@{LoadTexture}!TextureManager@{TextureManager}}
@@ -49,11 +47,11 @@ void Texture\+Manager\+::\+Load\+Texture (\begin{DoxyParamCaption}\item[{std\+::
 
 Load a texture into the engine. 
 
-Load a texture into the engine. You must specify the name of the file to load, and a key with which to identify the texture.
+Load a texture into the engine. You must specify a key with which to identify the texture, and the name of the file to load.
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em key} & The key to use to identify the texture. (Duplicate keys are not allowed!) \\
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the texture. (Duplicate keys are not allowed!) \\
 \hline
 \mbox{\texttt{ in}}  & {\em filename} & The name of the file to load. The file must be in TODO(insert folder here).\\
 \hline
@@ -62,7 +60,11 @@ Load a texture into the engine. You must specify the name of the file to load, a
 Does not return anything.
 \end{DoxyReturn}
 \begin{DoxySeeAlso}{See also}
-\doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture} 
+\doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture}
+
+\doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite} 
+
+\doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite} 
 \end{DoxySeeAlso}
 
 

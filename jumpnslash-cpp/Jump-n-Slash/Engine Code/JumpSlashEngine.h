@@ -60,7 +60,7 @@ private: // private functions
 	* \see	TextureManager::LoadTexture
 	* TODO: add more "see also" references for asset manager load functions as they're created
 	*/
-	void LoadResources(); // TODO: LoadResources function body
+	void LoadResources();
 	/*!
 	* \brief	Do things when the game ends.
 	* 
