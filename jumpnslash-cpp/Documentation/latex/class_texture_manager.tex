@@ -1,0 +1,72 @@
+\doxysection{Texture\+Manager Class Reference}
+\hypertarget{class_texture_manager}{}\label{class_texture_manager}\index{TextureManager@{TextureManager}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Load\+Texture}} (std\+::string key, std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Load a texture into the engine. \end{DoxyCompactList}\item 
+static sf\+::\+Texture \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Get\+Texture}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get a texture from the engine which has already been loaded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_texture_manager_aa8b9bb729fef86d58e00f6670e40efd2}\label{class_texture_manager_aa8b9bb729fef86d58e00f6670e40efd2} 
+class {\bfseries Texture\+Manager\+Attorney}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}\index{TextureManager@{TextureManager}!GetTexture@{GetTexture}}
+\index{GetTexture@{GetTexture}!TextureManager@{TextureManager}}
+\doxysubsubsection{\texorpdfstring{GetTexture()}{GetTexture()}}
+{\footnotesize\ttfamily \label{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba} 
+sf\+::\+Texture \texorpdfstring{$\ast$}{*} Texture\+Manager\+::\+Get\+Texture (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get a texture from the engine which has already been loaded. 
+
+Get a texture from the engine. In order to get a texture from the engine, you must have already loaded it into the engine.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the texture. This is the same key used when loading the texture.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to an SFML texture.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture} 
+\end{DoxySeeAlso}
+\Hypertarget{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}\index{TextureManager@{TextureManager}!LoadTexture@{LoadTexture}}
+\index{LoadTexture@{LoadTexture}!TextureManager@{TextureManager}}
+\doxysubsubsection{\texorpdfstring{LoadTexture()}{LoadTexture()}}
+{\footnotesize\ttfamily \label{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb} 
+void Texture\+Manager\+::\+Load\+Texture (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{, }\item[{std\+::string}]{filename}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load a texture into the engine. 
+
+Load a texture into the engine. You must specify the name of the file to load, and a key with which to identify the texture.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key to use to identify the texture. (Duplicate keys are not allowed!) \\
+\hline
+\mbox{\texttt{ in}}  & {\em filename} & The name of the file to load. The file must be in TODO(insert folder here).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Jump-\/n-\/\+Slash/\+Engine Code/Texture\+Manager.\+h\item 
+Jump-\/n-\/\+Slash/\+Engine Code/Texture\+Manager.\+cpp\end{DoxyCompactItemize}

@@ -22,6 +22,12 @@
     <Filter Include="Source Files\Game Code">
       <UniqueIdentifier>{bf26bac0-2770-4ba3-a82e-47dfee402125}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers">
+      <UniqueIdentifier>{a45ba797-c505-4449-b8ba-2e9a1f927bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Core Files">
+      <UniqueIdentifier>{798ced98-09a1-4b3d-bb75-6288a3728d1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -30,6 +36,12 @@
     <ClCompile Include="Engine Code\main.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\TextureManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\GameInitialize.cpp">
+      <Filter>Source Files\Game Code\Core Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -37,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="Game Code\Constants.h">
       <Filter>Source Files\Game Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TextureManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

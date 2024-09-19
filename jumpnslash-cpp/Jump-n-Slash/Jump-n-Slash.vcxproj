@@ -21,9 +21,12 @@
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp" />
     <ClCompile Include="Engine Code\main.cpp" />
+    <ClCompile Include="Engine Code\TextureManager.cpp" />
+    <ClCompile Include="Game Code\GameInitialize.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h" />
+    <ClInclude Include="Engine Code\TextureManager.h" />
     <ClInclude Include="Game Code\Constants.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

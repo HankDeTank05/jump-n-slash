@@ -58,17 +58,17 @@ void JumpSlashEngine::Initialize()
 {
 	// Use this area for one-time non-graphic creation
 	
-	// TODO: engine initialize function
+	GameInitialize();
 }
 
 void JumpSlashEngine::LoadContent()
 {
-	// TODO: engine loadcontent function
+	// TODO: engine loadcontent function body
 }
 
 void JumpSlashEngine::Update(float deltaTime)
 {
-	// TODO: engine update function
+	// TODO: engine update function body
 }
 
 void JumpSlashEngine::Draw()
@@ -82,5 +82,5 @@ void JumpSlashEngine::Draw()
 
 void JumpSlashEngine::UnloadContent()
 {
-	// TODO: engine unloadcontent function
+	// TODO: engine unloadcontent function body
 }
