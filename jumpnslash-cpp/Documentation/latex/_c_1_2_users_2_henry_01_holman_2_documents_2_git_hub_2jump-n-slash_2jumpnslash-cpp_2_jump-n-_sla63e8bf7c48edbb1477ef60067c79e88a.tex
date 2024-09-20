@@ -1,0 +1,173 @@
+\doxysection{C\+:/\+Users/\+Henry Holman/\+Documents/\+Git\+Hub/jump-\/n-\/slash/jumpnslash-\/cpp/\+Jump-\/n-\/\+Slash/\+Engine Code/\+Texture\+Manager.\+h}
+\hypertarget{_c_1_2_users_2_henry_01_holman_2_documents_2_git_hub_2jump-n-slash_2jumpnslash-cpp_2_jump-n-_sla63e8bf7c48edbb1477ef60067c79e88a}{}\label{_c_1_2_users_2_henry_01_holman_2_documents_2_git_hub_2jump-n-slash_2jumpnslash-cpp_2_jump-n-_sla63e8bf7c48edbb1477ef60067c79e88a}Load a texture into the engine.
+
+Load a texture into the engine.\+Load a texture into the engine. You must specify a key with which to identify the texture, and the name of the file to load.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the texture. (Duplicate keys are not allowed!) \\
+\hline
+\mbox{\texttt{ in}}  & {\em filename} & The name of the file to load. The file must be in TODO(insert folder here). \\
+\hline
+\mbox{\texttt{ in}}  & {\em smooth} & Whether or not a texture should be smoothed. If omitted, this argument is {\ttfamily false} by default.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The {\ttfamily filename} argument can include subfolders within the Textures folder. See examples below.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/TextureManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ JumpSlashEngine::LoadResources()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ load\ textures\ for\ pong}}
+\DoxyCodeLine{\ \ TextureManager::LoadTexture(\textcolor{stringliteral}{"{}ball"{}},\ \textcolor{stringliteral}{"{}ball.png"{}});}
+\DoxyCodeLine{\ \ TextureManager::LoadTexture(\textcolor{stringliteral}{"{}paddle"{}},\ \textcolor{stringliteral}{"{}paddle.png"{}});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:17]i001:\ Burn\ v3.10.4.4718,\ Windows\ v10.0\ (Build\ 19045:\ Service\ Pack\ 0),\ path:\ C:\(\backslash\)Windows\(\backslash\)Temp\(\backslash\)\{559F6F1B-\/E451-\/44A9-\/8C25-\/EDFFA59F2003\}\(\backslash\).cr\(\backslash\)VC\_redist.x64.exe}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:17]i009:\ Command\ Line:\ '-\/burn.clean.room=C:\(\backslash\)ProgramData\(\backslash\)Microsoft\(\backslash\)VisualStudio\(\backslash\)Packages\(\backslash\)Microsoft.VisualCpp.Redist.14,version=14.38.33130,chip=x64\(\backslash\)VC\_redist.x64.exe\ -\/burn.filehandle.attached=532\ -\/burn.filehandle.self=640\ /q\ /norestart\ /log\ C:\(\backslash\)Users\(\backslash\)Henry\ Holman\(\backslash\)AppData\(\backslash\)Local\(\backslash\)Temp\(\backslash\)dd\_setup\_20231206114234\_584\_Microsoft.VisualCpp.Redist.14.log'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:17]i000:\ Setting\ string\ variable\ 'WixBundleOriginalSource'\ to\ value\ 'C:\(\backslash\)ProgramData\(\backslash\)Microsoft\(\backslash\)VisualStudio\(\backslash\)Packages\(\backslash\)Microsoft.VisualCpp.Redist.14,version=14.38.33130,chip=x64\(\backslash\)VC\_redist.x64.exe'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:17]i000:\ Setting\ string\ variable\ 'WixBundleOriginalSourceFolder'\ to\ value\ 'C:\(\backslash\)ProgramData\(\backslash\)Microsoft\(\backslash\)VisualStudio\(\backslash\)Packages\(\backslash\)Microsoft.VisualCpp.Redist.14,version=14.38.33130,chip=x64\(\backslash\)'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ string\ variable\ 'WixBundleLog'\ to\ value\ 'C:\(\backslash\)Users\(\backslash\)Henry'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ string\ variable\ 'WixBundleName'\ to\ value\ 'Microsoft\ Visual\ C++\ 2015-\/2022\ Redistributable\ (x64)\ -\/\ 14.38.33130'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ string\ variable\ 'WixBundleManufacturer'\ to\ value\ 'Microsoft\ Corporation'}
+\DoxyCodeLine{[2EC4:1178][2023-\/12-\/06T11:49:18]i000:\ Setting\ version\ variable\ 'WixBundleFileVersion'\ to\ value\ '14.38.33130.0'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i100:\ Detect\ begin,\ 11\ packages}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ string\ variable\ 'Arm64\_Check'\ to\ value\ 'AMD64'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ version\ variable\ 'windows\_uCRT\_DetectKey'\ to\ value\ '10.0.19041.3636'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ numeric\ variable\ 'windows\_uCRT\_DetectKeyExists'\ to\ value\ 1}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i102:\ Detected\ related\ bundle:\ \{8bdfe669-\/9705-\/4184-\/9368-\/db9ce581e0e7\},\ type:\ Upgrade,\ scope:\ PerMachine,\ version:\ 14.36.32532.0,\ operation:\ MajorUpgrade}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i102:\ Detected\ related\ bundle:\ \{d4cecf3b-\/b68f-\/4995-\/8840-\/52ea0fab646e\},\ type:\ Upgrade,\ scope:\ PerMachine,\ version:\ 14.34.31931.0,\ operation:\ MajorUpgrade}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT\ =\ v6.3\ AND\ NOT\ VersionNT64)\ AND\ (windows\_uCRT\_DetectKeyExists\ AND\ windows\_uCRT\_DetectKey\ >=\ v10.0.10240.0)'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT\ =\ v6.3\ AND\ VersionNT64)\ AND\ (windows\_uCRT\_DetectKeyExists\ AND\ windows\_uCRT\_DetectKey\ >=\ v10.0.10240.0)'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT\ =\ v6.2\ AND\ NOT\ VersionNT64)\ AND\ (windows\_uCRT\_DetectKeyExists\ AND\ windows\_uCRT\_DetectKey\ >=\ v10.0.10240.0)'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT\ =\ v6.2\ AND\ VersionNT64)\ AND\ (windows\_uCRT\_DetectKeyExists\ AND\ windows\_uCRT\_DetectKey\ >=\ v10.0.10240.0)'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT\ =\ v6.1\ AND\ NOT\ VersionNT64)\ AND\ (windows\_uCRT\_DetectKeyExists\ AND\ windows\_uCRT\_DetectKey\ >=\ v10.0.10240.0)'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT\ =\ v6.1\ AND\ VersionNT64)\ AND\ (windows\_uCRT\_DetectKeyExists\ AND\ windows\_uCRT\_DetectKey\ >=\ v10.0.10240.0)'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT\ =\ v6.0\ AND\ NOT\ VersionNT64)\ AND\ (windows\_uCRT\_DetectKeyExists\ AND\ windows\_uCRT\_DetectKey\ >=\ v10.0.10240.0)'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT\ =\ v6.0\ AND\ VersionNT64)\ AND\ (windows\_uCRT\_DetectKeyExists\ AND\ windows\_uCRT\_DetectKey\ >=\ v10.0.10240.0)'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i103:\ Detected\ related\ package:\ \{D5D19E2F-\/7189-\/42FE-\/8103-\/92CD1FA457C2\},\ scope:\ PerMachine,\ version:\ 14.36.32532.0,\ language:\ 0\ operation:\ MajorUpgrade}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i103:\ Detected\ related\ package:\ \{0025DD72-\/A959-\/45B5-\/A0A3-\/7EFEB15A8050\},\ scope:\ PerMachine,\ version:\ 14.36.32532.0,\ language:\ 0\ operation:\ MajorUpgrade}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i103:\ Detected\ related\ package:\ \{D5D19E2F-\/7189-\/42FE-\/8103-\/92CD1FA457C2\},\ scope:\ PerMachine,\ version:\ 14.36.32532.0,\ language:\ 0\ operation:\ MajorUpgrade}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i103:\ Detected\ related\ package:\ \{0025DD72-\/A959-\/45B5-\/A0A3-\/7EFEB15A8050\},\ scope:\ PerMachine,\ version:\ 14.36.32532.0,\ language:\ 0\ operation:\ MajorUpgrade}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ Windows81\_x86,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ Windows81\_x64,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ Windows8\_x86,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ Windows8\_x64,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ Windows7\_MSU\_x86,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ Windows7\_MSU\_x64,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ WindowsVista\_MSU\_x86,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ WindowsVista\_MSU\_x64,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ vcRuntimeMinimum\_x64,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ vcRuntimeAdditional\_x64,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i101:\ Detected\ package:\ vcRuntime\_arm64,\ state:\ Absent,\ cached:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ >=\ v6.1'\ evaluates\ to\ true.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i199:\ Detect\ complete,\ result:\ 0x0}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i200:\ Plan\ begin,\ 11\ packages,\ action:\ Install}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ =\ v6.3\ AND\ NOT\ VersionNT64'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]w321:\ Skipping\ dependency\ registration\ on\ package\ with\ no\ dependency\ providers:\ Windows81\_x86}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ =\ v6.3\ AND\ VersionNT64'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]w321:\ Skipping\ dependency\ registration\ on\ package\ with\ no\ dependency\ providers:\ Windows81\_x64}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ =\ v6.2\ AND\ NOT\ VersionNT64'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]w321:\ Skipping\ dependency\ registration\ on\ package\ with\ no\ dependency\ providers:\ Windows8\_x86}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ =\ v6.2\ AND\ VersionNT64'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]w321:\ Skipping\ dependency\ registration\ on\ package\ with\ no\ dependency\ providers:\ Windows8\_x64}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ =\ v6.1\ AND\ NOT\ VersionNT64'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]w321:\ Skipping\ dependency\ registration\ on\ package\ with\ no\ dependency\ providers:\ Windows7\_MSU\_x86}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ =\ v6.1\ AND\ VersionNT64'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]w321:\ Skipping\ dependency\ registration\ on\ package\ with\ no\ dependency\ providers:\ Windows7\_MSU\_x64}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ =\ v6.0\ AND\ NOT\ VersionNT64'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]w321:\ Skipping\ dependency\ registration\ on\ package\ with\ no\ dependency\ providers:\ WindowsVista\_MSU\_x86}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'VersionNT\ =\ v6.0\ AND\ VersionNT64'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]w321:\ Skipping\ dependency\ registration\ on\ package\ with\ no\ dependency\ providers:\ WindowsVista\_MSU\_x64}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT64)\ AND\ NOT\ (Arm64\_Check\ =\ "{}ARM64"{})'\ evaluates\ to\ true.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ string\ variable\ 'WixBundleRollbackLog\_vcRuntimeMinimum\_x64'\ to\ value\ 'C:\(\backslash\)Users\(\backslash\)Henry\_000\_vcRuntimeMinimum\_x64\_rollback.log'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ string\ variable\ 'WixBundleLog\_vcRuntimeMinimum\_x64'\ to\ value\ 'C:\(\backslash\)Users\(\backslash\)Henry\_000\_vcRuntimeMinimum\_x64.log'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ '(VersionNT64)\ AND\ NOT\ (Arm64\_Check\ =\ "{}ARM64"{})'\ evaluates\ to\ true.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ string\ variable\ 'WixBundleRollbackLog\_vcRuntimeAdditional\_x64'\ to\ value\ 'C:\(\backslash\)Users\(\backslash\)Henry\_001\_vcRuntimeAdditional\_x64\_rollback.log'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i000:\ Setting\ string\ variable\ 'WixBundleLog\_vcRuntimeAdditional\_x64'\ to\ value\ 'C:\(\backslash\)Users\(\backslash\)Henry\_001\_vcRuntimeAdditional\_x64.log'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i052:\ Condition\ 'Arm64\_Check\ =\ "{}ARM64"{}'\ evaluates\ to\ false.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ Windows81\_x86,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ Windows81\_x64,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ Windows8\_x86,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ Windows8\_x64,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ Windows7\_MSU\_x86,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ Windows7\_MSU\_x64,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ WindowsVista\_MSU\_x86,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ WindowsVista\_MSU\_x64,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ vcRuntimeMinimum\_x64,\ state:\ Absent,\ default\ requested:\ Present,\ ba\ requested:\ Present,\ execute:\ Install,\ rollback:\ Uninstall,\ cache:\ Yes,\ uncache:\ No,\ dependency:\ Register}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ vcRuntimeAdditional\_x64,\ state:\ Absent,\ default\ requested:\ Present,\ ba\ requested:\ Present,\ execute:\ Install,\ rollback:\ Uninstall,\ cache:\ Yes,\ uncache:\ No,\ dependency:\ Register}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i201:\ Planned\ package:\ vcRuntime\_arm64,\ state:\ Absent,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ None,\ rollback:\ None,\ cache:\ No,\ uncache:\ No,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i207:\ Planned\ related\ bundle:\ \{8bdfe669-\/9705-\/4184-\/9368-\/db9ce581e0e7\},\ type:\ Upgrade,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ Uninstall,\ rollback:\ Install,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i207:\ Planned\ related\ bundle:\ \{d4cecf3b-\/b68f-\/4995-\/8840-\/52ea0fab646e\},\ type:\ Upgrade,\ default\ requested:\ Absent,\ ba\ requested:\ Absent,\ execute:\ Uninstall,\ rollback:\ Install,\ dependency:\ None}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i299:\ Plan\ complete,\ result:\ 0x0}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i300:\ Apply\ begin}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i010:\ Launching\ elevated\ engine\ process.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i011:\ Launched\ elevated\ engine\ process.}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:18]i012:\ Connected\ to\ elevated\ engine.}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:18]i358:\ Pausing\ automatic\ updates.}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:18]i359:\ Paused\ automatic\ updates.}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:18]i360:\ Creating\ a\ system\ restore\ point.}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:18]i361:\ Created\ a\ system\ restore\ point.}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:18]i370:\ Session\ begin,\ registration\ key:\ SOFTWARE\(\backslash\)Microsoft\(\backslash\)Windows\(\backslash\)CurrentVersion\(\backslash\)Uninstall\(\backslash\)\{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\},\ options:\ 0x7,\ disable\ resume:\ No}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:18]i000:\ Caching\ bundle\ from:\ 'C:\(\backslash\)Windows\(\backslash\)Temp\(\backslash\)\{769E0745-\/2877-\/4E75-\/ADD9-\/F17BD523D2A8\}\(\backslash\).be\(\backslash\)VC\_redist.x64.exe'\ to:\ 'C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\}\(\backslash\)VC\_redist.x64.exe'}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:18]i320:\ Registering\ bundle\ dependency\ provider:\ VC,redist.x64,amd64,14.38,bundle,\ version:\ 14.38.33130.0}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:18]i371:\ Updating\ session,\ registration\ key:\ SOFTWARE\(\backslash\)Microsoft\(\backslash\)Windows\(\backslash\)CurrentVersion\(\backslash\)Uninstall\(\backslash\)\{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\},\ resume:\ Active,\ restart\ initiated:\ No,\ disable\ resume:\ No}
+\DoxyCodeLine{[329C:0564][2023-\/12-\/06T11:49:18]i305:\ Verified\ acquired\ payload:\ vcRuntimeMinimum\_x64\ at\ path:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\).unverified\(\backslash\)vcRuntimeMinimum\_x64,\ moving\ to:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{1CA7421F-\/A225-\/4A9C-\/B320-\/A36981A2B789\}v14.38.33130\(\backslash\)packages\(\backslash\)vcRuntimeMinimum\_amd64\(\backslash\)vc\_runtimeMinimum\_x64.msi.}
+\DoxyCodeLine{[329C:0564][2023-\/12-\/06T11:49:18]i305:\ Verified\ acquired\ payload:\ cab5046A8AB272BF37297BB7928664C9503\ at\ path:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\).unverified\(\backslash\)cab5046A8AB272BF37297BB7928664C9503,\ moving\ to:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{1CA7421F-\/A225-\/4A9C-\/B320-\/A36981A2B789\}v14.38.33130\(\backslash\)packages\(\backslash\)vcRuntimeMinimum\_amd64\(\backslash\)cab1.cab.}
+\DoxyCodeLine{[329C:0564][2023-\/12-\/06T11:49:19]i305:\ Verified\ acquired\ payload:\ vcRuntimeAdditional\_x64\ at\ path:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\).unverified\(\backslash\)vcRuntimeAdditional\_x64,\ moving\ to:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{C31777DB-\/51C1-\/4B19-\/9F80-\/38EF5C1D7C89\}v14.38.33130\(\backslash\)packages\(\backslash\)vcRuntimeAdditional\_amd64\(\backslash\)vc\_runtimeAdditional\_x64.msi.}
+\DoxyCodeLine{[329C:0564][2023-\/12-\/06T11:49:19]i305:\ Verified\ acquired\ payload:\ cab2C04DDC374BD96EB5C8EB8208F2C7C92\ at\ path:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\).unverified\(\backslash\)cab2C04DDC374BD96EB5C8EB8208F2C7C92,\ moving\ to:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{C31777DB-\/51C1-\/4B19-\/9F80-\/38EF5C1D7C89\}v14.38.33130\(\backslash\)packages\(\backslash\)vcRuntimeAdditional\_amd64\(\backslash\)cab1.cab.}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:19]i301:\ Applying\ execute\ package:\ vcRuntimeMinimum\_x64,\ action:\ Install,\ path:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{1CA7421F-\/A225-\/4A9C-\/B320-\/A36981A2B789\}v14.38.33130\(\backslash\)packages\(\backslash\)vcRuntimeMinimum\_amd64\(\backslash\)vc\_runtimeMinimum\_x64.msi,\ arguments:\ '\ MSIFASTINSTALL="{}7"{}\ NOVSUI="{}1"{}'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:27]i319:\ Applied\ execute\ package:\ vcRuntimeMinimum\_x64,\ result:\ 0x0,\ restart:\ Required}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:27]i325:\ Registering\ dependency:\ \{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\}\ on\ package\ provider:\ Microsoft.VS.VC\_RuntimeMinimumVSU\_amd64,v14,\ package:\ vcRuntimeMinimum\_x64}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:27]i301:\ Applying\ execute\ package:\ vcRuntimeAdditional\_x64,\ action:\ Install,\ path:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{C31777DB-\/51C1-\/4B19-\/9F80-\/38EF5C1D7C89\}v14.38.33130\(\backslash\)packages\(\backslash\)vcRuntimeAdditional\_amd64\(\backslash\)vc\_runtimeAdditional\_x64.msi,\ arguments:\ '\ MSIFASTINSTALL="{}7"{}\ NOVSUI="{}1"{}'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:28]i319:\ Applied\ execute\ package:\ vcRuntimeAdditional\_x64,\ result:\ 0x0,\ restart:\ None}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:28]i325:\ Registering\ dependency:\ \{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\}\ on\ package\ provider:\ Microsoft.VS.VC\_RuntimeAdditionalVSU\_amd64,v14,\ package:\ vcRuntimeAdditional\_x64}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:28]i301:\ Applying\ execute\ package:\ \{8bdfe669-\/9705-\/4184-\/9368-\/db9ce581e0e7\},\ action:\ Uninstall,\ path:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{8bdfe669-\/9705-\/4184-\/9368-\/db9ce581e0e7\}\(\backslash\)VC\_redist.x64.exe,\ arguments:\ '"{}C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{8bdfe669-\/9705-\/4184-\/9368-\/db9ce581e0e7\}\(\backslash\)VC\_redist.x64.exe"{}\ -\/uninstall\ -\/quiet\ -\/burn.related.upgrade\ -\/burn.ancestors=\{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\}\ -\/burn.filehandle.self=1172'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:29]i319:\ Applied\ execute\ package:\ \{8bdfe669-\/9705-\/4184-\/9368-\/db9ce581e0e7\},\ result:\ 0x0,\ restart:\ None}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:29]i301:\ Applying\ execute\ package:\ \{d4cecf3b-\/b68f-\/4995-\/8840-\/52ea0fab646e\},\ action:\ Uninstall,\ path:\ C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{d4cecf3b-\/b68f-\/4995-\/8840-\/52ea0fab646e\}\(\backslash\)VC\_redist.x64.exe,\ arguments:\ '"{}C:\(\backslash\)ProgramData\(\backslash\)Package\ Cache\(\backslash\)\{d4cecf3b-\/b68f-\/4995-\/8840-\/52ea0fab646e\}\(\backslash\)VC\_redist.x64.exe"{}\ -\/uninstall\ -\/quiet\ -\/burn.related.upgrade\ -\/burn.ancestors=\{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\}\ -\/burn.filehandle.self=1196'}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i319:\ Applied\ execute\ package:\ \{d4cecf3b-\/b68f-\/4995-\/8840-\/52ea0fab646e\},\ result:\ 0x0,\ restart:\ None}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:30]i372:\ Session\ end,\ registration\ key:\ SOFTWARE\(\backslash\)Microsoft\(\backslash\)Windows\(\backslash\)CurrentVersion\(\backslash\)Uninstall\(\backslash\)\{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\},\ resume:\ ARP,\ restart:\ Required,\ disable\ resume:\ No}
+\DoxyCodeLine{[329C:2E7C][2023-\/12-\/06T11:49:30]i371:\ Updating\ session,\ registration\ key:\ SOFTWARE\(\backslash\)Microsoft\(\backslash\)Windows\(\backslash\)CurrentVersion\(\backslash\)Uninstall\(\backslash\)\{1de5e707-\/82da-\/4db6-\/b810-\/5d140cc4cbb3\},\ resume:\ ARP,\ restart\ initiated:\ No,\ disable\ resume:\ No}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i399:\ Apply\ complete,\ result:\ 0x0,\ restart:\ Required,\ ba\ requested\ restart:\ \ No}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i500:\ Shutting\ down,\ exit\ code:\ 0xbc2}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ Arm64\_Check\ =\ AMD64}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ SystemFolder\ =\ C:\(\backslash\)Windows\(\backslash\)system32\(\backslash\)}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ VersionNT\ =\ 10.0.0.0}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ VersionNT64\ =\ 10.0.0.0}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ windows\_uCRT\_DetectKey\ =\ 10.0.19041.3636}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ windows\_uCRT\_DetectKeyExists\ =\ 1}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleAction\ =\ 5}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleElevated\ =\ 1}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleFileVersion\ =\ 14.38.33130.0}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleInstalled\ =\ 0}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleLog\ =\ C:\(\backslash\)Users\(\backslash\)Henry}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleLog\_vcRuntimeAdditional\_x64\ =\ C:\(\backslash\)Users\(\backslash\)Henry\_001\_vcRuntimeAdditional\_x64.log}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleLog\_vcRuntimeMinimum\_x64\ =\ C:\(\backslash\)Users\(\backslash\)Henry\_000\_vcRuntimeMinimum\_x64.log}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleManufacturer\ =\ Microsoft\ Corporation}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleName\ =\ Microsoft\ Visual\ C++\ 2015-\/2022\ Redistributable\ (x64)\ -\/\ 14.38.33130}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleOriginalSource\ =\ C:\(\backslash\)ProgramData\(\backslash\)Microsoft\(\backslash\)VisualStudio\(\backslash\)Packages\(\backslash\)Microsoft.VisualCpp.Redist.14,version=14.38.33130,chip=x64\(\backslash\)VC\_redist.x64.exe}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleOriginalSourceFolder\ =\ C:\(\backslash\)ProgramData\(\backslash\)Microsoft\(\backslash\)VisualStudio\(\backslash\)Packages\(\backslash\)Microsoft.VisualCpp.Redist.14,version=14.38.33130,chip=x64\(\backslash\)}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleProviderKey\ =\ VC,redist.x64,amd64,14.38,bundle}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleRollbackLog\_vcRuntimeAdditional\_x64\ =\ C:\(\backslash\)Users\(\backslash\)Henry\_001\_vcRuntimeAdditional\_x64\_rollback.log}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleRollbackLog\_vcRuntimeMinimum\_x64\ =\ C:\(\backslash\)Users\(\backslash\)Henry\_000\_vcRuntimeMinimum\_x64\_rollback.log}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleSourceProcessFolder\ =\ C:\(\backslash\)ProgramData\(\backslash\)Microsoft\(\backslash\)VisualStudio\(\backslash\)Packages\(\backslash\)Microsoft.VisualCpp.Redist.14,version=14.38.33130,chip=x64\(\backslash\)}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleSourceProcessPath\ =\ C:\(\backslash\)ProgramData\(\backslash\)Microsoft\(\backslash\)VisualStudio\(\backslash\)Packages\(\backslash\)Microsoft.VisualCpp.Redist.14,version=14.38.33130,chip=x64\(\backslash\)VC\_redist.x64.exe}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleTag\ =\ }
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i410:\ Variable:\ WixBundleVersion\ =\ 14.38.33130.0}
+\DoxyCodeLine{[2EC4:39B4][2023-\/12-\/06T11:49:30]i007:\ Exit\ code:\ 0xbc2,\ restarting:\ No}
+
+\end{DoxyCodeInclude}
+ Holman/\+Documents/\+Git\+Hub/jump-\/n-\/slash/jumpnslash-\/cpp/\+Jump-\/n-\/\+Slash/\+Engine \doxylink{_texture_manager_8h_source}{Code/\+Texture\+Manager.\+h} 

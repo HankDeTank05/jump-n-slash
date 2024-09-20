@@ -13,9 +13,9 @@ TextureManager& TextureManager::Instance()
 	return *pInstance;
 }
 
-void TextureManager::LoadTexture(std::string key, std::string filename)
+void TextureManager::LoadTexture(std::string key, std::string filename, bool smooth)
 {
-	Instance().privLoadTexture(key, filename);
+	Instance().privLoadTexture(key, filename, smooth);
 }
 
 sf::Texture* TextureManager::GetTexture(std::string key)
@@ -23,7 +23,7 @@ sf::Texture* TextureManager::GetTexture(std::string key)
 	return Instance().privGetTexture(key);
 }
 
-void TextureManager::privLoadTexture(std::string key, std::string filename)
+void TextureManager::privLoadTexture(std::string key, std::string filename, bool smooth)
 {
 	assert(textures.count(key) == 0); // Invalid Key: texture key already exists!
 
@@ -32,6 +32,7 @@ void TextureManager::privLoadTexture(std::string key, std::string filename)
 	sf::Texture* pTex = new sf::Texture();
 	//pTex->loadFromFile(relativePath) // uncomment this to see the error message if the assert gets triggered
 	assert(pTex->loadFromFile(relativePath)); // File not found, probably.
+	pTex->setSmooth(smooth);
 	
 	textures.emplace(key, pTex);
 }

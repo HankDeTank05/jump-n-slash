@@ -3,7 +3,7 @@
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \mbox{\hyperlink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Load\+Texture}} (std\+::string key, std\+::string filename)
+static void \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{Load\+Texture}} (std\+::string key, std\+::string filename, bool smooth=true)
 \begin{DoxyCompactList}\small\item\em Load a texture into the engine. \end{DoxyCompactList}\item 
 static sf\+::\+Texture \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Get\+Texture}} (std\+::string key)
 \begin{DoxyCompactList}\small\item\em Get a texture which has already been loaded into the engine. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -30,18 +30,36 @@ Get a texture from the engine. In order to get a texture from the engine, it mus
 \begin{DoxyReturn}{Returns}
 Returns a pointer to an SFML texture.
 \end{DoxyReturn}
+{\bfseries{Example}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/TextureManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ JumpSlashEngine::LoadResources()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ make\ sure\ the\ pixelated\ textures\ for\ Super\ Mario\ Bros.\ are\ not\ smoothed}}
+\DoxyCodeLine{\ \ assert(\mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{TextureManager::GetTexture}}(\textcolor{stringliteral}{"{}question\ block"{}}).isSmooth\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ assert(\mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{TextureManager::GetTexture}}(\textcolor{stringliteral}{"{}brick\ block"{}}).isSmooth()\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ assert(\mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{TextureManager::GetTexture}}(\textcolor{stringliteral}{"{}mario\ spritesheet"{}}).isSmooth()\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ assert(\mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{TextureManager::GetTexture}}(\textcolor{stringliteral}{"{}clouds"{}}).isSmooth()\ ==\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
 \begin{DoxySeeAlso}{See also}
-\doxylink{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}{Texture\+Manager\+::\+Load\+Texture}
+\doxylink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{Texture\+Manager\+::\+Load\+Texture}
 
 \doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite} 
 
 \doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite} 
 \end{DoxySeeAlso}
-\Hypertarget{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb}\index{TextureManager@{TextureManager}!LoadTexture@{LoadTexture}}
+\Hypertarget{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}\index{TextureManager@{TextureManager}!LoadTexture@{LoadTexture}}
 \index{LoadTexture@{LoadTexture}!TextureManager@{TextureManager}}
 \doxysubsubsection{\texorpdfstring{LoadTexture()}{LoadTexture()}}
-{\footnotesize\ttfamily \label{class_texture_manager_a99362194b6fbe9df7b1cdb0db6f00cfb} 
-void Texture\+Manager\+::\+Load\+Texture (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{, }\item[{std\+::string}]{filename}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily \label{class_texture_manager_a770e03552151570f7a3cb06f48b66c01} 
+void Texture\+Manager\+::\+Load\+Texture (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{, }\item[{std\+::string}]{filename}{, }\item[{bool}]{smooth}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -53,12 +71,60 @@ Load a texture into the engine. You must specify a key with which to identify th
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em key} & The key used to identify the texture. (Duplicate keys are not allowed!) \\
 \hline
-\mbox{\texttt{ in}}  & {\em filename} & The name of the file to load. The file must be in TODO(insert folder here).\\
+\mbox{\texttt{ in}}  & {\em filename} & The name of the file to load. The file must be in {\ttfamily Assets/\+Textures/} or a subfolder within it. \\
+\hline
+\mbox{\texttt{ in}}  & {\em smooth} & Whether or not a texture should be smoothed. If omitted, this argument is {\ttfamily true} by default.\\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+The {\ttfamily filename} argument can include subfolders within the Textures folder. See examples below.
+\end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 Does not return anything.
 \end{DoxyReturn}
+{\bfseries{Example}} {\bfseries{1}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/TextureManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ JumpSlashEngine::LoadResources()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ load\ textures\ for\ Fruit\ Ninja}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}apple\ surface"{}},\ \textcolor{stringliteral}{"{}apple\_surface.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}apple\ inside"{}},\ \textcolor{stringliteral}{"{}apple\_inside.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}orange\ surface"{}},\ \textcolor{stringliteral}{"{}orange\_surface.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}orange\ inside"{}},\ \textcolor{stringliteral}{"{}orange\_inside.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}banana\ surface"{}},\ \textcolor{stringliteral}{"{}banana\_surface.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}banana\ inside"{}},\ \textcolor{stringliteral}{"{}banana\_inside.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}pineapple\ surface"{}},\ \textcolor{stringliteral}{"{}pineapple\_surface.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}pineapple\ inside"{}},\ \textcolor{stringliteral}{"{}pineapple\_inside.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}watermelon\ surface"{}},\ \textcolor{stringliteral}{"{}watermelon\_surface.png"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}watermelon\ inside"{}},\ \textcolor{stringliteral}{"{}watermelon\_inside.png"{}});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Example}} {\bfseries{2}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/TextureManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ JumpSlashEngine::LoadResources()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ load\ textures\ for\ Super\ Mario\ Bros.}}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ these\ textures\ are\ pixel\ art,\ so\ we\ don't\ want\ them\ smoothed}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}question\ block"{}},\ \textcolor{stringliteral}{"{}blocks/question\_block.png"{}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}brick\ block"{}},\ \textcolor{stringliteral}{"{}blocks/brick\_block.png"{}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}mario\ spritesheet"{}},\ \textcolor{stringliteral}{"{}characters/mario\_spritesheet.png"{}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}clouds"{}},\ \textcolor{stringliteral}{"{}backgrounds/cloud\_tiles.png"{}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture}
 
