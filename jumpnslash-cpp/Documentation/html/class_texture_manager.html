@@ -152,7 +152,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="keywordtype">void</span> JumpSlashEngine::LoadResources()</div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">// make sure the pixelated textures for Super Mario Bros. are not smoothed</span></div>
-<div class="line">  assert(<a class="code hl_function" href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a>(<span class="stringliteral">&quot;question block&quot;</span>).isSmooth == <span class="keyword">false</span>);</div>
+<div class="line">  assert(<a class="code hl_function" href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a>(<span class="stringliteral">&quot;question block&quot;</span>).isSmooth() == <span class="keyword">false</span>);</div>
 <div class="line">  assert(<a class="code hl_function" href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a>(<span class="stringliteral">&quot;brick block&quot;</span>).isSmooth() == <span class="keyword">false</span>);</div>
 <div class="line">  assert(<a class="code hl_function" href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a>(<span class="stringliteral">&quot;mario spritesheet&quot;</span>).isSmooth() == <span class="keyword">false</span>);</div>
 <div class="line">  assert(<a class="code hl_function" href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a>(<span class="stringliteral">&quot;clouds&quot;</span>).isSmooth() == <span class="keyword">false</span>);</div>

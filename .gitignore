@@ -396,4 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Henry's extra omissions
 jumpnslash-pico8/copy_to_path.txt
+jumpnslash-cpp/Doxyfile
