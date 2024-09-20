@@ -1,6 +1,7 @@
 #include "JumpSlashEngine.h"
 
 #include "../Game Code/Constants.h"
+#include "DrawManager.h"
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
 
@@ -68,14 +69,12 @@ void JumpSlashEngine::LoadContent()
 
 void JumpSlashEngine::Update(float deltaTime)
 {
-	// TODO: engine update system
+	// TODO: emptu function JumpSlashEngine::Update
 }
 
 void JumpSlashEngine::Draw()
 {
 	window.clear();
-
-	// TODO: engine draw system
 
 	// the following will be replaced with the engine draw system
 	sf::CircleShape shape(64.0f);
@@ -83,10 +82,12 @@ void JumpSlashEngine::Draw()
 	window.draw(shape);
 	// the preceding will be replaced with the engine draw system
 
+	pDrawMgr->Draw();
+
 	window.display();
 }
 
 void JumpSlashEngine::UnloadContent()
 {
-	// TODO: engine unloadcontent function body
+	// TODO: empty function JumpSlashEngine::UnloadContent
 }

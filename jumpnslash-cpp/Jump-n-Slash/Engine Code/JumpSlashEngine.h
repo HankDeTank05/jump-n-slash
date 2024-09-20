@@ -3,9 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 
-// this class is written as a singleton
+// forward declarations
+class DrawManager;
 
-class JumpSlashEngine
+class JumpSlashEngine // this class is written as a singleton
 {
 private:
 
@@ -14,18 +15,20 @@ private:
 	JumpSlashEngine();
 	JumpSlashEngine(const JumpSlashEngine& jse) = delete;
 	JumpSlashEngine& operator=(const JumpSlashEngine& jse) = delete;
-	~JumpSlashEngine() = default;
+	virtual ~JumpSlashEngine() = default;
 
 	static JumpSlashEngine& Instance();
 
 public: // public api functions
-	// TODO: add static function for setting window name
-	// TODO: add static function for setting window size
-	// TODO: add static function for setting the fullscreen mode
+	// TODO: create function static JumpSlashEngine::SetWindowName
+	// TODO: create function static JumpSlashEngine::SetWindowSize
+	// TODO: create function static JumpSlashEngine::SetFullscreenMode
 	
 	// TODO: should these be public?
-	static void Run(); // TODO: docs
-	static void Terminate(); // TODO: docs
+	// TODO: documentation for JumpSlashEngine::Run()
+	static void Run(); 
+	// TODO: documentation for JumpSlashEngine::Terminate()
+	static void Terminate();
 
 private: // private functions
 	void privRun();
@@ -58,6 +61,7 @@ private: // private functions
 	* \see	JumpSlashengine::GameEnd
 	* 
 	* \see	TextureManager::LoadTexture
+	* \see	SpriteManager::LoadSprite
 	* TODO: add more "see also" references for asset manager load functions as they're created
 	*/
 	void LoadResources();
@@ -72,11 +76,13 @@ private: // private functions
 	* \see	JumpSlashEngine::LoadResources
 	* TODO: figure out what the purpose of this function is
 	*/
-	void GameEnd(); // TODO: GameEnd function body
+	void GameEnd(); // TODO: function not defined JumpSlashEngine::GameEnd
 
 private: // member variables
 	sf::RenderWindow window;
 	sf::Clock clock;
+
+	DrawManager* pDrawMgr;
 };
 
 #endif

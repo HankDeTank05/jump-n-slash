@@ -13,7 +13,7 @@ private:
 	SpriteManager() = default;
 	SpriteManager(const SpriteManager& sm) = delete;
 	SpriteManager& operator=(const SpriteManager& sm) = delete;
-	~SpriteManager() = default;
+	virtual ~SpriteManager() = default;
 
 	static SpriteManager& Instance();
 
@@ -36,7 +36,7 @@ public: // api functions
 	* \see	TextureManager::LoadTexture
 	* \see	TextureManager::GetTexture
 	*/
-	static void LoadSprite(std::string key, sf::Texture* pTex); // TODO: add example code to this function's documentation
+	static void LoadSprite(std::string key, sf::Texture* pTex); // TODO: documentation for SpriteManager::LoadSprite(key, pTex) needs example code
 	/*!
 	* \brief	Load a sprite into the engine with a texture pointer, using a part of the texture.
 	* 
@@ -56,7 +56,7 @@ public: // api functions
 	* \see	TextureManager::LoadTexture
 	* \see	TextureManager::GetTexture
 	*/
-	static void LoadSprite(std::string key, sf::Texture* pTex, sf::IntRect spriteRect); // TODO: add example code to this function's documentation
+	static void LoadSprite(std::string key, sf::Texture* pTex, sf::IntRect spriteRect); // TODO: documentation for SpriteManager::LoadSprite(key, pTex, spriteRect) need example code
 	/*!
 	* \brief	Load a sprite into the engine with a texture key, using the whole texture.
 	* 
@@ -75,7 +75,7 @@ public: // api functions
 	* \see	TextureManager::LoadTexture
 	* \see	TextureManager::GetTexture
 	*/
-	static void LoadSprite(std::string key, std::string texKey); // TODO: add example code to this function's documentation
+	static void LoadSprite(std::string key, std::string texKey); // TODO: documentation for SpriteManager::LoadSprite(key, texKey) needs example code
 	/*!
 	* \brief	Load a sprite into the engine with a texture key, using a part of the texture
 	* 
@@ -95,7 +95,7 @@ public: // api functions
 	* \see	TextureManager::LoadTexture
 	* \see	TextureManager::GetTexture
 	*/
-	static void LoadSprite(std::string key, std::string texKey, sf::IntRect spriteRect); // TODO: add example code to this function's documentation
+	static void LoadSprite(std::string key, std::string texKey, sf::IntRect spriteRect); // TODO: documentation for SpriteManager::LoadSprite(key, texKey, spriteRect) needs example code
 	/*!
 	* \brief	Get a sprite which has already been loaded into the engine.
 	* 
@@ -113,7 +113,7 @@ public: // api functions
 	* \see	TextureManager::LoadTexture
 	* \see	TextureManager::GetTexture
 	*/
-	static sf::Sprite* GetSprite(std::string key); // TODO: add example code to this function's documentation
+	static sf::Sprite* GetSprite(std::string key); // TODO: documentation for SpriteManager::GetSprite(key) needs example code
 
 private: // private functions
 	void privLoadSprite(std::string key, sf::Texture* pTex);

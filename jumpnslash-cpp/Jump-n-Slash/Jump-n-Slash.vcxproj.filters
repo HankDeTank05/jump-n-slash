@@ -31,6 +31,42 @@
     <Filter Include="Source Files\Game Code\Player">
       <UniqueIdentifier>{d4d9b932-9159-4522-b400-752ee235dc87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems">
+      <UniqueIdentifier>{3b3de11b-8a13-4db0-bd9e-8979bf2145ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System">
+      <UniqueIdentifier>{5e5cc37e-d380-42db-a989-db78da0ab04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene System">
+      <UniqueIdentifier>{e909c860-a761-4e00-8d5f-be79e0202fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Camera System">
+      <UniqueIdentifier>{da86135f-46d2-4b80-91b3-a4fdb9e21f51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System">
+      <UniqueIdentifier>{8feb0065-cbef-4c0b-8680-d111757a1cba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Update System">
+      <UniqueIdentifier>{df19126b-72ff-4c0f-9cbc-1e4597f4cb56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Draw System">
+      <UniqueIdentifier>{2939ad04-43d2-4e14-aab2-929757b7bd6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Input System">
+      <UniqueIdentifier>{ab7070f7-057c-45bc-a64d-d669a0f558d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Alarm System">
+      <UniqueIdentifier>{d6f39594-5459-4ab7-a3bf-38bc7f5d62ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Debug Systems">
+      <UniqueIdentifier>{6c4b4b4e-bbdf-4061-93d5-2c02bedf5c62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Debug Systems\Visualizer System">
+      <UniqueIdentifier>{8e7dda7f-43a8-4a2b-a445-b57105f625fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Misc. files">
+      <UniqueIdentifier>{002f2070-2642-4b78-a7b1-5eccdca6db3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -54,6 +90,9 @@
     <ClCompile Include="Engine Code\SpriteManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\DrawManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -70,6 +109,18 @@
     </ClInclude>
     <ClInclude Include="Engine Code\SpriteManager.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\RegistrationState.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Command.h">
+      <Filter>Source Files\Engine Code\Misc. files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\DrawManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\DrawableObject.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

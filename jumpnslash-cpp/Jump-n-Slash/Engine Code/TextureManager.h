@@ -13,7 +13,7 @@ private:
 	TextureManager() = default;
 	TextureManager(const TextureManager& tm) = delete;
 	TextureManager& operator=(const TextureManager& tm) = delete;
-	~TextureManager() = default;
+	virtual ~TextureManager() = default;
 
 	static TextureManager& Instance();
 

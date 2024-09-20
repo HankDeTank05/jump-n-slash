@@ -7,7 +7,7 @@ public:
 	Player();
 	Player(const Player& p) = delete;
 	Player& operator=(const Player& p) = delete;
-	~Player();
+	virtual ~Player();
 };
 
 #endif

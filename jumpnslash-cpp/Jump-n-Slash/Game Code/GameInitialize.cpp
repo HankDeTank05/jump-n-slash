@@ -2,7 +2,7 @@
 
 void JumpSlashEngine::GameInitialize()
 {
-	// TODO: GameInitialize function body
+	// TODO: empty function JumpSlashEngine::GameInitialize
 
 	// the body of this function should set the window name and size
 }

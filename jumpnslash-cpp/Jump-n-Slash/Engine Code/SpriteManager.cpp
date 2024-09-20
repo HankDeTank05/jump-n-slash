@@ -41,7 +41,6 @@ sf::Sprite* SpriteManager::GetSprite(std::string key)
 
 void SpriteManager::privLoadSprite(std::string key, sf::Texture* pTex)
 {
-	// TODO: test that the (key, ptr) version of privLoadSprite works
 
 	assert(sprites.count(key) == 0); // Invalid Key: sprite key already exists!
 	assert(pTex != nullptr);
@@ -54,7 +53,6 @@ void SpriteManager::privLoadSprite(std::string key, sf::Texture* pTex)
 
 void SpriteManager::privLoadSprite(std::string key, sf::Texture* pTex, sf::IntRect spriteRect)
 {
-	// TODO: test that the (key, ptr, rect) version of privLoadSprite works
 
 	assert(sprites.count(key) == 0); // Invalid Key: sprite key already exists!
 	assert(pTex != nullptr);
@@ -68,7 +66,6 @@ void SpriteManager::privLoadSprite(std::string key, sf::Texture* pTex, sf::IntRe
 
 void SpriteManager::privLoadSprite(std::string key, std::string texKey)
 {
-	// TODO: test that the (key, texKey) version of privLoadSprite works
 
 	assert(sprites.count(key) == 0); // Invalid Key: sprite key already exists!
 
@@ -80,7 +77,6 @@ void SpriteManager::privLoadSprite(std::string key, std::string texKey)
 
 void SpriteManager::privLoadSprite(std::string key, std::string texKey, sf::IntRect spriteRect)
 {
-	// TODO: test that the (key, texKey, rect) version of privLoadSprite works
 
 	assert(sprites.count(key) == 0); // Invalid Key: sprite key already exists!
 
