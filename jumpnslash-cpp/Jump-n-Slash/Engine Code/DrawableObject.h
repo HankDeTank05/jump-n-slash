@@ -6,6 +6,7 @@
 
 // forward declarations
 class DrawRegistrationCommand;
+class DrawDeregistrationCommand;
 
 class DrawableObject
 {
@@ -33,6 +34,7 @@ private:
 private:
 	RegistrationState regState;
 	DrawRegistrationCommand* pRegCmd;
+	DrawDeregistrationCommand* pDeregCmd;
 	DrawManager::DrawListRef deleteRef;
 };
 
