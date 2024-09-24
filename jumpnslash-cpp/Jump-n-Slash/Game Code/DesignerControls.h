@@ -1,1 +1,1 @@
-#pragma once
+#ifndef DESIGNER_CONTROLS_H

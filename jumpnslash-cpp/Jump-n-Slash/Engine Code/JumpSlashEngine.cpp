@@ -1,16 +1,10 @@
 #include "JumpSlashEngine.h"
 
-#include "../Game Code/Constants.h"
-#include "DrawManager.h"
+#include <cassert>
+#include "SceneAttorney.h" // TODO: remove this when SceneManager is created
+#include "Scene.h" // TODO: remove this when SceneManager is created
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
-
-JumpSlashEngine::JumpSlashEngine()
-	: window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_NAME),
-	clock()
-{
-	// do nothing
-}
 
 JumpSlashEngine& JumpSlashEngine::Instance()
 {
@@ -19,6 +13,26 @@ JumpSlashEngine& JumpSlashEngine::Instance()
 		pInstance = new JumpSlashEngine();
 	}
 	return *pInstance;
+}
+
+void JumpSlashEngine::SetWindowName(sf::String winName)
+{
+	Instance().privSetWindowName(winName);
+}
+
+void JumpSlashEngine::SetWindowSize(int winWidth, int winHeight)
+{
+	Instance().privSetWindowSize(winWidth, winHeight);
+}
+
+void JumpSlashEngine::SetStartScene(Scene* pStartScene)
+{
+	Instance().privSetStartScene(pStartScene);
+}
+
+Scene* JumpSlashEngine::GetCurrentScene()
+{
+	return Instance().privGetCurrentScene();
 }
 
 void JumpSlashEngine::Run()
@@ -32,10 +46,33 @@ void JumpSlashEngine::Terminate()
 	pInstance = nullptr;
 }
 
+void JumpSlashEngine::privSetWindowName(sf::String _winName)
+{
+	winName = _winName;
+}
+
+void JumpSlashEngine::privSetWindowSize(int _winWidth, int _winHeight)
+{
+	winWidth = _winWidth;
+	winHeight = _winHeight;
+}
+
+void JumpSlashEngine::privSetStartScene(Scene* _pStartScene)
+{
+	pCurrentScene = _pStartScene;
+}
+
+Scene* JumpSlashEngine::privGetCurrentScene()
+{
+	assert(pCurrentScene != nullptr);
+	return pCurrentScene;
+}
+
 void JumpSlashEngine::privRun()
 {
 	this->Initialize();
 	this->LoadContent();
+	window.create(sf::VideoMode(winWidth, winHeight), winName);
 	while (window.isOpen())
 	{
 		sf::Time deltaTime = clock.restart();
@@ -65,24 +102,21 @@ void JumpSlashEngine::Initialize()
 void JumpSlashEngine::LoadContent()
 {
 	LoadResources();
+
+	assert(pCurrentScene != nullptr); // You forgot to call SetStartScene at the end of LoadContent!
+	pCurrentScene->Init();
 }
 
 void JumpSlashEngine::Update(float deltaTime)
 {
-	// TODO: emptu function JumpSlashEngine::Update
+	SceneAttorney::GameLoop::Update(pCurrentScene);
 }
 
 void JumpSlashEngine::Draw()
 {
 	window.clear();
 
-	// the following will be replaced with the engine draw system
-	sf::CircleShape shape(64.0f);
-	shape.setFillColor(sf::Color::Green);
-	window.draw(shape);
-	// the preceding will be replaced with the engine draw system
-
-	pDrawMgr->Draw();
+	SceneAttorney::GameLoop::Draw(pCurrentScene);
 
 	window.display();
 }
@@ -90,4 +124,14 @@ void JumpSlashEngine::Draw()
 void JumpSlashEngine::UnloadContent()
 {
 	// TODO: empty function JumpSlashEngine::UnloadContent
+}
+
+sf::RenderWindow& JumpSlashEngine::GetWindow()
+{
+	return Instance().privGetWindow();
+}
+
+sf::RenderWindow& JumpSlashEngine::privGetWindow()
+{
+	return window;
 }

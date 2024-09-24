@@ -1,5 +1,7 @@
 #include "DrawManager.h"
+
 #include <cassert>
+#include "DrawableObjectAttorney.h"
 
 DrawManager::~DrawManager()
 {
@@ -18,6 +20,8 @@ void DrawManager::Deregister(DrawListRef drawListRef)
 
 void DrawManager::Draw()
 {
-	// TODO: empty function DrawManager::Draw
-	assert(false);
+	for (DrawList::iterator it = drawList.begin(); it != drawList.end(); it++)
+	{
+		DrawableObjectAttorney::GameLoop::Draw(*it);
+	}
 }

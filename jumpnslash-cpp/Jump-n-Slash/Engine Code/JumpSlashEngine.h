@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 // forward declarations
-class DrawManager;
+class Scene;
 
 class JumpSlashEngine // this class is written as a singleton
 {
@@ -12,7 +12,7 @@ private:
 
 	static JumpSlashEngine* pInstance;
 
-	JumpSlashEngine();
+	JumpSlashEngine() = default;
 	JumpSlashEngine(const JumpSlashEngine& jse) = delete;
 	JumpSlashEngine& operator=(const JumpSlashEngine& jse) = delete;
 	virtual ~JumpSlashEngine() = default;
@@ -20,19 +20,31 @@ private:
 	static JumpSlashEngine& Instance();
 
 public: // public api functions
-	// TODO: create function static JumpSlashEngine::SetWindowName
-	// TODO: create function static JumpSlashEngine::SetWindowSize
-	// TODO: create function static JumpSlashEngine::SetFullscreenMode
+	static void SetWindowName(sf::String winName); // TODO: documentation for JumpSlashEngine::SetWindowName
+	static void SetWindowSize(int winWidth, int winHeight); // TODO: documentation for JumpSlashEngine::SetWindowSize
+	// TODO: create function JumpSlashEngine::SetFullscreenMode
+
+	static void SetStartScene(Scene* pStartScene);
+	static Scene* GetCurrentScene();
 	
 	// TODO: should these be public?
-	// TODO: documentation for JumpSlashEngine::Run()
-	static void Run(); 
-	// TODO: documentation for JumpSlashEngine::Terminate()
-	static void Terminate();
+	static void Run(); // TODO: documentation for JumpSlashEngine::Run
+	static void Terminate(); // TODO: documentation for JumpSlashEngine::Terminate
+
+	static sf::RenderWindow& GetWindow(); // TODO: I don't like this...
 
 private: // private functions
+	void privSetWindowName(sf::String winName);
+	void privSetWindowSize(int winWidth, int winHeight);
+
+	void privSetStartScene(Scene* pStartScene);
+	Scene* privGetCurrentScene();
+
 	void privRun();
 
+	sf::RenderWindow& privGetWindow();
+
+private:
 	void Initialize();
 	void LoadContent();
 	void Update(float deltaTime);
@@ -80,9 +92,13 @@ private: // private functions
 
 private: // member variables
 	sf::RenderWindow window;
+	sf::String winName;
+	int winWidth;
+	int winHeight;
 	sf::Clock clock;
 
-	DrawManager* pDrawMgr;
+	Scene* pCurrentScene;
+	
 };
 
 #endif

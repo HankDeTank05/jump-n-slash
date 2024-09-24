@@ -19,25 +19,39 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine Code\DrawableObject.cpp" />
+    <ClCompile Include="Engine Code\DrawableObjectAttorney.cpp" />
     <ClCompile Include="Engine Code\DrawManager.cpp" />
+    <ClCompile Include="Engine Code\DrawRegistrationCommand.cpp" />
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp" />
     <ClCompile Include="Engine Code\main.cpp" />
+    <ClCompile Include="Engine Code\RegistrationBroker.cpp" />
+    <ClCompile Include="Engine Code\Scene.cpp" />
+    <ClCompile Include="Engine Code\SceneAttorney.cpp" />
     <ClCompile Include="Engine Code\SpriteManager.cpp" />
     <ClCompile Include="Engine Code\TextureManager.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
+    <ClCompile Include="Game Code\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\Command.h" />
     <ClInclude Include="Engine Code\DrawableObject.h" />
+    <ClInclude Include="Engine Code\DrawableObjectAttorney.h" />
     <ClInclude Include="Engine Code\DrawManager.h" />
+    <ClInclude Include="Engine Code\DrawRegistrationCommand.h" />
     <ClInclude Include="Engine Code\JumpSlashEngine.h" />
+    <ClInclude Include="Engine Code\RegistrationBroker.h" />
     <ClInclude Include="Engine Code\RegistrationState.h" />
+    <ClInclude Include="Engine Code\Scene.h" />
+    <ClInclude Include="Engine Code\SceneAttorney.h" />
     <ClInclude Include="Engine Code\SpriteManager.h" />
     <ClInclude Include="Engine Code\TextureManager.h" />
     <ClInclude Include="Game Code\Constants.h" />
+    <ClInclude Include="Game Code\DesignerControls.h" />
     <ClInclude Include="Game Code\Player.h" />
+    <ClInclude Include="Game Code\TestScene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

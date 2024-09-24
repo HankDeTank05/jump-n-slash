@@ -1,6 +1,12 @@
 #ifndef DRAWABLE_OBJECT_H
 #define DRAWABLE_OBJECT_H
 
+#include "RegistrationState.h"
+#include "DrawManager.h"
+
+// forward declarations
+class DrawRegistrationCommand;
+
 class DrawableObject
 {
 public:
@@ -18,6 +24,16 @@ protected:
 	void EnqueueForDrawRegistration();
 	// TODO: documentation for DrawableObject::EnqueueForDrawDeregistration()
 	void EnqueueForDrawDeregistration();
+
+private:
+	friend class DrawableObjectAttorney;
+	void Register(); // TODO: rename this function to "DrawableObject::SceneRegister" once scene system is created
+	void Deregister(); // TODO: rename this function to "DrawableObject::SceneDeregister" once scene system is created
+
+private:
+	RegistrationState regState;
+	DrawRegistrationCommand* pRegCmd;
+	DrawManager::DrawListRef deleteRef;
 };
 
 #endif

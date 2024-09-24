@@ -67,6 +67,9 @@
     <Filter Include="Source Files\Engine Code\Misc. files">
       <UniqueIdentifier>{002f2070-2642-4b78-a7b1-5eccdca6db3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Test Scene">
+      <UniqueIdentifier>{9990cb5d-41ed-4b76-93e6-927206ed2283}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -91,6 +94,27 @@
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\DrawManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\DrawableObject.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\RegistrationBroker.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\DrawRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Scene.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\TestScene.cpp">
+      <Filter>Source Files\Game Code\Test Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\DrawableObjectAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -120,6 +144,27 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\DrawableObject.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\DesignerControls.h">
+      <Filter>Source Files\Game Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\RegistrationBroker.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\DrawRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Scene.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\TestScene.h">
+      <Filter>Source Files\Game Code\Test Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\DrawableObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClInclude>
   </ItemGroup>
