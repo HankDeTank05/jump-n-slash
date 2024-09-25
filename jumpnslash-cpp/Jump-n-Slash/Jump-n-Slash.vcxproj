@@ -24,6 +24,7 @@
     <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp" />
     <ClCompile Include="Engine Code\DrawManager.cpp" />
     <ClCompile Include="Engine Code\DrawRegistrationCommand.cpp" />
+    <ClCompile Include="Engine Code\InputObject.cpp" />
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp" />
     <ClCompile Include="Engine Code\main.cpp" />
     <ClCompile Include="Engine Code\RegistrationBroker.cpp" />
@@ -50,9 +51,15 @@
     <ClInclude Include="Engine Code\DrawDeregistrationCommand.h" />
     <ClInclude Include="Engine Code\DrawManager.h" />
     <ClInclude Include="Engine Code\DrawRegistrationCommand.h" />
+    <ClInclude Include="Engine Code\InputEvent.h" />
+    <ClInclude Include="Engine Code\InputObject.h" />
     <ClInclude Include="Engine Code\JumpSlashEngine.h" />
+    <ClInclude Include="Engine Code\KeyDeregistrationCommand.h" />
+    <ClInclude Include="Engine Code\KeyRegistrationCommand.h" />
     <ClInclude Include="Engine Code\MemTracker\Framework.h" />
     <ClInclude Include="Engine Code\MemTracker\ProjectSettings.h" />
+    <ClInclude Include="Engine Code\MouseBtnDeregistrationCommand.h" />
+    <ClInclude Include="Engine Code\MouseBtnRegistrationCommand.h" />
     <ClInclude Include="Engine Code\RegistrationBroker.h" />
     <ClInclude Include="Engine Code\RegistrationState.h" />
     <ClInclude Include="Engine Code\Scene.h" />

@@ -147,6 +147,9 @@
     <ClCompile Include="Engine Code\UpdateDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\InputObject.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -226,6 +229,24 @@
     </ClInclude>
     <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\InputObject.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\InputEvent.h">
+      <Filter>Source Files\Engine Code\Misc. files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\KeyRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\KeyDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MouseBtnRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MouseBtnDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

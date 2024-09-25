@@ -4,8 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include "../Engine Code/UpdatableObject.h"
 #include "../Engine Code/DrawableObject.h"
+#include "../Engine Code/InputObject.h"
 
-class Player : public UpdatableObject, public DrawableObject
+class Player : public UpdatableObject, public DrawableObject, public InputObject
 {
 public:
 	Player();
