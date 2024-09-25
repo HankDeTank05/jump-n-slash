@@ -11,3 +11,8 @@ void DrawableObjectAttorney::Registration::Register(DrawableObject* pDrawable)
 {
 	pDrawable->Register();
 }
+
+void DrawableObjectAttorney::Registration::Deregister(DrawableObject* pDrawable)
+{
+	pDrawable->Deregister();
+}

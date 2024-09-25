@@ -2,9 +2,10 @@
 #define PLAYER_H
 
 #include <SFML/Graphics.hpp>
+#include "../Engine Code/UpdatableObject.h"
 #include "../Engine Code/DrawableObject.h"
 
-class Player : public DrawableObject
+class Player : public UpdatableObject, public DrawableObject
 {
 public:
 	Player();
@@ -12,10 +13,13 @@ public:
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
 
+	virtual void Update() override;
 	virtual void Draw() override;
 	
 private:
 	sf::CircleShape circle;
+	int currentFrames;
+	int maxFrames;
 };
 
 #endif

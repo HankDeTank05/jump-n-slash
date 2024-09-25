@@ -132,6 +132,21 @@
     <ClCompile Include="Engine Code\SpriteManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\UpdateManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\UpdatableObject.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\UpdateRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\UpdatableObjectAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\UpdateDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -196,6 +211,21 @@
     </ClInclude>
     <ClInclude Include="Engine Code\SpriteManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\UpdateManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\UpdatableObject.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\UpdateRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\UpdatableObjectAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

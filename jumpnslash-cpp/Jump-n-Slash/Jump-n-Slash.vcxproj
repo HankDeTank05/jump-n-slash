@@ -33,6 +33,11 @@
     <ClCompile Include="Engine Code\SpriteManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\TextureManager.cpp" />
     <ClCompile Include="Engine Code\TextureManagerAttorney.cpp" />
+    <ClCompile Include="Engine Code\UpdatableObject.cpp" />
+    <ClCompile Include="Engine Code\UpdatableObjectAttorney.cpp" />
+    <ClCompile Include="Engine Code\UpdateDeregistrationCommand.cpp" />
+    <ClCompile Include="Engine Code\UpdateManager.cpp" />
+    <ClCompile Include="Engine Code\UpdateRegistrationCommand.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
@@ -56,6 +61,11 @@
     <ClInclude Include="Engine Code\SpriteManagerAttorney.h" />
     <ClInclude Include="Engine Code\TextureManager.h" />
     <ClInclude Include="Engine Code\TextureManagerAttorney.h" />
+    <ClInclude Include="Engine Code\UpdatableObject.h" />
+    <ClInclude Include="Engine Code\UpdatableObjectAttorney.h" />
+    <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h" />
+    <ClInclude Include="Engine Code\UpdateManager.h" />
+    <ClInclude Include="Engine Code\UpdateRegistrationCommand.h" />
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
     <ClInclude Include="Game Code\Player.h" />

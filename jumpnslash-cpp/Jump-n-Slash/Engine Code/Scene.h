@@ -1,11 +1,13 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+#include "UpdateManager.h"
 #include "DrawManager.h"
 
 // forward declarations
 class Command;
 class RegistrationBroker;
+class UpdatableObject;
 class DrawableObject;
 
 class Scene
@@ -24,8 +26,8 @@ private:
 	void Update();
 	void Draw();
 
-	// update reg function goes here
-	// update dereg function goes here
+	UpdateManager::UpdateListRef Register(UpdatableObject* pUpdatable);
+	void Deregister(UpdateManager::UpdateListRef updateListRef);
 
 	DrawManager::DrawListRef Register(DrawableObject* pDrawable);
 	void Deregister(DrawManager::DrawListRef drawListRef);
@@ -35,6 +37,7 @@ private:
 private:
 	RegistrationBroker* pRegBroker;
 
+	UpdateManager* pUpdateMgr;
 	DrawManager* pDrawMgr;
 };
 

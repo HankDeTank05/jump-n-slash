@@ -1,32 +1,30 @@
-#include "DrawableObject.h"
+#include "UpdatableObject.h"
 
-#include <cassert>
-#include "DrawRegistrationCommand.h"
-#include "DrawDeregistrationCommand.h"
-#include "JumpSlashEngine.h"
+#include "UpdateRegistrationCommand.h"
+#include "UpdateDeregistrationCommand.h"
 #include "SceneAttorney.h"
+#include "JumpSlashEngine.h"
 
-DrawableObject::DrawableObject()
+UpdatableObject::UpdatableObject()
 	: regState(RegistrationState::CURRENTLY_DEREGISTERED),
-	pRegCmd(new DrawRegistrationCommand(this)),
-	pDeregCmd(new DrawDeregistrationCommand(this)),
+	pRegCmd(new UpdateRegistrationCommand(this)),
+	pDeregCmd(new UpdateDeregistrationCommand(this)),
 	deleteRef()
 {
-	// do nothing
 }
 
-DrawableObject::~DrawableObject()
+UpdatableObject::~UpdatableObject()
 {
 	delete pDeregCmd;
 	delete pRegCmd;
 }
 
-void DrawableObject::Draw()
+void UpdatableObject::Update()
 {
 	// do nothing. override to make it do something
 }
 
-void DrawableObject::EnqueueForDrawRegistration()
+void UpdatableObject::EnqueueForUpdateRegistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_DEREGISTERED);
 
@@ -35,7 +33,7 @@ void DrawableObject::EnqueueForDrawRegistration()
 	regState = RegistrationState::PENDING_REGISTRATION;
 }
 
-void DrawableObject::EnqueueForDrawDeregistration()
+void UpdatableObject::EnqueueForUpdateDeregistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_REGISTERED);
 
@@ -44,20 +42,20 @@ void DrawableObject::EnqueueForDrawDeregistration()
 	regState = RegistrationState::PENDING_DEREGISTRATION;
 }
 
-void DrawableObject::Register()
+void UpdatableObject::Register()
 {
 	assert(regState == RegistrationState::PENDING_REGISTRATION);
 
-	deleteRef = SceneAttorney::Draw::Register(JumpSlashEngine::GetCurrentScene(), this);
+	deleteRef = SceneAttorney::Update::Register(JumpSlashEngine::GetCurrentScene(), this);
 
 	regState = RegistrationState::CURRENTLY_REGISTERED;
 }
 
-void DrawableObject::Deregister()
+void UpdatableObject::Deregister()
 {
 	assert(regState == RegistrationState::PENDING_DEREGISTRATION);
 
-	SceneAttorney::Draw::Deregister(JumpSlashEngine::GetCurrentScene(), deleteRef);
+	SceneAttorney::Update::Deregister(JumpSlashEngine::GetCurrentScene(), deleteRef);
 
 	regState = RegistrationState::CURRENTLY_DEREGISTERED;
 }

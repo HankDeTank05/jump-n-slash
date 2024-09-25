@@ -17,19 +17,15 @@ public:
 	virtual ~DrawableObject();
 
 protected:
+	virtual void Draw(); // TODO: documentation for DrawableObject::Draw
 
-	// TODO: documentation for DrawableObject::Draw()
-	virtual void Draw();
-
-	// TODO: documentation for DrawableObject::EnqueueForDrawRegistration()
-	void EnqueueForDrawRegistration();
-	// TODO: documentation for DrawableObject::EnqueueForDrawDeregistration()
-	void EnqueueForDrawDeregistration();
+	void EnqueueForDrawRegistration(); // TODO: documentation for DrawableObject::EnqueueForDrawRegistration
+	void EnqueueForDrawDeregistration(); // TODO: documentation for DrawableObject::EnqueueForDrawDeregistration
 
 private:
 	friend class DrawableObjectAttorney;
-	void Register(); // TODO: rename this function to "DrawableObject::SceneRegister" once scene system is created
-	void Deregister(); // TODO: rename this function to "DrawableObject::SceneDeregister" once scene system is created
+	void Register();
+	void Deregister();
 
 private:
 	RegistrationState regState;

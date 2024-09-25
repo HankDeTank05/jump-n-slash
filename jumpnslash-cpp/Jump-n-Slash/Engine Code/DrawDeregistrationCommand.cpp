@@ -24,5 +24,5 @@ DrawDeregistrationCommand& DrawDeregistrationCommand::operator=(const DrawDeregi
 
 void DrawDeregistrationCommand::Execute()
 {
-	assert(false);
+	DrawableObjectAttorney::Registration::Deregister(pDrawable);
 }

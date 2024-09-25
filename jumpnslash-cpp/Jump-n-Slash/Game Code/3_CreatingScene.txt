@@ -9,4 +9,6 @@ A scene could be any of the following:
 - something else?
 
 A game cannot exist in this engine without at least one scene, so a starting scene needs to be specified before the game can be run.
+
+TODO: documentation for CreatingScene tutorial is incomplete
 */

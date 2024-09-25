@@ -17,7 +17,9 @@ public:
 	{
 	private:
 		friend class DrawRegistrationCommand;
+		friend class DrawDeregistrationCommand;
 		static void Register(DrawableObject* pDrawable);
+		static void Deregister(DrawableObject* pDrawable);
 	};
 };
 

@@ -2,6 +2,7 @@
 #define SCENE_ATTORNEY_H
 
 #include "DrawManager.h"
+#include "UpdateManager.h"
 
 // forward declarations
 class Scene;
@@ -21,8 +22,17 @@ public:
 	class Commands
 	{
 	private:
+		friend class UpdatableObject;
 		friend class DrawableObject;
 		static void AddCommand(Scene* pScene, Command* pCmd);
+	};
+
+	class Update
+	{
+	private:
+		friend class UpdatableObject;
+		static UpdateManager::UpdateListRef Register(Scene* pScene, UpdatableObject* pUpdatable);
+		static void Deregister(Scene* pScene, UpdateManager::UpdateListRef deleteRef);
 	};
 
 	class Draw
@@ -30,6 +40,7 @@ public:
 	private:
 		friend class DrawableObject;
 		static DrawManager::DrawListRef Register(Scene* pScene, DrawableObject* pDrawable);
+		static void Deregister(Scene* pScene, DrawManager::DrawListRef deleteRef);
 	};
 };
 

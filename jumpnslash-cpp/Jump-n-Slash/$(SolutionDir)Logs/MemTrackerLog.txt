@@ -4,7 +4,7 @@
   MemTrackerLog 
 
        Sep 25 2024  
-       13:10:35  
+       14:10:06  
 
 ****************************************
 
@@ -809,47 +809,47 @@ Leak(795)  16 bytes ref:2371
 Leak(796)  32 bytes ref:2372 
 Leak(797)  16 bytes ref:2374 
 Leak(798)  32 bytes ref:2375 
-Leak(799)  16 bytes ref:2856 
-Leak(800)  64 bytes ref:2857 
-Leak(801)  16 bytes ref:2858 
-Leak(802)  64 bytes ref:2859 
-Leak(803)  16 bytes ref:2860 
-Leak(804)  64 bytes ref:2861 
-Leak(805)  16 bytes ref:2862 
-Leak(806)  64 bytes ref:2863 
-Leak(807)  16 bytes ref:2864 
-Leak(808)  64 bytes ref:2865 
-Leak(809)  16 bytes ref:2866 
-Leak(810)  64 bytes ref:2867 
-Leak(811)  16 bytes ref:2868 
-Leak(812)  64 bytes ref:2869 
-Leak(813)  16 bytes ref:2870 
-Leak(814)  64 bytes ref:2871 
-Leak(815)  16 bytes ref:2872 
-Leak(816)  64 bytes ref:2873 
-Leak(817)  16 bytes ref:2874 
-Leak(818)  64 bytes ref:2875 
-Leak(819)  16 bytes ref:2876 
-Leak(820)  64 bytes ref:2877 
-Leak(821)  16 bytes ref:2878 
-Leak(822)  64 bytes ref:2879 
-Leak(823)  16 bytes ref:2880 
-Leak(824)  64 bytes ref:2881 
-Leak(825)  16 bytes ref:2882 
-Leak(826)  64 bytes ref:2883 
-Leak(827)  16 bytes ref:2884 
-Leak(828)  64 bytes ref:2885 
-Leak(829)  16 bytes ref:2886 
-Leak(830)  64 bytes ref:2887 
-Leak(831)  24 bytes ref:2891 
-Leak(832)  40 bytes ref:2909 
-Leak(833)  48 bytes ref:2912 
-Leak(834)  16 bytes ref:4792 
-Leak(835)  32 bytes ref:4793 
-Leak(836)  16 bytes ref:4794 
-Leak(837)  71 bytes ref:4797 
-Leak(838)  16 bytes ref:4805 
-Leak(839)  48 bytes ref:4807 
+Leak(799)  16 bytes ref:2863 
+Leak(800)  64 bytes ref:2864 
+Leak(801)  16 bytes ref:2865 
+Leak(802)  64 bytes ref:2866 
+Leak(803)  16 bytes ref:2867 
+Leak(804)  64 bytes ref:2868 
+Leak(805)  16 bytes ref:2869 
+Leak(806)  64 bytes ref:2870 
+Leak(807)  16 bytes ref:2871 
+Leak(808)  64 bytes ref:2872 
+Leak(809)  16 bytes ref:2873 
+Leak(810)  64 bytes ref:2874 
+Leak(811)  16 bytes ref:2875 
+Leak(812)  64 bytes ref:2876 
+Leak(813)  16 bytes ref:2877 
+Leak(814)  64 bytes ref:2878 
+Leak(815)  16 bytes ref:2879 
+Leak(816)  64 bytes ref:2880 
+Leak(817)  16 bytes ref:2881 
+Leak(818)  64 bytes ref:2882 
+Leak(819)  16 bytes ref:2883 
+Leak(820)  64 bytes ref:2884 
+Leak(821)  16 bytes ref:2885 
+Leak(822)  64 bytes ref:2886 
+Leak(823)  16 bytes ref:2887 
+Leak(824)  64 bytes ref:2888 
+Leak(825)  16 bytes ref:2889 
+Leak(826)  64 bytes ref:2890 
+Leak(827)  16 bytes ref:2891 
+Leak(828)  64 bytes ref:2892 
+Leak(829)  16 bytes ref:2893 
+Leak(830)  64 bytes ref:2894 
+Leak(831)  24 bytes ref:2898 
+Leak(832)  40 bytes ref:2916 
+Leak(833)  48 bytes ref:2920 
+Leak(834)  16 bytes ref:6437 
+Leak(835)  32 bytes ref:6438 
+Leak(836)  16 bytes ref:6439 
+Leak(837)  71 bytes ref:6442 
+Leak(838)  16 bytes ref:6450 
+Leak(839)  48 bytes ref:6452 
 
 Memory Tracking Stats:
 
