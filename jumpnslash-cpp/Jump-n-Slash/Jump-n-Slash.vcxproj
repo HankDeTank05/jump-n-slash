@@ -30,7 +30,9 @@
     <ClCompile Include="Engine Code\Scene.cpp" />
     <ClCompile Include="Engine Code\SceneAttorney.cpp" />
     <ClCompile Include="Engine Code\SpriteManager.cpp" />
+    <ClCompile Include="Engine Code\SpriteManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\TextureManager.cpp" />
+    <ClCompile Include="Engine Code\TextureManagerAttorney.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
@@ -44,16 +46,27 @@
     <ClInclude Include="Engine Code\DrawManager.h" />
     <ClInclude Include="Engine Code\DrawRegistrationCommand.h" />
     <ClInclude Include="Engine Code\JumpSlashEngine.h" />
+    <ClInclude Include="Engine Code\MemTracker\Framework.h" />
+    <ClInclude Include="Engine Code\MemTracker\ProjectSettings.h" />
     <ClInclude Include="Engine Code\RegistrationBroker.h" />
     <ClInclude Include="Engine Code\RegistrationState.h" />
     <ClInclude Include="Engine Code\Scene.h" />
     <ClInclude Include="Engine Code\SceneAttorney.h" />
     <ClInclude Include="Engine Code\SpriteManager.h" />
+    <ClInclude Include="Engine Code\SpriteManagerAttorney.h" />
     <ClInclude Include="Engine Code\TextureManager.h" />
+    <ClInclude Include="Engine Code\TextureManagerAttorney.h" />
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
     <ClInclude Include="Game Code\Player.h" />
     <ClInclude Include="Game Code\TestScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Game Code\4_CreatingGameObject.txt" />
+    <Text Include="Game Code\0_DocsHome.txt" />
+    <Text Include="Game Code\1_EngineBasics.txt" />
+    <Text Include="Game Code\2_UsingAssetManagers.txt" />
+    <Text Include="Game Code\3_CreatingScene.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -80,14 +93,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -139,9 +152,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\..\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>"$(SolutionDir)\Jump-n-Slash\Engine Code\MemTracker\Framework.h"</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,9 +170,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\..\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>"$(SolutionDir)\Jump-n-Slash\Engine Code\MemTracker\Framework.h"</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

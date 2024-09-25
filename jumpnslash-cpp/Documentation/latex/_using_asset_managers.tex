@@ -1,0 +1,74 @@
+\chapter{Using the Asset Managers}
+\hypertarget{_using_asset_managers}{}\label{_using_asset_managers}\index{Using the Asset Managers@{Using the Asset Managers}}
+\hypertarget{_using_asset_managers_overview}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{_using_asset_managers_overview}
+The asset managers allow you to quickly and easily manage and access any assets you need to use in your game. They all have the same basic functionality\+:
+\begin{DoxyItemize}
+\item load an asset (makes an asset accessible in the code)
+\item get an asset (access/use an asset that\textquotesingle{}s been loaded)
+\end{DoxyItemize}\hypertarget{_using_asset_managers_textureManager}{}\doxysection{\texorpdfstring{Texture Manager}{Texture Manager}}\label{_using_asset_managers_textureManager}
+The Texture Manager handles any 2D image-\/based assets. It is the simplest asset manager and also the most essential. \begin{DoxyNote}{Note}
+Sprites are created using textures, so any sprite you want to create must be first loaded in as a texture.
+\end{DoxyNote}
+\hypertarget{_using_asset_managers_textureManager_load}{}\doxysubsection{\texorpdfstring{Loading a Texture}{Loading a Texture}}\label{_using_asset_managers_textureManager_load}
+In order to load a texture, you must provide at least two pieces of information to the {\ttfamily \doxylink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{Texture\+Manager\+::\+Load\+Texture}} function\+:
+\begin{DoxyItemize}
+\item The key (an {\ttfamily std\+::string})
+\begin{DoxyItemize}
+\item This is used to identify the texture when accessing it in the future. It can be whatever you want. (ex\+: {\ttfamily "{}mario\textquotesingle{}s sprite \+:)"{}})
+\end{DoxyItemize}
+\item The file name/location (also an {\ttfamily std\+::string})
+\begin{DoxyItemize}
+\item This is used to locate the texture within the Assets/\+Textures folder.
+\item If your texture is in the Textures folder, and not in any subfolder, simply provide the name of the file (ex\+: {\ttfamily "{}mario.\+png"{}});
+\item If your texture is in a subfolder within Textures, you need to provide the relative path to the file (ex\+: {\ttfamily "{}characters/mario.\+png"{}});
+\end{DoxyItemize}
+\item (Optional) Whether or not the texture should be smoothed (a {\ttfamily bool}, {\ttfamily true} by default)
+\begin{DoxyItemize}
+\item Provide {\ttfamily false} as the third argument if you don\textquotesingle{}t want any smoothing on your textures. Otherwise, this argument can be omitted.
+\item If you\textquotesingle{}re using pixel art that is extremely low-\/resolution, you probably don\textquotesingle{}t want smoothing.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{_using_asset_managers_textureManager_get}{}\doxysubsection{\texorpdfstring{Getting a Texture}{Getting a Texture}}\label{_using_asset_managers_textureManager_get}
+In order to get a texture, you only need to provide one piece of information to the {\ttfamily \doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture}} function\+:
+\begin{DoxyItemize}
+\item The key (an {\ttfamily std\+::string})
+\begin{DoxyItemize}
+\item This is the key you specified when loading the texture. The game will crash if you specify a key that does not exist.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{_using_asset_managers_spriteManager}{}\doxysection{\texorpdfstring{Sprite Manager}{Sprite Manager}}\label{_using_asset_managers_spriteManager}
+The Sprite Manager handles, well, sprites! This asset manager is a little more complex, as there are multiple ways to load sprites.\hypertarget{_using_asset_managers_spriteManager_load}{}\doxysubsection{\texorpdfstring{Loading a Sprites}{Loading a Sprites}}\label{_using_asset_managers_spriteManager_load}
+The simplest and easiest way to load a sprite is using two keys\+:
+\begin{DoxyItemize}
+\item The sprite key (an {\ttfamily std\+::string})
+\begin{DoxyItemize}
+\item Like the texture key, this is the key used to identify the sprite when accessing it in the future. It can also be whatever you want.
+\end{DoxyItemize}
+\item The texture key (an {\ttfamily std\+::string})
+\begin{DoxyItemize}
+\item This key is used to access a texture which has already been loaded. Like \doxysectlink{_using_asset_managers_textureManager_get}{Getting a Texture}{2}, the game will crash if you specify a key that does not exist.
+\end{DoxyItemize}
+\item (Optional) The sub-\/area of the texture to use for the sprite (an {\ttfamily sf\+::\+Int\+Rect})
+\begin{DoxyItemize}
+\item Providing an {\ttfamily sf\+::\+Int\+Rect} as the third argument will allow you to use only a portion of the texture when creating the sprite. This is most useful when you want to load one spritesheet as a texture, but create multiple sprites from it. (See the example code from the \doxysectlink{_engine_basics}{previous tutorial}{0})
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+There are four different ways to load a sprite. If you\textquotesingle{}re interested, check out the documentation for \doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite}.
+\end{DoxyNote}
+\hypertarget{_using_asset_managers_spriteManager_get}{}\doxysubsection{\texorpdfstring{Getting a Sprite}{Getting a Sprite}}\label{_using_asset_managers_spriteManager_get}
+Similar to getting a texture, you only need to provide one argument to access a sprite\+:
+\begin{DoxyItemize}
+\item The key (an {\ttfamily std\+::string})
+\begin{DoxyItemize}
+\item This is the key you specified when loading the sprite. The game will crash if you specify a key that does not exist.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{_using_asset_managers_seeAlso}{}\doxysection{\texorpdfstring{Functions referenced in this tutorial}{Functions referenced in this tutorial}}\label{_using_asset_managers_seeAlso}
+
+\begin{DoxyItemize}
+\item \doxylink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{Texture\+Manager\+::\+Load\+Texture}
+\item \doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture}
+\item \doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite}
+\item \doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite}
+\end{DoxyItemize}
+
+Previous tutorial\+: \doxysectlink{_engine_basics}{Engine basics}{0} / Next tutorial\+: \doxysectlink{_creating_scene}{Creating a scene}{0} 

@@ -14,5 +14,5 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::LoadSprite("spr test 3", "tex test");
 	SpriteManager::LoadSprite("spr test 4", "tex test", sf::IntRect(0, 0, 16, 16));
 
-	JumpSlashEngine::SetStartScene(new TestScene());
+	SetStartScene(new TestScene());
 }

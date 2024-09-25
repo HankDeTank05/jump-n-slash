@@ -1,0 +1,39 @@
+\doxysection{Draw\+Manager.\+h}
+\hypertarget{_draw_manager_8h_source}{}\label{_draw_manager_8h_source}\index{Jump-\/n-\/Slash/Engine Code/DrawManager.h@{Jump-\/n-\/Slash/Engine Code/DrawManager.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DRAW\_MANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DRAW\_MANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_manager}{DrawManager}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_draw_manager}{DrawManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_draw_manager}{DrawManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_draw_manager}{DrawManager}}\&\ dm)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_draw_manager}{DrawManager}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_draw_manager}{DrawManager}}\&\ dm)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_draw_manager}{\string~DrawManager}}();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{using\ }DrawList\ =\ std::list<DrawableObject*>;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{using\ }DrawListRef\ =\ DrawList::iterator;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawManager::Register}}
+\DoxyCodeLine{00023\ \ \ \ \ DrawListRef\ Register(\mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawable);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawManager::Deregister}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister(DrawListRef\ drawListRef);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ Draw();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00030\ \ \ \ \ DrawList\ drawList;}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

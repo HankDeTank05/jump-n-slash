@@ -25,9 +25,31 @@
 var NAVTREE =
 [
   [ "Jump n Slash", "index.html", [
+    [ "Jump-n-Slash Documentation", "index.html", null ],
+    [ "Engine Basics", "_engine_basics.html", [
+      [ "Files required by the engine", "_engine_basics.html#requiredByEngine", [
+        [ "GameInitialize.cpp", "_engine_basics.html#gameInitCpp", null ],
+        [ "LoadResources.cpp", "_engine_basics.html#loadResourcesCpp", null ]
+      ] ]
+    ] ],
+    [ "Using the Asset Managers", "_using_asset_managers.html", [
+      [ "Overview", "_using_asset_managers.html#overview", null ],
+      [ "Texture Manager", "_using_asset_managers.html#textureManager", [
+        [ "Loading a Texture", "_using_asset_managers.html#textureManager_load", null ],
+        [ "Getting a Texture", "_using_asset_managers.html#textureManager_get", null ]
+      ] ],
+      [ "Sprite Manager", "_using_asset_managers.html#spriteManager", [
+        [ "Loading a Sprites", "_using_asset_managers.html#spriteManager_load", null ],
+        [ "Getting a Sprite", "_using_asset_managers.html#spriteManager_get", null ]
+      ] ],
+      [ "Functions referenced in this tutorial", "_using_asset_managers.html#seeAlso", null ]
+    ] ],
+    [ "Creating a Scene", "_creating_scene.html", null ],
+    [ "Creating a Game Object", "_creating_game_object.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ]
@@ -41,7 +63,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_constants_8h_source.html"
+"_command_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

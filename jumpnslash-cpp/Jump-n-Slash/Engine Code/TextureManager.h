@@ -13,7 +13,7 @@ private:
 	TextureManager() = default;
 	TextureManager(const TextureManager& tm) = delete;
 	TextureManager& operator=(const TextureManager& tm) = delete;
-	virtual ~TextureManager() = default;
+	virtual ~TextureManager();
 
 	static TextureManager& Instance();
 
@@ -117,6 +117,7 @@ private: // member variables
 	const std::string FOLDER_NAME = "Assets/Textures/"; /*!< The name of the folder that texture files will be loaded from. */
 
 private: // engine-only api functions
+	friend class TextureManagerAttorney;
 	static void Terminate();
 };
 

@@ -1,0 +1,47 @@
+\doxysection{Scene.\+h}
+\hypertarget{_scene_8h_source}{}\label{_scene_8h_source}\index{Jump-\/n-\/Slash/Engine Code/Scene.h@{Jump-\/n-\/Slash/Engine Code/Scene.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SCENE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SCENE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}DrawManager.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_command}{Command}};}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_registration_broker}{RegistrationBroker}};}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene}{Scene}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_scene}{Scene}}();}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_scene}{Scene}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_scene}{Scene}}\&\ s)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_scene}{Scene}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_scene}{Scene}}\&\ s)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_scene}{\string~Scene}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Init()\ =\ 0;\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Scene::Init}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ End()\ =\ 0;\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Scene::End}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene_attorney}{SceneAttorney}};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ Update();}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ Draw();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ update\ reg\ function\ goes\ here}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ update\ dereg\ function\ goes\ here}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ DrawManager::DrawListRef\ Register(\mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawable);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister(DrawManager::DrawListRef\ drawListRef);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ AddCommand(\mbox{\hyperlink{class_command}{Command}}*\ pCmd);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_registration_broker}{RegistrationBroker}}*\ pRegBroker;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{class_draw_manager}{DrawManager}}*\ pDrawMgr;}
+\DoxyCodeLine{00039\ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

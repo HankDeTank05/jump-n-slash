@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Game Code\Test Scene">
       <UniqueIdentifier>{9990cb5d-41ed-4b76-93e6-927206ed2283}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Extra Documentation">
+      <UniqueIdentifier>{5c031f14-77f7-42dd-99df-5344014c8227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\MemTracker">
+      <UniqueIdentifier>{5082bb2f-30d6-4520-adb7-c6f646ded0bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -119,6 +125,12 @@
     </ClCompile>
     <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\TextureManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,5 +185,34 @@
     <ClInclude Include="Engine Code\DrawDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClInclude>
+    <ClInclude Include="Engine Code\MemTracker\Framework.h">
+      <Filter>Source Files\Engine Code\MemTracker</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MemTracker\ProjectSettings.h">
+      <Filter>Source Files\Engine Code\MemTracker</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TextureManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Game Code\0_DocsHome.txt">
+      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+    </Text>
+    <Text Include="Game Code\1_EngineBasics.txt">
+      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+    </Text>
+    <Text Include="Game Code\4_CreatingGameObject.txt">
+      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+    </Text>
+    <Text Include="Game Code\2_UsingAssetManagers.txt">
+      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+    </Text>
+    <Text Include="Game Code\3_CreatingScene.txt">
+      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+    </Text>
   </ItemGroup>
 </Project>

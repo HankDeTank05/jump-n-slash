@@ -14,7 +14,7 @@ DrawableObject::DrawableObject()
 
 DrawableObject::~DrawableObject()
 {
-	// do nothing?
+	delete pRegCmd;
 }
 
 void DrawableObject::Draw()

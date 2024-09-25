@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['spritemanager_0',['SpriteManager',['../class_sprite_manager.html',1,'']]]
+  ['engine_0',['Files required by the engine',['../_engine_basics.html#requiredByEngine',1,'']]],
+  ['engine_20basics_1',['Engine Basics',['../_engine_basics.html',1,'']]]
 ];

@@ -1,5 +1,11 @@
 \doxysection{Player Class Reference}
 \hypertarget{class_player}{}\label{class_player}\index{Player@{Player}}
+Inheritance diagram for Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_player}
+\end{center}
+\end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -8,7 +14,37 @@
 \item 
 \Hypertarget{class_player_afdecb3078358077642aa94059167e465}\label{class_player_afdecb3078358077642aa94059167e465} 
 \mbox{\hyperlink{class_player}{Player}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_player}{Player}} \&p)=delete
+\item 
+virtual void \mbox{\hyperlink{class_player_a5b60ad157bb1e8debca89ed6903ca2a4}{Draw}} () override
 \end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Drawable\+Object} (const \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \&dob)=delete
+\item 
+\mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \&dob)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Enqueue\+For\+Draw\+Registration} ()
+\item 
+void {\bfseries Enqueue\+For\+Draw\+Deregistration} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_a5b60ad157bb1e8debca89ed6903ca2a4}\index{Player@{Player}!Draw@{Draw}}
+\index{Draw@{Draw}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_player_a5b60ad157bb1e8debca89ed6903ca2a4} 
+void Player\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

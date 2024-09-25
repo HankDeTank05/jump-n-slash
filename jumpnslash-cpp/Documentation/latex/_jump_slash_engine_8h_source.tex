@@ -7,48 +7,69 @@
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
 \DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{comment}{//\ this\ class\ is\ written\ as\ a\ singleton}}
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}}
-\DoxyCodeLine{00009\ \{}
-\DoxyCodeLine{00010\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}*\ pInstance;}
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}();}
-\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\&\ jse)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\&\ jse)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_jump_slash_engine}{\string~JumpSlashEngine}}()\ =\ \textcolor{keywordflow}{default};}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\&\ Instance();}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{keyword}{public}:\ \textcolor{comment}{//\ public\ api\ functions}}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ TODO:\ add\ static\ function\ for\ setting\ window\ name}}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ TODO:\ add\ static\ function\ for\ setting\ window\ size}}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ TODO:\ add\ static\ function\ for\ setting\ the\ fullscreen\ mode}}
-\DoxyCodeLine{00025\ \ \ \ \ }
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ TODO:\ should\ these\ be\ public?}}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Run();\ \textcolor{comment}{//\ TODO:\ docs}}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();\ \textcolor{comment}{//\ TODO:\ docs}}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ functions}}
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ privRun();}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ Initialize();}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ LoadContent();}
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ deltaTime);}
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ Draw();}
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ UnloadContent();}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ GameInitialize();\ }
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ LoadResources();}
-\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ GameEnd();\ \textcolor{comment}{//\ TODO:\ GameEnd\ function\ body}}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00077\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
-\DoxyCodeLine{00078\ \ \ \ \ sf::RenderWindow\ window;}
-\DoxyCodeLine{00079\ \ \ \ \ sf::Clock\ clock;}
-\DoxyCodeLine{00080\ \};}
-\DoxyCodeLine{00081\ }
-\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene}{Scene}};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\ \textcolor{comment}{//\ this\ class\ is\ written\ as\ a\ singleton}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}*\ pInstance;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\&\ jse)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\&\ jse)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_jump_slash_engine}{\string~JumpSlashEngine}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}}\&\ Instance();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:\ \textcolor{comment}{//\ public\ api\ functions}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_jump_slash_engine_a7adf16a90879ab0f45a3a2531b57c615}{SetWindowName}}(sf::String\ winName);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_jump_slash_engine_a803194438c680ce7801a08f0fd7f9688}{SetWindowSize}}(\textcolor{keywordtype}{int}\ winWidth,\ \textcolor{keywordtype}{int}\ winHeight);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ TODO:\ create\ function\ JumpSlashEngine::SetFullscreenMode}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ SetStartScene(\mbox{\hyperlink{class_scene}{Scene}}*\ pStartScene);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_scene}{Scene}}*\ GetCurrentScene();}
+\DoxyCodeLine{00039\ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ TODO:\ should\ these\ be\ public?}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Run();\ \textcolor{comment}{//\ TODO:\ documentation\ for\ JumpSlashEngine::Run}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();\ \textcolor{comment}{//\ TODO:\ documentation\ for\ JumpSlashEngine::Terminate}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ sf::RenderWindow\&\ GetWindow();\ \textcolor{comment}{//\ TODO:\ I\ don't\ like\ this...}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ functions}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ privSetWindowName(sf::String\ winName);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ privSetWindowSize(\textcolor{keywordtype}{int}\ winWidth,\ \textcolor{keywordtype}{int}\ winHeight);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ privSetStartScene(\mbox{\hyperlink{class_scene}{Scene}}*\ pStartScene);}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_scene}{Scene}}*\ privGetCurrentScene();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ privRun();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ sf::RenderWindow\&\ privGetWindow();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ Initialize();}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ LoadContent();}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ Draw();}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ UnloadContent();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ GameInitialize();\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ LoadResources();}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{void}\ GameEnd();\ \textcolor{comment}{//\ TODO:\ function\ not\ defined\ JumpSlashEngine::GameEnd}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
+\DoxyCodeLine{00104\ \ \ \ \ sf::RenderWindow\ window;}
+\DoxyCodeLine{00105\ \ \ \ \ sf::String\ winName;}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{int}\ winWidth;}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{int}\ winHeight;}
+\DoxyCodeLine{00108\ \ \ \ \ sf::Clock\ clock;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{class_scene}{Scene}}*\ pCurrentScene;}
+\DoxyCodeLine{00111\ \ \ \ \ }
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

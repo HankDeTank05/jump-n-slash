@@ -1,0 +1,12 @@
+/*! \page CreatingScene Creating a Scene
+\section overview_scene Overview
+A scene is an environment which contains all the objects relevant to a certain situation.
+A scene could be any of the following:
+- a level in a game
+- a hub world or world map
+- a title screen or game over screen
+- a shop
+- something else?
+
+A game cannot exist in this engine without at least one scene, so a starting scene needs to be specified before the game can be run.
+*/

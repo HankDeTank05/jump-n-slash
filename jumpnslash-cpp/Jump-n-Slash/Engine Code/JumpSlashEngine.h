@@ -15,13 +15,23 @@ private:
 	JumpSlashEngine() = default;
 	JumpSlashEngine(const JumpSlashEngine& jse) = delete;
 	JumpSlashEngine& operator=(const JumpSlashEngine& jse) = delete;
-	virtual ~JumpSlashEngine() = default;
+	virtual ~JumpSlashEngine();
 
 	static JumpSlashEngine& Instance();
 
 public: // public api functions
-	static void SetWindowName(sf::String winName); // TODO: documentation for JumpSlashEngine::SetWindowName
-	static void SetWindowSize(int winWidth, int winHeight); // TODO: documentation for JumpSlashEngine::SetWindowSize
+	/*!
+	* \brief Set the name of the window.
+	* 
+	* TODO: documentation for JumpSlashEngine::SetWindowName is incomplete
+	*/
+	static void SetWindowName(sf::String winName);
+	/*!
+	* \brief Set the size of the window.
+	* 
+	* TODO: documentation for JumpSlashEngine::SetWindowSize is incomplete
+	*/
+	static void SetWindowSize(int winWidth, int winHeight);
 	// TODO: create function JumpSlashEngine::SetFullscreenMode
 
 	static void SetStartScene(Scene* pStartScene);

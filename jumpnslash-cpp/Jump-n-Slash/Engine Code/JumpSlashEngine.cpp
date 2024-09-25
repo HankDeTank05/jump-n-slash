@@ -1,10 +1,18 @@
 #include "JumpSlashEngine.h"
 
 #include <cassert>
+#include "TextureManagerAttorney.h"
+#include "SpriteManagerAttorney.h"
 #include "SceneAttorney.h" // TODO: remove this when SceneManager is created
 #include "Scene.h" // TODO: remove this when SceneManager is created
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
+
+JumpSlashEngine::~JumpSlashEngine()
+{
+	pCurrentScene->End();
+	delete pCurrentScene;
+}
 
 JumpSlashEngine& JumpSlashEngine::Instance()
 {
@@ -70,15 +78,15 @@ Scene* JumpSlashEngine::privGetCurrentScene()
 
 void JumpSlashEngine::privRun()
 {
-	this->Initialize();
-	this->LoadContent();
+	Initialize();
+	LoadContent();
 	window.create(sf::VideoMode(winWidth, winHeight), winName);
 	while (window.isOpen())
 	{
 		sf::Time deltaTime = clock.restart();
 
-		this->Update(deltaTime.asSeconds());
-		this->Draw();
+		Update(deltaTime.asSeconds());
+		Draw();
 
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -89,7 +97,7 @@ void JumpSlashEngine::privRun()
 			}
 		}
 	}
-	this->UnloadContent();
+	UnloadContent();
 }
 
 void JumpSlashEngine::Initialize()
@@ -123,7 +131,8 @@ void JumpSlashEngine::Draw()
 
 void JumpSlashEngine::UnloadContent()
 {
-	// TODO: empty function JumpSlashEngine::UnloadContent
+	TextureManagerAttorney::Termination::Terminate();
+	SpriteManagerAttorney::Termination::Terminate();
 }
 
 sf::RenderWindow& JumpSlashEngine::GetWindow()

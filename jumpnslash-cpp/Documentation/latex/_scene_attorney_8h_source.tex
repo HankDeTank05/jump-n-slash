@@ -1,0 +1,42 @@
+\doxysection{Scene\+Attorney.\+h}
+\hypertarget{_scene_attorney_8h_source}{}\label{_scene_attorney_8h_source}\index{Jump-\/n-\/Slash/Engine Code/SceneAttorney.h@{Jump-\/n-\/Slash/Engine Code/SceneAttorney.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SCENE\_ATTORNEY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SCENE\_ATTORNEY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}DrawManager.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene}{Scene}};}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_command}{Command}};}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene_attorney}{SceneAttorney}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene_attorney_1_1_game_loop}{GameLoop}}}
+\DoxyCodeLine{00014\ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}};\ \textcolor{comment}{//\ TODO:\ change\ this\ to\ SceneManager\ when\ it's\ created}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Update(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene);}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scene_attorney_1_1_draw}{Draw}}(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene);}
+\DoxyCodeLine{00019\ \ \ \ \ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene_attorney_1_1_commands}{Commands}}}
+\DoxyCodeLine{00022\ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AddCommand(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ \mbox{\hyperlink{class_command}{Command}}*\ pCmd);}
+\DoxyCodeLine{00026\ \ \ \ \ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene_attorney_1_1_draw}{Draw}}}
+\DoxyCodeLine{00029\ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ DrawManager::DrawListRef\ Register(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ \mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawable);}
+\DoxyCodeLine{00033\ \ \ \ \ \};}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

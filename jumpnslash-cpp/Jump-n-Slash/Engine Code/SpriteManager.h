@@ -13,7 +13,7 @@ private:
 	SpriteManager() = default;
 	SpriteManager(const SpriteManager& sm) = delete;
 	SpriteManager& operator=(const SpriteManager& sm) = delete;
-	virtual ~SpriteManager() = default;
+	virtual ~SpriteManager();
 
 	static SpriteManager& Instance();
 
@@ -126,6 +126,7 @@ private: // member variables
 	std::map<std::string, sf::Sprite*> sprites; /*!< The map containing every sprite loaded into the engine. */
 
 private: // engine-only api functions
+	friend class SpriteManagerAttorney;
 	static void Terminate();
 };
 

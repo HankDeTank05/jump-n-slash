@@ -1,0 +1,59 @@
+\chapter{Engine Basics}
+\hypertarget{_engine_basics}{}\label{_engine_basics}\index{Engine Basics@{Engine Basics}}
+\hypertarget{_engine_basics_requiredByEngine}{}\doxysection{\texorpdfstring{Files required by the engine}{Files required by the engine}}\label{_engine_basics_requiredByEngine}
+There are two files required by the engine\+: {\ttfamily Game\+Initialize.\+cpp}, and {\ttfamily Load\+Resources.\+cpp}.\hypertarget{_engine_basics_gameInitCpp}{}\doxysubsection{\texorpdfstring{Game\+Initialize.\+cpp}{Game\+Initialize.\+cpp}}\label{_engine_basics_gameInitCpp}
+This file contains a function called {\ttfamily Jump\+Slash\+Engine\+::\+Game\+Initialize}. This function is called by the engine when the game first opens.
+
+Here, you must specify the window title (using {\ttfamily \doxylink{class_jump_slash_engine_a7adf16a90879ab0f45a3a2531b57c615}{Jump\+Slash\+Engine\+::\+Set\+Window\+Name}} ) and size (using {\ttfamily \doxylink{class_jump_slash_engine_a803194438c680ce7801a08f0fd7f9688}{Jump\+Slash\+Engine\+::\+Set\+Window\+Size}} ).
+
+For example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ GameInitialize.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ JumpSlashEngine::GameInitialize()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_jump_slash_engine_a7adf16a90879ab0f45a3a2531b57c615}{SetWindowName}}(\textcolor{stringliteral}{"{}Super\ Mario\ Bros.\ (NES)"{}});}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_jump_slash_engine_a803194438c680ce7801a08f0fd7f9688}{SetWindowSize}}(256,\ 240);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{_engine_basics_loadResourcesCpp}{}\doxysubsection{\texorpdfstring{Load\+Resources.\+cpp}{Load\+Resources.\+cpp}}\label{_engine_basics_loadResourcesCpp}
+This file contains a function called {\ttfamily Jump\+Slash\+Engine\+::\+Load\+Resources}. This function is also called by the engine when the game first opens.
+
+Here, you must specify any and all assets you want to have access to while the game is running, and the starting scene for the game.
+
+For example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/TextureManager.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/SpriteManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}World1\_1.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ JumpSlashEngine::LoadResources()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ load\ in\ the\ spritesheet\ for\ mario}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{TextureManager::LoadTexture}}(\textcolor{stringliteral}{"{}mario\ ss"{}},\ \textcolor{stringliteral}{"{}characters/mario\_spritesheet.png"{}},\ \textcolor{keyword}{false});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ create\ sprites\ from\ the\ spritesheet}}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{SpriteManager::LoadSprite}}(\textcolor{stringliteral}{"{}mario\ small\ idle"{}},\ \ \ \textcolor{stringliteral}{"{}mario\ ss"{}},\ sf::IntRect(\ \ 0,\ \ 8,\ 16,\ 16));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{SpriteManager::LoadSprite}}(\textcolor{stringliteral}{"{}mario\ small\ walk\ 0"{}},\ \textcolor{stringliteral}{"{}mario\ ss"{}},\ sf::IntRect(\ 20,\ \ 8,\ 16,\ 16));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{SpriteManager::LoadSprite}}(\textcolor{stringliteral}{"{}mario\ small\ walk\ 1"{}},\ \textcolor{stringliteral}{"{}mario\ ss"{}},\ sf::IntRect(\ 38,\ \ 8,\ 16,\ 16));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{SpriteManager::LoadSprite}}(\textcolor{stringliteral}{"{}mario\ small\ walk\ 2"{}},\ \textcolor{stringliteral}{"{}mario\ ss"{}},\ sf::IntRect(\ 56,\ \ 8,\ 16,\ 16));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{SpriteManager::LoadSprite}}(\textcolor{stringliteral}{"{}mario\ big\ idle"{}},\ \ \ \ \ \textcolor{stringliteral}{"{}mario\ ss"{}},\ sf::IntRect(\ \ 0,\ 32,\ 16,\ 32));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{SpriteManager::LoadSprite}}(\textcolor{stringliteral}{"{}mario\ big\ walk\ 0"{}},\ \ \ \textcolor{stringliteral}{"{}mario\ ss"{}},\ sf::IntRect(\ 20,\ 32,\ 16,\ 32));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{SpriteManager::LoadSprite}}(\textcolor{stringliteral}{"{}mario\ big\ walk\ 1"{}},\ \ \ \textcolor{stringliteral}{"{}mario\ ss"{}},\ sf::IntRect(\ 38,\ 32,\ 16,\ 32));}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{SpriteManager::LoadSprite}}(\textcolor{stringliteral}{"{}mario\ big\ walk\ 2"{}},\ \ \ \textcolor{stringliteral}{"{}mario\ ss"{}},\ sf::IntRect(\ 56,\ 32,\ 16,\ 32));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ set\ the\ starting\ scene}}
+\DoxyCodeLine{\ \ \ \ SetStartScene(\textcolor{keyword}{new}\ World1\_1());}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+This may be a lot to process. That\textquotesingle{}s okay! The code above is explained in the following tutorials.
+
+Let\textquotesingle{}s move onto the next tutorial\+: \doxysectlink{_using_asset_managers}{Using Asset Managers}{0}. 

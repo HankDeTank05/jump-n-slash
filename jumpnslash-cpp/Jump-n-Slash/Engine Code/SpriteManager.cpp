@@ -5,6 +5,14 @@
 
 SpriteManager* SpriteManager::pInstance = nullptr;
 
+SpriteManager::~SpriteManager()
+{
+	for (std::map<std::string, sf::Sprite*>::iterator it = sprites.begin(); it != sprites.end(); it++)
+	{
+		delete it->second;
+	}
+}
+
 SpriteManager& SpriteManager::Instance()
 {
 	if (pInstance == nullptr)

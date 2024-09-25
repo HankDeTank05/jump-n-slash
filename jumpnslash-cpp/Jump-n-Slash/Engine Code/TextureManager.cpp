@@ -4,6 +4,14 @@
 
 TextureManager* TextureManager::pInstance = nullptr;
 
+TextureManager::~TextureManager()
+{
+	for (std::map<std::string, sf::Texture*>::iterator it = textures.begin(); it != textures.end(); it++)
+	{
+		delete it->second;
+	}
+}
+
 TextureManager& TextureManager::Instance()
 {
 	if (pInstance == nullptr)

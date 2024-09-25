@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['getsprite_0',['GetSprite',['../class_sprite_manager.html#a39d303a2a32e575c412693c49235a8c5',1,'SpriteManager']]],
-  ['gettexture_1',['GetTexture',['../class_texture_manager.html#aadcf6c9d978195ef308f9f38e88fd0ba',1,'TextureManager']]]
+  ['a_20game_20object_0',['Creating a Game Object',['../_creating_game_object.html',1,'']]],
+  ['a_20scene_1',['Creating a Scene',['../_creating_scene.html',1,'']]],
+  ['a_20sprite_2',['Getting a Sprite',['../_using_asset_managers.html#spriteManager_get',1,'']]],
+  ['a_20sprites_3',['Loading a Sprites',['../_using_asset_managers.html#spriteManager_load',1,'']]],
+  ['a_20texture_4',['a Texture',['../_using_asset_managers.html#textureManager_get',1,'Getting a Texture'],['../_using_asset_managers.html#textureManager_load',1,'Loading a Texture']]],
+  ['asset_20managers_5',['Using the Asset Managers',['../_using_asset_managers.html',1,'']]]
 ];

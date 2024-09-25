@@ -1,0 +1,30 @@
+\doxysection{Drawable\+Object\+Attorney.\+h}
+\hypertarget{_drawable_object_attorney_8h_source}{}\label{_drawable_object_attorney_8h_source}\index{Jump-\/n-\/Slash/Engine Code/DrawableObjectAttorney.h@{Jump-\/n-\/Slash/Engine Code/DrawableObjectAttorney.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DRAWABLE\_OBJECT\_ATTORNEY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DRAWABLE\_OBJECT\_ATTORNEY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object_attorney}{DrawableObjectAttorney}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object_attorney_1_1_game_loop}{GameLoop}}}
+\DoxyCodeLine{00011\ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_manager}{DrawManager}};}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Draw(\mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawable);}
+\DoxyCodeLine{00015\ \ \ \ \ \};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object_attorney_1_1_registration}{Registration}}}
+\DoxyCodeLine{00017\ \ \ \ \ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Register(\mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawable);}
+\DoxyCodeLine{00021\ \ \ \ \ \};}
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
