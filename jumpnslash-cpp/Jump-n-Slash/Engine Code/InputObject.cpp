@@ -63,10 +63,43 @@ void InputObject::EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseE
 void InputObject::RegisterKey(sf::Keyboard::Key key, KeyEvent eventToReg)
 {
 	KeyTrackerID keyID(key, eventToReg);
-	assert(keyTracker.count(keyID) > 0); // Invalid KeyID: keyID does not exist
+	assert(keyTracker.count(keyID) > 0); // Invalid KeyID: keyID does not exist!
 	assert(keyTracker.at(keyID).regState == RegistrationState::PENDING_REGISTRATION);
 
 	assert(false);
 
 	keyTracker.at(keyID).regState = RegistrationState::CURRENTLY_REGISTERED;
+}
+
+void InputObject::DeregisterKey(sf::Keyboard::Key key, KeyEvent eventToDereg)
+{
+	KeyTrackerID keyID(key, eventToDereg);
+	assert(keyTracker.count(keyID) > 0); // Invalid KeyID: keyID does not exist!
+	assert(keyTracker.at(keyID).regState == RegistrationState::PENDING_DEREGISTRATION);
+
+	assert(false);
+
+	keyTracker.at(keyID).regState = RegistrationState::CURRENTLY_DEREGISTERED;
+}
+
+void InputObject::RegisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToReg)
+{
+	MouseBtnTrackerID btnID(btn, eventToReg);
+	assert(mouseBtnTracker.count(btnID) > 0); // Invalid BtnID: btnID does not exist!
+	assert(mouseBtnTracker.at(btnID).regState == RegistrationState::PENDING_REGISTRATION);
+
+	assert(false);
+
+	mouseBtnTracker.at(btnID).regState == RegistrationState::CURRENTLY_REGISTERED;
+}
+
+void InputObject::DeregisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToDereg)
+{
+	MouseBtnTrackerID btnID(btn, eventToDereg);
+	assert(mouseBtnTracker.count(btnID) > 0); // Invalid BtnID: btnID does not exist!
+	assert(mouseBtnTracker.at(btnID).regState == RegistrationState::PENDING_DEREGISTRATION);
+
+	assert(false);
+
+	mouseBtnTracker.at(btnID).regState = RegistrationState::CURRENTLY_DEREGISTERED;
 }
