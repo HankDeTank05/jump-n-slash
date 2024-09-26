@@ -1,3 +1,0 @@
-/*! \page CreatingGameObject Creating a Game Object
-TODO: documentation for CreatingGameObject tutorial is incomplete
-*/

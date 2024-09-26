@@ -27,12 +27,15 @@ private:
 	void Update();
 	void Draw();
 
+	// update registration
 	UpdateManager::UpdateListRef Register(UpdatableObject* pUpdatable);
 	void Deregister(UpdateManager::UpdateListRef updateListRef);
 
+	// draw registration
 	DrawManager::DrawListRef Register(DrawableObject* pDrawable);
 	void Deregister(DrawManager::DrawListRef drawListRef);
 
+	// input registration
 	void RegisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToReg);
 	void DeregisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg);
 	void RegisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg);

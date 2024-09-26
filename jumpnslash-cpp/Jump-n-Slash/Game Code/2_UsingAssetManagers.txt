@@ -1,4 +1,5 @@
 /*! \page UsingAssetManagers Using the Asset Managers
+
 \section overview_assetMgr Overview
 The asset managers allow you to quickly and easily manage and access any assets you need to use in your game.
 They all have the same basic functionality:

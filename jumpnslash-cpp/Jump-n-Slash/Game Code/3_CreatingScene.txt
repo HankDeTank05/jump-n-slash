@@ -10,5 +10,73 @@ A scene could be any of the following:
 
 A game cannot exist in this engine without at least one scene, so a starting scene needs to be specified before the game can be run.
 
+\section baseClass The \c Scene Base Class
+To begin, let's take a look at the Scene base class:
+\code
+// Scene.h
+class Scene
+{
+public:
+	Scene(); // default constructor
+	// ... some functions ... //
+	virtual ~Scene(); // destructor
+
+	virtual void Init() = 0; // a pure virtual function
+	virtual void End() = 0; // also a pure virtual function
+
+private:
+	// ... some more functions ... //
+
+private:
+	// ... some member variables ... //
+}
+\endcode
+You'll notice this base class has two pure virtual functions. Every Scene-derived class needs its own version of these two functions.
+More on this later, though.
+
+\section derivedClass Your Derived \c Scene Class
+
+\subsection derivedClass_essentials The Essentials
+Let's begin making a derived Scene class. Always begin with the big four! TODO: make a tutorial about the big four
+\code
+// MyScene.h
+#ifndef MY_SCENE_H
+#define MY_SCENE_H
+
+#include "../Engine Code/Scene.h"
+
+class MyScene : public Scene
+{
+public:
+	MyScene(); // the default constructor
+	MyScene(const MyScene& ms) = delete; // the copy constructor
+	MyScene& operator=(const MyScene& ms) = delete; // the assignment operator
+	virtual ~MyScene(); // the destructor
+
+	virtual void Init() override; // override declaration of Init() (required)
+	virtual void End() override; // override declaration of End() (required)
+
+private:
+	// member variables go here (later tho)
+}
+
+#endif
+\endcode
+We also need to declare overrides for the \c Init() and \c End() functions.
+What are they for, though?
+
+\subsection derivedClass_init The \c Init() Function
+You can think of the \c Init() function as a constructor (sort of). What is the purpose of a constructor?
+
+When an instance of an object is created, the constructor is called to do all of the required setup to create the object.
+It initializes member variables, and maybe runs some sort of logic involving those variables. Once the constructor has
+finished its work, the instance of that object is ready to use.
+
+In that sense, the \c Init() function serves a similar purpose to a constructor. Rather than having the constructor do all that work,
+the \c Init() function handles it instead. This way, you can re-initialize a single instance of a Scene object multiple times without
+having to delete that instance and re-construct it.
+
+To illustrate this concept, let's look at an example: Super Mario Bros. (when you die and respawn, the level's scene is re-initialized)
+
 TODO: documentation for CreatingScene tutorial is incomplete
 */
