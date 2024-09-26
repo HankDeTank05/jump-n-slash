@@ -7,13 +7,15 @@
 Scene::Scene()
 	: pRegBroker(new RegistrationBroker()),
 	pUpdateMgr(new UpdateManager()),
-	pDrawMgr(new DrawManager())
+	pDrawMgr(new DrawManager()),
+	pInputMgr(new InputManager())
 {
 	// do nothing
 }
 
 Scene::~Scene()
 {
+	delete pInputMgr;
 	delete pDrawMgr;
 	delete pUpdateMgr;
 	delete pRegBroker;
@@ -22,6 +24,9 @@ Scene::~Scene()
 void Scene::Update()
 {
 	pRegBroker->ExecuteCommands();
+
+	pInputMgr->ProcessKeyboardEvents();
+	pInputMgr->ProcessMouseEvents();
 
 	pUpdateMgr->Update();
 }
@@ -49,6 +54,26 @@ DrawManager::DrawListRef Scene::Register(DrawableObject* pDrawable)
 void Scene::Deregister(DrawManager::DrawListRef drawListRef)
 {
 	pDrawMgr->Deregister(drawListRef);
+}
+
+void Scene::RegisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToReg)
+{
+	pInputMgr->RegisterKey(key, pInputable, eventToReg);
+}
+
+void Scene::DeregisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg)
+{
+	pInputMgr->DeregisterKey(key, pInputable, eventToDereg);
+}
+
+void Scene::RegisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg)
+{
+	pInputMgr->RegisterMouseBtn(btn, pInputable, eventToReg);
+}
+
+void Scene::DeregisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg)
+{
+	pInputMgr->DeregisterMouseBtn(btn, pInputable, eventToDereg);
 }
 
 void Scene::AddCommand(Command* pCmd)

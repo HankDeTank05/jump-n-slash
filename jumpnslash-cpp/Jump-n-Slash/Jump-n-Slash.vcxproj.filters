@@ -76,6 +76,9 @@
     <Filter Include="Source Files\Engine Code\MemTracker">
       <UniqueIdentifier>{5082bb2f-30d6-4520-adb7-c6f646ded0bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands">
+      <UniqueIdentifier>{7db14dac-9df0-4de6-9710-01f0cf1bb346}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -149,6 +152,27 @@
     </ClCompile>
     <ClCompile Include="Engine Code\InputObject.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\InputManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\KeyListener.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\InputObjectAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\KeyDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\KeyRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MouseBtnDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MouseBtnRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,17 +260,26 @@
     <ClInclude Include="Engine Code\InputEvent.h">
       <Filter>Source Files\Engine Code\Misc. files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\KeyRegistrationCommand.h">
+    <ClInclude Include="Engine Code\InputManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\KeyListener.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\InputObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\KeyDeregistrationCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\MouseBtnRegistrationCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    <ClInclude Include="Engine Code\KeyRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\MouseBtnDeregistrationCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MouseBtnRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

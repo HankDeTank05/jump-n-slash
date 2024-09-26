@@ -36,3 +36,23 @@ void SceneAttorney::Draw::Deregister(Scene* pScene, DrawManager::DrawListRef del
 {
 	pScene->Deregister(deleteRef);
 }
+
+void SceneAttorney::Input::RegisterKey(Scene* pScene, sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToReg)
+{
+	pScene->RegisterKey(key, pInputable, eventToReg);
+}
+
+void SceneAttorney::Input::DeregisterKey(Scene* pScene, sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg)
+{
+	pScene->DeregisterKey(key, pInputable, eventToDereg);
+}
+
+void SceneAttorney::Input::RegisterMouseBtn(Scene* pScene, sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg)
+{
+	pScene->RegisterMouseBtn(btn, pInputable, eventToReg);
+}
+
+void SceneAttorney::Input::DeregisterMouseBtn(Scene* pScene, sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg)
+{
+	pScene->DeregisterMouseBtn(btn, pInputable, eventToDereg);
+}

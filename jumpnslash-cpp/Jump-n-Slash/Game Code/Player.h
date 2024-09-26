@@ -16,6 +16,8 @@ public:
 
 	virtual void Update() override;
 	virtual void Draw() override;
+	virtual void KeyPressed(sf::Keyboard::Key key) override;
+
 	
 private:
 	sf::CircleShape circle;

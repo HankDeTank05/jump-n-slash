@@ -32,12 +32,11 @@ protected:
 
 	virtual void MouseBtnPressed(sf::Mouse::Button btn); // TODO: documentation for InputObject::MouseButtonPressed
 	virtual void MouseBtnReleased(sf::Mouse::Button btn); // TODO: documentation for InputObject::MouseButtonReleased
-
 	// TODO: figure out mouse position inputs
 	// TODO: figure out mouse wheel inputs
 
-	// TODO: figure out joystick button inputs
-	// TODO: figure out joystick stick inputs
+	// TODO: figure out gamepad button inputs
+	// TODO: figure out gamepad stick inputs
 
 	void EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg);
 	void EnqueueForKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg);
@@ -70,11 +69,11 @@ private:
 	};
 
 	using MouseBtnTrackerID = std::pair<sf::Mouse::Button, MouseEvent>;
-	using MouseRegTracker = std::map<MouseBtnTrackerID, MouseBtnRegistrationData>;
+	using MouseBtnRegTracker = std::map<MouseBtnTrackerID, MouseBtnRegistrationData>;
 
 private:
 	KeyRegTracker keyTracker;
-	MouseRegTracker mouseBtnTracker;
+	MouseBtnRegTracker mouseBtnTracker;
 };
 
 #endif

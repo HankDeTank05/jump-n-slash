@@ -13,7 +13,7 @@ class MouseBtnRegistrationCommand : public Command
 {
 public:
 	MouseBtnRegistrationCommand() = delete;
-	MouseBtnRegistrationCommand(InputObject* pInputable, sf::Mouse::Button btn, KeyEvent eventToDereg);
+	MouseBtnRegistrationCommand(InputObject* pInputable, sf::Mouse::Button btn, MouseEvent eventToReg);
 	MouseBtnRegistrationCommand(const MouseBtnRegistrationCommand& mbrc);
 	MouseBtnRegistrationCommand& operator=(const MouseBtnRegistrationCommand& mbrc);
 	virtual ~MouseBtnRegistrationCommand() = default;
@@ -23,7 +23,7 @@ public:
 private:
 	InputObject* pInputable;
 	sf::Mouse::Button btn;
-	KeyEvent eventToDereg;
+	MouseEvent eventToReg;
 };
 
 #endif

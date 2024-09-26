@@ -1,8 +1,12 @@
 #ifndef SCENE_ATTORNEY_H
 #define SCENE_ATTORNEY_H
 
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
+
 #include "DrawManager.h"
 #include "UpdateManager.h"
+#include "InputEvent.h"
 
 // forward declarations
 class Scene;
@@ -24,6 +28,7 @@ public:
 	private:
 		friend class UpdatableObject;
 		friend class DrawableObject;
+		friend class InputObject;
 		static void AddCommand(Scene* pScene, Command* pCmd);
 	};
 
@@ -41,6 +46,16 @@ public:
 		friend class DrawableObject;
 		static DrawManager::DrawListRef Register(Scene* pScene, DrawableObject* pDrawable);
 		static void Deregister(Scene* pScene, DrawManager::DrawListRef deleteRef);
+	};
+
+	class Input
+	{
+	private:
+		friend class InputObject;
+		static void RegisterKey(Scene* pScene, sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToReg);
+		static void DeregisterKey(Scene* pScene, sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg);
+		static void RegisterMouseBtn(Scene* pScene, sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg);
+		static void DeregisterMouseBtn(Scene* pScene, sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg);
 	};
 };
 

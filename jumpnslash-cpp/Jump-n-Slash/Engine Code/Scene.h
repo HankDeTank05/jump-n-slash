@@ -3,6 +3,7 @@
 
 #include "UpdateManager.h"
 #include "DrawManager.h"
+#include "InputManager.h"
 
 // forward declarations
 class Command;
@@ -32,6 +33,11 @@ private:
 	DrawManager::DrawListRef Register(DrawableObject* pDrawable);
 	void Deregister(DrawManager::DrawListRef drawListRef);
 
+	void RegisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToReg);
+	void DeregisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg);
+	void RegisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg);
+	void DeregisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg);
+
 	void AddCommand(Command* pCmd);
 
 private:
@@ -39,6 +45,7 @@ private:
 
 	UpdateManager* pUpdateMgr;
 	DrawManager* pDrawMgr;
+	InputManager* pInputMgr;
 };
 
 #endif
