@@ -79,6 +79,9 @@
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands">
       <UniqueIdentifier>{7db14dac-9df0-4de6-9710-01f0cf1bb346}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners">
+      <UniqueIdentifier>{aaa22e16-000e-4c09-a2eb-6676d02b0ec5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -96,7 +99,7 @@
     <ClCompile Include="Game Code\LoadResources.cpp">
       <Filter>Source Files\Game Code\Files Required by Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\Player.cpp">
+    <ClCompile Include="Game Code\TestClass.cpp">
       <Filter>Source Files\Game Code\Player</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\SpriteManager.cpp">
@@ -156,9 +159,6 @@
     <ClCompile Include="Engine Code\InputManager.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\KeyListener.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\InputObjectAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
     </ClCompile>
@@ -174,6 +174,12 @@
     <ClCompile Include="Engine Code\MouseBtnRegistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\KeyListener.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MouseBtnListener.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -185,7 +191,7 @@
     <ClInclude Include="Engine Code\TextureManager.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\Player.h">
+    <ClInclude Include="Game Code\TestClass.h">
       <Filter>Source Files\Game Code\Player</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\SpriteManager.h">
@@ -263,9 +269,6 @@
     <ClInclude Include="Engine Code\InputManager.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\KeyListener.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\InputObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
     </ClInclude>
@@ -280,6 +283,12 @@
     </ClInclude>
     <ClInclude Include="Engine Code\MouseBtnRegistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\KeyListener.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MouseBtnListener.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

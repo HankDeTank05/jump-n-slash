@@ -1,6 +1,7 @@
 #include "InputManager.h"
 
 #include "KeyListener.h"
+#include "MouseBtnListener.h"
 
 InputManager::InputManager()
 	: keyTracker(),
@@ -22,6 +23,22 @@ InputManager::~InputManager()
 	}
 }
 
+void InputManager::ProcessKeyboardEvents()
+{
+	for (KeyTracker::iterator it = keyTracker.begin(); it != keyTracker.end(); it++)
+	{
+		it->second->ProcessKeyEvent();
+	}
+}
+
+void InputManager::ProcessMouseEvents()
+{
+	for (MouseBtnTracker::iterator it = mouseBtnTracker.begin(); it != mouseBtnTracker.end(); it++)
+	{
+		it->second->ProcessMouseBtnEvent();
+	}
+}
+
 void InputManager::RegisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToReg)
 {
 	if (keyTracker.count(key) == 0)
@@ -35,15 +52,25 @@ void InputManager::RegisterKey(sf::Keyboard::Key key, InputObject* pInputable, K
 
 void InputManager::DeregisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg)
 {
-	assert(false);
+	assert(keyTracker.count(key) > 0); // crash if you try to deregister something that isn't registered
+
+	keyTracker.at(key)->Deregister(pInputable, eventToDereg);
 }
 
 void InputManager::RegisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg)
 {
-	assert(false);
+	if (mouseBtnTracker.count(btn) == 0)
+	{
+		// make new MouseBtnListener
+		mouseBtnTracker.emplace(btn, new MouseBtnListener(btn));
+	}
+
+	mouseBtnTracker.at(btn)->Register(pInputable, eventToReg);
 }
 
 void InputManager::DeregisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg)
 {
-	assert(false);
+	assert(mouseBtnTracker.count(btn) > 0); // crash if you try to deregister something that isn't registered
+
+	mouseBtnTracker.at(btn)->Deregister(pInputable, eventToDereg);
 }

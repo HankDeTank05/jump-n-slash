@@ -1,9 +1,9 @@
 #include "TestScene.h"
 
-#include "Player.h"
+#include "TestClass.h"
 
 TestScene::TestScene()
-	: pPlayer(nullptr)
+	: pTestClass(nullptr)
 {
 	// do nothing
 }
@@ -15,10 +15,10 @@ TestScene::~TestScene()
 
 void TestScene::Init()
 {
-	pPlayer = new Player();
+	pTestClass = new TestClass();
 }
 
 void TestScene::End()
 {
-	delete pPlayer;
+	delete pTestClass;
 }

@@ -2,6 +2,8 @@
 
 #include "KeyRegistrationCommand.h"
 #include "KeyDeregistrationCommand.h"
+#include "MouseBtnRegistrationCommand.h"
+#include "MouseBtnDeregistrationCommand.h"
 #include "SceneAttorney.h"
 #include "JumpSlashEngine.h"
 
@@ -21,8 +23,6 @@ void InputObject::EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent even
 	{
 		// use existing registration data
 		assert(keyTracker.at(keyID).regState == RegistrationState::CURRENTLY_DEREGISTERED);
-
-		assert(false);
 	}
 
 	SceneAttorney::Commands::AddCommand(JumpSlashEngine::GetCurrentScene(), keyTracker.at(keyID).pRegCmd);
@@ -36,7 +36,7 @@ void InputObject::EnqueueForKeyDeregistration(sf::Keyboard::Key key, KeyEvent ev
 	assert(keyTracker.count(keyID) > 0); // Invalid KeyID: keyID does not exist!
 	assert(keyTracker.at(keyID).regState == RegistrationState::CURRENTLY_REGISTERED);
 
-	assert(false);
+	SceneAttorney::Commands::AddCommand(JumpSlashEngine::GetCurrentScene(), keyTracker.at(keyID).pDeregCmd);
 
 	keyTracker.at(keyID).regState = RegistrationState::PENDING_DEREGISTRATION;
 }
@@ -47,15 +47,19 @@ void InputObject::EnqueueForMouseBtnRegistration(sf::Mouse::Button btn, MouseEve
 	if (mouseBtnTracker.count(btnID) == 0)
 	{
 		// create registration data
-		assert(false);
+		MouseBtnRegistrationData mouseBtnRegData;
+		mouseBtnRegData.regState = RegistrationState::CURRENTLY_DEREGISTERED;
+		mouseBtnRegData.pRegCmd = new MouseBtnRegistrationCommand(this, btn, eventToReg);
+		mouseBtnRegData.pDeregCmd = new MouseBtnDeregistrationCommand(this, btn, eventToReg);
+		mouseBtnTracker.emplace(btnID, mouseBtnRegData);
 	}
 	else
 	{
 		// use existing registration data
 		assert(mouseBtnTracker.at(btnID).regState == RegistrationState::CURRENTLY_DEREGISTERED);
-
-		assert(false);
 	}
+
+	SceneAttorney::Commands::AddCommand(JumpSlashEngine::GetCurrentScene(), mouseBtnTracker.at(btnID).pRegCmd);
 
 	mouseBtnTracker.at(btnID).regState = RegistrationState::PENDING_REGISTRATION;
 }
@@ -66,7 +70,7 @@ void InputObject::EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseE
 	assert(mouseBtnTracker.count(btnID) > 0); // Invalid BtnID: btnID does not exist!
 	assert(mouseBtnTracker.at(btnID).regState == RegistrationState::CURRENTLY_REGISTERED);
 
-	assert(false);
+	SceneAttorney::Commands::AddCommand(JumpSlashEngine::GetCurrentScene(), mouseBtnTracker.at(btnID).pDeregCmd);
 
 	mouseBtnTracker.at(btnID).regState = RegistrationState::PENDING_DEREGISTRATION;
 }
@@ -88,7 +92,7 @@ void InputObject::DeregisterKey(sf::Keyboard::Key key, KeyEvent eventToDereg)
 	assert(keyTracker.count(keyID) > 0); // Invalid KeyID: keyID does not exist!
 	assert(keyTracker.at(keyID).regState == RegistrationState::PENDING_DEREGISTRATION);
 
-	assert(false);
+	SceneAttorney::Input::DeregisterKey(JumpSlashEngine::GetCurrentScene(), key, this, eventToDereg);
 
 	keyTracker.at(keyID).regState = RegistrationState::CURRENTLY_DEREGISTERED;
 }
@@ -99,7 +103,7 @@ void InputObject::RegisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToReg)
 	assert(mouseBtnTracker.count(btnID) > 0); // Invalid BtnID: btnID does not exist!
 	assert(mouseBtnTracker.at(btnID).regState == RegistrationState::PENDING_REGISTRATION);
 
-	assert(false);
+	SceneAttorney::Input::RegisterMouseBtn(JumpSlashEngine::GetCurrentScene(), btn, this, eventToReg);
 
 	mouseBtnTracker.at(btnID).regState = RegistrationState::CURRENTLY_REGISTERED;
 }
@@ -110,7 +114,7 @@ void InputObject::DeregisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToDe
 	assert(mouseBtnTracker.count(btnID) > 0); // Invalid BtnID: btnID does not exist!
 	assert(mouseBtnTracker.at(btnID).regState == RegistrationState::PENDING_DEREGISTRATION);
 
-	assert(false);
+	SceneAttorney::Input::DeregisterMouseBtn(JumpSlashEngine::GetCurrentScene(), btn, this, eventToDereg);
 
 	mouseBtnTracker.at(btnID).regState = RegistrationState::CURRENTLY_DEREGISTERED;
 }

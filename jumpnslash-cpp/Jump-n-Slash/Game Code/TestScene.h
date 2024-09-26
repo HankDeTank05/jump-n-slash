@@ -4,7 +4,7 @@
 #include "../Engine Code/Scene.h"
 
 // forward declarations
-class Player;
+class TestClass;
 
 class TestScene : public Scene
 {
@@ -18,7 +18,7 @@ public:
 	virtual void End() override;
 
 private:
-	Player* pPlayer;
+	TestClass* pTestClass;
 };
 
 #endif

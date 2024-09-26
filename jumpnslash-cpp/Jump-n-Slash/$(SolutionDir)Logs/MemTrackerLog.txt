@@ -809,47 +809,47 @@ Leak(795)  16 bytes ref:2372
 Leak(796)  32 bytes ref:2373 
 Leak(797)  16 bytes ref:2375 
 Leak(798)  32 bytes ref:2376 
-Leak(799)  16 bytes ref:2888 
-Leak(800)  64 bytes ref:2889 
-Leak(801)  16 bytes ref:2890 
-Leak(802)  64 bytes ref:2891 
-Leak(803)  16 bytes ref:2892 
-Leak(804)  64 bytes ref:2893 
-Leak(805)  16 bytes ref:2894 
-Leak(806)  64 bytes ref:2895 
-Leak(807)  16 bytes ref:2896 
-Leak(808)  64 bytes ref:2897 
-Leak(809)  16 bytes ref:2898 
-Leak(810)  64 bytes ref:2899 
-Leak(811)  16 bytes ref:2900 
-Leak(812)  64 bytes ref:2901 
-Leak(813)  16 bytes ref:2902 
-Leak(814)  64 bytes ref:2903 
-Leak(815)  16 bytes ref:2904 
-Leak(816)  64 bytes ref:2905 
-Leak(817)  16 bytes ref:2906 
-Leak(818)  64 bytes ref:2907 
-Leak(819)  16 bytes ref:2908 
-Leak(820)  64 bytes ref:2909 
-Leak(821)  16 bytes ref:2910 
-Leak(822)  64 bytes ref:2911 
-Leak(823)  16 bytes ref:2912 
-Leak(824)  64 bytes ref:2913 
-Leak(825)  16 bytes ref:2914 
-Leak(826)  64 bytes ref:2915 
-Leak(827)  16 bytes ref:2916 
-Leak(828)  64 bytes ref:2917 
-Leak(829)  16 bytes ref:2918 
-Leak(830)  64 bytes ref:2919 
-Leak(831)  24 bytes ref:2926 
-Leak(832)  40 bytes ref:2944 
-Leak(833)  48 bytes ref:2969 
-Leak(834)  16 bytes ref:14154 
-Leak(835)  32 bytes ref:14155 
-Leak(836)  16 bytes ref:14156 
-Leak(837)  71 bytes ref:14159 
-Leak(838)  16 bytes ref:14167 
-Leak(839)  48 bytes ref:14169 
+Leak(799)  16 bytes ref:2881 
+Leak(800)  64 bytes ref:2882 
+Leak(801)  16 bytes ref:2883 
+Leak(802)  64 bytes ref:2884 
+Leak(803)  16 bytes ref:2885 
+Leak(804)  64 bytes ref:2886 
+Leak(805)  16 bytes ref:2887 
+Leak(806)  64 bytes ref:2888 
+Leak(807)  16 bytes ref:2889 
+Leak(808)  64 bytes ref:2890 
+Leak(809)  16 bytes ref:2891 
+Leak(810)  64 bytes ref:2892 
+Leak(811)  16 bytes ref:2893 
+Leak(812)  64 bytes ref:2894 
+Leak(813)  16 bytes ref:2895 
+Leak(814)  64 bytes ref:2896 
+Leak(815)  16 bytes ref:2897 
+Leak(816)  64 bytes ref:2898 
+Leak(817)  16 bytes ref:2899 
+Leak(818)  64 bytes ref:2900 
+Leak(819)  16 bytes ref:2901 
+Leak(820)  64 bytes ref:2902 
+Leak(821)  16 bytes ref:2903 
+Leak(822)  64 bytes ref:2904 
+Leak(823)  16 bytes ref:2905 
+Leak(824)  64 bytes ref:2906 
+Leak(825)  16 bytes ref:2907 
+Leak(826)  64 bytes ref:2908 
+Leak(827)  16 bytes ref:2909 
+Leak(828)  64 bytes ref:2910 
+Leak(829)  16 bytes ref:2911 
+Leak(830)  64 bytes ref:2912 
+Leak(831)  24 bytes ref:2916 
+Leak(832)  40 bytes ref:2934 
+Leak(833)  48 bytes ref:2952 
+Leak(834)  16 bytes ref:68102 
+Leak(835)  32 bytes ref:68103 
+Leak(836)  16 bytes ref:68104 
+Leak(837)  71 bytes ref:68107 
+Leak(838)  16 bytes ref:68115 
+Leak(839)  48 bytes ref:68117 
 
 Memory Tracking Stats:
 
@@ -866,6 +866,6 @@ CRT Debug Stats:
 
     0 bytes in 0 Free Blocks 
     40622 bytes in 840 Normal Blocks 
-    48989 bytes in 155 CRT Blocks 
+    46921 bytes in 152 CRT Blocks 
     0 bytes in 0 Ignore Blocks 
     0 bytes in 0 Client Blocks 

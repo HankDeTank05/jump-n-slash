@@ -33,6 +33,7 @@
     <ClCompile Include="Engine Code\KeyRegistrationCommand.cpp" />
     <ClCompile Include="Engine Code\main.cpp" />
     <ClCompile Include="Engine Code\MouseBtnDeregistrationCommand.cpp" />
+    <ClCompile Include="Engine Code\MouseBtnListener.cpp" />
     <ClCompile Include="Engine Code\MouseBtnRegistrationCommand.cpp" />
     <ClCompile Include="Engine Code\RegistrationBroker.cpp" />
     <ClCompile Include="Engine Code\Scene.cpp" />
@@ -48,7 +49,7 @@
     <ClCompile Include="Engine Code\UpdateRegistrationCommand.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
-    <ClCompile Include="Game Code\Player.cpp" />
+    <ClCompile Include="Game Code\TestClass.cpp" />
     <ClCompile Include="Game Code\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +70,7 @@
     <ClInclude Include="Engine Code\MemTracker\Framework.h" />
     <ClInclude Include="Engine Code\MemTracker\ProjectSettings.h" />
     <ClInclude Include="Engine Code\MouseBtnDeregistrationCommand.h" />
+    <ClInclude Include="Engine Code\MouseBtnListener.h" />
     <ClInclude Include="Engine Code\MouseBtnRegistrationCommand.h" />
     <ClInclude Include="Engine Code\RegistrationBroker.h" />
     <ClInclude Include="Engine Code\RegistrationState.h" />
@@ -85,7 +87,7 @@
     <ClInclude Include="Engine Code\UpdateRegistrationCommand.h" />
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
-    <ClInclude Include="Game Code\Player.h" />
+    <ClInclude Include="Game Code\TestClass.h" />
     <ClInclude Include="Game Code\TestScene.h" />
   </ItemGroup>
   <ItemGroup>

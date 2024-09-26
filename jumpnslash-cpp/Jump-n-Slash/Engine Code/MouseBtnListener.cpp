@@ -1,9 +1,9 @@
-#include "KeyListener.h"
+#include "MouseBtnListener.h"
 
 #include "InputObjectAttorney.h"
 
-KeyListener::KeyListener(sf::Keyboard::Key _key)
-	: key(_key),
+MouseBtnListener::MouseBtnListener(sf::Mouse::Button _btn)
+	: btn(_btn),
 	prevState(false),
 	notifyOnPress(),
 	notifyOnRelease()
@@ -11,46 +11,39 @@ KeyListener::KeyListener(sf::Keyboard::Key _key)
 	// do nothing
 }
 
-void KeyListener::ProcessKeyEvent()
+void MouseBtnListener::ProcessMouseBtnEvent()
 {
-	bool currState = sf::Keyboard::isKeyPressed(key);
+	bool currState = sf::Mouse::isButtonPressed(btn);
 
 	if (currState != prevState)
 	{
 		if (prevState == false && currState == true)
 		{
-			// key press
 			for (NotifyList::iterator it = notifyOnPress.begin(); it != notifyOnPress.end(); it++)
 			{
-				InputObjectAttorney::KeyEvents::KeyPressed(*it, key);
+				InputObjectAttorney::MouseEvents::MouseBtnPressed(*it, btn);
 			}
 		}
 		else if (prevState == true && currState == false)
 		{
-			// key release
 			for (NotifyList::iterator it = notifyOnRelease.begin(); it != notifyOnRelease.end(); it++)
 			{
-				InputObjectAttorney::KeyEvents::KeyReleased(*it, key);
+				InputObjectAttorney::MouseEvents::MouseBtnReleased(*it, btn);
 			}
-		}
-		else
-		{
-			assert(false);
 		}
 	}
 
 	prevState = currState;
 }
 
-void KeyListener::Register(InputObject* pInputable, KeyEvent eventToReg)
+void MouseBtnListener::Register(InputObject* pInputable, MouseEvent eventToReg)
 {
-
 	switch (eventToReg)
 	{
-	case KeyEvent::KeyPress:
+	case MouseEvent::BtnPress:
 		notifyOnPress.push_back(pInputable);
 		break;
-	case KeyEvent::KeyRelease:
+	case MouseEvent::BtnRelease:
 		notifyOnRelease.push_back(pInputable);
 		break;
 	default:
@@ -58,14 +51,14 @@ void KeyListener::Register(InputObject* pInputable, KeyEvent eventToReg)
 	}
 }
 
-void KeyListener::Deregister(InputObject* pInputable, KeyEvent eventToDereg)
+void MouseBtnListener::Deregister(InputObject* pInputable, MouseEvent eventToDereg)
 {
 	switch (eventToDereg)
 	{
-	case KeyEvent::KeyPress:
+	case MouseEvent::BtnPress:
 		notifyOnPress.remove(pInputable);
 		break;
-	case KeyEvent::KeyRelease:
+	case MouseEvent::BtnRelease:
 		notifyOnRelease.remove(pInputable);
 		break;
 	default:

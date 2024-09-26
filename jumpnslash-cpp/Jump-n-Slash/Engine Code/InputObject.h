@@ -38,11 +38,11 @@ protected:
 	// TODO: figure out gamepad button inputs
 	// TODO: figure out gamepad stick inputs
 
-	void EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg);
-	void EnqueueForKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg);
+	void EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg); // TODO: documentation for InputObject::EnqueueForKeyRegistration
+	void EnqueueForKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg); // TODO: documentation for InputObject::EnqueueForKeyDeregistration
 
-	void EnqueueForMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg);
-	void EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg);
+	void EnqueueForMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg); // TODO: documentation for InputObject::EnqueueForMouseBtnRegistration
+	void EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg); // TODO: documentation for InputObject::EnqueueForMouseBtnDeregistration
 
 private:
 	void RegisterKey(sf::Keyboard::Key key, KeyEvent eventToReg);
