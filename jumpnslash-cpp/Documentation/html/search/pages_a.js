@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['scene_0',['Creating a Scene',['../_creating_scene.html',1,'']]],
-  ['slash_20documentation_1',['Jump-n-Slash Documentation',['../index.html',1,'']]]
+  ['using_20the_20asset_20managers_0',['Using the Asset Managers',['../_using_asset_managers.html',1,'']]]
 ];

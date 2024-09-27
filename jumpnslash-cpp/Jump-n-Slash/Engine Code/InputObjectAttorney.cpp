@@ -22,6 +22,16 @@ void InputObjectAttorney::Registration::DeregisterMouseBtn(InputObject* pInputab
 	pInputable->DeregisterMouseBtn(btn, eventToDereg);
 }
 
+void InputObjectAttorney::Registration::RegisterMouseCursor(InputObject* pInputable)
+{
+	pInputable->RegisterMouseCursor();
+}
+
+void InputObjectAttorney::Registration::DeregisterMouseCursor(InputObject* pInputable)
+{
+	pInputable->DeregisterMouseCursor();
+}
+
 void InputObjectAttorney::KeyEvents::KeyPressed(InputObject* pInputable, sf::Keyboard::Key key)
 {
 	pInputable->KeyPressed(key);
@@ -40,4 +50,9 @@ void InputObjectAttorney::MouseEvents::MouseBtnPressed(InputObject* pInputable, 
 void InputObjectAttorney::MouseEvents::MouseBtnReleased(InputObject* pInputable, sf::Mouse::Button btn)
 {
 	pInputable->MouseBtnReleased(btn);
+}
+
+void InputObjectAttorney::MouseEvents::MouseCursorMoved(InputObject* pInputable, sf::Vector2i pos, sf::Vector2i delta)
+{
+	pInputable->MouseCursorMoved(pos, delta);
 }

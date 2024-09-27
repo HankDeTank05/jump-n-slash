@@ -33,7 +33,7 @@ var NAVTREE =
       ] ]
     ] ],
     [ "Using the Asset Managers", "_using_asset_managers.html", [
-      [ "Overview", "_using_asset_managers.html#overview", null ],
+      [ "Overview", "_using_asset_managers.html#overview_assetMgr", null ],
       [ "Texture Manager", "_using_asset_managers.html#textureManager", [
         [ "Loading a Texture", "_using_asset_managers.html#textureManager_load", null ],
         [ "Getting a Texture", "_using_asset_managers.html#textureManager_get", null ]
@@ -44,8 +44,15 @@ var NAVTREE =
       ] ],
       [ "Functions referenced in this tutorial", "_using_asset_managers.html#seeAlso", null ]
     ] ],
-    [ "Creating a Scene", "_creating_scene.html", null ],
-    [ "Creating a Game Object", "_creating_game_object.html", null ],
+    [ "Creating a Scene", "_creating_scene.html", [
+      [ "Overview", "_creating_scene.html#overview_scene", null ],
+      [ "The Scene Base Class", "_creating_scene.html#baseClass", null ],
+      [ "Your Derived Scene Class", "_creating_scene.html#derivedClass", [
+        [ "The Essentials", "_creating_scene.html#derivedClass_essentials", null ],
+        [ "The Init() Function", "_creating_scene.html#derivedClass_init", null ],
+        [ "The End() Function", "_creating_scene.html#derivedClass_end", null ]
+      ] ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

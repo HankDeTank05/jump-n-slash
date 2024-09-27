@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['n_20slash_20documentation_0',['Jump-n-Slash Documentation',['../index.html',1,'']]]
+  ['scene_0',['Creating a Scene',['../_creating_scene.html',1,'']]],
+  ['slash_20documentation_1',['Jump-n-Slash Documentation',['../index.html',1,'']]]
 ];

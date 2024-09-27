@@ -4,8 +4,20 @@
 #include "KeyDeregistrationCommand.h"
 #include "MouseBtnRegistrationCommand.h"
 #include "MouseBtnDeregistrationCommand.h"
+#include "MouseCursorRegistrationCommand.h"
+#include "MouseCursorDeregistrationCommand.h"
 #include "SceneAttorney.h"
 #include "JumpSlashEngine.h"
+
+InputObject::InputObject()
+	: keyTracker(),
+	mouseBtnTracker(),
+	mouseCursorRegData()
+{
+	mouseCursorRegData.regState = RegistrationState::CURRENTLY_DEREGISTERED;
+	mouseCursorRegData.pRegCmd = new MouseCursorRegistrationCommand(this);
+	mouseCursorRegData.pDeregCmd = new MouseCursorDeregistrationCommand(this);
+}
 
 void InputObject::EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg)
 {
@@ -75,6 +87,24 @@ void InputObject::EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseE
 	mouseBtnTracker.at(btnID).regState = RegistrationState::PENDING_DEREGISTRATION;
 }
 
+void InputObject::EnqueueForMouseCursorRegistration()
+{
+	assert(mouseCursorRegData.regState == RegistrationState::CURRENTLY_DEREGISTERED);
+
+	SceneAttorney::Commands::AddCommand(JumpSlashEngine::GetCurrentScene(), mouseCursorRegData.pRegCmd);
+
+	mouseCursorRegData.regState = RegistrationState::PENDING_REGISTRATION;
+}
+
+void InputObject::EnqueueForMouseCursorDeregistration()
+{
+	assert(mouseCursorRegData.regState == RegistrationState::CURRENTLY_REGISTERED);
+
+	SceneAttorney::Commands::AddCommand(JumpSlashEngine::GetCurrentScene(), mouseCursorRegData.pDeregCmd);
+
+	mouseCursorRegData.regState = RegistrationState::PENDING_DEREGISTRATION;
+}
+
 void InputObject::RegisterKey(sf::Keyboard::Key key, KeyEvent eventToReg)
 {
 	KeyTrackerID keyID(key, eventToReg);
@@ -119,6 +149,24 @@ void InputObject::DeregisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToDe
 	mouseBtnTracker.at(btnID).regState = RegistrationState::CURRENTLY_DEREGISTERED;
 }
 
+void InputObject::RegisterMouseCursor()
+{
+	assert(mouseCursorRegData.regState == RegistrationState::PENDING_REGISTRATION);
+
+	SceneAttorney::Input::RegisterMouseCursor(JumpSlashEngine::GetCurrentScene(), this);
+
+	mouseCursorRegData.regState = RegistrationState::CURRENTLY_REGISTERED;
+}
+
+void InputObject::DeregisterMouseCursor()
+{
+	assert(mouseCursorRegData.regState == RegistrationState::PENDING_DEREGISTRATION);
+
+	SceneAttorney::Input::DeregisterMouseCursor(JumpSlashEngine::GetCurrentScene(), this);
+
+	mouseCursorRegData.regState = RegistrationState::CURRENTLY_DEREGISTERED;
+}
+
 InputObject::~InputObject()
 {
 	for (KeyRegTracker::iterator it = keyTracker.begin(); it != keyTracker.end(); it++)
@@ -150,6 +198,11 @@ void InputObject::MouseBtnPressed(sf::Mouse::Button btn)
 }
 
 void InputObject::MouseBtnReleased(sf::Mouse::Button btn)
+{
+	// do nothing. override to make it do something
+}
+
+void InputObject::MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta)
 {
 	// do nothing. override to make it do something
 }

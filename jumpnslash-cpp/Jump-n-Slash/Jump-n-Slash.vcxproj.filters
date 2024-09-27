@@ -28,9 +28,6 @@
     <Filter Include="Source Files\Game Code\Files Required by Engine">
       <UniqueIdentifier>{798ced98-09a1-4b3d-bb75-6288a3728d1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Player">
-      <UniqueIdentifier>{d4d9b932-9159-4522-b400-752ee235dc87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems">
       <UniqueIdentifier>{3b3de11b-8a13-4db0-bd9e-8979bf2145ac}</UniqueIdentifier>
     </Filter>
@@ -67,9 +64,6 @@
     <Filter Include="Source Files\Engine Code\Misc. files">
       <UniqueIdentifier>{002f2070-2642-4b78-a7b1-5eccdca6db3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Test Scene">
-      <UniqueIdentifier>{9990cb5d-41ed-4b76-93e6-927206ed2283}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Code\Extra Documentation">
       <UniqueIdentifier>{5c031f14-77f7-42dd-99df-5344014c8227}</UniqueIdentifier>
     </Filter>
@@ -81,6 +75,9 @@
     </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners">
       <UniqueIdentifier>{aaa22e16-000e-4c09-a2eb-6676d02b0ec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Engine Testing">
+      <UniqueIdentifier>{9f51742c-c55e-4f4a-8121-81cd6e09086e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -98,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="Game Code\LoadResources.cpp">
       <Filter>Source Files\Game Code\Files Required by Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\TestClass.cpp">
-      <Filter>Source Files\Game Code\Player</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\SpriteManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
@@ -122,9 +116,6 @@
     </ClCompile>
     <ClCompile Include="Engine Code\SceneAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\TestScene.cpp">
-      <Filter>Source Files\Game Code\Test Scene</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\DrawableObjectAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
@@ -180,6 +171,21 @@
     <ClCompile Include="Engine Code\MouseBtnListener.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\TestScene.cpp">
+      <Filter>Source Files\Game Code\Engine Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\TestClass.cpp">
+      <Filter>Source Files\Game Code\Engine Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MouseCursorListener.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MouseCursorRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MouseCursorDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -190,9 +196,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\TextureManager.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\TestClass.h">
-      <Filter>Source Files\Game Code\Player</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\SpriteManager.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
@@ -223,9 +226,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\SceneAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\TestScene.h">
-      <Filter>Source Files\Game Code\Test Scene</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\DrawableObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
@@ -290,6 +290,21 @@
     <ClInclude Include="Engine Code\MouseBtnListener.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
     </ClInclude>
+    <ClInclude Include="Game Code\TestScene.h">
+      <Filter>Source Files\Game Code\Engine Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\TestClass.h">
+      <Filter>Source Files\Game Code\Engine Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MouseCursorListener.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MouseCursorRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MouseCursorDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\0_DocsHome.txt">
@@ -298,13 +313,16 @@
     <Text Include="Game Code\1_EngineBasics.txt">
       <Filter>Source Files\Game Code\Extra Documentation</Filter>
     </Text>
-    <Text Include="Game Code\4_CreatingGameObject.txt">
+    <Text Include="Game Code\4_CreatingGameObject1.txt">
       <Filter>Source Files\Game Code\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\2_UsingAssetManagers.txt">
       <Filter>Source Files\Game Code\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\3_CreatingScene.txt">
+      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+    </Text>
+    <Text Include="Game Code\5_CreatingGameObject2.txt">
       <Filter>Source Files\Game Code\Extra Documentation</Filter>
     </Text>
   </ItemGroup>

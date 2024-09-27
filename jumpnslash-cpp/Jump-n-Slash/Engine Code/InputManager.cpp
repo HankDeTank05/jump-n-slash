@@ -2,10 +2,12 @@
 
 #include "KeyListener.h"
 #include "MouseBtnListener.h"
+#include "MouseCursorListener.h"
 
 InputManager::InputManager()
 	: keyTracker(),
-	mouseBtnTracker()
+	mouseBtnTracker(),
+	pCursorListener(new MouseCursorListener())
 {
 	// do nothing
 }
@@ -33,6 +35,7 @@ void InputManager::ProcessKeyboardEvents()
 
 void InputManager::ProcessMouseEvents()
 {
+	pCursorListener->ProcessCursorEvent();
 	for (MouseBtnTracker::iterator it = mouseBtnTracker.begin(); it != mouseBtnTracker.end(); it++)
 	{
 		it->second->ProcessMouseBtnEvent();
@@ -73,4 +76,14 @@ void InputManager::DeregisterMouseBtn(sf::Mouse::Button btn, InputObject* pInput
 	assert(mouseBtnTracker.count(btn) > 0); // crash if you try to deregister something that isn't registered
 
 	mouseBtnTracker.at(btn)->Deregister(pInputable, eventToDereg);
+}
+
+void InputManager::RegisterMouseCursor(InputObject* pInputable)
+{
+	pCursorListener->Register(pInputable);
+}
+
+void InputManager::DeregisterMouseCursor(InputObject* pInputable)
+{
+	pCursorListener->Deregister(pInputable);
 }

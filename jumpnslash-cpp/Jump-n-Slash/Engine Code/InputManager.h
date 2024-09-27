@@ -13,6 +13,7 @@
 class InputObject;
 class KeyListener;
 class MouseBtnListener;
+class MouseCursorListener;
 
 class InputManager
 {
@@ -34,9 +35,13 @@ public:
 	void RegisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg);
 	void DeregisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg);
 
+	void RegisterMouseCursor(InputObject* pInputable);
+	void DeregisterMouseCursor(InputObject* pInputable);
+
 private:
 	KeyTracker keyTracker;
 	MouseBtnTracker mouseBtnTracker;
+	MouseCursorListener* pCursorListener;
 };
 
 #endif

@@ -80,6 +80,17 @@ multiple times without having to delete that instance and re-construct it.
 To illustrate this concept, let's look at an example: Super Mario Bros. Let's say that each level in the game is it's
 own scene object. Without an \c Init() function, all of your setup logic is in the constructor, which means you would
 have to delete a perfectly valid and usable scene and re-construct it each time the player died, which is very inefficient.
+However, using an \c Init() function we can do partial setup in the constructor, and the rest of it (only the essentials)
+in the \c Init() function.
+
+\subsection derivedClass_end The \c End() Function
+Similarly to how \c Init() serves as a constructor-like function, \c End() serves as a destructor-like function. You can
+have a partial "destruction" occur in the \c End() function without having to completely delete an object.
+
+TODO: expand on the explanation of the Scene::End function
+
+\subsection derivedClass_members Member Variables
+(words go here)
 
 TODO: documentation for CreatingScene tutorial is incomplete
 */

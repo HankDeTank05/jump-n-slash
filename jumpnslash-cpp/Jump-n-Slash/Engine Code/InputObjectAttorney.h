@@ -24,6 +24,11 @@ public:
 		friend class MouseBtnDeregistrationCommand;
 		static void RegisterMouseBtn(InputObject* pInputable, sf::Mouse::Button btn, MouseEvent eventToReg);
 		static void DeregisterMouseBtn(InputObject* pInputable, sf::Mouse::Button btn, MouseEvent eventToDereg);
+
+		friend class MouseCursorRegistrationCommand;
+		friend class MouseCursorDeregistrationCommand;
+		static void RegisterMouseCursor(InputObject* pInputable);
+		static void DeregisterMouseCursor(InputObject* pInputable);
 	};
 
 	class KeyEvents
@@ -38,8 +43,10 @@ public:
 	{
 	private:
 		friend class MouseBtnListener;
+		friend class MouseCursorListener;
 		static void MouseBtnPressed(InputObject* pInputable, sf::Mouse::Button btn);
 		static void MouseBtnReleased(InputObject* pInputable, sf::Mouse::Button btn);
+		static void MouseCursorMoved(InputObject* pInputable, sf::Vector2i pos, sf::Vector2i delta);
 	};
 };
 

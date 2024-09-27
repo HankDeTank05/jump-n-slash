@@ -3,8 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 
-sf::String WINDOW_NAME = "Jump n Slash";
-int WINDOW_WIDTH = 128;
-int WINDOW_HEIGHT = 128;
+const sf::String WINDOW_NAME = "Jump n Slash";
+const int WINDOW_WIDTH = 128;
+const int WINDOW_HEIGHT = 128;
 
 #endif

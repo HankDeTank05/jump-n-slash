@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['player_0',['Player',['../class_player.html',1,'']]]
+  ['n_20slash_20documentation_0',['Jump-n-Slash Documentation',['../index.html',1,'']]]
 ];

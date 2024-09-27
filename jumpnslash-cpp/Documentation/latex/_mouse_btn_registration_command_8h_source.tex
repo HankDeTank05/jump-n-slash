@@ -1,0 +1,35 @@
+\doxysection{Mouse\+Btn\+Registration\+Command.\+h}
+\hypertarget{_mouse_btn_registration_command_8h_source}{}\label{_mouse_btn_registration_command_8h_source}\index{Jump-\/n-\/Slash/Engine Code/MouseBtnRegistrationCommand.h@{Jump-\/n-\/Slash/Engine Code/MouseBtnRegistrationCommand.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MOUSE\_BTN\_REGISTRATION\_COMMAND\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MOUSE\_BTN\_REGISTRATION\_COMMAND\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Window/Mouse.hpp>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Command.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}InputEvent.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_object}{InputObject}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_command}{Command}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}()\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Mouse::Button\ btn,\ MouseEvent\ eventToReg);}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}\&\ mbrc);}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}\&\ mbrc);}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_mouse_btn_registration_command}{\string~MouseBtnRegistrationCommand}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Execute()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable;}
+\DoxyCodeLine{00025\ \ \ \ \ sf::Mouse::Button\ btn;}
+\DoxyCodeLine{00026\ \ \ \ \ MouseEvent\ eventToReg;}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

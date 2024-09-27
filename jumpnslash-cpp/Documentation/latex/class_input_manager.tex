@@ -1,0 +1,44 @@
+\doxysection{Input\+Manager Class Reference}
+\hypertarget{class_input_manager}{}\label{class_input_manager}\index{InputManager@{InputManager}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_input_manager_a042c1c42f8ff74a163e4421e1f1623a5}\label{class_input_manager_a042c1c42f8ff74a163e4421e1f1623a5} 
+using {\bfseries Key\+Tracker} = std\+::map$<$sf\+::\+Keyboard\+::\+Key, \mbox{\hyperlink{class_key_listener}{Key\+Listener}}\texorpdfstring{$\ast$}{*}$>$
+\item 
+\Hypertarget{class_input_manager_ab200094530a41c365ce82203f7eef6a6}\label{class_input_manager_ab200094530a41c365ce82203f7eef6a6} 
+using {\bfseries Mouse\+Btn\+Tracker} = std\+::map$<$sf\+::\+Mouse\+::\+Button, \mbox{\hyperlink{class_mouse_btn_listener}{Mouse\+Btn\+Listener}}\texorpdfstring{$\ast$}{*}$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_input_manager_a0301743ede7e19372333ba99d066d0ed}\label{class_input_manager_a0301743ede7e19372333ba99d066d0ed} 
+{\bfseries Input\+Manager} (const \mbox{\hyperlink{class_input_manager}{Input\+Manager}} \&im)=delete
+\item 
+\Hypertarget{class_input_manager_a77fe9697d1dfbd5f45f90c6afa45d31d}\label{class_input_manager_a77fe9697d1dfbd5f45f90c6afa45d31d} 
+\mbox{\hyperlink{class_input_manager}{Input\+Manager}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_input_manager}{Input\+Manager}} \&im)=delete
+\item 
+\Hypertarget{class_input_manager_a0e39884874b7c0312764030cfbe0fe8e}\label{class_input_manager_a0e39884874b7c0312764030cfbe0fe8e} 
+void {\bfseries Process\+Keyboard\+Events} ()
+\item 
+\Hypertarget{class_input_manager_aed2250f0698379d883e6258c60fef2af}\label{class_input_manager_aed2250f0698379d883e6258c60fef2af} 
+void {\bfseries Process\+Mouse\+Events} ()
+\item 
+\Hypertarget{class_input_manager_aec1ffb2e9e0fd7bb94776ea58069d3bc}\label{class_input_manager_aec1ffb2e9e0fd7bb94776ea58069d3bc} 
+void {\bfseries Register\+Key} (sf\+::\+Keyboard\+::\+Key key, \mbox{\hyperlink{class_input_object}{Input\+Object}} \texorpdfstring{$\ast$}{*}p\+Inputable, Key\+Event event\+To\+Reg)
+\item 
+\Hypertarget{class_input_manager_a9bc1a38ac8a2ea0788e8fc5dcb6486cb}\label{class_input_manager_a9bc1a38ac8a2ea0788e8fc5dcb6486cb} 
+void {\bfseries Deregister\+Key} (sf\+::\+Keyboard\+::\+Key key, \mbox{\hyperlink{class_input_object}{Input\+Object}} \texorpdfstring{$\ast$}{*}p\+Inputable, Key\+Event event\+To\+Dereg)
+\item 
+\Hypertarget{class_input_manager_a73d6f349d229fd8b403743b4018ee6fb}\label{class_input_manager_a73d6f349d229fd8b403743b4018ee6fb} 
+void {\bfseries Register\+Mouse\+Btn} (sf\+::\+Mouse\+::\+Button btn, \mbox{\hyperlink{class_input_object}{Input\+Object}} \texorpdfstring{$\ast$}{*}p\+Inputable, Mouse\+Event event\+To\+Reg)
+\item 
+\Hypertarget{class_input_manager_a638dc4f77fc22edeed0f64147a6c175d}\label{class_input_manager_a638dc4f77fc22edeed0f64147a6c175d} 
+void {\bfseries Deregister\+Mouse\+Btn} (sf\+::\+Mouse\+::\+Button btn, \mbox{\hyperlink{class_input_object}{Input\+Object}} \texorpdfstring{$\ast$}{*}p\+Inputable, Mouse\+Event event\+To\+Dereg)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Jump-\/n-\/\+Slash/\+Engine Code/Input\+Manager.\+h\item 
+Jump-\/n-\/\+Slash/\+Engine Code/Input\+Manager.\+cpp\end{DoxyCompactItemize}

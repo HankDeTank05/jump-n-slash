@@ -10,7 +10,8 @@ enum class KeyEvent
 enum class MouseEvent
 {
 	BtnPress,
-	BtnRelease
+	BtnRelease,
+	CursorMove
 };
 
 #endif

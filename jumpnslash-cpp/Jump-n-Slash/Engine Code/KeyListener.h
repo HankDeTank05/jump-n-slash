@@ -27,9 +27,6 @@ public:
 	void Deregister(InputObject* pInputable, KeyEvent eventToDereg);
 
 private:
-	bool GetKeyBinState();
-
-private:
 	sf::Keyboard::Key key;
 	bool prevState;
 	NotifyList notifyOnPress;

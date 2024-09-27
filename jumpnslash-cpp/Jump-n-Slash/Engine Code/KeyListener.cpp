@@ -44,7 +44,6 @@ void KeyListener::ProcessKeyEvent()
 
 void KeyListener::Register(InputObject* pInputable, KeyEvent eventToReg)
 {
-
 	switch (eventToReg)
 	{
 	case KeyEvent::KeyPress:

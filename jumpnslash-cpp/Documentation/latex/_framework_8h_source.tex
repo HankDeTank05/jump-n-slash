@@ -1,0 +1,1653 @@
+\doxysection{Framework.\+h}
+\hypertarget{_framework_8h_source}{}\label{_framework_8h_source}\index{Jump-\/n-\/Slash/Engine Code/MemTracker/Framework.h@{Jump-\/n-\/Slash/Engine Code/MemTracker/Framework.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Copyright\ 2019,\ Ed\ Keenan,\ all\ rights\ reserved.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Framework\ -\/\ for\ Keenan's\ C++\ classes}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ \ \ \ One\ header\ to\ rule\ them\ all,\ }}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ \ \ \ \ \ \ \ one\ header\ to\ find\ them,\ }}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ \ \ \ \ \ \ \ one\ header\ to\ bring\ them\ all\ }}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ \ \ \ \ \ \ \ and\ in\ the\ Linker\ bind\ them.\ \ \ <thank\ you\ Tolkien>}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ \ \ \ Don't\ try\ to\ understand\ it...\ its\ very\ complicated}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ \ \ Systems:}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ \ \ \ \ \ Memory\ Tracking\ -\/\ dynamic\ memory\ leak\ tracking}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ \ \ \ \ \ \ \ C++\ Unit\ Testing\ -\/\ unit\ testing\ with\ teardown}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ \ \ \ \ \ \ \ Trace\ -\/\ debug\ printing\ to\ visual\ studio\ output\ window}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ \ \ \ \ \ \ \ Performance\ timer\ -\/\ hardware\ cycle\ count\ micro\ timer\ for\ performance\ tracking}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ \ \ \ \ \ \ \ File\ logging\ -\/\ dumping\ data\ to\ an\ external\ logging\ file}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ \ \ \ \ \ \ \ Memory\ Alignment\ Base\ class\ -\/\ keeping\ alignment\ to\ 16\ bytes\ for\ SIMD}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ \ \ \ }}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ \ \ \ v.2.5.0\ }}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ \ \ \ v.2.6\ \ \ -\/\ Baseline}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ \ \ \ v.2.6.1\ -\/\ fixed\ warning\ TestRegistry}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ \ \ \ v.2.7\ \ \ -\/\ Baseline}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ \ \ v.2.8\ \ \ -\/\ warning\ 5039\ windows.h}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ \ v.2.9\ \ \ -\/\ fence}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ \ \ \ v.2.10\ \ -\/\ msc\_ver\ 1914,\ win\ 10.0.17}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ \ \ \ v.2.11\ \ -\/\ warning\ fixes\ }}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ \ \ \ v.2.12\ \ -\/\ mutex\ on\ all\ trace::out}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ \ \ \ v.2.13\ \ -\/\ fixed\ warnings\ on\ mutex\ and\ default\ copy\ const\ /\ assignment}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ \ \ \ v.2.14\ \ -\/\ FileIO\ remove\ new...\ so\ you\ can\ overload\ new/delete}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ \ \ \ v.2.15\ \ -\/\ number\ tests\ pass\ reformat}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ \ \ \ v.2.16\ \ -\/\ fixing\ static\ analysis\ issues}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ \ \ \ v.2.18\ \ -\/\ teardown\ issue}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ \ \ \ v.2.19\ \ -\/\ WinSDK,\ Compiler,\ Framework\ version\ reporting}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ \ \ v.2.20\ \ -\/\ WinSDK,\ Compiler,\ Framework\ version\ reporting\ in\ Release\ mode}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ \ \ \ v.2.21\ \ -\/\ x64\ info\ header}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ \ \ \ v.2.22\ \ -\/\ Timer\ renamed\ to\ PerformanceTimer\ }}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ \ \ \ v.2.23\ \ -\/\ Mem\ Tracking\ now\ works\ with\ placement\ and\ alignment\ new}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//\ \ \ \ v.2.24\ \ -\/\ new\ tracking\ with\ file\ names\ and\ line\ numbers}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ v.2.25\ \ -\/\ fixing\ collision\ with\ unused\_var()\ macros\ in\ align16}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ v.2.26\ \ -\/\ any\ order\ for\ the\ link,\ removed\ FileIO.cpp\ and\ PerformanceTimer.cpp}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//\ \ \ \ v.2.27\ \ -\/\ atomics\ in\ Timer\ }}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ \ \ \ v.2.28\ \ -\/\ remove\ dynamic\ cast,\ warnings\ on\ atomic}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ \ \ \ v.2.29\ \ -\/\ placement\ new\ on\ align16}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ \ \ \ v.2.30\ \ -\/\ HUGE\ rework\ of\ UnitTest.h\ removed\ UnitTest.cpp}}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ \ \ \ v.3.00\ \ -\/\ Flatten\ into\ 2\ files}}
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ \ \ \ v.3.01\ \ -\/\ reduce\ includes}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ \ \ \ v.3.02\ \ -\/\ removed\ framework\ main...\ std::call\_once()\ now\ only\ one\ include\ <period>}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ v.3.03\ \ -\/\ MemoryTracking\ reporting\ improvements}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ \ \ \ v.3.04\ \ -\/\ Clean\ up\ of\ framework}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ v.3.05\ \ -\/\ consolidate\ warnings}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ \ \ \ v.3.06\ \ -\/\ Tweaked\ several\ settings\ on\ configurations\ 8\ in\ total\ \{debug/release,x86/64,\ mem\_enable/disabled\}}}
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ \ \ \ v.3.07\ \ -\/\ nothrow\ is\ a\ problem}}
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ \ \ \ v.3.08\ \ -\/\ application\ vs\ external\ memory\ tracking}}
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ \ \ \ v.3.09\ \ -\/\ added\ log\ file}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ \ \ \ v.3.10\ \ -\/\ modes\ printing}}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ \ \ \ v.3.11\ \ -\/\ banner\ before\ leak\ print\ out}}
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ \ \ \ v.3.12\ \ -\/\ project\ settings}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ \ \ \ v.3.13\ \ -\/\ UnitStats,\ mkdir\ only\ it\ doesn't\ exist}}
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ \ \ \ v.3.14\ \ -\/\ file\ open\ errors...\ need\ a\ cleaner\ way\ to\ deal\ with\ them}}
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ \ \ \ v.3.15\ \ -\/\ log\ directory\ -\/\ fixed\ for\ Memory:\ todo\ FileIO}}
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ \ \ \ v.3.16\ \ -\/\ added\ default\ if\ MEMORY\_LOGS\_DIR\ is\ missing}}
+\DoxyCodeLine{00066\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ }}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#ifndef\ FRAMEWORK\_H}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ FRAMEWORK\_H}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ FRAMEWORK\_VER\ "{}3.16"{}}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ General\ Guidelines}}
+\DoxyCodeLine{00075\ \textcolor{comment}{//}}
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ Using\ C-\/Strings\ for\ the\ project}}
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ \ \ \ \ \ \ You\ need\ to\ set\ your\ project\ settings}}
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ \ \ \ \ \ \ Properties\ /\ General\ /\ Advanced\ /\ Character\ Set-\/>Use\ Multi\ -\/\ Byte\ Character\ Set}}
+\DoxyCodeLine{00079\ \textcolor{comment}{//}}
+\DoxyCodeLine{00080\ \textcolor{comment}{//\ Forced\ include\ this\ this\ header}}
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ \ \ \ \ \ Properties/C++/Advanced/Forced\ Include\ File\ -\/>\ "{}Framework.h"{}}}
+\DoxyCodeLine{00082\ \textcolor{comment}{//\ \ \ \ \ \ Make\ sure\ Framework.h\ is\ any\ project\ include\ directory}}
+\DoxyCodeLine{00083\ \textcolor{comment}{//}}
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ Add\ to\ your\ defines:}}
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ \ \ \ \ \ Properties/C++/Preprocessor/Preprocessor\ Definition\ }}
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ -\/>\ add\ WINDOWS\_TARGET\_PLATFORM="{}\$(TargetPlatformVersion)"{};}}
+\DoxyCodeLine{00087\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ -\/>\ add\ MEMORY\_LOGS\_DIR=R"{}(\$(SolutionDir))"{};}}
+\DoxyCodeLine{00088\ \textcolor{comment}{//}}
+\DoxyCodeLine{00089\ \textcolor{comment}{//\ Turn\ off\ Memory\ Tracking...}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ \ \ \ \ Comment\ out\ the\ \#define\ MEM\_TRACKING\_ENABLED}}
+\DoxyCodeLine{00091\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ Comment\ out\ this\ line\ to\ turn\ off\ memory\ tracking}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ MEM\_TRACKER\_ENABLED}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{comment}{//\ default\ warning...\ please\ setup\ correctly}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#ifndef\ WINDOWS\_TARGET\_PLATFORM}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\ \ \ \ \#define\ \ WINDOWS\_TARGET\_PLATFORM\ "{}-\/\ MISSING\ -\/\ "{}}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ Build\ Mode:}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#ifdef\ \_DEBUG}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_M\_X64}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BUILD\_CONFIG\_MODE\ "{}x64\ Debug\ \ "{}}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BUILD\_CONFIG\_MODE\ "{}x86\ Debug\ \ "{}}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ \_M\_X64}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BUILD\_CONFIG\_MODE\ "{}x64\ Release"{}}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BUILD\_CONFIG\_MODE\ "{}x86\ Release"{}}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ Warning\ levels\ turned\ on\ for\ Wall...\ that\ Should\ be\ supressed\ globally}}
+\DoxyCodeLine{00120\ \textcolor{comment}{//\ \ \ \ \ Set\ here\ to\ avoid\ surpressing\ them\ in\ the\ settings}}
+\DoxyCodeLine{00121\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4127\ )\ }\textcolor{comment}{//\ conditional\ expression\ is\ constant}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4201\ )\ }\textcolor{comment}{//\ nonstandard\ extension\ used:\ nameless\ struct/union}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4355\ )\ }\textcolor{comment}{//\ 'this'\ :\ used\ in\ base\ member\ initializer\ list}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4514\ )\ }\textcolor{comment}{//\ 'function':\ unreferenced\ inline\ function\ has\ been\ removed}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4571\ )\ }\textcolor{comment}{//\ Informational:\ catch(...)\ semantics\ changed\ since\ Visual\ C++\ 7.1;\ structured\ exceptions\ (SEH)\ are\ no\ longer\ caught}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4625\ )\ }\textcolor{comment}{//\ 'derived\ class'\ :\ copy\ constructor\ was\ implicitly\ defined\ as\ deleted\ because\ a\ base\ class\ copy\ constructor\ is\ inaccessible\ or\ deleted}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4626\ )\ }\textcolor{comment}{//\ 'derived\ class'\ :\ assignment\ operator\ was\ implicitly\ defined\ as\ deleted\ because\ a\ base\ class\ assignment\ operator\ is\ inaccessible\ or\ deleted}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4668\ )\ }\textcolor{comment}{//\ 'symbol'\ is\ not\ defined\ as\ a\ preprocessor\ macro,\ replacing\ with\ '0'\ for\ 'directive'}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4587\ )\ }\textcolor{comment}{//\ 'anonymous\_structure':\ behavior\ change:\ constructor\ is\ no\ longer\ implicitly\ called}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4588\ )\ }\textcolor{comment}{//\ 'anonymous\_structure':\ behavior\ change:\ destructor\ is\ no\ longer\ implicitly\ called}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4710\ )\ }\textcolor{comment}{//\ 'function':\ function\ not\ inlined}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4711\ )\ }\textcolor{comment}{//\ function\ 'function'\ selected\ for\ automatic\ inline\ expansion}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 4820\ )\ }\textcolor{comment}{//\ 'bytes'\ bytes\ padding\ added\ after\ construct\ 'member\_name'}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 5025\ )\ }\textcolor{comment}{//\ 'type':\ move\ assignment\ operator\ was\ implicitly\ defined\ as\ deleted}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 5026\ )\ }\textcolor{comment}{//\ 'type':\ move\ constructor\ was\ implicitly\ defined\ as\ deleted}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 5027\ )\ }\textcolor{comment}{//\ 'type':\ move\ assignment\ operator\ was\ implicitly\ defined\ as\ deleted}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 5039\ )\ }\textcolor{comment}{//\ function':\ pointer\ or\ reference\ to\ potentially\ throwing\ function\ passed\ to\ extern\ C\ function\ under\ -\/EHc.\ Undefined\ behavior\ may\ occur\ if\ this\ function\ throws\ an\ exception.}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#pragma\ warning(\ disable\ :\ 5045\ )\ }\textcolor{comment}{//\ Compiler\ will\ insert\ Spectre\ mitigation\ for\ memory\ load\ if\ /Qspectre\ switch\ specified}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#include\ "{}ProjectSettings.h"{}}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00145\ \textcolor{comment}{//\ General\ includes}}
+\DoxyCodeLine{00146\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#include\ <assert.h>}}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#include\ <stdlib.h>}\ \ }
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#include\ <crtdbg.h>}\ \ }
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00156\ \textcolor{comment}{//\ Many\ standard\ includes\ have\ serious\ warnings\ }}
+\DoxyCodeLine{00157\ \textcolor{comment}{//\ \ \ \ \ need\ to\ wrap\ for\ Wall\ warnings}}
+\DoxyCodeLine{00158\ \textcolor{comment}{//}}
+\DoxyCodeLine{00159\ \textcolor{comment}{//\ Todo:\ reverify\ with\ major\ compiler\ releases...\ }}
+\DoxyCodeLine{00160\ \textcolor{comment}{//\ \ \ \ \ \ \ Come\ on\ Microsoft..\ clean\ up\ your\ code}}
+\DoxyCodeLine{00161\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#pragma\ warning(\ push\ )}}
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4820\ )\ }\textcolor{comment}{//\ 'bytes'\ bytes\ padding\ added\ after\ construct\ 'member\_name'}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#define\ NOMINMAX}}
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\ \ \ \ \#include\ <Windows.h>}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#pragma\ warning(\ pop\ )\ }}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#pragma\ warning(\ push\ )}}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4365\ )\ }\textcolor{comment}{//\ 'classname':\ class\ has\ virtual\ functions,\ but\ destructor\ is\ not\ virtual\(\backslash\)n\ instances\ of\ this\ class\ may\ not\ be\ destructed\ correctly}}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4623\ )\ }\textcolor{comment}{//\ 'derived\ class':\ default\ constructor\ was\ implicitly\ defined\ as\ deleted\ because\ a\ base\ class\ default\ constructor\ is\ inaccessible\ or\ deleted}}
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4625\ )\ }\textcolor{comment}{//\ 'derived\ class':\ copy\ constructor\ was\ implicitly\ defined\ as\ deleted\ because\ a\ base\ class\ copy\ constructor\ is\ inaccessible\ or\ deleted}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4626\ )\ }\textcolor{comment}{//\ 'derived\ class':\ assignment\ operator\ was\ implicitly\ defined\ as\ deleted\ because\ a\ base\ class\ assignment\ operator\ is\ inaccessible\ or\ deleted}}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4820\ )\ }\textcolor{comment}{//\ 'bytes'\ bytes\ padding\ added\ after\ construct\ 'member\_name'}}
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 5026\ )\ }\textcolor{comment}{//\ 'type':\ move\ constructor\ was\ implicitly\ defined\ as\ deleted}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 5027\ )\ }\textcolor{comment}{//\ 'type':\ move\ assignment\ operator\ was\ implicitly\ defined\ as\ deleted}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\ \ \ \ \#include\ <mutex>}}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#pragma\ warning(\ pop\ )\ }}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#pragma\ warning(\ push\ )}}
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4365\ )\ \ }\textcolor{comment}{//\ 'classname':\ class\ has\ virtual\ functions,\ but\ destructor\ is\ not\ virtual\(\backslash\)n\ instances\ of\ this\ class\ may\ not\ be\ destructed\ correctly}}
+\DoxyCodeLine{00182\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4625\ )\ }\textcolor{comment}{//\ 'derived\ class':\ copy\ constructor\ was\ implicitly\ defined\ as\ deleted\ because\ a\ base\ class\ copy\ constructor\ is\ inaccessible\ or\ deleted}}
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 4626\ )\ }\textcolor{comment}{//\ 'derived\ class':\ assignment\ operator\ was\ implicitly\ defined\ as\ deleted\ because\ a\ base\ class\ assignment\ operator\ is\ inaccessible\ or\ deleted}}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 5026\ )\ }\textcolor{comment}{//\ 'type':\ move\ constructor\ was\ implicitly\ defined\ as\ deleted}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\ \ \ \ \#pragma\ warning(\ disable\ :\ 5027\ )\ }\textcolor{comment}{//\ 'type':\ move\ assignment\ operator\ was\ implicitly\ defined\ as\ deleted}}
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\ \ \ \ \#include\ <atomic>}}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#pragma\ warning(\ pop\ )\ }}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00191\ \textcolor{comment}{//\ Copyright\ 2019,\ Ed\ Keenan,\ all\ rights\ reserved.}}
+\DoxyCodeLine{00192\ \textcolor{comment}{//}}
+\DoxyCodeLine{00193\ \textcolor{comment}{//\ Memory\ Tracker\ }}
+\DoxyCodeLine{00194\ \textcolor{comment}{//\ \ \ \ \ \ Homemade\ Memory\ Tracker\ sitting\ on\ top\ of\ CRTDEBUG}}
+\DoxyCodeLine{00195\ \textcolor{comment}{//\ \ \ \ \ \ Works\ by\ macro\ trick..\ replacing\ everyone's\ new\ with\ macro}}
+\DoxyCodeLine{00196\ \textcolor{comment}{//\ \ \ \ \ \ Problems\ with\ placement\ new()\ need\ to\ follow\ instructions}}
+\DoxyCodeLine{00197\ \textcolor{comment}{//\ \ \ \ \ \ If\ using\ aligned\ allocations...\ need\ to\ overload\ new/delete\ operator\ see\ Align16\ for\ example}}
+\DoxyCodeLine{00198\ \textcolor{comment}{//\ \ \ \ \ \ Only\ works\ in\ Debug\ and\ with\ MEM\_TRACKER\_ENABLE\ is\ defined\ not\ in\ RELEASE}}
+\DoxyCodeLine{00199\ \textcolor{comment}{//\ \ \ \ \ \ Works\ in\ x86/64\ and\ with\ external\ libraries\ that\ are\ leaking\ as\ well}}
+\DoxyCodeLine{00200\ \textcolor{comment}{//}}
+\DoxyCodeLine{00201\ \textcolor{comment}{//\ \ \ \ \ \ Used\ to\ be\ stand\ alone\ files...\ now\ all\ one\ include}}
+\DoxyCodeLine{00202\ \textcolor{comment}{//}}
+\DoxyCodeLine{00203\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\#ifndef\ MEM\_TRACKER\_H}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#define\ MEM\_TRACKER\_H}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ One\ instructions\ to\ rule\ them\ all:}}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ To\ Enable:\ }}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \#define\ MEM\_TRACKER\_ENABLED}}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ To\ Disable:\ }}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ Comment\ out\ \#define\ MEM\_TRACKER\_ENABLED}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ Include\ Framework.h\ to\ every\ file:}}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ Change\ your\ project\ settings}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Go\ to\ C\ /\ C++\ tab}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Go\ to\ Advanced}}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ set\ Forced\ Include\ :\ Framework.h}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ This\ will\ add\ this\ file\ automagically\ to\ all\ files\ (great!)}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ Placement\ new\ changes:}}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ No\ memory\ tracking\ \_\_SHOULD\_\_\ take\ place\ on\ placement\ new}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ So\ you\ need\ to\ tell\ the\ Memory\ Tracking\ system\ to\ ignore\ this\ placement\ new}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ Add\ 3\ lines\ around\ placement\ new\ to\ allow\ it\ to\ compile}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ example:\ \ Dog\ *pDog\ =\ new(address)\ Dog();\ \ //\ original\ (new\ way\ below)}}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ PLACEMENT\_NEW\_BEGIN\ \ \ \ <-\/-\/-\/-\/-\/\ Add\ 1/3\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \#undef\ new\ \ \ \ \ \ \ \ \ \ \ \ \ <-\/-\/-\/-\/-\/\ Add\ 2/3\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ Dog\ *pDog\ =\ new(address)\ Dog();}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ PLACEMENT\_NEW\_END\ \ \ \ \ \ <-\/-\/-\/-\/-\/\ Add\ 3/3\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ Issue\ with\ new(std::nothrow)}}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ This\ needs\ to\ be\ tracked...\ but\ the\ macro\ trick\ is\ a\ problem}}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ }}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum\ class}\ MemTracker}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ Disabled}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ defined(\_DEBUG)\ \&\&\ defined(MEM\_TRACKER\_ENABLED)}}
+\DoxyCodeLine{00248\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ MEMORY\_TRACKING\_ENABLE\_STRING\ "{}enabled\ \ \ \ \ \ \ \ \ "{}}}
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ MEMORY\_TRACKING\_ENABLE\_STRING\ "{}-\/-\/>\ DISABLED\ <-\/-\/"{}}}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mem_trace}{MemTrace}}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ MemTraceBuffSize\ =\ 256;}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ found\ this\ structure\ in\ documentation}}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ created\ a\ shadow\ structure\ to\ allow\ error\ reporting\ }}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_mem_trace_1_1___crt_mem_block_header}{\_CrtMemBlockHeader}}}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ nNoMansLandSize\ =\ 4;\ \textcolor{comment}{//\ said\ in\ doc\ that\ its\ 4}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_mem_trace_1_1___crt_mem_block_header}{\_CrtMemBlockHeader}}\ *pBlockHeaderNext;}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_mem_trace_1_1___crt_mem_block_header}{\_CrtMemBlockHeader}}\ *pBlockHeaderPrev;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *szFileName;\ \ \ \ \textcolor{comment}{//\ File\ name}}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nLine;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Line\ number}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nBlockUse;\ \ \ \ \ \ \ \textcolor{comment}{//\ Type\ of\ block\ \ \ }}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ nDataSize;\ \ \ \ \textcolor{comment}{//\ Size\ of\ user\ block}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{long}\ lRequest;\ \ \ \ \ \ \ \textcolor{comment}{//\ Allocation\ number}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ gap[nNoMansLandSize];}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ In\ an\ actual\ memory\ block\ in\ the\ debug\ heap,}}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ this\ structure\ is\ followed\ by:}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ unsigned\ char\ data[nDataSize];}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ unsigned\ char\ anotherGap[nNoMansLandSize];}}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \mbox{\hyperlink{struct_mem_trace_1_1___crt_mem_block_header}{\_CrtMemBlockHeader}};}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Big\ Six}}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}()\ noexcept}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(\&privBuff[0],\ 0,\ MemTraceBuffSize);}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}(\mbox{\hyperlink{class_mem_trace}{MemTrace}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ \&\ operator\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ \&\ operator\ =\ (\mbox{\hyperlink{class_mem_trace}{MemTrace}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{\string~MemTrace}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ displays\ a\ printf\ to\ the\ output\ window}}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ privOut(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ fmt,\ ...)}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ *pTrace\ =\ MemTrace::privGetInstance();}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pTrace);}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>mtx.lock();}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ push\ )}}
+\DoxyCodeLine{00309\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 26492\ )}}
+\DoxyCodeLine{00310\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 26481\ )}}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ va\_start(args,\ fmt);}
+\DoxyCodeLine{00312\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ pop\ )}}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vsprintf\_s(\&pTrace-\/>privBuff[0],\ MemTraceBuffSize,\ fmt,\ args);}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OutputDebugString(\&pTrace-\/>privBuff[0]);}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ va\_end(args);\ -\/\ original..\ below\ to\ new\ code}}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ args\ =\ \textcolor{keyword}{static\_cast<}va\_list\textcolor{keyword}{>}\ (\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>mtx.unlock();}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *privStripDir(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pInName)}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *pReturn\ =\ (\textcolor{keywordtype}{char}\ *)pInName;}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *pch\ =\ pInName;}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (pch\ !=\ 0)}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pch\ =\ strstr(pch,\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)"{}});}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pch\ !=\ 0)}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pch\ +=\ 1;}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pReturn\ =\ (\textcolor{keywordtype}{char}\ *)pch;}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pReturn;}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ privDisplayLogLink()}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ sBuff[512]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ GetCurrentDirectory(512,\ sBuff);}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *pch\ =\ sBuff;}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ *pSlash\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (pch\ !=\ 0)}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pch\ =\ strstr(pch,\ \textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)"{}});}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pch\ !=\ 0)}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pch\ +=\ 1;}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pSlash\ =\ (\textcolor{keywordtype}{char}\ *)pch;}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ numBytes\ =\ (size\_t)(pSlash\ -\/\ sBuff);}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ pBuff[512]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memcpy\_s(pBuff,\ 512,\ sBuff,\ numBytes);}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \textcolor{preprocessor}{\#ifndef\ MEMORY\_LOGS\_DIR}}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ strLogFile\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogFile.append(\textcolor{stringliteral}{"{}Logs"{}});}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogFile.append(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)MemTrackerLog.txt"{}});}
+\DoxyCodeLine{00369\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ strLogFile\ =\ MEMORY\_LOGS\_DIR;}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogFile.append(\textcolor{stringliteral}{"{}Logs"{}});}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogFile.append(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)MemTrackerLog.txt"{}});}
+\DoxyCodeLine{00373\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ MemTrackerLog\ Link:\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \%s(1)\ :\ <Double\ Click>\(\backslash\)n"{}},\ strLogFile.c\_str());}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ProcessEnd()\ noexcept}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ *pTrace\ =\ MemTrace::privGetInstance();}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ included\ so\ you\ can\ have\ one\ universal\ include}}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::call\_once(pTrace-\/>ProcessEndFlag,\ [pTrace]()}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FILE*\ pFile\ =\ nullptr;}
+\DoxyCodeLine{00389\ }
+\DoxyCodeLine{00390\ \#ifndef\ MEMORY\_LOGS\_DIR}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ system(\textcolor{stringliteral}{"{}if\ not\ exist\ .\(\backslash\)\(\backslash\)..\(\backslash\)\(\backslash\)Logs\ mkdir\ .\(\backslash\)\(\backslash\)..\(\backslash\)\(\backslash\)Logs"{}});}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fopen\_s(\&pFile,\ \textcolor{stringliteral}{"{}.\(\backslash\)\(\backslash\)..\(\backslash\)\(\backslash\)Logs\(\backslash\)\(\backslash\)MemTrackerLog.txt"{}},\ \textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{00393\ \#else}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ strLogDir\ =\ MEMORY\_LOGS\_DIR;}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogDir.append(\textcolor{stringliteral}{"{}Logs"{}});}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogDir.append(\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogDir.insert(0,\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}});}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ mkLogDir\ =\ \textcolor{stringliteral}{"{}if\ not\ exist\ "{}}\ +\ strLogDir\ +\ \textcolor{stringliteral}{"{}\ mkdir\ "{}}\ +\ strLogDir;}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ system(mkLogDir.c\_str());}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ strLogFile\ =\ MEMORY\_LOGS\_DIR;}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogFile.append(\textcolor{stringliteral}{"{}Logs"{}});}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strLogFile.append(\textcolor{stringliteral}{"{}\(\backslash\)\(\backslash\)MemTrackerLog.txt"{}});}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fopen\_s(\&pFile,\ strLogFile.c\_str(),\ \textcolor{stringliteral}{"{}w"{}});}
+\DoxyCodeLine{00406\ \#endif}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pFile);}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ (pFile\ !=\ nullptr)}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ MemTrackerLog\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \%s\ \ \(\backslash\)n"{}},\ \_\_DATE\_\_);}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \%s\ \ \(\backslash\)n"{}},\ \_\_TIME\_\_);}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}External\ Libs:\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_CrtMemState\ state;}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_CrtMemCheckpoint(\&state);}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_CrtMemBlockHeader\ *pTmp;}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTmp\ =\ \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{struct_mem_trace_1_1___crt_mem_block_header}{MemTrace::\_CrtMemBlockHeader}}\ *\textcolor{keyword}{>}\ (state.pBlockHeader);}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i\ =\ 0;}
+\DoxyCodeLine{00432\ }
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ appMaxIndex\ =\ 0;}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ appMaxSize\ =\ 0;}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ appCount\ =\ 0;}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ appTotalSize\ =\ 0;}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_CrtMemBlockHeader\ *pAppMaxTmp\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ extMaxIndex\ =\ 0;}
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ extMaxSize\ =\ 0;}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ extCount\ =\ 0;}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ extTotalSize\ =\ 0;}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_CrtMemBlockHeader\ *pExtMaxTmp\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ NormBlockLeakCount\ =\ 0;}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Walk\ to\ the\ end\ of\ list\ \&\&\ see\ if\ there\ is\ any\ leaks}}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (pTmp\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pTmp-\/>nBlockUse\ ==\ \_NORMAL\_BLOCK)}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ NormBlockLeakCount++;}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00454\ }
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pTmp-\/>pBlockHeaderNext\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTmp\ =\ pTmp-\/>pBlockHeaderNext;}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (NormBlockLeakCount\ >\ 0)}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}>>>\ \ \ Memory\ Tracking:\ Leaks\ detected\ \ \ \ \ \ \ \ \ \ \ \ \ \ <<<\(\backslash\)n"{}});}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}>>>\ \ \ Double\ click\ on\ file\ string\ to\ Leak\ location\ <<<\(\backslash\)n"{}});}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00469\ }
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (pTmp\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pTmp-\/>nBlockUse\ ==\ \_NORMAL\_BLOCK)}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ treat\ allocation\ with/without\ names\ as\ different\ groups}}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pTmp-\/>szFileName\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extTotalSize\ +=\ pTmp-\/>nDataSize;}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extCount++;}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (extMaxSize\ <\ pTmp-\/>nDataSize)}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extMaxSize\ =\ pTmp-\/>nDataSize;}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extMaxIndex\ =\ i;}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pExtMaxTmp\ =\ pTmp;}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pFile\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}Leak(\%d)\ \ \%d\ bytes\ ref:\%d\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})i,\ (\textcolor{keywordtype}{int})pTmp-\/>nDataSize,\ (\textcolor{keywordtype}{int})pTmp-\/>lRequest);}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ appTotalSize\ +=\ pTmp-\/>nDataSize;}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ appCount++;}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (appMaxSize\ <\ pTmp-\/>nDataSize)}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ appMaxSize\ =\ pTmp-\/>nDataSize;}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ appMaxIndex\ =\ i;}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pAppMaxTmp\ =\ pTmp;}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}Leak(\%d)\ \ \%d\ bytes\ ref:\%d\ \%s\ \(\backslash\)n"{}},\ i,\ pTmp-\/>nDataSize,\ pTmp-\/>lRequest,\ pTrace-\/>privStripDir(pTmp-\/>szFileName));}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \%s(\%d)\ :\ <Double\ Click>\ \(\backslash\)n"{}},\ pTmp-\/>szFileName,\ pTmp-\/>nLine);}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00505\ }
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTmp\ =\ pTmp-\/>pBlockHeaderPrev;}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00510\ }
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}Memory\ Tracking\ statistics\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ Application\ files:\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\ of\ leaks:\ \%d\ \(\backslash\)n"{}},\ appCount);}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ total\ bytes\ leaked:\ \%d\ \(\backslash\)n"{}},\ appTotalSize);}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pAppMaxTmp\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ largest\ individual:\ Leak(\%d)\ size:\ \%d\ \(\backslash\)n"{}},\ appMaxIndex,\ pAppMaxTmp-\/>nDataSize);}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ External\ Libs:\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\ of\ leaks:\ \%d\ \(\backslash\)n"{}},\ extCount);}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ total\ bytes\ leaked:\ \%d\ \(\backslash\)n"{}},\ extTotalSize);}
+\DoxyCodeLine{00524\ }
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pExtMaxTmp\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ largest\ individual:\ Leak(\%d)\ size:\ \%d\ \(\backslash\)n"{}},\ extMaxIndex,\ pExtMaxTmp-\/>nDataSize);}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pFile\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}Memory\ Tracking\ Stats:\(\backslash\)n"{}});}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ Application\ files:\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\ of\ leaks:\ \%d\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})appCount);}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ total\ bytes\ leaked:\ \%d\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})appTotalSize);}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pAppMaxTmp\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ largest\ individual:\ Leak(\%d)\ size:\ \%d\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})appMaxIndex,\ (\textcolor{keywordtype}{int})pAppMaxTmp-\/>nDataSize);}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ External\ Libs:\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ num\ of\ leaks:\ \%d\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})extCount);}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ total\ bytes\ leaked:\ \%d\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})extTotalSize);}
+\DoxyCodeLine{00545\ }
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pExtMaxTmp\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ \ \ largest\ individual:\ Leak(\%d)\ size:\ \%d\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})extMaxIndex,\ (\textcolor{keywordtype}{int})pExtMaxTmp-\/>nDataSize);}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00550\ }
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}CRT\ Debug\ Stats:\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \%d\ bytes\ in\ \%d\ Free\ Blocks\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})state.lSizes[\_FREE\_BLOCK],\ (\textcolor{keywordtype}{int})state.lCounts[\_FREE\_BLOCK]);}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \%d\ bytes\ in\ \%d\ Normal\ Blocks\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})state.lSizes[\_NORMAL\_BLOCK],\ (\textcolor{keywordtype}{int})state.lCounts[\_NORMAL\_BLOCK]);}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \%d\ bytes\ in\ \%d\ CRT\ Blocks\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})state.lSizes[\_CRT\_BLOCK],\ (\textcolor{keywordtype}{int})state.lCounts[\_CRT\_BLOCK]);}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \%d\ bytes\ in\ \%d\ Ignore\ Blocks\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})state.lSizes[\_IGNORE\_BLOCK],\ (\textcolor{keywordtype}{int})state.lCounts[\_IGNORE\_BLOCK]);}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(pFile,\ \textcolor{stringliteral}{"{}\ \ \ \ \%d\ bytes\ in\ \%d\ Client\ Blocks\ \(\backslash\)n"{}},\ (\textcolor{keywordtype}{int})state.lSizes[\_CLIENT\_BLOCK],\ (\textcolor{keywordtype}{int})state.lCounts[\_CLIENT\_BLOCK]);}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privDisplayLogLink();}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00563\ }
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//pTrace-\/>privOut("{}\(\backslash\)n"{});}}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//printf("{}\(\backslash\)n"{});}}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (appCount)}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}>>>\ Memory\ Tracking:\ FAIL\ <<<<<<\(\backslash\)n"{}});}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}>>>\ Memory\ Tracking:\ FAIL\ <<<<<<\(\backslash\)n"{}});}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ }
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ Memory\ Tracking:\ passed\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ \ \ \ Memory\ Tracking:\ passed\ \(\backslash\)n"{}});}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ Memory\ Tracking:\ end()\ \ \ \ \ \ \(\backslash\)n"{}});}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ \ \ \ Memory\ Tracking:\ end()\ \ \ \ \ \ \(\backslash\)n"{}});}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00585\ }
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\_CrtMemDumpStatistics(\&state);}}
+\DoxyCodeLine{00587\ }
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pFile\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fclose(pFile);}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00592\ }
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00596\ }
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ProcessBegin()\ noexcept}
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ *pTrace\ =\ MemTrace::privGetInstance();}
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ included\ so\ you\ can\ have\ one\ universal\ include}}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::call\_once(pTrace-\/>ProcessBeginFlag,\ [pTrace]()}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ \ \ \ Framework:\ \%s\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ FRAMEWORK\_VER);}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ C++\ Compiler:\ \%d\ \ \ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ \_MSC\_FULL\_VER);}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ \ Windows\ SDK:\ \%s\ \ \ \ \ \ \ **\(\backslash\)n"{}},\ WINDOWS\_TARGET\_PLATFORM);}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ Mem\ Tracking:\ \%s\ \ \ **\(\backslash\)n"{}},\ MEMORY\_TRACKING\_ENABLE\_STRING);}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ \ \ \ \ \ \ \ \ Mode:\ \%s\ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ BUILD\_CONFIG\_MODE);}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ \ \ \ Framework:\ \%s\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ FRAMEWORK\_VER);}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ C++\ Compiler:\ \%d\ \ \ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ \_MSC\_FULL\_VER);}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ \ Windows\ SDK:\ \%s\ \ \ \ \ \ \ **\(\backslash\)n"{}},\ WINDOWS\_TARGET\_PLATFORM);}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ Mem\ Tracking:\ \%s\ \ \ **\(\backslash\)n"{}},\ MEMORY\_TRACKING\_ENABLE\_STRING);}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ \ \ \ \ \ \ \ \ Mode:\ \%s\ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ BUILD\_CONFIG\_MODE);}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\ \ \ \ Memory\ Tracking:\ start()\ \ \ \ \(\backslash\)n"{}});}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ \ \ \ Memory\ Tracking:\ start()\ \ \ \ \(\backslash\)n"{}});}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00633\ }
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ProcessBegin\_Release()\ noexcept}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ *pTrace\ =\ MemTrace::privGetInstance();}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ included\ so\ you\ can\ have\ one\ universal\ include}}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::call\_once(pTrace-\/>ProcessBeginFlag,\ [pTrace]()}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});\ }
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});\ }
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ \ \ \ Framework:\ \%s\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ FRAMEWORK\_VER);\ }
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ C++\ Compiler:\ \%d\ \ \ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ \_MSC\_FULL\_VER);\ }
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ \ Windows\ SDK:\ \%s\ \ \ \ \ \ \ **\(\backslash\)n"{}},\ WINDOWS\_TARGET\_PLATFORM);\ }
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ Mem\ Tracking:\ \%s\ \ \ **\(\backslash\)n"{}},\ MEMORY\_TRACKING\_ENABLE\_STRING);\ }
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}**\ \ \ \ \ \ \ \ \ \ \ Mode:\ \%s\ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ BUILD\_CONFIG\_MODE);}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});\ }
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>privOut(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});\ }
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});\ }
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});\ }
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ \ \ \ Framework:\ \%s\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ FRAMEWORK\_VER);\ }
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ C++\ Compiler:\ \%d\ \ \ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ \_MSC\_FULL\_VER);\ }
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ \ Windows\ SDK:\ \%s\ \ \ \ \ \ \ **\(\backslash\)n"{}},\ WINDOWS\_TARGET\_PLATFORM);\ }
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ Mem\ Tracking:\ \%s\ \ \ **\(\backslash\)n"{}},\ MEMORY\_TRACKING\_ENABLE\_STRING);\ }
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}**\ \ \ \ \ \ \ \ \ \ \ Mode:\ \%s\ \ \ \ \ \ \ \ **\(\backslash\)n"{}},\ BUILD\_CONFIG\_MODE);}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}****************************************\(\backslash\)n"{}});\ }
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00662\ }
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ std::once\_flag\ ProcessBeginFlag;}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \ \ \ \ std::once\_flag\ ProcessEndFlag;}
+\DoxyCodeLine{00665\ }
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ *privGetInstance()\ noexcept}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ where\ its\ actually\ stored\ (BSS\ section)}}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_mem_trace}{MemTrace}}\ helper;}
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&helper;}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ privBuff[MemTraceBuffSize];}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \ \ \ \ std::mutex\ mtx;}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00676\ }
+\DoxyCodeLine{00677\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ PLACEMENT\_NEW\_BEGIN\ \_\_pragma(push\_macro("{}new"{}))\ \(\backslash\)}}
+\DoxyCodeLine{00678\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_\_pragma(warning(\ disable\ :\ 4291))\ }\textcolor{comment}{//\ placement\ new\ issue}}
+\DoxyCodeLine{00679\ }
+\DoxyCodeLine{00680\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ PLACEMENT\_NEW\_END\ \_\_pragma(pop\_macro("{}new"{}))}}
+\DoxyCodeLine{00681\ }
+\DoxyCodeLine{00682\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#if\ defined(\_DEBUG)\ \&\&\ defined(MEM\_TRACKER\_ENABLED)}}
+\DoxyCodeLine{00683\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ \_CRTDBG\_MAP\_ALLOC\ \ }}
+\DoxyCodeLine{00684\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ new\ new(\ \_NORMAL\_BLOCK\ ,\ \_\_FILE\_\_\ ,\ \_\_LINE\_\_\ )}}
+\DoxyCodeLine{00685\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{00686\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ push\ )}}
+\DoxyCodeLine{00687\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 4820\ )}}
+\DoxyCodeLine{00688\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 4577\ )}}
+\DoxyCodeLine{00689\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 4987\ )}}
+\DoxyCodeLine{00690\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#include\ <new>}}
+\DoxyCodeLine{00691\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ pop\ )}}
+\DoxyCodeLine{00692\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00693\ }
+\DoxyCodeLine{00694\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#ifdef\ MEM\_TRACKER\_ENABLED}}
+\DoxyCodeLine{00695\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ \_DEBUG}}
+\DoxyCodeLine{00696\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#define\ MEM\_TRACKER\_PROCESS\_BEGIN\ \ \ \(\backslash\)}}
+\DoxyCodeLine{00697\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MemTrace::ProcessBegin();}}
+\DoxyCodeLine{00698\ }
+\DoxyCodeLine{00699\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#define\ MEM\_TRACKER\_PROCESS\_END\ \(\backslash\)}}
+\DoxyCodeLine{00700\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MemTrace::ProcessEnd();}}
+\DoxyCodeLine{00701\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{00702\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#define\ MEM\_TRACKER\_PROCESS\_BEGIN\ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00703\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MemTrace::ProcessBegin\_Release();}}
+\DoxyCodeLine{00704\ }
+\DoxyCodeLine{00705\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#define\ MEM\_TRACKER\_PROCESS\_END}}
+\DoxyCodeLine{00706\ }
+\DoxyCodeLine{00707\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00708\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{00709\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ MEM\_TRACKER\_PROCESS\_BEGIN\ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00710\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MemTrace::ProcessBegin\_Release();}}
+\DoxyCodeLine{00711\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00712\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#define\ MEM\_TRACKER\_PROCESS\_END}}
+\DoxyCodeLine{00713\ }
+\DoxyCodeLine{00714\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{00715\ }
+\DoxyCodeLine{00716\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ MEM\_TRACKER\_BEGIN:}}
+\DoxyCodeLine{00717\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{struct\ }\_StaticMem\ }
+\DoxyCodeLine{00718\ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{00719\ \ \ \ \ \ \ \ \ \ \ \ \ \_StaticMem()\ noexcept}
+\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{00721\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MEM\_TRACKER\_PROCESS\_BEGIN\ }
+\DoxyCodeLine{00722\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00723\ \ \ \ \ \ \ \ \ \ \ \ \ \string~\_StaticMem()\ }
+\DoxyCodeLine{00724\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MEM\_TRACKER\_PROCESS\_END\ }
+\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00727\ \ \ \ \ \ \ \ \ \ \ \ \ \_StaticMem(\textcolor{keyword}{const}\ \_StaticMem\ \&)\ =\ \textcolor{keyword}{delete};\ }
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ \ \ \ \ \_StaticMem(\_StaticMem\ \&\&)\ =\ \textcolor{keyword}{delete};\ }
+\DoxyCodeLine{00729\ \ \ \ \ \ \ \ \ \ \ \ \ \_StaticMem\ \&operator\ =\ (\textcolor{keyword}{const}\ \_StaticMem\ \&)\ =\ \textcolor{keyword}{delete};\ }
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \ \ \ \ \_StaticMem\ \&operator\ =\ (\_StaticMem\ \&\&)\ =\ \textcolor{keyword}{delete};\ }
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ \}\ \_StaticMemInst;\ }
+\DoxyCodeLine{00732\ }
+\DoxyCodeLine{00733\ }
+\DoxyCodeLine{00734\ \textcolor{preprocessor}{\#endif\ \ MEM\_TRACKER\_H}}
+\DoxyCodeLine{00735\ }
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00737\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00738\ \textcolor{comment}{//\ Copyright\ 2019,\ Ed\ Keenan,\ all\ rights\ reserved.}}
+\DoxyCodeLine{00739\ \textcolor{comment}{//}}
+\DoxyCodeLine{00740\ \textcolor{comment}{//\ CPP\ Unit\ Test}}
+\DoxyCodeLine{00741\ \textcolor{comment}{//\ \ \ \ \ \ Unit\ Test\ in\ C++\ without\ exceptions\ (that\ was\ hard)}}
+\DoxyCodeLine{00742\ \textcolor{comment}{//\ \ \ \ \ \ Includes\ TearDown..\ so\ you\ can\ cleanup\ allocations\ even\ if\ test\ fails}}
+\DoxyCodeLine{00743\ \textcolor{comment}{//\ \ \ \ \ \ Test\ aborts\ on\ first\ failed\ CHECK()\ in\ unit\ test,\ then\ continues\ to\ next}}
+\DoxyCodeLine{00744\ \textcolor{comment}{//}}
+\DoxyCodeLine{00745\ \textcolor{comment}{//\ \ \ \ \ \ Used\ to\ be\ stand\ alone\ files...\ now\ all\ one\ include}}
+\DoxyCodeLine{00746\ \textcolor{comment}{//}}
+\DoxyCodeLine{00747\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00748\ }
+\DoxyCodeLine{00749\ \textcolor{preprocessor}{\#ifndef\ UNIT\_TEST\_CPP\_H}}
+\DoxyCodeLine{00750\ \textcolor{preprocessor}{\#define\ UNIT\_TEST\_CPP\_H}}
+\DoxyCodeLine{00751\ }
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_unit_trace}{UnitTrace}}}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ UnitTraceBuffSize\ =\ 256;}
+\DoxyCodeLine{00756\ }
+\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ displays\ a\ printf\ to\ the\ output\ window}}
+\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ out(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ fmt,\ ...)}
+\DoxyCodeLine{00760\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00761\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ *pTrace\ =\ UnitTrace::privGetInstance();}
+\DoxyCodeLine{00762\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pTrace);}
+\DoxyCodeLine{00763\ }
+\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>mtx.lock();}
+\DoxyCodeLine{00765\ }
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{00767\ }
+\DoxyCodeLine{00768\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ push\ )}}
+\DoxyCodeLine{00769\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 26492\ )}}
+\DoxyCodeLine{00770\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 26481\ )}}
+\DoxyCodeLine{00771\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ va\_start(args,\ fmt);}
+\DoxyCodeLine{00772\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ pop\ )}}
+\DoxyCodeLine{00773\ }
+\DoxyCodeLine{00774\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vsprintf\_s(\&pTrace-\/>privBuff[0],\ UnitTraceBuffSize,\ fmt,\ args);}
+\DoxyCodeLine{00775\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OutputDebugString(\&pTrace-\/>privBuff[0]);}
+\DoxyCodeLine{00776\ }
+\DoxyCodeLine{00777\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//va\_end(args);}}
+\DoxyCodeLine{00778\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ args\ =\ \textcolor{keyword}{static\_cast<}va\_list\textcolor{keyword}{>}\ (\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00779\ }
+\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>mtx.unlock();}
+\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00782\ }
+\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Big\ Six}}
+\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00785\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(\&privBuff[0],\ 0x0,\ UnitTraceBuffSize);}
+\DoxyCodeLine{00787\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00788\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00789\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}(\mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ \&\ operator\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ \&\ operator\ =\ (\mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_trace}{\string~UnitTrace}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00793\ }
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ *privGetInstance()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ where\ its\ actually\ stored\ (BSS\ section)}}
+\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_unit_trace}{UnitTrace}}\ helper;}
+\DoxyCodeLine{00799\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&helper;}
+\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ privBuff[UnitTraceBuffSize];}
+\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \ \ \ \ std::mutex\ mtx;}
+\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00804\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_unit_utility}{UnitUtility}}}
+\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ AreEqual(\textcolor{keywordtype}{float}\ a,\ \textcolor{keywordtype}{float}\ b,\ \textcolor{keywordtype}{float}\ epsilon\ =\ 0.001f)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00808\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00809\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (fabs(a\ -\/\ b)\ <\ epsilon);}
+\DoxyCodeLine{00810\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00811\ }
+\DoxyCodeLine{00812\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ AreEqual(\textcolor{keywordtype}{double}\ a,\ \textcolor{keywordtype}{double}\ b,\ \textcolor{keywordtype}{double}\ epsilon\ =\ 0.001f)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00813\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00814\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (fabs(a\ -\/\ b)\ <\ epsilon);}
+\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00816\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00817\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_unit_stats}{UnitStats}}}
+\DoxyCodeLine{00818\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00819\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Big\ six}}
+\DoxyCodeLine{00820\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}()\ noexcept}
+\DoxyCodeLine{00821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :testCount(0),}
+\DoxyCodeLine{00822\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ testPass(0),}
+\DoxyCodeLine{00823\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ testFail(0),}
+\DoxyCodeLine{00824\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ indvAsserts(0)}
+\DoxyCodeLine{00825\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00826\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00827\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00828\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}(\mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&\&)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00829\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&\ operator\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00830\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&\ operator\ =\ (\mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&\&)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00831\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{\string~UnitStats}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00832\ }
+\DoxyCodeLine{00833\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ data:\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00834\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ testCount;}
+\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ testPass;}
+\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ testFail;}
+\DoxyCodeLine{00837\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ indvAsserts;}
+\DoxyCodeLine{00838\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00839\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_unit_data}{UnitData}}}
+\DoxyCodeLine{00840\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00841\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Big\ six}}
+\DoxyCodeLine{00842\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{UnitData}}()\ noexcept}
+\DoxyCodeLine{00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ pMemberName(\textcolor{keyword}{nullptr}),}
+\DoxyCodeLine{00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pSourceFilePath(\textcolor{keyword}{nullptr}),}
+\DoxyCodeLine{00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sourceLineNumber(0),}
+\DoxyCodeLine{00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result(\textcolor{keyword}{false}),}
+\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pad0(0),}
+\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pad1(0),}
+\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pad2(0)}
+\DoxyCodeLine{00850\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00851\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00852\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{UnitData}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_unit_data}{UnitData}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00853\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{UnitData}}(\mbox{\hyperlink{struct_unit_data}{UnitData}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{UnitData}}\ \&\ operator\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_unit_data}{UnitData}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{UnitData}}\ \&\ operator\ =\ (\mbox{\hyperlink{struct_unit_data}{UnitData}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{\string~UnitData}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00857\ }
+\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ data:\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *pMemberName;}
+\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *pSourceFilePath;}
+\DoxyCodeLine{00861\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ sourceLineNumber;}
+\DoxyCodeLine{00862\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ result;}
+\DoxyCodeLine{00863\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ pad0;}
+\DoxyCodeLine{00864\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ pad1;}
+\DoxyCodeLine{00865\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ pad2;}
+\DoxyCodeLine{00866\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00867\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_unit_s_link}{UnitSLink}}}
+\DoxyCodeLine{00868\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00869\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00870\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Big\ Six}}
+\DoxyCodeLine{00871\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}()\ noexcept}
+\DoxyCodeLine{00872\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\_pNext(\textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00873\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00874\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00875\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00876\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}(\mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00877\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ \&\ operator\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00878\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ \&\ operator\ =\ (\mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00879\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_unit_s_link}{\string~UnitSLink}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00880\ }
+\DoxyCodeLine{00881\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AddToFront(\mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *\&pRoot,\ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ \&rNode)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00882\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00883\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pRoot\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00884\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00885\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pRoot\ =\ \&rNode;}
+\DoxyCodeLine{00886\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(rNode.\_pNext\ ==\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00887\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00888\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00889\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00890\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *pTmp\ =\ pRoot;}
+\DoxyCodeLine{00891\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pRoot\ =\ \&rNode;}
+\DoxyCodeLine{00892\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ rNode.\_pNext\ =\ pTmp;}
+\DoxyCodeLine{00893\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00894\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00895\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AddToEnd(\mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *\&pRoot,\ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *pNode)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00896\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00897\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{nullptr}\ ==\ pRoot)}
+\DoxyCodeLine{00898\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00899\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pRoot\ =\ pNode;}
+\DoxyCodeLine{00900\ }
+\DoxyCodeLine{00901\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pNode\ !=\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00902\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pNode-\/>\_pNext\ ==\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00903\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00904\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00905\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00906\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *pTmpX\ =\ pRoot;}
+\DoxyCodeLine{00907\ }
+\DoxyCodeLine{00908\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (pTmpX\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00909\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00910\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pTmpX-\/>\_pNext\ ==\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00911\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00912\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ at\ the\ end}}
+\DoxyCodeLine{00913\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTmpX-\/>\_pNext\ =\ pNode;}
+\DoxyCodeLine{00914\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pNode-\/>\_pNext\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00915\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00916\ }
+\DoxyCodeLine{00917\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTmpX\ =\ pTmpX-\/>\_pNext;}
+\DoxyCodeLine{00918\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00919\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00920\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00921\ }
+\DoxyCodeLine{00922\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00923\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00924\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *\_pNext;}
+\DoxyCodeLine{00925\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00926\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_test_registry}{TestRegistry}}}
+\DoxyCodeLine{00927\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00928\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00929\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Big\ four}}
+\DoxyCodeLine{00930\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{TestRegistry}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00931\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{TestRegistry}}(\mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00932\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&\ operator\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00933\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&\ operator\ =\ (\mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00934\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{\string~TestRegistry}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00935\ }
+\DoxyCodeLine{00936\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ AddTest(\mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *pTest)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00937\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ add\ to\ End\ \ \ }}
+\DoxyCodeLine{00939\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitSLink::AddToEnd(this-\/>\_pRoot,\ pTest);}
+\DoxyCodeLine{00940\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00941\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&GetStats()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00942\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00943\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\_UnitStats;}
+\DoxyCodeLine{00944\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00945\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{UnitData}}\ \&GetData()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00946\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00947\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\_UnitData;}
+\DoxyCodeLine{00948\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00949\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *GetRoot()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00950\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00951\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>\_pRoot;}
+\DoxyCodeLine{00952\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00953\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&GetInstance()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00954\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00955\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ tRegistry;}
+\DoxyCodeLine{00956\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tRegistry;}
+\DoxyCodeLine{00957\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00958\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ Stats()\ }
+\DoxyCodeLine{00959\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00960\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&reg\ =\ TestRegistry::GetInstance();}
+\DoxyCodeLine{00961\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reg.\_UnitStats;}
+\DoxyCodeLine{00962\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00963\ }
+\DoxyCodeLine{00964\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00965\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{TestRegistry}}()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00966\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00967\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\_pRoot\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00968\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00969\ }
+\DoxyCodeLine{00970\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Data:\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00971\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{UnitData}}\ \_UnitData;}
+\DoxyCodeLine{00972\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \_UnitStats;}
+\DoxyCodeLine{00973\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *\_pRoot;}
+\DoxyCodeLine{00974\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00975\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_test}{Test}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}}
+\DoxyCodeLine{00976\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00977\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00978\ }
+\DoxyCodeLine{00979\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{Test}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pTestName)\ noexcept}
+\DoxyCodeLine{00980\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\mbox{\hyperlink{class_unit_s_link}{UnitSLink}}(),}
+\DoxyCodeLine{00981\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pName(pTestName),}
+\DoxyCodeLine{00982\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ testFunc(\textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00983\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00984\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ functional\ pointer}}
+\DoxyCodeLine{00985\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>testFunc\ =\ \textcolor{keyword}{this};}
+\DoxyCodeLine{00986\ }
+\DoxyCodeLine{00987\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ register\ it}}
+\DoxyCodeLine{00988\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&tR\ =\ TestRegistry::GetInstance();}
+\DoxyCodeLine{00989\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tR.AddTest(\textcolor{keyword}{this});}
+\DoxyCodeLine{00990\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00991\ }
+\DoxyCodeLine{00992\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Big\ six}}
+\DoxyCodeLine{00993\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{Test}}()\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00994\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{Test}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_test}{Test}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00995\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{Test}}(\mbox{\hyperlink{class_test}{Test}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00996\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{Test}}\ \&\ operator\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_test}{Test}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00997\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{Test}}\ \&\ operator\ =\ (\mbox{\hyperlink{class_test}{Test}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00998\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{\string~Test}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00999\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ run(\mbox{\hyperlink{struct_unit_data}{UnitData}}\ \&,\ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&)\ =\ 0;}
+\DoxyCodeLine{01000\ }
+\DoxyCodeLine{01001\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ Tests\ with\ NO\ Teardowns...\ do\ nothing}}
+\DoxyCodeLine{01002\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ teardown()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01003\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01004\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{01005\ }
+\DoxyCodeLine{01006\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ RunTests()}
+\DoxyCodeLine{01007\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01008\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ \_DEBUG}}
+\DoxyCodeLine{01009\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Testing\ DEBUG\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{01010\ }
+\DoxyCodeLine{01011\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ \_M\_X64}}
+\DoxyCodeLine{01012\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ mode\ =\ \textcolor{stringliteral}{"{}x64\ Debug"{}};}
+\DoxyCodeLine{01013\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{01014\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ mode\ =\ \textcolor{stringliteral}{"{}x86\ Debug"{}};}
+\DoxyCodeLine{01015\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{01016\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{01017\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ \_M\_X64}}
+\DoxyCodeLine{01018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ mode\ =\ \textcolor{stringliteral}{"{}x64\ Release"{}};}
+\DoxyCodeLine{01019\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{01020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ mode\ =\ \textcolor{stringliteral}{"{}x86\ Release"{}};}
+\DoxyCodeLine{01021\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{01022\ }
+\DoxyCodeLine{01023\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ MR\_FAST\ \ \ }\textcolor{comment}{//\ Only\ used\ in\ optimized\ class}}
+\DoxyCodeLine{01024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Testing\ MR\_FAST\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{01025\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{01026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Testing\ RELEASE\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{01027\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{01028\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{01029\ }
+\DoxyCodeLine{01030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test_registry}{TestRegistry}}\ \&rRegistry\ =\ TestRegistry::GetInstance();}
+\DoxyCodeLine{01032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_unit_s_link}{UnitSLink}}\ *pTmp\ =\ rRegistry.GetRoot();}
+\DoxyCodeLine{01033\ }
+\DoxyCodeLine{01034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_stats}{UnitStats}}\ \&unitStats\ =\ rRegistry.GetStats();}
+\DoxyCodeLine{01035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_unit_data}{UnitData}}\ \ \&unitData\ =\ rRegistry.GetData();}
+\DoxyCodeLine{01036\ }
+\DoxyCodeLine{01037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (pTmp\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{01038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unitStats.testCount++;}
+\DoxyCodeLine{01040\ }
+\DoxyCodeLine{01041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ downcast\ to\ the\ test}}
+\DoxyCodeLine{01042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{Test}}\ *pTest\ =\ (\mbox{\hyperlink{class_test}{Test}}\ *)(pTmp);}
+\DoxyCodeLine{01043\ }
+\DoxyCodeLine{01044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pTest);}
+\DoxyCodeLine{01045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Test:\%s\ \(\backslash\)n"{}},\ pTest-\/>pName);}
+\DoxyCodeLine{01046\ }
+\DoxyCodeLine{01047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Needed\ to\ be\ added\ -\/\ for\ fencing\ issues\ between\ tests}}
+\DoxyCodeLine{01048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Release\ rearranges..\ and\ affects\ timing}}
+\DoxyCodeLine{01049\ }
+\DoxyCodeLine{01050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Forces\ a\ Fence...\ }}
+\DoxyCodeLine{01051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atomic\_thread\_fence(std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{01052\ }
+\DoxyCodeLine{01053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ run\ the\ test}}
+\DoxyCodeLine{01054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unitData.result\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{01055\ }
+\DoxyCodeLine{01056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pTest-\/>testFunc\ !=\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{01057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTest-\/>testFunc-\/>run(unitData,\ unitStats);}
+\DoxyCodeLine{01058\ }
+\DoxyCodeLine{01059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Forces\ a\ Fence...\ }}
+\DoxyCodeLine{01060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atomic\_thread\_fence(std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{01061\ }
+\DoxyCodeLine{01062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Always\ call\ the\ teardown}}
+\DoxyCodeLine{01063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTest-\/>testFunc-\/>teardown();}
+\DoxyCodeLine{01064\ }
+\DoxyCodeLine{01065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Forces\ a\ Fence...\ }}
+\DoxyCodeLine{01066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atomic\_thread\_fence(std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{01067\ }
+\DoxyCodeLine{01068\ }
+\DoxyCodeLine{01069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (unitData.result\ ==\ \textcolor{keyword}{true})}
+\DoxyCodeLine{01070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unitStats.testPass++;}
+\DoxyCodeLine{01072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{01074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ unitStats.testFail++;}
+\DoxyCodeLine{01076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01077\ }
+\DoxyCodeLine{01078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ next\ test}}
+\DoxyCodeLine{01079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTmp\ =\ pTmp-\/>\_pNext;}
+\DoxyCodeLine{01080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01081\ }
+\DoxyCodeLine{01082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (unitStats.testFail)}
+\DoxyCodeLine{01083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}\ (\%s)\ testPass:\ \%d\(\backslash\)n"{}},\ mode,\ unitStats.testPass);}
+\DoxyCodeLine{01087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}\ (\%s)\ testFail:\ \%d\(\backslash\)n"{}},\ mode,\ unitStats.testFail);}
+\DoxyCodeLine{01088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}\ testCount:\ \%d\(\backslash\)n"{}},\ unitStats.testCount);}
+\DoxyCodeLine{01090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}indvChecks:\ \%d\(\backslash\)n"{}},\ unitStats.indvAsserts);}
+\DoxyCodeLine{01091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{01093\ }
+\DoxyCodeLine{01094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ (\%s)\ testPass:\ \%d\(\backslash\)n"{}},\ mode,\ unitStats.testPass);}
+\DoxyCodeLine{01096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ (\%s)\ testFail:\ \%d\(\backslash\)n"{}},\ mode,\ unitStats.testFail);}
+\DoxyCodeLine{01097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\ testCount:\ \%d\(\backslash\)n"{}},\ unitStats.testCount);}
+\DoxyCodeLine{01099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}indvChecks:\ \%d\(\backslash\)n"{}},\ unitStats.indvAsserts);}
+\DoxyCodeLine{01100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{01102\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01103\ }
+\DoxyCodeLine{01104\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{01105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pName;}
+\DoxyCodeLine{01106\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_test}{Test}}\ *testFunc;}
+\DoxyCodeLine{01107\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{01108\ }
+\DoxyCodeLine{01109\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ a\ trick\ to\ create\ a\ c-\/string}}
+\DoxyCodeLine{01110\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ STRING\_ME(s)\ \#s}}
+\DoxyCodeLine{01111\ }
+\DoxyCodeLine{01112\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increments\ total\ check\ count}}
+\DoxyCodeLine{01113\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Creates\ a\ clickable\ format\ in\ the\ output\ window\ for\ failure}}
+\DoxyCodeLine{01114\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Abort\ test\ on\ first\ fail}}
+\DoxyCodeLine{01115\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ CHECK(\ condition\ )\ \(\backslash\)}}
+\DoxyCodeLine{01116\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01117\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \_UnitStats.indvAsserts++;\(\backslash\)}}
+\DoxyCodeLine{01118\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if(\ !(\ condition\ )\ )\ \(\backslash\)}}
+\DoxyCodeLine{01119\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01120\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitData.result\ =\ false;\ \ \(\backslash\)}}
+\DoxyCodeLine{01121\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitData.pMemberName\ =\ this-\/>pName;\ \(\backslash\)}}
+\DoxyCodeLine{01122\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitData.pSourceFilePath\ =\ \_\_FILE\_\_;\ \ \(\backslash\)}}
+\DoxyCodeLine{01123\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitData.sourceLineNumber\ =\ \_\_LINE\_\_;\ \(\backslash\)}}
+\DoxyCodeLine{01124\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out("{}\%s(\%d):\ \%s\ \(\backslash\)n"{},\ \_UnitData.pSourceFilePath,\ \_UnitData.sourceLineNumber,\ \_UnitData.pMemberName\ );\ \(\backslash\)}}
+\DoxyCodeLine{01125\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\%s(\%d):\ \%s\ \(\backslash\)n"{},\ \_UnitData.pSourceFilePath,\ \_UnitData.sourceLineNumber,\ \_UnitData.pMemberName\ );\ \(\backslash\)}}
+\DoxyCodeLine{01126\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return;\ \(\backslash\)}}
+\DoxyCodeLine{01127\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{01128\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ else\(\backslash\)}}
+\DoxyCodeLine{01129\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\(\backslash\)}}
+\DoxyCodeLine{01130\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{01131\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01132\ }
+\DoxyCodeLine{01133\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ CHECK\_EQUAL(\ value1,\ value2\ )\ \(\backslash\)}}
+\DoxyCodeLine{01134\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01135\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \_UnitStats.indvAsserts++;\(\backslash\)}}
+\DoxyCodeLine{01136\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if(\ !(\ (value1)\ ==\ (value2)\ )\ )\ \(\backslash\)}}
+\DoxyCodeLine{01137\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01138\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitData.result\ =\ false;\ \ \(\backslash\)}}
+\DoxyCodeLine{01139\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitData.pMemberName\ =\ this-\/>pName;\ \(\backslash\)}}
+\DoxyCodeLine{01140\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitData.pSourceFilePath\ =\ \_\_FILE\_\_;\ \(\backslash\)}}
+\DoxyCodeLine{01141\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitData.sourceLineNumber\ =\ \_\_LINE\_\_;\ \(\backslash\)}}
+\DoxyCodeLine{01142\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ UnitTrace::out("{}\%s(\%d):\ \%s\(\backslash\)n"{},\ \_UnitData.pSourceFilePath,\ \_UnitData.sourceLineNumber,\ \_UnitData.pMemberName\ \ );\ \(\backslash\)}}
+\DoxyCodeLine{01143\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\%s(\%d):\ \%s\(\backslash\)n"{},\ \_UnitData.pSourceFilePath,\ \_UnitData.sourceLineNumber,\ \_UnitData.pMemberName\ \ );\ \(\backslash\)}}
+\DoxyCodeLine{01144\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return;\ \(\backslash\)}}
+\DoxyCodeLine{01145\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{01146\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ else\(\backslash\)}}
+\DoxyCodeLine{01147\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\(\backslash\)}}
+\DoxyCodeLine{01148\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{01149\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{01150\ }
+\DoxyCodeLine{01151\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01152\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Here\ is\ the\ unit\ test\ magic}}
+\DoxyCodeLine{01153\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{01154\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1)\ it\ creates\ a\ class,\ <TestName>\_Test}}
+\DoxyCodeLine{01155\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ it\ is\ derived\ from\ Test\ class}}
+\DoxyCodeLine{01156\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 2)\ it\ defines\ the\ constructor\ and\ calls\ the\ base\ constructor\ with\ the\ name}}
+\DoxyCodeLine{01157\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \ \ \ it\ registers\ the\ name\ of\ the\ test\ to\ a\ single\ class\ (TestRegistry)}}
+\DoxyCodeLine{01158\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 3)\ It\ also\ overloads\ the\ Test::run()\ method\ with\ the\ body\ of\ the\ macro}}
+\DoxyCodeLine{01159\ \ \ \ \ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{01160\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01161\ }
+\DoxyCodeLine{01162\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ TEST\_END\ \}}}
+\DoxyCodeLine{01163\ }
+\DoxyCodeLine{01164\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ TEST(\ TestName,\ GroupName,\ TestFlagEnable\ )\ \(\backslash\)}}
+\DoxyCodeLine{01165\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ class\ TestName\#\#\_\#\#GroupName\#\#\_Test\ :\ public\ Test\ \(\backslash\)}}
+\DoxyCodeLine{01166\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01167\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ public:\ \(\backslash\)}}
+\DoxyCodeLine{01168\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TestName\#\#\_\#\#GroupName\#\#\_Test()\ noexcept\ :\ \(\backslash\)}}
+\DoxyCodeLine{01169\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Test(\ STRING\_ME(TestName\#\#\_\#\#GroupName\#\#\_Test))\ \(\backslash\)}}
+\DoxyCodeLine{01170\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01171\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};\ \(\backslash\)}}
+\DoxyCodeLine{01172\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TestName\#\#\_\#\#GroupName\#\#\_Test\ \&\ operator\ =\ (const\ TestName\#\#\_\#\#GroupName\#\#\_Test\ \&)\ =\ delete;\(\backslash\)}}
+\DoxyCodeLine{01173\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TestName\#\#\_\#\#GroupName\#\#\_Test(const\ TestName\#\#\_\#\#GroupName\#\#\_Test\ \&)\ =\ delete;\(\backslash\)}}
+\DoxyCodeLine{01174\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01175\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ void\ run(UnitData\ \&\_UnitData,\ UnitStats\ \&\_UnitStats)\ override;\(\backslash\)}}
+\DoxyCodeLine{01176\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ TestName\#\#\_\#\#GroupName\#\#\_instance;\ \(\backslash\)}}
+\DoxyCodeLine{01177\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01178\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ void\ TestName\#\#\_\#\#GroupName\#\#\_Test::run(\ UnitData\ \&\_UnitData,\ UnitStats\ \&\_UnitStats\ )\ \(\backslash\)}}
+\DoxyCodeLine{01179\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01180\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if(!TestFlagEnable)\ \(\backslash\)}}
+\DoxyCodeLine{01181\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01182\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitStats.testCount-\/-\/;\ \(\backslash\)}}
+\DoxyCodeLine{01183\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitStats.testPass-\/-\/;\ \(\backslash\)}}
+\DoxyCodeLine{01184\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{01185\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ else\ }}
+\DoxyCodeLine{01186\ }
+\DoxyCodeLine{01187\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ TEST\_WITH\_TEARDOWN(\ TestName,\ GroupName,\ TestFlagEnable\ )\ \(\backslash\)}}
+\DoxyCodeLine{01188\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ class\ TestName\#\#\_\#\#GroupName\#\#\_Test\ :\ public\ Test\ \(\backslash\)}}
+\DoxyCodeLine{01189\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01190\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ public:\ \(\backslash\)}}
+\DoxyCodeLine{01191\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TestName\#\#\_\#\#GroupName\#\#\_Test()\ noexcept\ :\ \(\backslash\)}}
+\DoxyCodeLine{01192\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Test(\ STRING\_ME(TestName\#\#\_\#\#GroupName\#\#\_Test))\ \(\backslash\)}}
+\DoxyCodeLine{01193\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01194\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};\ \(\backslash\)}}
+\DoxyCodeLine{01195\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TestName\#\#\_\#\#GroupName\#\#\_Test\ \&\ operator\ =\ (\ const\ TestName\#\#\_\#\#GroupName\#\#\_Test\ \&\ )\ =\ delete;\(\backslash\)}}
+\DoxyCodeLine{01196\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TestName\#\#\_\#\#GroupName\#\#\_Test(\ const\ TestName\#\#\_\#\#GroupName\#\#\_Test\ \&\ )\ =\ delete;\(\backslash\)}}
+\DoxyCodeLine{01197\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01198\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ void\ run(UnitData\ \&\_UnitData,\ UnitStats\ \&\_UnitStats)\ override;\(\backslash\)}}
+\DoxyCodeLine{01199\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ void\ teardown()\ noexcept\ override;\(\backslash\)}}
+\DoxyCodeLine{01200\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ TestName\#\#\_\#\#GroupName\#\#\_instance;\ \(\backslash\)}}
+\DoxyCodeLine{01201\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{01202\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ void\ TestName\#\#\_\#\#GroupName\#\#\_Test::run(\ UnitData\ \&\_UnitData,\ UnitStats\ \&\_UnitStats\ )\ \(\backslash\)}}
+\DoxyCodeLine{01203\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01204\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ (!TestFlagEnable)\ \(\backslash\)}}
+\DoxyCodeLine{01205\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \{\ \(\backslash\)}}
+\DoxyCodeLine{01206\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitStats.testCount-\/-\/;\ \(\backslash\)}}
+\DoxyCodeLine{01207\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_UnitStats.testPass-\/-\/;\ \(\backslash\)}}
+\DoxyCodeLine{01208\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ \(\backslash\)}}
+\DoxyCodeLine{01209\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ else}}
+\DoxyCodeLine{01210\ }
+\DoxyCodeLine{01211\ }
+\DoxyCodeLine{01212\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ TEST\_TEARDOWN(\ TestName,\ GroupName\ )\ \(\backslash\)}}
+\DoxyCodeLine{01213\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ void\ TestName\#\#\_\#\#GroupName\#\#\_Test::teardown()\ noexcept}}
+\DoxyCodeLine{01214\ }
+\DoxyCodeLine{01215\ \textcolor{preprocessor}{\#endif\ \ UNIT\_TEST\_CPP\_H}}
+\DoxyCodeLine{01216\ }
+\DoxyCodeLine{01217\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01218\ \textcolor{comment}{//\ Copyright\ 2019,\ Ed\ Keenan,\ all\ rights\ reserved.}}
+\DoxyCodeLine{01219\ \textcolor{comment}{//}}
+\DoxyCodeLine{01220\ \textcolor{comment}{//\ Performance\ timer}}
+\DoxyCodeLine{01221\ \textcolor{comment}{//\ \ \ \ \ \ Quick\ hardware\ timer}}
+\DoxyCodeLine{01222\ \textcolor{comment}{//\ \ \ \ \ \ Uses\ the\ hardware\ clock\ for\ timing}}
+\DoxyCodeLine{01223\ \textcolor{comment}{//\ \ \ \ \ \ Returns\ time\ as\ float\ (easier\ than\ Abstract\ Data\ Types\ for\ students)}}
+\DoxyCodeLine{01224\ \textcolor{comment}{//\ \ \ \ \ \ Not\ designed\ for\ timing\ event...\ but\ instead\ for\ measuring\ time}}
+\DoxyCodeLine{01225\ \textcolor{comment}{//}}
+\DoxyCodeLine{01226\ \textcolor{comment}{//\ \ \ \ \ \ Used\ to\ be\ stand\ alone\ files...\ now\ all\ one\ include}}
+\DoxyCodeLine{01227\ \textcolor{comment}{//}}
+\DoxyCodeLine{01228\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01229\ }
+\DoxyCodeLine{01230\ \textcolor{preprocessor}{\#ifndef\ PERFORMANCE\_TIMER\_H}}
+\DoxyCodeLine{01231\ \textcolor{preprocessor}{\#define\ PERFORMANCE\_TIMER\_H}}
+\DoxyCodeLine{01232\ }
+\DoxyCodeLine{01233\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}}
+\DoxyCodeLine{01234\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01235\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{01236\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ big\ six}}
+\DoxyCodeLine{01237\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}()\ noexcept}
+\DoxyCodeLine{01238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :}
+\DoxyCodeLine{01239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ticTime(),}
+\DoxyCodeLine{01240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tocTime(),}
+\DoxyCodeLine{01241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ deltaTime(),}
+\DoxyCodeLine{01242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SecondsPerCycle(0.0f),}
+\DoxyCodeLine{01243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ timeSeconds(0.0f)}
+\DoxyCodeLine{01244\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>privInitTimer();}
+\DoxyCodeLine{01246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>Reset();}
+\DoxyCodeLine{01247\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01248\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01249\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}(\mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01250\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}\ \&\ operator=\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01251\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}\ \&\ operator=\ (\mbox{\hyperlink{class_performance_timer}{PerformanceTimer}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01252\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_performance_timer}{\string~PerformanceTimer}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{01253\ }
+\DoxyCodeLine{01254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Tic()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01255\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Forces\ a\ Fence...\ }}
+\DoxyCodeLine{01257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atomic\_thread\_fence(std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{01258\ }
+\DoxyCodeLine{01259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>ticTime\ =\ this-\/>privGetTimer();}
+\DoxyCodeLine{01260\ }
+\DoxyCodeLine{01261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Forces\ a\ Fence...}}
+\DoxyCodeLine{01262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atomic\_thread\_fence(std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{01263\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01264\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Toc()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01265\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Forces\ a\ Fence...\ }}
+\DoxyCodeLine{01267\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atomic\_thread\_fence(std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{01268\ }
+\DoxyCodeLine{01269\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>tocTime\ =\ this-\/>privGetTimer();}
+\DoxyCodeLine{01270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(this-\/>tocTime.QuadPart\ >=\ this-\/>ticTime.QuadPart);}
+\DoxyCodeLine{01271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>deltaTime.QuadPart\ =\ this-\/>tocTime.QuadPart\ -\/\ this-\/>ticTime.QuadPart;}
+\DoxyCodeLine{01272\ }
+\DoxyCodeLine{01273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Forces\ a\ Fence...\ }}
+\DoxyCodeLine{01274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ atomic\_thread\_fence(std::memory\_order\_acq\_rel);}
+\DoxyCodeLine{01275\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01276\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Reset()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01277\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>ticTime.QuadPart\ =\ 0;}
+\DoxyCodeLine{01279\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>tocTime.QuadPart\ =\ 0;}
+\DoxyCodeLine{01280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>deltaTime.QuadPart\ =\ 0;}
+\DoxyCodeLine{01281\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ TimeInSeconds()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01283\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ floatTime;}
+\DoxyCodeLine{01285\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ floatTime\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(this-\/>deltaTime.QuadPart);}
+\DoxyCodeLine{01286\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ floatTime\ *=\ this-\/>SecondsPerCycle;}
+\DoxyCodeLine{01287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ floatTime;}
+\DoxyCodeLine{01288\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01289\ }
+\DoxyCodeLine{01290\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{01291\ }
+\DoxyCodeLine{01292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ privInitTimer()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01293\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LARGE\_INTEGER\ Frequency;}
+\DoxyCodeLine{01295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QueryPerformanceFrequency(\&Frequency);}
+\DoxyCodeLine{01296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>SecondsPerCycle\ =\ 1.0f\ /\ Frequency.QuadPart;}
+\DoxyCodeLine{01297\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01298\ \ \ \ \ \ \ \ \ \ \ \ \ LARGE\_INTEGER\ privGetTimer()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01299\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LARGE\_INTEGER\ time;}
+\DoxyCodeLine{01301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QueryPerformanceCounter(\&time);}
+\DoxyCodeLine{01302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ time;}
+\DoxyCodeLine{01303\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01304\ }
+\DoxyCodeLine{01305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01306\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ data}}
+\DoxyCodeLine{01307\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01308\ }
+\DoxyCodeLine{01309\ \ \ \ \ \ \ \ \ \ \ \ \ LARGE\_INTEGER\ \ \ ticTime;}
+\DoxyCodeLine{01310\ \ \ \ \ \ \ \ \ \ \ \ \ LARGE\_INTEGER\ \ \ tocTime;}
+\DoxyCodeLine{01311\ \ \ \ \ \ \ \ \ \ \ \ \ LARGE\_INTEGER\ \ \ deltaTime;}
+\DoxyCodeLine{01312\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ SecondsPerCycle;}
+\DoxyCodeLine{01313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ timeSeconds;}
+\DoxyCodeLine{01314\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{01315\ }
+\DoxyCodeLine{01316\ \textcolor{preprocessor}{\#endif\ PERFORMANCE\_TIMER\_H}}
+\DoxyCodeLine{01317\ }
+\DoxyCodeLine{01318\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01319\ \textcolor{comment}{//\ Copyright\ 2019,\ Ed\ Keenan,\ all\ rights\ reserved.}}
+\DoxyCodeLine{01320\ \textcolor{comment}{//}}
+\DoxyCodeLine{01321\ \textcolor{comment}{//\ Output\ Debug\ print}}
+\DoxyCodeLine{01322\ \textcolor{comment}{//\ \ \ \ \ \ Same\ interface\ as\ printf(...)\ but\ outputs\ to\ the\ debug\ window}}
+\DoxyCodeLine{01323\ \textcolor{comment}{//\ \ \ \ \ \ Also\ protected\ with\ mutex\ for\ race\ conditions}}
+\DoxyCodeLine{01324\ \textcolor{comment}{//}}
+\DoxyCodeLine{01325\ \textcolor{comment}{//\ \ \ \ \ \ Used\ to\ be\ stand\ alone\ files...\ now\ all\ one\ include}}
+\DoxyCodeLine{01326\ \textcolor{comment}{//}}
+\DoxyCodeLine{01327\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01328\ }
+\DoxyCodeLine{01329\ \textcolor{preprocessor}{\#ifndef\ DEBUG\_OUTPUT\_H}}
+\DoxyCodeLine{01330\ \textcolor{preprocessor}{\#define\ DEBUG\_OUTPUT\_H}}
+\DoxyCodeLine{01331\ }
+\DoxyCodeLine{01332\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_trace}{Trace}}}
+\DoxyCodeLine{01333\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01334\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{01335\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ TraceBuffSize\ =\ 256;}
+\DoxyCodeLine{01336\ }
+\DoxyCodeLine{01337\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{01338\ }
+\DoxyCodeLine{01339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Big\ six}}
+\DoxyCodeLine{01340\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_trace}{Trace}}()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01341\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(\&privBuff[0],\ 0x0,\ TraceBuffSize);}
+\DoxyCodeLine{01343\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01344\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_trace}{Trace}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_trace}{Trace}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01345\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_trace}{Trace}}(\mbox{\hyperlink{class_trace}{Trace}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01346\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_trace}{Trace}}\ \&\ operator\ =\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{class_trace}{Trace}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01347\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_trace}{Trace}}\ \&\ operator\ =\ (\mbox{\hyperlink{class_trace}{Trace}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01348\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_trace}{\string~Trace}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{01349\ }
+\DoxyCodeLine{01350\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ displays\ a\ printf\ to\ the\ output\ window}}
+\DoxyCodeLine{01351\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ out(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ fmt,\ ...)}
+\DoxyCodeLine{01352\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_trace}{Trace}}\ *pTrace\ =\ Trace::privGetInstance();}
+\DoxyCodeLine{01354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pTrace);}
+\DoxyCodeLine{01355\ }
+\DoxyCodeLine{01356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>mtx.lock();}
+\DoxyCodeLine{01357\ }
+\DoxyCodeLine{01358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ va\_list\ args;}
+\DoxyCodeLine{01359\ }
+\DoxyCodeLine{01360\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ push\ )}}
+\DoxyCodeLine{01361\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 26492\ )}}
+\DoxyCodeLine{01362\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ disable\ :\ 26481\ )}}
+\DoxyCodeLine{01363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ va\_start(args,\ fmt);}
+\DoxyCodeLine{01364\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \#pragma\ warning(\ pop\ )}}
+\DoxyCodeLine{01365\ }
+\DoxyCodeLine{01366\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vsprintf\_s(\&pTrace-\/>privBuff[0],\ TraceBuffSize,\ fmt,\ args);}
+\DoxyCodeLine{01367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ OutputDebugString(\&pTrace-\/>privBuff[0]);}
+\DoxyCodeLine{01368\ }
+\DoxyCodeLine{01369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//va\_end(args);}}
+\DoxyCodeLine{01370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ args\ =\ \textcolor{keyword}{static\_cast<}va\_list\textcolor{keyword}{>}\ (\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{01371\ }
+\DoxyCodeLine{01372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pTrace-\/>mtx.unlock();}
+\DoxyCodeLine{01373\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01374\ }
+\DoxyCodeLine{01375\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{01376\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_trace}{Trace}}\ *privGetInstance()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01377\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01378\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_trace}{Trace}}\ helper;}
+\DoxyCodeLine{01379\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&helper;}
+\DoxyCodeLine{01380\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01381\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ privBuff[TraceBuffSize];}
+\DoxyCodeLine{01382\ \ \ \ \ \ \ \ \ \ \ \ \ std::mutex\ mtx;}
+\DoxyCodeLine{01383\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{01384\ }
+\DoxyCodeLine{01385\ \textcolor{preprocessor}{\#endif\ DEBUG\_OUTPUT\_H}}
+\DoxyCodeLine{01386\ }
+\DoxyCodeLine{01387\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01388\ \textcolor{comment}{//\ Copyright\ 2019,\ Ed\ Keenan,\ all\ rights\ reserved.}}
+\DoxyCodeLine{01389\ \textcolor{comment}{//}}
+\DoxyCodeLine{01390\ \textcolor{comment}{//\ File\ I/O\ for\ logging}}
+\DoxyCodeLine{01391\ \textcolor{comment}{//\ \ \ \ \ \ Need\ a\ clean\ an\ easy\ way\ to\ create\ and\ log\ to\ a\ file\ in\ ascii}}
+\DoxyCodeLine{01392\ \textcolor{comment}{//\ \ \ \ \ \ used\ in\ course\ for\ logging...}}
+\DoxyCodeLine{01393\ \textcolor{comment}{//}}
+\DoxyCodeLine{01394\ \textcolor{comment}{//\ \ \ \ \ \ Used\ to\ be\ stand\ alone\ files...\ now\ all\ one\ include}}
+\DoxyCodeLine{01395\ \textcolor{comment}{//}}
+\DoxyCodeLine{01396\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01397\ }
+\DoxyCodeLine{01398\ \textcolor{preprocessor}{\#ifndef\ FILE\_IO\_H}}
+\DoxyCodeLine{01399\ \textcolor{preprocessor}{\#define\ FILE\_IO\_H}}
+\DoxyCodeLine{01400\ }
+\DoxyCodeLine{01401\ }
+\DoxyCodeLine{01402\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#ifdef\ \_DEBUG}}
+\DoxyCodeLine{01403\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ \_M\_X64}}
+\DoxyCodeLine{01404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ pFileio\_mode\ =\ \textcolor{stringliteral}{"{}x64\_Debug"{}};}
+\DoxyCodeLine{01405\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{01406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ pFileio\_mode\ =\ \textcolor{stringliteral}{"{}x86\_Debug"{}};}
+\DoxyCodeLine{01407\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{01408\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{01409\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#ifdef\ \_M\_X64}}
+\DoxyCodeLine{01410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ pFileio\_mode\ =\ \textcolor{stringliteral}{"{}x64\_Release"{}};}
+\DoxyCodeLine{01411\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#else}}
+\DoxyCodeLine{01412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ pFileio\_mode\ =\ \textcolor{stringliteral}{"{}x86\_Release"{}};}
+\DoxyCodeLine{01413\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{01414\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#endif}}
+\DoxyCodeLine{01415\ }
+\DoxyCodeLine{01416\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_file_i_o}{FileIO}}}
+\DoxyCodeLine{01417\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01418\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{01419\ }
+\DoxyCodeLine{01420\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Open(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pFirstName,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pLastName)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01421\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pFirstName);}
+\DoxyCodeLine{01423\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pLastName);}
+\DoxyCodeLine{01424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FileIO::privGetInstance()-\/>privOpen(pFirstName,\ pLastName);}
+\DoxyCodeLine{01425\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01426\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Close()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01427\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FileIO::privGetInstance()-\/>privClose();}
+\DoxyCodeLine{01429\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01430\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ FILE\ *GetHandle()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01431\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01432\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ FileIO::privGetInstance()-\/>privGetHandle();}
+\DoxyCodeLine{01433\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01434\ }
+\DoxyCodeLine{01435\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{01436\ }
+\DoxyCodeLine{01437\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ privOpen(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pFirstName,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pLastName)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01438\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ system(\textcolor{stringliteral}{"{}if\ not\ exist\ .\(\backslash\)\(\backslash\)..\(\backslash\)\(\backslash\)Logs\ mkdir\ .\(\backslash\)\(\backslash\)..\(\backslash\)\(\backslash\)Logs"{}});}
+\DoxyCodeLine{01440\ }
+\DoxyCodeLine{01441\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pFile\_extension\ =\ \textcolor{stringliteral}{"{}.txt"{}};}
+\DoxyCodeLine{01442\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \textcolor{keyword}{const}\ pFile\_io\_path\ =\ \textcolor{stringliteral}{"{}.\(\backslash\)\(\backslash\)..\(\backslash\)\(\backslash\)Logs\(\backslash\)\(\backslash\)"{}};}
+\DoxyCodeLine{01443\ }
+\DoxyCodeLine{01444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ length\ =\ 256;}
+\DoxyCodeLine{01445\ }
+\DoxyCodeLine{01446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ pFileName[length]\ =\ \{\ 0\ \};}
+\DoxyCodeLine{01447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pFileName);}
+\DoxyCodeLine{01448\ }
+\DoxyCodeLine{01449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ errno\_t\ fileError(0);}
+\DoxyCodeLine{01450\ }
+\DoxyCodeLine{01451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ wash\ the\ name\ to\ 0}}
+\DoxyCodeLine{01452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(\&pFileName[0],\ 0,\ length);}
+\DoxyCodeLine{01453\ }
+\DoxyCodeLine{01454\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ is\ there\ enough\ of\ space?}}
+\DoxyCodeLine{01455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(\ (strlen(pFile\_io\_path)\ }
+\DoxyCodeLine{01456\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ strlen(pFirstName)\ }
+\DoxyCodeLine{01457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ strlen(pLastName)\ }
+\DoxyCodeLine{01458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ strlen(\textcolor{stringliteral}{"{}-\/"{}})\ }
+\DoxyCodeLine{01459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ strlen(pFileio\_mode)\ }
+\DoxyCodeLine{01460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ strlen(pFile\_extension)\ }
+\DoxyCodeLine{01461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ strlen(\textcolor{stringliteral}{"{}/0"{}})\ )\ <\ length);}
+\DoxyCodeLine{01462\ }
+\DoxyCodeLine{01463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcat\_s(\&pFileName[0],\ length,\ pFile\_io\_path);}
+\DoxyCodeLine{01464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcat\_s(\&pFileName[0],\ length,\ pFirstName);}
+\DoxyCodeLine{01465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcat\_s(\&pFileName[0],\ length,\ pLastName);}
+\DoxyCodeLine{01466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcat\_s(\&pFileName[0],\ length,\ \textcolor{stringliteral}{"{}\_"{}});}
+\DoxyCodeLine{01467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcat\_s(\&pFileName[0],\ length,\ pFileio\_mode);}
+\DoxyCodeLine{01468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcat\_s(\&pFileName[0],\ length,\ pFile\_extension);}
+\DoxyCodeLine{01469\ }
+\DoxyCodeLine{01470\ }
+\DoxyCodeLine{01471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fileError\ =\ fopen\_s(\&pFileHandle,\ \&pFileName[0],\ \textcolor{stringliteral}{"{}wt"{}});}
+\DoxyCodeLine{01472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pFileHandle);}
+\DoxyCodeLine{01473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(pFileHandle\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{01474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{01476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}Log\ File\ \(\backslash\)n"{}});}
+\DoxyCodeLine{01478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}Name:\ \%s\ \%s\(\backslash\)n"{}},\ pFirstName,\ pLastName);}
+\DoxyCodeLine{01480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}Mode:\ \%s\(\backslash\)n"{}},\ pFileio\_mode);}
+\DoxyCodeLine{01481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{01483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fprintf(this-\/>pFileHandle,\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{01484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01485\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01486\ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ *privGetHandle()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01487\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pFileHandle);}
+\DoxyCodeLine{01489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ this-\/>pFileHandle;}
+\DoxyCodeLine{01490\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01491\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_file_i_o}{FileIO}}\ *privGetInstance()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01492\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01493\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_file_i_o}{FileIO}}\ instance;}
+\DoxyCodeLine{01494\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&instance;}
+\DoxyCodeLine{01495\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01496\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ privClose()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01497\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01498\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ errno\_t\ fileError(0);}
+\DoxyCodeLine{01499\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(pFileHandle);}
+\DoxyCodeLine{01500\ }
+\DoxyCodeLine{01501\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fileError\ =\ fflush(this-\/>pFileHandle);}
+\DoxyCodeLine{01502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(!fileError);}
+\DoxyCodeLine{01503\ }
+\DoxyCodeLine{01504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fileError\ =\ fclose(this-\/>pFileHandle);}
+\DoxyCodeLine{01505\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>pFileHandle\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{01506\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(!fileError);}
+\DoxyCodeLine{01507\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01508\ }
+\DoxyCodeLine{01509\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ big\ six\ \ }}
+\DoxyCodeLine{01510\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{class_file_i_o}{FileIO}}()\ noexcept}
+\DoxyCodeLine{01511\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :pFileHandle(\textcolor{keyword}{nullptr})}
+\DoxyCodeLine{01512\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01513\ }
+\DoxyCodeLine{01514\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{01515\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_file_i_o}{FileIO}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_i_o}{FileIO}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01516\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_file_i_o}{FileIO}}(\mbox{\hyperlink{class_file_i_o}{FileIO}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01517\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_file_i_o}{FileIO}}\ \&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_file_i_o}{FileIO}}\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01518\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_file_i_o}{FileIO}}\ \&\ operator=(\mbox{\hyperlink{class_file_i_o}{FileIO}}\ \&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{01519\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_file_i_o}{\string~FileIO}}()}
+\DoxyCodeLine{01520\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{nullptr}\ !=\ this-\/>pFileHandle)}
+\DoxyCodeLine{01522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01523\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>privClose();}
+\DoxyCodeLine{01524\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01525\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{01526\ }
+\DoxyCodeLine{01527\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01528\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ data}}
+\DoxyCodeLine{01529\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01530\ }
+\DoxyCodeLine{01531\ \ \ \ \ \ \ \ \ \ \ \ \ FILE\ *pFileHandle;}
+\DoxyCodeLine{01532\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{01533\ }
+\DoxyCodeLine{01534\ \textcolor{preprocessor}{\#endif\ FILE\_IO\_H}}
+\DoxyCodeLine{01535\ }
+\DoxyCodeLine{01536\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01537\ \textcolor{comment}{//\ Copyright\ 2019,\ Ed\ Keenan,\ all\ rights\ reserved.}}
+\DoxyCodeLine{01538\ \textcolor{comment}{//}}
+\DoxyCodeLine{01539\ \textcolor{comment}{//\ Align16}}
+\DoxyCodeLine{01540\ \textcolor{comment}{//\ \ \ \ \ \ Needed\ a\ clean\ way\ to\ allocate\ aligned\ data\ for\ Matrix,\ Quat,\ and\ Vector}}
+\DoxyCodeLine{01541\ \textcolor{comment}{//\ \ \ \ \ \ Data\ is\ align\ by\ inheriting\ this\ class}}
+\DoxyCodeLine{01542\ \textcolor{comment}{//\ \ \ \ \ \ }}
+\DoxyCodeLine{01543\ \textcolor{comment}{//}}
+\DoxyCodeLine{01544\ \textcolor{comment}{//\ \ \ \ \ \ Used\ to\ be\ stand\ alone\ files...\ now\ all\ one\ include}}
+\DoxyCodeLine{01545\ \textcolor{comment}{//}}
+\DoxyCodeLine{01546\ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{01547\ }
+\DoxyCodeLine{01548\ }
+\DoxyCodeLine{01549\ \textcolor{preprocessor}{\#ifndef\ ALIGN\_16\_H}}
+\DoxyCodeLine{01550\ \textcolor{preprocessor}{\#define\ ALIGN\_16\_H}}
+\DoxyCodeLine{01551\ }
+\DoxyCodeLine{01552\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ ALIGN\_UNUSED\_VAR(x)\ (void(x))}}
+\DoxyCodeLine{01553\ }
+\DoxyCodeLine{01554\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ push\_macro("{}new"{})}}
+\DoxyCodeLine{01555\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#undef\ new}}
+\DoxyCodeLine{01556\ }
+\DoxyCodeLine{01557\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_align16}{Align16}}}
+\DoxyCodeLine{01558\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01559\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{01560\ }
+\DoxyCodeLine{01561\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Placement\ new\ for\ align16}}
+\DoxyCodeLine{01562\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}*\ \textcolor{keyword}{operator}\ \textcolor{keyword}{new}(size\_t,\ \textcolor{keywordtype}{void}\ *p)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01563\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(p);}
+\DoxyCodeLine{01565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{01566\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01567\ }
+\DoxyCodeLine{01568\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\textcolor{keyword}{operator}\ \textcolor{keyword}{new}(\textcolor{keywordtype}{size\_t}\ size)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01569\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *p\ =\ \_aligned\_malloc(size,\ 16);}
+\DoxyCodeLine{01571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{01572\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01573\ }
+\DoxyCodeLine{01574\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \textcolor{keyword}{operator}\ \textcolor{keyword}{delete}(\textcolor{keywordtype}{void}\ *p)}
+\DoxyCodeLine{01575\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_aligned\_free(p);}
+\DoxyCodeLine{01577\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01578\ }
+\DoxyCodeLine{01579\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\textcolor{keyword}{operator}\ \textcolor{keyword}{new}[](\textcolor{keywordtype}{size\_t}\ size)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01580\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *p\ =\ \_aligned\_malloc(size,\ 16);}
+\DoxyCodeLine{01582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{01583\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01584\ }
+\DoxyCodeLine{01585\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \textcolor{keyword}{operator}\ \textcolor{keyword}{delete}[](\textcolor{keywordtype}{void}\ *p)}
+\DoxyCodeLine{01586\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_aligned\_free(p);}
+\DoxyCodeLine{01588\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01589\ }
+\DoxyCodeLine{01590\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\textcolor{keyword}{operator}\ \textcolor{keyword}{new}(\textcolor{keywordtype}{size\_t}\ \ \ \ \ \ size,}
+\DoxyCodeLine{01591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \_BlockUse,}
+\DoxyCodeLine{01592\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ \_FileName,}
+\DoxyCodeLine{01593\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \_LineNumber)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01594\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01595\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_BlockUse);}
+\DoxyCodeLine{01596\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_FileName);}
+\DoxyCodeLine{01597\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_LineNumber);}
+\DoxyCodeLine{01598\ }
+\DoxyCodeLine{01599\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *p\ =\ \_aligned\_malloc\_dbg(size,\ 16,\ \_FileName,\ \_LineNumber);}
+\DoxyCodeLine{01600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{01601\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01602\ }
+\DoxyCodeLine{01603\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \textcolor{keyword}{operator}\ \textcolor{keyword}{delete}(\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ *p,}
+\DoxyCodeLine{01604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \_BlockUse,}
+\DoxyCodeLine{01605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ \_FileName,}
+\DoxyCodeLine{01606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \_LineNumber)}
+\DoxyCodeLine{01607\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01608\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_BlockUse);}
+\DoxyCodeLine{01609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_FileName);}
+\DoxyCodeLine{01610\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_LineNumber);}
+\DoxyCodeLine{01611\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_aligned\_free\_dbg(p);}
+\DoxyCodeLine{01612\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01613\ }
+\DoxyCodeLine{01614\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *\textcolor{keyword}{operator}\ \textcolor{keyword}{new}[](\textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ size,}
+\DoxyCodeLine{01615\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \_BlockUse,}
+\DoxyCodeLine{01616\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ \_FileName,}
+\DoxyCodeLine{01617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \_LineNumber)\ \ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{01618\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01619\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_BlockUse);}
+\DoxyCodeLine{01620\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_FileName);}
+\DoxyCodeLine{01621\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_LineNumber);}
+\DoxyCodeLine{01622\ }
+\DoxyCodeLine{01623\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ *p\ =\ \_aligned\_malloc\_dbg(size,\ 16,\ \_FileName,\ \_LineNumber);}
+\DoxyCodeLine{01624\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{01625\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01626\ }
+\DoxyCodeLine{01627\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \textcolor{keyword}{operator}\ \textcolor{keyword}{delete}[](\textcolor{keywordtype}{void}\ \ \ \ \ \ *p,}
+\DoxyCodeLine{01628\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \_BlockUse,}
+\DoxyCodeLine{01629\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*\ \_FileName,}
+\DoxyCodeLine{01630\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \_LineNumber)}
+\DoxyCodeLine{01631\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01632\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_BlockUse);}
+\DoxyCodeLine{01633\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_FileName);}
+\DoxyCodeLine{01634\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ALIGN\_UNUSED\_VAR(\_LineNumber);}
+\DoxyCodeLine{01635\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_aligned\_free\_dbg(p);}
+\DoxyCodeLine{01636\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01637\ }
+\DoxyCodeLine{01638\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{01639\ }
+\DoxyCodeLine{01640\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#pragma\ pop\_macro("{}new"{})}}
+\DoxyCodeLine{01641\ }
+\DoxyCodeLine{01642\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//ALIGN\_16\_H}}
+\DoxyCodeLine{01643\ }
+\DoxyCodeLine{01644\ }
+\DoxyCodeLine{01645\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//FRAMEWORK\_H}}
+\DoxyCodeLine{01646\ }
+\DoxyCodeLine{01647\ \textcolor{comment}{//\ -\/-\/-\/\ \ End\ of\ File\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

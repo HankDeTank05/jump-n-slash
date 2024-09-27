@@ -1,0 +1,145 @@
+\doxysection{Test\+Class Class Reference}
+\hypertarget{class_test_class}{}\label{class_test_class}\index{TestClass@{TestClass}}
+Inheritance diagram for Test\+Class\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_test_class}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_test_class_ac56a05663e347cab936aace1bfc2bb5b}\label{class_test_class_ac56a05663e347cab936aace1bfc2bb5b} 
+{\bfseries Test\+Class} (const \mbox{\hyperlink{class_test_class}{Test\+Class}} \&p)=delete
+\item 
+\Hypertarget{class_test_class_a4f6c790a8ee34d31ebce6ff29fe2dd3d}\label{class_test_class_a4f6c790a8ee34d31ebce6ff29fe2dd3d} 
+\mbox{\hyperlink{class_test_class}{Test\+Class}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_test_class}{Test\+Class}} \&p)=delete
+\item 
+virtual void \mbox{\hyperlink{class_test_class_ac58818679317ba194e67987d077b97d1}{Update}} () override
+\item 
+virtual void \mbox{\hyperlink{class_test_class_a78894580a70988ad537f12f35ea26230}{Draw}} () override
+\item 
+virtual void \mbox{\hyperlink{class_test_class_a79b2b83aaafeadcaf2ea424aacb105e0}{Key\+Pressed}} (sf\+::\+Keyboard\+::\+Key key) override
+\item 
+virtual void \mbox{\hyperlink{class_test_class_a266fa061d8a4705405d57f7578e2b04c}{Key\+Released}} (sf\+::\+Keyboard\+::\+Key key) override
+\item 
+virtual void \mbox{\hyperlink{class_test_class_ae1ad048f7fb36db5308cfd2defbc84e4}{Mouse\+Btn\+Pressed}} (sf\+::\+Mouse\+::\+Button btn) override
+\item 
+virtual void \mbox{\hyperlink{class_test_class_af9de31853d4b816634fd034331e787d7}{Mouse\+Btn\+Released}} (sf\+::\+Mouse\+::\+Button btn) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Updatable\+Object} (const \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}} \&uo)=delete
+\item 
+\mbox{\hyperlink{class_updatable_object}{Updatable\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}} \&uo)=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Drawable\+Object} (const \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \&dob)=delete
+\item 
+\mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \&dob)=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_input_object}{Input\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Input\+Object} (const \mbox{\hyperlink{class_input_object}{Input\+Object}} \&io)=delete
+\item 
+\mbox{\hyperlink{class_input_object}{Input\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_input_object}{Input\+Object}} \&io)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Enqueue\+For\+Update\+Registration} ()
+\item 
+void {\bfseries Enqueue\+For\+Update\+Deregistration} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Enqueue\+For\+Draw\+Registration} ()
+\item 
+void {\bfseries Enqueue\+For\+Draw\+Deregistration} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_input_object}{Input\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Enqueue\+For\+Key\+Registration} (sf\+::\+Keyboard\+::\+Key key, Key\+Event event\+To\+Reg)
+\item 
+void {\bfseries Enqueue\+For\+Key\+Deregistration} (sf\+::\+Keyboard\+::\+Key key, Key\+Event event\+To\+Dereg)
+\item 
+void {\bfseries Enqueue\+For\+Mouse\+Btn\+Registration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Reg)
+\item 
+void {\bfseries Enqueue\+For\+Mouse\+Btn\+Deregistration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Dereg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_test_class_a78894580a70988ad537f12f35ea26230}\index{TestClass@{TestClass}!Draw@{Draw}}
+\index{Draw@{Draw}!TestClass@{TestClass}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_test_class_a78894580a70988ad537f12f35ea26230} 
+void Test\+Class\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}.
+
+\Hypertarget{class_test_class_a79b2b83aaafeadcaf2ea424aacb105e0}\index{TestClass@{TestClass}!KeyPressed@{KeyPressed}}
+\index{KeyPressed@{KeyPressed}!TestClass@{TestClass}}
+\doxysubsubsection{\texorpdfstring{KeyPressed()}{KeyPressed()}}
+{\footnotesize\ttfamily \label{class_test_class_a79b2b83aaafeadcaf2ea424aacb105e0} 
+void Test\+Class\+::\+Key\+Pressed (\begin{DoxyParamCaption}\item[{sf\+::\+Keyboard\+::\+Key}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
+
+\Hypertarget{class_test_class_a266fa061d8a4705405d57f7578e2b04c}\index{TestClass@{TestClass}!KeyReleased@{KeyReleased}}
+\index{KeyReleased@{KeyReleased}!TestClass@{TestClass}}
+\doxysubsubsection{\texorpdfstring{KeyReleased()}{KeyReleased()}}
+{\footnotesize\ttfamily \label{class_test_class_a266fa061d8a4705405d57f7578e2b04c} 
+void Test\+Class\+::\+Key\+Released (\begin{DoxyParamCaption}\item[{sf\+::\+Keyboard\+::\+Key}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
+
+\Hypertarget{class_test_class_ae1ad048f7fb36db5308cfd2defbc84e4}\index{TestClass@{TestClass}!MouseBtnPressed@{MouseBtnPressed}}
+\index{MouseBtnPressed@{MouseBtnPressed}!TestClass@{TestClass}}
+\doxysubsubsection{\texorpdfstring{MouseBtnPressed()}{MouseBtnPressed()}}
+{\footnotesize\ttfamily \label{class_test_class_ae1ad048f7fb36db5308cfd2defbc84e4} 
+void Test\+Class\+::\+Mouse\+Btn\+Pressed (\begin{DoxyParamCaption}\item[{sf\+::\+Mouse\+::\+Button}]{btn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
+
+\Hypertarget{class_test_class_af9de31853d4b816634fd034331e787d7}\index{TestClass@{TestClass}!MouseBtnReleased@{MouseBtnReleased}}
+\index{MouseBtnReleased@{MouseBtnReleased}!TestClass@{TestClass}}
+\doxysubsubsection{\texorpdfstring{MouseBtnReleased()}{MouseBtnReleased()}}
+{\footnotesize\ttfamily \label{class_test_class_af9de31853d4b816634fd034331e787d7} 
+void Test\+Class\+::\+Mouse\+Btn\+Released (\begin{DoxyParamCaption}\item[{sf\+::\+Mouse\+::\+Button}]{btn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
+
+\Hypertarget{class_test_class_ac58818679317ba194e67987d077b97d1}\index{TestClass@{TestClass}!Update@{Update}}
+\index{Update@{Update}!TestClass@{TestClass}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_test_class_ac58818679317ba194e67987d077b97d1} 
+void Test\+Class\+::\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Jump-\/n-\/\+Slash/\+Game Code/Test\+Class.\+h\item 
+Jump-\/n-\/\+Slash/\+Game Code/Test\+Class.\+cpp\end{DoxyCompactItemize}

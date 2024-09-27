@@ -27,9 +27,6 @@ public:
 	void Deregister(InputObject* pInputable, MouseEvent eventToDereg);
 
 private:
-	bool GetMouseBtnBinState();
-
-private:
 	sf::Mouse::Button btn;
 	bool prevState;
 	NotifyList notifyOnPress;

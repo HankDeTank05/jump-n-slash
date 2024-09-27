@@ -15,11 +15,13 @@ class KeyRegistrationCommand;
 class KeyDeregistrationCommand;
 class MouseBtnRegistrationCommand;
 class MouseBtnDeregistrationCommand;
+class MouseCursorRegistrationCommand;
+class MouseCursorDeregistrationCommand;
 
 class InputObject
 {
 public:
-	InputObject() = default;
+	InputObject();
 	InputObject(const InputObject& io) = delete;
 	InputObject& operator=(const InputObject& io) = delete;
 	virtual ~InputObject();
@@ -32,7 +34,7 @@ protected:
 
 	virtual void MouseBtnPressed(sf::Mouse::Button btn); // TODO: documentation for InputObject::MouseButtonPressed
 	virtual void MouseBtnReleased(sf::Mouse::Button btn); // TODO: documentation for InputObject::MouseButtonReleased
-	// TODO: figure out mouse position inputs
+	virtual void MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta); // TODO: documentation for InputObject::MouseCursorMoved
 	// TODO: figure out mouse wheel inputs
 
 	// TODO: figure out gamepad button inputs
@@ -43,6 +45,8 @@ protected:
 
 	void EnqueueForMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg); // TODO: documentation for InputObject::EnqueueForMouseBtnRegistration
 	void EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg); // TODO: documentation for InputObject::EnqueueForMouseBtnDeregistration
+	void EnqueueForMouseCursorRegistration(); // TODO: documentation for InputObject::EnqueueForMouseCursorRegistration
+	void EnqueueForMouseCursorDeregistration(); // TODO: documentation for InputObject::EnqueueForMouseCursorDeregistration
 
 private:
 	void RegisterKey(sf::Keyboard::Key key, KeyEvent eventToReg);
@@ -50,6 +54,8 @@ private:
 
 	void RegisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToReg);
 	void DeregisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToDereg);
+	void RegisterMouseCursor();
+	void DeregisterMouseCursor();
 
 	struct KeyRegistrationData
 	{
@@ -71,9 +77,17 @@ private:
 	using MouseBtnTrackerID = std::pair<sf::Mouse::Button, MouseEvent>;
 	using MouseBtnRegTracker = std::map<MouseBtnTrackerID, MouseBtnRegistrationData>;
 
+	struct MouseCursorRegistrationData
+	{
+		RegistrationState regState;
+		MouseCursorRegistrationCommand* pRegCmd;
+		MouseCursorDeregistrationCommand* pDeregCmd;
+	};
+
 private:
 	KeyRegTracker keyTracker;
 	MouseBtnRegTracker mouseBtnTracker;
+	MouseCursorRegistrationData mouseCursorRegData;
 };
 
 #endif

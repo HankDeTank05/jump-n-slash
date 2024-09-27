@@ -1,3 +1,75 @@
 \chapter{Creating a Scene}
 \hypertarget{_creating_scene}{}\label{_creating_scene}\index{Creating a Scene@{Creating a Scene}}
-(docs go here) 
+\hypertarget{_creating_scene_overview_scene}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{_creating_scene_overview_scene}
+A scene is an environment which contains all the objects relevant to a certain situation. A scene could be any of the following\+:
+\begin{DoxyItemize}
+\item a level in a game
+\item a hub world or world map
+\item a title screen or game over screen
+\item a shop
+\item something else?
+\end{DoxyItemize}
+
+A game cannot exist in this engine without at least one scene, so a starting scene needs to be specified before the game can be run.\hypertarget{_creating_scene_baseClass}{}\doxysection{\texorpdfstring{The {\ttfamily Scene} Base Class}{The {\ttfamily Scene} Base Class}}\label{_creating_scene_baseClass}
+To begin, let\textquotesingle{}s take a look at the \doxylink{class_scene}{Scene} base class\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Scene.h}}
+\DoxyCodeLine{\textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene}{Scene}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{class_scene}{Scene}}();\ \textcolor{comment}{//\ default\ constructor}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ ...\ some\ functions\ ...\ //}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_scene}{\string~Scene}}();\ \textcolor{comment}{//\ destructor}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Init()\ =\ 0;\ \textcolor{comment}{//\ a\ pure\ virtual\ function}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ End()\ =\ 0;\ \textcolor{comment}{//\ also\ a\ pure\ virtual\ function}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ ...\ some\ more\ functions\ ...\ //}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ ...\ some\ member\ variables\ ...\ //}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ You\textquotesingle{}ll notice this base class has two pure virtual functions. Every Scene-\/derived class needs its own version of these two functions. More on this later, though.\hypertarget{_creating_scene_derivedClass}{}\doxysection{\texorpdfstring{Your Derived {\ttfamily Scene} Class}{Your Derived {\ttfamily Scene} Class}}\label{_creating_scene_derivedClass}
+\hypertarget{_creating_scene_derivedClass_essentials}{}\doxysubsection{\texorpdfstring{The Essentials}{The Essentials}}\label{_creating_scene_derivedClass_essentials}
+Let\textquotesingle{}s begin making a derived \doxylink{class_scene}{Scene} class. Always begin with the big four! TODO\+: make a tutorial about the big four 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ MyScene.h}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef\ MY\_SCENE\_H}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ MY\_SCENE\_H}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/Scene.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }MyScene\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_scene}{Scene}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ MyScene();\ \textcolor{comment}{//\ the\ default\ constructor}}
+\DoxyCodeLine{\ \ \ \ MyScene(\textcolor{keyword}{const}\ MyScene\&\ ms)\ =\ \textcolor{keyword}{delete};\ \textcolor{comment}{//\ the\ copy\ constructor}}
+\DoxyCodeLine{\ \ \ \ MyScene\&\ operator=(\textcolor{keyword}{const}\ MyScene\&\ ms)\ =\ \textcolor{keyword}{delete};\ \textcolor{comment}{//\ the\ assignment\ operator}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \string~MyScene();\ \textcolor{comment}{//\ the\ destructor}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Init()\ \textcolor{keyword}{override};\ \textcolor{comment}{//\ override\ declaration\ of\ Init()\ (required)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ End()\ \textcolor{keyword}{override};\ \textcolor{comment}{//\ override\ declaration\ of\ End()\ (required)}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ member\ variables\ go\ here\ (later\ tho)}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
+ We also need to declare overrides for the {\ttfamily Init()} and {\ttfamily End()} functions. What are they for, though?\hypertarget{_creating_scene_derivedClass_init}{}\doxysubsection{\texorpdfstring{The {\ttfamily Init()} Function}{The {\ttfamily Init()} Function}}\label{_creating_scene_derivedClass_init}
+You can think of the {\ttfamily Init()} function as a constructor (sort of). What is the purpose of a constructor?
+
+When an instance of an object is created, the constructor is called to do all of the required setup to create the object. It initializes member variables, and maybe runs some sort of logic involving those variables. Once the constructor has finished its work, the instance of that object is ready to use.
+
+In that sense, the {\ttfamily Init()} function serves a similar purpose to a constructor. Rather than having the constructor do all that work, the {\ttfamily Init()} function handles it instead. This way, you can re-\/initialize a single instance of a \doxylink{class_scene}{Scene} object multiple times without having to delete that instance and re-\/construct it.
+
+To illustrate this concept, let\textquotesingle{}s look at an example\+: Super Mario Bros. Let\textquotesingle{}s say that each level in the game is it\textquotesingle{}s own scene object. Without an {\ttfamily Init()} function, all of your setup logic is in the constructor, which means you would have to delete a perfectly valid and usable scene and re-\/construct it each time the player died, which is very inefficient. However, using an {\ttfamily Init()} function we can do partial setup in the constructor, and the rest of it (only the essentials) in the {\ttfamily Init()} function.\hypertarget{_creating_scene_derivedClass_end}{}\doxysubsection{\texorpdfstring{The {\ttfamily End()} Function}{The {\ttfamily End()} Function}}\label{_creating_scene_derivedClass_end}
+Similarly to how {\ttfamily Init()} serves as a constructor-\/like function, {\ttfamily End()} serves as a destructor-\/like function. You can have a partial "{}destruction"{} occur in the {\ttfamily End()} function without having to completely delete an object.
+
+TODO\+: expand on the explanation of the Scene\+::\+End function
+
+TODO\+: documentation for Creating\+Scene tutorial is incomplete 

@@ -17,7 +17,7 @@
 \DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_texture_manager}{TextureManager}}()\ =\ \textcolor{keywordflow}{default};}
 \DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_texture_manager}{TextureManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_texture_manager}{TextureManager}}\&\ tm)\ =\ \textcolor{keyword}{delete};}
 \DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_texture_manager}{TextureManager}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_texture_manager}{TextureManager}}\&\ tm)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_texture_manager}{\string~TextureManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_texture_manager}{\string~TextureManager}}();}
 \DoxyCodeLine{00017\ }
 \DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_texture_manager}{TextureManager}}\&\ Instance();}
 \DoxyCodeLine{00019\ }
@@ -33,9 +33,10 @@
 \DoxyCodeLine{00116\ \ \ \ \ std::map<std::string,\ sf::Texture*>\ textures;\ }
 \DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ FOLDER\_NAME\ =\ \textcolor{stringliteral}{"{}Assets/Textures/"{}};\ }
 \DoxyCodeLine{00119\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
-\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
-\DoxyCodeLine{00121\ \};}
-\DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_texture_manager_attorney}{TextureManagerAttorney}};}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
+\DoxyCodeLine{00122\ \};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

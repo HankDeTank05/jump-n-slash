@@ -99,7 +99,75 @@ $(function(){initNavTree('_creating_scene.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">Creating a Scene</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>(docs go here) </p>
+<div class="textblock"><h1><a class="anchor" id="overview_scene"></a>
+Overview</h1>
+<p>A scene is an environment which contains all the objects relevant to a certain situation. A scene could be any of the following:</p><ul>
+<li>a level in a game</li>
+<li>a hub world or world map</li>
+<li>a title screen or game over screen</li>
+<li>a shop</li>
+<li>something else?</li>
+</ul>
+<p>A game cannot exist in this engine without at least one scene, so a starting scene needs to be specified before the game can be run.</p>
+<h1><a class="anchor" id="baseClass"></a>
+The <code>Scene</code> Base Class</h1>
+<p>To begin, let's take a look at the <a class="el" href="class_scene.html">Scene</a> base class: </p><div class="fragment"><div class="line"><span class="comment">// Scene.h</span></div>
+<div class="line"><span class="keyword">class </span><a class="code hl_class" href="class_scene.html">Scene</a></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <a class="code hl_class" href="class_scene.html">Scene</a>(); <span class="comment">// default constructor</span></div>
+<div class="line">    <span class="comment">// ... some functions ... //</span></div>
+<div class="line">    <span class="keyword">virtual</span> <a class="code hl_class" href="class_scene.html">~Scene</a>(); <span class="comment">// destructor</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Init() = 0; <span class="comment">// a pure virtual function</span></div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> End() = 0; <span class="comment">// also a pure virtual function</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">// ... some more functions ... //</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">// ... some member variables ... //</span></div>
+<div class="line">}</div>
+<div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition</b> Scene.h:15</div></div>
+</div><!-- fragment --><p> You'll notice this base class has two pure virtual functions. Every Scene-derived class needs its own version of these two functions. More on this later, though.</p>
+<h1><a class="anchor" id="derivedClass"></a>
+Your Derived <code>Scene</code> Class</h1>
+<h2><a class="anchor" id="derivedClass_essentials"></a>
+The Essentials</h2>
+<p>Let's begin making a derived <a class="el" href="class_scene.html">Scene</a> class. Always begin with the big four! TODO: make a tutorial about the big four </p><div class="fragment"><div class="line"><span class="comment">// MyScene.h</span></div>
+<div class="line"><span class="preprocessor">#ifndef MY_SCENE_H</span></div>
+<div class="line"><span class="preprocessor">#define MY_SCENE_H</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/Scene.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>MyScene : <span class="keyword">public</span> <a class="code hl_class" href="class_scene.html">Scene</a></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    MyScene(); <span class="comment">// the default constructor</span></div>
+<div class="line">    MyScene(<span class="keyword">const</span> MyScene&amp; ms) = <span class="keyword">delete</span>; <span class="comment">// the copy constructor</span></div>
+<div class="line">    MyScene&amp; operator=(<span class="keyword">const</span> MyScene&amp; ms) = <span class="keyword">delete</span>; <span class="comment">// the assignment operator</span></div>
+<div class="line">    <span class="keyword">virtual</span> ~MyScene(); <span class="comment">// the destructor</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Init() <span class="keyword">override</span>; <span class="comment">// override declaration of Init() (required)</span></div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> End() <span class="keyword">override</span>; <span class="comment">// override declaration of End() (required)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    <span class="comment">// member variables go here (later tho)</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --><p> We also need to declare overrides for the <code>Init()</code> and <code>End()</code> functions. What are they for, though?</p>
+<h2><a class="anchor" id="derivedClass_init"></a>
+The <code>Init()</code> Function</h2>
+<p>You can think of the <code>Init()</code> function as a constructor (sort of). What is the purpose of a constructor?</p>
+<p>When an instance of an object is created, the constructor is called to do all of the required setup to create the object. It initializes member variables, and maybe runs some sort of logic involving those variables. Once the constructor has finished its work, the instance of that object is ready to use.</p>
+<p>In that sense, the <code>Init()</code> function serves a similar purpose to a constructor. Rather than having the constructor do all that work, the <code>Init()</code> function handles it instead. This way, you can re-initialize a single instance of a <a class="el" href="class_scene.html">Scene</a> object multiple times without having to delete that instance and re-construct it.</p>
+<p>To illustrate this concept, let's look at an example: Super Mario Bros. Let's say that each level in the game is it's own scene object. Without an <code>Init()</code> function, all of your setup logic is in the constructor, which means you would have to delete a perfectly valid and usable scene and re-construct it each time the player died, which is very inefficient. However, using an <code>Init()</code> function we can do partial setup in the constructor, and the rest of it (only the essentials) in the <code>Init()</code> function.</p>
+<h2><a class="anchor" id="derivedClass_end"></a>
+The <code>End()</code> Function</h2>
+<p>Similarly to how <code>Init()</code> serves as a constructor-like function, <code>End()</code> serves as a destructor-like function. You can have a partial "destruction" occur in the <code>End()</code> function without having to completely delete an object.</p>
+<p>TODO: expand on the explanation of the Scene::End function</p>
+<p>TODO: documentation for CreatingScene tutorial is incomplete </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

@@ -1,0 +1,37 @@
+\doxysection{Test\+Class.\+h}
+\hypertarget{_test_class_8h_source}{}\label{_test_class_8h_source}\index{Jump-\/n-\/Slash/Game Code/TestClass.h@{Jump-\/n-\/Slash/Game Code/TestClass.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TEST\_CLASS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TEST\_CLASS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/UpdatableObject.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/DrawableObject.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/InputObject.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_test_class}{TestClass}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_updatable_object}{UpdatableObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_drawable_object}{DrawableObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_input_object}{InputObject}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_test_class}{TestClass}}();}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_test_class}{TestClass}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_test_class}{TestClass}}\&\ p)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_test_class}{TestClass}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_test_class}{TestClass}}\&\ p)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_test_class}{\string~TestClass}}();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ KeyPressed(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ KeyReleased(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ MouseBtnPressed(sf::Mouse::Button\ btn)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ MouseBtnReleased(sf::Mouse::Button\ btn)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ sf::CircleShape\ circle;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ currentFrames;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{int}\ maxFrames;}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

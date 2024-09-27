@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['documentation_0',['Jump-n-Slash Documentation',['../index.html',1,'']]],
-  ['draw_1',['Draw',['../class_scene_attorney_1_1_draw.html',1,'SceneAttorney']]],
-  ['drawableobject_2',['DrawableObject',['../class_drawable_object.html',1,'']]],
-  ['drawableobjectattorney_3',['DrawableObjectAttorney',['../class_drawable_object_attorney.html',1,'']]],
-  ['drawderegistrationcommand_4',['DrawDeregistrationCommand',['../class_draw_deregistration_command.html',1,'']]],
-  ['drawmanager_5',['DrawManager',['../class_draw_manager.html',1,'']]],
-  ['drawregistrationcommand_6',['DrawRegistrationCommand',['../class_draw_registration_command.html',1,'']]]
+  ['c_20end_20function_0',['The \c End() Function',['../_creating_scene.html#derivedClass_end',1,'']]],
+  ['c_20init_20function_1',['The \c Init() Function',['../_creating_scene.html#derivedClass_init',1,'']]],
+  ['c_20scene_20base_20class_2',['The \c Scene Base Class',['../_creating_scene.html#baseClass',1,'']]],
+  ['c_20scene_20class_3',['Your Derived \c Scene Class',['../_creating_scene.html#derivedClass',1,'']]],
+  ['class_4',['Class',['../_creating_scene.html#baseClass',1,'The \c Scene Base Class'],['../_creating_scene.html#derivedClass',1,'Your Derived \c Scene Class']]],
+  ['command_5',['Command',['../class_command.html',1,'']]],
+  ['commands_6',['Commands',['../class_scene_attorney_1_1_commands.html',1,'SceneAttorney']]],
+  ['cpp_7',['cpp',['../_engine_basics.html#gameInitCpp',1,'GameInitialize.cpp'],['../_engine_basics.html#loadResourcesCpp',1,'LoadResources.cpp']]],
+  ['creating_20a_20scene_8',['Creating a Scene',['../_creating_scene.html',1,'']]]
 ];

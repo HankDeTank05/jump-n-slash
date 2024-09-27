@@ -76,6 +76,16 @@ void Scene::DeregisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, M
 	pInputMgr->DeregisterMouseBtn(btn, pInputable, eventToDereg);
 }
 
+void Scene::RegisterMouseCursor(InputObject* pInputable)
+{
+	pInputMgr->RegisterMouseCursor(pInputable);
+}
+
+void Scene::DeregisterMouseCursor(InputObject* pInputable)
+{
+	pInputMgr->DeregisterMouseCursor(pInputable);
+}
+
 void Scene::AddCommand(Command* pCmd)
 {
 	pRegBroker->AddCommand(pCmd);

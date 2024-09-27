@@ -40,6 +40,8 @@ private:
 	void DeregisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg);
 	void RegisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg);
 	void DeregisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg);
+	void RegisterMouseCursor(InputObject* pInputable);
+	void DeregisterMouseCursor(InputObject* pInputable);
 
 	void AddCommand(Command* pCmd);
 

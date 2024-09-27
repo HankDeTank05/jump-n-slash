@@ -98,6 +98,7 @@ $(function(){initNavTree('class_texture_manager.html',''); initResizable(true); 
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="class_texture_manager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">TextureManager Class Reference</div></div>
 </div><!--header-->
@@ -111,6 +112,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aadcf6c9d978195ef308f9f38e88fd0ba" id="r_aadcf6c9d978195ef308f9f38e88fd0ba"><td class="memItemLeft" align="right" valign="top">static sf::Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aadcf6c9d978195ef308f9f38e88fd0ba">GetTexture</a> (std::string key)</td></tr>
 <tr class="memdesc:aadcf6c9d978195ef308f9f38e88fd0ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a texture which has already been loaded into the engine.  <br /></td></tr>
 <tr class="separator:aadcf6c9d978195ef308f9f38e88fd0ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:aa8b9bb729fef86d58e00f6670e40efd2" id="r_aa8b9bb729fef86d58e00f6670e40efd2"><td class="memItemLeft" align="right" valign="top"><a id="aa8b9bb729fef86d58e00f6670e40efd2" name="aa8b9bb729fef86d58e00f6670e40efd2"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>TextureManagerAttorney</b></td></tr>
+<tr class="separator:aa8b9bb729fef86d58e00f6670e40efd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="aadcf6c9d978195ef308f9f38e88fd0ba" name="aadcf6c9d978195ef308f9f38e88fd0ba"></a>
@@ -157,7 +164,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">  assert(<a class="code hl_function" href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a>(<span class="stringliteral">&quot;mario spritesheet&quot;</span>).isSmooth() == <span class="keyword">false</span>);</div>
 <div class="line">  assert(<a class="code hl_function" href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a>(<span class="stringliteral">&quot;clouds&quot;</span>).isSmooth() == <span class="keyword">false</span>);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclass_texture_manager_html_aadcf6c9d978195ef308f9f38e88fd0ba"><div class="ttname"><a href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a></div><div class="ttdeci">static sf::Texture * GetTexture(std::string key)</div><div class="ttdoc">Get a texture which has already been loaded into the engine.</div><div class="ttdef"><b>Definition</b> TextureManager.cpp:21</div></div>
+<div class="ttc" id="aclass_texture_manager_html_aadcf6c9d978195ef308f9f38e88fd0ba"><div class="ttname"><a href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a></div><div class="ttdeci">static sf::Texture * GetTexture(std::string key)</div><div class="ttdoc">Get a texture which has already been loaded into the engine.</div><div class="ttdef"><b>Definition</b> TextureManager.cpp:29</div></div>
 </div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="#a770e03552151570f7a3cb06f48b66c01" title="Load a texture into the engine.">TextureManager::LoadTexture</a></dd>
 <dd>
 <a class="el" href="class_sprite_manager.html#a0ed3095680ba68bde1eda070234c3631" title="Load a sprite into the engine with a texture pointer, using the whole texture.">SpriteManager::LoadSprite</a> </dd>
@@ -228,7 +235,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line">  <a class="code hl_function" href="#a770e03552151570f7a3cb06f48b66c01">TextureManager::LoadTexture</a>(<span class="stringliteral">&quot;watermelon surface&quot;</span>, <span class="stringliteral">&quot;watermelon_surface.png&quot;</span>);</div>
 <div class="line">  <a class="code hl_function" href="#a770e03552151570f7a3cb06f48b66c01">TextureManager::LoadTexture</a>(<span class="stringliteral">&quot;watermelon inside&quot;</span>, <span class="stringliteral">&quot;watermelon_inside.png&quot;</span>);</div>
 <div class="line">}</div>
-<div class="ttc" id="aclass_texture_manager_html_a770e03552151570f7a3cb06f48b66c01"><div class="ttname"><a href="#a770e03552151570f7a3cb06f48b66c01">TextureManager::LoadTexture</a></div><div class="ttdeci">static void LoadTexture(std::string key, std::string filename, bool smooth=true)</div><div class="ttdoc">Load a texture into the engine.</div><div class="ttdef"><b>Definition</b> TextureManager.cpp:16</div></div>
+<div class="ttc" id="aclass_texture_manager_html_a770e03552151570f7a3cb06f48b66c01"><div class="ttname"><a href="#a770e03552151570f7a3cb06f48b66c01">TextureManager::LoadTexture</a></div><div class="ttdeci">static void LoadTexture(std::string key, std::string filename, bool smooth=true)</div><div class="ttdoc">Load a texture into the engine.</div><div class="ttdef"><b>Definition</b> TextureManager.cpp:24</div></div>
 </div><!-- fragment --><p><b>Example</b> <b>2</b> </p><div class="fragment"><div class="line"><span class="comment">// LoadResources.cpp</span></div>
 <div class="line"><span class="preprocessor">#include &quot;../Engine Code/JumpSlashEngine.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;../Engine Code/TextureManager.h&quot;</span></div>

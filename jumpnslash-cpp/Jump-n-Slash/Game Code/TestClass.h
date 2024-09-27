@@ -20,6 +20,7 @@ public:
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
 	virtual void MouseBtnPressed(sf::Mouse::Button btn) override;
 	virtual void MouseBtnReleased(sf::Mouse::Button btn) override;
+	virtual void MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta) override;
 
 	
 private:

@@ -21,27 +21,23 @@
 \DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_drawable_object}{\string~DrawableObject}}();}
 \DoxyCodeLine{00018\ }
 \DoxyCodeLine{00019\ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawableObject::Draw()}}
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw();}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawableObject::EnqueueForDrawRegistration()}}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ EnqueueForDrawRegistration();}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawableObject::EnqueueForDrawDeregistration()}}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ EnqueueForDrawDeregistration();}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object_attorney}{DrawableObjectAttorney}};}
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ Register();\ \textcolor{comment}{//\ TODO:\ rename\ this\ function\ to\ "{}DrawableObject::SceneRegister"{}\ once\ scene\ system\ is\ created}}
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister();\ \textcolor{comment}{//\ TODO:\ rename\ this\ function\ to\ "{}DrawableObject::SceneDeregister"{}\ once\ scene\ system\ is\ created}}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00035\ \ \ \ \ RegistrationState\ regState;}
-\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}*\ pRegCmd;}
-\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_draw_deregistration_command}{DrawDeregistrationCommand}}*\ pDeregCmd;}
-\DoxyCodeLine{00038\ \ \ \ \ DrawManager::DrawListRef\ deleteRef;}
-\DoxyCodeLine{00039\ \};}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw();\ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawableObject::Draw}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ EnqueueForDrawRegistration();\ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawableObject::EnqueueForDrawRegistration}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ EnqueueForDrawDeregistration();\ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawableObject::EnqueueForDrawDeregistration}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object_attorney}{DrawableObjectAttorney}};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ Register();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ RegistrationState\ regState;}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}*\ pRegCmd;}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_draw_deregistration_command}{DrawDeregistrationCommand}}*\ pDeregCmd;}
+\DoxyCodeLine{00034\ \ \ \ \ DrawManager::DrawListRef\ deleteRef;}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

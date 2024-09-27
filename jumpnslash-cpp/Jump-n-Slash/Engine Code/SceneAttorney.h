@@ -56,6 +56,8 @@ public:
 		static void DeregisterKey(Scene* pScene, sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg);
 		static void RegisterMouseBtn(Scene* pScene, sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg);
 		static void DeregisterMouseBtn(Scene* pScene, sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg);
+		static void RegisterMouseCursor(Scene* pScene, InputObject* pInputable);
+		static void DeregisterMouseCursor(Scene* pScene, InputObject* pInputable);
 	};
 };
 

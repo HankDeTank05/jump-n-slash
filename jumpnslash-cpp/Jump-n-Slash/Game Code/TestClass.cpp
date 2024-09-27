@@ -1,6 +1,7 @@
 #include "TestClass.h"
 
 #include "../Engine Code/JumpSlashEngine.h"
+#include "Constants.h"
 
 TestClass::TestClass()
 	: circle(64.0f),
@@ -8,6 +9,7 @@ TestClass::TestClass()
 	maxFrames(100)
 {
 	circle.setFillColor(sf::Color::White);
+	circle.setOutlineColor(sf::Color::Red);
 
 	EnqueueForUpdateRegistration();
 	EnqueueForDrawRegistration();
@@ -62,6 +64,8 @@ void TestClass::KeyPressed(sf::Keyboard::Key key)
 		EnqueueForMouseBtnRegistration(sf::Mouse::Middle, MouseEvent::BtnRelease);
 		EnqueueForMouseBtnRegistration(sf::Mouse::Right, MouseEvent::BtnPress);
 		EnqueueForMouseBtnRegistration(sf::Mouse::Right, MouseEvent::BtnRelease);
+		EnqueueForMouseCursorRegistration();
+		circle.setOutlineThickness(10.0f);
 		break;
 	case sf::Keyboard::X:
 		EnqueueForKeyDeregistration(sf::Keyboard::R, KeyEvent::KeyPress);
@@ -76,6 +80,8 @@ void TestClass::KeyPressed(sf::Keyboard::Key key)
 		EnqueueForMouseBtnDeregistration(sf::Mouse::Middle, MouseEvent::BtnRelease);
 		EnqueueForMouseBtnDeregistration(sf::Mouse::Right, MouseEvent::BtnPress);
 		EnqueueForMouseBtnDeregistration(sf::Mouse::Right, MouseEvent::BtnRelease);
+		EnqueueForMouseCursorDeregistration();
+		circle.setOutlineThickness(0.0f);
 		break;
 	}
 }
@@ -117,5 +123,17 @@ void TestClass::MouseBtnReleased(sf::Mouse::Button btn)
 	case sf::Mouse::Right:
 		circle.setFillColor(sf::Color::White);
 		break;
+	}
+}
+
+void TestClass::MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta)
+{
+	if (0 <= pos.x && pos.x < WINDOW_WIDTH && 0 <= pos.y && pos.y < WINDOW_HEIGHT)
+	{
+		circle.setOutlineColor(sf::Color::Green);
+	}
+	else
+	{
+		circle.setOutlineColor(sf::Color::Red);
 	}
 }

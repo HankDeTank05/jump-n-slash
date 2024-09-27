@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['game_20object_0',['Creating a Game Object',['../_creating_game_object.html',1,'']]],
-  ['gameinitialize_20cpp_1',['GameInitialize.cpp',['../_engine_basics.html#gameInitCpp',1,'']]],
-  ['gameloop_2',['GameLoop',['../class_drawable_object_attorney_1_1_game_loop.html',1,'DrawableObjectAttorney::GameLoop'],['../class_scene_attorney_1_1_game_loop.html',1,'SceneAttorney::GameLoop']]],
-  ['getsprite_3',['GetSprite',['../class_sprite_manager.html#a39d303a2a32e575c412693c49235a8c5',1,'SpriteManager']]],
-  ['gettexture_4',['GetTexture',['../class_texture_manager.html#aadcf6c9d978195ef308f9f38e88fd0ba',1,'TextureManager']]],
-  ['getting_20a_20sprite_5',['Getting a Sprite',['../_using_asset_managers.html#spriteManager_get',1,'']]],
-  ['getting_20a_20texture_6',['Getting a Texture',['../_using_asset_managers.html#textureManager_get',1,'']]]
+  ['fileio_0',['FileIO',['../class_file_i_o.html',1,'']]],
+  ['files_20required_20by_20the_20engine_1',['Files required by the engine',['../_engine_basics.html#requiredByEngine',1,'']]],
+  ['function_2',['Function',['../_creating_scene.html#derivedClass_end',1,'The \c End() Function'],['../_creating_scene.html#derivedClass_init',1,'The \c Init() Function']]],
+  ['functions_20referenced_20in_20this_20tutorial_3',['Functions referenced in this tutorial',['../_using_asset_managers.html#seeAlso',1,'']]]
 ];

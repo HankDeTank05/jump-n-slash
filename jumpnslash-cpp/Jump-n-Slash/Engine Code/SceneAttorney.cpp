@@ -56,3 +56,13 @@ void SceneAttorney::Input::DeregisterMouseBtn(Scene* pScene, sf::Mouse::Button b
 {
 	pScene->DeregisterMouseBtn(btn, pInputable, eventToDereg);
 }
+
+void SceneAttorney::Input::RegisterMouseCursor(Scene* pScene, InputObject* pInputable)
+{
+	pScene->RegisterMouseCursor(pInputable);
+}
+
+void SceneAttorney::Input::DeregisterMouseCursor(Scene* pScene, InputObject* pInputable)
+{
+	pScene->DeregisterMouseCursor(pInputable);
+}
