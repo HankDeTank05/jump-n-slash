@@ -117,7 +117,7 @@ void JumpSlashEngine::LoadContent()
 
 void JumpSlashEngine::Update(float deltaTime)
 {
-	SceneAttorney::GameLoop::Update(pCurrentScene);
+	SceneAttorney::GameLoop::Update(pCurrentScene, deltaTime);
 }
 
 void JumpSlashEngine::Draw()

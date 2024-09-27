@@ -23,7 +23,7 @@ TestClass::~TestClass()
 	// do destructor stuff here
 }
 
-void TestClass::Update()
+void TestClass::Update(float deltaTime)
 {
 	//currentFrames++;
 	//if (currentFrames >= maxFrames)

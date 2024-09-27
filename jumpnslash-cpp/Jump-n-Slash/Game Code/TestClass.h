@@ -14,7 +14,7 @@ public:
 	TestClass& operator=(const TestClass& p) = delete;
 	virtual ~TestClass();
 
-	virtual void Update() override;
+	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;
 	virtual void KeyPressed(sf::Keyboard::Key key) override;
 	virtual void KeyReleased(sf::Keyboard::Key key) override;

@@ -19,7 +19,7 @@ public:
 	{
 	private:
 		friend class JumpSlashEngine; // TODO: change this to SceneManager when it's created
-		static void Update(Scene* pScene);
+		static void Update(Scene* pScene, float deltaTime);
 		static void Draw(Scene* pScene);
 	};
 

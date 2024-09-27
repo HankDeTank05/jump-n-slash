@@ -11,7 +11,7 @@ public:
 	{
 	private:
 		friend class UpdateManager;
-		static void Update(UpdatableObject* pUpdatable);
+		static void Update(UpdatableObject* pUpdatable, float deltaTime);
 	};
 
 	class Registration

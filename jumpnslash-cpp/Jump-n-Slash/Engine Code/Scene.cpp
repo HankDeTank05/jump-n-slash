@@ -21,14 +21,14 @@ Scene::~Scene()
 	delete pRegBroker;
 }
 
-void Scene::Update()
+void Scene::Update(float deltaTime)
 {
 	pRegBroker->ExecuteCommands();
 
 	pInputMgr->ProcessKeyboardEvents();
 	pInputMgr->ProcessMouseEvents();
 
-	pUpdateMgr->Update();
+	pUpdateMgr->Update(deltaTime);
 }
 
 void Scene::Draw()

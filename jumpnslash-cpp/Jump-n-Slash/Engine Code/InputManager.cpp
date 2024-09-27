@@ -14,12 +14,14 @@ InputManager::InputManager()
 
 InputManager::~InputManager()
 {
-	for (KeyTracker::iterator it = keyTracker.begin(); it != keyTracker.end(); it++)
+	delete pCursorListener;
+
+	for (MouseBtnTracker::iterator it = mouseBtnTracker.begin(); it != mouseBtnTracker.end(); it++)
 	{
 		delete it->second;
 	}
 
-	for (MouseBtnTracker::iterator it = mouseBtnTracker.begin(); it != mouseBtnTracker.end(); it++)
+	for (KeyTracker::iterator it = keyTracker.begin(); it != keyTracker.end(); it++)
 	{
 		delete it->second;
 	}

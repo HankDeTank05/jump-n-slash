@@ -64,9 +64,6 @@
     <Filter Include="Source Files\Engine Code\Misc. files">
       <UniqueIdentifier>{002f2070-2642-4b78-a7b1-5eccdca6db3d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Extra Documentation">
-      <UniqueIdentifier>{5c031f14-77f7-42dd-99df-5344014c8227}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine Code\MemTracker">
       <UniqueIdentifier>{5082bb2f-30d6-4520-adb7-c6f646ded0bd}</UniqueIdentifier>
     </Filter>
@@ -76,8 +73,23 @@
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners">
       <UniqueIdentifier>{aaa22e16-000e-4c09-a2eb-6676d02b0ec5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Engine Testing">
+    <Filter Include="Source Files\Game Code\Misc. files">
+      <UniqueIdentifier>{b3a20d19-11e6-4fe9-add8-410e43f0151c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Misc. files\Engine Testing">
       <UniqueIdentifier>{9f51742c-c55e-4f4a-8121-81cd6e09086e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Misc. files\Extra Documentation">
+      <UniqueIdentifier>{5c031f14-77f7-42dd-99df-5344014c8227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Player">
+      <UniqueIdentifier>{03005a24-48dc-482f-bf47-4221183d0c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Player\FSM + States">
+      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes">
+      <UniqueIdentifier>{5e9b3079-2e05-4406-b849-155b97e9c9f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -172,10 +184,10 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\TestScene.cpp">
-      <Filter>Source Files\Game Code\Engine Testing</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Engine Testing</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\TestClass.cpp">
-      <Filter>Source Files\Game Code\Engine Testing</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Engine Testing</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\MouseCursorListener.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
@@ -185,6 +197,30 @@
     </ClCompile>
     <ClCompile Include="Engine Code\MouseCursorDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerStateIdle.cpp">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerStateWalking.cpp">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerStateJumping.cpp">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerStateFalling.cpp">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Player.cpp">
+      <Filter>Source Files\Game Code\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Level0.cpp">
+      <Filter>Source Files\Game Code\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerFSM.cpp">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerMoveState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -291,10 +327,10 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\TestScene.h">
-      <Filter>Source Files\Game Code\Engine Testing</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Engine Testing</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\TestClass.h">
-      <Filter>Source Files\Game Code\Engine Testing</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Engine Testing</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\MouseCursorListener.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
@@ -305,25 +341,55 @@
     <ClInclude Include="Engine Code\MouseCursorDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Engine Code\CollisionObject.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CollisionManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Player.h">
+      <Filter>Source Files\Game Code\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerMoveState.h">
+      <Filter>Source Files\Game Code\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerStateIdle.h">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerFSM.h">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerStateWalking.h">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerStateJumping.h">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerStateFalling.h">
+      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Level0.h">
+      <Filter>Source Files\Game Code\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\0_DocsHome.txt">
-      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\1_EngineBasics.txt">
-      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\4_CreatingGameObject1.txt">
-      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\2_UsingAssetManagers.txt">
-      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\3_CreatingScene.txt">
-      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\5_CreatingGameObject2.txt">
-      <Filter>Source Files\Game Code\Extra Documentation</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
   </ItemGroup>
 </Project>

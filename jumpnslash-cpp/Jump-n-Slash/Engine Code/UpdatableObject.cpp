@@ -19,7 +19,7 @@ UpdatableObject::~UpdatableObject()
 	delete pRegCmd;
 }
 
-void UpdatableObject::Update()
+void UpdatableObject::Update(float deltaTime)
 {
 	// do nothing. override to make it do something
 }

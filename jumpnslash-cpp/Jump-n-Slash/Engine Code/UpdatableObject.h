@@ -17,7 +17,7 @@ public:
 	virtual ~UpdatableObject();
 
 protected:
-	virtual void Update(); // TODO: documentation for UpdatableObject::Update
+	virtual void Update(float deltaTime); // TODO: documentation for UpdatableObject::Update
 
 	void EnqueueForUpdateRegistration(); // TODO: documentation for UpdatableObject::EnqueueForUpdateRegistration
 	void EnqueueForUpdateDeregistration(); // TODO: documentation for UpdatableObject::EnqueueForUpdateDeregistration

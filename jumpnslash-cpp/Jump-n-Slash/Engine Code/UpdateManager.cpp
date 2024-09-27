@@ -17,10 +17,10 @@ void UpdateManager::Deregister(UpdateListRef updateListRef)
 	updateList.erase(updateListRef);
 }
 
-void UpdateManager::Update()
+void UpdateManager::Update(float deltaTime)
 {
 	for (UpdateList::iterator it = updateList.begin(); it != updateList.end(); it++)
 	{
-		UpdatableObjectAttorney::GameLoop::Update(*it);
+		UpdatableObjectAttorney::GameLoop::Update(*it, deltaTime);
 	}
 }

@@ -2,9 +2,9 @@
 
 #include "Scene.h"
 
-void SceneAttorney::GameLoop::Update(Scene* pScene)
+void SceneAttorney::GameLoop::Update(Scene* pScene, float deltaTime)
 {
-	pScene->Update();
+	pScene->Update(deltaTime);
 }
 
 void SceneAttorney::GameLoop::Draw(Scene* pScene)

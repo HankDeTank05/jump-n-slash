@@ -22,7 +22,7 @@ public:
 	UpdateListRef Register(UpdatableObject* pUpdatable); // TODO: documentation for UpdateManager::Register
 	void Deregister(UpdateListRef updateListRef); // TODO: documentation for UpdateManager::Deregister
 
-	void Update();
+	void Update(float deltaTime);
 
 private:
 	UpdateList updateList;

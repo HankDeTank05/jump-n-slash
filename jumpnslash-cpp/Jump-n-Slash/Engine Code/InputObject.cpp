@@ -19,6 +19,24 @@ InputObject::InputObject()
 	mouseCursorRegData.pDeregCmd = new MouseCursorDeregistrationCommand(this);
 }
 
+InputObject::~InputObject()
+{
+	delete mouseCursorRegData.pDeregCmd;
+	delete mouseCursorRegData.pRegCmd;
+
+	for (MouseBtnRegTracker::iterator it = mouseBtnTracker.begin(); it != mouseBtnTracker.end(); it++)
+	{
+		delete it->second.pDeregCmd;
+		delete it->second.pRegCmd;
+	}
+
+	for (KeyRegTracker::iterator it = keyTracker.begin(); it != keyTracker.end(); it++)
+	{
+		delete it->second.pDeregCmd;
+		delete it->second.pRegCmd;
+	}
+}
+
 void InputObject::EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg)
 {
 	KeyTrackerID keyID(key, eventToReg);
@@ -165,21 +183,6 @@ void InputObject::DeregisterMouseCursor()
 	SceneAttorney::Input::DeregisterMouseCursor(JumpSlashEngine::GetCurrentScene(), this);
 
 	mouseCursorRegData.regState = RegistrationState::CURRENTLY_DEREGISTERED;
-}
-
-InputObject::~InputObject()
-{
-	for (KeyRegTracker::iterator it = keyTracker.begin(); it != keyTracker.end(); it++)
-	{
-		delete it->second.pDeregCmd;
-		delete it->second.pRegCmd;
-	}
-
-	for (MouseBtnRegTracker::iterator it = mouseBtnTracker.begin(); it != mouseBtnTracker.end(); it++)
-	{
-		delete it->second.pDeregCmd;
-		delete it->second.pRegCmd;
-	}
 }
 
 void InputObject::KeyPressed(sf::Keyboard::Key key)

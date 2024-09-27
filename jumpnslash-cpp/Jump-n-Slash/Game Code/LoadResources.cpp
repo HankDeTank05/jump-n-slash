@@ -3,16 +3,19 @@
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
 
-#include "TestScene.h"
+#include "Level0.h"
 
 void JumpSlashEngine::LoadResources()
 {
-	TextureManager::LoadTexture("tex test", "player/idle_1_32.png");
+	TextureManager::LoadTexture("player idle 1", "player/idle_1_32.png");
+	TextureManager::LoadTexture("player idle 2", "player/idle_2_32.png");
+	TextureManager::LoadTexture("player idle 3", "player/idle_3_32.png");
+	TextureManager::LoadTexture("player idle 4", "player/idle_4_32.png");
 
-	SpriteManager::LoadSprite("spr test 1", TextureManager::GetTexture("tex test"));
-	SpriteManager::LoadSprite("spr test 2", TextureManager::GetTexture("tex test"), sf::IntRect(0, 0, 16, 16));
-	SpriteManager::LoadSprite("spr test 3", "tex test");
-	SpriteManager::LoadSprite("spr test 4", "tex test", sf::IntRect(0, 0, 16, 16));
+	SpriteManager::LoadSprite("player idle 1", "player idle 1");
+	SpriteManager::LoadSprite("player idle 2", "player idle 2");
+	SpriteManager::LoadSprite("player idle 3", "player idle 3");
+	SpriteManager::LoadSprite("player idle 4", "player idle 4");
 
-	SetStartScene(new TestScene());
+	SetStartScene(new Level0());
 }

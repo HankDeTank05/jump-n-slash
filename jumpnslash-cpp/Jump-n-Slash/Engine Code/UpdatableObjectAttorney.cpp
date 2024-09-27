@@ -2,9 +2,9 @@
 
 #include "UpdatableObject.h"
 
-void UpdatableObjectAttorney::GameLoop::Update(UpdatableObject* pUpdatable)
+void UpdatableObjectAttorney::GameLoop::Update(UpdatableObject* pUpdatable, float deltaTime)
 {
-	pUpdatable->Update();
+	pUpdatable->Update(deltaTime);
 }
 
 void UpdatableObjectAttorney::Registration::Register(UpdatableObject* pUpdatable)

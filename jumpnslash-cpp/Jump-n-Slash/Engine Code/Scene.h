@@ -24,7 +24,7 @@ public:
 
 private:
 	friend class SceneAttorney;
-	void Update();
+	void Update(float deltaTime);
 	void Draw();
 
 	// update registration
