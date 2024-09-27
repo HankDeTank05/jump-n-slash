@@ -8,7 +8,8 @@ A scene could be any of the following:
 - a shop
 - something else?
 
-A game cannot exist in this engine without at least one scene, so a starting scene needs to be specified before the game can be run.
+A game cannot exist in this engine without at least one scene, so a starting scene needs to be specified before the game
+can be run.
 
 \section baseClass The \c Scene Base Class
 To begin, let's take a look at the Scene base class:
@@ -31,8 +32,8 @@ private:
 	// ... some member variables ... //
 }
 \endcode
-You'll notice this base class has two pure virtual functions. Every Scene-derived class needs its own version of these two functions.
-More on this later, though.
+You'll notice this base class has two pure virtual functions. Every Scene-derived class needs its own version of these two
+functions. More on this later, though.
 
 \section derivedClass Your Derived \c Scene Class
 
@@ -72,11 +73,13 @@ When an instance of an object is created, the constructor is called to do all of
 It initializes member variables, and maybe runs some sort of logic involving those variables. Once the constructor has
 finished its work, the instance of that object is ready to use.
 
-In that sense, the \c Init() function serves a similar purpose to a constructor. Rather than having the constructor do all that work,
-the \c Init() function handles it instead. This way, you can re-initialize a single instance of a Scene object multiple times without
-having to delete that instance and re-construct it.
+In that sense, the \c Init() function serves a similar purpose to a constructor. Rather than having the constructor do all
+that work, the \c Init() function handles it instead. This way, you can re-initialize a single instance of a Scene object
+multiple times without having to delete that instance and re-construct it.
 
-To illustrate this concept, let's look at an example: Super Mario Bros. (when you die and respawn, the level's scene is re-initialized)
+To illustrate this concept, let's look at an example: Super Mario Bros. Let's say that each level in the game is it's
+own scene object. Without an \c Init() function, all of your setup logic is in the constructor, which means you would
+have to delete a perfectly valid and usable scene and re-construct it each time the player died, which is very inefficient.
 
 TODO: documentation for CreatingScene tutorial is incomplete
 */
