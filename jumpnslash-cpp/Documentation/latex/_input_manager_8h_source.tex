@@ -17,32 +17,37 @@
 \DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_object}{InputObject}};}
 \DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_key_listener}{KeyListener}};}
 \DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_btn_listener}{MouseBtnListener}};}
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_manager}{InputManager}}}
-\DoxyCodeLine{00018\ \{}
-\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_input_manager}{InputManager}}();}
-\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_input_manager}{InputManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_input_manager}{InputManager}}\&\ im)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_input_manager}{InputManager}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_input_manager}{InputManager}}\&\ im)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_input_manager}{\string~InputManager}}();}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessKeyboardEvents();}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessMouseEvents();}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//void\ ProcessGamepadEvents();}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{using\ }KeyTracker\ =\ std::map<sf::Keyboard::Key,\ KeyListener*>;}
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterKey(sf::Keyboard::Key\ key,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ KeyEvent\ eventToReg);}
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterKey(sf::Keyboard::Key\ key,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ KeyEvent\ eventToDereg);}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{using\ }MouseBtnTracker\ =\ std::map<sf::Mouse::Button,\ MouseBtnListener*>;}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseBtn(sf::Mouse::Button\ btn,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ MouseEvent\ eventToReg);}
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseBtn(sf::Mouse::Button\ btn,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ MouseEvent\ eventToDereg);}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00037\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00038\ \ \ \ \ KeyTracker\ keyTracker;}
-\DoxyCodeLine{00039\ \ \ \ \ MouseBtnTracker\ mouseBtnTracker;}
-\DoxyCodeLine{00040\ \};}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_manager}{InputManager}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_input_manager}{InputManager}}();}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_input_manager}{InputManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_input_manager}{InputManager}}\&\ im)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_input_manager}{InputManager}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_input_manager}{InputManager}}\&\ im)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_input_manager}{\string~InputManager}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessKeyboardEvents();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessMouseEvents();}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//void\ ProcessGamepadEvents();}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{using\ }KeyTracker\ =\ std::map<sf::Keyboard::Key,\ KeyListener*>;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterKey(sf::Keyboard::Key\ key,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ KeyEvent\ eventToReg);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterKey(sf::Keyboard::Key\ key,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ KeyEvent\ eventToDereg);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{using\ }MouseBtnTracker\ =\ std::map<sf::Mouse::Button,\ MouseBtnListener*>;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseBtn(sf::Mouse::Button\ btn,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ MouseEvent\ eventToReg);}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseBtn(sf::Mouse::Button\ btn,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ MouseEvent\ eventToDereg);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseCursor(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseCursor(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ KeyTracker\ keyTracker;}
+\DoxyCodeLine{00043\ \ \ \ \ MouseBtnTracker\ mouseBtnTracker;}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}}*\ pCursorListener;}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

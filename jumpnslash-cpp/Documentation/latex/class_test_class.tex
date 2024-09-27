@@ -26,6 +26,8 @@ virtual void \mbox{\hyperlink{class_test_class_a266fa061d8a4705405d57f7578e2b04c
 virtual void \mbox{\hyperlink{class_test_class_ae1ad048f7fb36db5308cfd2defbc84e4}{Mouse\+Btn\+Pressed}} (sf\+::\+Mouse\+::\+Button btn) override
 \item 
 virtual void \mbox{\hyperlink{class_test_class_af9de31853d4b816634fd034331e787d7}{Mouse\+Btn\+Released}} (sf\+::\+Mouse\+::\+Button btn) override
+\item 
+virtual void \mbox{\hyperlink{class_test_class_a90869daadb5279694f8e3c58df3dfc23}{Mouse\+Cursor\+Moved}} (sf\+::\+Vector2i pos, sf\+::\+Vector2i delta) override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}}}
 \begin{DoxyCompactItemize}
@@ -73,6 +75,10 @@ void {\bfseries Enqueue\+For\+Key\+Deregistration} (sf\+::\+Keyboard\+::\+Key ke
 void {\bfseries Enqueue\+For\+Mouse\+Btn\+Registration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Reg)
 \item 
 void {\bfseries Enqueue\+For\+Mouse\+Btn\+Deregistration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Dereg)
+\item 
+void {\bfseries Enqueue\+For\+Mouse\+Cursor\+Registration} ()
+\item 
+void {\bfseries Enqueue\+For\+Mouse\+Cursor\+Deregistration} ()
 \end{DoxyCompactItemize}
 
 
@@ -122,6 +128,16 @@ Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
 \doxysubsubsection{\texorpdfstring{MouseBtnReleased()}{MouseBtnReleased()}}
 {\footnotesize\ttfamily \label{class_test_class_af9de31853d4b816634fd034331e787d7} 
 void Test\+Class\+::\+Mouse\+Btn\+Released (\begin{DoxyParamCaption}\item[{sf\+::\+Mouse\+::\+Button}]{btn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
+
+\Hypertarget{class_test_class_a90869daadb5279694f8e3c58df3dfc23}\index{TestClass@{TestClass}!MouseCursorMoved@{MouseCursorMoved}}
+\index{MouseCursorMoved@{MouseCursorMoved}!TestClass@{TestClass}}
+\doxysubsubsection{\texorpdfstring{MouseCursorMoved()}{MouseCursorMoved()}}
+{\footnotesize\ttfamily \label{class_test_class_a90869daadb5279694f8e3c58df3dfc23} 
+void Test\+Class\+::\+Mouse\+Cursor\+Moved (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2i}]{pos}{, }\item[{sf\+::\+Vector2i}]{delta}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 

@@ -28,25 +28,32 @@
 \DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_btn_deregistration_command}{MouseBtnDeregistrationCommand}};}
 \DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ RegisterMouseBtn(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Mouse::Button\ btn,\ MouseEvent\ eventToReg);}
 \DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ DeregisterMouseBtn(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Mouse::Button\ btn,\ MouseEvent\ eventToDereg);}
-\DoxyCodeLine{00027\ \ \ \ \ \};}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_object_attorney_1_1_key_events}{KeyEvents}}}
-\DoxyCodeLine{00030\ \ \ \ \ \{}
-\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_key_listener}{KeyListener}};}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ KeyPressed(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Keyboard::Key\ key);}
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ KeyReleased(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Keyboard::Key\ key);}
-\DoxyCodeLine{00035\ \ \ \ \ \};}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_object_attorney_1_1_mouse_events}{MouseEvents}}}
-\DoxyCodeLine{00038\ \ \ \ \ \{}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_btn_listener}{MouseBtnListener}};}
-\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MouseBtnPressed(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Mouse::Button\ btn);}
-\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MouseBtnReleased(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Mouse::Button\ btn);}
-\DoxyCodeLine{00043\ \ \ \ \ \};}
-\DoxyCodeLine{00044\ \};}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_cursor_registration_command}{MouseCursorRegistrationCommand}};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_cursor_deregistration_command}{MouseCursorDeregistrationCommand}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ RegisterMouseCursor(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ DeregisterMouseCursor(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable);}
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_object_attorney_1_1_key_events}{KeyEvents}}}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_key_listener}{KeyListener}};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ KeyPressed(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Keyboard::Key\ key);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ KeyReleased(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Keyboard::Key\ key);}
+\DoxyCodeLine{00040\ \ \ \ \ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_object_attorney_1_1_mouse_events}{MouseEvents}}}
+\DoxyCodeLine{00043\ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_btn_listener}{MouseBtnListener}};}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MouseBtnPressed(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Mouse::Button\ btn);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MouseBtnReleased(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Mouse::Button\ btn);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ MouseCursorMoved(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ sf::Vector2i\ pos,\ sf::Vector2i\ delta);}
+\DoxyCodeLine{00050\ \ \ \ \ \};}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

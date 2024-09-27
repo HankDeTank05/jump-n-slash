@@ -70,6 +70,7 @@ In that sense, the {\ttfamily Init()} function serves a similar purpose to a con
 To illustrate this concept, let\textquotesingle{}s look at an example\+: Super Mario Bros. Let\textquotesingle{}s say that each level in the game is it\textquotesingle{}s own scene object. Without an {\ttfamily Init()} function, all of your setup logic is in the constructor, which means you would have to delete a perfectly valid and usable scene and re-\/construct it each time the player died, which is very inefficient. However, using an {\ttfamily Init()} function we can do partial setup in the constructor, and the rest of it (only the essentials) in the {\ttfamily Init()} function.\hypertarget{_creating_scene_derivedClass_end}{}\doxysubsection{\texorpdfstring{The {\ttfamily End()} Function}{The {\ttfamily End()} Function}}\label{_creating_scene_derivedClass_end}
 Similarly to how {\ttfamily Init()} serves as a constructor-\/like function, {\ttfamily End()} serves as a destructor-\/like function. You can have a partial "{}destruction"{} occur in the {\ttfamily End()} function without having to completely delete an object.
 
-TODO\+: expand on the explanation of the Scene\+::\+End function
+TODO\+: expand on the explanation of the Scene\+::\+End function\hypertarget{_creating_scene_derivedClass_members}{}\doxysubsection{\texorpdfstring{Member Variables}{Member Variables}}\label{_creating_scene_derivedClass_members}
+(words go here)
 
 TODO\+: documentation for Creating\+Scene tutorial is incomplete 

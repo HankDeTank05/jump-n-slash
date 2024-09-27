@@ -44,17 +44,19 @@
 \DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterKey(sf::Keyboard::Key\ key,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ KeyEvent\ eventToDereg);}
 \DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseBtn(sf::Mouse::Button\ btn,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ MouseEvent\ eventToReg);}
 \DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseBtn(sf::Mouse::Button\ btn,\ \mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable,\ MouseEvent\ eventToDereg);}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ AddCommand(\mbox{\hyperlink{class_command}{Command}}*\ pCmd);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseCursor(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseCursor(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable);}
 \DoxyCodeLine{00045\ }
-\DoxyCodeLine{00046\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{class_registration_broker}{RegistrationBroker}}*\ pRegBroker;}
-\DoxyCodeLine{00048\ }
-\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_update_manager}{UpdateManager}}*\ pUpdateMgr;}
-\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{class_draw_manager}{DrawManager}}*\ pDrawMgr;}
-\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_input_manager}{InputManager}}*\ pInputMgr;}
-\DoxyCodeLine{00052\ \};}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{void}\ AddCommand(\mbox{\hyperlink{class_command}{Command}}*\ pCmd);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_registration_broker}{RegistrationBroker}}*\ pRegBroker;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_update_manager}{UpdateManager}}*\ pUpdateMgr;}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_draw_manager}{DrawManager}}*\ pDrawMgr;}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_input_manager}{InputManager}}*\ pInputMgr;}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

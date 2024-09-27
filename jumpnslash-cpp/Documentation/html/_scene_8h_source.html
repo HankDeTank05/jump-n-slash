@@ -142,24 +142,26 @@ $(function(){initNavTree('_scene_8h_source.html',''); initResizable(true); });
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">void</span> DeregisterKey(sf::Keyboard::Key key, <a class="code hl_class" href="class_input_object.html">InputObject</a>* pInputable, KeyEvent eventToDereg);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">void</span> RegisterMouseBtn(sf::Mouse::Button btn, <a class="code hl_class" href="class_input_object.html">InputObject</a>* pInputable, MouseEvent eventToReg);</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">void</span> DeregisterMouseBtn(sf::Mouse::Button btn, <a class="code hl_class" href="class_input_object.html">InputObject</a>* pInputable, MouseEvent eventToDereg);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> AddCommand(<a class="code hl_class" href="class_command.html">Command</a>* pCmd);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> RegisterMouseCursor(<a class="code hl_class" href="class_input_object.html">InputObject</a>* pInputable);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">void</span> DeregisterMouseCursor(<a class="code hl_class" href="class_input_object.html">InputObject</a>* pInputable);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_class" href="class_registration_broker.html">RegistrationBroker</a>* pRegBroker;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="class_update_manager.html">UpdateManager</a>* pUpdateMgr;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="class_draw_manager.html">DrawManager</a>* pDrawMgr;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="class_input_manager.html">InputManager</a>* pInputMgr;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> AddCommand(<a class="code hl_class" href="class_command.html">Command</a>* pCmd);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_class" href="class_registration_broker.html">RegistrationBroker</a>* pRegBroker;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_class" href="class_update_manager.html">UpdateManager</a>* pUpdateMgr;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_class" href="class_draw_manager.html">DrawManager</a>* pDrawMgr;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_class" href="class_input_manager.html">InputManager</a>* pInputMgr;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
 </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_command_html"><div class="ttname"><a href="class_command.html">Command</a></div><div class="ttdef"><b>Definition</b> Command.h:5</div></div>
 <div class="ttc" id="aclass_draw_manager_html"><div class="ttname"><a href="class_draw_manager.html">DrawManager</a></div><div class="ttdef"><b>Definition</b> DrawManager.h:10</div></div>
 <div class="ttc" id="aclass_drawable_object_html"><div class="ttname"><a href="class_drawable_object.html">DrawableObject</a></div><div class="ttdef"><b>Definition</b> DrawableObject.h:12</div></div>
-<div class="ttc" id="aclass_input_manager_html"><div class="ttname"><a href="class_input_manager.html">InputManager</a></div><div class="ttdef"><b>Definition</b> InputManager.h:18</div></div>
-<div class="ttc" id="aclass_input_object_html"><div class="ttname"><a href="class_input_object.html">InputObject</a></div><div class="ttdef"><b>Definition</b> InputObject.h:20</div></div>
+<div class="ttc" id="aclass_input_manager_html"><div class="ttname"><a href="class_input_manager.html">InputManager</a></div><div class="ttdef"><b>Definition</b> InputManager.h:19</div></div>
+<div class="ttc" id="aclass_input_object_html"><div class="ttname"><a href="class_input_object.html">InputObject</a></div><div class="ttdef"><b>Definition</b> InputObject.h:22</div></div>
 <div class="ttc" id="aclass_registration_broker_html"><div class="ttname"><a href="class_registration_broker.html">RegistrationBroker</a></div><div class="ttdef"><b>Definition</b> RegistrationBroker.h:10</div></div>
 <div class="ttc" id="aclass_scene_attorney_html"><div class="ttname"><a href="class_scene_attorney.html">SceneAttorney</a></div><div class="ttdef"><b>Definition</b> SceneAttorney.h:16</div></div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdef"><b>Definition</b> Scene.h:15</div></div>

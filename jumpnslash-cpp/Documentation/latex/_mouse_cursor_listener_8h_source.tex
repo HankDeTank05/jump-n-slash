@@ -1,0 +1,37 @@
+\doxysection{Mouse\+Cursor\+Listener.\+h}
+\hypertarget{_mouse_cursor_listener_8h_source}{}\label{_mouse_cursor_listener_8h_source}\index{Jump-\/n-\/Slash/Engine Code/MouseCursorListener.h@{Jump-\/n-\/Slash/Engine Code/MouseCursorListener.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MOUSE\_CURSOR\_LISTENER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MOUSE\_CURSOR\_LISTENER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <SFML/Window/Mouse.hpp>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_object}{InputObject}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}}();}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}}\&\ mcl)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_mouse_cursor_listener}{MouseCursorListener}}\&\ mcl)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_mouse_cursor_listener}{\string~MouseCursorListener}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ ProcessCursorEvent();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{using\ }NotifyList\ =\ std::list<InputObject*>;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ Register(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister(\mbox{\hyperlink{class_input_object}{InputObject}}*\ pInputable);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \ \ sf::Vector2i\ prevPos;}
+\DoxyCodeLine{00028\ \ \ \ \ NotifyList\ notifyOnMove;}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

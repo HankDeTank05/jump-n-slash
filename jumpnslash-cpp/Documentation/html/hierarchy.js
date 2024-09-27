@@ -9,6 +9,8 @@ var hierarchy =
       [ "KeyRegistrationCommand", "class_key_registration_command.html", null ],
       [ "MouseBtnDeregistrationCommand", "class_mouse_btn_deregistration_command.html", null ],
       [ "MouseBtnRegistrationCommand", "class_mouse_btn_registration_command.html", null ],
+      [ "MouseCursorDeregistrationCommand", "class_mouse_cursor_deregistration_command.html", null ],
+      [ "MouseCursorRegistrationCommand", "class_mouse_cursor_registration_command.html", null ],
       [ "UpdateDeregistrationCommand", "class_update_deregistration_command.html", null ],
       [ "UpdateRegistrationCommand", "class_update_registration_command.html", null ]
     ] ],
@@ -34,6 +36,7 @@ var hierarchy =
     [ "KeyListener", "class_key_listener.html", null ],
     [ "MemTrace", "class_mem_trace.html", null ],
     [ "MouseBtnListener", "class_mouse_btn_listener.html", null ],
+    [ "MouseCursorListener", "class_mouse_cursor_listener.html", null ],
     [ "InputObjectAttorney::MouseEvents", "class_input_object_attorney_1_1_mouse_events.html", null ],
     [ "PerformanceTimer", "class_performance_timer.html", null ],
     [ "DrawableObjectAttorney::Registration", "class_drawable_object_attorney_1_1_registration.html", null ],

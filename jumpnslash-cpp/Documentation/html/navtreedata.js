@@ -50,7 +50,8 @@ var NAVTREE =
       [ "Your Derived Scene Class", "_creating_scene.html#derivedClass", [
         [ "The Essentials", "_creating_scene.html#derivedClass_essentials", null ],
         [ "The Init() Function", "_creating_scene.html#derivedClass_init", null ],
-        [ "The End() Function", "_creating_scene.html#derivedClass_end", null ]
+        [ "The End() Function", "_creating_scene.html#derivedClass_end", null ],
+        [ "Member Variables", "_creating_scene.html#derivedClass_members", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
