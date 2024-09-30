@@ -21,8 +21,10 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::LoadSprite("player idle 3", "player idle 3");
 	SpriteManager::LoadSprite("player idle 4", "player idle 4");
 
-	std::ifstream jsonFile("..\\..\\..\\tools\\formatting_rules.json");
-	nlohmann::json jsonData = nlohmann::json::parse(jsonFile);
+	// parse the json file for level tiles to add
+	std::ifstream file("..\\..\\..\\tools\\formatting_rules.json");
+	nlohmann::json data = nlohmann::json::parse(file);
+	
 
 	SetStartScene(new Level0());
 }

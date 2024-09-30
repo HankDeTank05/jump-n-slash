@@ -5,3 +5,8 @@ Map::Map()
 {
 	// code goes here
 }
+
+Map::~Map()
+{
+	// code goes here
+}

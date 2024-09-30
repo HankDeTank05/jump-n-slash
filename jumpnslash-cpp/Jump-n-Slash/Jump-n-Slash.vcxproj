@@ -51,6 +51,7 @@
     <ClCompile Include="Engine Code\UpdateManager.cpp" />
     <ClCompile Include="Engine Code\UpdateRegistrationCommand.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
+    <ClCompile Include="Game Code\JsonParser.cpp" />
     <ClCompile Include="Game Code\Level0.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
     <ClCompile Include="Game Code\Map.cpp" />
@@ -105,6 +106,7 @@
     <ClInclude Include="Engine Code\UpdateRegistrationCommand.h" />
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
+    <ClInclude Include="Game Code\JsonParser.h" />
     <ClInclude Include="Game Code\Level0.h" />
     <ClInclude Include="Game Code\Map.h" />
     <ClInclude Include="Game Code\MapTile.h" />
@@ -213,14 +215,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include;$(SolutionDir)\external_libs\nlohmann\single_include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include;$(SolutionDir)\external_libs\nlohman-json-3.11.3\single_include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>"$(SolutionDir)\Jump-n-Slash\Engine Code\MemTracker\Framework.h"</ForcedIncludeFiles>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\SFML-2.6.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-audio-d.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -232,9 +234,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include;$(SolutionDir)\external_libs\nlohmann\single_include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>"$(SolutionDir)\Jump-n-Slash\Engine Code\MemTracker\Framework.h"</ForcedIncludeFiles>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

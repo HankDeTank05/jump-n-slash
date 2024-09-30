@@ -231,6 +231,9 @@
     <ClCompile Include="Game Code\Map.cpp">
       <Filter>Source Files\Game Code\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\JsonParser.cpp">
+      <Filter>Source Files\Game Code\Misc. files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -388,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="Game Code\MapTile.h">
       <Filter>Source Files\Game Code\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonParser.h">
+      <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
