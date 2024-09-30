@@ -3,10 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Engine Code/UpdatableObject.h"
-#include "../Engine Code/DrawableObject.h"
-
-class MapTile : public UpdatableObject, public DrawableObject
+class MapTile
 {
 public:
 	MapTile();
@@ -16,10 +13,10 @@ public:
 
 private:
 	sf::Sprite* pSprite;
-	sf::Vector2i mapPos;
 	bool solidOnTop;
-	bool solidOnSides;
+	bool solidOnSide;
 	bool solidOnBottom;
+	bool breakable;
 };
 
 #endif
