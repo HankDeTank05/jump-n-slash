@@ -1,5 +1,9 @@
 #include "../Engine Code/JumpSlashEngine.h"
 
+#include <fstream>
+
+#include <nlohmann/json.hpp>
+
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
 
@@ -16,6 +20,9 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::LoadSprite("player idle 2", "player idle 2");
 	SpriteManager::LoadSprite("player idle 3", "player idle 3");
 	SpriteManager::LoadSprite("player idle 4", "player idle 4");
+
+	std::ifstream jsonFile("..\\..\\..\\tools\\formatting_rules.json");
+	nlohmann::json jsonData = nlohmann::json::parse(jsonFile);
 
 	SetStartScene(new Level0());
 }

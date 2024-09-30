@@ -47,10 +47,10 @@ def add_file_data_to_dict(_files, _data):
         _data["gameInfo"]["decodeTiles"][tile_id] = files[i]
 
 
-editor_tile_read_path = os.path.join("..", "jumpnslash-cpp", "assets", "textures", "leveltiles")
-editor_level_write_path = os.path.join("..", "jumpnslash-cpp", "assets", "leveldata")
-game_tile_read_path = os.path.join("..", "jumpnslash-cpp", "assets", "sprites", "leveltiles")
-game_level_read_path = os.path.join("..", "jumpnslash-cpp", "assets", "leveldata")
+editor_tile_read_path = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets", "textures", "leveltiles")
+editor_level_write_path = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets", "leveldata")
+game_tile_read_path = os.path.join("..", "assets", "sprites", "leveltiles")
+game_level_read_path = os.path.join("..", "assets", "leveldata")
 tile_size = 32
 tile_extension = ".png"
 level_extension = ".txt"

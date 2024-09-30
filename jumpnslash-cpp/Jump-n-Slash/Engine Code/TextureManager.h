@@ -114,7 +114,7 @@ private: // private functions
 
 private: // member variables
 	std::map<std::string, sf::Texture*> textures; /*!< The map containing every texture loaded into the engine. */
-	const std::string FOLDER_NAME = "Assets/Textures/"; /*!< The name of the folder that texture files will be loaded from. */
+	const std::string FOLDER_NAME = "assets/textures/"; /*!< The name of the folder that texture files will be loaded from. */
 
 private: // engine-only api functions
 	friend class TextureManagerAttorney;

@@ -1,7 +1,7 @@
 {
     "editorInfo": {
-        "tileReadPath": "..\\jumpnslash-cpp\\assets\\textures\\leveltiles",
-        "levelWritePath": "..\\jumpnslash-cpp\\assets\\leveldata",
+        "tileReadPath": "..\\jumpnslash-cpp\\Jump-n-Slash\\assets\\textures\\leveltiles",
+        "levelWritePath": "..\\jumpnslash-cpp\\Jump-n-Slash\\assets\\leveldata",
         "encodeTiles": {
             "block_breakable_32.png": "01",
             "block_hazard_32.png": "02",
@@ -18,8 +18,8 @@
         }
     },
     "gameInfo": {
-        "tileReadPath": "..\\jumpnslash-cpp\\assets\\sprites\\leveltiles",
-        "levelReadPath": "..\\jumpnslash-cpp\\assets\\leveldata",
+        "tileReadPath": "..\\assets\\sprites\\leveltiles",
+        "levelReadPath": "..\\assets\\leveldata",
         "decodeTiles": {
             "01": "block_breakable_32.png",
             "02": "block_hazard_32.png",
