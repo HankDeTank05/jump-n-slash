@@ -91,6 +91,9 @@
     <Filter Include="Source Files\Game Code\Scenes">
       <UniqueIdentifier>{5e9b3079-2e05-4406-b849-155b97e9c9f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Map">
+      <UniqueIdentifier>{a26ee793-bd38-4863-81c9-ee4fbc14ab6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -221,6 +224,12 @@
     </ClCompile>
     <ClCompile Include="Game Code\PlayerMoveState.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerAttorney.cpp">
+      <Filter>Source Files\Game Code\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Map.cpp">
+      <Filter>Source Files\Game Code\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +379,15 @@
     </ClInclude>
     <ClInclude Include="Game Code\Level0.h">
       <Filter>Source Files\Game Code\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerAttorney.h">
+      <Filter>Source Files\Game Code\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Map.h">
+      <Filter>Source Files\Game Code\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MapTile.h">
+      <Filter>Source Files\Game Code\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

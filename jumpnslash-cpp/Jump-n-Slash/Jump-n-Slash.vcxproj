@@ -53,7 +53,9 @@
     <ClCompile Include="Game Code\GameInitialize.cpp" />
     <ClCompile Include="Game Code\Level0.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
+    <ClCompile Include="Game Code\Map.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
+    <ClCompile Include="Game Code\PlayerAttorney.cpp" />
     <ClCompile Include="Game Code\PlayerFSM.cpp" />
     <ClCompile Include="Game Code\PlayerMoveState.cpp" />
     <ClCompile Include="Game Code\PlayerStateFalling.cpp" />
@@ -104,7 +106,10 @@
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
     <ClInclude Include="Game Code\Level0.h" />
+    <ClInclude Include="Game Code\Map.h" />
+    <ClInclude Include="Game Code\MapTile.h" />
     <ClInclude Include="Game Code\Player.h" />
+    <ClInclude Include="Game Code\PlayerAttorney.h" />
     <ClInclude Include="Game Code\PlayerFSM.h" />
     <ClInclude Include="Game Code\PlayerMoveState.h" />
     <ClInclude Include="Game Code\PlayerStateFalling.h" />
@@ -206,10 +211,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion)";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\..\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include;$(SolutionDir)\external_libs\nlohmann\single_include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>"$(SolutionDir)\Jump-n-Slash\Engine Code\MemTracker\Framework.h"</ForcedIncludeFiles>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -226,8 +232,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\..\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include;$(SolutionDir)\external_libs\nlohmann\single_include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>"$(SolutionDir)\Jump-n-Slash\Engine Code\MemTracker\Framework.h"</ForcedIncludeFiles>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
