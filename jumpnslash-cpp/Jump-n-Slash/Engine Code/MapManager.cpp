@@ -4,6 +4,11 @@
 
 MapManager* MapManager::pInstance = nullptr;
 
+MapManager::~MapManager()
+{
+	assert(false);
+}
+
 MapManager& MapManager::Instance()
 {
 	if (pInstance == nullptr)
@@ -18,7 +23,7 @@ void MapManager::LoadMap(std::string key, std::string filename)
 	Instance().privLoadMap(key, filename);
 }
 
-void MapManager::privLoadMap(std::string key, std::string fileneame)
+void MapManager::privLoadMap(std::string key, std::string filename)
 {
 	assert(levelMaps.count(key) == 0); // no duplicate keys!
 

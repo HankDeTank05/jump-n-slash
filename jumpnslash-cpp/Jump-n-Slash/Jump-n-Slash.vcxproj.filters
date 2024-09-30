@@ -91,8 +91,8 @@
     <Filter Include="Source Files\Game Code\Scenes">
       <UniqueIdentifier>{5e9b3079-2e05-4406-b849-155b97e9c9f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Map">
-      <UniqueIdentifier>{a26ee793-bd38-4863-81c9-ee4fbc14ab6d}</UniqueIdentifier>
+    <Filter Include="Source Files\Engine Code\Main Systems\Map System">
+      <UniqueIdentifier>{1ad08447-83ec-400a-be6f-84933ea6c6d8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -222,17 +222,23 @@
     <ClCompile Include="Game Code\PlayerFSM.cpp">
       <Filter>Source Files\Game Code\Player\FSM + States</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\PlayerMoveState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Game Code\PlayerAttorney.cpp">
       <Filter>Source Files\Game Code\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\Map.cpp">
-      <Filter>Source Files\Game Code\Map</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\JsonParser.cpp">
       <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerMoveState.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+    <ClCompile Include="Engine Code\Camera.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MapManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\LevelMap.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Map System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -386,14 +392,20 @@
     <ClInclude Include="Game Code\PlayerAttorney.h">
       <Filter>Source Files\Game Code\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\Map.h">
-      <Filter>Source Files\Game Code\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\MapTile.h">
-      <Filter>Source Files\Game Code\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\JsonParser.h">
       <Filter>Source Files\Game Code\Misc. files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Camera.h">
+      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MapManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\LevelMap.h">
+      <Filter>Source Files\Engine Code\Main Systems\Map System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MapTile.h">
+      <Filter>Source Files\Engine Code\Main Systems\Map System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

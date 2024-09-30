@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine Code\Camera.cpp" />
     <ClCompile Include="Engine Code\DrawableObject.cpp" />
     <ClCompile Include="Engine Code\DrawableObjectAttorney.cpp" />
     <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp" />
@@ -31,7 +32,9 @@
     <ClCompile Include="Engine Code\KeyDeregistrationCommand.cpp" />
     <ClCompile Include="Engine Code\KeyListener.cpp" />
     <ClCompile Include="Engine Code\KeyRegistrationCommand.cpp" />
+    <ClCompile Include="Engine Code\LevelMap.cpp" />
     <ClCompile Include="Engine Code\main.cpp" />
+    <ClCompile Include="Engine Code\MapManager.cpp" />
     <ClCompile Include="Engine Code\MouseBtnDeregistrationCommand.cpp" />
     <ClCompile Include="Engine Code\MouseBtnListener.cpp" />
     <ClCompile Include="Engine Code\MouseBtnRegistrationCommand.cpp" />
@@ -54,7 +57,6 @@
     <ClCompile Include="Game Code\JsonParser.cpp" />
     <ClCompile Include="Game Code\Level0.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
-    <ClCompile Include="Game Code\Map.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
     <ClCompile Include="Game Code\PlayerAttorney.cpp" />
     <ClCompile Include="Game Code\PlayerFSM.cpp" />
@@ -67,6 +69,7 @@
     <ClCompile Include="Game Code\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine Code\Camera.h" />
     <ClInclude Include="Engine Code\CollisionManager.h" />
     <ClInclude Include="Engine Code\CollisionObject.h" />
     <ClInclude Include="Engine Code\Command.h" />
@@ -83,6 +86,9 @@
     <ClInclude Include="Engine Code\KeyDeregistrationCommand.h" />
     <ClInclude Include="Engine Code\KeyListener.h" />
     <ClInclude Include="Engine Code\KeyRegistrationCommand.h" />
+    <ClInclude Include="Engine Code\LevelMap.h" />
+    <ClInclude Include="Engine Code\MapManager.h" />
+    <ClInclude Include="Engine Code\MapTile.h" />
     <ClInclude Include="Engine Code\MemTracker\Framework.h" />
     <ClInclude Include="Engine Code\MemTracker\ProjectSettings.h" />
     <ClInclude Include="Engine Code\MouseBtnDeregistrationCommand.h" />
@@ -108,8 +114,6 @@
     <ClInclude Include="Game Code\DesignerControls.h" />
     <ClInclude Include="Game Code\JsonParser.h" />
     <ClInclude Include="Game Code\Level0.h" />
-    <ClInclude Include="Game Code\Map.h" />
-    <ClInclude Include="Game Code\MapTile.h" />
     <ClInclude Include="Game Code\Player.h" />
     <ClInclude Include="Game Code\PlayerAttorney.h" />
     <ClInclude Include="Game Code\PlayerFSM.h" />

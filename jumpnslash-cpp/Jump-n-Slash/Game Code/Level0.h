@@ -5,6 +5,7 @@
 
 // forward declarations
 class Player;
+class LevelMap;
 
 class Level0 : public Scene
 {
@@ -19,6 +20,7 @@ public:
 
 private:
 	Player* pPlayer;
+	LevelMap* pMap; // TODO: THIS IS A BASTARDIZATION OF THE SYSTEM, DO NOT DO THIS!!! THIS IS ONLY HERE FOR TESTING!!!
 };
 
 #endif
