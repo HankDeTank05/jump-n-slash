@@ -6,8 +6,8 @@
 #include "Player.h"
 
 Level0::Level0()
-	: pPlayer(nullptr),
-	pMap(nullptr)
+	: pMap(nullptr),
+	pPlayer(nullptr)
 {
 	// do nothing
 }
@@ -17,6 +17,10 @@ Level0::~Level0()
 	if (pPlayer != nullptr)
 	{
 		delete pPlayer;
+	}
+	if (pMap != nullptr)
+	{
+		delete pMap;
 	}
 }
 
