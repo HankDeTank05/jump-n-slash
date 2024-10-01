@@ -3,16 +3,18 @@
 #include "../Engine Code/JumpSlashEngine.h"
 #include "../Engine Code/SpriteManager.h"
 
+#include "Constants.h"
 #include "DesignerControls.h"
 #include "PlayerMoveState.h"
 #include "PlayerFSM.h"
 
-Player::Player()
+Player::Player(sf::Vector2f spawnPoint)
 	: pos(0.0f, 0.0f),
 	posDelta(0.0f, 0.0f),
 	speed(PLAYER_WALK_SPEED),
 	pSprite(SpriteManager::GetSprite("player idle 1")),
-	pCurrentState(&PlayerFSM::idle)
+	pCurrentState(&PlayerFSM::idle),
+	respawnPoint(spawnPoint)
 {
 	EnqueueForUpdateRegistration();
 	EnqueueForDrawRegistration();
@@ -73,32 +75,17 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	}
 }
 
-float Player::GetPosX()
-{
-	return pos.x;
-}
-
-float Player::GetPosY()
-{
-	return pos.y;
-}
-
 sf::Vector2f Player::GetPos()
 {
 	return pos;
 }
 
-float Player::GetPosDeltaX()
-{
-	return posDelta.x;
-}
-
-float Player::GetPosDeltaY()
-{
-	return posDelta.y;
-}
-
 sf::Vector2f Player::GetPosDelta()
 {
 	return posDelta;
+}
+
+void Player::SetSpawnPoint(sf::Vector2f spawnPoint)
+{
+	respawnPoint = spawnPoint;
 }

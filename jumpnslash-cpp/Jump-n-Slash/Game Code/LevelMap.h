@@ -2,6 +2,7 @@
 #define LEVEL_MAP_H
 
 #include <array>
+#include <list>
 
 #include <SFML/Graphics.hpp>
 
@@ -28,14 +29,23 @@ private:
 		sf::Vector2i origin;
 		sf::Vector2i size;
 		bool isStartingRoom;
-		bool hasSpawn;
-		sf::Vector2i* spawnPoint;
+		bool hasPlayerSpawn;
+		sf::Vector2f* playerSpawnPoint; // if hasPlayerSpawn == false, this is nullptr
+		std::list<sf::Vector2f> enemyLeftSpawns;
+		std::list<sf::Vector2f> enemyRightSpawns;
 	};
+
+	using RoomList = std::list<RoomData*>;
+public:
+	using RoomListRef = RoomList::iterator;
+
+private: // level map accessors. for selective access only (thru attorney)
+	sf::Vector2f GetStartingSpawnPoint();
 
 private:
 	std::array<std::array<sf::Sprite*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
 	sf::Vector2i usedSize;
-	std::array<RoomData*, 50> rooms;
+	RoomList rooms;
 };
 
 #endif

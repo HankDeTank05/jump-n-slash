@@ -19,8 +19,8 @@ public:
 	virtual void End() override;
 
 private:
-	Player* pPlayer;
 	LevelMap* pMap;
+	Player* pPlayer;
 };
 
 #endif

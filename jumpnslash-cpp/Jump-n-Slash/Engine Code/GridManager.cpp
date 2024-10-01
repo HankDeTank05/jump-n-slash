@@ -61,6 +61,7 @@ void GridManager::privLoadGrid(std::string key, std::string filename)
 				grid->at(y).push_back(line.substr(0, 2));
 				line = line.substr(index + 1, std::string::npos);
 			}
+			grid->at(y).push_back(line);
 			y++;
 		}
 		file.close();

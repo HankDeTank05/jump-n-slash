@@ -13,7 +13,8 @@ class PlayerMoveState;
 class Player : public UpdatableObject, public DrawableObject, public InputObject
 {
 public:
-	Player();
+	Player() = delete;
+	Player(sf::Vector2f spawnPoint);
 	Player(const Player& p) = delete;
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
@@ -26,18 +27,11 @@ public:
 
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
-
-	float GetPosX();
-	float GetPosY();
 	sf::Vector2f GetPos();
-
-	float GetPosDeltaX();
-	float GetPosDeltaY();
 	sf::Vector2f GetPosDelta();
 
 private: // player mutators. for selective access only (thru attorney)
-
-	// function declarations go here
+	void SetSpawnPoint(sf::Vector2f spawnPoint);
 
 private:
 	sf::Vector2f pos;
@@ -45,6 +39,7 @@ private:
 	float speed;
 	sf::Sprite* pSprite;
 	const PlayerMoveState* pCurrentState;
+	sf::Vector2f respawnPoint;
 };
 
 #endif

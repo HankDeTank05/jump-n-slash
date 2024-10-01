@@ -22,8 +22,8 @@ Level0::~Level0()
 
 void Level0::Init()
 {
-	pPlayer = new Player();
 	pMap = new LevelMap(GridManager::GetGrid("test"));
+	pPlayer = new Player();
 }
 
 void Level0::End()
