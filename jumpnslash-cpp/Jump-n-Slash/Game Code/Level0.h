@@ -4,8 +4,8 @@
 #include "../Engine Code/Scene.h"
 
 // forward declarations
-class Player;
 class LevelMap;
+class Player;
 
 class Level0 : public Scene
 {
