@@ -20,6 +20,8 @@ public:
 	LevelMap& operator=(const LevelMap& lm) = delete;
 	virtual ~LevelMap();
 
+	void Init();
+
 	virtual void Draw() override;
 
 private:

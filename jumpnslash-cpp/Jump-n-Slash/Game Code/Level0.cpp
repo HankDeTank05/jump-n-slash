@@ -1,6 +1,7 @@
 #include "Level0.h"
 
 #include "../Engine Code/MapManager.h"
+#include "../Engine Code/LevelMap.h"
 
 #include "Player.h"
 
@@ -23,6 +24,7 @@ void Level0::Init()
 {
 	pPlayer = new Player();
 	pMap = MapManager::GetMap("test");
+	pMap->Init();
 }
 
 void Level0::End()

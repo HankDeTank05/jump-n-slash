@@ -31,7 +31,6 @@ LevelMap::LevelMap(std::string filename)
 {
 	// parse the text file
 	int y = 0;
-	int x = 0;
 	std::string line;
 	std::ifstream file(filename);
 	std::vector<std::vector<std::string>> tempMap;
@@ -47,9 +46,7 @@ LevelMap::LevelMap(std::string filename)
 				int index = line.find(" ");
 				tempMap[y].push_back(line.substr(0, 2));
 				line = line.substr(index + 1, std::string::npos);
-				x++;
 			}
-			x = 0;
 			y++;
 		}
 		file.close();
@@ -58,11 +55,29 @@ LevelMap::LevelMap(std::string filename)
 	{
 		assert(false); // unable to open file
 	}
+
+	for (int y = 0; y < tempMap.size(); y++)
+	{
+		for (int x = 0; x < tempMap[y].size(); x++)
+		{
+			std::string tileID = tempMap[y][x];
+			if (tileID == "06" || tileID == "03" || tileID == "07" || tileID == "04" || tileID == "05")
+			{
+				map[y][x] = SpriteManager::GetSprite("block solid");
+			}
+		}
+	}
+
 }
 
 LevelMap::~LevelMap()
 {
 	// do nothing
+}
+
+void LevelMap::Init()
+{
+	EnqueueForDrawRegistration();
 }
 
 void LevelMap::Draw()
