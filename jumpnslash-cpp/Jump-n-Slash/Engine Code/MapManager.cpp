@@ -23,9 +23,23 @@ void MapManager::LoadMap(std::string key, std::string filename)
 	Instance().privLoadMap(key, filename);
 }
 
+LevelMap* MapManager::GetMap(std::string key)
+{
+	return Instance().privGetMap(key);
+}
+
 void MapManager::privLoadMap(std::string key, std::string filename)
 {
 	assert(levelMaps.count(key) == 0); // no duplicate keys!
 
-	levelMaps.emplace(key, new LevelMap(filename));
+	LevelMap* pMap = new LevelMap(FOLDER_NAME + filename); // this line is left separate from the emplace call for easier debugging
+
+	levelMaps.emplace(key, pMap);
+}
+
+LevelMap* MapManager::privGetMap(std::string key)
+{
+	assert(levelMaps.count(key) > 0); // if you triggered this assert, your key does not exist in map!
+
+	return levelMaps.at(key);
 }

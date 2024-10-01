@@ -20,7 +20,7 @@ public:
 
 private:
 	Player* pPlayer;
-	LevelMap* pMap; // TODO: THIS IS A BASTARDIZATION OF THE SYSTEM, DO NOT DO THIS!!! THIS IS ONLY HERE FOR TESTING!!!
+	LevelMap* pMap;
 };
 
 #endif

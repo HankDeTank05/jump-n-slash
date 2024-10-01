@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "DrawableObject.h"
+#include "../Game Code/Constants.h"
 
 // forward declarations
 class MapTile;
@@ -13,7 +14,7 @@ class MapTile;
 class LevelMap : public DrawableObject
 {
 public:
-	LevelMap();
+	LevelMap() = delete;
 	LevelMap(std::string filename);
 	LevelMap(const LevelMap& lm) = delete;
 	LevelMap& operator=(const LevelMap& lm) = delete;
@@ -22,7 +23,7 @@ public:
 	virtual void Draw() override;
 
 private:
-	std::array<std::array<sf::Sprite*, 16>, 16> map;
+	std::array<std::array<sf::Sprite*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
 };
 
 #endif

@@ -6,6 +6,7 @@
 
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
+#include "../Engine Code/MapManager.h"
 
 #include "Level0.h"
 
@@ -28,6 +29,8 @@ void JumpSlashEngine::LoadResources()
 	TextureManager::LoadTexture("block solid", "leveltiles/block_solid_32.png");
 
 	SpriteManager::LoadSprite("block solid", "block solid");
+
+	MapManager::LoadMap("test", "test.txt");
 
 	SetStartScene(new Level0());
 }

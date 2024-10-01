@@ -1,33 +1,63 @@
 #include "LevelMap.h"
 
+#include <string>
+#include <fstream>
+
 #include "JumpSlashEngine.h"
 #include "SpriteManager.h"
 
-LevelMap::LevelMap()
-{
-	for (int y = 0; y < map.size(); y++)
-	{
-		for (int x = 0; x < map[y].size(); x++)
-		{
-			if (y == 0 || x == 0 || y == map.size() - 1 || x == map[y].size() - 1)
-			{
-				map[y][x] = SpriteManager::GetSprite("block solid");
-			}
-			else
-			{
-				map[y][x] = nullptr;
-			}
-		}
-	}
-
-	EnqueueForDrawRegistration();
-}
+//LevelMap::LevelMap()
+//{
+//	for (int y = 0; y < map.size(); y++)
+//	{
+//		for (int x = 0; x < map[y].size(); x++)
+//		{
+//			if (y == 0 || x == 0 || y == map.size() - 1 || x == map[y].size() - 1)
+//			{
+//				map[y][x] = SpriteManager::GetSprite("block solid");
+//			}
+//			else
+//			{
+//				map[y][x] = nullptr;
+//			}
+//		}
+//	}
+//
+//	EnqueueForDrawRegistration();
+//}
 
 LevelMap::LevelMap(std::string filename)
+	: map()
 {
-	assert(false);
-
-	EnqueueForDrawRegistration();
+	// parse the text file
+	int y = 0;
+	int x = 0;
+	std::string line;
+	std::ifstream file(filename);
+	std::vector<std::vector<std::string>> tempMap;
+	if (file.is_open())
+	{
+		while (std::getline(file, line))
+		{
+			tempMap.push_back(std::vector<std::string>());
+			// split the line by spaces
+			while (line.find(" ") != std::string::npos)
+			{
+				int size = line.size();
+				int index = line.find(" ");
+				tempMap[y].push_back(line.substr(0, 2));
+				line = line.substr(index + 1, std::string::npos);
+				x++;
+			}
+			x = 0;
+			y++;
+		}
+		file.close();
+	}
+	else
+	{
+		assert(false); // unable to open file
+	}
 }
 
 LevelMap::~LevelMap()
