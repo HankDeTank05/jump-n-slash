@@ -26,8 +26,8 @@ public:
 private:
 	struct RoomData
 	{
-		sf::Vector2i origin;
-		sf::Vector2i size;
+		sf::Vector2f origin; // in world space!!
+		sf::Vector2f size; // in world space!!
 		bool isStartingRoom;
 		bool hasPlayerSpawn;
 		sf::Vector2f* playerSpawnPoint; // if hasPlayerSpawn == false, this is nullptr
@@ -39,7 +39,6 @@ private:
 public:
 	using RoomListRef = RoomList::iterator;
 
-private: // level map accessors. for selective access only (thru attorney)
 	sf::Vector2f GetStartingSpawnPoint();
 
 private:

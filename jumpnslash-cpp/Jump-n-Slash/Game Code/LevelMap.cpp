@@ -223,8 +223,8 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 
 		// set all the room data
 		RoomData* pRoomData = new RoomData();
-		pRoomData->origin = origin;
-		pRoomData->size = sf::Vector2i(widthPos.x - origin.x, heightPos.y - origin.y);
+		pRoomData->origin = sf::Vector2f(origin.x * TILE_SIZE_F, origin.y * TILE_SIZE_F);
+		pRoomData->size = sf::Vector2f((widthPos.x - origin.x) * TILE_SIZE_F, (heightPos.y - origin.y) * TILE_SIZE_F);
 		pRoomData->isStartingRoom = origin == startOrigin;
 		pRoomData->hasPlayerSpawn = playerSpawn.x >= 0 && playerSpawn.y >= 0;
 		if (pRoomData->hasPlayerSpawn)
@@ -266,6 +266,18 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 		
 		// add the created room data to the list
 		rooms.push_back(pRoomData);
+
+		// sanity check to make sure there's only one starting room
+		int startRoomCount = 0;
+		for (RoomList::iterator it = rooms.begin(); it != rooms.end(); it++)
+		{
+			if ((*it)->isStartingRoom == true)
+			{
+				startRoomCount++;
+			}
+		}
+		assert(startRoomCount == 1);
+		assert(rooms.front()->isStartingRoom == true); // the starting room should always be the first one in the list
 	}
 
 	EnqueueForDrawRegistration();
@@ -297,4 +309,11 @@ void LevelMap::Draw()
 			}
 		}
 	}
+}
+
+sf::Vector2f LevelMap::GetStartingSpawnPoint()
+{
+	assert(rooms.front()->isStartingRoom == true);
+	assert(rooms.front()->playerSpawnPoint != nullptr);
+	return *(rooms.front()->playerSpawnPoint);
 }

@@ -23,7 +23,7 @@ Level0::~Level0()
 void Level0::Init()
 {
 	pMap = new LevelMap(GridManager::GetGrid("test"));
-	pPlayer = new Player();
+	pPlayer = new Player(pMap->GetStartingSpawnPoint());
 }
 
 void Level0::End()

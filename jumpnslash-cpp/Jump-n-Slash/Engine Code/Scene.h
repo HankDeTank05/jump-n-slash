@@ -43,6 +43,7 @@ private:
 	void RegisterMouseCursor(InputObject* pInputable);
 	void DeregisterMouseCursor(InputObject* pInputable);
 
+	// registration broker
 	void AddCommand(Command* pCmd);
 
 private:
