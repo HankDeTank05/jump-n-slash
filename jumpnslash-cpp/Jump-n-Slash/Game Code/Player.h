@@ -35,6 +35,10 @@ private: // player accessors. for selective access only (thru attorney)
 	float GetPosDeltaY();
 	sf::Vector2f GetPosDelta();
 
+private: // player mutators. for selective access only (thru attorney)
+
+	// function declarations go here
+
 private:
 	sf::Vector2f pos;
 	sf::Vector2f posDelta;

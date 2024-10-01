@@ -1,7 +1,7 @@
 #include "Level0.h"
 
-#include "../Engine Code/MapManager.h"
-#include "../Engine Code/LevelMap.h"
+#include "../Engine Code/GridManager.h"
+#include "LevelMap.h"
 
 #include "Player.h"
 
@@ -23,8 +23,7 @@ Level0::~Level0()
 void Level0::Init()
 {
 	pPlayer = new Player();
-	pMap = MapManager::GetMap("test");
-	pMap->Init();
+	pMap = new LevelMap(GridManager::GetGrid("test"));
 }
 
 void Level0::End()

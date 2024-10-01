@@ -91,8 +91,8 @@
     <Filter Include="Source Files\Game Code\Scenes">
       <UniqueIdentifier>{5e9b3079-2e05-4406-b849-155b97e9c9f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine Code\Main Systems\Map System">
-      <UniqueIdentifier>{1ad08447-83ec-400a-be6f-84933ea6c6d8}</UniqueIdentifier>
+    <Filter Include="Source Files\Game Code\LevelMap">
+      <UniqueIdentifier>{1eb88e99-537a-41b8-b56a-d933290b1e45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -234,11 +234,14 @@
     <ClCompile Include="Engine Code\Camera.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\MapManager.cpp">
+    <ClCompile Include="Game Code\LevelMap.cpp">
+      <Filter>Source Files\Game Code\LevelMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GridManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\LevelMap.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Map System</Filter>
+    <ClCompile Include="Engine Code\GridManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -398,14 +401,14 @@
     <ClInclude Include="Engine Code\Camera.h">
       <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\MapManager.h">
+    <ClInclude Include="Game Code\LevelMap.h">
+      <Filter>Source Files\Game Code\LevelMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GridManager.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\LevelMap.h">
-      <Filter>Source Files\Engine Code\Main Systems\Map System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\MapTile.h">
-      <Filter>Source Files\Engine Code\Main Systems\Map System</Filter>
+    <ClInclude Include="Engine Code\GridManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

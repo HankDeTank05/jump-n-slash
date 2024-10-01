@@ -115,7 +115,11 @@ public: // api functions
 	*/
 	static sf::Sprite* GetSprite(std::string key); // TODO: documentation for SpriteManager::GetSprite(key) needs example code
 
-private: // private functions
+private: // engine-only api functions
+	friend class SpriteManagerAttorney;
+	static void Terminate();
+
+private: // private api backend functions
 	void privLoadSprite(std::string key, sf::Texture* pTex);
 	void privLoadSprite(std::string key, sf::Texture* pTex, sf::IntRect spriteRect);
 	void privLoadSprite(std::string key, std::string texKey);
@@ -124,10 +128,6 @@ private: // private functions
 
 private: // member variables
 	std::map<std::string, sf::Sprite*> sprites; /*!< The map containing every sprite loaded into the engine. */
-
-private: // engine-only api functions
-	friend class SpriteManagerAttorney;
-	static void Terminate();
 };
 
 #endif

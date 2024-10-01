@@ -47,6 +47,12 @@ sf::Sprite* SpriteManager::GetSprite(std::string key)
 	return Instance().privGetSprite(key);
 }
 
+void SpriteManager::Terminate()
+{
+	delete pInstance;
+	pInstance = nullptr;
+}
+
 void SpriteManager::privLoadSprite(std::string key, sf::Texture* pTex)
 {
 
@@ -100,10 +106,4 @@ sf::Sprite* SpriteManager::privGetSprite(std::string key)
 	assert(sprites.count(key) > 0); // Invalid Key: sprite key not found!
 
 	return sprites.at(key);
-}
-
-void SpriteManager::Terminate()
-{
-	delete pInstance;
-	pInstance = nullptr;
 }

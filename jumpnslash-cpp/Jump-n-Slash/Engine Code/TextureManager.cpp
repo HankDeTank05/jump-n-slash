@@ -31,6 +31,12 @@ sf::Texture* TextureManager::GetTexture(std::string key)
 	return Instance().privGetTexture(key);
 }
 
+void TextureManager::Terminate()
+{
+	delete pInstance;
+	pInstance = nullptr;
+}
+
 void TextureManager::privLoadTexture(std::string key, std::string filename, bool smooth)
 {
 	assert(textures.count(key) == 0); // Invalid Key: texture key already exists!
@@ -50,10 +56,4 @@ sf::Texture* TextureManager::privGetTexture(std::string key)
 	assert(textures.count(key) > 0); // Invalid Key: texture key not found!
 
 	return textures.at(key);
-}
-
-void TextureManager::Terminate()
-{
-	delete pInstance;
-	pInstance = nullptr;
 }

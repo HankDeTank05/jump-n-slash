@@ -108,17 +108,17 @@ public: // api functions
 	*/
 	static sf::Texture* GetTexture(std::string key);
 
-private: // private functions
+private: // engine-only api functions
+	friend class TextureManagerAttorney;
+	static void Terminate();
+
+private: // private api backend functions
 	void privLoadTexture(std::string key, std::string filename, bool smooth);
 	sf::Texture* privGetTexture(std::string key);
 
 private: // member variables
 	std::map<std::string, sf::Texture*> textures; /*!< The map containing every texture loaded into the engine. */
 	const std::string FOLDER_NAME = "assets/textures/"; /*!< The name of the folder that texture files will be loaded from. */
-
-private: // engine-only api functions
-	friend class TextureManagerAttorney;
-	static void Terminate();
 };
 
 #endif

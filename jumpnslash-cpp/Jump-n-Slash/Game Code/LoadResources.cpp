@@ -6,7 +6,7 @@
 
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
-#include "../Engine Code/MapManager.h"
+#include "../Engine Code/GridManager.h"
 
 #include "Level0.h"
 
@@ -25,12 +25,26 @@ void JumpSlashEngine::LoadResources()
 	// parse the json file for level tiles to add
 	//std::ifstream file("..\\..\\..\\tools\\formatting_rules.json");
 	//nlohmann::json data = nlohmann::json::parse(file);
-	
-	TextureManager::LoadTexture("block solid", "leveltiles/block_solid_32.png");
 
+	TextureManager::LoadTexture("block solid", "leveltiles/block_solid_32.png");
 	SpriteManager::LoadSprite("block solid", "block solid");
 
-	MapManager::LoadMap("test", "test.txt");
+	TextureManager::LoadTexture("indicator room height", "leveltiles/indicator_room_height_32.png");
+	SpriteManager::LoadSprite("indicator room height", "indicator room height");
+
+	TextureManager::LoadTexture("indicator room origin", "leveltiles/indicator_room_origin_32.png");
+	SpriteManager::LoadSprite("indicator room origin", "indicator room origin");
+
+	TextureManager::LoadTexture("indicator room origin start", "leveltiles/indicator_room_origin_start_32.png");
+	SpriteManager::LoadSprite("indicator room origin start", "indicator room origin start");
+
+	TextureManager::LoadTexture("indicator room width", "leveltiles/indicator_room_width_32.png");
+	SpriteManager::LoadSprite("indicator room width", "indicator room width");
+
+	TextureManager::LoadTexture("indicator spawn player right", "leveltiles/indicator_spawn_player_right_32.png");
+	SpriteManager::LoadSprite("indicator spawn player right", "indicator spawn player right");
+
+	GridManager::LoadGrid("test", "test.txt");
 
 	SetStartScene(new Level0());
 }
