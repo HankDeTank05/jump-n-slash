@@ -91,8 +91,11 @@
     <Filter Include="Source Files\Game Code\Scenes">
       <UniqueIdentifier>{5e9b3079-2e05-4406-b849-155b97e9c9f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\LevelMap">
+    <Filter Include="Source Files\Game Code\Level Data">
       <UniqueIdentifier>{1eb88e99-537a-41b8-b56a-d933290b1e45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Level Data\LeveTile dervied classes">
+      <UniqueIdentifier>{52280e2c-ba7a-40e8-838d-256cc8d2b504}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -235,13 +238,22 @@
       <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\LevelMap.cpp">
-      <Filter>Source Files\Game Code\LevelMap</Filter>
+      <Filter>Source Files\Game Code\Level Data</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\GridManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\GridManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\LevelTile.cpp">
+      <Filter>Source Files\Game Code\Level Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\BlockBreakable.cpp">
+      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\BlockHazard.cpp">
+      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -402,13 +414,22 @@
       <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\LevelMap.h">
-      <Filter>Source Files\Game Code\LevelMap</Filter>
+      <Filter>Source Files\Game Code\Level Data</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\GridManager.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\GridManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\LevelTile.h">
+      <Filter>Source Files\Game Code\Level Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\BlockBreakable.h">
+      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\BlockHazard.h">
+      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

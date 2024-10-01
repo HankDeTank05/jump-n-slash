@@ -6,6 +6,7 @@
 class BlockBreakable : public LevelTile
 {
 public:
+	BlockBreakable() = delete;
 	BlockBreakable(sf::Vector2f pos);
 	BlockBreakable(const BlockBreakable& bb) = delete;
 	BlockBreakable& operator=(const BlockBreakable& bb) = delete;
