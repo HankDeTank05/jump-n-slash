@@ -49,10 +49,22 @@ var NAVTREE =
       [ "The Scene Base Class", "_creating_scene.html#baseClass", null ],
       [ "Your Derived Scene Class", "_creating_scene.html#derivedClass", [
         [ "The Essentials", "_creating_scene.html#derivedClass_essentials", null ],
-        [ "The Init() Function", "_creating_scene.html#derivedClass_init", null ],
-        [ "The End() Function", "_creating_scene.html#derivedClass_end", null ],
+        [ "The Init() and End() Functions", "_creating_scene.html#derivedClass_initEnd", null ],
         [ "Member Variables", "_creating_scene.html#derivedClass_members", null ]
       ] ]
+    ] ],
+    [ "Creating a Game Object", "_creating_game_object.html", [
+      [ "The Update System", "_creating_game_object.html#updateSystem", [
+        [ "Example", "_creating_game_object.html#updateSystem_exampleCode", null ]
+      ] ],
+      [ "The Draw System", "_creating_game_object.html#drawSystem", [
+        [ "Example", "_creating_game_object.html#drawSystem_exampleCode", null ]
+      ] ],
+      [ "The Input System", "_creating_game_object.html#inputSystem", [
+        [ "Example", "_creating_game_object.html#inputSystem_exampleCode", null ]
+      ] ],
+      [ "The Alarm System (coming soon)", "_creating_game_object.html#alarmSystem", null ],
+      [ "The Collision System (coming soon)", "_creating_game_object.html#collisionSystem", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -71,7 +83,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_command_8h_source.html"
+"_block_breakable_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -15,11 +15,6 @@ BlockBreakable::~BlockBreakable()
 	// do nothing
 }
 
-void BlockBreakable::Update()
-{
-	// do nothing
-}
-
 void BlockBreakable::Break()
 {
 	EnqueueForDrawDeregistration();

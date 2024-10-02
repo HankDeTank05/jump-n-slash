@@ -40,13 +40,13 @@ protected:
 	// TODO: figure out gamepad button inputs
 	// TODO: figure out gamepad stick inputs
 
-	void EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg); // TODO: documentation for InputObject::EnqueueForKeyRegistration
-	void EnqueueForKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg); // TODO: documentation for InputObject::EnqueueForKeyDeregistration
+	void RequestKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg); // TODO: documentation for InputObject::RequestKeyRegistration
+	void RequestKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg); // TODO: documentation for InputObject::RequestKeyDeregistration
 
-	void EnqueueForMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg); // TODO: documentation for InputObject::EnqueueForMouseBtnRegistration
-	void EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg); // TODO: documentation for InputObject::EnqueueForMouseBtnDeregistration
-	void EnqueueForMouseCursorRegistration(); // TODO: documentation for InputObject::EnqueueForMouseCursorRegistration
-	void EnqueueForMouseCursorDeregistration(); // TODO: documentation for InputObject::EnqueueForMouseCursorDeregistration
+	void RequestMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg); // TODO: documentation for InputObject::RequestMouseBtnRegistration
+	void RequestMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg); // TODO: documentation for InputObject::RequestMouseBtnDeregistration
+	void RequestMouseCursorRegistration(); // TODO: documentation for InputObject::RequestMouseCursorRegistration
+	void RequestMouseCursorDeregistration(); // TODO: documentation for InputObject::RequestMouseCursorDeregistration
 
 private:
 	void RegisterKey(sf::Keyboard::Key key, KeyEvent eventToReg);

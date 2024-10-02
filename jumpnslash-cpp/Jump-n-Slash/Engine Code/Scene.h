@@ -8,8 +8,8 @@
 // forward declarations
 class Command;
 class RegistrationBroker;
-class UpdatableObject;
-class DrawableObject;
+class UpdateObject;
+class DrawObject;
 
 class Scene
 {
@@ -28,11 +28,11 @@ private:
 	void Draw();
 
 	// update registration
-	UpdateManager::UpdateListRef Register(UpdatableObject* pUpdatable);
+	UpdateManager::UpdateListRef Register(UpdateObject* pUpdatable);
 	void Deregister(UpdateManager::UpdateListRef updateListRef);
 
 	// draw registration
-	DrawManager::DrawListRef Register(DrawableObject* pDrawable);
+	DrawManager::DrawListRef Register(DrawObject* pDrawable);
 	void Deregister(DrawManager::DrawListRef drawListRef);
 
 	// input registration

@@ -1,0 +1,34 @@
+\doxysection{Camera.\+h}
+\hypertarget{_camera_8h_source}{}\label{_camera_8h_source}\index{Jump-\/n-\/Slash/Engine Code/Camera.h@{Jump-\/n-\/Slash/Engine Code/Camera.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CAMERA\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CAMERA\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_camera}{Camera}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{class_camera}{Camera}}()\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{class_camera}{Camera}}(\textcolor{keywordtype}{float}\ centerX,\ \textcolor{keywordtype}{float}\ centerY);}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{class_camera}{Camera}}(sf::Vector2f\ size,\ sf::Vector2f\ center);}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_camera}{Camera}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_camera}{Camera}}\&\ c)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_camera}{Camera}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_camera}{Camera}}\&\ c)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_camera}{\string~Camera}}();}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ SetCenter(\textcolor{keywordtype}{float}\ newCenterX,\ \textcolor{keywordtype}{float}\ newCenterY);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Camera::SetCenter}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ Move(\textcolor{keywordtype}{float}\ centerDeltaX,\ \textcolor{keywordtype}{float}\ centerDeltaY);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Camera::Move}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ SetRotation(\textcolor{keywordtype}{float}\ rotationDegrees);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Camera::SetRotation}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ Rotate(\textcolor{keywordtype}{float}\ degreesDelta);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Camera::Rotate}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ SetSize(\textcolor{keywordtype}{float}\ viewWidth,\ \textcolor{keywordtype}{float}\ viewHeight);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Camera::SetSize}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ Zoom(\textcolor{keywordtype}{float}\ relativeScale);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Camera::Zoom}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ SetViewport(\textcolor{keywordtype}{float}\ screenX,\ \textcolor{keywordtype}{float}\ screenY,\ \textcolor{keywordtype}{float}\ screenWidth,\ \textcolor{keywordtype}{float}\ screenHeight);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ Camera::SetViewport}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ sf::View\ view;}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,14 +1,14 @@
 #include "DrawManager.h"
 
 #include <cassert>
-#include "DrawableObjectAttorney.h"
+#include "DrawObjectAttorney.h"
 
 DrawManager::~DrawManager()
 {
 	drawList.clear();
 }
 
-DrawManager::DrawListRef DrawManager::Register(DrawableObject* pDrawable)
+DrawManager::DrawListRef DrawManager::Register(DrawObject* pDrawable)
 {
 	return drawList.insert(drawList.end(), pDrawable);
 }
@@ -22,6 +22,6 @@ void DrawManager::Draw()
 {
 	for (DrawList::iterator it = drawList.begin(); it != drawList.end(); it++)
 	{
-		DrawableObjectAttorney::GameLoop::Draw(*it);
+		DrawObjectAttorney::GameLoop::Draw(*it);
 	}
 }

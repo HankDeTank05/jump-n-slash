@@ -1,0 +1,65 @@
+\doxysection{Level\+Map Class Reference}
+\hypertarget{class_level_map}{}\label{class_level_map}\index{LevelMap@{LevelMap}}
+Inheritance diagram for Level\+Map\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_level_map}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_level_map_a354441e53be83325a0f5638aafd5e8ee}\label{class_level_map_a354441e53be83325a0f5638aafd5e8ee} 
+using {\bfseries Room\+List\+Ref} = Room\+List\+::iterator
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_level_map_af203675d5e12f4483880c17b97e2eb5e}\label{class_level_map_af203675d5e12f4483880c17b97e2eb5e} 
+{\bfseries Level\+Map} (std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \texorpdfstring{$\ast$}{*}grid)
+\item 
+\Hypertarget{class_level_map_a796405742b6247b820044c075f0e2598}\label{class_level_map_a796405742b6247b820044c075f0e2598} 
+{\bfseries Level\+Map} (const \mbox{\hyperlink{class_level_map}{Level\+Map}} \&lm)=delete
+\item 
+\Hypertarget{class_level_map_a81b118e3d5a038bf240d9f5d6bc4eb02}\label{class_level_map_a81b118e3d5a038bf240d9f5d6bc4eb02} 
+\mbox{\hyperlink{class_level_map}{Level\+Map}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_level_map}{Level\+Map}} \&lm)=delete
+\item 
+virtual void \mbox{\hyperlink{class_level_map_a7902cf952bf9d4e0398e09b287ccaaf5}{Draw}} () override
+\item 
+\Hypertarget{class_level_map_a77365007efd749c624e589d9142dd659}\label{class_level_map_a77365007efd749c624e589d9142dd659} 
+sf\+::\+Vector2f {\bfseries Get\+Starting\+Spawn\+Point} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Draw\+Object} (const \mbox{\hyperlink{class_draw_object}{Draw\+Object}} \&dob)=delete
+\item 
+\mbox{\hyperlink{class_draw_object}{Draw\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_draw_object}{Draw\+Object}} \&dob)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Request\+Draw\+Registration} ()
+\item 
+void {\bfseries Request\+Draw\+Deregistration} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_level_map_a7902cf952bf9d4e0398e09b287ccaaf5}\index{LevelMap@{LevelMap}!Draw@{Draw}}
+\index{Draw@{Draw}!LevelMap@{LevelMap}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_level_map_a7902cf952bf9d4e0398e09b287ccaaf5} 
+void Level\+Map\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Jump-\/n-\/\+Slash/\+Game Code/Level\+Map.\+h\item 
+Jump-\/n-\/\+Slash/\+Game Code/Level\+Map.\+cpp\end{DoxyCompactItemize}

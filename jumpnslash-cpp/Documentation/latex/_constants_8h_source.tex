@@ -5,12 +5,30 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CONSTANTS\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CONSTANTS\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ general\ constants}}
 \DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keyword}{const}\ sf::String\ WINDOW\_NAME\ =\ \textcolor{stringliteral}{"{}Jump\ n\ Slash"{}};}
-\DoxyCodeLine{00007\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WINDOW\_WIDTH\ =\ 128;}
-\DoxyCodeLine{00008\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WINDOW\_HEIGHT\ =\ 128;}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{const}\ std::string\ WINDOW\_NAME\ =\ \textcolor{stringliteral}{"{}Jump\ n\ Slash"{}};}
+\DoxyCodeLine{00007\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WINDOW\_WIDTH\ =\ 1280;}
+\DoxyCodeLine{00008\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ WINDOW\_HEIGHT\ =\ 720;}
+\DoxyCodeLine{00009\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ MAX\_LEVEL\_SIZE\ =\ 1024;}
+\DoxyCodeLine{00010\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ TILE\_SIZE\ =\ 32;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ TILE\_SIZE\_F\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(TILE\_SIZE);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ level\ tile\ keys,\ for\ ease\ of\ use}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{const}\ std::string\ KEY\_BLOCK\_BREAKABLE\ =\ \textcolor{stringliteral}{"{}block\ breakable"{}};}
+\DoxyCodeLine{00016\ \textcolor{keyword}{const}\ std::string\ KEY\_BLOCK\_HAZARD\ =\ \textcolor{stringliteral}{"{}block\ hazard"{}};}
+\DoxyCodeLine{00017\ \textcolor{keyword}{const}\ std::string\ KEY\_BLOCK\_SOLID\ =\ \textcolor{stringliteral}{"{}block\ solid"{}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{const}\ std::string\ KEY\_PLATFORM\_SEMISOLID\ =\ \textcolor{stringliteral}{"{}platform\ semisolid"{}};}
+\DoxyCodeLine{00019\ \textcolor{keyword}{const}\ std::string\ KEY\_INDICATOR\_ROOM\_ORIGIN\_START\ =\ \textcolor{stringliteral}{"{}indicator\ room\ origin\ start"{}};}
+\DoxyCodeLine{00020\ \textcolor{keyword}{const}\ std::string\ KEY\_INDICATOR\_ROOM\_ORIGIN\ =\ \textcolor{stringliteral}{"{}indicator\ room\ origin"{}};}
+\DoxyCodeLine{00021\ \textcolor{keyword}{const}\ std::string\ KEY\_INDICATOR\_ROOM\_WIDTH\ =\ \textcolor{stringliteral}{"{}indicator\ room\ width"{}};}
+\DoxyCodeLine{00022\ \textcolor{keyword}{const}\ std::string\ KEY\_INDICATOR\_ROOM\_HEIGHT\ =\ \textcolor{stringliteral}{"{}indicator\ room\ height"{}};}
+\DoxyCodeLine{00023\ \textcolor{keyword}{const}\ std::string\ KEY\_INDICATOR\_SPAWN\_PLAYER\_LEFT\ =\ \textcolor{stringliteral}{"{}indicator\ spawn\ player\ left"{}};}
+\DoxyCodeLine{00024\ \textcolor{keyword}{const}\ std::string\ KEY\_INDICATOR\_SPAWN\_PLAYER\_RIGHT\ =\ \textcolor{stringliteral}{"{}indicator\ spawn\ player\ right"{}};}
+\DoxyCodeLine{00025\ \textcolor{keyword}{const}\ std::string\ KEY\_INDICATOR\_SPAWN\_ENEMY\_LEFT\ =\ \textcolor{stringliteral}{"{}indicator\ spawn\ enemy\ left"{}};}
+\DoxyCodeLine{00026\ \textcolor{keyword}{const}\ std::string\ KEY\_INDICATOR\_SPAWN\_ENEMY\_RIGHT\ =\ \textcolor{stringliteral}{"{}indicator\ spawn\ enemy\ right"{}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

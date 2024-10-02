@@ -1,9 +1,10 @@
 #include "DrawRegistrationCommand.h"
 
 #include <cassert>
-#include "DrawableObjectAttorney.h"
 
-DrawRegistrationCommand::DrawRegistrationCommand(DrawableObject* _pDrawObj)
+#include "DrawObjectAttorney.h"
+
+DrawRegistrationCommand::DrawRegistrationCommand(DrawObject* _pDrawObj)
 	: pDrawable(_pDrawObj)
 {
 	// do nothing
@@ -24,5 +25,5 @@ DrawRegistrationCommand& DrawRegistrationCommand::operator=(const DrawRegistrati
 
 void DrawRegistrationCommand::Execute()
 {
-	DrawableObjectAttorney::Registration::Register(pDrawable);
+	DrawObjectAttorney::Registration::Register(pDrawable);
 }

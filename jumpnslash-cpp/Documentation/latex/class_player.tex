@@ -9,28 +9,85 @@ Inheritance diagram for Player\+:\begin{figure}[H]
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\Hypertarget{class_player_a1ff921d722476bca1e2732536a081e75}\label{class_player_a1ff921d722476bca1e2732536a081e75} 
+{\bfseries Player} (sf\+::\+Vector2f spawn\+Point)
+\item 
 \Hypertarget{class_player_a91d1e792414561a3efa33058b3c7635f}\label{class_player_a91d1e792414561a3efa33058b3c7635f} 
 {\bfseries Player} (const \mbox{\hyperlink{class_player}{Player}} \&p)=delete
 \item 
 \Hypertarget{class_player_afdecb3078358077642aa94059167e465}\label{class_player_afdecb3078358077642aa94059167e465} 
 \mbox{\hyperlink{class_player}{Player}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_player}{Player}} \&p)=delete
 \item 
+virtual void \mbox{\hyperlink{class_player_a20bfb1cb738f6b00f589207ce460491e}{Update}} (float delta\+Time) override
+\item 
 virtual void \mbox{\hyperlink{class_player_a5b60ad157bb1e8debca89ed6903ca2a4}{Draw}} () override
+\item 
+virtual void \mbox{\hyperlink{class_player_a726a2a91a52257abf1d4c8614421644b}{Key\+Pressed}} (sf\+::\+Keyboard\+::\+Key key) override
+\item 
+virtual void \mbox{\hyperlink{class_player_a490acdcc808e1581a8094bf2571d7b2d}{Key\+Released}} (sf\+::\+Keyboard\+::\+Key key) override
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_update_object}{Update\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Drawable\+Object} (const \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \&dob)=delete
+{\bfseries Update\+Object} (const \mbox{\hyperlink{class_update_object}{Update\+Object}} \&uo)=delete
 \item 
-\mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \&dob)=delete
+\mbox{\hyperlink{class_update_object}{Update\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_update_object}{Update\+Object}} \&uo)=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Draw\+Object} (const \mbox{\hyperlink{class_draw_object}{Draw\+Object}} \&dob)=delete
+\item 
+\mbox{\hyperlink{class_draw_object}{Draw\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_draw_object}{Draw\+Object}} \&dob)=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_input_object}{Input\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Input\+Object} (const \mbox{\hyperlink{class_input_object}{Input\+Object}} \&io)=delete
+\item 
+\mbox{\hyperlink{class_input_object}{Input\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_input_object}{Input\+Object}} \&io)=delete
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_afd52995b128ff34a6041881c7fce41cf}\label{class_player_afd52995b128ff34a6041881c7fce41cf} 
+class {\bfseries Player\+Attorney}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
-\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_update_object}{Update\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries Enqueue\+For\+Draw\+Registration} ()
+void {\bfseries Request\+Update\+Registration} ()
 \item 
-void {\bfseries Enqueue\+For\+Draw\+Deregistration} ()
+void {\bfseries Request\+Update\+Deregistration} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Request\+Draw\+Registration} ()
+\item 
+void {\bfseries Request\+Draw\+Deregistration} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_input_object}{Input\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries Mouse\+Btn\+Pressed} (sf\+::\+Mouse\+::\+Button btn)
+\item 
+virtual void {\bfseries Mouse\+Btn\+Released} (sf\+::\+Mouse\+::\+Button btn)
+\item 
+virtual void {\bfseries Mouse\+Cursor\+Moved} (sf\+::\+Vector2i pos, sf\+::\+Vector2i delta)
+\item 
+void {\bfseries Request\+Key\+Registration} (sf\+::\+Keyboard\+::\+Key key, Key\+Event event\+To\+Reg)
+\item 
+void {\bfseries Request\+Key\+Deregistration} (sf\+::\+Keyboard\+::\+Key key, Key\+Event event\+To\+Dereg)
+\item 
+void {\bfseries Request\+Mouse\+Btn\+Registration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Reg)
+\item 
+void {\bfseries Request\+Mouse\+Btn\+Deregistration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Dereg)
+\item 
+void {\bfseries Request\+Mouse\+Cursor\+Registration} ()
+\item 
+void {\bfseries Request\+Mouse\+Cursor\+Deregistration} ()
 \end{DoxyCompactItemize}
 
 
@@ -43,7 +100,37 @@ void Player\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspac
 
 
 
-Reimplemented from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}.
+Reimplemented from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}.
+
+\Hypertarget{class_player_a726a2a91a52257abf1d4c8614421644b}\index{Player@{Player}!KeyPressed@{KeyPressed}}
+\index{KeyPressed@{KeyPressed}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{KeyPressed()}{KeyPressed()}}
+{\footnotesize\ttfamily \label{class_player_a726a2a91a52257abf1d4c8614421644b} 
+void Player\+::\+Key\+Pressed (\begin{DoxyParamCaption}\item[{sf\+::\+Keyboard\+::\+Key}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
+
+\Hypertarget{class_player_a490acdcc808e1581a8094bf2571d7b2d}\index{Player@{Player}!KeyReleased@{KeyReleased}}
+\index{KeyReleased@{KeyReleased}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{KeyReleased()}{KeyReleased()}}
+{\footnotesize\ttfamily \label{class_player_a490acdcc808e1581a8094bf2571d7b2d} 
+void Player\+::\+Key\+Released (\begin{DoxyParamCaption}\item[{sf\+::\+Keyboard\+::\+Key}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
+
+\Hypertarget{class_player_a20bfb1cb738f6b00f589207ce460491e}\index{Player@{Player}!Update@{Update}}
+\index{Update@{Update}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_player_a20bfb1cb738f6b00f589207ce460491e} 
+void Player\+::\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+Time}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_update_object}{Update\+Object}}.
 
 
 

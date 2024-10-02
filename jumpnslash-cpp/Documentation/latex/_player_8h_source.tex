@@ -6,22 +6,46 @@
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAYER\_H}}
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/DrawableObject.h"{}}}
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_drawable_object}{DrawableObject}}}
-\DoxyCodeLine{00008\ \{}
-\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}();}
-\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player}{Player}}\&\ p)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player}{Player}}\&\ p)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_player}{\string~Player}}();}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00016\ \ \ \ \ }
-\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00018\ \ \ \ \ sf::CircleShape\ circle;}
-\DoxyCodeLine{00019\ \};}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/UpdateObject.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/DrawObject.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/InputObject.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player_move_state}{PlayerMoveState}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_update_object}{UpdateObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_draw_object}{DrawObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_input_object}{InputObject}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}()\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(sf::Vector2f\ spawnPoint);}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player}{Player}}\&\ p)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player}{Player}}\&\ p)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_player}{\string~Player}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ KeyPressed(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ KeyReleased(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ player\ accessors.\ for\ selective\ access\ only\ (thru\ attorney)}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player_attorney}{PlayerAttorney}};}
+\DoxyCodeLine{00030\ \ \ \ \ sf::Vector2f\ GetPos();}
+\DoxyCodeLine{00031\ \ \ \ \ sf::Vector2f\ GetPosDelta();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ player\ mutators.\ for\ selective\ access\ only\ (thru\ attorney)}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ SetSpawnPoint(sf::Vector2f\ spawnPoint);}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00037\ \ \ \ \ sf::Vector2f\ pos;}
+\DoxyCodeLine{00038\ \ \ \ \ sf::Vector2f\ posDelta;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ speed;}
+\DoxyCodeLine{00040\ \ \ \ \ sf::Sprite*\ pSprite;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}*\ pCurrentState;}
+\DoxyCodeLine{00042\ \ \ \ \ sf::Vector2f\ respawnPoint;}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

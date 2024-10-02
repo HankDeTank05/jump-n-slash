@@ -1,8 +1,8 @@
 #include "UpdateDeregistrationCommand.h"
 
-#include "UpdatableObjectAttorney.h"
+#include "UpdateObjectAttorney.h"
 
-UpdateDeregistrationCommand::UpdateDeregistrationCommand(UpdatableObject* _pUpdatable)
+UpdateDeregistrationCommand::UpdateDeregistrationCommand(UpdateObject* _pUpdatable)
 	: pUpdatable(_pUpdatable)
 {
 	// do nothing
@@ -23,5 +23,5 @@ UpdateDeregistrationCommand& UpdateDeregistrationCommand::operator=(const Update
 
 void UpdateDeregistrationCommand::Execute()
 {
-	UpdatableObjectAttorney::Registration::Deregister(pUpdatable);
+	UpdateObjectAttorney::Registration::Deregister(pUpdatable);
 }

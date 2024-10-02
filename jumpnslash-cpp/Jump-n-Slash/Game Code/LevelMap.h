@@ -7,12 +7,12 @@
 #include <SFML/Graphics.hpp>
 
 #include "Constants.h"
-#include "../Engine Code/DrawableObject.h"
+#include "../Engine Code/DrawObject.h"
 
 // forward declarations
 class MapTile;
 
-class LevelMap : public DrawableObject
+class LevelMap : public DrawObject
 {
 public:
 	LevelMap() = delete;

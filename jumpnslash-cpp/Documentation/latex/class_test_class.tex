@@ -15,7 +15,7 @@ Inheritance diagram for Test\+Class\+:\begin{figure}[H]
 \Hypertarget{class_test_class_a4f6c790a8ee34d31ebce6ff29fe2dd3d}\label{class_test_class_a4f6c790a8ee34d31ebce6ff29fe2dd3d} 
 \mbox{\hyperlink{class_test_class}{Test\+Class}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_test_class}{Test\+Class}} \&p)=delete
 \item 
-virtual void \mbox{\hyperlink{class_test_class_ac58818679317ba194e67987d077b97d1}{Update}} () override
+virtual void \mbox{\hyperlink{class_test_class_abba6bf085748fdc324cc68661fea7189}{Update}} (float delta\+Time) override
 \item 
 virtual void \mbox{\hyperlink{class_test_class_a78894580a70988ad537f12f35ea26230}{Draw}} () override
 \item 
@@ -29,19 +29,19 @@ virtual void \mbox{\hyperlink{class_test_class_af9de31853d4b816634fd034331e787d7
 \item 
 virtual void \mbox{\hyperlink{class_test_class_a90869daadb5279694f8e3c58df3dfc23}{Mouse\+Cursor\+Moved}} (sf\+::\+Vector2i pos, sf\+::\+Vector2i delta) override
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}}}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_update_object}{Update\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Updatable\+Object} (const \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}} \&uo)=delete
+{\bfseries Update\+Object} (const \mbox{\hyperlink{class_update_object}{Update\+Object}} \&uo)=delete
 \item 
-\mbox{\hyperlink{class_updatable_object}{Updatable\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}} \&uo)=delete
+\mbox{\hyperlink{class_update_object}{Update\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_update_object}{Update\+Object}} \&uo)=delete
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Drawable\+Object} (const \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \&dob)=delete
+{\bfseries Draw\+Object} (const \mbox{\hyperlink{class_draw_object}{Draw\+Object}} \&dob)=delete
 \item 
-\mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}} \&dob)=delete
+\mbox{\hyperlink{class_draw_object}{Draw\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_draw_object}{Draw\+Object}} \&dob)=delete
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_input_object}{Input\+Object}}}
 \begin{DoxyCompactItemize}
@@ -51,34 +51,34 @@ virtual void \mbox{\hyperlink{class_test_class_a90869daadb5279694f8e3c58df3dfc23
 \mbox{\hyperlink{class_input_object}{Input\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_input_object}{Input\+Object}} \&io)=delete
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Additional Inherited Members}
-\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}}}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_update_object}{Update\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries Enqueue\+For\+Update\+Registration} ()
+void {\bfseries Request\+Update\+Registration} ()
 \item 
-void {\bfseries Enqueue\+For\+Update\+Deregistration} ()
+void {\bfseries Request\+Update\+Deregistration} ()
 \end{DoxyCompactItemize}
-\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries Enqueue\+For\+Draw\+Registration} ()
+void {\bfseries Request\+Draw\+Registration} ()
 \item 
-void {\bfseries Enqueue\+For\+Draw\+Deregistration} ()
+void {\bfseries Request\+Draw\+Deregistration} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_input_object}{Input\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries Enqueue\+For\+Key\+Registration} (sf\+::\+Keyboard\+::\+Key key, Key\+Event event\+To\+Reg)
+void {\bfseries Request\+Key\+Registration} (sf\+::\+Keyboard\+::\+Key key, Key\+Event event\+To\+Reg)
 \item 
-void {\bfseries Enqueue\+For\+Key\+Deregistration} (sf\+::\+Keyboard\+::\+Key key, Key\+Event event\+To\+Dereg)
+void {\bfseries Request\+Key\+Deregistration} (sf\+::\+Keyboard\+::\+Key key, Key\+Event event\+To\+Dereg)
 \item 
-void {\bfseries Enqueue\+For\+Mouse\+Btn\+Registration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Reg)
+void {\bfseries Request\+Mouse\+Btn\+Registration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Reg)
 \item 
-void {\bfseries Enqueue\+For\+Mouse\+Btn\+Deregistration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Dereg)
+void {\bfseries Request\+Mouse\+Btn\+Deregistration} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Dereg)
 \item 
-void {\bfseries Enqueue\+For\+Mouse\+Cursor\+Registration} ()
+void {\bfseries Request\+Mouse\+Cursor\+Registration} ()
 \item 
-void {\bfseries Enqueue\+For\+Mouse\+Cursor\+Deregistration} ()
+void {\bfseries Request\+Mouse\+Cursor\+Deregistration} ()
 \end{DoxyCompactItemize}
 
 
@@ -91,7 +91,7 @@ void Test\+Class\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\
 
 
 
-Reimplemented from \mbox{\hyperlink{class_drawable_object}{Drawable\+Object}}.
+Reimplemented from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}.
 
 \Hypertarget{class_test_class_a79b2b83aaafeadcaf2ea424aacb105e0}\index{TestClass@{TestClass}!KeyPressed@{KeyPressed}}
 \index{KeyPressed@{KeyPressed}!TestClass@{TestClass}}
@@ -143,15 +143,15 @@ void Test\+Class\+::\+Mouse\+Cursor\+Moved (\begin{DoxyParamCaption}\item[{sf\+:
 
 Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
 
-\Hypertarget{class_test_class_ac58818679317ba194e67987d077b97d1}\index{TestClass@{TestClass}!Update@{Update}}
+\Hypertarget{class_test_class_abba6bf085748fdc324cc68661fea7189}\index{TestClass@{TestClass}!Update@{Update}}
 \index{Update@{Update}!TestClass@{TestClass}}
 \doxysubsubsection{\texorpdfstring{Update()}{Update()}}
-{\footnotesize\ttfamily \label{class_test_class_ac58818679317ba194e67987d077b97d1} 
-void Test\+Class\+::\+Update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily \label{class_test_class_abba6bf085748fdc324cc68661fea7189} 
+void Test\+Class\+::\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+Time}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Reimplemented from \mbox{\hyperlink{class_updatable_object}{Updatable\+Object}}.
+Reimplemented from \mbox{\hyperlink{class_update_object}{Update\+Object}}.
 
 
 

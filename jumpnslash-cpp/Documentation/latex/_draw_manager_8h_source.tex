@@ -8,7 +8,7 @@
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <list>}}
 \DoxyCodeLine{00005\ }
 \DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
-\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_object}{DrawObject}};}
 \DoxyCodeLine{00008\ }
 \DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_manager}{DrawManager}}}
 \DoxyCodeLine{00010\ \{}
@@ -19,11 +19,11 @@
 \DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_draw_manager}{\string~DrawManager}}();}
 \DoxyCodeLine{00016\ }
 \DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{using\ }DrawList\ =\ std::list<DrawableObject*>;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{using\ }DrawList\ =\ std::list<DrawObject*>;}
 \DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{using\ }DrawListRef\ =\ DrawList::iterator;}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ DrawListRef\ Register(\mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawable);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawManager::Register}}
+\DoxyCodeLine{00022\ \ \ \ \ DrawListRef\ Register(\mbox{\hyperlink{class_draw_object}{DrawObject}}*\ pDrawable);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawManager::Register}}
 \DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister(DrawListRef\ drawListRef);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ DrawManager::Deregister}}
 \DoxyCodeLine{00024\ }
 \DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ Draw();}

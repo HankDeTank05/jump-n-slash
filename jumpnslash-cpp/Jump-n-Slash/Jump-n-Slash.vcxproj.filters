@@ -120,7 +120,7 @@
     <ClCompile Include="Engine Code\DrawManager.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\DrawableObject.cpp">
+    <ClCompile Include="Engine Code\DrawObject.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\RegistrationBroker.cpp">
@@ -135,7 +135,7 @@
     <ClCompile Include="Engine Code\SceneAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\DrawableObjectAttorney.cpp">
+    <ClCompile Include="Engine Code\DrawObjectAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp">
@@ -150,13 +150,13 @@
     <ClCompile Include="Engine Code\UpdateManager.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\UpdatableObject.cpp">
+    <ClCompile Include="Engine Code\UpdateObject.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\UpdateRegistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\UpdatableObjectAttorney.cpp">
+    <ClCompile Include="Engine Code\UpdateObjectAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\UpdateDeregistrationCommand.cpp">
@@ -284,7 +284,7 @@
     <ClInclude Include="Engine Code\DrawManager.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\DrawableObject.h">
+    <ClInclude Include="Engine Code\DrawObject.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\DesignerControls.h">
@@ -302,7 +302,7 @@
     <ClInclude Include="Engine Code\SceneAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\DrawableObjectAttorney.h">
+    <ClInclude Include="Engine Code\DrawObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\DrawDeregistrationCommand.h">
@@ -323,13 +323,13 @@
     <ClInclude Include="Engine Code\UpdateManager.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\UpdatableObject.h">
+    <ClInclude Include="Engine Code\UpdateObject.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\UpdateRegistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\UpdatableObjectAttorney.h">
+    <ClInclude Include="Engine Code\UpdateObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h">
@@ -451,16 +451,13 @@
     <Text Include="Game Code\1_EngineBasics.txt">
       <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
-    <Text Include="Game Code\4_CreatingGameObject1.txt">
+    <Text Include="Game Code\4_CreatingGameObject.txt">
       <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\2_UsingAssetManagers.txt">
       <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\3_CreatingScene.txt">
-      <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
-    </Text>
-    <Text Include="Game Code\5_CreatingGameObject2.txt">
       <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
   </ItemGroup>

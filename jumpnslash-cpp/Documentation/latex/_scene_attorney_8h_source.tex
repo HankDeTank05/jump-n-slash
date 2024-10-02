@@ -23,15 +23,15 @@
 \DoxyCodeLine{00019\ \ \ \ \ \{}
 \DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_jump_slash_engine}{JumpSlashEngine}};\ \textcolor{comment}{//\ TODO:\ change\ this\ to\ SceneManager\ when\ it's\ created}}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scene_attorney_1_1_update}{Update}}(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scene_attorney_1_1_update}{Update}}(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ \textcolor{keywordtype}{float}\ deltaTime);}
 \DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scene_attorney_1_1_draw}{Draw}}(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene);}
 \DoxyCodeLine{00024\ \ \ \ \ \};}
 \DoxyCodeLine{00025\ }
 \DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene_attorney_1_1_commands}{Commands}}}
 \DoxyCodeLine{00027\ \ \ \ \ \{}
 \DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_updatable_object}{UpdatableObject}};}
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object}{UpdateObject}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_object}{DrawObject}};}
 \DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_input_object}{InputObject}};}
 \DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ AddCommand(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ \mbox{\hyperlink{class_command}{Command}}*\ pCmd);}
 \DoxyCodeLine{00033\ \ \ \ \ \};}
@@ -39,16 +39,16 @@
 \DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene_attorney_1_1_update}{Update}}}
 \DoxyCodeLine{00036\ \ \ \ \ \{}
 \DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_updatable_object}{UpdatableObject}};}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ UpdateManager::UpdateListRef\ Register(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ \mbox{\hyperlink{class_updatable_object}{UpdatableObject}}*\ pUpdatable);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object}{UpdateObject}};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ UpdateManager::UpdateListRef\ Register(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ \mbox{\hyperlink{class_update_object}{UpdateObject}}*\ pUpdatable);}
 \DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Deregister(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ UpdateManager::UpdateListRef\ deleteRef);}
 \DoxyCodeLine{00041\ \ \ \ \ \};}
 \DoxyCodeLine{00042\ }
 \DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scene_attorney_1_1_draw}{Draw}}}
 \DoxyCodeLine{00044\ \ \ \ \ \{}
 \DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ DrawManager::DrawListRef\ Register(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ \mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawable);}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_object}{DrawObject}};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ DrawManager::DrawListRef\ Register(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ \mbox{\hyperlink{class_draw_object}{DrawObject}}*\ pDrawable);}
 \DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Deregister(\mbox{\hyperlink{class_scene}{Scene}}*\ pScene,\ DrawManager::DrawListRef\ deleteRef);}
 \DoxyCodeLine{00049\ \ \ \ \ \};}
 \DoxyCodeLine{00050\ }

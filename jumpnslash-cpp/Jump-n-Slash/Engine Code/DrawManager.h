@@ -4,7 +4,7 @@
 #include <list>
 
 // forward declarations
-class DrawableObject;
+class DrawObject;
 
 class DrawManager
 {
@@ -15,11 +15,11 @@ public:
 	virtual ~DrawManager();
 
 private:
-	using DrawList = std::list<DrawableObject*>;
+	using DrawList = std::list<DrawObject*>;
 public:
 	using DrawListRef = DrawList::iterator;
 
-	DrawListRef Register(DrawableObject* pDrawable); // TODO: documentation for DrawManager::Register
+	DrawListRef Register(DrawObject* pDrawable); // TODO: documentation for DrawManager::Register
 	void Deregister(DrawListRef drawListRef); // TODO: documentation for DrawManager::Deregister
 
 	void Draw();

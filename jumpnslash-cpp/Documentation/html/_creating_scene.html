@@ -157,20 +157,19 @@ The Essentials</h2>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#endif</span></div>
 </div><!-- fragment --><p> We also need to declare overrides for the <code>Init()</code> and <code>End()</code> functions. What are they for, though?</p>
-<h2><a class="anchor" id="derivedClass_init"></a>
-The <code>Init()</code> Function</h2>
+<h2><a class="anchor" id="derivedClass_initEnd"></a>
+The <code>Init()</code> and <code>End()</code> Functions</h2>
 <p>You can think of the <code>Init()</code> function as a constructor (sort of). What is the purpose of a constructor?</p>
 <p>When an instance of an object is created, the constructor is called to do all of the required setup to create the object. It initializes member variables, and maybe runs some sort of logic involving those variables. Once the constructor has finished its work, the instance of that object is ready to use.</p>
 <p>In that sense, the <code>Init()</code> function serves a similar purpose to a constructor. Rather than having the constructor do all that work, the <code>Init()</code> function handles it instead. This way, you can re-initialize a single instance of a <a class="el" href="class_scene.html">Scene</a> object multiple times without having to delete that instance and re-construct it.</p>
 <p>To illustrate this concept, let's look at an example: Super Mario Bros. Let's say that each level in the game is it's own scene object. Without an <code>Init()</code> function, all of your setup logic is in the constructor, which means you would have to delete a perfectly valid and usable scene and re-construct it each time the player died, which is very inefficient. However, using an <code>Init()</code> function we can do partial setup in the constructor, and the rest of it (only the essentials) in the <code>Init()</code> function.</p>
-<h2><a class="anchor" id="derivedClass_end"></a>
-The <code>End()</code> Function</h2>
 <p>Similarly to how <code>Init()</code> serves as a constructor-like function, <code>End()</code> serves as a destructor-like function. You can have a partial "destruction" occur in the <code>End()</code> function without having to completely delete an object.</p>
 <p>TODO: expand on the explanation of the Scene::End function</p>
 <h2><a class="anchor" id="derivedClass_members"></a>
 Member Variables</h2>
 <p>(words go here)</p>
-<p>TODO: documentation for CreatingScene tutorial is incomplete </p>
+<p>TODO: documentation for CreatingScene tutorial is incomplete</p>
+<p>Previous tutorial: <a class="el" href="_using_asset_managers.html">Using the Asset Managers</a> / Next tutorial: <a class="el" href="_creating_game_object.html">Creating a Game Object</a> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

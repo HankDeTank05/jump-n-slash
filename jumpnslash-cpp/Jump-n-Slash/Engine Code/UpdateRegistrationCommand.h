@@ -4,13 +4,13 @@
 #include "Command.h"
 
 // forward declarations
-class UpdatableObject;
+class UpdateObject;
 
 class UpdateRegistrationCommand : public Command
 {
 public:
 	UpdateRegistrationCommand() = delete;
-	UpdateRegistrationCommand(UpdatableObject* pUpdatable);
+	UpdateRegistrationCommand(UpdateObject* pUpdatable);
 	UpdateRegistrationCommand(const UpdateRegistrationCommand& urc);
 	UpdateRegistrationCommand& operator=(const UpdateRegistrationCommand& urc);
 	virtual ~UpdateRegistrationCommand() = default;
@@ -18,7 +18,7 @@ public:
 	virtual void Execute() override;
 
 private:
-	UpdatableObject* pUpdatable;
+	UpdateObject* pUpdatable;
 };
 
 #endif

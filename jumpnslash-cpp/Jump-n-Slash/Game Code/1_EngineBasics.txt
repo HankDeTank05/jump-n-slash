@@ -3,9 +3,11 @@
 There are two files required by the engine: \c GameInitialize.cpp, and \c LoadResources.cpp.
 
 \subsection gameInitCpp GameInitialize.cpp
-This file contains a function called \c JumpSlashEngine::GameInitialize. This function is called by the engine when the game first opens.
+This file contains a function called \c JumpSlashEngine::GameInitialize. This function is called by the engine when the
+game first opens.
 
-Here, you must specify the window title (using \c JumpSlashEngine::SetWindowName ) and size (using \c JumpSlashEngine::SetWindowSize ).
+Here, you must specify the window title (using \c JumpSlashEngine::SetWindowName ) and size
+(using \c JumpSlashEngine::SetWindowSize ).
 
 For example:
 \code
@@ -20,9 +22,11 @@ void JumpSlashEngine::GameInitialize()
 \endcode
 
 \subsection loadResourcesCpp LoadResources.cpp
-This file contains a function called \c JumpSlashEngine::LoadResources. This function is also called by the engine when the game first opens.
+This file contains a function called \c JumpSlashEngine::LoadResources. This function is also called by the engine
+when the game first opens.
 
-Here, you must specify any and all assets you want to have access to while the game is running, and the starting scene for the game.
+Here, you must specify any and all assets you want to have access to while the game is running, and the starting
+scene for the game.
 
 For example:
 \code

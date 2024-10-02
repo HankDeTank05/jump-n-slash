@@ -1,0 +1,33 @@
+\doxysection{Update\+Object\+Attorney.\+h}
+\hypertarget{_update_object_attorney_8h_source}{}\label{_update_object_attorney_8h_source}\index{Jump-\/n-\/Slash/Engine Code/UpdateObjectAttorney.h@{Jump-\/n-\/Slash/Engine Code/UpdateObjectAttorney.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UPDATE\_OBJECT\_ATTORNEY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ UPDATE\_OBJECT\_ATTORNEY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object}{UpdateObject}};}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object_attorney}{UpdateObjectAttorney}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object_attorney_1_1_game_loop}{GameLoop}}}
+\DoxyCodeLine{00011\ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_manager}{UpdateManager}};}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Update(\mbox{\hyperlink{class_update_object}{UpdateObject}}*\ pUpdatable,\ \textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00015\ \ \ \ \ \};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object_attorney_1_1_registration}{Registration}}}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_deregistration_command}{UpdateDeregistrationCommand}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Register(\mbox{\hyperlink{class_update_object}{UpdateObject}}*\ pUpdatable);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Deregister(\mbox{\hyperlink{class_update_object}{UpdateObject}}*\ pUpdatable);}
+\DoxyCodeLine{00024\ \ \ \ \ \};}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

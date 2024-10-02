@@ -1,0 +1,45 @@
+\doxysection{Grid\+Manager.\+h}
+\hypertarget{_grid_manager_8h_source}{}\label{_grid_manager_8h_source}\index{Jump-\/n-\/Slash/Engine Code/GridManager.h@{Jump-\/n-\/Slash/Engine Code/GridManager.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GRID\_MANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GRID\_MANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_grid_manager}{GridManager}}\ \textcolor{comment}{//\ this\ class\ is\ written\ as\ a\ singleton}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_grid_manager}{GridManager}}*\ pInstance;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_grid_manager}{GridManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_grid_manager}{GridManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_grid_manager}{GridManager}}\&\ gm)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_grid_manager}{GridManager}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_grid_manager}{GridManager}}\&\ gm)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_grid_manager}{\string~GridManager}}();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_grid_manager}{GridManager}}\&\ Instance();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:\ \textcolor{comment}{//\ public\ api\ functions}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ LoadGrid(std::string\ key,\ std::string\ filename);}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::vector<std::string>>*\ GetGrid(std::string\ key);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_grid_manager_attorney}{GridManagerAttorney}};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ api\ backend\ functions}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadGrid(std::string\ key,\ std::string\ filename);}
+\DoxyCodeLine{00032\ \ \ \ \ std::vector<std::vector<std::string>>*\ privGetGrid(std::string\ key);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
+\DoxyCodeLine{00035\ \ \ \ \ std::map<std::string,\ std::vector<std::vector<std::string>>*>\ grids;\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ FOLDER\_NAME\ =\ \textcolor{stringliteral}{"{}assets/leveldata/"{}};\ }
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

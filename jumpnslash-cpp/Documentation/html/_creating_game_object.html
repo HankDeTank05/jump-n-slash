@@ -99,7 +99,280 @@ $(function(){initNavTree('_creating_game_object.html',''); initResizable(true); 
   <div class="headertitle"><div class="title">Creating a Game Object</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>(docs go here) </p>
+<div class="textblock"><h1><a class="anchor" id="updateSystem"></a>
+The Update System</h1>
+<p>The Update system is exactly what it sounds like: it is the system that updates all registered objects every frame.</p>
+<p>This system is very easy to use. Any object you would like to update simply needs to derive from the <code><a class="el" href="class_update_object.html">UpdateObject</a></code> class.</p>
+<p>There are three main functions you need to know about in the <code><a class="el" href="class_update_object.html">UpdateObject</a></code> class.</p><ul>
+<li><code>UpdateObject::RequestUpdateRegistration</code> </li>
+<li><code>UpdateObject::RequestUpdateDeregistration</code> </li>
+<li><code>UpdateObject::Update</code> </li>
+</ul>
+<p><code>RequestUpdateRegistration</code> and <code>RequestUpdateDeregistration</code> can only be called by an <code><a class="el" href="class_update_object.html">UpdateObject</a></code> -derived class, meaning the object that wants to be updated (or stop being updated) needs to call it.</p>
+<p><code>Update</code> is a function you need to override if you want anything to actually happen when it is updated. It's as simple as declaring <code>"virtual void Update(float deltaTime) override;"</code> in your object's header file, and defining the update behavior in the <code>cpp</code> file.</p>
+<dl class="section note"><dt>Note</dt><dd>This engine is not framerate-controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) need to be multiplied by the provided <code>deltaTime</code> argument in order to appear normal!</dd></dl>
+<h2><a class="anchor" id="updateSystem_exampleCode"></a>
+Example</h2>
+<p>The following is an example of how one might implement a Mario class in this engine. </p><div class="fragment"><div class="line"><span class="comment">// Mario.h</span></div>
+<div class="line"><span class="preprocessor">#ifndef MARIO_H</span></div>
+<div class="line"><span class="preprocessor">#define MARIO_H</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/UpdateObject.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Mario : <span class="keyword">public</span> <a class="code hl_class" href="class_update_object.html">UpdateObject</a></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    Mario();</div>
+<div class="line">    Mario(<span class="keyword">const</span> Mario&amp; m) = <span class="keyword">delete</span>;</div>
+<div class="line">    Mario&amp; operator=(<span class="keyword">const</span> Mario&amp; m) = <span class="keyword">delete</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> ~Mario();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Update(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    sf::Vector2f pos;</div>
+<div class="line">    sf::Vector2f posDelta;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_update_object_html"><div class="ttname"><a href="class_update_object.html">UpdateObject</a></div><div class="ttdef"><b>Definition</b> UpdateObject.h:12</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Mario.cpp</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Mario.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;DesignerControls.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line">Mario::Mario() <span class="comment">// and Luigi Mario?</span></div>
+<div class="line">    : pos(0.0f, 0.0f),</div>
+<div class="line">    posDelta(0.0f, 0.0f)</div>
+<div class="line">{</div>
+<div class="line">    RequestUpdateRegistration();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">Mario::~Mario()</div>
+<div class="line">{</div>
+<div class="line">    RequestUpdateDeregistration();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> Mario::Update(<span class="keywordtype">float</span> deltaTime)</div>
+<div class="line">{</div>
+<div class="line">    <span class="comment">// apply gravity</span></div>
+<div class="line">    posDelta.y += GRAVITY * deltaTime; <span class="comment">// deltaTime is a function argument. Use it anytime you have behavior occurring over time</span></div>
+<div class="line">    <span class="comment">// GRAVITY is from the DesignerControls.h file</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// apply any movement</span></div>
+<div class="line">    pos += posDelta;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="drawSystem"></a>
+The Draw System</h1>
+<p>The Draw system is very similar to the Update system in many ways. It is simple to use, and it only has three functions you need to worry about:</p><ul>
+<li><code>DrawObject::RequestDrawRegistration</code> </li>
+<li><code>DrawObject::RequestDrawDeregistration</code> </li>
+<li><code>DrawObject::Draw</code> </li>
+</ul>
+<p>Just like with updating, <code>RequestDrawRegistration</code> and <code>RequestDrawDeregistration</code> can only be called by a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class, and <code>Draw</code> is the function you need to override if you actually want to see anything happen.</p>
+<h2><a class="anchor" id="drawSystem_exampleCode"></a>
+Example</h2>
+<p>Building on the previous example, we want to be able to see Mario on screen. </p><div class="fragment"><div class="line"><span class="comment">// Mario.h</span></div>
+<div class="line"><span class="preprocessor">#ifndef MARIO_H</span></div>
+<div class="line"><span class="preprocessor">#define MARIO_H</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;SFML/Graphics.hpp&gt;</span> <span class="comment">// newly added</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/UpdateObject.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/DrawObject.h&quot;</span> <span class="comment">// newly added</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Mario : <span class="keyword">public</span> <a class="code hl_class" href="class_update_object.html">UpdateObject</a>, <span class="keyword">public</span> <a class="code hl_class" href="class_draw_object.html">DrawObject</a> <span class="comment">// newly added</span></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    Mario();</div>
+<div class="line">    Mario(<span class="keyword">const</span> Mario&amp; m) = <span class="keyword">delete</span>;</div>
+<div class="line">    Mario&amp; operator=(<span class="keyword">const</span> Mario&amp; m) = <span class="keyword">delete</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> ~Mario();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Update(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Draw() <span class="keyword">override</span>; <span class="comment">// newly added</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    sf::Sprite* pSprite; <span class="comment">// newly added</span></div>
+<div class="line">    sf::Vector2f pos;</div>
+<div class="line">    sf::Vector2f posDelta;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_draw_object_html"><div class="ttname"><a href="class_draw_object.html">DrawObject</a></div><div class="ttdef"><b>Definition</b> DrawObject.h:12</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Mario.cpp</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Mario.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/JumpSlashEngine.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/SpriteManager.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;DesignerControls.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line">Mario::Mario()</div>
+<div class="line">    : pSprite(<a class="code hl_class" href="class_sprite_manager.html">SpriteManager</a>::GetSprite(<span class="stringliteral">&quot;mario&quot;</span>)), <span class="comment">// newly added</span></div>
+<div class="line">    pos(0.0f, 0.0f),</div>
+<div class="line">    posDelta(0.0f, 0.0f)</div>
+<div class="line">{</div>
+<div class="line">    RequestUpdateRegistration();</div>
+<div class="line">    RequestDrawRegistration(); <span class="comment">// newly added</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">Mario::~Mario()</div>
+<div class="line">{</div>
+<div class="line">    RequestUpdateDeregistration();</div>
+<div class="line">    RequestDrawDeregistration(); <span class="comment">// newly added</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> Mario::Update(<span class="keywordtype">float</span> deltaTime)</div>
+<div class="line">{</div>
+<div class="line">    posDelta.y += GRAVITY * deltaTime;</div>
+<div class="line"> </div>
+<div class="line">    pos += posDelta;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// vvv newly added vvv</span></div>
+<div class="line"><span class="keywordtype">void</span> Mario::Draw()</div>
+<div class="line">{</div>
+<div class="line">    pSprite-&gt;setPosition(pos);</div>
+<div class="line">    JumpSlashEngine::GetWindow().draw(*pSprite);</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">// ^^^ newly added ^^^</span></div>
+<div class="ttc" id="aclass_sprite_manager_html"><div class="ttname"><a href="class_sprite_manager.html">SpriteManager</a></div><div class="ttdef"><b>Definition</b> SpriteManager.h:9</div></div>
+</div><!-- fragment --><h1><a class="anchor" id="inputSystem"></a>
+The Input System</h1>
+<p>While the Input system is similar to the Update and Draw systems in many ways, it is not as simple to use. You have a lot more functions at your disposal, and it may be a little overwhelming to use at first. Hopefully this guide will make it feel simpler than it looks!</p>
+<p>There are several functions you have at your disposal when you derive from the <a class="el" href="class_input_object.html">InputObject</a> class:</p>
+<p>For keyboard inputs:</p><ul>
+<li>InputObject::RequestKeyRegistration</li>
+<li>InputObject::RequestKeyDeregistration</li>
+<li>InputObject::KeyPressed</li>
+<li>InputObject::KeyReleased</li>
+</ul>
+<p>For mouse button inputs (clicking):</p><ul>
+<li>InputObject::RequestMouseBtnRegistration</li>
+<li>InputObject::RequestMouseBtnDeregistration</li>
+<li>InputObject::MouseBtnPressed</li>
+<li>InputObject::MouseBtnReleased</li>
+</ul>
+<p>For mouse cursor inputs (movement):</p><ul>
+<li>InputObject::RequestMouseCursorRegistration</li>
+<li>InputObject::RequestMouseCursorDeregistration</li>
+<li>InputObject::MouseCursorMoved</li>
+</ul>
+<p>Let's keep things simple for now, and only worry about keyboard inputs. Just like with updating and drawing, the "Request" functions (<code>RequestKeyRegistration</code> , <code>RequestKeyDeregistration</code> , etc.) can only be called by an <code><a class="el" href="class_input_object.html">InputObject</a></code> -derived class, and it's how you tell the engine you want to know when an input of the requested type occurs.</p>
+<p>When you call <code>RequestKeyRegistration</code> (and <code>RequestKeyDeregistration</code> ), you need to provide some information, though. First, you need to tell it what key you want to recieve inputs from. This is defined using the <code>sf::Keyboard::Key</code> type through SFML. If you type in <code>"sf::Keyboard::"</code> , IntelliSense will provide you with a list of available keys. Second, you need to tell it what <code>KeyEvent</code> you would like to know about. There are only two <code>KeyEvent</code> s: <code>KeyEvent::Press</code> and <code>KeyEvent::Release</code> . If you would like to register for both events for the same key, you must call the function twice.</p>
+<p>However, you must override the <code>KeyPressed</code> and/or <code>KeyReleased</code> functions if you want to define the behavior of a key press or release.</p>
+<dl class="section note"><dt>Note</dt><dd><code>KeyPressed</code> is called when a <code>KeyEvent::Press</code> occurs, and likewise for <code>KeyReleased</code> and <code>KeyEvent::Release</code> . There is nothing stopping you from overriding one of those functions even if you never register for the corresponding event, and doing so will not cause any problems. For example, if you want to preemptively override the <code>KeyReleased</code> function knowing you'll need it in the future, it'll just sit there never being called, but not causing any issues. (The same applies to mouse buttons and cursor).</dd></dl>
+<h2><a class="anchor" id="inputSystem_exampleCode"></a>
+Example</h2>
+<p>Let's expand on the previous examples to make Mario walk left and right when you use the arrow keys. </p><div class="fragment"><div class="line"><span class="comment">// Mario.h</span></div>
+<div class="line"><span class="preprocessor">#ifndef MARIO_H</span></div>
+<div class="line"><span class="preprocessor">#define MARIO_H</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;SFML/Graphics.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/UpdateObject.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/DrawObject.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/InputObject.h&quot;</span> <span class="comment">// newly added</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Mario : <span class="keyword">public</span> <a class="code hl_class" href="class_update_object.html">UpdateObject</a>, <span class="keyword">public</span> <a class="code hl_class" href="class_draw_object.html">DrawObject</a>, <span class="keyword">public</span> <a class="code hl_class" href="class_input_object.html">InputObject</a> <span class="comment">// newly added</span></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    Mario();</div>
+<div class="line">    Mario(<span class="keyword">const</span> Mario&amp; m) = <span class="keyword">delete</span>;</div>
+<div class="line">    Mario&amp; operator=(<span class="keyword">const</span> Mario&amp; m) = <span class="keyword">delete</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> ~Mario();</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Update(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> Draw() <span class="keyword">override</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> KeyPressed(sf::Keyboard::Key key) <span class="keyword">override</span>; <span class="comment">// newly added</span></div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> KeyReleased(sf::Keyboard::Key key) <span class="keyword">override</span>; <span class="comment">// newly added</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">    sf::Sprite* pSprite;</div>
+<div class="line">    sf::Vector2f pos;</div>
+<div class="line">    sf::Vector2f posDelta;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_input_object_html"><div class="ttname"><a href="class_input_object.html">InputObject</a></div><div class="ttdef"><b>Definition</b> InputObject.h:22</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Mario.cpp</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Mario.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/JumpSlashEngine.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/SpriteManager.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;DesignerControls.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line">Mario::Mario()</div>
+<div class="line">    : pSprite(<a class="code hl_class" href="class_sprite_manager.html">SpriteManager</a>::GetSprite(<span class="stringliteral">&quot;mario&quot;</span>)),</div>
+<div class="line">    pos(0.0f, 0.0f),</div>
+<div class="line">    posDelta(0.0f, 0.0f)</div>
+<div class="line">{</div>
+<div class="line">    RequestUpdateRegistration();</div>
+<div class="line">    RequestDrawRegistration();</div>
+<div class="line">    RequestKeyRegistration(sf::Keyboard::Left, KeyEvent::Press); <span class="comment">// newly added</span></div>
+<div class="line">    RequestKeyRegistration(sf::Keyboard::Left, KeyEvent::Release); <span class="comment">// newly added</span></div>
+<div class="line">    RequestKeyRegistration(sf::Keyboard::Right, KeyEvent::Press); <span class="comment">// newly added</span></div>
+<div class="line">    RequestKeyRegistration(sf::Keyboard::Right, KeyEvent::Release); <span class="comment">// newly added</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">Mario::~Mario()</div>
+<div class="line">{</div>
+<div class="line">    RequestUpdateDeregistration();</div>
+<div class="line">    RequestDrawDeregistration();</div>
+<div class="line">    RequestKeyDeregistration(sf::Keyboard::Left, KeyEvent::Press); <span class="comment">// newly added</span></div>
+<div class="line">    RequestKeyDeregistration(sf::Keyboard::Left, KeyEvent::Release); <span class="comment">// newly added</span></div>
+<div class="line">    RequestKeyDeregistration(sf::Keyboard::Right, KeyEvent::Press); <span class="comment">// newly added</span></div>
+<div class="line">    RequestKeyDeregistration(sf::Keyboard::Right, KeyEvent::Release); <span class="comment">// newly added</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> Mario::Update(<span class="keywordtype">float</span> deltaTime)</div>
+<div class="line">{</div>
+<div class="line">    posDelta.y += GRAVITY; <span class="comment">// removed multiplication by deltaTime because other things are modifying posDelta now</span></div>
+<div class="line"> </div>
+<div class="line">    pos += posDelta * deltaTime; <span class="comment">// multiply by deltaTime here to make sure all movement is smoothed</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> Mario::Draw()</div>
+<div class="line">{</div>
+<div class="line">    pSprite-&gt;setPosition(pos);</div>
+<div class="line">    JumpSlashEngine::GetWindow().draw(*pSprite);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// vvv newly added vvv</span></div>
+<div class="line"><span class="keywordtype">void</span> Mario::KeyPressed(sf::Keyboard::Key key)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">switch</span>(key)</div>
+<div class="line">    {</div>
+<div class="line">    <span class="keywordflow">case</span> sf::Keyboard::Left:</div>
+<div class="line">        posDelta.x -= PLAYER_WALK_SPEED; <span class="comment">// variable is from DesignerControls.h</span></div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
+<div class="line">    <span class="keywordflow">case</span> sf::Keyboard::Right:</div>
+<div class="line">        posDelta.x += PLAYER_WALK_SPEED;</div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">// ^^^ newly added ^^^</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// vvv newly added vvv</span></div>
+<div class="line"><span class="keywordtype">void</span> Mario::KeyReleased(sf::Keyboard::Key key)</div>
+<div class="line">{</div>
+<div class="line">    <span class="keywordflow">switch</span>(key)</div>
+<div class="line">    {</div>
+<div class="line">    <span class="keywordflow">case</span> sf::Keyboard::Left:</div>
+<div class="line">    <span class="keywordflow">case</span> sf::Keyboard::Right:</div>
+<div class="line">        posDelta.x = 0;</div>
+<div class="line">        <span class="keywordflow">break</span>;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"><span class="comment">// ^^^ newly added ^^^</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="alarmSystem"></a>
+The Alarm System (coming soon)</h1>
+<h1><a class="anchor" id="collisionSystem"></a>
+The Collision System (coming soon)</h1>
+<p>TODO: documentation for CreatingGameObject tutorial is incomplete</p>
+<p>Previous tutorial: <a class="el" href="_creating_scene.html">Creating a Scene</a> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

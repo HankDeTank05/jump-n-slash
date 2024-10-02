@@ -1,8 +1,8 @@
 #include "UpdateRegistrationCommand.h"
 
-#include "UpdatableObjectAttorney.h"
+#include "UpdateObjectAttorney.h"
 
-UpdateRegistrationCommand::UpdateRegistrationCommand(UpdatableObject* _pUpdatable)
+UpdateRegistrationCommand::UpdateRegistrationCommand(UpdateObject* _pUpdatable)
 	: pUpdatable(_pUpdatable)
 {
 	// do nothing
@@ -23,5 +23,5 @@ UpdateRegistrationCommand& UpdateRegistrationCommand::operator=(const UpdateRegi
 
 void UpdateRegistrationCommand::Execute()
 {
-	UpdatableObjectAttorney::Registration::Register(pUpdatable);
+	UpdateObjectAttorney::Registration::Register(pUpdatable);
 }

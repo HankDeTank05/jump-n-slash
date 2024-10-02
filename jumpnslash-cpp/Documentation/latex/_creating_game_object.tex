@@ -1,3 +1,311 @@
 \chapter{Creating a Game Object}
 \hypertarget{_creating_game_object}{}\label{_creating_game_object}\index{Creating a Game Object@{Creating a Game Object}}
-(docs go here) 
+\hypertarget{_creating_game_object_updateSystem}{}\doxysection{\texorpdfstring{The Update System}{The Update System}}\label{_creating_game_object_updateSystem}
+The Update system is exactly what it sounds like\+: it is the system that updates all registered objects every frame.
+
+This system is very easy to use. Any object you would like to update simply needs to derive from the {\ttfamily \doxylink{class_update_object}{Update\+Object}} class.
+
+There are three main functions you need to know about in the {\ttfamily \doxylink{class_update_object}{Update\+Object}} class.
+\begin{DoxyItemize}
+\item {\ttfamily Update\+Object\+::\+Request\+Update\+Registration} 
+\item {\ttfamily Update\+Object\+::\+Request\+Update\+Deregistration} 
+\item {\ttfamily Update\+Object\+::\+Update} 
+\end{DoxyItemize}
+
+{\ttfamily Request\+Update\+Registration} and {\ttfamily Request\+Update\+Deregistration} can only be called by an {\ttfamily \doxylink{class_update_object}{Update\+Object}} -\/derived class, meaning the object that wants to be updated (or stop being updated) needs to call it.
+
+{\ttfamily Update} is a function you need to override if you want anything to actually happen when it is updated. It\textquotesingle{}s as simple as declaring {\ttfamily "{}virtual void Update(float delta\+Time) override;"{}} in your object\textquotesingle{}s header file, and defining the update behavior in the {\ttfamily cpp} file.
+
+\begin{DoxyNote}{Note}
+This engine is not framerate-\/controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) need to be multiplied by the provided {\ttfamily delta\+Time} argument in order to appear normal!
+\end{DoxyNote}
+\hypertarget{_creating_game_object_updateSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_updateSystem_exampleCode}
+The following is an example of how one might implement a Mario class in this engine. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Mario.h}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef\ MARIO\_H}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ MARIO\_H}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/UpdateObject.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Mario\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_update_object}{UpdateObject}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ Mario();}
+\DoxyCodeLine{\ \ \ \ Mario(\textcolor{keyword}{const}\ Mario\&\ m)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\ \ \ \ Mario\&\ operator=(\textcolor{keyword}{const}\ Mario\&\ m)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \string~Mario();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \ \ \ sf::Vector2f\ pos;}
+\DoxyCodeLine{\ \ \ \ sf::Vector2f\ posDelta;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Mario.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Mario.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}DesignerControls.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{Mario::Mario()\ \textcolor{comment}{//\ and\ Luigi\ Mario?}}
+\DoxyCodeLine{\ \ \ \ :\ pos(0.0f,\ 0.0f),}
+\DoxyCodeLine{\ \ \ \ posDelta(0.0f,\ 0.0f)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ RequestUpdateRegistration();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{Mario::\string~Mario()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ RequestUpdateDeregistration();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Mario::Update(\textcolor{keywordtype}{float}\ deltaTime)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ apply\ gravity}}
+\DoxyCodeLine{\ \ \ \ posDelta.y\ +=\ GRAVITY\ *\ deltaTime;\ \textcolor{comment}{//\ deltaTime\ is\ a\ function\ argument.\ Use\ it\ anytime\ you\ have\ behavior\ occurring\ over\ time}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ GRAVITY\ is\ from\ the\ DesignerControls.h\ file}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ apply\ any\ movement}}
+\DoxyCodeLine{\ \ \ \ pos\ +=\ posDelta;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{_creating_game_object_drawSystem}{}\doxysection{\texorpdfstring{The Draw System}{The Draw System}}\label{_creating_game_object_drawSystem}
+The Draw system is very similar to the Update system in many ways. It is simple to use, and it only has three functions you need to worry about\+:
+\begin{DoxyItemize}
+\item {\ttfamily Draw\+Object\+::\+Request\+Draw\+Registration} 
+\item {\ttfamily Draw\+Object\+::\+Request\+Draw\+Deregistration} 
+\item {\ttfamily Draw\+Object\+::\+Draw} 
+\end{DoxyItemize}
+
+Just like with updating, {\ttfamily Request\+Draw\+Registration} and {\ttfamily Request\+Draw\+Deregistration} can only be called by a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class, and {\ttfamily Draw} is the function you need to override if you actually want to see anything happen.\hypertarget{_creating_game_object_drawSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_drawSystem_exampleCode}
+Building on the previous example, we want to be able to see Mario on screen. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Mario.h}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef\ MARIO\_H}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ MARIO\_H}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/UpdateObject.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/DrawObject.h"{}}\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Mario\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_update_object}{UpdateObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_draw_object}{DrawObject}}\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ Mario();}
+\DoxyCodeLine{\ \ \ \ Mario(\textcolor{keyword}{const}\ Mario\&\ m)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\ \ \ \ Mario\&\ operator=(\textcolor{keyword}{const}\ Mario\&\ m)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \string~Mario();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw()\ \textcolor{keyword}{override};\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \ \ \ sf::Sprite*\ pSprite;\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ sf::Vector2f\ pos;}
+\DoxyCodeLine{\ \ \ \ sf::Vector2f\ posDelta;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Mario.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Mario.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/SpriteManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}DesignerControls.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{Mario::Mario()}
+\DoxyCodeLine{\ \ \ \ :\ pSprite(\mbox{\hyperlink{class_sprite_manager}{SpriteManager}}::GetSprite(\textcolor{stringliteral}{"{}mario"{}})),\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ pos(0.0f,\ 0.0f),}
+\DoxyCodeLine{\ \ \ \ posDelta(0.0f,\ 0.0f)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ RequestUpdateRegistration();}
+\DoxyCodeLine{\ \ \ \ RequestDrawRegistration();\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{Mario::\string~Mario()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ RequestUpdateDeregistration();}
+\DoxyCodeLine{\ \ \ \ RequestDrawDeregistration();\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Mario::Update(\textcolor{keywordtype}{float}\ deltaTime)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ posDelta.y\ +=\ GRAVITY\ *\ deltaTime;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pos\ +=\ posDelta;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ vvv\ newly\ added\ vvv}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Mario::Draw()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ pSprite-\/>setPosition(pos);}
+\DoxyCodeLine{\ \ \ \ JumpSlashEngine::GetWindow().draw(*pSprite);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//\ \string^\string^\string^\ newly\ added\ \string^\string^\string^}}
+
+\end{DoxyCode}
+\hypertarget{_creating_game_object_inputSystem}{}\doxysection{\texorpdfstring{The Input System}{The Input System}}\label{_creating_game_object_inputSystem}
+While the Input system is similar to the Update and Draw systems in many ways, it is not as simple to use. You have a lot more functions at your disposal, and it may be a little overwhelming to use at first. Hopefully this guide will make it feel simpler than it looks!
+
+There are several functions you have at your disposal when you derive from the \doxylink{class_input_object}{Input\+Object} class\+:
+
+For keyboard inputs\+:
+\begin{DoxyItemize}
+\item Input\+Object\+::\+Request\+Key\+Registration
+\item Input\+Object\+::\+Request\+Key\+Deregistration
+\item Input\+Object\+::\+Key\+Pressed
+\item Input\+Object\+::\+Key\+Released
+\end{DoxyItemize}
+
+For mouse button inputs (clicking)\+:
+\begin{DoxyItemize}
+\item Input\+Object\+::\+Request\+Mouse\+Btn\+Registration
+\item Input\+Object\+::\+Request\+Mouse\+Btn\+Deregistration
+\item Input\+Object\+::\+Mouse\+Btn\+Pressed
+\item Input\+Object\+::\+Mouse\+Btn\+Released
+\end{DoxyItemize}
+
+For mouse cursor inputs (movement)\+:
+\begin{DoxyItemize}
+\item Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration
+\item Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration
+\item Input\+Object\+::\+Mouse\+Cursor\+Moved
+\end{DoxyItemize}
+
+Let\textquotesingle{}s keep things simple for now, and only worry about keyboard inputs. Just like with updating and drawing, the "{}\+Request"{} functions ({\ttfamily Request\+Key\+Registration} , {\ttfamily Request\+Key\+Deregistration} , etc.) can only be called by an {\ttfamily \doxylink{class_input_object}{Input\+Object}} -\/derived class, and it\textquotesingle{}s how you tell the engine you want to know when an input of the requested type occurs.
+
+When you call {\ttfamily Request\+Key\+Registration} (and {\ttfamily Request\+Key\+Deregistration} ), you need to provide some information, though. First, you need to tell it what key you want to recieve inputs from. This is defined using the {\ttfamily sf\+::\+Keyboard\+::\+Key} type through SFML. If you type in {\ttfamily "{}sf\+::\+Keyboard\+::"{}} , Intelli\+Sense will provide you with a list of available keys. Second, you need to tell it what {\ttfamily Key\+Event} you would like to know about. There are only two {\ttfamily Key\+Event} s\+: {\ttfamily Key\+Event\+::\+Press} and {\ttfamily Key\+Event\+::\+Release} . If you would like to register for both events for the same key, you must call the function twice.
+
+However, you must override the {\ttfamily Key\+Pressed} and/or {\ttfamily Key\+Released} functions if you want to define the behavior of a key press or release.
+
+\begin{DoxyNote}{Note}
+{\ttfamily Key\+Pressed} is called when a {\ttfamily Key\+Event\+::\+Press} occurs, and likewise for {\ttfamily Key\+Released} and {\ttfamily Key\+Event\+::\+Release} . There is nothing stopping you from overriding one of those functions even if you never register for the corresponding event, and doing so will not cause any problems. For example, if you want to preemptively override the {\ttfamily Key\+Released} function knowing you\textquotesingle{}ll need it in the future, it\textquotesingle{}ll just sit there never being called, but not causing any issues. (The same applies to mouse buttons and cursor).
+\end{DoxyNote}
+\hypertarget{_creating_game_object_inputSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_inputSystem_exampleCode}
+Let\textquotesingle{}s expand on the previous examples to make Mario walk left and right when you use the arrow keys. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Mario.h}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef\ MARIO\_H}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ MARIO\_H}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/UpdateObject.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/DrawObject.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/InputObject.h"{}}\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Mario\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_update_object}{UpdateObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_draw_object}{DrawObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_input_object}{InputObject}}\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ Mario();}
+\DoxyCodeLine{\ \ \ \ Mario(\textcolor{keyword}{const}\ Mario\&\ m)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\ \ \ \ Mario\&\ operator=(\textcolor{keyword}{const}\ Mario\&\ m)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \string~Mario();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ KeyPressed(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ KeyReleased(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \ \ \ sf::Sprite*\ pSprite;}
+\DoxyCodeLine{\ \ \ \ sf::Vector2f\ pos;}
+\DoxyCodeLine{\ \ \ \ sf::Vector2f\ posDelta;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Mario.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Mario.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/SpriteManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}DesignerControls.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{Mario::Mario()}
+\DoxyCodeLine{\ \ \ \ :\ pSprite(\mbox{\hyperlink{class_sprite_manager}{SpriteManager}}::GetSprite(\textcolor{stringliteral}{"{}mario"{}})),}
+\DoxyCodeLine{\ \ \ \ pos(0.0f,\ 0.0f),}
+\DoxyCodeLine{\ \ \ \ posDelta(0.0f,\ 0.0f)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ RequestUpdateRegistration();}
+\DoxyCodeLine{\ \ \ \ RequestDrawRegistration();}
+\DoxyCodeLine{\ \ \ \ RequestKeyRegistration(sf::Keyboard::Left,\ KeyEvent::Press);\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ RequestKeyRegistration(sf::Keyboard::Left,\ KeyEvent::Release);\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ RequestKeyRegistration(sf::Keyboard::Right,\ KeyEvent::Press);\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ RequestKeyRegistration(sf::Keyboard::Right,\ KeyEvent::Release);\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{Mario::\string~Mario()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ RequestUpdateDeregistration();}
+\DoxyCodeLine{\ \ \ \ RequestDrawDeregistration();}
+\DoxyCodeLine{\ \ \ \ RequestKeyDeregistration(sf::Keyboard::Left,\ KeyEvent::Press);\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ RequestKeyDeregistration(sf::Keyboard::Left,\ KeyEvent::Release);\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ RequestKeyDeregistration(sf::Keyboard::Right,\ KeyEvent::Press);\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\ \ \ \ RequestKeyDeregistration(sf::Keyboard::Right,\ KeyEvent::Release);\ \textcolor{comment}{//\ newly\ added}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Mario::Update(\textcolor{keywordtype}{float}\ deltaTime)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ posDelta.y\ +=\ GRAVITY;\ \textcolor{comment}{//\ removed\ multiplication\ by\ deltaTime\ because\ other\ things\ are\ modifying\ posDelta\ now}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ pos\ +=\ posDelta\ *\ deltaTime;\ \textcolor{comment}{//\ multiply\ by\ deltaTime\ here\ to\ make\ sure\ all\ movement\ is\ smoothed}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Mario::Draw()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ pSprite-\/>setPosition(pos);}
+\DoxyCodeLine{\ \ \ \ JumpSlashEngine::GetWindow().draw(*pSprite);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ vvv\ newly\ added\ vvv}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Mario::KeyPressed(sf::Keyboard::Key\ key)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{switch}(key)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Left:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ posDelta.x\ -\/=\ PLAYER\_WALK\_SPEED;\ \textcolor{comment}{//\ variable\ is\ from\ DesignerControls.h}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Right:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ posDelta.x\ +=\ PLAYER\_WALK\_SPEED;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//\ \string^\string^\string^\ newly\ added\ \string^\string^\string^}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ vvv\ newly\ added\ vvv}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Mario::KeyReleased(sf::Keyboard::Key\ key)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{switch}(key)}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Left:}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ sf::Keyboard::Right:}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ posDelta.x\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{//\ \string^\string^\string^\ newly\ added\ \string^\string^\string^}}
+
+\end{DoxyCode}
+\hypertarget{_creating_game_object_alarmSystem}{}\doxysection{\texorpdfstring{The Alarm System (coming soon)}{The Alarm System (coming soon)}}\label{_creating_game_object_alarmSystem}
+\hypertarget{_creating_game_object_collisionSystem}{}\doxysection{\texorpdfstring{The Collision System (coming soon)}{The Collision System (coming soon)}}\label{_creating_game_object_collisionSystem}
+TODO\+: documentation for Creating\+Game\+Object tutorial is incomplete
+
+Previous tutorial\+: \doxysectlink{_creating_scene}{Creating a Scene}{0} 

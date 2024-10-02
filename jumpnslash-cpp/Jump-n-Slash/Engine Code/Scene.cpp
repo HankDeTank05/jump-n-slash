@@ -36,7 +36,7 @@ void Scene::Draw()
 	pDrawMgr->Draw();
 }
 
-UpdateManager::UpdateListRef Scene::Register(UpdatableObject* pUpdatable)
+UpdateManager::UpdateListRef Scene::Register(UpdateObject* pUpdatable)
 {
 	return pUpdateMgr->Register(pUpdatable);
 }
@@ -46,7 +46,7 @@ void Scene::Deregister(UpdateManager::UpdateListRef updateListRef)
 	pUpdateMgr->Deregister(updateListRef);
 }
 
-DrawManager::DrawListRef Scene::Register(DrawableObject* pDrawable)
+DrawManager::DrawListRef Scene::Register(DrawObject* pDrawable)
 {
 	return pDrawMgr->Register(pDrawable);
 }

@@ -1,0 +1,32 @@
+\doxysection{Level0.\+h}
+\hypertarget{_level0_8h_source}{}\label{_level0_8h_source}\index{Jump-\/n-\/Slash/Game Code/Level0.h@{Jump-\/n-\/Slash/Game Code/Level0.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LEVEL\_0\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LEVEL\_0\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/Scene.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_level_map}{LevelMap}};}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}};}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_level0}{Level0}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_scene}{Scene}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_level0}{Level0}}();}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_level0}{Level0}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_level0}{Level0}}\&\ l0)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_level0}{Level0}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_level0}{Level0}}\&\ l0)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_level0}{\string~Level0}}();}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Init()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ End()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_level_map}{LevelMap}}*\ pMap;}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}*\ pPlayer;}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

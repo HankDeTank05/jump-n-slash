@@ -3,14 +3,14 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Engine Code/UpdatableObject.h"
-#include "../Engine Code/DrawableObject.h"
+#include "../Engine Code/UpdateObject.h"
+#include "../Engine Code/DrawObject.h"
 #include "../Engine Code/InputObject.h"
 
 // forward declarations
 class PlayerMoveState;
 
-class Player : public UpdatableObject, public DrawableObject, public InputObject
+class Player : public UpdateObject, public DrawObject, public InputObject
 {
 public:
 	Player() = delete;

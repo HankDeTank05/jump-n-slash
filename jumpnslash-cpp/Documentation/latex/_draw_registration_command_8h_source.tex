@@ -8,13 +8,13 @@
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Command.h"{}}}
 \DoxyCodeLine{00005\ }
 \DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
-\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_drawable_object}{DrawableObject}};}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_object}{DrawObject}};}
 \DoxyCodeLine{00008\ }
 \DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_command}{Command}}}
 \DoxyCodeLine{00010\ \{}
 \DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}()\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}(\mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawObj);}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}(\mbox{\hyperlink{class_draw_object}{DrawObject}}*\ pDrawObj);}
 \DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}\&\ drc);}
 \DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}\&\ drc);}
 \DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_draw_registration_command}{\string~DrawRegistrationCommand}}()\ =\ \textcolor{keywordflow}{default};}
@@ -22,7 +22,7 @@
 \DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Execute()\ \textcolor{keyword}{override};}
 \DoxyCodeLine{00019\ }
 \DoxyCodeLine{00020\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_drawable_object}{DrawableObject}}*\ pDrawable;}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_draw_object}{DrawObject}}*\ pDrawable;}
 \DoxyCodeLine{00022\ \};}
 \DoxyCodeLine{00023\ }
 \DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}

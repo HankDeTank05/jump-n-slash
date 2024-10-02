@@ -26,8 +26,8 @@ public:
 	class Commands
 	{
 	private:
-		friend class UpdatableObject;
-		friend class DrawableObject;
+		friend class UpdateObject;
+		friend class DrawObject;
 		friend class InputObject;
 		static void AddCommand(Scene* pScene, Command* pCmd);
 	};
@@ -35,16 +35,16 @@ public:
 	class Update
 	{
 	private:
-		friend class UpdatableObject;
-		static UpdateManager::UpdateListRef Register(Scene* pScene, UpdatableObject* pUpdatable);
+		friend class UpdateObject;
+		static UpdateManager::UpdateListRef Register(Scene* pScene, UpdateObject* pUpdatable);
 		static void Deregister(Scene* pScene, UpdateManager::UpdateListRef deleteRef);
 	};
 
 	class Draw
 	{
 	private:
-		friend class DrawableObject;
-		static DrawManager::DrawListRef Register(Scene* pScene, DrawableObject* pDrawable);
+		friend class DrawObject;
+		static DrawManager::DrawListRef Register(Scene* pScene, DrawObject* pDrawable);
 		static void Deregister(Scene* pScene, DrawManager::DrawListRef deleteRef);
 	};
 

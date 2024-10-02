@@ -1,3 +1,0 @@
-/*! \page CreatingGameObject2 Creating a Game Object (Input System)
-TODO: documentation for CreatingGameObject2 tutorial is incomplete
-*/

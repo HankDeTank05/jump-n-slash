@@ -4,7 +4,7 @@
 #include <list>
 
 // forward declarations
-class UpdatableObject;
+class UpdateObject;
 
 class UpdateManager
 {
@@ -15,11 +15,11 @@ public:
 	virtual ~UpdateManager();
 
 private:
-	using UpdateList = std::list<UpdatableObject*>;
+	using UpdateList = std::list<UpdateObject*>;
 public:
 	using UpdateListRef = UpdateList::iterator;
 
-	UpdateListRef Register(UpdatableObject* pUpdatable); // TODO: documentation for UpdateManager::Register
+	UpdateListRef Register(UpdateObject* pUpdatable); // TODO: documentation for UpdateManager::Register
 	void Deregister(UpdateListRef updateListRef); // TODO: documentation for UpdateManager::Deregister
 
 	void Update(float deltaTime);

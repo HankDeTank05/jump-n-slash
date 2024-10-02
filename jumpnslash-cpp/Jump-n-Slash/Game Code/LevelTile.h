@@ -3,10 +3,10 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "../Engine Code/UpdatableObject.h"
-#include "../Engine Code/DrawableObject.h"
+#include "../Engine Code/UpdateObject.h"
+#include "../Engine Code/DrawObject.h"
 
-class LevelTile : public DrawableObject
+class LevelTile : public DrawObject
 {
 public:
 	LevelTile() = delete;

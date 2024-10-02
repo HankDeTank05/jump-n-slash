@@ -17,7 +17,7 @@ void SceneAttorney::Commands::AddCommand(Scene* pScene, Command* pCmd)
 	pScene->AddCommand(pCmd);
 }
 
-UpdateManager::UpdateListRef SceneAttorney::Update::Register(Scene* pScene, UpdatableObject* pUpdatable)
+UpdateManager::UpdateListRef SceneAttorney::Update::Register(Scene* pScene, UpdateObject* pUpdatable)
 {
 	return pScene->Register(pUpdatable);
 }
@@ -27,7 +27,7 @@ void SceneAttorney::Update::Deregister(Scene* pScene, UpdateManager::UpdateListR
 	pScene->Deregister(deleteRef);
 }
 
-DrawManager::DrawListRef SceneAttorney::Draw::Register(Scene* pScene, DrawableObject* pDrawable)
+DrawManager::DrawListRef SceneAttorney::Draw::Register(Scene* pScene, DrawObject* pDrawable)
 {
 	return pScene->Register(pDrawable);
 }

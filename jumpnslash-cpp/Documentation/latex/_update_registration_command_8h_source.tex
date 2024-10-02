@@ -8,13 +8,13 @@
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Command.h"{}}}
 \DoxyCodeLine{00005\ }
 \DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
-\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_updatable_object}{UpdatableObject}};}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object}{UpdateObject}};}
 \DoxyCodeLine{00008\ }
 \DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_command}{Command}}}
 \DoxyCodeLine{00010\ \{}
 \DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}()\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}(\mbox{\hyperlink{class_updatable_object}{UpdatableObject}}*\ pUpdatable);}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}(\mbox{\hyperlink{class_update_object}{UpdateObject}}*\ pUpdatable);}
 \DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}\&\ urc);}
 \DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}\&\ urc);}
 \DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_update_registration_command}{\string~UpdateRegistrationCommand}}()\ =\ \textcolor{keywordflow}{default};}
@@ -22,7 +22,7 @@
 \DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Execute()\ \textcolor{keyword}{override};}
 \DoxyCodeLine{00019\ }
 \DoxyCodeLine{00020\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_updatable_object}{UpdatableObject}}*\ pUpdatable;}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_update_object}{UpdateObject}}*\ pUpdatable;}
 \DoxyCodeLine{00022\ \};}
 \DoxyCodeLine{00023\ }
 \DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}

@@ -1,0 +1,29 @@
+\doxysection{Player\+Move\+State.\+h}
+\hypertarget{_player_move_state_8h_source}{}\label{_player_move_state_8h_source}\index{Jump-\/n-\/Slash/Game Code/PlayerMoveState.h@{Jump-\/n-\/Slash/Game Code/PlayerMoveState.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLAYER\_MOVE\_STATE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAYER\_MOVE\_STATE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}};}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}();}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}\&\ pms)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}\&\ pms)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_player_move_state}{\string~PlayerMoveState}}();}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Enter(\mbox{\hyperlink{class_player}{Player}}*\ pPlayer)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{comment}{//virtual\ const\ void\ HandleInput(Player*\ pPlayer)\ const\ =\ 0;}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}*\ GetNextState(\mbox{\hyperlink{class_player}{Player}}*\ pPlayer)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//virtual\ void\ SetAnimation(Player*\ pPlayer)\ const\ =\ 0;}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00021\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

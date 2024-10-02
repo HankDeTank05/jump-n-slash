@@ -1,0 +1,56 @@
+\doxysection{Level\+Map.\+h}
+\hypertarget{_level_map_8h_source}{}\label{_level_map_8h_source}\index{Jump-\/n-\/Slash/Game Code/LevelMap.h@{Jump-\/n-\/Slash/Game Code/LevelMap.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LEVEL\_MAP\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LEVEL\_MAP\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Constants.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}../Engine\ Code/DrawObject.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }MapTile;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_level_map}{LevelMap}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_draw_object}{DrawObject}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_level_map}{LevelMap}}()\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_level_map}{LevelMap}}(std::vector<std::vector<std::string>>*\ grid);}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_level_map}{LevelMap}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_level_map}{LevelMap}}\&\ lm)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_level_map}{LevelMap}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_level_map}{LevelMap}}\&\ lm)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_level_map}{\string~LevelMap}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{struct\ }RoomData}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ sf::Vector2f\ origin;\ \textcolor{comment}{//\ in\ world\ space!!}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ sf::Vector2f\ size;\ \textcolor{comment}{//\ in\ world\ space!!}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ isStartingRoom;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ hasPlayerSpawn;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ sf::Vector2f*\ playerSpawnPoint;\ \textcolor{comment}{//\ if\ hasPlayerSpawn\ ==\ false,\ this\ is\ nullptr}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::list<sf::Vector2f>\ enemyLeftSpawns;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::list<sf::Vector2f>\ enemyRightSpawns;}
+\DoxyCodeLine{00036\ \ \ \ \ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{using\ }RoomList\ =\ std::list<RoomData*>;}
+\DoxyCodeLine{00039\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{using\ }RoomListRef\ =\ RoomList::iterator;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ sf::Vector2f\ GetStartingSpawnPoint();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00045\ \ \ \ \ std::array<std::array<sf::Sprite*,\ MAX\_LEVEL\_SIZE>,\ MAX\_LEVEL\_SIZE>\ map;}
+\DoxyCodeLine{00046\ \ \ \ \ sf::Vector2i\ usedSize;}
+\DoxyCodeLine{00047\ \ \ \ \ RoomList\ rooms;}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

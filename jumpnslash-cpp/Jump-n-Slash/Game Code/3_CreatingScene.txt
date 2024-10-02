@@ -66,7 +66,7 @@ private:
 We also need to declare overrides for the \c Init() and \c End() functions.
 What are they for, though?
 
-\subsection derivedClass_init The \c Init() Function
+\subsection derivedClass_initEnd The \c Init() and \c End() Functions
 You can think of the \c Init() function as a constructor (sort of). What is the purpose of a constructor?
 
 When an instance of an object is created, the constructor is called to do all of the required setup to create the object.
@@ -83,7 +83,6 @@ have to delete a perfectly valid and usable scene and re-construct it each time 
 However, using an \c Init() function we can do partial setup in the constructor, and the rest of it (only the essentials)
 in the \c Init() function.
 
-\subsection derivedClass_end The \c End() Function
 Similarly to how \c Init() serves as a constructor-like function, \c End() serves as a destructor-like function. You can
 have a partial "destruction" occur in the \c End() function without having to completely delete an object.
 
@@ -93,4 +92,7 @@ TODO: expand on the explanation of the Scene::End function
 (words go here)
 
 TODO: documentation for CreatingScene tutorial is incomplete
+
+Previous tutorial: \ref UsingAssetManagers "Using the Asset Managers" /
+Next tutorial: \ref CreatingGameObject "Creating a Game Object"
 */

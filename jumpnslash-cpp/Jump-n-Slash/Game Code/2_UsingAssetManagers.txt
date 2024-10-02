@@ -8,18 +8,24 @@ They all have the same basic functionality:
 
 \section textureManager Texture Manager
 The Texture Manager handles any 2D image-based assets. It is the simplest asset manager and also the most essential.
+
 \note Sprites are created using textures, so any sprite you want to create must be first loaded in as a texture.
 
 \subsection textureManager_load Loading a Texture
-In order to load a texture, you must provide at least two pieces of information to the \c TextureManager::LoadTexture function:
+In order to load a texture, you must provide at least two pieces of information to the
+\c TextureManager::LoadTexture function:
 - The key (an \c std::string)
-	- This is used to identify the texture when accessing it in the future. It can be whatever you want. (ex: \c "mario's sprite :)")
+	- This is used to identify the texture when accessing it in the future.
+	It can be whatever you want. (ex: \c "mario's sprite :)")
 - The file name/location (also an \c std::string)
 	- This is used to locate the texture within the Assets/Textures folder. 
-	- If your texture is in the Textures folder, and not in any subfolder, simply provide the name of the file (ex: \c "mario.png");
-	- If your texture is in a subfolder within Textures, you need to provide the relative path to the file (ex: \c "characters/mario.png");
+	- If your texture is in the Textures folder, and not in any subfolder, simply provide the name of the file
+	(ex: \c "mario.png");
+	- If your texture is in a subfolder within Textures, you need to provide the relative path to the file
+	(ex: \c "characters/mario.png");
 - (Optional) Whether or not the texture should be smoothed (a \c bool, \c true by default)
-	- Provide \c false as the third argument if you don't want any smoothing on your textures. Otherwise, this argument can be omitted.
+	- Provide \c false as the third argument if you don't want any smoothing on your textures. Otherwise,
+	this argument can be omitted.
 	- If you're using pixel art that is extremely low-resolution, you probably don't want smoothing.
 
 \subsection textureManager_get Getting a Texture
@@ -28,21 +34,25 @@ In order to get a texture, you only need to provide one piece of information to 
 	- This is the key you specified when loading the texture. The game will crash if you specify a key that does not exist.
 
 \section spriteManager Sprite Manager
-The Sprite Manager handles, well, sprites! This asset manager is a little more complex, as there are multiple ways to load sprites.
+The Sprite Manager handles, well, sprites! This asset manager is a little more complex, as there are multiple ways to load
+sprites.
 
 \subsection spriteManager_load Loading a Sprites
 The simplest and easiest way to load a sprite is using two keys:
 - The sprite key (an \c std::string)
-	- Like the texture key, this is the key used to identify the sprite when accessing it in the future. It can also be whatever you want.
+	- Like the texture key, this is the key used to identify the sprite when accessing it in the future. It can also be
+	whatever you want.
 - The texture key (an \c std::string)
 	- This key is used to access a texture which has already been loaded.
 	Like \ref textureManager_get "Getting a Texture", the game will crash if you specify a key that does not exist.
 - (Optional) The sub-area of the texture to use for the sprite (an \c sf::IntRect)
-	- Providing an \c sf::IntRect as the third argument will allow you to use only a portion of the texture when creating the sprite.
+	- Providing an \c sf::IntRect as the third argument will allow you to use only a portion of the texture when creating
+	the sprite.
 	This is most useful when you want to load one spritesheet as a texture, but create multiple sprites from it.
 	(See the example code from the \ref EngineBasics "previous tutorial")
 
-\note There are four different ways to load a sprite. If you're interested, check out the documentation for SpriteManager::LoadSprite.
+\note There are four different ways to load a sprite. If you're interested, check out the documentation for
+\c SpriteManager::LoadSprite.
 
 \subsection spriteManager_get Getting a Sprite
 Similar to getting a texture, you only need to provide one argument to access a sprite:
@@ -55,5 +65,6 @@ Similar to getting a texture, you only need to provide one argument to access a 
 - SpriteManager::LoadSprite
 - SpriteManager::GetSprite
 
-Previous tutorial: \ref EngineBasics "Engine basics" / Next tutorial: \ref CreatingScene "Creating a scene"
+Previous tutorial: \ref EngineBasics "Engine basics" /
+Next tutorial: \ref CreatingScene "Creating a scene"
 */

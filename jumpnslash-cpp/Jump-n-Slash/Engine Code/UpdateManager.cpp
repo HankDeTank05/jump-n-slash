@@ -1,13 +1,13 @@
 #include "UpdateManager.h"
 
-#include "UpdatableObjectAttorney.h"
+#include "UpdateObjectAttorney.h"
 
 UpdateManager::~UpdateManager()
 {
 	updateList.clear();
 }
 
-UpdateManager::UpdateListRef UpdateManager::Register(UpdatableObject* pUpdatable)
+UpdateManager::UpdateListRef UpdateManager::Register(UpdateObject* pUpdatable)
 {
 	return updateList.insert(updateList.end(), pUpdatable);
 }
@@ -21,6 +21,6 @@ void UpdateManager::Update(float deltaTime)
 {
 	for (UpdateList::iterator it = updateList.begin(); it != updateList.end(); it++)
 	{
-		UpdatableObjectAttorney::GameLoop::Update(*it, deltaTime);
+		UpdateObjectAttorney::GameLoop::Update(*it, deltaTime);
 	}
 }

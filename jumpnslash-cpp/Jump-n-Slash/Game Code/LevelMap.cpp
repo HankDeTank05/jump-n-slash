@@ -247,7 +247,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 				if (origin.x <= (*searchIt).x && (*searchIt).x <= widthPos.x &&
 					origin.y <= (*searchIt).y && (*searchIt).y <= heightPos.y)
 				{
-					pRoomData->enemyLeftSpawns.push_back(sf::Vector2f((*searchIt).x, (*searchIt).y));
+					pRoomData->enemyLeftSpawns.push_back(sf::Vector2f(static_cast<float>((*searchIt).x), static_cast<float>((*searchIt).y)));
 				}
 			}
 		}
@@ -259,7 +259,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 				if (origin.x <= (*searchIt).x && (*searchIt).x <= widthPos.x &&
 					origin.y <= (*searchIt).y && (*searchIt).y <= heightPos.y)
 				{
-					pRoomData->enemyRightSpawns.push_back(sf::Vector2f((*searchIt).x, (*searchIt).y));
+					pRoomData->enemyRightSpawns.push_back(sf::Vector2f(static_cast<float>((*searchIt).x), static_cast<float>((*searchIt).y)));
 				}
 			}
 		}
