@@ -417,7 +417,7 @@ protected:
 	* button's specified input event. You must provide the mouse button you want to receive input from, and an event which should be
 	* listened for.
 	* 
-	* \note This function is only accessible to classes deriving \c InputObject .
+	* \note This function is only accessible to classes deriving from \c InputObject .
 	* 
 	* \param[in]	btn				The mouse button you would like to receive input from. Type \c sf::Mouse:: and IntelliSense will
 	* provide you with a list of available mouse buttons.
@@ -450,7 +450,7 @@ protected:
 	*/
 	void RequestMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg); 
 	/*!
-	* \brief Request that the engine stop reading for mouse button events.
+	* \brief	Request that the engine stop reading for mouse button events.
 	* 
 	* Call this function in an \c InputObject -derived class to let the engine know you would like it to stop listening for a certain
 	* mouse button's specified input event. You must provide the mouse button you want to stop receiving input from, and the event which
@@ -488,9 +488,71 @@ protected:
 	* \see CollisionObject
 	*/
 	void RequestMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg); 
-	// TODO: documentation for InputObject::RequestMouseCursorRegistration
+	/*!
+	* \brief	Request that the engine read mouse cursor movements.
+	* 
+	* Call this function in a \c InputObject -derived class to let the engine know you would like it to listen for when the mouse
+	* cursor moves.
+	* 
+	* \note This function is only accessible to classes deriving from \c InputObject .
+	* 
+	* \note As the name of this function implies, this puts in a request for the engine to listen for mouse cursor movements. The request
+	* is processed on the same frame this function is called, and calls to \c InputObject::MouseCursorMoved can begin as soon as \b the
+	* \b following frame.
+	* 
+	* \return	Does not return anything.
+	* 
+	* \section example Example
+	* TODO: documentation for InputObject::RequestMouseCursorRegistration needs example code
+	* 
+	* \see InputObject::KeyPressed
+	* \see InputObject::KeyReleased
+	* \see InputObject::RequestKeyRegistration
+	* \see InputObject::RequestKeyDeregistration
+	* \see InputObject::MouseBtnPressed
+	* \see InputObject::MouseBtnReleased
+	* \see InputObject::RequestMouseBtnRegistration
+	* \see InputObject::RequestMouseBtnDeregistration
+	* \see InputObject::MouseCursorMoved
+	* \see InputObject::RequestMouseCursorDeregistration
+	* \see UpdateObject
+	* \see DrawObject
+	* \see AlarmObject
+	* \see CollisionObject
+	*/
 	void RequestMouseCursorRegistration(); 
-	// TODO: documentation for InputObject::RequestMouseCursorDeregistration
+	/*!
+	* \brief	Request that the engine stop reading mouse cursor movements.
+	* 
+	* Call this function in a \c InputObject -derived class to let the engine know you would like it to stop listening for mouse cursor
+	* movements.
+	* 
+	* \note This function is only accessible to classes deriving from \c InputObject .
+	* 
+	* \note As the name of this function implies, this puts in a request for the engine to stop listening for mouse cursor movements.
+	* The request is processed on the same frame this function is called, and calls to \c InputObject::MouseCursorMoved will cease
+	* \b the \b following frame.
+	* 
+	* \return	Does not return anything.
+	* 
+	* \section example Example
+	* TODO: documentation for InputObject::RequestMouseCursorDeregistration need example code
+	* 
+	* \see InputObject::KeyPressed
+	* \see InputObject::KeyReleased
+	* \see InputObject::RequestKeyRegistration
+	* \see InputObject::RequestKeyDeregistration
+	* \see InputObject::MouseBtnPressed
+	* \see InputObject::MouseBtnReleased
+	* \see InputObject::RequestMouseBtnRegistration
+	* \see InputObject::RequestMouseBtnDeregistration
+	* \see InputObject::MouseCursorMoved
+	* \see InputObject::RequestMouseCursorRegistration
+	* \see UpdateObject
+	* \see DrawObject
+	* \see AlarmObject
+	* \see CollisionObject
+	*/
 	void RequestMouseCursorDeregistration(); 
 
 private:

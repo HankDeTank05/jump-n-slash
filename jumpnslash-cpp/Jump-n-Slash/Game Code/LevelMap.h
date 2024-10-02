@@ -4,13 +4,12 @@
 #include <array>
 #include <list>
 
-#include <SFML/Graphics.hpp>
-
-#include "Constants.h"
 #include "../Engine Code/DrawObject.h"
 
+#include "Constants.h"
+
 // forward declarations
-class MapTile;
+class LevelTile;
 
 class LevelMap : public DrawObject
 {
@@ -42,7 +41,7 @@ public:
 	sf::Vector2f GetStartingSpawnPoint();
 
 private:
-	std::array<std::array<sf::Sprite*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
+	std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
 	sf::Vector2i usedSize;
 	RoomList rooms;
 };

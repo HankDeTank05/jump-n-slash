@@ -6,6 +6,11 @@
 #include "../Engine Code/JumpSlashEngine.h"
 #include "../Engine Code/SpriteManager.h"
 
+#include "BlockBreakable.h"
+#include "BlockHazard.h"
+#include "BlockSolid.h"
+#include "PlatformSemisolid.h"
+
 //LevelMap::LevelMap()
 //{
 //	for (int y = 0; y < map.size(); y++)
@@ -33,7 +38,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 {
 	std::map<std::string, std::list<sf::Vector2i>> tiles;
 
-	// convert the grid into an array of sprite pointers
+	// convert the grid into an array of LevelTile pointers
 	for (int y = 0; y < grid->size(); y++)
 	{
 		assert(y < MAX_LEVEL_SIZE);
@@ -45,10 +50,13 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 
 			// add the indicator to the std::map
 			std::string key = "not set";
-			sf::Vector2i pos(x, y);
+			sf::Vector2i coords(x, y);
 
 			// TODO: I hate that this is hard coded. replace this when json parsing is working
 			
+			// make a vector to pass to the LevelTiles
+			sf::Vector2f worldPos(static_cast<float>(x * TILE_SIZE), static_cast<float>(y * TILE_SIZE));
+
 			// empty space
 			if(tileID == "00")
 			{
@@ -57,42 +65,42 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 			// block breakable
 			else if (tileID == "01")
 			{
-				key = "block breakable";
+				map[y][x] = new BlockBreakable(worldPos);
 			}
 			// block hazard
 			else if (tileID == "02")
 			{
-				key = "block hazard";
+				map[y][x] = new BlockHazard(worldPos);
 			}
 			// block solid
 			else if (tileID == "03")
 			{
-				key = "block solid";
+				map[y][x] = new BlockSolid(worldPos);
 			}
 			// indicator room height
 			else if (tileID == "04")
 			{
-				key = "indicator room height";
+				map[y][x] = new BlockSolid(worldPos); // TODO: make some formal definition for what should replace indicators when the map is drawn
 			}
 			// indicator room origin
 			else if (tileID == "05") 
 			{
-				key = "indicator room origin";
+				map[y][x] = new BlockSolid(worldPos);
 			}
 			// indicator room origin start
 			else if (tileID == "06")
 			{
-				key = "indicator room origin start";
+				map[y][x] = new BlockSolid(worldPos);
 			}
 			// indicator room width
 			else if (tileID == "07") 
 			{
-				key = "indicator room width";
+				map[y][x] = new BlockSolid(worldPos);
 			}
 			// indicator spawn enemy left
 			else if (tileID == "08")
 			{
-				key = "indicator spawn enemy left";
+				map[y][x] = nullptr; // TODO: make some formal definition for this replacement
 			}
 			// indicator spawn enemy right
 			else if (tileID == "09")
@@ -134,7 +142,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 				// create the std::list if it doesn't already exist
 				tiles.emplace(key, std::list<sf::Vector2i>());
 			}
-			tiles.at(key).push_back(pos);
+			tiles.at(key).push_back(coords);
 
 			// adjust the used size
 			if (x > usedSize.x)
