@@ -18,9 +18,8 @@ Inheritance diagram for Input\+Object\+:\begin{figure}[H]
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_input_object_aa5efffbaa424815e3caa1c7b5caee920}\label{class_input_object_aa5efffbaa424815e3caa1c7b5caee920} 
-virtual void {\bfseries Key\+Pressed} (sf\+::\+Keyboard\+::\+Key key)
-\item 
+virtual void \mbox{\hyperlink{class_input_object_aa5efffbaa424815e3caa1c7b5caee920}{Key\+Pressed}} (sf\+::\+Keyboard\+::\+Key key)
+\begin{DoxyCompactList}\small\item\em Do something when a key is pressed. \end{DoxyCompactList}\item 
 \Hypertarget{class_input_object_a562ec6b13331e068efa163ef47827f19}\label{class_input_object_a562ec6b13331e068efa163ef47827f19} 
 virtual void {\bfseries Key\+Released} (sf\+::\+Keyboard\+::\+Key key)
 \item 
@@ -57,6 +56,59 @@ void {\bfseries Request\+Mouse\+Cursor\+Deregistration} ()
 \Hypertarget{class_input_object_ae3334ea6d7a2c3a3d757d78ab6c7df26}\label{class_input_object_ae3334ea6d7a2c3a3d757d78ab6c7df26} 
 class {\bfseries Input\+Object\+Attorney}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_input_object_aa5efffbaa424815e3caa1c7b5caee920}\index{InputObject@{InputObject}!KeyPressed@{KeyPressed}}
+\index{KeyPressed@{KeyPressed}!InputObject@{InputObject}}
+\doxysubsubsection{\texorpdfstring{KeyPressed()}{KeyPressed()}}
+{\footnotesize\ttfamily \label{class_input_object_aa5efffbaa424815e3caa1c7b5caee920} 
+void Input\+Object\+::\+Key\+Pressed (\begin{DoxyParamCaption}\item[{sf\+::\+Keyboard\+::\+Key}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Do something when a key is pressed. 
+
+The function called by the engine whenever a key registered for key press events is pressed. It is only called on the first frame the key is held down. This function does nothing by default, and can be overridden by an {\ttfamily \doxylink{class_input_object}{Input\+Object}} -\/derived class. Any behavior that should occur when a key is pressed should go in the overridden function body.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key which was pressed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+See the Input System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
+For more on keyboard input\+: \begin{DoxySeeAlso}{See also}
+Input\+Object\+::\+Key\+Released 
+
+Input\+Object\+::\+Request\+Key\+Registration 
+
+Input\+Object\+::\+Request\+Key\+Deregistration
+\end{DoxySeeAlso}
+For mouse button input\+: \begin{DoxySeeAlso}{See also}
+Input\+Object\+::\+Mouse\+Btn\+Pressed 
+
+Input\+Object\+::\+Mouse\+Btn\+Released 
+
+Input\+Object\+::\+Request\+Mouse\+Btn\+Registration 
+
+Input\+Object\+::\+Request\+Mouse\+Btn\+Deregistration
+\end{DoxySeeAlso}
+For mouse cursor input\+: \begin{DoxySeeAlso}{See also}
+Input\+Object\+::\+Mouse\+Cursor\+Moved 
+
+Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration 
+
+Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration 
+\end{DoxySeeAlso}
+
+
+Reimplemented in \mbox{\hyperlink{class_player_a726a2a91a52257abf1d4c8614421644b}{Player}}, and \mbox{\hyperlink{class_test_class_a79b2b83aaafeadcaf2ea424aacb105e0}{Test\+Class}}.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

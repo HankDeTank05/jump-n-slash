@@ -7,7 +7,7 @@
 BlockBreakable::BlockBreakable(sf::Vector2f pos)
 	: LevelTile(pos, SpriteManager::GetSprite(KEY_BLOCK_BREAKABLE), true, true, true, true)
 {
-	EnqueueForDrawRegistration();
+	RequestDrawRegistration();
 }
 
 BlockBreakable::~BlockBreakable()
@@ -17,5 +17,5 @@ BlockBreakable::~BlockBreakable()
 
 void BlockBreakable::Break()
 {
-	EnqueueForDrawDeregistration();
+	RequestDrawDeregistration();
 }

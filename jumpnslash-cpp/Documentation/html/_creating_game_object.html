@@ -104,9 +104,9 @@ The Update System</h1>
 <p>The Update system is exactly what it sounds like: it is the system that updates all registered objects every frame.</p>
 <p>This system is very easy to use. Any object you would like to update simply needs to derive from the <code><a class="el" href="class_update_object.html">UpdateObject</a></code> class.</p>
 <p>There are three main functions you need to know about in the <code><a class="el" href="class_update_object.html">UpdateObject</a></code> class.</p><ul>
-<li><code>UpdateObject::RequestUpdateRegistration</code> </li>
-<li><code>UpdateObject::RequestUpdateDeregistration</code> </li>
-<li><code>UpdateObject::Update</code> </li>
+<li><code><a class="el" href="class_update_object.html#ad60cbe12fe88bf7566a904900378c934" title="Request that the engine update this object.">UpdateObject::RequestUpdateRegistration</a></code> </li>
+<li><code><a class="el" href="class_update_object.html#ac2573c3f88943d35dd98154cfb96dd4b" title="Request that the engine stop updating this object.">UpdateObject::RequestUpdateDeregistration</a></code> </li>
+<li><code><a class="el" href="class_update_object.html#a288ca794056a05fafc9ef19e57532366" title="Update an object.">UpdateObject::Update</a></code> </li>
 </ul>
 <p><code>RequestUpdateRegistration</code> and <code>RequestUpdateDeregistration</code> can only be called by an <code><a class="el" href="class_update_object.html">UpdateObject</a></code> -derived class, meaning the object that wants to be updated (or stop being updated) needs to call it.</p>
 <p><code>Update</code> is a function you need to override if you want anything to actually happen when it is updated. It's as simple as declaring <code>"virtual void Update(float deltaTime) override;"</code> in your object's header file, and defining the update behavior in the <code>cpp</code> file.</p>
@@ -165,9 +165,9 @@ Example</h2>
 </div><!-- fragment --><h1><a class="anchor" id="drawSystem"></a>
 The Draw System</h1>
 <p>The Draw system is very similar to the Update system in many ways. It is simple to use, and it only has three functions you need to worry about:</p><ul>
-<li><code>DrawObject::RequestDrawRegistration</code> </li>
-<li><code>DrawObject::RequestDrawDeregistration</code> </li>
-<li><code>DrawObject::Draw</code> </li>
+<li><code><a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a></code> </li>
+<li><code><a class="el" href="class_draw_object.html#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a></code> </li>
+<li><code><a class="el" href="class_draw_object.html#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a></code> </li>
 </ul>
 <p>Just like with updating, <code>RequestDrawRegistration</code> and <code>RequestDrawDeregistration</code> can only be called by a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class, and <code>Draw</code> is the function you need to override if you actually want to see anything happen.</p>
 <h2><a class="anchor" id="drawSystem_exampleCode"></a>
@@ -245,7 +245,7 @@ The Input System</h1>
 <p>For keyboard inputs:</p><ul>
 <li>InputObject::RequestKeyRegistration</li>
 <li>InputObject::RequestKeyDeregistration</li>
-<li>InputObject::KeyPressed</li>
+<li><a class="el" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920" title="Do something when a key is pressed.">InputObject::KeyPressed</a></li>
 <li>InputObject::KeyReleased</li>
 </ul>
 <p>For mouse button inputs (clicking):</p><ul>

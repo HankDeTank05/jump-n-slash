@@ -37,7 +37,7 @@ InputObject::~InputObject()
 	}
 }
 
-void InputObject::EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg)
+void InputObject::RequestKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg)
 {
 	KeyTrackerID keyID(key, eventToReg);
 	if (keyTracker.count(keyID) == 0)
@@ -60,7 +60,7 @@ void InputObject::EnqueueForKeyRegistration(sf::Keyboard::Key key, KeyEvent even
 	keyTracker.at(keyID).regState = RegistrationState::PENDING_REGISTRATION;
 }
 
-void InputObject::EnqueueForKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg)
+void InputObject::RequestKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg)
 {
 	KeyTrackerID keyID(key, eventToDereg);
 	assert(keyTracker.count(keyID) > 0); // Invalid KeyID: keyID does not exist!
@@ -71,7 +71,7 @@ void InputObject::EnqueueForKeyDeregistration(sf::Keyboard::Key key, KeyEvent ev
 	keyTracker.at(keyID).regState = RegistrationState::PENDING_DEREGISTRATION;
 }
 
-void InputObject::EnqueueForMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg)
+void InputObject::RequestMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg)
 {
 	MouseBtnTrackerID btnID(btn, eventToReg);
 	if (mouseBtnTracker.count(btnID) == 0)
@@ -94,7 +94,7 @@ void InputObject::EnqueueForMouseBtnRegistration(sf::Mouse::Button btn, MouseEve
 	mouseBtnTracker.at(btnID).regState = RegistrationState::PENDING_REGISTRATION;
 }
 
-void InputObject::EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg)
+void InputObject::RequestMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg)
 {
 	MouseBtnTrackerID btnID(btn, eventToDereg);
 	assert(mouseBtnTracker.count(btnID) > 0); // Invalid BtnID: btnID does not exist!
@@ -105,7 +105,7 @@ void InputObject::EnqueueForMouseBtnDeregistration(sf::Mouse::Button btn, MouseE
 	mouseBtnTracker.at(btnID).regState = RegistrationState::PENDING_DEREGISTRATION;
 }
 
-void InputObject::EnqueueForMouseCursorRegistration()
+void InputObject::RequestMouseCursorRegistration()
 {
 	assert(mouseCursorRegData.regState == RegistrationState::CURRENTLY_DEREGISTERED);
 
@@ -114,7 +114,7 @@ void InputObject::EnqueueForMouseCursorRegistration()
 	mouseCursorRegData.regState = RegistrationState::PENDING_REGISTRATION;
 }
 
-void InputObject::EnqueueForMouseCursorDeregistration()
+void InputObject::RequestMouseCursorDeregistration()
 {
 	assert(mouseCursorRegData.regState == RegistrationState::CURRENTLY_REGISTERED);
 

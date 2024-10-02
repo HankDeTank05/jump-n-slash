@@ -1,6 +1,6 @@
 /*! \page CreatingGameObject Creating a Game Object
 
-\section updateSystem The Update System
+\section go_updateSystem The Update System
 The Update system is exactly what it sounds like: it is the system that updates all registered objects every frame.
 
 This system is very easy to use. Any object you would like to update simply needs to derive from the \c UpdateObject class.
@@ -20,7 +20,7 @@ in the \c cpp file.
 \note This engine is not framerate-controlled! A frame will render as soon as it can, meaning the time between frames is unknown.
 Any behavior (such as movement) need to be multiplied by the provided \c deltaTime argument in order to appear normal!
 
-\subsection updateSystem_exampleCode Example
+\subsection go_updateSystem_exampleCode Example
 The following is an example of how one might implement a Mario class in this engine.
 \code
 // Mario.h
@@ -75,7 +75,7 @@ void Mario::Update(float deltaTime)
 }
 \endcode
 
-\section drawSystem The Draw System
+\section go_drawSystem The Draw System
 The Draw system is very similar to the Update system in many ways. It is simple to use, and it only has three functions you need
 to worry about:
 - \c DrawObject::RequestDrawRegistration
@@ -85,7 +85,7 @@ to worry about:
 Just like with updating, \c RequestDrawRegistration and \c RequestDrawDeregistration can only be called by a \c DrawObject -derived
 class, and \c Draw is the function you need to override if you actually want to see anything happen.
 
-\subsection drawSystem_exampleCode Example
+\subsection go_drawSystem_exampleCode Example
 Building on the previous example, we want to be able to see Mario on screen.
 \code
 // Mario.h
@@ -156,7 +156,7 @@ void Mario::Draw()
 // ^^^ newly added ^^^
 \endcode
 
-\section inputSystem The Input System
+\section go_inputSystem The Input System
 While the Input system is similar to the Update and Draw systems in many ways, it is not as simple to use. You have a lot more
 functions at your disposal, and it may be a little overwhelming to use at first. Hopefully this guide will make it feel simpler
 than it looks!
@@ -198,7 +198,7 @@ nothing stopping you from overriding one of those functions even if you never re
 will not cause any problems. For example, if you want to preemptively override the \c KeyReleased function knowing you'll need it
 in the future, it'll just sit there never being called, but not causing any issues. (The same applies to mouse buttons and cursor).
 
-\subsection inputSystem_exampleCode Example
+\subsection go_inputSystem_exampleCode Example
 Let's expand on the previous examples to make Mario walk left and right when you use the arrow keys.
 \code
 // Mario.h
@@ -306,9 +306,9 @@ void Mario::KeyReleased(sf::Keyboard::Key key)
 // ^^^ newly added ^^^
 \endcode
 
-\section alarmSystem The Alarm System (coming soon)
+\section go_alarmSystem The Alarm System (coming soon)
 
-\section collisionSystem The Collision System (coming soon)
+\section go_collisionSystem The Collision System (coming soon)
 
 TODO: documentation for CreatingGameObject tutorial is incomplete
 

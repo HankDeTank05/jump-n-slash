@@ -27,7 +27,7 @@ void DrawObject::Draw()
 	// do nothing. override to make it do something
 }
 
-void DrawObject::EnqueueForDrawRegistration()
+void DrawObject::RequestDrawRegistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_DEREGISTERED);
 
@@ -36,7 +36,7 @@ void DrawObject::EnqueueForDrawRegistration()
 	regState = RegistrationState::PENDING_REGISTRATION;
 }
 
-void DrawObject::EnqueueForDrawDeregistration()
+void DrawObject::RequestDrawDeregistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_REGISTERED);
 

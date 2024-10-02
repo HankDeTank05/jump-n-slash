@@ -7,9 +7,9 @@ This system is very easy to use. Any object you would like to update simply need
 
 There are three main functions you need to know about in the {\ttfamily \doxylink{class_update_object}{Update\+Object}} class.
 \begin{DoxyItemize}
-\item {\ttfamily Update\+Object\+::\+Request\+Update\+Registration} 
-\item {\ttfamily Update\+Object\+::\+Request\+Update\+Deregistration} 
-\item {\ttfamily Update\+Object\+::\+Update} 
+\item {\ttfamily \doxylink{class_update_object_ad60cbe12fe88bf7566a904900378c934}{Update\+Object\+::\+Request\+Update\+Registration}} 
+\item {\ttfamily \doxylink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{Update\+Object\+::\+Request\+Update\+Deregistration}} 
+\item {\ttfamily \doxylink{class_update_object_a288ca794056a05fafc9ef19e57532366}{Update\+Object\+::\+Update}} 
 \end{DoxyItemize}
 
 {\ttfamily Request\+Update\+Registration} and {\ttfamily Request\+Update\+Deregistration} can only be called by an {\ttfamily \doxylink{class_update_object}{Update\+Object}} -\/derived class, meaning the object that wants to be updated (or stop being updated) needs to call it.
@@ -79,9 +79,9 @@ The following is an example of how one might implement a Mario class in this eng
 \hypertarget{_creating_game_object_drawSystem}{}\doxysection{\texorpdfstring{The Draw System}{The Draw System}}\label{_creating_game_object_drawSystem}
 The Draw system is very similar to the Update system in many ways. It is simple to use, and it only has three functions you need to worry about\+:
 \begin{DoxyItemize}
-\item {\ttfamily Draw\+Object\+::\+Request\+Draw\+Registration} 
-\item {\ttfamily Draw\+Object\+::\+Request\+Draw\+Deregistration} 
-\item {\ttfamily Draw\+Object\+::\+Draw} 
+\item {\ttfamily \doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration}} 
+\item {\ttfamily \doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration}} 
+\item {\ttfamily \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw}} 
 \end{DoxyItemize}
 
 Just like with updating, {\ttfamily Request\+Draw\+Registration} and {\ttfamily Request\+Draw\+Deregistration} can only be called by a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class, and {\ttfamily Draw} is the function you need to override if you actually want to see anything happen.\hypertarget{_creating_game_object_drawSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_drawSystem_exampleCode}
@@ -166,7 +166,7 @@ For keyboard inputs\+:
 \begin{DoxyItemize}
 \item Input\+Object\+::\+Request\+Key\+Registration
 \item Input\+Object\+::\+Request\+Key\+Deregistration
-\item Input\+Object\+::\+Key\+Pressed
+\item \doxylink{class_input_object_aa5efffbaa424815e3caa1c7b5caee920}{Input\+Object\+::\+Key\+Pressed}
 \item Input\+Object\+::\+Key\+Released
 \end{DoxyItemize}
 

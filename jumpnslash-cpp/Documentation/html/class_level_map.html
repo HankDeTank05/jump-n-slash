@@ -131,6 +131,7 @@ Public Member Functions</h2></td></tr>
 <a class="el" href="class_level_map.html">LevelMap</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="class_level_map.html">LevelMap</a> &amp;lm)=delete</td></tr>
 <tr class="separator:a81b118e3d5a038bf240d9f5d6bc4eb02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7902cf952bf9d4e0398e09b287ccaaf5" id="r_a7902cf952bf9d4e0398e09b287ccaaf5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7902cf952bf9d4e0398e09b287ccaaf5">Draw</a> () override</td></tr>
+<tr class="memdesc:a7902cf952bf9d4e0398e09b287ccaaf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw an object.  <br /></td></tr>
 <tr class="separator:a7902cf952bf9d4e0398e09b287ccaaf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77365007efd749c624e589d9142dd659" id="r_a77365007efd749c624e589d9142dd659"><td class="memItemLeft" align="right" valign="top"><a id="a77365007efd749c624e589d9142dd659" name="a77365007efd749c624e589d9142dd659"></a>
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>GetStartingSpawnPoint</b> ()</td></tr>
@@ -146,11 +147,11 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>GetStartingSp
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_methods_class_draw_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_class_draw_object')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_draw_object.html">DrawObject</a></td></tr>
-<tr class="memitem:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object" id="r_a0d223751f7022545e5387488fd2a5ef6"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestDrawRegistration</b> ()</td></tr>
+<tr class="memitem:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object" id="r_a0d223751f7022545e5387488fd2a5ef6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6">RequestDrawRegistration</a> ()</td></tr>
+<tr class="memdesc:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine draw this object.  <br /></td></tr>
 <tr class="separator:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac36c9194561c0f21483f88a8c3b2d605 inherit pro_methods_class_draw_object" id="r_ac36c9194561c0f21483f88a8c3b2d605"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestDrawDeregistration</b> ()</td></tr>
+<tr class="memitem:ac36c9194561c0f21483f88a8c3b2d605 inherit pro_methods_class_draw_object" id="r_ac36c9194561c0f21483f88a8c3b2d605"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_object.html#ac36c9194561c0f21483f88a8c3b2d605">RequestDrawDeregistration</a> ()</td></tr>
+<tr class="memdesc:ac36c9194561c0f21483f88a8c3b2d605 inherit pro_methods_class_draw_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine stop drawing this object.  <br /></td></tr>
 <tr class="separator:ac36c9194561c0f21483f88a8c3b2d605 inherit pro_methods_class_draw_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -177,7 +178,25 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestDrawDeregistra
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_draw_object.html">DrawObject</a>.</p>
+<p>Draw an object. </p>
+<p>The function called by the engine to draw an object. This function does nothing by default, and can be overridden by a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class. Any behavior that should occur when drawing an object should go in the overridden function body.</p>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<p>See the Draw System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html">InputObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_draw_object.html#a58db365c96dc8ab875f2a03b23e3c2ae">DrawObject</a>.</p>
 
 </div>
 </div>

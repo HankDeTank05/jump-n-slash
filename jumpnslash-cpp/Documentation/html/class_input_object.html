@@ -126,8 +126,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa5efffbaa424815e3caa1c7b5caee920" id="r_aa5efffbaa424815e3caa1c7b5caee920"><td class="memItemLeft" align="right" valign="top"><a id="aa5efffbaa424815e3caa1c7b5caee920" name="aa5efffbaa424815e3caa1c7b5caee920"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>KeyPressed</b> (sf::Keyboard::Key key)</td></tr>
+<tr class="memitem:aa5efffbaa424815e3caa1c7b5caee920" id="r_aa5efffbaa424815e3caa1c7b5caee920"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa5efffbaa424815e3caa1c7b5caee920">KeyPressed</a> (sf::Keyboard::Key key)</td></tr>
+<tr class="memdesc:aa5efffbaa424815e3caa1c7b5caee920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do something when a key is pressed.  <br /></td></tr>
 <tr class="separator:aa5efffbaa424815e3caa1c7b5caee920"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a562ec6b13331e068efa163ef47827f19" id="r_a562ec6b13331e068efa163ef47827f19"><td class="memItemLeft" align="right" valign="top"><a id="a562ec6b13331e068efa163ef47827f19" name="a562ec6b13331e068efa163ef47827f19"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>KeyReleased</b> (sf::Keyboard::Key key)</td></tr>
@@ -166,6 +166,64 @@ Friends</h2></td></tr>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>InputObjectAttorney</b></td></tr>
 <tr class="separator:ae3334ea6d7a2c3a3d757d78ab6c7df26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa5efffbaa424815e3caa1c7b5caee920" name="aa5efffbaa424815e3caa1c7b5caee920"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5efffbaa424815e3caa1c7b5caee920">&#9670;&#160;</a></span>KeyPressed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InputObject::KeyPressed </td>
+          <td>(</td>
+          <td class="paramtype">sf::Keyboard::Key</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Do something when a key is pressed. </p>
+<p>The function called by the engine whenever a key registered for key press events is pressed. It is only called on the first frame the key is held down. This function does nothing by default, and can be overridden by an <code><a class="el" href="class_input_object.html">InputObject</a></code> -derived class. Any behavior that should occur when a key is pressed should go in the overridden function body.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>The key which was pressed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<p>See the Input System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>For more on keyboard input: </p><dl class="section see"><dt>See also</dt><dd>InputObject::KeyReleased </dd>
+<dd>
+InputObject::RequestKeyRegistration </dd>
+<dd>
+InputObject::RequestKeyDeregistration</dd></dl>
+<p>For mouse button input: </p><dl class="section see"><dt>See also</dt><dd>InputObject::MouseBtnPressed </dd>
+<dd>
+InputObject::MouseBtnReleased </dd>
+<dd>
+InputObject::RequestMouseBtnRegistration </dd>
+<dd>
+InputObject::RequestMouseBtnDeregistration</dd></dl>
+<p>For mouse cursor input: </p><dl class="section see"><dt>See also</dt><dd>InputObject::MouseCursorMoved </dd>
+<dd>
+InputObject::RequestMouseCursorRegistration </dd>
+<dd>
+InputObject::RequestMouseCursorDeregistration </dd></dl>
+
+<p>Reimplemented in <a class="el" href="class_player.html#a726a2a91a52257abf1d4c8614421644b">Player</a>, and <a class="el" href="class_test_class.html#a79b2b83aaafeadcaf2ea424aacb105e0">TestClass</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Jump-n-Slash/Engine Code/<a class="el" href="_input_object_8h_source.html">InputObject.h</a></li>
 <li>Jump-n-Slash/Engine Code/<b>InputObject.cpp</b></li>

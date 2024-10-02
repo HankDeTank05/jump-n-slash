@@ -31,7 +31,7 @@ public: // api functions
 	* 
 	* \return	Does not return anything.
 	* 
-	* \b Example \b 1
+	* \section example1 Example 1
 	* \code
 	* // LoadResources.cpp
 	* #include "../Engine Code/JumpSlashEngine.h"
@@ -53,7 +53,7 @@ public: // api functions
 	* }
 	* \endcode
 	* 
-	* \b Example \b 2
+	* \section example2 Example 2
 	* \code
 	* // LoadResources.cpp
 	* #include "../Engine Code/JumpSlashEngine.h"
@@ -102,7 +102,6 @@ public: // api functions
 	* \endcode
 	* 
 	* \see	TextureManager::LoadTexture
-	* 
 	* \see	SpriteManager::LoadSprite
 	* \see	SpriteManager::GetSprite
 	*/

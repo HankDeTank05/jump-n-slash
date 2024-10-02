@@ -16,14 +16,14 @@ Player::Player(sf::Vector2f spawnPoint)
 	pCurrentState(&PlayerFSM::idle),
 	respawnPoint(spawnPoint)
 {
-	EnqueueForUpdateRegistration();
-	EnqueueForDrawRegistration();
-	EnqueueForKeyRegistration(JUMP_BTN, KeyEvent::KeyPress);
-	EnqueueForKeyRegistration(JUMP_BTN, KeyEvent::KeyRelease);
-	EnqueueForKeyRegistration(WALK_LEFT_BTN, KeyEvent::KeyPress);
-	EnqueueForKeyRegistration(WALK_LEFT_BTN, KeyEvent::KeyRelease);
-	EnqueueForKeyRegistration(WALK_RIGHT_BTN, KeyEvent::KeyPress);
-	EnqueueForKeyRegistration(WALK_RIGHT_BTN, KeyEvent::KeyRelease);
+	RequestUpdateRegistration();
+	RequestDrawRegistration();
+	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
+	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
+	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyPress);
+	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
+	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
+	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
 	
 	assert(pCurrentState != nullptr);
 }
@@ -55,10 +55,10 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 {
 	switch (key)
 	{
-	case WALK_LEFT_BTN:
+	case WALK_LEFT_KEY:
 		posDelta.x = -speed;
 		break;
-	case WALK_RIGHT_BTN:
+	case WALK_RIGHT_KEY:
 		posDelta.x = speed;
 		break;
 	}
@@ -68,8 +68,8 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 {
 	switch (key)
 	{
-	case WALK_LEFT_BTN:
-	case WALK_RIGHT_BTN:
+	case WALK_LEFT_KEY:
+	case WALK_RIGHT_KEY:
 		posDelta.x = 0.0f;
 		break;
 	}

@@ -7,7 +7,7 @@
 BlockHazard::BlockHazard(sf::Vector2f pos)
 	: LevelTile(pos, SpriteManager::GetSprite(KEY_BLOCK_HAZARD), true, true, true, false)
 {
-	EnqueueForDrawRegistration();
+	RequestDrawRegistration();
 }
 
 BlockHazard::~BlockHazard()

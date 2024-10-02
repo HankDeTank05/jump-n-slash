@@ -21,23 +21,23 @@
 \DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_update_object}{\string~UpdateObject}}();}
 \DoxyCodeLine{00018\ }
 \DoxyCodeLine{00019\ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ deltaTime);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ UpdateObject::Update}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ RequestUpdateRegistration();\ \textcolor{comment}{//\ TODO:\ documentation\ for\ UpdateObject::RequestUpdateRegistration}}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ RequestUpdateDeregistration();\ \textcolor{comment}{//\ TODO:\ documentation\ for\ UpdateObject::RequestUpdateDeregistration}}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object_attorney}{UpdateObjectAttorney}};}
-\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ Register();}
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister();}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00031\ \ \ \ \ RegistrationState\ regState;}
-\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}*\ pRegCmd;}
-\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_update_deregistration_command}{UpdateDeregistrationCommand}}*\ pDeregCmd;}
-\DoxyCodeLine{00034\ \ \ \ \ UpdateManager::UpdateListRef\ deleteRef;}
-\DoxyCodeLine{00035\ \};}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_update_object_a288ca794056a05fafc9ef19e57532366}{Update}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_update_object_ad60cbe12fe88bf7566a904900378c934}{RequestUpdateRegistration}}();}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{RequestUpdateDeregistration}}();}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_update_object_attorney}{UpdateObjectAttorney}};}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ Register();}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00108\ \ \ \ \ RegistrationState\ regState;\ \textcolor{comment}{//\ TODO:\ documentation\ for\ member\ variable}}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{class_update_registration_command}{UpdateRegistrationCommand}}*\ pRegCmd;\ \textcolor{comment}{//\ TODO:\ documentation\ for\ member\ variable}}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{class_update_deregistration_command}{UpdateDeregistrationCommand}}*\ pDeregCmd;\ \textcolor{comment}{//\ TODO:\ documentation\ for\ member\ variable}}
+\DoxyCodeLine{00111\ \ \ \ \ UpdateManager::UpdateListRef\ deleteRef;\ \textcolor{comment}{//\ TODO:\ documentation\ for\ member\ variable}}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

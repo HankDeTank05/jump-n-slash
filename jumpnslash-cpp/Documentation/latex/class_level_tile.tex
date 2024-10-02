@@ -19,7 +19,7 @@ Inheritance diagram for Level\+Tile\+:\begin{figure}[H]
 \mbox{\hyperlink{class_level_tile}{Level\+Tile}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_level_tile}{Level\+Tile}} \&lt)=delete
 \item 
 virtual void \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd}{Draw}} () override final
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -31,10 +31,10 @@ virtual void \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries Request\+Draw\+Registration} ()
-\item 
-void {\bfseries Request\+Draw\+Deregistration} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Request\+Draw\+Registration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine draw this object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Request\+Draw\+Deregistration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine stop drawing this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
@@ -46,7 +46,32 @@ void Level\+Tile\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\
 
 
 
-Reimplemented from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}.
+Draw an object. 
+
+The function called by the engine to draw an object. This function does nothing by default, and can be overridden by a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class. Any behavior that should occur when drawing an object should go in the overridden function body.
+
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+See the Draw System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
+
+\doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
+
+\doxylink{class_update_object}{Update\+Object} 
+
+\doxylink{class_input_object}{Input\+Object} 
+
+Alarm\+Object 
+
+\doxylink{class_collision_object}{Collision\+Object} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object}}.
 
 
 

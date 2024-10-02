@@ -23,7 +23,7 @@
 //		}
 //	}
 //
-//	EnqueueForDrawRegistration();
+//	RequestDrawRegistration();
 //}
 
 LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
@@ -280,7 +280,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 		assert(rooms.front()->isStartingRoom == true); // the starting room should always be the first one in the list
 	}
 
-	EnqueueForDrawRegistration();
+	RequestDrawRegistration();
 }
 
 LevelMap::~LevelMap()

@@ -18,21 +18,124 @@ Inheritance diagram for Draw\+Object\+:\begin{figure}[H]
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}\label{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae} 
-virtual void {\bfseries Draw} ()
-\item 
-\Hypertarget{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}\label{class_draw_object_a0d223751f7022545e5387488fd2a5ef6} 
-void {\bfseries Request\+Draw\+Registration} ()
-\item 
-\Hypertarget{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}\label{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605} 
-void {\bfseries Request\+Draw\+Deregistration} ()
-\end{DoxyCompactItemize}
+virtual void \mbox{\hyperlink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw}} ()
+\begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Request\+Draw\+Registration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine draw this object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Request\+Draw\+Deregistration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine stop drawing this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_draw_object_a552032a5bbc214719fa0b2c21fd976d8}\label{class_draw_object_a552032a5bbc214719fa0b2c21fd976d8} 
 class {\bfseries Draw\+Object\+Attorney}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}\index{DrawObject@{DrawObject}!Draw@{Draw}}
+\index{Draw@{Draw}!DrawObject@{DrawObject}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae} 
+void Draw\+Object\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Draw an object. 
+
+The function called by the engine to draw an object. This function does nothing by default, and can be overridden by a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class. Any behavior that should occur when drawing an object should go in the overridden function body.
+
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+See the Draw System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
+
+\doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
+
+\doxylink{class_update_object}{Update\+Object} 
+
+\doxylink{class_input_object}{Input\+Object} 
+
+Alarm\+Object 
+
+\doxylink{class_collision_object}{Collision\+Object} 
+\end{DoxySeeAlso}
+
+
+Reimplemented in \mbox{\hyperlink{class_level_map_a7902cf952bf9d4e0398e09b287ccaaf5}{Level\+Map}}, \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd}{Level\+Tile}}, \mbox{\hyperlink{class_player_a5b60ad157bb1e8debca89ed6903ca2a4}{Player}}, and \mbox{\hyperlink{class_test_class_a78894580a70988ad537f12f35ea26230}{Test\+Class}}.
+
+\Hypertarget{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}\index{DrawObject@{DrawObject}!RequestDrawDeregistration@{RequestDrawDeregistration}}
+\index{RequestDrawDeregistration@{RequestDrawDeregistration}!DrawObject@{DrawObject}}
+\doxysubsubsection{\texorpdfstring{RequestDrawDeregistration()}{RequestDrawDeregistration()}}
+{\footnotesize\ttfamily \label{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605} 
+void Draw\+Object\+::\+Request\+Draw\+Deregistration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Request that the engine stop drawing this object. 
+
+Call this function in a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class to let the engien know you would like to stop drawing the object. This function is only accessible to classes deriving from {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} .
+
+\begin{DoxyNote}{Note}
+As the name of this function implies, this puts in a request with the engine for your object to stop being drawn. The request is processed by the engien on the same frame this fucntion is called, and calls to {\ttfamily \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw}} will cease {\bfseries{the}} {\bfseries{following}} frame.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+See the Draw System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw} 
+
+\doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
+
+\doxylink{class_update_object}{Update\+Object} 
+
+\doxylink{class_input_object}{Input\+Object} 
+
+Alarm\+Object 
+
+\doxylink{class_collision_object}{Collision\+Object} 
+\end{DoxySeeAlso}
+\Hypertarget{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}\index{DrawObject@{DrawObject}!RequestDrawRegistration@{RequestDrawRegistration}}
+\index{RequestDrawRegistration@{RequestDrawRegistration}!DrawObject@{DrawObject}}
+\doxysubsubsection{\texorpdfstring{RequestDrawRegistration()}{RequestDrawRegistration()}}
+{\footnotesize\ttfamily \label{class_draw_object_a0d223751f7022545e5387488fd2a5ef6} 
+void Draw\+Object\+::\+Request\+Draw\+Registration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Request that the engine draw this object. 
+
+Call this function in a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class to let the engine know you would like to begin drawing the object. This function is only accessible to classes deriving from {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} .
+
+\begin{DoxyNote}{Note}
+As the name of this function implies, this puts in a request with the engine for your object to be drawn. The request is processed by the engine on the same frame this function is called, and calls to {\ttfamily \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw}} will begin {\bfseries{the}} {\bfseries{following}} frame.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+See the Draw System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw} 
+
+\doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
+
+\doxylink{class_update_object}{Update\+Object} 
+
+\doxylink{class_input_object}{Input\+Object} 
+
+Alarm\+Object 
+
+\doxylink{class_collision_object}{Collision\+Object} 
+\end{DoxySeeAlso}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

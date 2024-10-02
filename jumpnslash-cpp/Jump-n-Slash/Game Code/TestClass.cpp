@@ -11,11 +11,11 @@ TestClass::TestClass()
 	circle.setFillColor(sf::Color::White);
 	circle.setOutlineColor(sf::Color::Red);
 
-	EnqueueForUpdateRegistration();
-	EnqueueForDrawRegistration();
+	RequestUpdateRegistration();
+	RequestDrawRegistration();
 
-	EnqueueForKeyRegistration(sf::Keyboard::O, KeyEvent::KeyPress);
-	EnqueueForKeyRegistration(sf::Keyboard::X, KeyEvent::KeyPress);
+	RequestKeyRegistration(sf::Keyboard::O, KeyEvent::KeyPress);
+	RequestKeyRegistration(sf::Keyboard::X, KeyEvent::KeyPress);
 }
 
 TestClass::~TestClass()
@@ -28,8 +28,8 @@ void TestClass::Update(float deltaTime)
 	//currentFrames++;
 	//if (currentFrames >= maxFrames)
 	//{
-	//	EnqueueForUpdateDeregistration();
-	//	EnqueueForDrawDeregistration();
+	//	RequestUpdateDeregistration();
+	//	RequestDrawDeregistration();
 	//}
 }
 
@@ -52,35 +52,35 @@ void TestClass::KeyPressed(sf::Keyboard::Key key)
 		circle.setFillColor(sf::Color::Blue);
 		break;
 	case sf::Keyboard::O:
-		EnqueueForKeyRegistration(sf::Keyboard::R, KeyEvent::KeyPress);
-		EnqueueForKeyRegistration(sf::Keyboard::R, KeyEvent::KeyRelease);
-		EnqueueForKeyRegistration(sf::Keyboard::G, KeyEvent::KeyPress);
-		EnqueueForKeyRegistration(sf::Keyboard::G, KeyEvent::KeyRelease);
-		EnqueueForKeyRegistration(sf::Keyboard::B, KeyEvent::KeyPress);
-		EnqueueForKeyRegistration(sf::Keyboard::B, KeyEvent::KeyRelease);
-		EnqueueForMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
-		EnqueueForMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnRelease);
-		EnqueueForMouseBtnRegistration(sf::Mouse::Middle, MouseEvent::BtnPress);
-		EnqueueForMouseBtnRegistration(sf::Mouse::Middle, MouseEvent::BtnRelease);
-		EnqueueForMouseBtnRegistration(sf::Mouse::Right, MouseEvent::BtnPress);
-		EnqueueForMouseBtnRegistration(sf::Mouse::Right, MouseEvent::BtnRelease);
-		EnqueueForMouseCursorRegistration();
+		RequestKeyRegistration(sf::Keyboard::R, KeyEvent::KeyPress);
+		RequestKeyRegistration(sf::Keyboard::R, KeyEvent::KeyRelease);
+		RequestKeyRegistration(sf::Keyboard::G, KeyEvent::KeyPress);
+		RequestKeyRegistration(sf::Keyboard::G, KeyEvent::KeyRelease);
+		RequestKeyRegistration(sf::Keyboard::B, KeyEvent::KeyPress);
+		RequestKeyRegistration(sf::Keyboard::B, KeyEvent::KeyRelease);
+		RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
+		RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnRelease);
+		RequestMouseBtnRegistration(sf::Mouse::Middle, MouseEvent::BtnPress);
+		RequestMouseBtnRegistration(sf::Mouse::Middle, MouseEvent::BtnRelease);
+		RequestMouseBtnRegistration(sf::Mouse::Right, MouseEvent::BtnPress);
+		RequestMouseBtnRegistration(sf::Mouse::Right, MouseEvent::BtnRelease);
+		RequestMouseCursorRegistration();
 		circle.setOutlineThickness(10.0f);
 		break;
 	case sf::Keyboard::X:
-		EnqueueForKeyDeregistration(sf::Keyboard::R, KeyEvent::KeyPress);
-		EnqueueForKeyDeregistration(sf::Keyboard::R, KeyEvent::KeyRelease);
-		EnqueueForKeyDeregistration(sf::Keyboard::G, KeyEvent::KeyPress);
-		EnqueueForKeyDeregistration(sf::Keyboard::G, KeyEvent::KeyRelease);
-		EnqueueForKeyDeregistration(sf::Keyboard::B, KeyEvent::KeyPress);
-		EnqueueForKeyDeregistration(sf::Keyboard::B, KeyEvent::KeyRelease);
-		EnqueueForMouseBtnDeregistration(sf::Mouse::Left, MouseEvent::BtnPress);
-		EnqueueForMouseBtnDeregistration(sf::Mouse::Left, MouseEvent::BtnRelease);
-		EnqueueForMouseBtnDeregistration(sf::Mouse::Middle, MouseEvent::BtnPress);
-		EnqueueForMouseBtnDeregistration(sf::Mouse::Middle, MouseEvent::BtnRelease);
-		EnqueueForMouseBtnDeregistration(sf::Mouse::Right, MouseEvent::BtnPress);
-		EnqueueForMouseBtnDeregistration(sf::Mouse::Right, MouseEvent::BtnRelease);
-		EnqueueForMouseCursorDeregistration();
+		RequestKeyDeregistration(sf::Keyboard::R, KeyEvent::KeyPress);
+		RequestKeyDeregistration(sf::Keyboard::R, KeyEvent::KeyRelease);
+		RequestKeyDeregistration(sf::Keyboard::G, KeyEvent::KeyPress);
+		RequestKeyDeregistration(sf::Keyboard::G, KeyEvent::KeyRelease);
+		RequestKeyDeregistration(sf::Keyboard::B, KeyEvent::KeyPress);
+		RequestKeyDeregistration(sf::Keyboard::B, KeyEvent::KeyRelease);
+		RequestMouseBtnDeregistration(sf::Mouse::Left, MouseEvent::BtnPress);
+		RequestMouseBtnDeregistration(sf::Mouse::Left, MouseEvent::BtnRelease);
+		RequestMouseBtnDeregistration(sf::Mouse::Middle, MouseEvent::BtnPress);
+		RequestMouseBtnDeregistration(sf::Mouse::Middle, MouseEvent::BtnRelease);
+		RequestMouseBtnDeregistration(sf::Mouse::Right, MouseEvent::BtnPress);
+		RequestMouseBtnDeregistration(sf::Mouse::Right, MouseEvent::BtnRelease);
+		RequestMouseCursorDeregistration();
 		circle.setOutlineThickness(0.0f);
 		break;
 	}

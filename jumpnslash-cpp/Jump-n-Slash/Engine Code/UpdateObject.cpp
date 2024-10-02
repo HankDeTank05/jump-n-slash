@@ -24,7 +24,7 @@ void UpdateObject::Update(float deltaTime)
 	// do nothing. override to make it do something
 }
 
-void UpdateObject::EnqueueForUpdateRegistration()
+void UpdateObject::RequestUpdateRegistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_DEREGISTERED);
 
@@ -33,7 +33,7 @@ void UpdateObject::EnqueueForUpdateRegistration()
 	regState = RegistrationState::PENDING_REGISTRATION;
 }
 
-void UpdateObject::EnqueueForUpdateDeregistration()
+void UpdateObject::RequestUpdateDeregistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_REGISTERED);
 

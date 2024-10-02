@@ -16,11 +16,11 @@ Inheritance diagram for Test\+Class\+:\begin{figure}[H]
 \mbox{\hyperlink{class_test_class}{Test\+Class}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_test_class}{Test\+Class}} \&p)=delete
 \item 
 virtual void \mbox{\hyperlink{class_test_class_abba6bf085748fdc324cc68661fea7189}{Update}} (float delta\+Time) override
-\item 
+\begin{DoxyCompactList}\small\item\em Update an object. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_test_class_a78894580a70988ad537f12f35ea26230}{Draw}} () override
-\item 
+\begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_test_class_a79b2b83aaafeadcaf2ea424aacb105e0}{Key\+Pressed}} (sf\+::\+Keyboard\+::\+Key key) override
-\item 
+\begin{DoxyCompactList}\small\item\em Do something when a key is pressed. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_test_class_a266fa061d8a4705405d57f7578e2b04c}{Key\+Released}} (sf\+::\+Keyboard\+::\+Key key) override
 \item 
 virtual void \mbox{\hyperlink{class_test_class_ae1ad048f7fb36db5308cfd2defbc84e4}{Mouse\+Btn\+Pressed}} (sf\+::\+Mouse\+::\+Button btn) override
@@ -54,17 +54,17 @@ virtual void \mbox{\hyperlink{class_test_class_a90869daadb5279694f8e3c58df3dfc23
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_update_object}{Update\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries Request\+Update\+Registration} ()
-\item 
-void {\bfseries Request\+Update\+Deregistration} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_update_object_ad60cbe12fe88bf7566a904900378c934}{Request\+Update\+Registration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine update this object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{Request\+Update\+Deregistration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine stop updating this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries Request\+Draw\+Registration} ()
-\item 
-void {\bfseries Request\+Draw\+Deregistration} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Request\+Draw\+Registration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine draw this object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Request\+Draw\+Deregistration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine stop drawing this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_input_object}{Input\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -91,7 +91,32 @@ void Test\+Class\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\
 
 
 
-Reimplemented from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}.
+Draw an object. 
+
+The function called by the engine to draw an object. This function does nothing by default, and can be overridden by a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class. Any behavior that should occur when drawing an object should go in the overridden function body.
+
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+See the Draw System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
+
+\doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
+
+\doxylink{class_update_object}{Update\+Object} 
+
+\doxylink{class_input_object}{Input\+Object} 
+
+Alarm\+Object 
+
+\doxylink{class_collision_object}{Collision\+Object} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object}}.
 
 \Hypertarget{class_test_class_a79b2b83aaafeadcaf2ea424aacb105e0}\index{TestClass@{TestClass}!KeyPressed@{KeyPressed}}
 \index{KeyPressed@{KeyPressed}!TestClass@{TestClass}}
@@ -101,7 +126,47 @@ void Test\+Class\+::\+Key\+Pressed (\begin{DoxyParamCaption}\item[{sf\+::\+Keybo
 
 
 
-Reimplemented from \mbox{\hyperlink{class_input_object}{Input\+Object}}.
+Do something when a key is pressed. 
+
+The function called by the engine whenever a key registered for key press events is pressed. It is only called on the first frame the key is held down. This function does nothing by default, and can be overridden by an {\ttfamily \doxylink{class_input_object}{Input\+Object}} -\/derived class. Any behavior that should occur when a key is pressed should go in the overridden function body.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key which was pressed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+See the Input System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
+For more on keyboard input\+: \begin{DoxySeeAlso}{See also}
+Input\+Object\+::\+Key\+Released 
+
+Input\+Object\+::\+Request\+Key\+Registration 
+
+Input\+Object\+::\+Request\+Key\+Deregistration
+\end{DoxySeeAlso}
+For mouse button input\+: \begin{DoxySeeAlso}{See also}
+Input\+Object\+::\+Mouse\+Btn\+Pressed 
+
+Input\+Object\+::\+Mouse\+Btn\+Released 
+
+Input\+Object\+::\+Request\+Mouse\+Btn\+Registration 
+
+Input\+Object\+::\+Request\+Mouse\+Btn\+Deregistration
+\end{DoxySeeAlso}
+For mouse cursor input\+: \begin{DoxySeeAlso}{See also}
+Input\+Object\+::\+Mouse\+Cursor\+Moved 
+
+Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration 
+
+Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{class_input_object_aa5efffbaa424815e3caa1c7b5caee920}{Input\+Object}}.
 
 \Hypertarget{class_test_class_a266fa061d8a4705405d57f7578e2b04c}\index{TestClass@{TestClass}!KeyReleased@{KeyReleased}}
 \index{KeyReleased@{KeyReleased}!TestClass@{TestClass}}
@@ -151,7 +216,41 @@ void Test\+Class\+::\+Update (\begin{DoxyParamCaption}\item[{float}]{delta\+Time
 
 
 
-Reimplemented from \mbox{\hyperlink{class_update_object}{Update\+Object}}.
+Update an object. 
+
+The function called by the engine to update an object. This function does nothing by default, and can be overridden by an {\ttfamily \doxylink{class_update_object}{Update\+Object}} -\/derived class. Any behavior that should occur when updating an object should go in the overridden function body.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em delta\+Time} & The amount of time since the previous frame, in seconds.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This engine is not framerate-\/controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) need to be multiplied by the provided {\ttfamily delta\+Time} argument in order to appear normal!
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+See the Update System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
+For more on the update system\+: \begin{DoxySeeAlso}{See also}
+\doxylink{class_update_object_ad60cbe12fe88bf7566a904900378c934}{Update\+Object\+::\+Request\+Update\+Registration} 
+
+\doxylink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{Update\+Object\+::\+Request\+Update\+Deregistration}
+\end{DoxySeeAlso}
+For more game object features\+: \begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object}{Draw\+Object} 
+
+\doxylink{class_input_object}{Input\+Object} 
+
+Alarm\+Object 
+
+\doxylink{class_collision_object}{Collision\+Object} 
+\end{DoxySeeAlso}
+
+
+Reimplemented from \mbox{\hyperlink{class_update_object_a288ca794056a05fafc9ef19e57532366}{Update\+Object}}.
 
 
 

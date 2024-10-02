@@ -132,14 +132,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a58db365c96dc8ab875f2a03b23e3c2ae" id="r_a58db365c96dc8ab875f2a03b23e3c2ae"><td class="memItemLeft" align="right" valign="top"><a id="a58db365c96dc8ab875f2a03b23e3c2ae" name="a58db365c96dc8ab875f2a03b23e3c2ae"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>Draw</b> ()</td></tr>
+<tr class="memitem:a58db365c96dc8ab875f2a03b23e3c2ae" id="r_a58db365c96dc8ab875f2a03b23e3c2ae"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae">Draw</a> ()</td></tr>
+<tr class="memdesc:a58db365c96dc8ab875f2a03b23e3c2ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw an object.  <br /></td></tr>
 <tr class="separator:a58db365c96dc8ab875f2a03b23e3c2ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d223751f7022545e5387488fd2a5ef6" id="r_a0d223751f7022545e5387488fd2a5ef6"><td class="memItemLeft" align="right" valign="top"><a id="a0d223751f7022545e5387488fd2a5ef6" name="a0d223751f7022545e5387488fd2a5ef6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestDrawRegistration</b> ()</td></tr>
+<tr class="memitem:a0d223751f7022545e5387488fd2a5ef6" id="r_a0d223751f7022545e5387488fd2a5ef6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d223751f7022545e5387488fd2a5ef6">RequestDrawRegistration</a> ()</td></tr>
+<tr class="memdesc:a0d223751f7022545e5387488fd2a5ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine draw this object.  <br /></td></tr>
 <tr class="separator:a0d223751f7022545e5387488fd2a5ef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac36c9194561c0f21483f88a8c3b2d605" id="r_ac36c9194561c0f21483f88a8c3b2d605"><td class="memItemLeft" align="right" valign="top"><a id="ac36c9194561c0f21483f88a8c3b2d605" name="ac36c9194561c0f21483f88a8c3b2d605"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestDrawDeregistration</b> ()</td></tr>
+<tr class="memitem:ac36c9194561c0f21483f88a8c3b2d605" id="r_ac36c9194561c0f21483f88a8c3b2d605"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac36c9194561c0f21483f88a8c3b2d605">RequestDrawDeregistration</a> ()</td></tr>
+<tr class="memdesc:ac36c9194561c0f21483f88a8c3b2d605"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine stop drawing this object.  <br /></td></tr>
 <tr class="separator:ac36c9194561c0f21483f88a8c3b2d605"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
@@ -148,6 +148,140 @@ Friends</h2></td></tr>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>DrawObjectAttorney</b></td></tr>
 <tr class="separator:a552032a5bbc214719fa0b2c21fd976d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a58db365c96dc8ab875f2a03b23e3c2ae" name="a58db365c96dc8ab875f2a03b23e3c2ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58db365c96dc8ab875f2a03b23e3c2ae">&#9670;&#160;</a></span>Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawObject::Draw </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Draw an object. </p>
+<p>The function called by the engine to draw an object. This function does nothing by default, and can be overridden by a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class. Any behavior that should occur when drawing an object should go in the overridden function body.</p>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<p>See the Draw System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
+<dd>
+<a class="el" href="#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html">InputObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
+
+<p>Reimplemented in <a class="el" href="class_level_map.html#a7902cf952bf9d4e0398e09b287ccaaf5">LevelMap</a>, <a class="el" href="class_level_tile.html#a84bfc4cbfd57d67ad3295833e2e5b8fd">LevelTile</a>, <a class="el" href="class_player.html#a5b60ad157bb1e8debca89ed6903ca2a4">Player</a>, and <a class="el" href="class_test_class.html#a78894580a70988ad537f12f35ea26230">TestClass</a>.</p>
+
+</div>
+</div>
+<a id="ac36c9194561c0f21483f88a8c3b2d605" name="ac36c9194561c0f21483f88a8c3b2d605"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac36c9194561c0f21483f88a8c3b2d605">&#9670;&#160;</a></span>RequestDrawDeregistration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawObject::RequestDrawDeregistration </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Request that the engine stop drawing this object. </p>
+<p>Call this function in a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class to let the engien know you would like to stop drawing the object. This function is only accessible to classes deriving from <code><a class="el" href="class_draw_object.html">DrawObject</a></code> .</p>
+<dl class="section note"><dt>Note</dt><dd>As the name of this function implies, this puts in a request with the engine for your object to stop being drawn. The request is processed by the engien on the same frame this fucntion is called, and calls to <code><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a></code> will cease <b>the</b> <b>following</b> frame.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<p>See the Draw System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a> </dd>
+<dd>
+<a class="el" href="#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html">InputObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
+
+</div>
+</div>
+<a id="a0d223751f7022545e5387488fd2a5ef6" name="a0d223751f7022545e5387488fd2a5ef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d223751f7022545e5387488fd2a5ef6">&#9670;&#160;</a></span>RequestDrawRegistration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawObject::RequestDrawRegistration </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Request that the engine draw this object. </p>
+<p>Call this function in a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class to let the engine know you would like to begin drawing the object. This function is only accessible to classes deriving from <code><a class="el" href="class_draw_object.html">DrawObject</a></code> .</p>
+<dl class="section note"><dt>Note</dt><dd>As the name of this function implies, this puts in a request with the engine for your object to be drawn. The request is processed by the engine on the same frame this function is called, and calls to <code><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a></code> will begin <b>the</b> <b>following</b> frame.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<p>See the Draw System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a> </dd>
+<dd>
+<a class="el" href="#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html">InputObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Jump-n-Slash/Engine Code/<a class="el" href="_draw_object_8h_source.html">DrawObject.h</a></li>
 <li>Jump-n-Slash/Engine Code/<b>DrawObject.cpp</b></li>
