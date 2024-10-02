@@ -60,80 +60,79 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 			// empty space
 			if(tileID == "00")
 			{
+				map[y][x] = nullptr;
 				key = "empty";
 			}
 			// block breakable
 			else if (tileID == "01")
 			{
 				map[y][x] = new BlockBreakable(worldPos);
+				key = KEY_BLOCK_BREAKABLE;
 			}
 			// block hazard
 			else if (tileID == "02")
 			{
 				map[y][x] = new BlockHazard(worldPos);
+				key = KEY_BLOCK_HAZARD;
 			}
 			// block solid
 			else if (tileID == "03")
 			{
 				map[y][x] = new BlockSolid(worldPos);
+				key = KEY_BLOCK_SOLID;
 			}
 			// indicator room height
 			else if (tileID == "04")
 			{
-				map[y][x] = new BlockSolid(worldPos); // TODO: make some formal definition for what should replace indicators when the map is drawn
+				map[y][x] = new BlockSolid(worldPos); // TODO: make some formal definition for this replacement
+				key = KEY_INDICATOR_ROOM_HEIGHT;
 			}
 			// indicator room origin
 			else if (tileID == "05") 
 			{
 				map[y][x] = new BlockSolid(worldPos);
+				key = KEY_INDICATOR_ROOM_ORIGIN;
 			}
 			// indicator room origin start
 			else if (tileID == "06")
 			{
 				map[y][x] = new BlockSolid(worldPos);
+				key = KEY_INDICATOR_ROOM_ORIGIN_START;
 			}
 			// indicator room width
 			else if (tileID == "07") 
 			{
 				map[y][x] = new BlockSolid(worldPos);
+				key = KEY_INDICATOR_ROOM_WIDTH;
 			}
 			// indicator spawn enemy left
 			else if (tileID == "08")
 			{
 				map[y][x] = nullptr; // TODO: make some formal definition for this replacement
+				key = KEY_INDICATOR_SPAWN_ENEMY_LEFT;
 			}
 			// indicator spawn enemy right
 			else if (tileID == "09")
 			{
-				key = "indicator spawn enemy right";
+				map[y][x] = nullptr;
+				key = KEY_INDICATOR_SPAWN_ENEMY_RIGHT;
 			}
 			// indicator spawn player left
 			else if (tileID == "10")
 			{
-				key = "indicator spawn player left";
+				map[y][x] = nullptr;
+				key = KEY_INDICATOR_SPAWN_PLAYER_LEFT;
 			}
 			// indicator spawn player right
 			else if (tileID == "11")
 			{
-				key = "indicator spawn player right";
+				map[y][x] = nullptr;
+				key = KEY_INDICATOR_SPAWN_PLAYER_RIGHT;
 			}
 			// crash if the tileID can't be converted to an actual tile
 			else 
 			{
 				assert(false);
-			}
-
-			// an extra sanity check can't hurt lol
-			assert(key != "not set");
-
-			// set the sprite on the level map
-			if (key != "empty")
-			{
-				map[y][x] = SpriteManager::GetSprite(key);
-			}
-			else
-			{
-				map[y][x] = nullptr;
 			}
 
 			// add the tile to the std::map
@@ -158,16 +157,16 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 	}
 
 	// if you triggered this assert, you have more than one starting room in your level map
-	assert(tiles.at("indicator room origin start").size() == 1);
-	sf::Vector2i startOrigin = tiles.at("indicator room origin start").front();
+	assert(tiles.at(KEY_INDICATOR_ROOM_ORIGIN_START).size() == 1);
+	sf::Vector2i startOrigin = tiles.at(KEY_INDICATOR_ROOM_ORIGIN_START).front();
 
 	// make it so these are actual sizes, not max indices (makes it easy for looping)
 	usedSize.x += 1;
 	usedSize.y += 1;
 
 	// use indicators to create room data (one room per origin indicator)
-	std::list<sf::Vector2i> list = tiles.at("indicator room origin");
-	list.push_front(tiles.at("indicator room origin start").front());
+	std::list<sf::Vector2i> list = tiles.at(KEY_INDICATOR_ROOM_ORIGIN);
+	list.push_front(tiles.at(KEY_INDICATOR_ROOM_ORIGIN_START).front());
 	for (std::list<sf::Vector2i>::iterator it = list.begin(); it != list.end(); it++)
 	{
 		// determine the origin of the room
