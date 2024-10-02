@@ -167,12 +167,14 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateObjectAttorney
 </div><div class="memdoc">
 
 <p>Request that the engine stop updating this object. </p>
-<p>Call this function in an <code><a class="el" href="class_update_object.html">UpdateObject</a></code> -derived class to let the engine know you would like to stop updating the object. This function is only accessible to classes deriving from <code><a class="el" href="class_update_object.html">UpdateObject</a></code> .</p>
-<dl class="section note"><dt>Note</dt><dd>As the name of the function implies, this puts in a request with the engine for your object to stop being updated. The request is processed by the engine on the same frame this function is called, and calls to <code><a class="el" href="#a288ca794056a05fafc9ef19e57532366" title="Update an object.">UpdateObject::Update</a></code> will cease <b>the</b> <b>following</b> frame.</dd></dl>
+<p>Call this function in an <code><a class="el" href="class_update_object.html">UpdateObject</a></code> -derived class to let the engine know you would like to stop updating the object.</p>
+<dl class="section note"><dt>Note</dt><dd>This function is only accessible to classes deriving from <code><a class="el" href="class_update_object.html">UpdateObject</a></code> .</dd>
+<dd>
+As the name of the function implies, this puts in a request with the engine for your object to stop being updated. The request is processed by the engine on the same frame this function is called, and calls to <code><a class="el" href="#a288ca794056a05fafc9ef19e57532366" title="Update an object.">UpdateObject::Update</a></code> will cease <b>the</b> <b>following</b> frame.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Update System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the <a class="el" href="_creating_game_object.html#go_updateSystem_exampleCode">Update System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a288ca794056a05fafc9ef19e57532366" title="Update an object.">UpdateObject::Update</a> </dd>
 <dd>
 <a class="el" href="#ad60cbe12fe88bf7566a904900378c934" title="Request that the engine update this object.">UpdateObject::RequestUpdateRegistration</a> </dd>
@@ -211,20 +213,19 @@ AlarmObject </dd>
 </div><div class="memdoc">
 
 <p>Request that the engine update this object. </p>
-<p>Call this function in an <code><a class="el" href="class_update_object.html">UpdateObject</a></code> -derived class to let the engine know you would like to begin updating the object. This function is only accessible to classes deriving from <code><a class="el" href="class_update_object.html">UpdateObject</a></code> .</p>
-<dl class="section note"><dt>Note</dt><dd>As the name of the function implies, this puts in a request with the engine for your object to be updated. The request is processed by the engine on the same frame this function is called, and calls to <code><a class="el" href="#a288ca794056a05fafc9ef19e57532366" title="Update an object.">UpdateObject::Update</a></code> will begin <b>the</b> <b>following</b> frame.</dd></dl>
+<p>Call this function in an <code><a class="el" href="class_update_object.html">UpdateObject</a></code> -derived class to let the engine know you would like to begin updating the object.</p>
+<dl class="section note"><dt>Note</dt><dd>This function is only accessible to classes deriving from <code><a class="el" href="class_update_object.html">UpdateObject</a></code> .</dd>
+<dd>
+As the name of the function implies, this puts in a request with the engine for your object to be updated. The request is processed by the engine on the same frame this function is called, and calls to <code><a class="el" href="#a288ca794056a05fafc9ef19e57532366" title="Update an object.">UpdateObject::Update</a></code> will begin <b>the</b> <b>following</b> frame.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Update System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
-<h1><a class="anchor" id="For"></a>
-more on the update system</h1>
+<p>See the <a class="el" href="_creating_game_object.html#go_updateSystem_exampleCode">Update System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a288ca794056a05fafc9ef19e57532366" title="Update an object.">UpdateObject::Update</a> </dd>
 <dd>
-<a class="el" href="#ac2573c3f88943d35dd98154cfb96dd4b" title="Request that the engine stop updating this object.">UpdateObject::RequestUpdateDeregistration</a></dd></dl>
-<h1><a class="anchor" id="For"></a>
-more on the update system</h1>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_draw_object.html">DrawObject</a> </dd>
+<a class="el" href="#ac2573c3f88943d35dd98154cfb96dd4b" title="Request that the engine stop updating this object.">UpdateObject::RequestUpdateDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html">DrawObject</a> </dd>
 <dd>
 <a class="el" href="class_input_object.html">InputObject</a> </dd>
 <dd>
@@ -265,15 +266,16 @@ AlarmObject </dd>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This engine is not framerate-controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) need to be multiplied by the provided <code>deltaTime</code> argument in order to appear normal!</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This engine is not framerate-controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) which occurs over time needs to be multiplied by the provided <code>deltaTime</code> argument in order to appear normal!</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Update System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
-<p>For more on the update system: </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="#ad60cbe12fe88bf7566a904900378c934" title="Request that the engine update this object.">UpdateObject::RequestUpdateRegistration</a> </dd>
+<p>See the <a class="el" href="_creating_game_object.html#go_updateSystem_exampleCode">Update System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ad60cbe12fe88bf7566a904900378c934" title="Request that the engine update this object.">UpdateObject::RequestUpdateRegistration</a> </dd>
 <dd>
-<a class="el" href="#ac2573c3f88943d35dd98154cfb96dd4b" title="Request that the engine stop updating this object.">UpdateObject::RequestUpdateDeregistration</a></dd></dl>
-<p>For more game object features: </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_draw_object.html">DrawObject</a> </dd>
+<a class="el" href="#ac2573c3f88943d35dd98154cfb96dd4b" title="Request that the engine stop updating this object.">UpdateObject::RequestUpdateDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html">DrawObject</a> </dd>
 <dd>
 <a class="el" href="class_input_object.html">InputObject</a> </dd>
 <dd>

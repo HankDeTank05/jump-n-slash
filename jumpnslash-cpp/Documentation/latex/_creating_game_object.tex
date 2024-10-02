@@ -1,6 +1,6 @@
 \chapter{Creating a Game Object}
 \hypertarget{_creating_game_object}{}\label{_creating_game_object}\index{Creating a Game Object@{Creating a Game Object}}
-\hypertarget{_creating_game_object_updateSystem}{}\doxysection{\texorpdfstring{The Update System}{The Update System}}\label{_creating_game_object_updateSystem}
+\hypertarget{_creating_game_object_go_updateSystem}{}\doxysection{\texorpdfstring{The Update System}{The Update System}}\label{_creating_game_object_go_updateSystem}
 The Update system is exactly what it sounds like\+: it is the system that updates all registered objects every frame.
 
 This system is very easy to use. Any object you would like to update simply needs to derive from the {\ttfamily \doxylink{class_update_object}{Update\+Object}} class.
@@ -19,7 +19,7 @@ There are three main functions you need to know about in the {\ttfamily \doxylin
 \begin{DoxyNote}{Note}
 This engine is not framerate-\/controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) need to be multiplied by the provided {\ttfamily delta\+Time} argument in order to appear normal!
 \end{DoxyNote}
-\hypertarget{_creating_game_object_updateSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_updateSystem_exampleCode}
+\hypertarget{_creating_game_object_go_updateSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_go_updateSystem_exampleCode}
 The following is an example of how one might implement a Mario class in this engine. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//\ Mario.h}}
@@ -76,7 +76,7 @@ The following is an example of how one might implement a Mario class in this eng
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-\hypertarget{_creating_game_object_drawSystem}{}\doxysection{\texorpdfstring{The Draw System}{The Draw System}}\label{_creating_game_object_drawSystem}
+\hypertarget{_creating_game_object_go_drawSystem}{}\doxysection{\texorpdfstring{The Draw System}{The Draw System}}\label{_creating_game_object_go_drawSystem}
 The Draw system is very similar to the Update system in many ways. It is simple to use, and it only has three functions you need to worry about\+:
 \begin{DoxyItemize}
 \item {\ttfamily \doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration}} 
@@ -84,7 +84,7 @@ The Draw system is very similar to the Update system in many ways. It is simple 
 \item {\ttfamily \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw}} 
 \end{DoxyItemize}
 
-Just like with updating, {\ttfamily Request\+Draw\+Registration} and {\ttfamily Request\+Draw\+Deregistration} can only be called by a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class, and {\ttfamily Draw} is the function you need to override if you actually want to see anything happen.\hypertarget{_creating_game_object_drawSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_drawSystem_exampleCode}
+Just like with updating, {\ttfamily Request\+Draw\+Registration} and {\ttfamily Request\+Draw\+Deregistration} can only be called by a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class, and {\ttfamily Draw} is the function you need to override if you actually want to see anything happen.\hypertarget{_creating_game_object_go_drawSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_go_drawSystem_exampleCode}
 Building on the previous example, we want to be able to see Mario on screen. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//\ Mario.h}}
@@ -157,32 +157,32 @@ Building on the previous example, we want to be able to see Mario on screen.
 \DoxyCodeLine{\textcolor{comment}{//\ \string^\string^\string^\ newly\ added\ \string^\string^\string^}}
 
 \end{DoxyCode}
-\hypertarget{_creating_game_object_inputSystem}{}\doxysection{\texorpdfstring{The Input System}{The Input System}}\label{_creating_game_object_inputSystem}
+\hypertarget{_creating_game_object_go_inputSystem}{}\doxysection{\texorpdfstring{The Input System}{The Input System}}\label{_creating_game_object_go_inputSystem}
 While the Input system is similar to the Update and Draw systems in many ways, it is not as simple to use. You have a lot more functions at your disposal, and it may be a little overwhelming to use at first. Hopefully this guide will make it feel simpler than it looks!
 
 There are several functions you have at your disposal when you derive from the \doxylink{class_input_object}{Input\+Object} class\+:
 
 For keyboard inputs\+:
 \begin{DoxyItemize}
-\item Input\+Object\+::\+Request\+Key\+Registration
-\item Input\+Object\+::\+Request\+Key\+Deregistration
+\item \doxylink{class_input_object_a08a9295dcd211e267ad769364041d725}{Input\+Object\+::\+Request\+Key\+Registration}
+\item \doxylink{class_input_object_ae2deb58330cc0232d791ea8325f8a8e9}{Input\+Object\+::\+Request\+Key\+Deregistration}
 \item \doxylink{class_input_object_aa5efffbaa424815e3caa1c7b5caee920}{Input\+Object\+::\+Key\+Pressed}
-\item Input\+Object\+::\+Key\+Released
+\item \doxylink{class_input_object_a562ec6b13331e068efa163ef47827f19}{Input\+Object\+::\+Key\+Released}
 \end{DoxyItemize}
 
 For mouse button inputs (clicking)\+:
 \begin{DoxyItemize}
-\item Input\+Object\+::\+Request\+Mouse\+Btn\+Registration
-\item Input\+Object\+::\+Request\+Mouse\+Btn\+Deregistration
-\item Input\+Object\+::\+Mouse\+Btn\+Pressed
-\item Input\+Object\+::\+Mouse\+Btn\+Released
+\item \doxylink{class_input_object_ade9e2d061e46270568425c217860cfaa}{Input\+Object\+::\+Request\+Mouse\+Btn\+Registration}
+\item \doxylink{class_input_object_a66a46cb8ce45c100cb89b34ce34a2d09}{Input\+Object\+::\+Request\+Mouse\+Btn\+Deregistration}
+\item \doxylink{class_input_object_a292855f37cac7a2bee20babd7a33f623}{Input\+Object\+::\+Mouse\+Btn\+Pressed}
+\item \doxylink{class_input_object_af54e743de21c52ae8ef84a0c8719e5ed}{Input\+Object\+::\+Mouse\+Btn\+Released}
 \end{DoxyItemize}
 
 For mouse cursor inputs (movement)\+:
 \begin{DoxyItemize}
 \item Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration
 \item Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration
-\item Input\+Object\+::\+Mouse\+Cursor\+Moved
+\item \doxylink{class_input_object_aa74c7001abec6bea78ca584bc6588450}{Input\+Object\+::\+Mouse\+Cursor\+Moved}
 \end{DoxyItemize}
 
 Let\textquotesingle{}s keep things simple for now, and only worry about keyboard inputs. Just like with updating and drawing, the "{}\+Request"{} functions ({\ttfamily Request\+Key\+Registration} , {\ttfamily Request\+Key\+Deregistration} , etc.) can only be called by an {\ttfamily \doxylink{class_input_object}{Input\+Object}} -\/derived class, and it\textquotesingle{}s how you tell the engine you want to know when an input of the requested type occurs.
@@ -194,7 +194,7 @@ However, you must override the {\ttfamily Key\+Pressed} and/or {\ttfamily Key\+R
 \begin{DoxyNote}{Note}
 {\ttfamily Key\+Pressed} is called when a {\ttfamily Key\+Event\+::\+Press} occurs, and likewise for {\ttfamily Key\+Released} and {\ttfamily Key\+Event\+::\+Release} . There is nothing stopping you from overriding one of those functions even if you never register for the corresponding event, and doing so will not cause any problems. For example, if you want to preemptively override the {\ttfamily Key\+Released} function knowing you\textquotesingle{}ll need it in the future, it\textquotesingle{}ll just sit there never being called, but not causing any issues. (The same applies to mouse buttons and cursor).
 \end{DoxyNote}
-\hypertarget{_creating_game_object_inputSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_inputSystem_exampleCode}
+\hypertarget{_creating_game_object_go_inputSystem_exampleCode}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{_creating_game_object_go_inputSystem_exampleCode}
 Let\textquotesingle{}s expand on the previous examples to make Mario walk left and right when you use the arrow keys. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//\ Mario.h}}
@@ -304,8 +304,8 @@ Let\textquotesingle{}s expand on the previous examples to make Mario walk left a
 \DoxyCodeLine{\textcolor{comment}{//\ \string^\string^\string^\ newly\ added\ \string^\string^\string^}}
 
 \end{DoxyCode}
-\hypertarget{_creating_game_object_alarmSystem}{}\doxysection{\texorpdfstring{The Alarm System (coming soon)}{The Alarm System (coming soon)}}\label{_creating_game_object_alarmSystem}
-\hypertarget{_creating_game_object_collisionSystem}{}\doxysection{\texorpdfstring{The Collision System (coming soon)}{The Collision System (coming soon)}}\label{_creating_game_object_collisionSystem}
+\hypertarget{_creating_game_object_go_alarmSystem}{}\doxysection{\texorpdfstring{The Alarm System (coming soon)}{The Alarm System (coming soon)}}\label{_creating_game_object_go_alarmSystem}
+\hypertarget{_creating_game_object_go_collisionSystem}{}\doxysection{\texorpdfstring{The Collision System (coming soon)}{The Collision System (coming soon)}}\label{_creating_game_object_go_collisionSystem}
 TODO\+: documentation for Creating\+Game\+Object tutorial is incomplete
 
 Previous tutorial\+: \doxysectlink{_creating_scene}{Creating a Scene}{0} 

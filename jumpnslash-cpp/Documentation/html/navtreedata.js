@@ -54,17 +54,17 @@ var NAVTREE =
       ] ]
     ] ],
     [ "Creating a Game Object", "_creating_game_object.html", [
-      [ "The Update System", "_creating_game_object.html#updateSystem", [
-        [ "Example", "_creating_game_object.html#updateSystem_exampleCode", null ]
+      [ "The Update System", "_creating_game_object.html#go_updateSystem", [
+        [ "Example", "_creating_game_object.html#go_updateSystem_exampleCode", null ]
       ] ],
-      [ "The Draw System", "_creating_game_object.html#drawSystem", [
-        [ "Example", "_creating_game_object.html#drawSystem_exampleCode", null ]
+      [ "The Draw System", "_creating_game_object.html#go_drawSystem", [
+        [ "Example", "_creating_game_object.html#go_drawSystem_exampleCode", null ]
       ] ],
-      [ "The Input System", "_creating_game_object.html#inputSystem", [
-        [ "Example", "_creating_game_object.html#inputSystem_exampleCode", null ]
+      [ "The Input System", "_creating_game_object.html#go_inputSystem", [
+        [ "Example", "_creating_game_object.html#go_inputSystem_exampleCode", null ]
       ] ],
-      [ "The Alarm System (coming soon)", "_creating_game_object.html#alarmSystem", null ],
-      [ "The Collision System (coming soon)", "_creating_game_object.html#collisionSystem", null ]
+      [ "The Alarm System (coming soon)", "_creating_game_object.html#go_alarmSystem", null ],
+      [ "The Collision System (coming soon)", "_creating_game_object.html#go_collisionSystem", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

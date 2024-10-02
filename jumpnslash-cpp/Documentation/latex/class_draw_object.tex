@@ -49,7 +49,7 @@ The function called by the engine to draw an object. This function does nothing 
 Does not return anything.
 \end{DoxyReturn}
 \hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
-See the Draw System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
 
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
@@ -78,16 +78,18 @@ void Draw\+Object\+::\+Request\+Draw\+Deregistration (\begin{DoxyParamCaption}{}
 
 Request that the engine stop drawing this object. 
 
-Call this function in a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class to let the engien know you would like to stop drawing the object. This function is only accessible to classes deriving from {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} .
+Call this function in a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class to let the engien know you would like to stop drawing the object.
 
 \begin{DoxyNote}{Note}
+This function is only accessible to classes deriving from {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} .
+
 As the name of this function implies, this puts in a request with the engine for your object to stop being drawn. The request is processed by the engien on the same frame this fucntion is called, and calls to {\ttfamily \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw}} will cease {\bfseries{the}} {\bfseries{following}} frame.
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 Does not return anything.
 \end{DoxyReturn}
 \hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
-See the Draw System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
 
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw} 
@@ -112,16 +114,18 @@ void Draw\+Object\+::\+Request\+Draw\+Registration (\begin{DoxyParamCaption}{}{}
 
 Request that the engine draw this object. 
 
-Call this function in a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class to let the engine know you would like to begin drawing the object. This function is only accessible to classes deriving from {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} .
+Call this function in a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class to let the engine know you would like to begin drawing the object.
 
 \begin{DoxyNote}{Note}
+This function is only accessible to classes deriving from {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} .
+
 As the name of this function implies, this puts in a request with the engine for your object to be drawn. The request is processed by the engine on the same frame this function is called, and calls to {\ttfamily \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw}} will begin {\bfseries{the}} {\bfseries{following}} frame.
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 Does not return anything.
 \end{DoxyReturn}
 \hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
-See the Draw System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
 
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw} 

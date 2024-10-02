@@ -132,12 +132,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a79b2b83aaafeadcaf2ea424aacb105e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do something when a key is pressed.  <br /></td></tr>
 <tr class="separator:a79b2b83aaafeadcaf2ea424aacb105e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a266fa061d8a4705405d57f7578e2b04c" id="r_a266fa061d8a4705405d57f7578e2b04c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a266fa061d8a4705405d57f7578e2b04c">KeyReleased</a> (sf::Keyboard::Key key) override</td></tr>
+<tr class="memdesc:a266fa061d8a4705405d57f7578e2b04c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do something when a key is released.  <br /></td></tr>
 <tr class="separator:a266fa061d8a4705405d57f7578e2b04c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1ad048f7fb36db5308cfd2defbc84e4" id="r_ae1ad048f7fb36db5308cfd2defbc84e4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1ad048f7fb36db5308cfd2defbc84e4">MouseBtnPressed</a> (sf::Mouse::Button btn) override</td></tr>
+<tr class="memdesc:ae1ad048f7fb36db5308cfd2defbc84e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do something when a mouse button is pressed.  <br /></td></tr>
 <tr class="separator:ae1ad048f7fb36db5308cfd2defbc84e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9de31853d4b816634fd034331e787d7" id="r_af9de31853d4b816634fd034331e787d7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9de31853d4b816634fd034331e787d7">MouseBtnReleased</a> (sf::Mouse::Button btn) override</td></tr>
+<tr class="memdesc:af9de31853d4b816634fd034331e787d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do something when a mouse button is released.  <br /></td></tr>
 <tr class="separator:af9de31853d4b816634fd034331e787d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90869daadb5279694f8e3c58df3dfc23" id="r_a90869daadb5279694f8e3c58df3dfc23"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90869daadb5279694f8e3c58df3dfc23">MouseCursorMoved</a> (sf::Vector2i pos, sf::Vector2i delta) override</td></tr>
+<tr class="memdesc:a90869daadb5279694f8e3c58df3dfc23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do something when the mouse cursor is moved.  <br /></td></tr>
 <tr class="separator:a90869daadb5279694f8e3c58df3dfc23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_update_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_update_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_update_object.html">UpdateObject</a></td></tr>
 <tr class="memitem:ad21aed21f2f8154daa8a025ba96f7e98 inherit pub_methods_class_update_object" id="r_ad21aed21f2f8154daa8a025ba96f7e98"><td class="memItemLeft" align="right" valign="top">
@@ -178,17 +182,16 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ac36c9194561c0f21483f88a8c3b2d605 inherit pro_methods_class_draw_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine stop drawing this object.  <br /></td></tr>
 <tr class="separator:ac36c9194561c0f21483f88a8c3b2d605 inherit pro_methods_class_draw_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_input_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_class_input_object')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_input_object.html">InputObject</a></td></tr>
-<tr class="memitem:a08a9295dcd211e267ad769364041d725 inherit pro_methods_class_input_object" id="r_a08a9295dcd211e267ad769364041d725"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestKeyRegistration</b> (sf::Keyboard::Key key, KeyEvent eventToReg)</td></tr>
+<tr class="memitem:a08a9295dcd211e267ad769364041d725 inherit pro_methods_class_input_object" id="r_a08a9295dcd211e267ad769364041d725"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">RequestKeyRegistration</a> (sf::Keyboard::Key key, KeyEvent eventToReg)</td></tr>
 <tr class="separator:a08a9295dcd211e267ad769364041d725 inherit pro_methods_class_input_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2deb58330cc0232d791ea8325f8a8e9 inherit pro_methods_class_input_object" id="r_ae2deb58330cc0232d791ea8325f8a8e9"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestKeyDeregistration</b> (sf::Keyboard::Key key, KeyEvent eventToDereg)</td></tr>
+<tr class="memitem:ae2deb58330cc0232d791ea8325f8a8e9 inherit pro_methods_class_input_object" id="r_ae2deb58330cc0232d791ea8325f8a8e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9">RequestKeyDeregistration</a> (sf::Keyboard::Key key, KeyEvent eventToDereg)</td></tr>
+<tr class="memdesc:ae2deb58330cc0232d791ea8325f8a8e9 inherit pro_methods_class_input_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine stop reading for key events.  <br /></td></tr>
 <tr class="separator:ae2deb58330cc0232d791ea8325f8a8e9 inherit pro_methods_class_input_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade9e2d061e46270568425c217860cfaa inherit pro_methods_class_input_object" id="r_ade9e2d061e46270568425c217860cfaa"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestMouseBtnRegistration</b> (sf::Mouse::Button btn, MouseEvent eventToReg)</td></tr>
+<tr class="memitem:ade9e2d061e46270568425c217860cfaa inherit pro_methods_class_input_object" id="r_ade9e2d061e46270568425c217860cfaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa">RequestMouseBtnRegistration</a> (sf::Mouse::Button btn, MouseEvent eventToReg)</td></tr>
+<tr class="memdesc:ade9e2d061e46270568425c217860cfaa inherit pro_methods_class_input_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine read for mouse button events.  <br /></td></tr>
 <tr class="separator:ade9e2d061e46270568425c217860cfaa inherit pro_methods_class_input_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66a46cb8ce45c100cb89b34ce34a2d09 inherit pro_methods_class_input_object" id="r_a66a46cb8ce45c100cb89b34ce34a2d09"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestMouseBtnDeregistration</b> (sf::Mouse::Button btn, MouseEvent eventToDereg)</td></tr>
+<tr class="memitem:a66a46cb8ce45c100cb89b34ce34a2d09 inherit pro_methods_class_input_object" id="r_a66a46cb8ce45c100cb89b34ce34a2d09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09">RequestMouseBtnDeregistration</a> (sf::Mouse::Button btn, MouseEvent eventToDereg)</td></tr>
+<tr class="memdesc:a66a46cb8ce45c100cb89b34ce34a2d09 inherit pro_methods_class_input_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine stop reading for mouse button events.  <br /></td></tr>
 <tr class="separator:a66a46cb8ce45c100cb89b34ce34a2d09 inherit pro_methods_class_input_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a370ca7911b8a9af883388c1b4c6ac60f inherit pro_methods_class_input_object" id="r_a370ca7911b8a9af883388c1b4c6ac60f"><td class="memItemLeft" align="right" valign="top">
 void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestMouseCursorRegistration</b> ()</td></tr>
@@ -226,7 +229,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestMouseCursorDer
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Draw System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
 <dd>
 <a class="el" href="class_draw_object.html#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
@@ -277,24 +280,34 @@ AlarmObject </dd>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Input System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
-<p>For more on keyboard input: </p><dl class="section see"><dt>See also</dt><dd>InputObject::KeyReleased </dd>
+<p>See the <a class="el" href="_creating_game_object.html#go_inputSystem_exampleCode">Input System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_input_object.html#a562ec6b13331e068efa163ef47827f19" title="Do something when a key is released.">InputObject::KeyReleased</a> </dd>
 <dd>
-InputObject::RequestKeyRegistration </dd>
+<a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a> </dd>
 <dd>
-InputObject::RequestKeyDeregistration</dd></dl>
-<p>For mouse button input: </p><dl class="section see"><dt>See also</dt><dd>InputObject::MouseBtnPressed </dd>
+<a class="el" href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9" title="Request that the engine stop reading for key events.">InputObject::RequestKeyDeregistration</a> </dd>
 <dd>
-InputObject::MouseBtnReleased </dd>
+<a class="el" href="class_input_object.html#a292855f37cac7a2bee20babd7a33f623" title="Do something when a mouse button is pressed.">InputObject::MouseBtnPressed</a> </dd>
 <dd>
-InputObject::RequestMouseBtnRegistration </dd>
+<a class="el" href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed" title="Do something when a mouse button is released.">InputObject::MouseBtnReleased</a> </dd>
 <dd>
-InputObject::RequestMouseBtnDeregistration</dd></dl>
-<p>For mouse cursor input: </p><dl class="section see"><dt>See also</dt><dd>InputObject::MouseCursorMoved </dd>
+<a class="el" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa" title="Request that the engine read for mouse button events.">InputObject::RequestMouseBtnRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09" title="Request that the engine stop reading for mouse button events.">InputObject::RequestMouseBtnDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a> </dd>
 <dd>
 InputObject::RequestMouseCursorRegistration </dd>
 <dd>
-InputObject::RequestMouseCursorDeregistration </dd></dl>
+InputObject::RequestMouseCursorDeregistration </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html">DrawObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920">InputObject</a>.</p>
 
@@ -323,7 +336,47 @@ InputObject::RequestMouseCursorDeregistration </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_input_object.html">InputObject</a>.</p>
+<p>Do something when a key is released. </p>
+<p>The function called by the engine whenever a key registered for key release events is released. It is only called on the first frame the key is released. This function does nothing by default, and can be overridden by an <code><a class="el" href="class_input_object.html">InputObject</a></code> -derived class. Any behavior that should occur when a key is pressed should go in the overridden function body.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>The key which was released.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<p>See the <a class="el" href="_creating_game_object.html#go_inputSystem_exampleCode">Input System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920" title="Do something when a key is pressed.">InputObject::KeyPressed</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9" title="Request that the engine stop reading for key events.">InputObject::RequestKeyDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a292855f37cac7a2bee20babd7a33f623" title="Do something when a mouse button is pressed.">InputObject::MouseBtnPressed</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed" title="Do something when a mouse button is released.">InputObject::MouseBtnReleased</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa" title="Request that the engine read for mouse button events.">InputObject::RequestMouseBtnRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09" title="Request that the engine stop reading for mouse button events.">InputObject::RequestMouseBtnDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a> </dd>
+<dd>
+InputObject::RequestMouseCursorRegistration </dd>
+<dd>
+InputObject::RequestMouseCursorDeregistration </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html">DrawObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_input_object.html#a562ec6b13331e068efa163ef47827f19">InputObject</a>.</p>
 
 </div>
 </div>
@@ -350,7 +403,101 @@ InputObject::RequestMouseCursorDeregistration </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_input_object.html">InputObject</a>.</p>
+<p>Do something when a mouse button is pressed. </p>
+<p>The function called by the engine whenever a mouse button registered for mouse button press events is pressed. It is only called on the first frame the button is held down. This function does nothing by default, and can be overridden by an <code><a class="el" href="class_input_object.html">InputObject</a></code> -derived class. Any behavior that should occur when a key is pressed should go in the overridden function body.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">btn</td><td>The button which was pressed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="comment">// DoomGuy.h</span></div>
+<div class="line"><span class="preprocessor">#ifndef DOOM_GUY_H</span></div>
+<div class="line"><span class="preprocessor">#define DOOM_GUY_H</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/InputObject.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>DoomGuy : <span class="keyword">public</span> <a class="code hl_class" href="class_input_object.html">InputObject</a></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  DoomGuy();</div>
+<div class="line">  DoomGuy(<span class="keyword">const</span> DoomGuy&amp; dg) = <span class="keyword">delete</span>;</div>
+<div class="line">  DoomGuy&amp; operator=(<span class="keyword">const</span> DoomGuy&amp; dg) = <span class="keyword">delete</span>;</div>
+<div class="line">  <span class="keyword">virtual</span> ~DoomGuy();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// ... some functions ... //</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> MouseBtnPressed(sf::Mouse::Button btn) <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// ... some more functions ... //</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <span class="keywordtype">void</span> Shoot();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <span class="comment">// ... member variables ... //</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_input_object_html"><div class="ttname"><a href="class_input_object.html">InputObject</a></div><div class="ttdef"><b>Definition</b> InputObject.h:22</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// DoomGuy.cpp</span></div>
+<div class="line"><span class="preprocessor">#include &quot;DoomGuy.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line">DoomGuy::DoomGuy()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// ... some code ... //</span></div>
+<div class="line">  <a class="code hl_function" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa">RequestMouseBtnRegistration</a>(sf::Mouse::Left, MouseEvent::BtnPress);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">DoomGuy::~DoomGuy()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// ... some code ... //</span></div>
+<div class="line">  <a class="code hl_function" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09">RequestMouseBtnDeregistration</a>(sf::Mouse::Left, MouseEvent::BtnPress);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> DoomGuy::MouseBtnPressed(sf::Mouse::Button btn)</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">switch</span>(btn)</div>
+<div class="line">  {</div>
+<div class="line">  <span class="keywordflow">case</span> sf::Mouse::Left:</div>
+<div class="line">    this-&gt;Shoot();</div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="ttc" id="aclass_input_object_html_a66a46cb8ce45c100cb89b34ce34a2d09"><div class="ttname"><a href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09">InputObject::RequestMouseBtnDeregistration</a></div><div class="ttdeci">void RequestMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg)</div><div class="ttdoc">Request that the engine stop reading for mouse button events.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:97</div></div>
+<div class="ttc" id="aclass_input_object_html_ade9e2d061e46270568425c217860cfaa"><div class="ttname"><a href="class_input_object.html#ade9e2d061e46270568425c217860cfaa">InputObject::RequestMouseBtnRegistration</a></div><div class="ttdeci">void RequestMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg)</div><div class="ttdoc">Request that the engine read for mouse button events.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:74</div></div>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920" title="Do something when a key is pressed.">InputObject::KeyPressed</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a562ec6b13331e068efa163ef47827f19" title="Do something when a key is released.">InputObject::KeyReleased</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9" title="Request that the engine stop reading for key events.">InputObject::RequestKeyDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed" title="Do something when a mouse button is released.">InputObject::MouseBtnReleased</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa" title="Request that the engine read for mouse button events.">InputObject::RequestMouseBtnRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09" title="Request that the engine stop reading for mouse button events.">InputObject::RequestMouseBtnDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a> </dd>
+<dd>
+InputObject::RequestMouseCursorRegistration </dd>
+<dd>
+InputObject::RequestMouseCursorDeregistration </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html">DrawObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_input_object.html#a292855f37cac7a2bee20babd7a33f623">InputObject</a>.</p>
 
 </div>
 </div>
@@ -377,7 +524,123 @@ InputObject::RequestMouseCursorDeregistration </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_input_object.html">InputObject</a>.</p>
+<p>Do something when a mouse button is released. </p>
+<p>The function called by the engine whenever a mouse button registered for mouse button release events is released. It is only called on the first frame the button is released. This function does nothing by default, and can be overridden by an <code><a class="el" href="class_input_object.html">InputObject</a></code> -derived class. Any behavior that should occur when a key is pressed should go in the overridden function body.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">btn</td><td>The button which was released</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="comment">// DoomGuy.h</span></div>
+<div class="line"><span class="preprocessor">#ifndef DOOM_GUY_H</span></div>
+<div class="line"><span class="preprocessor">#define DOOM_GUY_H</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/UpdateObject.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/InputObject.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>DoomGuy : <span class="keyword">public</span> <a class="code hl_class" href="class_input_object.html">InputObject</a></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  DoomGuy();</div>
+<div class="line">  DoomGuy(<span class="keyword">const</span> DoomGuy&amp; dg) = <span class="keyword">delete</span>;</div>
+<div class="line">  DoomGuy&amp; operator=(<span class="keyword">const</span> DoomGuy&amp; dg) = <span class="keyword">delete</span>;</div>
+<div class="line">  <span class="keyword">virtual</span> ~DoomGuy();</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// ... some functions ... //</span></div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> Update(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> MouseBtnPressed(sf::Mouse::Button btn) <span class="keyword">override</span>;</div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> MouseBtnReleased(sf::Mouse::Button btn) <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// ... some more functions ... //</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <span class="keywordtype">void</span> Shoot();</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  <span class="comment">// ... member variables ... //</span></div>
+<div class="line">  <span class="keywordtype">bool</span> currentlyShooting;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// DoomGuy.cpp</span></div>
+<div class="line"><span class="preprocessor">#include &quot;DoomGuy.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line">DoomGuy::DoomGuy()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// ... some code ... //</span></div>
+<div class="line">  <a class="code hl_function" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa">RequestMouseBtnRegistration</a>(sf::Mouse::Left, MouseEvent::BtnPress);</div>
+<div class="line">  <a class="code hl_function" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa">RequestMouseBtnRegistration</a>(sf::Mouse::Left, MouseEvent::BtnRelease);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">DoomGuy::~DoomGuy()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// ... some code ... //</span></div>
+<div class="line">  <a class="code hl_function" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09">RequestMouseBtnDeregistration</a>(sf::Mouse::Left, MouseEvent::BtnPress);</div>
+<div class="line">  <a class="code hl_function" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09">RequestMouseBtnDeregistration</a>(sf::Mouse::Left, MouseEvent::BtnRelease);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> DoomGuy::Update(<span class="keywordtype">float</span> deltaTime)</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> (currentlyShooting)</div>
+<div class="line">  {</div>
+<div class="line">    this-&gt;Shoot();</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> DoomGuy::MouseBtnPressed(sf::Mouse::Button btn)</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">switch</span>(btn)</div>
+<div class="line">  {</div>
+<div class="line">  <span class="keywordflow">case</span> sf::Mouse::Left:</div>
+<div class="line">    this-&gt;currentlyShooting = <span class="keyword">true</span>;</div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> DoomGuy::MouseBtnReleased(sf::Mouse::Button btn)</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">switch</span>(btn)</div>
+<div class="line">  {</div>
+<div class="line">  <span class="keywordflow">case</span> sf::Mouse::Left:</div>
+<div class="line">    this-&gt;currentlyShooting = <span class="keyword">false</span>;</div>
+<div class="line">    <span class="keywordflow">break</span>;</div>
+<div class="line">  }</div>
+<div class="line">}</div>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920" title="Do something when a key is pressed.">InputObject::KeyPressed</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a562ec6b13331e068efa163ef47827f19" title="Do something when a key is released.">InputObject::KeyReleased</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9" title="Request that the engine stop reading for key events.">InputObject::RequestKeyDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a292855f37cac7a2bee20babd7a33f623" title="Do something when a mouse button is pressed.">InputObject::MouseBtnPressed</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa" title="Request that the engine read for mouse button events.">InputObject::RequestMouseBtnRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09" title="Request that the engine stop reading for mouse button events.">InputObject::RequestMouseBtnDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a> </dd>
+<dd>
+InputObject::RequestMouseCursorRegistration </dd>
+<dd>
+InputObject::RequestMouseCursorDeregistration </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html">DrawObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed">InputObject</a>.</p>
 
 </div>
 </div>
@@ -408,7 +671,49 @@ InputObject::RequestMouseCursorDeregistration </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="class_input_object.html">InputObject</a>.</p>
+<p>Do something when the mouse cursor is moved. </p>
+<p>The function called by the engine whenever the mouse cursor is moved (as long as the object has registered for mouse cursor inputs). It is only called on frames where the current mouse position is different from its position the previous frame. This function does nothing by default, and can be overridden by an <code><a class="el" href="class_input_object.html">InputObject</a></code> -derived class. Any behavior that should occur when the mouse cursor moves should go in the overridden function body.</p>
+<dl class="section note"><dt>Note</dt><dd>This engine is not framerate-controlled! A frame will render as soon as it can, meaning the amount of time between frames can be extremely short. Because of this, a mouse movement that appears smooth and consistent may have one or more frames where no mouse movement has been detected. It is recommended that you save the <code>pos</code> and/or <code>posDelta</code> values for accumulation/calculation in the <a class="el" href="class_update_object.html#a288ca794056a05fafc9ef19e57532366" title="Update an object.">UpdateObject::Update</a> function if you would like to read mouse movements over a period longer than a single frame.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>The current position of the mouse cursor, in pixels, relative to the top-left corner of the game window. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">posDelta</td><td>The change in mouse position between the previous frame and the current frame.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<p>TODO: documentation for <a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a> needs example code</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920" title="Do something when a key is pressed.">InputObject::KeyPressed</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a562ec6b13331e068efa163ef47827f19" title="Do something when a key is released.">InputObject::KeyReleased</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9" title="Request that the engine stop reading for key events.">InputObject::RequestKeyDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a292855f37cac7a2bee20babd7a33f623" title="Do something when a mouse button is pressed.">InputObject::MouseBtnPressed</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed" title="Do something when a mouse button is released.">InputObject::MouseBtnReleased</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa" title="Request that the engine read for mouse button events.">InputObject::RequestMouseBtnRegistration</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09" title="Request that the engine stop reading for mouse button events.">InputObject::RequestMouseBtnDeregistration</a> </dd>
+<dd>
+InputObject::RequestMouseCursorRegistration </dd>
+<dd>
+InputObject::RequestMouseCursorDeregistration </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html">DrawObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450">InputObject</a>.</p>
 
 </div>
 </div>
@@ -443,15 +748,16 @@ InputObject::RequestMouseCursorDeregistration </dd></dl>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This engine is not framerate-controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) need to be multiplied by the provided <code>deltaTime</code> argument in order to appear normal!</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This engine is not framerate-controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) which occurs over time needs to be multiplied by the provided <code>deltaTime</code> argument in order to appear normal!</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Update System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
-<p>For more on the update system: </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_update_object.html#ad60cbe12fe88bf7566a904900378c934" title="Request that the engine update this object.">UpdateObject::RequestUpdateRegistration</a> </dd>
+<p>See the <a class="el" href="_creating_game_object.html#go_updateSystem_exampleCode">Update System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_update_object.html#ad60cbe12fe88bf7566a904900378c934" title="Request that the engine update this object.">UpdateObject::RequestUpdateRegistration</a> </dd>
 <dd>
-<a class="el" href="class_update_object.html#ac2573c3f88943d35dd98154cfb96dd4b" title="Request that the engine stop updating this object.">UpdateObject::RequestUpdateDeregistration</a></dd></dl>
-<p>For more game object features: </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_draw_object.html">DrawObject</a> </dd>
+<a class="el" href="class_update_object.html#ac2573c3f88943d35dd98154cfb96dd4b" title="Request that the engine stop updating this object.">UpdateObject::RequestUpdateDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html">DrawObject</a> </dd>
 <dd>
 <a class="el" href="class_input_object.html">InputObject</a> </dd>
 <dd>

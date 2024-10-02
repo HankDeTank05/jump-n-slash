@@ -99,7 +99,7 @@ $(function(){initNavTree('_creating_game_object.html',''); initResizable(true); 
   <div class="headertitle"><div class="title">Creating a Game Object</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="updateSystem"></a>
+<div class="textblock"><h1><a class="anchor" id="go_updateSystem"></a>
 The Update System</h1>
 <p>The Update system is exactly what it sounds like: it is the system that updates all registered objects every frame.</p>
 <p>This system is very easy to use. Any object you would like to update simply needs to derive from the <code><a class="el" href="class_update_object.html">UpdateObject</a></code> class.</p>
@@ -111,7 +111,7 @@ The Update System</h1>
 <p><code>RequestUpdateRegistration</code> and <code>RequestUpdateDeregistration</code> can only be called by an <code><a class="el" href="class_update_object.html">UpdateObject</a></code> -derived class, meaning the object that wants to be updated (or stop being updated) needs to call it.</p>
 <p><code>Update</code> is a function you need to override if you want anything to actually happen when it is updated. It's as simple as declaring <code>"virtual void Update(float deltaTime) override;"</code> in your object's header file, and defining the update behavior in the <code>cpp</code> file.</p>
 <dl class="section note"><dt>Note</dt><dd>This engine is not framerate-controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) need to be multiplied by the provided <code>deltaTime</code> argument in order to appear normal!</dd></dl>
-<h2><a class="anchor" id="updateSystem_exampleCode"></a>
+<h2><a class="anchor" id="go_updateSystem_exampleCode"></a>
 Example</h2>
 <p>The following is an example of how one might implement a Mario class in this engine. </p><div class="fragment"><div class="line"><span class="comment">// Mario.h</span></div>
 <div class="line"><span class="preprocessor">#ifndef MARIO_H</span></div>
@@ -162,7 +162,7 @@ Example</h2>
 <div class="line">    <span class="comment">// apply any movement</span></div>
 <div class="line">    pos += posDelta;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="drawSystem"></a>
+</div><!-- fragment --><h1><a class="anchor" id="go_drawSystem"></a>
 The Draw System</h1>
 <p>The Draw system is very similar to the Update system in many ways. It is simple to use, and it only has three functions you need to worry about:</p><ul>
 <li><code><a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a></code> </li>
@@ -170,7 +170,7 @@ The Draw System</h1>
 <li><code><a class="el" href="class_draw_object.html#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a></code> </li>
 </ul>
 <p>Just like with updating, <code>RequestDrawRegistration</code> and <code>RequestDrawDeregistration</code> can only be called by a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class, and <code>Draw</code> is the function you need to override if you actually want to see anything happen.</p>
-<h2><a class="anchor" id="drawSystem_exampleCode"></a>
+<h2><a class="anchor" id="go_drawSystem_exampleCode"></a>
 Example</h2>
 <p>Building on the previous example, we want to be able to see Mario on screen. </p><div class="fragment"><div class="line"><span class="comment">// Mario.h</span></div>
 <div class="line"><span class="preprocessor">#ifndef MARIO_H</span></div>
@@ -238,32 +238,32 @@ Example</h2>
 <div class="line">}</div>
 <div class="line"><span class="comment">// ^^^ newly added ^^^</span></div>
 <div class="ttc" id="aclass_sprite_manager_html"><div class="ttname"><a href="class_sprite_manager.html">SpriteManager</a></div><div class="ttdef"><b>Definition</b> SpriteManager.h:9</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="inputSystem"></a>
+</div><!-- fragment --><h1><a class="anchor" id="go_inputSystem"></a>
 The Input System</h1>
 <p>While the Input system is similar to the Update and Draw systems in many ways, it is not as simple to use. You have a lot more functions at your disposal, and it may be a little overwhelming to use at first. Hopefully this guide will make it feel simpler than it looks!</p>
 <p>There are several functions you have at your disposal when you derive from the <a class="el" href="class_input_object.html">InputObject</a> class:</p>
 <p>For keyboard inputs:</p><ul>
-<li>InputObject::RequestKeyRegistration</li>
-<li>InputObject::RequestKeyDeregistration</li>
+<li><a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a></li>
+<li><a class="el" href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9" title="Request that the engine stop reading for key events.">InputObject::RequestKeyDeregistration</a></li>
 <li><a class="el" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920" title="Do something when a key is pressed.">InputObject::KeyPressed</a></li>
-<li>InputObject::KeyReleased</li>
+<li><a class="el" href="class_input_object.html#a562ec6b13331e068efa163ef47827f19" title="Do something when a key is released.">InputObject::KeyReleased</a></li>
 </ul>
 <p>For mouse button inputs (clicking):</p><ul>
-<li>InputObject::RequestMouseBtnRegistration</li>
-<li>InputObject::RequestMouseBtnDeregistration</li>
-<li>InputObject::MouseBtnPressed</li>
-<li>InputObject::MouseBtnReleased</li>
+<li><a class="el" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa" title="Request that the engine read for mouse button events.">InputObject::RequestMouseBtnRegistration</a></li>
+<li><a class="el" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09" title="Request that the engine stop reading for mouse button events.">InputObject::RequestMouseBtnDeregistration</a></li>
+<li><a class="el" href="class_input_object.html#a292855f37cac7a2bee20babd7a33f623" title="Do something when a mouse button is pressed.">InputObject::MouseBtnPressed</a></li>
+<li><a class="el" href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed" title="Do something when a mouse button is released.">InputObject::MouseBtnReleased</a></li>
 </ul>
 <p>For mouse cursor inputs (movement):</p><ul>
 <li>InputObject::RequestMouseCursorRegistration</li>
 <li>InputObject::RequestMouseCursorDeregistration</li>
-<li>InputObject::MouseCursorMoved</li>
+<li><a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a></li>
 </ul>
 <p>Let's keep things simple for now, and only worry about keyboard inputs. Just like with updating and drawing, the "Request" functions (<code>RequestKeyRegistration</code> , <code>RequestKeyDeregistration</code> , etc.) can only be called by an <code><a class="el" href="class_input_object.html">InputObject</a></code> -derived class, and it's how you tell the engine you want to know when an input of the requested type occurs.</p>
 <p>When you call <code>RequestKeyRegistration</code> (and <code>RequestKeyDeregistration</code> ), you need to provide some information, though. First, you need to tell it what key you want to recieve inputs from. This is defined using the <code>sf::Keyboard::Key</code> type through SFML. If you type in <code>"sf::Keyboard::"</code> , IntelliSense will provide you with a list of available keys. Second, you need to tell it what <code>KeyEvent</code> you would like to know about. There are only two <code>KeyEvent</code> s: <code>KeyEvent::Press</code> and <code>KeyEvent::Release</code> . If you would like to register for both events for the same key, you must call the function twice.</p>
 <p>However, you must override the <code>KeyPressed</code> and/or <code>KeyReleased</code> functions if you want to define the behavior of a key press or release.</p>
 <dl class="section note"><dt>Note</dt><dd><code>KeyPressed</code> is called when a <code>KeyEvent::Press</code> occurs, and likewise for <code>KeyReleased</code> and <code>KeyEvent::Release</code> . There is nothing stopping you from overriding one of those functions even if you never register for the corresponding event, and doing so will not cause any problems. For example, if you want to preemptively override the <code>KeyReleased</code> function knowing you'll need it in the future, it'll just sit there never being called, but not causing any issues. (The same applies to mouse buttons and cursor).</dd></dl>
-<h2><a class="anchor" id="inputSystem_exampleCode"></a>
+<h2><a class="anchor" id="go_inputSystem_exampleCode"></a>
 Example</h2>
 <p>Let's expand on the previous examples to make Mario walk left and right when you use the arrow keys. </p><div class="fragment"><div class="line"><span class="comment">// Mario.h</span></div>
 <div class="line"><span class="preprocessor">#ifndef MARIO_H</span></div>
@@ -367,9 +367,9 @@ Example</h2>
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="line"><span class="comment">// ^^^ newly added ^^^</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="alarmSystem"></a>
+</div><!-- fragment --><h1><a class="anchor" id="go_alarmSystem"></a>
 The Alarm System (coming soon)</h1>
-<h1><a class="anchor" id="collisionSystem"></a>
+<h1><a class="anchor" id="go_collisionSystem"></a>
 The Collision System (coming soon)</h1>
 <p>TODO: documentation for CreatingGameObject tutorial is incomplete</p>
 <p>Previous tutorial: <a class="el" href="_creating_scene.html">Creating a Scene</a> </p>

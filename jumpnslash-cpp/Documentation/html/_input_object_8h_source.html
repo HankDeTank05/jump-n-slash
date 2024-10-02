@@ -131,78 +131,82 @@ $(function(){initNavTree('_input_object_8h_source.html',''); initResizable(true)
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">protected</span>:</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="class_input_object_attorney.html">InputObjectAttorney</a>;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920">KeyPressed</a>(sf::Keyboard::Key key); <span class="comment">// TODO: documentation for InputObject::KeyPressed</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> KeyReleased(sf::Keyboard::Key key); <span class="comment">// TODO: documentation for InputObject::KeyReleased</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> MouseBtnPressed(sf::Mouse::Button btn); <span class="comment">// TODO: documentation for InputObject::MouseButtonPressed</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> MouseBtnReleased(sf::Mouse::Button btn); <span class="comment">// TODO: documentation for InputObject::MouseButtonReleased</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta); <span class="comment">// TODO: documentation for InputObject::MouseCursorMoved</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="comment">// TODO: figure out mouse wheel inputs</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="comment">// TODO: figure out gamepad button inputs</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="comment">// TODO: figure out gamepad stick inputs</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="comment">// TODO: documentation for InputObject::RequestKeyRegistration</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> RequestKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg); </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="comment">// TODO: documentation for InputObject::RequestKeyDeregistration</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">void</span> RequestKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg); </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="comment">// TODO: documentation for InputObject::RequestMouseBtnRegistration</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">void</span> RequestMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg); </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="comment">// TODO: documentation for InputObject::RequestMouseBtnDeregistration</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">void</span> RequestMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg); </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="comment">// TODO: documentation for InputObject::RequestMouseCursorRegistration</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">void</span> RequestMouseCursorRegistration(); </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="comment">// TODO: documentation for InputObject::RequestMouseCursorDeregistration</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">void</span> RequestMouseCursorDeregistration(); </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">void</span> RegisterKey(sf::Keyboard::Key key, KeyEvent eventToReg);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordtype">void</span> DeregisterKey(sf::Keyboard::Key key, KeyEvent eventToDereg);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">void</span> RegisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToReg);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">void</span> DeregisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToDereg);</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordtype">void</span> RegisterMouseCursor();</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">void</span> DeregisterMouseCursor();</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">struct </span>KeyRegistrationData</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        RegistrationState regState;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <a class="code hl_class" href="class_key_registration_command.html">KeyRegistrationCommand</a>* pRegCmd;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <a class="code hl_class" href="class_key_deregistration_command.html">KeyDeregistrationCommand</a>* pDeregCmd;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    };</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">using </span>KeyTrackerID = std::pair&lt;sf::Keyboard::Key, KeyEvent&gt;;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keyword">using </span>KeyRegTracker = std::map&lt;KeyTrackerID, KeyRegistrationData&gt;;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keyword">struct </span>MouseBtnRegistrationData</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    {</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        RegistrationState regState;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <a class="code hl_class" href="class_mouse_btn_registration_command.html">MouseBtnRegistrationCommand</a>* pRegCmd;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <a class="code hl_class" href="class_mouse_btn_deregistration_command.html">MouseBtnDeregistrationCommand</a>* pDeregCmd;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    };</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">using </span>MouseBtnTrackerID = std::pair&lt;sf::Mouse::Button, MouseEvent&gt;;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">using </span>MouseBtnRegTracker = std::map&lt;MouseBtnTrackerID, MouseBtnRegistrationData&gt;;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">struct </span>MouseCursorRegistrationData</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        RegistrationState regState;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <a class="code hl_class" href="class_mouse_cursor_registration_command.html">MouseCursorRegistrationCommand</a>* pRegCmd;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <a class="code hl_class" href="class_mouse_cursor_deregistration_command.html">MouseCursorDeregistrationCommand</a>* pDeregCmd;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    };</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    KeyRegTracker keyTracker;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    MouseBtnRegTracker mouseBtnTracker;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    MouseCursorRegistrationData mouseCursorRegData;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>};</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920">KeyPressed</a>(sf::Keyboard::Key key);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#a562ec6b13331e068efa163ef47827f19">KeyReleased</a>(sf::Keyboard::Key key);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#a292855f37cac7a2bee20babd7a33f623">MouseBtnPressed</a>(sf::Mouse::Button btn);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed">MouseBtnReleased</a>(sf::Mouse::Button btn);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450">MouseCursorMoved</a>(sf::Vector2i pos, sf::Vector2i delta);</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    <span class="comment">// TODO: figure out mouse wheel inputs</span></div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span> </div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>    <span class="comment">// TODO: figure out gamepad button inputs</span></div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>    <span class="comment">// TODO: figure out gamepad stick inputs</span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span> </div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">RequestKeyRegistration</a>(sf::Keyboard::Key key, KeyEvent eventToReg); </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9">RequestKeyDeregistration</a>(sf::Keyboard::Key key, KeyEvent eventToDereg); </div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span> </div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#ade9e2d061e46270568425c217860cfaa">RequestMouseBtnRegistration</a>(sf::Mouse::Button btn, MouseEvent eventToReg); </div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09">RequestMouseBtnDeregistration</a>(sf::Mouse::Button btn, MouseEvent eventToDereg); </div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>    <span class="comment">// TODO: documentation for InputObject::RequestMouseCursorRegistration</span></div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>    <span class="keywordtype">void</span> RequestMouseCursorRegistration(); </div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>    <span class="comment">// TODO: documentation for InputObject::RequestMouseCursorDeregistration</span></div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    <span class="keywordtype">void</span> RequestMouseCursorDeregistration(); </div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span> </div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>    <span class="keywordtype">void</span> RegisterKey(sf::Keyboard::Key key, KeyEvent eventToReg);</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>    <span class="keywordtype">void</span> DeregisterKey(sf::Keyboard::Key key, KeyEvent eventToDereg);</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span> </div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>    <span class="keywordtype">void</span> RegisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToReg);</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>    <span class="keywordtype">void</span> DeregisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToDereg);</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>    <span class="keywordtype">void</span> RegisterMouseCursor();</div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>    <span class="keywordtype">void</span> DeregisterMouseCursor();</div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span> </div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>    <span class="keyword">struct </span>KeyRegistrationData</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>    {</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>        RegistrationState regState;</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>        <a class="code hl_class" href="class_key_registration_command.html">KeyRegistrationCommand</a>* pRegCmd;</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>        <a class="code hl_class" href="class_key_deregistration_command.html">KeyDeregistrationCommand</a>* pDeregCmd;</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>    };</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span> </div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    <span class="keyword">using </span>KeyTrackerID = std::pair&lt;sf::Keyboard::Key, KeyEvent&gt;;</div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>    <span class="keyword">using </span>KeyRegTracker = std::map&lt;KeyTrackerID, KeyRegistrationData&gt;;</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span> </div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>    <span class="keyword">struct </span>MouseBtnRegistrationData</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>    {</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>        RegistrationState regState;</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>        <a class="code hl_class" href="class_mouse_btn_registration_command.html">MouseBtnRegistrationCommand</a>* pRegCmd;</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>        <a class="code hl_class" href="class_mouse_btn_deregistration_command.html">MouseBtnDeregistrationCommand</a>* pDeregCmd;</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>    };</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span> </div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>    <span class="keyword">using </span>MouseBtnTrackerID = std::pair&lt;sf::Mouse::Button, MouseEvent&gt;;</div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>    <span class="keyword">using </span>MouseBtnRegTracker = std::map&lt;MouseBtnTrackerID, MouseBtnRegistrationData&gt;;</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span> </div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>    <span class="keyword">struct </span>MouseCursorRegistrationData</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    {</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>        RegistrationState regState;</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>        <a class="code hl_class" href="class_mouse_cursor_registration_command.html">MouseCursorRegistrationCommand</a>* pRegCmd;</div>
+<div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>        <a class="code hl_class" href="class_mouse_cursor_deregistration_command.html">MouseCursorDeregistrationCommand</a>* pDeregCmd;</div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>    };</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span> </div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>    KeyRegTracker keyTracker;</div>
+<div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>    MouseBtnRegTracker mouseBtnTracker;</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>    MouseCursorRegistrationData mouseCursorRegData;</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>};</div>
 </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span> </div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_input_object_attorney_html"><div class="ttname"><a href="class_input_object_attorney.html">InputObjectAttorney</a></div><div class="ttdef"><b>Definition</b> InputObjectAttorney.h:13</div></div>
 <div class="ttc" id="aclass_input_object_html"><div class="ttname"><a href="class_input_object.html">InputObject</a></div><div class="ttdef"><b>Definition</b> InputObject.h:22</div></div>
+<div class="ttc" id="aclass_input_object_html_a08a9295dcd211e267ad769364041d725"><div class="ttname"><a href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a></div><div class="ttdeci">void RequestKeyRegistration(sf::Keyboard::Key key, KeyEvent eventToReg)</div><div class="ttdef"><b>Definition</b> InputObject.cpp:40</div></div>
+<div class="ttc" id="aclass_input_object_html_a292855f37cac7a2bee20babd7a33f623"><div class="ttname"><a href="class_input_object.html#a292855f37cac7a2bee20babd7a33f623">InputObject::MouseBtnPressed</a></div><div class="ttdeci">virtual void MouseBtnPressed(sf::Mouse::Button btn)</div><div class="ttdoc">Do something when a mouse button is pressed.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:198</div></div>
+<div class="ttc" id="aclass_input_object_html_a562ec6b13331e068efa163ef47827f19"><div class="ttname"><a href="class_input_object.html#a562ec6b13331e068efa163ef47827f19">InputObject::KeyReleased</a></div><div class="ttdeci">virtual void KeyReleased(sf::Keyboard::Key key)</div><div class="ttdoc">Do something when a key is released.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:193</div></div>
+<div class="ttc" id="aclass_input_object_html_a66a46cb8ce45c100cb89b34ce34a2d09"><div class="ttname"><a href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09">InputObject::RequestMouseBtnDeregistration</a></div><div class="ttdeci">void RequestMouseBtnDeregistration(sf::Mouse::Button btn, MouseEvent eventToDereg)</div><div class="ttdoc">Request that the engine stop reading for mouse button events.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:97</div></div>
 <div class="ttc" id="aclass_input_object_html_aa5efffbaa424815e3caa1c7b5caee920"><div class="ttname"><a href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920">InputObject::KeyPressed</a></div><div class="ttdeci">virtual void KeyPressed(sf::Keyboard::Key key)</div><div class="ttdoc">Do something when a key is pressed.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:188</div></div>
+<div class="ttc" id="aclass_input_object_html_aa74c7001abec6bea78ca584bc6588450"><div class="ttname"><a href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450">InputObject::MouseCursorMoved</a></div><div class="ttdeci">virtual void MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta)</div><div class="ttdoc">Do something when the mouse cursor is moved.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:208</div></div>
+<div class="ttc" id="aclass_input_object_html_ade9e2d061e46270568425c217860cfaa"><div class="ttname"><a href="class_input_object.html#ade9e2d061e46270568425c217860cfaa">InputObject::RequestMouseBtnRegistration</a></div><div class="ttdeci">void RequestMouseBtnRegistration(sf::Mouse::Button btn, MouseEvent eventToReg)</div><div class="ttdoc">Request that the engine read for mouse button events.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:74</div></div>
+<div class="ttc" id="aclass_input_object_html_ae2deb58330cc0232d791ea8325f8a8e9"><div class="ttname"><a href="class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9">InputObject::RequestKeyDeregistration</a></div><div class="ttdeci">void RequestKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg)</div><div class="ttdoc">Request that the engine stop reading for key events.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:63</div></div>
+<div class="ttc" id="aclass_input_object_html_af54e743de21c52ae8ef84a0c8719e5ed"><div class="ttname"><a href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed">InputObject::MouseBtnReleased</a></div><div class="ttdeci">virtual void MouseBtnReleased(sf::Mouse::Button btn)</div><div class="ttdoc">Do something when a mouse button is released.</div><div class="ttdef"><b>Definition</b> InputObject.cpp:203</div></div>
 <div class="ttc" id="aclass_key_deregistration_command_html"><div class="ttname"><a href="class_key_deregistration_command.html">KeyDeregistrationCommand</a></div><div class="ttdef"><b>Definition</b> KeyDeregistrationCommand.h:13</div></div>
 <div class="ttc" id="aclass_key_registration_command_html"><div class="ttname"><a href="class_key_registration_command.html">KeyRegistrationCommand</a></div><div class="ttdef"><b>Definition</b> KeyRegistrationCommand.h:13</div></div>
 <div class="ttc" id="aclass_mouse_btn_deregistration_command_html"><div class="ttname"><a href="class_mouse_btn_deregistration_command.html">MouseBtnDeregistrationCommand</a></div><div class="ttdef"><b>Definition</b> MouseBtnDeregistrationCommand.h:13</div></div>

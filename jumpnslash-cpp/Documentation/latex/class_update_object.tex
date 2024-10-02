@@ -43,16 +43,18 @@ void Update\+Object\+::\+Request\+Update\+Deregistration (\begin{DoxyParamCaptio
 
 Request that the engine stop updating this object. 
 
-Call this function in an {\ttfamily \doxylink{class_update_object}{Update\+Object}} -\/derived class to let the engine know you would like to stop updating the object. This function is only accessible to classes deriving from {\ttfamily \doxylink{class_update_object}{Update\+Object}} .
+Call this function in an {\ttfamily \doxylink{class_update_object}{Update\+Object}} -\/derived class to let the engine know you would like to stop updating the object.
 
 \begin{DoxyNote}{Note}
+This function is only accessible to classes deriving from {\ttfamily \doxylink{class_update_object}{Update\+Object}} .
+
 As the name of the function implies, this puts in a request with the engine for your object to stop being updated. The request is processed by the engine on the same frame this function is called, and calls to {\ttfamily \doxylink{class_update_object_a288ca794056a05fafc9ef19e57532366}{Update\+Object\+::\+Update}} will cease {\bfseries{the}} {\bfseries{following}} frame.
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 Does not return anything.
 \end{DoxyReturn}
 \hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
-See the Update System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+See the \doxysectlink{_creating_game_object_go_updateSystem_exampleCode}{Update System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
 
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_update_object_a288ca794056a05fafc9ef19e57532366}{Update\+Object\+::\+Update} 
@@ -77,23 +79,24 @@ void Update\+Object\+::\+Request\+Update\+Registration (\begin{DoxyParamCaption}
 
 Request that the engine update this object. 
 
-Call this function in an {\ttfamily \doxylink{class_update_object}{Update\+Object}} -\/derived class to let the engine know you would like to begin updating the object. This function is only accessible to classes deriving from {\ttfamily \doxylink{class_update_object}{Update\+Object}} .
+Call this function in an {\ttfamily \doxylink{class_update_object}{Update\+Object}} -\/derived class to let the engine know you would like to begin updating the object.
 
 \begin{DoxyNote}{Note}
+This function is only accessible to classes deriving from {\ttfamily \doxylink{class_update_object}{Update\+Object}} .
+
 As the name of the function implies, this puts in a request with the engine for your object to be updated. The request is processed by the engine on the same frame this function is called, and calls to {\ttfamily \doxylink{class_update_object_a288ca794056a05fafc9ef19e57532366}{Update\+Object\+::\+Update}} will begin {\bfseries{the}} {\bfseries{following}} frame.
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 Does not return anything.
 \end{DoxyReturn}
 \hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
-See the Update System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.\hypertarget{class_update_object_For}{}\doxysubsection{\texorpdfstring{more on the update system}{more on the update system}}\label{class_update_object_For}
+See the \doxysectlink{_creating_game_object_go_updateSystem_exampleCode}{Update System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_update_object_a288ca794056a05fafc9ef19e57532366}{Update\+Object\+::\+Update} 
 
-\doxylink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{Update\+Object\+::\+Request\+Update\+Deregistration}
-\end{DoxySeeAlso}
-\hypertarget{class_update_object_For}{}\doxysubsection{\texorpdfstring{more on the update system}{more on the update system}}\label{class_update_object_For}
-\begin{DoxySeeAlso}{See also}
+\doxylink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{Update\+Object\+::\+Request\+Update\+Deregistration} 
+
 \doxylink{class_draw_object}{Draw\+Object} 
 
 \doxylink{class_input_object}{Input\+Object} 
@@ -120,20 +123,19 @@ The function called by the engine to update an object. This function does nothin
 \hline
 \end{DoxyParams}
 \begin{DoxyNote}{Note}
-This engine is not framerate-\/controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) need to be multiplied by the provided {\ttfamily delta\+Time} argument in order to appear normal!
+This engine is not framerate-\/controlled! A frame will render as soon as it can, meaning the time between frames is unknown. Any behavior (such as movement) which occurs over time needs to be multiplied by the provided {\ttfamily delta\+Time} argument in order to appear normal!
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 Does not return anything.
 \end{DoxyReturn}
 \hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
-See the Update System Example Code section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
+See the \doxysectlink{_creating_game_object_go_updateSystem_exampleCode}{Update System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
 
-For more on the update system\+: \begin{DoxySeeAlso}{See also}
+\begin{DoxySeeAlso}{See also}
 \doxylink{class_update_object_ad60cbe12fe88bf7566a904900378c934}{Update\+Object\+::\+Request\+Update\+Registration} 
 
-\doxylink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{Update\+Object\+::\+Request\+Update\+Deregistration}
-\end{DoxySeeAlso}
-For more game object features\+: \begin{DoxySeeAlso}{See also}
+\doxylink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{Update\+Object\+::\+Request\+Update\+Deregistration} 
+
 \doxylink{class_draw_object}{Draw\+Object} 
 
 \doxylink{class_input_object}{Input\+Object} 

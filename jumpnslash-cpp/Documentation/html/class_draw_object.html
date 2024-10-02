@@ -177,7 +177,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>DrawObjectAttorney</
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Draw System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
 <dd>
 <a class="el" href="#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
@@ -218,12 +218,14 @@ AlarmObject </dd>
 </div><div class="memdoc">
 
 <p>Request that the engine stop drawing this object. </p>
-<p>Call this function in a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class to let the engien know you would like to stop drawing the object. This function is only accessible to classes deriving from <code><a class="el" href="class_draw_object.html">DrawObject</a></code> .</p>
-<dl class="section note"><dt>Note</dt><dd>As the name of this function implies, this puts in a request with the engine for your object to stop being drawn. The request is processed by the engien on the same frame this fucntion is called, and calls to <code><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a></code> will cease <b>the</b> <b>following</b> frame.</dd></dl>
+<p>Call this function in a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class to let the engien know you would like to stop drawing the object.</p>
+<dl class="section note"><dt>Note</dt><dd>This function is only accessible to classes deriving from <code><a class="el" href="class_draw_object.html">DrawObject</a></code> .</dd>
+<dd>
+As the name of this function implies, this puts in a request with the engine for your object to stop being drawn. The request is processed by the engien on the same frame this fucntion is called, and calls to <code><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a></code> will cease <b>the</b> <b>following</b> frame.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Draw System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a> </dd>
 <dd>
 <a class="el" href="#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
@@ -262,12 +264,14 @@ AlarmObject </dd>
 </div><div class="memdoc">
 
 <p>Request that the engine draw this object. </p>
-<p>Call this function in a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class to let the engine know you would like to begin drawing the object. This function is only accessible to classes deriving from <code><a class="el" href="class_draw_object.html">DrawObject</a></code> .</p>
-<dl class="section note"><dt>Note</dt><dd>As the name of this function implies, this puts in a request with the engine for your object to be drawn. The request is processed by the engine on the same frame this function is called, and calls to <code><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a></code> will begin <b>the</b> <b>following</b> frame.</dd></dl>
+<p>Call this function in a <code><a class="el" href="class_draw_object.html">DrawObject</a></code> -derived class to let the engine know you would like to begin drawing the object.</p>
+<dl class="section note"><dt>Note</dt><dd>This function is only accessible to classes deriving from <code><a class="el" href="class_draw_object.html">DrawObject</a></code> .</dd>
+<dd>
+As the name of this function implies, this puts in a request with the engine for your object to be drawn. The request is processed by the engine on the same frame this function is called, and calls to <code><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a></code> will begin <b>the</b> <b>following</b> frame.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the Draw System Example Code section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a> </dd>
 <dd>
 <a class="el" href="#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>

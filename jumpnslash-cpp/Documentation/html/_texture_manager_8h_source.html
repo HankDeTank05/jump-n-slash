@@ -121,23 +121,23 @@ $(function(){initNavTree('_texture_manager_8h_source.html',''); initResizable(tr
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>: <span class="comment">// api functions</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_texture_manager.html#a770e03552151570f7a3cb06f48b66c01">LoadTexture</a>(std::string key, std::string filename, <span class="keywordtype">bool</span> smooth = <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keyword">static</span> sf::Texture* <a class="code hl_function" href="class_texture_manager.html#aadcf6c9d978195ef308f9f38e88fd0ba">GetTexture</a>(std::string key);</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">private</span>: <span class="comment">// engine-only api functions</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="class_texture_manager_attorney.html">TextureManagerAttorney</a>;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> Terminate();</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keyword">private</span>: <span class="comment">// private api backend functions</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keywordtype">void</span> privLoadTexture(std::string key, std::string filename, <span class="keywordtype">bool</span> smooth);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    sf::Texture* privGetTexture(std::string key);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">private</span>: <span class="comment">// member variables</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    std::map&lt;std::string, sf::Texture*&gt; textures; </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keyword">const</span> std::string FOLDER_NAME = <span class="stringliteral">&quot;assets/textures/&quot;</span>; </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>};</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keyword">static</span> sf::Texture* <a class="code hl_function" href="class_texture_manager.html#aadcf6c9d978195ef308f9f38e88fd0ba">GetTexture</a>(std::string key);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keyword">private</span>: <span class="comment">// engine-only api functions</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="class_texture_manager_attorney.html">TextureManagerAttorney</a>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> Terminate();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword">private</span>: <span class="comment">// private api backend functions</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keywordtype">void</span> privLoadTexture(std::string key, std::string filename, <span class="keywordtype">bool</span> smooth);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    sf::Texture* privGetTexture(std::string key);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="keyword">private</span>: <span class="comment">// member variables</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    std::map&lt;std::string, sf::Texture*&gt; textures; </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keyword">const</span> std::string FOLDER_NAME = <span class="stringliteral">&quot;assets/textures/&quot;</span>; </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>};</div>
 </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclass_texture_manager_attorney_html"><div class="ttname"><a href="class_texture_manager_attorney.html">TextureManagerAttorney</a></div><div class="ttdef"><b>Definition</b> TextureManagerAttorney.h:5</div></div>
 <div class="ttc" id="aclass_texture_manager_html"><div class="ttname"><a href="class_texture_manager.html">TextureManager</a></div><div class="ttdef"><b>Definition</b> TextureManager.h:9</div></div>
 <div class="ttc" id="aclass_texture_manager_html_a770e03552151570f7a3cb06f48b66c01"><div class="ttname"><a href="class_texture_manager.html#a770e03552151570f7a3cb06f48b66c01">TextureManager::LoadTexture</a></div><div class="ttdeci">static void LoadTexture(std::string key, std::string filename, bool smooth=true)</div><div class="ttdoc">Load a texture into the engine.</div><div class="ttdef"><b>Definition</b> TextureManager.cpp:24</div></div>

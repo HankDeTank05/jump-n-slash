@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['requestdrawderegistration_0',['RequestDrawDeregistration',['../class_draw_object.html#ac36c9194561c0f21483f88a8c3b2d605',1,'DrawObject']]],
-  ['requestdrawregistration_1',['RequestDrawRegistration',['../class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6',1,'DrawObject']]],
-  ['requestupdatederegistration_2',['RequestUpdateDeregistration',['../class_update_object.html#ac2573c3f88943d35dd98154cfb96dd4b',1,'UpdateObject']]],
-  ['requestupdateregistration_3',['RequestUpdateRegistration',['../class_update_object.html#ad60cbe12fe88bf7566a904900378c934',1,'UpdateObject']]]
+  ['mousebtnpressed_0',['MouseBtnPressed',['../class_input_object.html#a292855f37cac7a2bee20babd7a33f623',1,'InputObject::MouseBtnPressed()'],['../class_test_class.html#ae1ad048f7fb36db5308cfd2defbc84e4',1,'TestClass::MouseBtnPressed()']]],
+  ['mousebtnreleased_1',['MouseBtnReleased',['../class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed',1,'InputObject::MouseBtnReleased()'],['../class_test_class.html#af9de31853d4b816634fd034331e787d7',1,'TestClass::MouseBtnReleased()']]],
+  ['mousecursormoved_2',['MouseCursorMoved',['../class_input_object.html#aa74c7001abec6bea78ca584bc6588450',1,'InputObject::MouseCursorMoved()'],['../class_test_class.html#a90869daadb5279694f8e3c58df3dfc23',1,'TestClass::MouseCursorMoved()']]]
 ];
