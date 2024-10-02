@@ -2,8 +2,8 @@
 Welcome to the homepage for Jump-n-Slash documentation!
 
 Here are some tutorials to get you started:
-1. \ref EngineBasics "Engine basics"
-2. \ref UsingAssetManagers "Using the asset managers"
-3. \ref CreatingScene "Creating a scene"
-4. \ref CreatingGameObject "Creating a game object"
+1. \ref EngineBasics "Engine Basics"
+2. \ref UsingAssetManagers "Using the Asset Managers"
+3. \ref CreatingScene "Creating a Scene"
+4. \ref CreatingGameObject "Creating a Game Object"
 */
