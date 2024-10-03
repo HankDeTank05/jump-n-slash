@@ -9,7 +9,7 @@
 #include "PlayerFSM.h"
 
 Player::Player(sf::Vector2f spawnPoint)
-	: pos(0.0f, 0.0f),
+	: pos(spawnPoint),
 	posDelta(0.0f, 0.0f),
 	speed(PLAYER_WALK_SPEED),
 	pSprite(SpriteManager::GetSprite("player idle 1")),
@@ -48,7 +48,7 @@ void Player::Update(float deltaTime)
 
 void Player::Draw()
 {
-	JumpSlashEngine::GetWindow().draw(*pSprite);
+	Render(*pSprite);
 }
 
 void Player::KeyPressed(sf::Keyboard::Key key)

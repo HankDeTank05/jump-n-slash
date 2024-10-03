@@ -174,7 +174,6 @@
 boxfont setfont
 1 boundaspect scale
 (DrawObject) cw
-(LevelMap) cw
 (LevelTile) cw
 (Player) cw
 (TestClass) cw
@@ -193,8 +192,7 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (DrawObject) 2.000000 2.000000 box
- (LevelMap) 0.000000 1.000000 box
+ (DrawObject) 2.500000 2.000000 box
  (LevelTile) 1.500000 1.000000 box
  (Player) 2.500000 1.000000 box
  (TestClass) 3.500000 1.000000 box
@@ -206,11 +204,9 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- relations -----
 
 solid
-1 2.000000 1.250000 out
+1 2.500000 1.250000 out
 solid
-0.000000 3.500000 2.000000 conn
-solid
-0 0.000000 1.750000 in
+1.500000 3.500000 2.000000 conn
 solid
 0 1.500000 1.750000 in
 solid

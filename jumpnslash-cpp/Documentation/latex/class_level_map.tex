@@ -1,11 +1,5 @@
 \doxysection{Level\+Map Class Reference}
 \hypertarget{class_level_map}{}\label{class_level_map}\index{LevelMap@{LevelMap}}
-Inheritance diagram for Level\+Map\+:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=2.000000cm]{class_level_map}
-\end{center}
-\end{figure}
 \doxysubsubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -24,64 +18,44 @@ using {\bfseries Room\+List\+Ref} = Room\+List\+::iterator
 \Hypertarget{class_level_map_a81b118e3d5a038bf240d9f5d6bc4eb02}\label{class_level_map_a81b118e3d5a038bf240d9f5d6bc4eb02} 
 \mbox{\hyperlink{class_level_map}{Level\+Map}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_level_map}{Level\+Map}} \&lm)=delete
 \item 
-virtual void \mbox{\hyperlink{class_level_map_a7902cf952bf9d4e0398e09b287ccaaf5}{Draw}} () override
-\begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\item 
 \Hypertarget{class_level_map_a77365007efd749c624e589d9142dd659}\label{class_level_map_a77365007efd749c624e589d9142dd659} 
 sf\+::\+Vector2f {\bfseries Get\+Starting\+Spawn\+Point} ()
-\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
-\begin{DoxyCompactItemize}
 \item 
-{\bfseries Draw\+Object} (const \mbox{\hyperlink{class_draw_object}{Draw\+Object}} \&dob)=delete
-\item 
-\mbox{\hyperlink{class_draw_object}{Draw\+Object}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_draw_object}{Draw\+Object}} \&dob)=delete
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Additional Inherited Members}
-\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
-\begin{DoxyCompactItemize}
-\item 
-void \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Request\+Draw\+Registration}} ()
-\begin{DoxyCompactList}\small\item\em Request that the engine draw this object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Request\+Draw\+Deregistration}} ()
-\begin{DoxyCompactList}\small\item\em Request that the engine stop drawing this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_level_tile}{Level\+Tile}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_level_map_aa44d9991b2f63fc4793bc9a60d5a5335}{Get\+Tile\+At\+Pos}} (sf\+::\+Vector2f world\+Pos)
+\begin{DoxyCompactList}\small\item\em Get the tile at a given world-\/space position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{class_level_map_a7902cf952bf9d4e0398e09b287ccaaf5}\index{LevelMap@{LevelMap}!Draw@{Draw}}
-\index{Draw@{Draw}!LevelMap@{LevelMap}}
-\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
-{\footnotesize\ttfamily \label{class_level_map_a7902cf952bf9d4e0398e09b287ccaaf5} 
-void Level\+Map\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+\Hypertarget{class_level_map_aa44d9991b2f63fc4793bc9a60d5a5335}\index{LevelMap@{LevelMap}!GetTileAtPos@{GetTileAtPos}}
+\index{GetTileAtPos@{GetTileAtPos}!LevelMap@{LevelMap}}
+\doxysubsubsection{\texorpdfstring{GetTileAtPos()}{GetTileAtPos()}}
+{\footnotesize\ttfamily \label{class_level_map_aa44d9991b2f63fc4793bc9a60d5a5335} 
+\mbox{\hyperlink{class_level_tile}{Level\+Tile}} \texorpdfstring{$\ast$}{*} Level\+Map\+::\+Get\+Tile\+At\+Pos (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{world\+Pos}{}\end{DoxyParamCaption})}
 
 
 
-Draw an object. 
+Get the tile at a given world-\/space position. 
 
-The function called by the engine to draw an object. This function does nothing by default, and can be overridden by a {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} -\/derived class. Any behavior that should occur when drawing an object should go in the overridden function body.
+Returns a pointer to the {\ttfamily \doxylink{class_level_tile}{Level\+Tile}} at the given world-\/space position. If there is no tile at the given position, {\ttfamily nullptr} will be returned.
 
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em world\+Pos} & The world-\/space position at which you would like to check for a tile.\\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Does not return anything.
+A {\ttfamily \doxylink{class_level_tile}{Level\+Tile}} pointer. Will be {\ttfamily nullptr} if no tile exists at the given coordinates.
 \end{DoxyReturn}
-\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
-See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
-
+\begin{DoxyNote}{Note}
+If you pass invalid coordinates to this function, it will crash the game. Valid coordinates are in the following range\+:
+\begin{DoxyItemize}
+\item {\ttfamily 0.\+0f} {\ttfamily \texorpdfstring{$<$}{<}=} {\ttfamily x} {\ttfamily \texorpdfstring{$<$}{<}} {\ttfamily MAX\+\_\+\+LEVEL\+\_\+\+SIZE} {\ttfamily \texorpdfstring{$\ast$}{*}} {\ttfamily TILE\+\_\+\+SIZE\+\_\+F} 
+\item {\ttfamily 0.\+0f} {\ttfamily \texorpdfstring{$<$}{<}=} {\ttfamily y} {\ttfamily \texorpdfstring{$<$}{<}} {\ttfamily MAX\+\_\+\+LEVEL\+\_\+\+SIZE} {\ttfamily \texorpdfstring{$\ast$}{*}} {\ttfamily TILE\+\_\+\+SIZE\+\_\+F} {\ttfamily MAX\+\_\+\+LEVEL\+\_\+\+SIZE} and {\ttfamily TILE\+\_\+\+SIZE\+\_\+F} are defined in the \doxylink{_constants_8h_source}{Constants.\+h} file.
+\end{DoxyItemize}
+\end{DoxyNote}
 \begin{DoxySeeAlso}{See also}
-\doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
-
-\doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
-
-\doxylink{class_update_object}{Update\+Object} 
-
-\doxylink{class_input_object}{Input\+Object} 
-
-Alarm\+Object 
-
-\doxylink{class_collision_object}{Collision\+Object} 
+\doxylink{class_level_tile}{Level\+Tile} 
 \end{DoxySeeAlso}
-
-
-Reimplemented from \mbox{\hyperlink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object}}.
-
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

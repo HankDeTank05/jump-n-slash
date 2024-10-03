@@ -17,6 +17,11 @@ public:
 
 	virtual void Draw() override final;
 
+	bool IsSolidOnTop();
+	bool IsSolidOnSides();
+	bool IsSolidOnBottom();
+	bool IsBreakable();
+
 private:
 	sf::Vector2f pos;
 	sf::Sprite* pSprite;

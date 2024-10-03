@@ -2,6 +2,7 @@
 
 #include <cassert>
 
+#include "EngineAttorney.h"
 #include "DrawRegistrationCommand.h"
 #include "DrawDeregistrationCommand.h"
 #include "JumpSlashEngine.h"
@@ -25,6 +26,11 @@ DrawObject::~DrawObject()
 void DrawObject::Draw()
 {
 	// do nothing. override to make it do something
+}
+
+void DrawObject::Render(sf::Drawable& drawable)
+{
+	EngineAttorney::GameWindow::GetWindow().draw(drawable);
 }
 
 void DrawObject::RequestDrawRegistration()

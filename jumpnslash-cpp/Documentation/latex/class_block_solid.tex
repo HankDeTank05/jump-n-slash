@@ -28,7 +28,15 @@ Inheritance diagram for Block\+Solid\+:\begin{figure}[H]
 \mbox{\hyperlink{class_level_tile}{Level\+Tile}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_level_tile}{Level\+Tile}} \&lt)=delete
 \item 
 virtual void \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd}{Draw}} () override final
-\begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\item 
+bool {\bfseries Is\+Solid\+On\+Top} ()
+\item 
+bool {\bfseries Is\+Solid\+On\+Sides} ()
+\item 
+bool {\bfseries Is\+Solid\+On\+Bottom} ()
+\item 
+bool {\bfseries Is\+Breakable} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -40,6 +48,8 @@ virtual void \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Render}} (sf\+::\+Drawable \&drawable)
+\begin{DoxyCompactList}\small\item\em Render a drawable SFML object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Request\+Draw\+Registration}} ()
 \begin{DoxyCompactList}\small\item\em Request that the engine draw this object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Request\+Draw\+Deregistration}} ()

@@ -1,7 +1,7 @@
 #include "MouseCursorListener.h"
 
 #include "InputObjectAttorney.h"
-#include "JumpSlashEngine.h"
+#include "EngineAttorney.h"
 
 MouseCursorListener::MouseCursorListener()
 	: prevPos(sf::Mouse::getPosition()),
@@ -17,7 +17,7 @@ MouseCursorListener::~MouseCursorListener()
 
 void MouseCursorListener::ProcessCursorEvent()
 {
-	sf::Vector2i currPos = sf::Mouse::getPosition(JumpSlashEngine::GetWindow());
+	sf::Vector2i currPos = sf::Mouse::getPosition(EngineAttorney::GameWindow::GetWindow());
 
 	if (currPos != prevPos)
 	{

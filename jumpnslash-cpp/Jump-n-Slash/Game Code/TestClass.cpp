@@ -35,7 +35,7 @@ void TestClass::Update(float deltaTime)
 
 void TestClass::Draw()
 {
-	JumpSlashEngine::GetWindow().draw(circle);
+	Render(circle);
 }
 
 void TestClass::KeyPressed(sf::Keyboard::Key key)

@@ -41,9 +41,11 @@ public: // public api functions
 	static void Run(); // TODO: documentation for JumpSlashEngine::Run
 	static void Terminate(); // TODO: documentation for JumpSlashEngine::Terminate
 
-	static sf::RenderWindow& GetWindow(); // TODO: I don't like this...
+private: // engine-only api functions
+	friend class EngineAttorney;
+	static sf::RenderWindow& GetWindow();
 
-private: // private functions
+private: // private api backend functions
 	void privSetWindowName(sf::String winName);
 	void privSetWindowSize(int winWidth, int winHeight);
 

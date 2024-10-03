@@ -10,6 +10,7 @@ var dir_f71208ecbb6c06141fe31cdea5ca43e5 =
     [ "DrawObject.h", "_draw_object_8h_source.html", null ],
     [ "DrawObjectAttorney.h", "_draw_object_attorney_8h_source.html", null ],
     [ "DrawRegistrationCommand.h", "_draw_registration_command_8h_source.html", null ],
+    [ "EngineAttorney.h", "_engine_attorney_8h_source.html", null ],
     [ "GridManager.h", "_grid_manager_8h_source.html", null ],
     [ "GridManagerAttorney.h", "_grid_manager_attorney_8h_source.html", null ],
     [ "InputEvent.h", "_input_event_8h_source.html", null ],

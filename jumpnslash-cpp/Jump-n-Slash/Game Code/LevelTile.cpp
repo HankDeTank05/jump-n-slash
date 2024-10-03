@@ -10,7 +10,7 @@ LevelTile::LevelTile(sf::Vector2f _pos, sf::Sprite* _pSprite, bool _solidOnTop, 
 	solidOnBottom(_solidOnBottom),
 	breakable(_breakable)
 {
-	// do nothing
+	RequestDrawRegistration();
 }
 
 LevelTile::~LevelTile()
@@ -21,5 +21,25 @@ LevelTile::~LevelTile()
 void LevelTile::Draw()
 {
 	pSprite->setPosition(pos);
-	JumpSlashEngine::GetWindow().draw(*pSprite);
+	Render(*pSprite);
+}
+
+bool LevelTile::IsSolidOnTop()
+{
+	return solidOnTop;
+}
+
+bool LevelTile::IsSolidOnSides()
+{
+	return solidOnSides;
+}
+
+bool LevelTile::IsSolidOnBottom()
+{
+	return solidOnBottom;
+}
+
+bool LevelTile::IsBreakable()
+{
+	return breakable;
 }

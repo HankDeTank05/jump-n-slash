@@ -49,53 +49,51 @@
 \DoxyCodeLine{00412\ }
 \DoxyCodeLine{00451\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_input_object_ade9e2d061e46270568425c217860cfaa}{RequestMouseBtnRegistration}}(sf::Mouse::Button\ btn,\ MouseEvent\ eventToReg);\ }
 \DoxyCodeLine{00490\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_input_object_a66a46cb8ce45c100cb89b34ce34a2d09}{RequestMouseBtnDeregistration}}(sf::Mouse::Button\ btn,\ MouseEvent\ eventToDereg);\ }
-\DoxyCodeLine{00491\ \ \ \ \ \textcolor{comment}{//\ TODO:\ documentation\ for\ InputObject::RequestMouseCursorRegistration}}
-\DoxyCodeLine{00492\ \ \ \ \ \textcolor{keywordtype}{void}\ RequestMouseCursorRegistration();\ }
-\DoxyCodeLine{00493\ \ \ \ \ \textcolor{comment}{//\ TODO:\ documentation\ for\ InputObject::RequestMouseCursorDeregistration}}
-\DoxyCodeLine{00494\ \ \ \ \ \textcolor{keywordtype}{void}\ RequestMouseCursorDeregistration();\ }
-\DoxyCodeLine{00495\ }
-\DoxyCodeLine{00496\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00497\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterKey(sf::Keyboard::Key\ key,\ KeyEvent\ eventToReg);}
-\DoxyCodeLine{00498\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterKey(sf::Keyboard::Key\ key,\ KeyEvent\ eventToDereg);}
-\DoxyCodeLine{00499\ }
-\DoxyCodeLine{00500\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseBtn(sf::Mouse::Button\ btn,\ MouseEvent\ eventToReg);}
-\DoxyCodeLine{00501\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseBtn(sf::Mouse::Button\ btn,\ MouseEvent\ eventToDereg);}
-\DoxyCodeLine{00502\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseCursor();}
-\DoxyCodeLine{00503\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseCursor();}
-\DoxyCodeLine{00504\ }
-\DoxyCodeLine{00505\ \ \ \ \ \textcolor{keyword}{struct\ }KeyRegistrationData}
-\DoxyCodeLine{00506\ \ \ \ \ \{}
-\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ RegistrationState\ regState;}
-\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_key_registration_command}{KeyRegistrationCommand}}*\ pRegCmd;}
-\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_key_deregistration_command}{KeyDeregistrationCommand}}*\ pDeregCmd;}
-\DoxyCodeLine{00510\ \ \ \ \ \};}
-\DoxyCodeLine{00511\ }
-\DoxyCodeLine{00512\ \ \ \ \ \textcolor{keyword}{using\ }KeyTrackerID\ =\ std::pair<sf::Keyboard::Key,\ KeyEvent>;}
-\DoxyCodeLine{00513\ \ \ \ \ \textcolor{keyword}{using\ }KeyRegTracker\ =\ std::map<KeyTrackerID,\ KeyRegistrationData>;}
-\DoxyCodeLine{00514\ }
-\DoxyCodeLine{00515\ \ \ \ \ \textcolor{keyword}{struct\ }MouseBtnRegistrationData}
-\DoxyCodeLine{00516\ \ \ \ \ \{}
-\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ RegistrationState\ regState;}
-\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}*\ pRegCmd;}
-\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mouse_btn_deregistration_command}{MouseBtnDeregistrationCommand}}*\ pDeregCmd;}
-\DoxyCodeLine{00520\ \ \ \ \ \};}
-\DoxyCodeLine{00521\ }
-\DoxyCodeLine{00522\ \ \ \ \ \textcolor{keyword}{using\ }MouseBtnTrackerID\ =\ std::pair<sf::Mouse::Button,\ MouseEvent>;}
-\DoxyCodeLine{00523\ \ \ \ \ \textcolor{keyword}{using\ }MouseBtnRegTracker\ =\ std::map<MouseBtnTrackerID,\ MouseBtnRegistrationData>;}
-\DoxyCodeLine{00524\ }
-\DoxyCodeLine{00525\ \ \ \ \ \textcolor{keyword}{struct\ }MouseCursorRegistrationData}
-\DoxyCodeLine{00526\ \ \ \ \ \{}
-\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ RegistrationState\ regState;}
-\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mouse_cursor_registration_command}{MouseCursorRegistrationCommand}}*\ pRegCmd;}
-\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mouse_cursor_deregistration_command}{MouseCursorDeregistrationCommand}}*\ pDeregCmd;}
-\DoxyCodeLine{00530\ \ \ \ \ \};}
-\DoxyCodeLine{00531\ }
-\DoxyCodeLine{00532\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00533\ \ \ \ \ KeyRegTracker\ keyTracker;}
-\DoxyCodeLine{00534\ \ \ \ \ MouseBtnRegTracker\ mouseBtnTracker;}
-\DoxyCodeLine{00535\ \ \ \ \ MouseCursorRegistrationData\ mouseCursorRegData;}
-\DoxyCodeLine{00536\ \};}
-\DoxyCodeLine{00537\ }
-\DoxyCodeLine{00538\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00523\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_input_object_a370ca7911b8a9af883388c1b4c6ac60f}{RequestMouseCursorRegistration}}();\ }
+\DoxyCodeLine{00556\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_input_object_a80a1f6d281aafdc534f3c909f943cfcb}{RequestMouseCursorDeregistration}}();\ }
+\DoxyCodeLine{00557\ }
+\DoxyCodeLine{00558\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00559\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterKey(sf::Keyboard::Key\ key,\ KeyEvent\ eventToReg);}
+\DoxyCodeLine{00560\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterKey(sf::Keyboard::Key\ key,\ KeyEvent\ eventToDereg);}
+\DoxyCodeLine{00561\ }
+\DoxyCodeLine{00562\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseBtn(sf::Mouse::Button\ btn,\ MouseEvent\ eventToReg);}
+\DoxyCodeLine{00563\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseBtn(sf::Mouse::Button\ btn,\ MouseEvent\ eventToDereg);}
+\DoxyCodeLine{00564\ \ \ \ \ \textcolor{keywordtype}{void}\ RegisterMouseCursor();}
+\DoxyCodeLine{00565\ \ \ \ \ \textcolor{keywordtype}{void}\ DeregisterMouseCursor();}
+\DoxyCodeLine{00566\ }
+\DoxyCodeLine{00567\ \ \ \ \ \textcolor{keyword}{struct\ }KeyRegistrationData}
+\DoxyCodeLine{00568\ \ \ \ \ \{}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ RegistrationState\ regState;}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_key_registration_command}{KeyRegistrationCommand}}*\ pRegCmd;}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_key_deregistration_command}{KeyDeregistrationCommand}}*\ pDeregCmd;}
+\DoxyCodeLine{00572\ \ \ \ \ \};}
+\DoxyCodeLine{00573\ }
+\DoxyCodeLine{00574\ \ \ \ \ \textcolor{keyword}{using\ }KeyTrackerID\ =\ std::pair<sf::Keyboard::Key,\ KeyEvent>;}
+\DoxyCodeLine{00575\ \ \ \ \ \textcolor{keyword}{using\ }KeyRegTracker\ =\ std::map<KeyTrackerID,\ KeyRegistrationData>;}
+\DoxyCodeLine{00576\ }
+\DoxyCodeLine{00577\ \ \ \ \ \textcolor{keyword}{struct\ }MouseBtnRegistrationData}
+\DoxyCodeLine{00578\ \ \ \ \ \{}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ RegistrationState\ regState;}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mouse_btn_registration_command}{MouseBtnRegistrationCommand}}*\ pRegCmd;}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mouse_btn_deregistration_command}{MouseBtnDeregistrationCommand}}*\ pDeregCmd;}
+\DoxyCodeLine{00582\ \ \ \ \ \};}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \ \ \ \ \textcolor{keyword}{using\ }MouseBtnTrackerID\ =\ std::pair<sf::Mouse::Button,\ MouseEvent>;}
+\DoxyCodeLine{00585\ \ \ \ \ \textcolor{keyword}{using\ }MouseBtnRegTracker\ =\ std::map<MouseBtnTrackerID,\ MouseBtnRegistrationData>;}
+\DoxyCodeLine{00586\ }
+\DoxyCodeLine{00587\ \ \ \ \ \textcolor{keyword}{struct\ }MouseCursorRegistrationData}
+\DoxyCodeLine{00588\ \ \ \ \ \{}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ RegistrationState\ regState;}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mouse_cursor_registration_command}{MouseCursorRegistrationCommand}}*\ pRegCmd;}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mouse_cursor_deregistration_command}{MouseCursorDeregistrationCommand}}*\ pDeregCmd;}
+\DoxyCodeLine{00592\ \ \ \ \ \};}
+\DoxyCodeLine{00593\ }
+\DoxyCodeLine{00594\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00595\ \ \ \ \ KeyRegTracker\ keyTracker;}
+\DoxyCodeLine{00596\ \ \ \ \ MouseBtnRegTracker\ mouseBtnTracker;}
+\DoxyCodeLine{00597\ \ \ \ \ MouseCursorRegistrationData\ mouseCursorRegData;}
+\DoxyCodeLine{00598\ \};}
+\DoxyCodeLine{00599\ }
+\DoxyCodeLine{00600\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

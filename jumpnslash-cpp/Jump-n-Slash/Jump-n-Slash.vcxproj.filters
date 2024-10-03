@@ -97,6 +97,9 @@
     <Filter Include="Source Files\Game Code\Level Data\LeveTile dervied classes">
       <UniqueIdentifier>{52280e2c-ba7a-40e8-838d-256cc8d2b504}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Debug Systems\Visualizer System\Commands">
+      <UniqueIdentifier>{048b4331-6afa-4e42-aee7-c2fa0db848f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -260,6 +263,21 @@
     </ClCompile>
     <ClCompile Include="Game Code\PlayerMoveState.cpp">
       <Filter>Source Files\Game Code\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\EngineAttorney.cpp">
+      <Filter>Source Files\Engine Code\Core Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Visualizer.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VisualizerCommandCircle.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VisualizerCommand.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VisualizerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -443,6 +461,21 @@
     <ClInclude Include="Game Code\BlockSolid.h">
       <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
     </ClInclude>
+    <ClInclude Include="Engine Code\EngineAttorney.h">
+      <Filter>Source Files\Engine Code\Core Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Visualizer.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VisualizerCommandCircle.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VisualizerCommand.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VisualizerAttorney.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\0_DocsHome.txt">
@@ -458,6 +491,9 @@
       <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
     <Text Include="Game Code\3_CreatingScene.txt">
+      <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
+    </Text>
+    <Text Include="Game Code\HelpfulReferenceResources.txt">
       <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
   </ItemGroup>

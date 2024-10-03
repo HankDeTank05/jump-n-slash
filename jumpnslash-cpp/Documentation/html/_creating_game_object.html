@@ -199,7 +199,7 @@ Example</h2>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclass_draw_object_html"><div class="ttname"><a href="class_draw_object.html">DrawObject</a></div><div class="ttdef"><b>Definition</b> DrawObject.h:12</div></div>
+<div class="ttc" id="aclass_draw_object_html"><div class="ttname"><a href="class_draw_object.html">DrawObject</a></div><div class="ttdef"><b>Definition</b> DrawObject.h:14</div></div>
 </div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Mario.cpp</span></div>
 <div class="line"><span class="preprocessor">#include &quot;Mario.h&quot;</span></div>
 <div class="line"> </div>
@@ -255,8 +255,8 @@ The Input System</h1>
 <li><a class="el" href="class_input_object.html#af54e743de21c52ae8ef84a0c8719e5ed" title="Do something when a mouse button is released.">InputObject::MouseBtnReleased</a></li>
 </ul>
 <p>For mouse cursor inputs (movement):</p><ul>
-<li>InputObject::RequestMouseCursorRegistration</li>
-<li>InputObject::RequestMouseCursorDeregistration</li>
+<li><a class="el" href="class_input_object.html#a370ca7911b8a9af883388c1b4c6ac60f" title="Request that the engine read mouse cursor movements.">InputObject::RequestMouseCursorRegistration</a></li>
+<li><a class="el" href="class_input_object.html#a80a1f6d281aafdc534f3c909f943cfcb" title="Request that the engine stop reading mouse cursor movements.">InputObject::RequestMouseCursorDeregistration</a></li>
 <li><a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a></li>
 </ul>
 <p>Let's keep things simple for now, and only worry about keyboard inputs. Just like with updating and drawing, the "Request" functions (<code>RequestKeyRegistration</code> , <code>RequestKeyDeregistration</code> , etc.) can only be called by an <code><a class="el" href="class_input_object.html">InputObject</a></code> -derived class, and it's how you tell the engine you want to know when an input of the requested type occurs.</p>

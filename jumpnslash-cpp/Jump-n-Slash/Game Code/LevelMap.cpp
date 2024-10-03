@@ -10,6 +10,7 @@
 #include "BlockHazard.h"
 #include "BlockSolid.h"
 #include "PlatformSemisolid.h"
+#include "Constants.h"
 
 LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 	: map(),
@@ -29,12 +30,13 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 			std::string tileID = grid->at(y)[x];
 
 			// add the indicator to the std::map
+
 			std::string key = "not set";
 			sf::Vector2i coords(x, y);
 
 			// TODO: I hate that this is hard coded. replace this when json parsing is working
 			
-			// make a vector to pass to the LevelTiles
+			// a position vector to pass to the LevelTiles
 			sf::Vector2f worldPos(static_cast<float>(x * TILE_SIZE), static_cast<float>(y * TILE_SIZE));
 
 			// empty space
@@ -118,7 +120,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 			// add the tile to the std::map
 			if (tiles.count(key) == 0)
 			{
-				// create the std::list if it doesn't already exist
+				// create an empty std::list at the given key if it doesn't already exist
 				tiles.emplace(key, std::list<sf::Vector2i>());
 			}
 			tiles.at(key).push_back(coords);
@@ -145,6 +147,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 	usedSize.y += 1;
 
 	// use indicators to create room data (one room per origin indicator)
+
 	std::list<sf::Vector2i> list = tiles.at(KEY_INDICATOR_ROOM_ORIGIN);
 	list.push_front(tiles.at(KEY_INDICATOR_ROOM_ORIGIN_START).front());
 	for (std::list<sf::Vector2i>::iterator it = list.begin(); it != list.end(); it++)
@@ -270,6 +273,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 
 LevelMap::~LevelMap()
 {
+	// delete owned pointers in room data
 	for (std::list<RoomData*>::iterator it = rooms.begin(); it != rooms.end(); it++)
 	{
 		RoomData* pRoomData = (*it);
@@ -279,6 +283,19 @@ LevelMap::~LevelMap()
 		}
 		delete pRoomData;
 	}
+
+	// delete owned pointers in the levelmap
+	for (std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE>::iterator yIt = map.begin(); yIt != map.end(); yIt++)
+	{
+		std::array<LevelTile*, MAX_LEVEL_SIZE> row = *yIt;
+		for (std::array<LevelTile*, MAX_LEVEL_SIZE>::iterator xIt = row.begin(); xIt != row.end(); xIt++)
+		{
+			if (*xIt != nullptr)
+			{
+				delete (*xIt);
+			}
+		}
+	}
 }
 
 sf::Vector2f LevelMap::GetStartingSpawnPoint()
@@ -286,4 +303,17 @@ sf::Vector2f LevelMap::GetStartingSpawnPoint()
 	assert(rooms.front()->isStartingRoom == true);
 	assert(rooms.front()->playerSpawnPoint != nullptr);
 	return *(rooms.front()->playerSpawnPoint);
+}
+
+LevelTile* LevelMap::GetTileAtPos(sf::Vector2f worldPos)
+{
+	int x = static_cast<int>(worldPos.x / TILE_SIZE_F);
+	int y = static_cast<int>(worldPos.y / TILE_SIZE_F);
+
+	assert(0 <= x);
+	assert(x < MAX_LEVEL_SIZE);
+	assert(0 <= y);
+	assert(y < MAX_LEVEL_SIZE);
+
+	return map[y][x];
 }

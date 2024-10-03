@@ -1,6 +1,10 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <string>
+
+#include <SFML/Graphics.hpp>
+
 // general constants
 
 const std::string WINDOW_NAME = "Jump n Slash";
@@ -24,5 +28,10 @@ const std::string KEY_INDICATOR_SPAWN_PLAYER_LEFT = "indicator spawn player left
 const std::string KEY_INDICATOR_SPAWN_PLAYER_RIGHT = "indicator spawn player right";
 const std::string KEY_INDICATOR_SPAWN_ENEMY_LEFT = "indicator spawn enemy left";
 const std::string KEY_INDICATOR_SPAWN_ENEMY_RIGHT = "indicator spawn enemy right";
+
+// visualizer default settings
+
+const sf::Color VIZ_DEFAULT_COLOR = sf::Color::Cyan;
+const float VIZ_DEFAULT_LINE_SIZE = 1.0f
 
 #endif

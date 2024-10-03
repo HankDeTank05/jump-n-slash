@@ -19,7 +19,19 @@ Inheritance diagram for Level\+Tile\+:\begin{figure}[H]
 \mbox{\hyperlink{class_level_tile}{Level\+Tile}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_level_tile}{Level\+Tile}} \&lt)=delete
 \item 
 virtual void \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd}{Draw}} () override final
-\begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\item 
+\Hypertarget{class_level_tile_a7062f9fa5c54006ae75c0f52213e0ac9}\label{class_level_tile_a7062f9fa5c54006ae75c0f52213e0ac9} 
+bool {\bfseries Is\+Solid\+On\+Top} ()
+\item 
+\Hypertarget{class_level_tile_aea5c09ba0ad7e9c83efdfa1aff4304b9}\label{class_level_tile_aea5c09ba0ad7e9c83efdfa1aff4304b9} 
+bool {\bfseries Is\+Solid\+On\+Sides} ()
+\item 
+\Hypertarget{class_level_tile_a540f9162e6d50ac2b0cec53c2158703a}\label{class_level_tile_a540f9162e6d50ac2b0cec53c2158703a} 
+bool {\bfseries Is\+Solid\+On\+Bottom} ()
+\item 
+\Hypertarget{class_level_tile_add07ed3e16e440a00118bc2d4450528a}\label{class_level_tile_add07ed3e16e440a00118bc2d4450528a} 
+bool {\bfseries Is\+Breakable} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
@@ -31,6 +43,8 @@ virtual void \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Render}} (sf\+::\+Drawable \&drawable)
+\begin{DoxyCompactList}\small\item\em Render a drawable SFML object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Request\+Draw\+Registration}} ()
 \begin{DoxyCompactList}\small\item\em Request that the engine draw this object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Request\+Draw\+Deregistration}} ()
@@ -57,6 +71,8 @@ Does not return anything.
 See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
 
 \begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Draw\+Object\+::\+Render} 
+
 \doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
 
 \doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 

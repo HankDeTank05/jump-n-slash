@@ -21,15 +21,20 @@
 \DoxyCodeLine{00017\ }
 \DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd}{Draw}}()\ \textcolor{keyword}{override}\ \textcolor{keyword}{final};}
 \DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00021\ \ \ \ \ sf::Vector2f\ pos;}
-\DoxyCodeLine{00022\ \ \ \ \ sf::Sprite*\ pSprite;}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ solidOnTop;}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{bool}\ solidOnSides;}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ solidOnBottom;}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ breakable;}
-\DoxyCodeLine{00027\ \};}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsSolidOnTop();}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsSolidOnSides();}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsSolidOnBottom();}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsBreakable();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ sf::Vector2f\ pos;}
+\DoxyCodeLine{00027\ \ \ \ \ sf::Sprite*\ pSprite;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ solidOnTop;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ solidOnSides;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ solidOnBottom;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ breakable;}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

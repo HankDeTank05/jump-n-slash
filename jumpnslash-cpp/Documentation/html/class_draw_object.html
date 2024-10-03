@@ -110,7 +110,6 @@ Inheritance diagram for DrawObject:</div>
  <div class="center">
   <img src="class_draw_object.png" usemap="#DrawObject_map" alt=""/>
   <map id="DrawObject_map" name="DrawObject_map">
-<area href="class_level_map.html" alt="LevelMap" shape="rect" coords="0,56,111,80"/>
 <area href="class_level_tile.html" alt="LevelTile" shape="rect" coords="181,56,292,80"/>
 <area href="class_player.html" alt="Player" shape="rect" coords="302,56,413,80"/>
 <area href="class_test_class.html" alt="TestClass" shape="rect" coords="423,56,534,80"/>
@@ -135,6 +134,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a58db365c96dc8ab875f2a03b23e3c2ae" id="r_a58db365c96dc8ab875f2a03b23e3c2ae"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae">Draw</a> ()</td></tr>
 <tr class="memdesc:a58db365c96dc8ab875f2a03b23e3c2ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw an object.  <br /></td></tr>
 <tr class="separator:a58db365c96dc8ab875f2a03b23e3c2ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29574cbabc6c837e048587857def8ca3" id="r_a29574cbabc6c837e048587857def8ca3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29574cbabc6c837e048587857def8ca3">Render</a> (sf::Drawable &amp;drawable)</td></tr>
+<tr class="memdesc:a29574cbabc6c837e048587857def8ca3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render a drawable SFML object.  <br /></td></tr>
+<tr class="separator:a29574cbabc6c837e048587857def8ca3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d223751f7022545e5387488fd2a5ef6" id="r_a0d223751f7022545e5387488fd2a5ef6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d223751f7022545e5387488fd2a5ef6">RequestDrawRegistration</a> ()</td></tr>
 <tr class="memdesc:a0d223751f7022545e5387488fd2a5ef6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine draw this object.  <br /></td></tr>
 <tr class="separator:a0d223751f7022545e5387488fd2a5ef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,7 +180,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>DrawObjectAttorney</
 <h1><a class="anchor" id="example"></a>
 Example</h1>
 <p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#a29574cbabc6c837e048587857def8ca3" title="Render a drawable SFML object.">DrawObject::Render</a> </dd>
+<dd>
+<a class="el" href="#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
 <dd>
 <a class="el" href="#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
 <dd>
@@ -190,7 +194,114 @@ AlarmObject </dd>
 <dd>
 <a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_level_map.html#a7902cf952bf9d4e0398e09b287ccaaf5">LevelMap</a>, <a class="el" href="class_level_tile.html#a84bfc4cbfd57d67ad3295833e2e5b8fd">LevelTile</a>, <a class="el" href="class_player.html#a5b60ad157bb1e8debca89ed6903ca2a4">Player</a>, and <a class="el" href="class_test_class.html#a78894580a70988ad537f12f35ea26230">TestClass</a>.</p>
+<p>Reimplemented in <a class="el" href="class_level_tile.html#a84bfc4cbfd57d67ad3295833e2e5b8fd">LevelTile</a>, <a class="el" href="class_player.html#a5b60ad157bb1e8debca89ed6903ca2a4">Player</a>, and <a class="el" href="class_test_class.html#a78894580a70988ad537f12f35ea26230">TestClass</a>.</p>
+
+</div>
+</div>
+<a id="a29574cbabc6c837e048587857def8ca3" name="a29574cbabc6c837e048587857def8ca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29574cbabc6c837e048587857def8ca3">&#9670;&#160;</a></span>Render()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DrawObject::Render </td>
+          <td>(</td>
+          <td class="paramtype">sf::Drawable &amp;</td>          <td class="paramname"><span class="paramname"><em>drawable</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Render a drawable SFML object. </p>
+<p>This function renders the <code>sf::Drawable</code> object passed to it. The following types are <code>sf::Drawable</code> -derived, and therefore may be passed to this function:</p><ul>
+<li><code>sf::Shape</code> </li>
+<li><code>sf::Sprite</code> </li>
+<li><code>sf::Text</code> </li>
+<li><code>sf::VertexArray</code> </li>
+<li><code>sf::VertexBuffer</code> </li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>This function is only accessible to classes deriving from <code><a class="el" href="class_draw_object.html">DrawObject</a></code> .</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">drawable</td><td>The object to draw.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<p>The following is an example of how to use the render function. </p><div class="fragment"><div class="line"><span class="comment">// Zelda.h</span></div>
+<div class="line"><span class="preprocessor">#ifndef ZELDA_H</span></div>
+<div class="line"><span class="preprocessor">#define ZELDA_H</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;SFML/Graphics.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/UpdateObject.h&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/DrawObject.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">class </span>Zelda : <span class="keyword">public</span> <a class="code hl_class" href="class_update_object.html">UpdateObject</a>, <span class="keyword">public</span> <a class="code hl_class" href="class_draw_object.html">DrawObject</a></div>
+<div class="line">{</div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">  Zelda();</div>
+<div class="line">  Zelda(<span class="keyword">const</span> Zelda&amp; z) = <span class="keyword">delete</span>;</div>
+<div class="line">  Zelda&amp; operator=(<span class="keyword">const</span> Zelda&amp; z) = <span class="keyword">delete</span>;</div>
+<div class="line">  <span class="keyword">virtual</span> ~Zelda() = <span class="keywordflow">default</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> Update(<span class="keywordtype">float</span> deltaTime) <span class="keyword">override</span>;</div>
+<div class="line">  <span class="keyword">virtual</span> <span class="keywordtype">void</span> Draw() <span class="keyword">override</span>;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">private</span>:</div>
+<div class="line">  sf::Sprite* pSprite;</div>
+<div class="line">  sf::Vector2f pos;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclass_draw_object_html"><div class="ttname"><a href="class_draw_object.html">DrawObject</a></div><div class="ttdef"><b>Definition</b> DrawObject.h:14</div></div>
+<div class="ttc" id="aclass_update_object_html"><div class="ttname"><a href="class_update_object.html">UpdateObject</a></div><div class="ttdef"><b>Definition</b> UpdateObject.h:12</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="comment">// Zelda.cpp</span></div>
+<div class="line"><span class="preprocessor">#include &quot;Zelda.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &quot;../Engine Code/SpriteManager.h&quot;</span></div>
+<div class="line"> </div>
+<div class="line">Zelda::Zelda()</div>
+<div class="line">  : pSprite(<a class="code hl_class" href="class_sprite_manager.html">SpriteManager</a>::GetSprite(<span class="stringliteral">&quot;zelda sprite&quot;</span>)),</div>
+<div class="line">  pos(2.21f, 19.86f)</div>
+<div class="line">{</div>
+<div class="line">  RequestDrawRegistration();</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> Zelda::Update(<span class="keywordtype">float</span> deltaTime)</div>
+<div class="line">{</div>
+<div class="line">  pSprite-&gt;setPosition(pos); <span class="comment">// don&#39;t forget to set the position before you render!</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> Zelda::Draw()</div>
+<div class="line">{</div>
+<div class="line">  Render(*pSprite); <span class="comment">// don&#39;t forget to dereference the pointer!</span></div>
+<div class="line">}</div>
+<div class="ttc" id="aclass_sprite_manager_html"><div class="ttname"><a href="class_sprite_manager.html">SpriteManager</a></div><div class="ttdef"><b>Definition</b> SpriteManager.h:9</div></div>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a> </dd>
+<dd>
+<a class="el" href="#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
+<dd>
+<a class="el" href="#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
+<dd>
+<a class="el" href="class_update_object.html">UpdateObject</a> </dd>
+<dd>
+<a class="el" href="class_input_object.html">InputObject</a> </dd>
+<dd>
+AlarmObject </dd>
+<dd>
+<a class="el" href="class_collision_object.html">CollisionObject</a> </dd></dl>
 
 </div>
 </div>
@@ -227,6 +338,8 @@ As the name of this function implies, this puts in a request with the engine for
 Example</h1>
 <p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a> </dd>
+<dd>
+<a class="el" href="#a29574cbabc6c837e048587857def8ca3" title="Render a drawable SFML object.">DrawObject::Render</a> </dd>
 <dd>
 <a class="el" href="#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
 <dd>
@@ -273,6 +386,8 @@ As the name of this function implies, this puts in a request with the engine for
 Example</h1>
 <p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="#a58db365c96dc8ab875f2a03b23e3c2ae" title="Draw an object.">DrawObject::Draw</a> </dd>
+<dd>
+<a class="el" href="#a29574cbabc6c837e048587857def8ca3" title="Render a drawable SFML object.">DrawObject::Render</a> </dd>
 <dd>
 <a class="el" href="#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
 <dd>

@@ -1,0 +1,13 @@
+/*! \page HelpfulReferenceResources Helpful Reference and Resources
+\section reference_SFML SFML Resources
+- SFML Tutorials: https://www.sfml-dev.org/tutorials/2.6/
+- SFML API Documentation: https://www.sfml-dev.org/documentation/2.6.1/
+
+\section reference_doxygen Doxygen Resources
+- Doxygen Documentation: https://www.doxygen.nl/manual/index.html
+- Doxygen Commands: https://www.doxygen.nl/manual/commands.html
+
+\section reference_cpp C++ Resources
+- STL Containers Documentation: https://cplusplus.com/reference/stl/
+- Game Programming Patterns (web version): https://gameprogrammingpatterns.com/contents.html
+*/

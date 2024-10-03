@@ -1,14 +1,11 @@
 var searchData=
 [
-  ['unitdata_0',['UnitData',['../struct_unit_data.html',1,'']]],
-  ['unitslink_1',['UnitSLink',['../class_unit_s_link.html',1,'']]],
-  ['unitstats_2',['UnitStats',['../struct_unit_stats.html',1,'']]],
-  ['unittrace_3',['UnitTrace',['../class_unit_trace.html',1,'']]],
-  ['unitutility_4',['UnitUtility',['../class_unit_utility.html',1,'']]],
-  ['update_5',['Update',['../class_scene_attorney_1_1_update.html',1,'SceneAttorney']]],
-  ['updatederegistrationcommand_6',['UpdateDeregistrationCommand',['../class_update_deregistration_command.html',1,'']]],
-  ['updatemanager_7',['UpdateManager',['../class_update_manager.html',1,'']]],
-  ['updateobject_8',['UpdateObject',['../class_update_object.html',1,'']]],
-  ['updateobjectattorney_9',['UpdateObjectAttorney',['../class_update_object_attorney.html',1,'']]],
-  ['updateregistrationcommand_10',['UpdateRegistrationCommand',['../class_update_registration_command.html',1,'']]]
+  ['termination_0',['Termination',['../class_grid_manager_attorney_1_1_termination.html',1,'GridManagerAttorney::Termination'],['../class_sprite_manager_attorney_1_1_termination.html',1,'SpriteManagerAttorney::Termination'],['../class_texture_manager_attorney_1_1_termination.html',1,'TextureManagerAttorney::Termination']]],
+  ['test_1',['Test',['../class_test.html',1,'']]],
+  ['testclass_2',['TestClass',['../class_test_class.html',1,'']]],
+  ['testregistry_3',['TestRegistry',['../class_test_registry.html',1,'']]],
+  ['testscene_4',['TestScene',['../class_test_scene.html',1,'']]],
+  ['texturemanager_5',['TextureManager',['../class_texture_manager.html',1,'']]],
+  ['texturemanagerattorney_6',['TextureManagerAttorney',['../class_texture_manager_attorney.html',1,'']]],
+  ['trace_7',['Trace',['../class_trace.html',1,'']]]
 ];

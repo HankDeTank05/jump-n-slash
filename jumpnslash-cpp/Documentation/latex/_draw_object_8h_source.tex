@@ -5,39 +5,43 @@
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DRAW\_OBJECT\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DRAW\_OBJECT\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}RegistrationState.h"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}DrawManager.h"{}}}
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{comment}{//\ forward\ declarations}}
-\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}};}
-\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_deregistration_command}{DrawDeregistrationCommand}};}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_object}{DrawObject}}}
-\DoxyCodeLine{00012\ \{}
-\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_draw_object}{DrawObject}}();}
-\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_draw_object}{DrawObject}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_draw_object}{DrawObject}}\&\ dob)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_draw_object}{DrawObject}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_draw_object}{DrawObject}}\&\ dob)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_draw_object}{\string~DrawObject}}();}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw}}();}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{RequestDrawRegistration}}();}
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{RequestDrawDeregistration}}();\ }
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_object_attorney}{DrawObjectAttorney}};}
-\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ Register();}
-\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister();}
-\DoxyCodeLine{00096\ }
-\DoxyCodeLine{00097\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00098\ \ \ \ \ RegistrationState\ regState;}
-\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}*\ pRegCmd;}
-\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{class_draw_deregistration_command}{DrawDeregistrationCommand}}*\ pDeregCmd;}
-\DoxyCodeLine{00101\ \ \ \ \ DrawManager::DrawListRef\ deleteRef;}
-\DoxyCodeLine{00102\ \};}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}RegistrationState.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}DrawManager.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}};}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_deregistration_command}{DrawDeregistrationCommand}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_object}{DrawObject}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_draw_object}{DrawObject}}();}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_draw_object}{DrawObject}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_draw_object}{DrawObject}}\&\ dob)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_draw_object}{DrawObject}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_draw_object}{DrawObject}}\&\ dob)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_draw_object}{\string~DrawObject}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Render}}(sf::Drawable\&\ drawable);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{RequestDrawRegistration}}();}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{RequestDrawDeregistration}}();\ }
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_draw_object_attorney}{DrawObjectAttorney}};}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{void}\ Register();}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{void}\ Deregister();}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00184\ \ \ \ \ RegistrationState\ regState;}
+\DoxyCodeLine{00185\ \ \ \ \ \mbox{\hyperlink{class_draw_registration_command}{DrawRegistrationCommand}}*\ pRegCmd;}
+\DoxyCodeLine{00186\ \ \ \ \ \mbox{\hyperlink{class_draw_deregistration_command}{DrawDeregistrationCommand}}*\ pDeregCmd;}
+\DoxyCodeLine{00187\ \ \ \ \ DrawManager::DrawListRef\ deleteRef;}
+\DoxyCodeLine{00188\ \};}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

@@ -13,6 +13,7 @@ var annotated_dup =
     [ "DrawObject", "class_draw_object.html", "class_draw_object" ],
     [ "DrawObjectAttorney", "class_draw_object_attorney.html", "class_draw_object_attorney" ],
     [ "DrawRegistrationCommand", "class_draw_registration_command.html", null ],
+    [ "EngineAttorney", "class_engine_attorney.html", "class_engine_attorney" ],
     [ "FileIO", "class_file_i_o.html", null ],
     [ "GridManager", "class_grid_manager.html", null ],
     [ "GridManagerAttorney", "class_grid_manager_attorney.html", "class_grid_manager_attorney" ],

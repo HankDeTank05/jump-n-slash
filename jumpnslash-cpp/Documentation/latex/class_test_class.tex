@@ -61,6 +61,8 @@ void \mbox{\hyperlink{class_update_object_ac2573c3f88943d35dd98154cfb96dd4b}{Req
 \doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_draw_object}{Draw\+Object}}}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Render}} (sf\+::\+Drawable \&drawable)
+\begin{DoxyCompactList}\small\item\em Render a drawable SFML object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Request\+Draw\+Registration}} ()
 \begin{DoxyCompactList}\small\item\em Request that the engine draw this object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Request\+Draw\+Deregistration}} ()
@@ -76,10 +78,10 @@ void \mbox{\hyperlink{class_input_object_ade9e2d061e46270568425c217860cfaa}{Requ
 \begin{DoxyCompactList}\small\item\em Request that the engine read for mouse button events. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_input_object_a66a46cb8ce45c100cb89b34ce34a2d09}{Request\+Mouse\+Btn\+Deregistration}} (sf\+::\+Mouse\+::\+Button btn, Mouse\+Event event\+To\+Dereg)
 \begin{DoxyCompactList}\small\item\em Request that the engine stop reading for mouse button events. \end{DoxyCompactList}\item 
-void {\bfseries Request\+Mouse\+Cursor\+Registration} ()
-\item 
-void {\bfseries Request\+Mouse\+Cursor\+Deregistration} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_input_object_a370ca7911b8a9af883388c1b4c6ac60f}{Request\+Mouse\+Cursor\+Registration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine read mouse cursor movements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_input_object_a80a1f6d281aafdc534f3c909f943cfcb}{Request\+Mouse\+Cursor\+Deregistration}} ()
+\begin{DoxyCompactList}\small\item\em Request that the engine stop reading mouse cursor movements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Member Function Documentation}
@@ -102,6 +104,8 @@ Does not return anything.
 See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
 
 \begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Draw\+Object\+::\+Render} 
+
 \doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
 
 \doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
@@ -158,9 +162,9 @@ See the \doxysectlink{_creating_game_object_go_inputSystem_exampleCode}{Input Sy
 
 \doxylink{class_input_object_aa74c7001abec6bea78ca584bc6588450}{Input\+Object\+::\+Mouse\+Cursor\+Moved} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration 
+\doxylink{class_input_object_a370ca7911b8a9af883388c1b4c6ac60f}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration 
+\doxylink{class_input_object_a80a1f6d281aafdc534f3c909f943cfcb}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration} 
 
 \doxylink{class_update_object}{Update\+Object} 
 
@@ -214,9 +218,9 @@ See the \doxysectlink{_creating_game_object_go_inputSystem_exampleCode}{Input Sy
 
 \doxylink{class_input_object_aa74c7001abec6bea78ca584bc6588450}{Input\+Object\+::\+Mouse\+Cursor\+Moved} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration 
+\doxylink{class_input_object_a370ca7911b8a9af883388c1b4c6ac60f}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration 
+\doxylink{class_input_object_a80a1f6d281aafdc534f3c909f943cfcb}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration} 
 
 \doxylink{class_update_object}{Update\+Object} 
 
@@ -330,9 +334,9 @@ Does not return anything.
 
 \doxylink{class_input_object_aa74c7001abec6bea78ca584bc6588450}{Input\+Object\+::\+Mouse\+Cursor\+Moved} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration 
+\doxylink{class_input_object_a370ca7911b8a9af883388c1b4c6ac60f}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration 
+\doxylink{class_input_object_a80a1f6d281aafdc534f3c909f943cfcb}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration} 
 
 \doxylink{class_update_object}{Update\+Object} 
 
@@ -471,9 +475,9 @@ Does not return anything.
 
 \doxylink{class_input_object_aa74c7001abec6bea78ca584bc6588450}{Input\+Object\+::\+Mouse\+Cursor\+Moved} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration 
+\doxylink{class_input_object_a370ca7911b8a9af883388c1b4c6ac60f}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration 
+\doxylink{class_input_object_a80a1f6d281aafdc534f3c909f943cfcb}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration} 
 
 \doxylink{class_update_object}{Update\+Object} 
 
@@ -532,9 +536,9 @@ TODO\+: documentation for \doxylink{class_input_object_aa74c7001abec6bea78ca584b
 
 \doxylink{class_input_object_a66a46cb8ce45c100cb89b34ce34a2d09}{Input\+Object\+::\+Request\+Mouse\+Btn\+Deregistration} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration 
+\doxylink{class_input_object_a370ca7911b8a9af883388c1b4c6ac60f}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Registration} 
 
-Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration 
+\doxylink{class_input_object_a80a1f6d281aafdc534f3c909f943cfcb}{Input\+Object\+::\+Request\+Mouse\+Cursor\+Deregistration} 
 
 \doxylink{class_update_object}{Update\+Object} 
 

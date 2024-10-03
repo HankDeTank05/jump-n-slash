@@ -8,5 +8,7 @@ var class_input_object =
     [ "RequestKeyDeregistration", "class_input_object.html#ae2deb58330cc0232d791ea8325f8a8e9", null ],
     [ "RequestKeyRegistration", "class_input_object.html#a08a9295dcd211e267ad769364041d725", null ],
     [ "RequestMouseBtnDeregistration", "class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09", null ],
-    [ "RequestMouseBtnRegistration", "class_input_object.html#ade9e2d061e46270568425c217860cfaa", null ]
+    [ "RequestMouseBtnRegistration", "class_input_object.html#ade9e2d061e46270568425c217860cfaa", null ],
+    [ "RequestMouseCursorDeregistration", "class_input_object.html#a80a1f6d281aafdc534f3c909f943cfcb", null ],
+    [ "RequestMouseCursorRegistration", "class_input_object.html#a370ca7911b8a9af883388c1b4c6ac60f", null ]
 ];

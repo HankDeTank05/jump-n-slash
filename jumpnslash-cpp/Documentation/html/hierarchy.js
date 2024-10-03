@@ -21,7 +21,6 @@ var hierarchy =
     [ "SceneAttorney::Draw", "class_scene_attorney_1_1_draw.html", null ],
     [ "DrawManager", "class_draw_manager.html", null ],
     [ "DrawObject", "class_draw_object.html", [
-      [ "LevelMap", "class_level_map.html", null ],
       [ "LevelTile", "class_level_tile.html", [
         [ "BlockBreakable", "class_block_breakable.html", null ],
         [ "BlockHazard", "class_block_hazard.html", null ],
@@ -32,10 +31,12 @@ var hierarchy =
       [ "TestClass", "class_test_class.html", null ]
     ] ],
     [ "DrawObjectAttorney", "class_draw_object_attorney.html", null ],
+    [ "EngineAttorney", "class_engine_attorney.html", null ],
     [ "FileIO", "class_file_i_o.html", null ],
     [ "DrawObjectAttorney::GameLoop", "class_draw_object_attorney_1_1_game_loop.html", null ],
     [ "SceneAttorney::GameLoop", "class_scene_attorney_1_1_game_loop.html", null ],
     [ "UpdateObjectAttorney::GameLoop", "class_update_object_attorney_1_1_game_loop.html", null ],
+    [ "EngineAttorney::GameWindow", "class_engine_attorney_1_1_game_window.html", null ],
     [ "GridManager", "class_grid_manager.html", null ],
     [ "GridManagerAttorney", "class_grid_manager_attorney.html", null ],
     [ "SceneAttorney::Input", "class_scene_attorney_1_1_input.html", null ],
@@ -49,6 +50,7 @@ var hierarchy =
     [ "JumpSlashEngine", "class_jump_slash_engine.html", null ],
     [ "InputObjectAttorney::KeyEvents", "class_input_object_attorney_1_1_key_events.html", null ],
     [ "KeyListener", "class_key_listener.html", null ],
+    [ "LevelMap", "class_level_map.html", null ],
     [ "MemTrace", "class_mem_trace.html", null ],
     [ "MouseBtnListener", "class_mouse_btn_listener.html", null ],
     [ "MouseCursorListener", "class_mouse_cursor_listener.html", null ],

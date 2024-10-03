@@ -176,6 +176,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ac2573c3f88943d35dd98154cfb96dd4b inherit pro_methods_class_update_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine stop updating this object.  <br /></td></tr>
 <tr class="separator:ac2573c3f88943d35dd98154cfb96dd4b inherit pro_methods_class_update_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_draw_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_class_draw_object')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_draw_object.html">DrawObject</a></td></tr>
+<tr class="memitem:a29574cbabc6c837e048587857def8ca3 inherit pro_methods_class_draw_object" id="r_a29574cbabc6c837e048587857def8ca3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_object.html#a29574cbabc6c837e048587857def8ca3">Render</a> (sf::Drawable &amp;drawable)</td></tr>
+<tr class="memdesc:a29574cbabc6c837e048587857def8ca3 inherit pro_methods_class_draw_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render a drawable SFML object.  <br /></td></tr>
+<tr class="separator:a29574cbabc6c837e048587857def8ca3 inherit pro_methods_class_draw_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object" id="r_a0d223751f7022545e5387488fd2a5ef6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6">RequestDrawRegistration</a> ()</td></tr>
 <tr class="memdesc:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine draw this object.  <br /></td></tr>
 <tr class="separator:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -203,11 +206,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a66a46cb8ce45c100cb89b34ce34a2d09 inherit pro_methods_class_input_object" id="r_a66a46cb8ce45c100cb89b34ce34a2d09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_object.html#a66a46cb8ce45c100cb89b34ce34a2d09">RequestMouseBtnDeregistration</a> (sf::Mouse::Button btn, MouseEvent eventToDereg)</td></tr>
 <tr class="memdesc:a66a46cb8ce45c100cb89b34ce34a2d09 inherit pro_methods_class_input_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine stop reading for mouse button events.  <br /></td></tr>
 <tr class="separator:a66a46cb8ce45c100cb89b34ce34a2d09 inherit pro_methods_class_input_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a370ca7911b8a9af883388c1b4c6ac60f inherit pro_methods_class_input_object" id="r_a370ca7911b8a9af883388c1b4c6ac60f"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestMouseCursorRegistration</b> ()</td></tr>
+<tr class="memitem:a370ca7911b8a9af883388c1b4c6ac60f inherit pro_methods_class_input_object" id="r_a370ca7911b8a9af883388c1b4c6ac60f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_object.html#a370ca7911b8a9af883388c1b4c6ac60f">RequestMouseCursorRegistration</a> ()</td></tr>
+<tr class="memdesc:a370ca7911b8a9af883388c1b4c6ac60f inherit pro_methods_class_input_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine read mouse cursor movements.  <br /></td></tr>
 <tr class="separator:a370ca7911b8a9af883388c1b4c6ac60f inherit pro_methods_class_input_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80a1f6d281aafdc534f3c909f943cfcb inherit pro_methods_class_input_object" id="r_a80a1f6d281aafdc534f3c909f943cfcb"><td class="memItemLeft" align="right" valign="top">
-void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestMouseCursorDeregistration</b> ()</td></tr>
+<tr class="memitem:a80a1f6d281aafdc534f3c909f943cfcb inherit pro_methods_class_input_object" id="r_a80a1f6d281aafdc534f3c909f943cfcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input_object.html#a80a1f6d281aafdc534f3c909f943cfcb">RequestMouseCursorDeregistration</a> ()</td></tr>
+<tr class="memdesc:a80a1f6d281aafdc534f3c909f943cfcb inherit pro_methods_class_input_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine stop reading mouse cursor movements.  <br /></td></tr>
 <tr class="separator:a80a1f6d281aafdc534f3c909f943cfcb inherit pro_methods_class_input_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -240,7 +243,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>RequestMouseCursorDer
 <h1><a class="anchor" id="example"></a>
 Example</h1>
 <p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_draw_object.html#a29574cbabc6c837e048587857def8ca3" title="Render a drawable SFML object.">DrawObject::Render</a> </dd>
+<dd>
+<a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
 <dd>
 <a class="el" href="class_draw_object.html#ac36c9194561c0f21483f88a8c3b2d605" title="Request that the engine stop drawing this object.">DrawObject::RequestDrawDeregistration</a> </dd>
 <dd>
@@ -307,9 +312,9 @@ Example</h1>
 <dd>
 <a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a> </dd>
 <dd>
-InputObject::RequestMouseCursorRegistration </dd>
+<a class="el" href="class_input_object.html#a370ca7911b8a9af883388c1b4c6ac60f" title="Request that the engine read mouse cursor movements.">InputObject::RequestMouseCursorRegistration</a> </dd>
 <dd>
-InputObject::RequestMouseCursorDeregistration </dd>
+<a class="el" href="class_input_object.html#a80a1f6d281aafdc534f3c909f943cfcb" title="Request that the engine stop reading mouse cursor movements.">InputObject::RequestMouseCursorDeregistration</a> </dd>
 <dd>
 <a class="el" href="class_update_object.html">UpdateObject</a> </dd>
 <dd>
@@ -374,9 +379,9 @@ Example</h1>
 <dd>
 <a class="el" href="class_input_object.html#aa74c7001abec6bea78ca584bc6588450" title="Do something when the mouse cursor is moved.">InputObject::MouseCursorMoved</a> </dd>
 <dd>
-InputObject::RequestMouseCursorRegistration </dd>
+<a class="el" href="class_input_object.html#a370ca7911b8a9af883388c1b4c6ac60f" title="Request that the engine read mouse cursor movements.">InputObject::RequestMouseCursorRegistration</a> </dd>
 <dd>
-InputObject::RequestMouseCursorDeregistration </dd>
+<a class="el" href="class_input_object.html#a80a1f6d281aafdc534f3c909f943cfcb" title="Request that the engine stop reading mouse cursor movements.">InputObject::RequestMouseCursorDeregistration</a> </dd>
 <dd>
 <a class="el" href="class_update_object.html">UpdateObject</a> </dd>
 <dd>

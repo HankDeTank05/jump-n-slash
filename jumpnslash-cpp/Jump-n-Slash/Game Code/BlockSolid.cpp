@@ -5,7 +5,7 @@
 BlockSolid::BlockSolid(sf::Vector2f pos)
 	: LevelTile(pos, SpriteManager::GetSprite("block solid"), true, true, true, false)
 {
-	// Do nothing
+	// do nothing
 }
 
 BlockSolid::~BlockSolid()

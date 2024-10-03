@@ -20,6 +20,8 @@ Inheritance diagram for Draw\+Object\+:\begin{figure}[H]
 \item 
 virtual void \mbox{\hyperlink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw}} ()
 \begin{DoxyCompactList}\small\item\em Draw an object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Render}} (sf\+::\+Drawable \&drawable)
+\begin{DoxyCompactList}\small\item\em Render a drawable SFML object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Request\+Draw\+Registration}} ()
 \begin{DoxyCompactList}\small\item\em Request that the engine draw this object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Request\+Draw\+Deregistration}} ()
@@ -52,6 +54,8 @@ Does not return anything.
 See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw System Example Code}{2} section from the \doxysectlink{_creating_game_object}{Creating a Game Object}{0} tutorial for example code.
 
 \begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Draw\+Object\+::\+Render} 
+
 \doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
 
 \doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
@@ -66,8 +70,111 @@ Alarm\+Object
 \end{DoxySeeAlso}
 
 
-Reimplemented in \mbox{\hyperlink{class_level_map_a7902cf952bf9d4e0398e09b287ccaaf5}{Level\+Map}}, \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd}{Level\+Tile}}, \mbox{\hyperlink{class_player_a5b60ad157bb1e8debca89ed6903ca2a4}{Player}}, and \mbox{\hyperlink{class_test_class_a78894580a70988ad537f12f35ea26230}{Test\+Class}}.
+Reimplemented in \mbox{\hyperlink{class_level_tile_a84bfc4cbfd57d67ad3295833e2e5b8fd}{Level\+Tile}}, \mbox{\hyperlink{class_player_a5b60ad157bb1e8debca89ed6903ca2a4}{Player}}, and \mbox{\hyperlink{class_test_class_a78894580a70988ad537f12f35ea26230}{Test\+Class}}.
 
+\Hypertarget{class_draw_object_a29574cbabc6c837e048587857def8ca3}\index{DrawObject@{DrawObject}!Render@{Render}}
+\index{Render@{Render}!DrawObject@{DrawObject}}
+\doxysubsubsection{\texorpdfstring{Render()}{Render()}}
+{\footnotesize\ttfamily \label{class_draw_object_a29574cbabc6c837e048587857def8ca3} 
+void Draw\+Object\+::\+Render (\begin{DoxyParamCaption}\item[{sf\+::\+Drawable \&}]{drawable}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Render a drawable SFML object. 
+
+This function renders the {\ttfamily sf\+::\+Drawable} object passed to it. The following types are {\ttfamily sf\+::\+Drawable} -\/derived, and therefore may be passed to this function\+:
+\begin{DoxyItemize}
+\item {\ttfamily sf\+::\+Shape} 
+\item {\ttfamily sf\+::\+Sprite} 
+\item {\ttfamily sf\+::\+Text} 
+\item {\ttfamily sf\+::\+Vertex\+Array} 
+\item {\ttfamily sf\+::\+Vertex\+Buffer} 
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+This function is only accessible to classes deriving from {\ttfamily \doxylink{class_draw_object}{Draw\+Object}} .
+\end{DoxyNote}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em drawable} & The object to draw.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+The following is an example of how to use the render function. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Zelda.h}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef\ ZELDA\_H}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ ZELDA\_H}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/UpdateObject.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/DrawObject.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Zelda\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_update_object}{UpdateObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_draw_object}{DrawObject}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ Zelda();}
+\DoxyCodeLine{\ \ Zelda(\textcolor{keyword}{const}\ Zelda\&\ z)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\ \ Zelda\&\ operator=(\textcolor{keyword}{const}\ Zelda\&\ z)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\ \ \textcolor{keyword}{virtual}\ \string~Zelda()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Update(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{\ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ Draw()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \ sf::Sprite*\ pSprite;}
+\DoxyCodeLine{\ \ sf::Vector2f\ pos;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Zelda.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}Zelda.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/SpriteManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{Zelda::Zelda()}
+\DoxyCodeLine{\ \ :\ pSprite(\mbox{\hyperlink{class_sprite_manager}{SpriteManager}}::GetSprite(\textcolor{stringliteral}{"{}zelda\ sprite"{}})),}
+\DoxyCodeLine{\ \ pos(2.21f,\ 19.86f)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ RequestDrawRegistration();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Zelda::Update(\textcolor{keywordtype}{float}\ deltaTime)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ pSprite-\/>setPosition(pos);\ \textcolor{comment}{//\ don't\ forget\ to\ set\ the\ position\ before\ you\ render!}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ Zelda::Draw()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ Render(*pSprite);\ \textcolor{comment}{//\ don't\ forget\ to\ dereference\ the\ pointer!}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw} 
+
+\doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
+
+\doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
+
+\doxylink{class_update_object}{Update\+Object} 
+
+\doxylink{class_input_object}{Input\+Object} 
+
+Alarm\+Object 
+
+\doxylink{class_collision_object}{Collision\+Object} 
+\end{DoxySeeAlso}
 \Hypertarget{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}\index{DrawObject@{DrawObject}!RequestDrawDeregistration@{RequestDrawDeregistration}}
 \index{RequestDrawDeregistration@{RequestDrawDeregistration}!DrawObject@{DrawObject}}
 \doxysubsubsection{\texorpdfstring{RequestDrawDeregistration()}{RequestDrawDeregistration()}}
@@ -93,6 +200,8 @@ See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw Syst
 
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw} 
+
+\doxylink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Draw\+Object\+::\+Render} 
 
 \doxylink{class_draw_object_a0d223751f7022545e5387488fd2a5ef6}{Draw\+Object\+::\+Request\+Draw\+Registration} 
 
@@ -129,6 +238,8 @@ See the \doxysectlink{_creating_game_object_go_drawSystem_exampleCode}{Draw Syst
 
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_draw_object_a58db365c96dc8ab875f2a03b23e3c2ae}{Draw\+Object\+::\+Draw} 
+
+\doxylink{class_draw_object_a29574cbabc6c837e048587857def8ca3}{Draw\+Object\+::\+Render} 
 
 \doxylink{class_draw_object_ac36c9194561c0f21483f88a8c3b2d605}{Draw\+Object\+::\+Request\+Draw\+Deregistration} 
 
