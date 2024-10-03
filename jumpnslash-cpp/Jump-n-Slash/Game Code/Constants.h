@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 // general constants
 
@@ -32,6 +32,7 @@ const std::string KEY_INDICATOR_SPAWN_ENEMY_RIGHT = "indicator spawn enemy right
 // visualizer default settings
 
 const sf::Color VIZ_DEFAULT_COLOR = sf::Color::Cyan;
-const float VIZ_DEFAULT_LINE_SIZE = 1.0f
+const float VIZ_DEFAULT_LINE_SIZE = 1.0f;
+const float VIZ_POINT_RADIUS = 1.0f;
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef VISUALIZER_COMMAND_H
 #define VISUALIZER_COMMAND_H
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 #include "Command.h"
 

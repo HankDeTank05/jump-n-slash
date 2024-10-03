@@ -100,6 +100,9 @@
     <Filter Include="Source Files\Engine Code\Debug Systems\Visualizer System\Commands">
       <UniqueIdentifier>{048b4331-6afa-4e42-aee7-c2fa0db848f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling">
+      <UniqueIdentifier>{30a8b4b1-237d-4a5f-8bf6-1d6c6ce43d52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -278,6 +281,12 @@
     </ClCompile>
     <ClCompile Include="Engine Code\VisualizerAttorney.cpp">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VizCmdFactory.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VizCmdCirclePool.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -475,6 +484,12 @@
     </ClInclude>
     <ClInclude Include="Engine Code\VisualizerAttorney.h">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VizCmdFactory.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VizCmdCirclePool.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

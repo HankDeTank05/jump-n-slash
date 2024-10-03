@@ -1,7 +1,7 @@
 #include "Player.h"
 
-#include "../Engine Code/JumpSlashEngine.h"
 #include "../Engine Code/SpriteManager.h"
+#include "../Engine Code/Visualizer.h"
 
 #include "Constants.h"
 #include "DesignerControls.h"
@@ -37,6 +37,8 @@ void Player::Update(float deltaTime)
 {
 	pos += posDelta * deltaTime;
 	pSprite->setPosition(pos);
+	//Visualizer::VisualizeCircle(pos + sf::Vector2f(TILE_SIZE_F / 2.0f, TILE_SIZE_F / 2.0f), TILE_SIZE_F / 2.0f, sf::Color::Cyan, false);
+	Visualizer::VisualizePoint(pos);
 
 	const PlayerMoveState* pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);
