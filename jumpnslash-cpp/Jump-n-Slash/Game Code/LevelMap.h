@@ -1,17 +1,15 @@
 #ifndef LEVEL_MAP_H
 #define LEVEL_MAP_H
 
+#include "Constants.h"
+
 #include <array>
 #include <list>
-
-#include "../Engine Code/DrawObject.h"
-
-#include "Constants.h"
 
 // forward declarations
 class LevelTile;
 
-class LevelMap : public DrawObject
+class LevelMap
 {
 public:
 	LevelMap() = delete;
@@ -19,8 +17,6 @@ public:
 	LevelMap(const LevelMap& lm) = delete;
 	LevelMap& operator=(const LevelMap& lm) = delete;
 	virtual ~LevelMap();
-
-	virtual void Draw() override;
 
 private:
 	struct RoomData

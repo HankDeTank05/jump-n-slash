@@ -1,7 +1,7 @@
 var searchData=
 [
   ['manager_0',['Manager',['../_using_asset_managers.html#spriteManager',1,'Sprite Manager'],['../_using_asset_managers.html#textureManager',1,'Texture Manager']]],
-  ['managers_1',['Using the Asset Managers',['../_using_asset_managers.html',1,'']]],
+  ['managers_1',['Managers',['../index.html#home_engineDocs_assetMgrs',1,'Asset Managers'],['../_using_asset_managers.html',1,'Using the Asset Managers']]],
   ['member_20variables_2',['Member Variables',['../_creating_scene.html#derivedClass_members',1,'']]],
   ['memtrace_3',['MemTrace',['../class_mem_trace.html',1,'']]],
   ['mousebtnderegistrationcommand_4',['MouseBtnDeregistrationCommand',['../class_mouse_btn_deregistration_command.html',1,'']]],

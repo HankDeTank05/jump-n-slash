@@ -8,5 +8,5 @@ var searchData=
   ['alarm_20system_20coming_20soon_5',['The Alarm System (coming soon)',['../_creating_game_object.html#go_alarmSystem',1,'']]],
   ['align16_6',['Align16',['../class_align16.html',1,'']]],
   ['and_20c_20end_20functions_7',['The \c Init() and \c End() Functions',['../_creating_scene.html#derivedClass_initEnd',1,'']]],
-  ['asset_20managers_8',['Using the Asset Managers',['../_using_asset_managers.html',1,'']]]
+  ['asset_20managers_8',['Asset Managers',['../index.html#home_engineDocs_assetMgrs',1,'Asset Managers'],['../_using_asset_managers.html',1,'Using the Asset Managers']]]
 ];

@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "Jump n Slash", "index.html", [
-    [ "Jump-n-Slash Documentation", "index.html", null ],
+    [ "Jump-n-Slash Documentation", "index.html", "index" ],
     [ "Engine Basics", "_engine_basics.html", [
       [ "Files required by the engine", "_engine_basics.html#requiredByEngine", [
         [ "GameInitialize.cpp", "_engine_basics.html#gameInitCpp", null ],

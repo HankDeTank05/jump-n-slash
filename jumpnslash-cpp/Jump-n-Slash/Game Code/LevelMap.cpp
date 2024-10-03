@@ -11,26 +11,6 @@
 #include "BlockSolid.h"
 #include "PlatformSemisolid.h"
 
-//LevelMap::LevelMap()
-//{
-//	for (int y = 0; y < map.size(); y++)
-//	{
-//		for (int x = 0; x < map[y].size(); x++)
-//		{
-//			if (y == 0 || x == 0 || y == map.size() - 1 || x == map[y].size() - 1)
-//			{
-//				map[y][x] = SpriteManager::GetSprite("block solid");
-//			}
-//			else
-//			{
-//				map[y][x] = nullptr;
-//			}
-//		}
-//	}
-//
-//	RequestDrawRegistration();
-//}
-
 LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 	: map(),
 	usedSize(0, 0),
@@ -286,8 +266,6 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 		assert(startRoomCount == 1);
 		assert(rooms.front()->isStartingRoom == true); // the starting room should always be the first one in the list
 	}
-
-	RequestDrawRegistration();
 }
 
 LevelMap::~LevelMap()
@@ -300,21 +278,6 @@ LevelMap::~LevelMap()
 			delete pRoomData->playerSpawnPoint;
 		}
 		delete pRoomData;
-	}
-}
-
-void LevelMap::Draw()
-{
-	for (int y = 0; y < map.size(); y++)
-	{
-		for (int x = 0; x < map[y].size(); x++)
-		{
-			if (map[y][x] != nullptr)
-			{
-				map[y][x]->setPosition(x * TILE_SIZE_F, y * TILE_SIZE_F);
-				JumpSlashEngine::GetWindow().draw(*map[y][x]);
-			}
-		}
 	}
 }
 
