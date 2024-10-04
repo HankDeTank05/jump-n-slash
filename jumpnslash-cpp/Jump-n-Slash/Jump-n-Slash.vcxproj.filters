@@ -288,6 +288,27 @@
     <ClCompile Include="Engine Code\VizCmdCirclePool.cpp">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\VisualizerCommandPoint.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VisualizerCommandRect.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VizCmdPointPool.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VizCmdRectPool.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VizCmdSegPool.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VisualizerCommandSegment.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VizCmdFactoryAttorney.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -489,6 +510,27 @@
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\VizCmdCirclePool.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VizCmdRectPool.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VizCmdPointPool.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VisualizerCommandRect.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VisualizerCommandPoint.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VisualizerCommandSegment.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VizCmdSegPool.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VizCmdFactoryAttorney.h">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClInclude>
   </ItemGroup>

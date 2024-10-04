@@ -22,7 +22,7 @@ private:
 	VizCmdFactory();
 	VizCmdFactory(const VizCmdFactory& vcf) = delete;
 	VizCmdFactory& operator=(const VizCmdFactory& vcf) = delete;
-	virtual ~VizCmdFactory() = default;
+	virtual ~VizCmdFactory();
 
 	static VizCmdFactory& Instance();
 
@@ -34,23 +34,27 @@ public: // public api functions
 	static void RecyclePointCommand(VisualizerCommandPoint* pCmd);
 	static void RecycleCircleCommand(VisualizerCommandCircle* pCmd);
 	static void RecycleRectCommand(VisualizerCommandRect* pCmd);
+	static void RecycleSegmentCommand(VisualizerCommandSegment* pCmd);
 
 private: // engine-only api functions
-	friend class VizCmdAttorney;
+	friend class VizCmdFactoryAttorney;
 	static void Terminate();
 
 private: // private api backend functions
 	VisualizerCommandPoint* privGetPointCommand(sf::Vector2f pos, sf::Color color);
 	VisualizerCommandCircle* privGetCircleCommand(sf::Vector2f pos, float radius, sf::Color color, bool showCenter);
 	VisualizerCommandRect* privGetRectCommand(sf::Vector2f pos, sf::Vector2f size, sf::Color color);
+	VisualizerCommandSegment* privGetSegmentCommand(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color);
 	void privRecyclePointCommand(VisualizerCommandPoint* pCmd);
 	void privRecycleCircleCommand(VisualizerCommandCircle* pCmd);
 	void privRecycleRectCommand(VisualizerCommandRect* pCmd);
+	void privRecycleSegmentCommand(VisualizerCommandSegment* pCmd);
 
 private: // member variables
 	VizCmdPointPool* pPointPool;
 	VizCmdCirclePool* pCirclePool;
 	VizCmdRectPool* pRectPool;
+	VizCmdSegPool* pSegPool;
 };
 
 #endif

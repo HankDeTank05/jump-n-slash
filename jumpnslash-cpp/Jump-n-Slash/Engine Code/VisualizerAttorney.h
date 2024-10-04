@@ -30,6 +30,16 @@ public:
 		friend class VisualizerCommandRect;
 		static void ShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color);
 	};
+	class Segment
+	{
+		friend class VisualizerCommandSegment;
+		static void ShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color);
+	};
+	class Termination
+	{
+		friend class JumpSlashEngine;
+		static void Terminate();
+	};
 };
 
 #endif

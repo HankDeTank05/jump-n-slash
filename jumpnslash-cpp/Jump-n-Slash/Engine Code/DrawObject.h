@@ -122,6 +122,7 @@ protected:
 	*/
 	void Render(sf::Drawable& drawable);
 
+	void Render(sf::Vertex* array, int vtexCount);
 	/*!
 	* \brief	Request that the engine draw this object.
 	* 

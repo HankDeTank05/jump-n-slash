@@ -21,3 +21,13 @@ void VisualizerAttorney::Rect::ShowRect(sf::Vector2f pos, sf::Vector2f size, sf:
 {
 	Visualizer::ShowRect(pos, size, color);
 }
+
+void VisualizerAttorney::Segment::ShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
+{
+	Visualizer::ShowSegment(pos0, pos1, color);
+}
+
+void VisualizerAttorney::Termination::Terminate()
+{
+	Visualizer::Terminate();
+}

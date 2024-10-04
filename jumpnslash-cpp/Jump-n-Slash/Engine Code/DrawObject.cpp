@@ -33,6 +33,11 @@ void DrawObject::Render(sf::Drawable& drawable)
 	EngineAttorney::GameWindow::GetWindow().draw(drawable);
 }
 
+void DrawObject::Render(sf::Vertex* array, int vtexCount)
+{
+	EngineAttorney::GameWindow::GetWindow().draw(array, vtexCount, sf::Lines);
+}
+
 void DrawObject::RequestDrawRegistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_DEREGISTERED);

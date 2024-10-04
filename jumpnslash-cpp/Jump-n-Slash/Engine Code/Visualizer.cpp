@@ -5,6 +5,7 @@
 #include "VisualizerCommandPoint.h"
 #include "VisualizerCommandCircle.h"
 #include "VisualizerCommandRect.h"
+#include "VisualizerCommandSegment.h"
 
 #include "../Game Code/Constants.h"
 
@@ -25,6 +26,13 @@ Visualizer::~Visualizer()
 {
 	delete pRect;
 	delete pCircle;
+	if (cmdList.size() > 0)
+	{
+		for (VizCmdList::iterator it = cmdList.begin(); it != cmdList.end(); it++)
+		{
+			(*it)->Recycle();
+		}
+	}
 }
 
 Visualizer& Visualizer::Instance()
@@ -96,6 +104,17 @@ void Visualizer::ShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
 	Instance().privShowRect(pos, size, color);
 }
 
+void Visualizer::ShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
+{
+	Instance().privShowSegment(pos0, pos1, color);
+}
+
+void Visualizer::Terminate()
+{
+	delete pInstance;
+	pInstance = nullptr;
+}
+
 void Visualizer::privVisualizePoint(sf::Vector2f pos, sf::Color color)
 {
 	cmdList.push_back(VizCmdFactory::GetPointCommand(pos, color));
@@ -160,4 +179,17 @@ void Visualizer::privShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color col
 	pRect->setFillColor(sf::Color(0, 0, 0, 0)); // make sure it has no fill color (100% transparent)
 	pRect->setOutlineColor(color);
 	Render(*pRect);
+}
+
+void Visualizer::privShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
+{
+	sf::Vertex line[] = {
+		sf::Vertex(pos0),
+		sf::Vertex(pos1)
+	};
+
+	line[0].color = color;
+	line[1].color = color;
+
+	Render(line, 2);
 }
