@@ -1,12 +1,18 @@
 #include "VizCmdFactory.h"
 
+#include "VizCmdPointPool.h"
 #include "VizCmdCirclePool.h"
+#include "VizCmdRectPool.h"
+#include "VisualizerCommandPoint.h"
 #include "VisualizerCommandCircle.h"
+#include "VisualizerCommandRect.h"
 
 VizCmdFactory* VizCmdFactory::pInstance = nullptr;
 
 VizCmdFactory::VizCmdFactory()
-	: pCirclePool(new VizCmdCirclePool())
+	: pPointPool(new VizCmdPointPool()),
+	pCirclePool(new VizCmdCirclePool()),
+	pRectPool(new VizCmdRectPool())
 {
 	// do nothing
 }
@@ -20,6 +26,11 @@ VizCmdFactory& VizCmdFactory::Instance()
 	return *pInstance;
 }
 
+VisualizerCommandPoint* VizCmdFactory::GetPointCommand(sf::Vector2f pos, sf::Color color)
+{
+	return Instance().privGetPointCommand(pos, color);
+}
+
 VisualizerCommandCircle* VizCmdFactory::GetCircleCommand(sf::Vector2f pos, float radius, sf::Color color, bool showCenter)
 {
 	return Instance().privGetCircleCommand(pos, radius, color, showCenter);
@@ -28,6 +39,11 @@ VisualizerCommandCircle* VizCmdFactory::GetCircleCommand(sf::Vector2f pos, float
 VisualizerCommandRect* VizCmdFactory::GetRectCommand(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
 {
 	return Instance().privGetRectCommand(pos, size, color);
+}
+
+void VizCmdFactory::RecyclePointCommand(VisualizerCommandPoint* pCmd)
+{
+	Instance().privRecyclePointCommand(pCmd);
 }
 
 void VizCmdFactory::RecycleCircleCommand(VisualizerCommandCircle* pCmd)
@@ -46,6 +62,15 @@ void VizCmdFactory::Terminate()
 	pInstance = nullptr;
 }
 
+VisualizerCommandPoint* VizCmdFactory::privGetPointCommand(sf::Vector2f pos, sf::Color color)
+{
+	VisualizerCommandPoint* pCmd = pPointPool->GetCommand();
+
+	pCmd->Init(pos, color);
+
+	return pCmd;
+}
+
 VisualizerCommandCircle* VizCmdFactory::privGetCircleCommand(sf::Vector2f pos, float radius, sf::Color color, bool showCenter)
 {
 	VisualizerCommandCircle* pCmd = pCirclePool->GetCommand();
@@ -57,8 +82,16 @@ VisualizerCommandCircle* VizCmdFactory::privGetCircleCommand(sf::Vector2f pos, f
 
 VisualizerCommandRect* VizCmdFactory::privGetRectCommand(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
 {
-	assert(false); // TODO: empty function VizCmdFactory:privGetRectCommand
-	return nullptr;
+	VisualizerCommandRect* pCmd = pRectPool->GetCommand();
+
+	pCmd->Init(pos, size, color);
+
+	return pCmd;
+}
+
+void VizCmdFactory::privRecyclePointCommand(VisualizerCommandPoint* pCmd)
+{
+	pPointPool->RecycleCommand(pCmd);
 }
 
 void VizCmdFactory::privRecycleCircleCommand(VisualizerCommandCircle* pCmd)
@@ -68,5 +101,5 @@ void VizCmdFactory::privRecycleCircleCommand(VisualizerCommandCircle* pCmd)
 
 void VizCmdFactory::privRecycleRectCommand(VisualizerCommandRect* pCmd)
 {
-	assert(false); // TODO: empty function VizCmdFactory::privRecycleRectCommand
+	pRectPool->RecycleCommand(pCmd);
 }

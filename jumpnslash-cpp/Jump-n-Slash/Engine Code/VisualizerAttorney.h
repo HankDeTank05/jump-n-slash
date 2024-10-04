@@ -18,6 +18,18 @@ public:
 		friend class VisualizerCommandCircle;
 		static void ShowCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter);
 	};
+	class Point
+	{
+	private:
+		friend class VisualizerCommandPoint;
+		static void ShowPoint(sf::Vector2f pos, sf::Color color);
+	};
+	class Rect
+	{
+	private:
+		friend class VisualizerCommandRect;
+		static void ShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color);
+	};
 };
 
 #endif

@@ -37,8 +37,10 @@ void Player::Update(float deltaTime)
 {
 	pos += posDelta * deltaTime;
 	pSprite->setPosition(pos);
-	//Visualizer::VisualizeCircle(pos + sf::Vector2f(TILE_SIZE_F / 2.0f, TILE_SIZE_F / 2.0f), TILE_SIZE_F / 2.0f, sf::Color::Cyan, false);
 	Visualizer::VisualizePoint(pos);
+	Visualizer::VisualizeCircle(pos + sf::Vector2f(TILE_SIZE_F / 2.0f, TILE_SIZE_F / 2.0f), TILE_SIZE_F / 2.0f, sf::Color::Cyan, false);
+	Visualizer::VisualizeRect(pos, sf::Vector2f(TILE_SIZE_F, TILE_SIZE_F));
+	Visualizer::VisualizeSegment(pos + sf::Vector2f(0.f, TILE_SIZE_F), pos + sf::Vector2f(0.f, TILE_SIZE_F * 4));
 
 	const PlayerMoveState* pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);

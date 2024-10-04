@@ -19,17 +19,17 @@ VizCmdCirclePool::~VizCmdCirclePool()
 
 VisualizerCommandCircle* VizCmdCirclePool::GetCommand()
 {
-	VisualizerCommandCircle* pVizCmdCircle;
+	VisualizerCommandCircle* pCmd;
 	if (pool.empty() == false)
 	{
-		pVizCmdCircle = pool.top();
+		pCmd = pool.top();
 		pool.pop();
 	}
 	else
 	{
-		pVizCmdCircle = new VisualizerCommandCircle();
+		pCmd = new VisualizerCommandCircle();
 	}
-	return pVizCmdCircle;
+	return pCmd;
 }
 
 void VizCmdCirclePool::RecycleCommand(VisualizerCommandCircle* pCmd)
