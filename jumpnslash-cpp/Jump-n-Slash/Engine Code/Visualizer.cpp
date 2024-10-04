@@ -84,6 +84,21 @@ void Visualizer::VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Colo
 	Instance().privVisualizeSegment(pos0, pos1, color);
 }
 
+void Visualizer::VisualizeSegment(float x0, float y0, sf::Vector2f pos1, sf::Color color)
+{
+	Instance().privVisualizeSegment(sf::Vector2f(x0, y0), pos1, color);
+}
+
+void Visualizer::VisualizeSegment(sf::Vector2f pos0, float x1, float y1, sf::Color color)
+{
+	Instance().privVisualizeSegment(pos0, sf::Vector2f(x1, y1), color);
+}
+
+void Visualizer::VisualizeSegment(float x0, float y0, float x1, float y1, sf::Color color)
+{
+	Instance().privVisualizeSegment(sf::Vector2f(x0, y0), sf::Vector2f(x1, y1), color);
+}
+
 void Visualizer::ProcessCommands()
 {
 	Instance().privProcessCommands();

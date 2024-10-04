@@ -12,6 +12,7 @@ public:
 	virtual ~PlayerStateFalling();
 
 	virtual void Enter(Player* pPlayer) const override;
+	virtual void Update(Player* pPlayer, float deltaTime) const override;
 	virtual const PlayerMoveState* GetNextState(Player* pPlayer) const override;
 };
 

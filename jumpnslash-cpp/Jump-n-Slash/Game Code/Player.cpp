@@ -35,12 +35,21 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
+	/*
 	pos += posDelta * deltaTime;
 	pSprite->setPosition(pos);
-	Visualizer::VisualizePoint(pos);
-	Visualizer::VisualizeCircle(pos + sf::Vector2f(TILE_SIZE_F / 2.0f, TILE_SIZE_F / 2.0f), TILE_SIZE_F / 2.0f, sf::Color::Cyan, false);
-	Visualizer::VisualizeRect(pos, sf::Vector2f(TILE_SIZE_F, TILE_SIZE_F));
-	Visualizer::VisualizeSegment(pos + sf::Vector2f(0.f, TILE_SIZE_F), pos + sf::Vector2f(0.f, TILE_SIZE_F * 4));
+
+	// map collision
+	Visualizer::VisualizePoint(pos + sf::Vector2f(0.f, TILE_SIZE_F), sf::Color::Green);
+	Visualizer::VisualizePoint(pos + sf::Vector2f(TILE_SIZE_F, TILE_SIZE_F), sf::Color::Green);
+	Visualizer::VisualizeSegment(pos + sf::Vector2f(0.f, TILE_SIZE_F), pos + sf::Vector2f(0.f, TILE_SIZE_F * 4), sf::Color::Yellow);
+	//Visualizer::VisualizePoint(pos);
+	//Visualizer::VisualizePoint(pos + sf::Vector2f(TILE_SIZE_F, 0.f));
+	//*/
+	pCurrentState->Update(this, deltaTime);
+
+	pos += posDelta * deltaTime;
+	pSprite->setPosition(pos);
 
 	const PlayerMoveState* pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);

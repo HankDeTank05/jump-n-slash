@@ -25,6 +25,11 @@ void PlayerStateWalking::Enter(Player* pPlayer) const
 	// code goes here
 }
 
+void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
+{
+	assert(false);
+}
+
 const PlayerMoveState* PlayerStateWalking::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;

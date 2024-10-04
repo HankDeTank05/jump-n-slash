@@ -28,6 +28,11 @@ void PlayerStateIdle::Enter(Player* pPlayer) const
 	// code goes here
 }
 
+void PlayerStateIdle::Update(Player* pPlayer, float deltaTime) const
+{
+	// do nothing
+}
+
 const PlayerMoveState* PlayerStateIdle::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;

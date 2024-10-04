@@ -29,6 +29,7 @@ private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
 	sf::Vector2f GetPos();
 	sf::Vector2f GetPosDelta();
+	friend class PlayerMoveState; // TODO: I'm not sure I like this but we'll keep it for now...
 
 private: // player mutators. for selective access only (thru attorney)
 	void SetSpawnPoint(sf::Vector2f spawnPoint);

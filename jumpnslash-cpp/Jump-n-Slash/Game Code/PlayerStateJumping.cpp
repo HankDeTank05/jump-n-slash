@@ -25,6 +25,11 @@ void PlayerStateJumping::Enter(Player* pPlayer) const
 	// code goes here
 }
 
+void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const
+{
+	assert(false);
+}
+
 const PlayerMoveState* PlayerStateJumping::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;
