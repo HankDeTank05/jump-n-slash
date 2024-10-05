@@ -9,12 +9,13 @@
 
 // forward declarations
 class PlayerMoveState;
+class LevelMap;
 
 class Player : public UpdateObject, public DrawObject, public InputObject
 {
 public:
 	Player() = delete;
-	Player(sf::Vector2f spawnPoint);
+	Player(LevelMap* pLevel);
 	Player(const Player& p) = delete;
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
@@ -29,10 +30,11 @@ private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
 	sf::Vector2f GetPos();
 	sf::Vector2f GetPosDelta();
-	friend class PlayerMoveState; // TODO: I'm not sure I like this but we'll keep it for now...
+	LevelMap* GetLevel();
 
 private: // player mutators. for selective access only (thru attorney)
-	void SetSpawnPoint(sf::Vector2f spawnPoint);
+	void SetPosX(float newX);
+	void SetPosY(float newY);
 
 private:
 	sf::Vector2f pos;
@@ -41,6 +43,7 @@ private:
 	sf::Sprite* pSprite;
 	const PlayerMoveState* pCurrentState;
 	sf::Vector2f respawnPoint;
+	LevelMap* pLevel;
 };
 
 #endif

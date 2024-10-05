@@ -315,5 +315,7 @@ LevelTile* LevelMap::GetTileAtPos(sf::Vector2f worldPos)
 	assert(0 <= y);
 	assert(y < MAX_LEVEL_SIZE);
 
-	return map[y][x];
+	std::array<LevelTile*, MAX_LEVEL_SIZE> row = map[y];
+
+	return row[x];
 }

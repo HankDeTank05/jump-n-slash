@@ -7,14 +7,16 @@
 #include "DesignerControls.h"
 #include "PlayerMoveState.h"
 #include "PlayerFSM.h"
+#include "LevelMap.h"
 
-Player::Player(sf::Vector2f spawnPoint)
-	: pos(spawnPoint),
+Player::Player(LevelMap* _pLevel)
+	: pos(_pLevel->GetStartingSpawnPoint()),
 	posDelta(0.0f, 0.0f),
 	speed(PLAYER_WALK_SPEED),
 	pSprite(SpriteManager::GetSprite("player idle 1")),
 	pCurrentState(&PlayerFSM::idle),
-	respawnPoint(spawnPoint)
+	respawnPoint(_pLevel->GetStartingSpawnPoint()),
+	pLevel(_pLevel)
 {
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
@@ -98,7 +100,22 @@ sf::Vector2f Player::GetPosDelta()
 	return posDelta;
 }
 
+LevelMap* Player::GetLevel()
+{
+	return pLevel;
+}
+
 void Player::SetSpawnPoint(sf::Vector2f spawnPoint)
 {
 	respawnPoint = spawnPoint;
+}
+
+void Player::SetPosX(float newX)
+{
+	pos.x = newX;
+}
+
+void Player::SetPosY(float newY)
+{
+	pos.y = newY;
 }
