@@ -85,14 +85,21 @@ void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
 		}
 
-		// compare minx with pos.x + posDelta.x
-		// set pos.x to minx
+		sf::Vector2f mayMoveTo = PlayerAttorney::State::GetPos(pPlayer) + PlayerAttorney::State::GetPosDelta(pPlayer) * deltaTime;
+
+		if (mayMoveTo.x < minX)
+		{
+			minX = mayMoveTo.x;
+		}
+		PlayerAttorney::State::SetPosX(pPlayer, minX);
 	}
 	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
 	{
 		// cast a ray from the top (index=0) and the bottom (index=1) of the sprite
 		startPos[0] = PlayerAttorney::State::GetPos(pPlayer);
 		startPos[1] = PlayerAttorney::State::GetPos(pPlayer) + sf::Vector2f(0.f, TILE_SIZE_F);
+
+		float maxX = 0;
 
 		for (int i = 0; i < RAY_COUNT; i++)
 		{
@@ -120,9 +127,20 @@ void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 			}
 
 			endPos[i] = currPos;
+			if (endPos[i].x > maxX)
+			{
+				maxX = endPos[i].x;
+			}
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
 		}
+
+		sf::Vector2f mayMoveTo = PlayerAttorney::State::GetPos(pPlayer) + PlayerAttorney::State::GetPosDelta(pPlayer) * deltaTime;
+		if (mayMoveTo.x > maxX)
+		{
+			maxX = mayMoveTo.x;
+		}
+		PlayerAttorney::State::SetPosX(pPlayer, maxX);
 	}
 }
 

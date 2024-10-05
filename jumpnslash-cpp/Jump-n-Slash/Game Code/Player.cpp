@@ -50,7 +50,6 @@ void Player::Update(float deltaTime)
 	//*/
 	pCurrentState->Update(this, deltaTime);
 
-	pos += posDelta * deltaTime;
 	pSprite->setPosition(pos);
 
 	const PlayerMoveState* pPrevState = pCurrentState;
@@ -85,7 +84,7 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	{
 	case WALK_LEFT_KEY:
 	case WALK_RIGHT_KEY:
-		posDelta.x = 0.0f;
+		posDelta.x = 0.f;
 		break;
 	}
 }
@@ -103,11 +102,6 @@ sf::Vector2f Player::GetPosDelta()
 LevelMap* Player::GetLevel()
 {
 	return pLevel;
-}
-
-void Player::SetSpawnPoint(sf::Vector2f spawnPoint)
-{
-	respawnPoint = spawnPoint;
 }
 
 void Player::SetPosX(float newX)
