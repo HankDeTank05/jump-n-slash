@@ -29,6 +29,9 @@ void JumpSlashEngine::LoadResources()
 	TextureManager::LoadTexture("block solid", "leveltiles/block_solid_32.png");
 	SpriteManager::LoadSprite("block solid", "block solid");
 
+	TextureManager::LoadTexture("platform semisolid", "leveltiles/platform_semisolid_32.png");
+	SpriteManager::LoadSprite("platform semisolid", "platform semisolid");
+
 	TextureManager::LoadTexture("indicator room height", "leveltiles/indicator_room_height_32.png");
 	SpriteManager::LoadSprite("indicator room height", "indicator room height");
 
