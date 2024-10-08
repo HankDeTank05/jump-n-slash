@@ -34,5 +34,6 @@ const std::string KEY_INDICATOR_SPAWN_ENEMY_RIGHT = "indicator spawn enemy right
 const sf::Color VIZ_DEFAULT_COLOR = sf::Color::Cyan;
 const float VIZ_DEFAULT_LINE_SIZE = 1.0f;
 const float VIZ_POINT_RADIUS = 1.0f;
+const int VIZ_DEFAULT_TEXT_SIZE = 15;
 
 #endif

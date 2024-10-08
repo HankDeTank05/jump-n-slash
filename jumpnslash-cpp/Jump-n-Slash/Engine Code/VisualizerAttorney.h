@@ -1,7 +1,9 @@
 #ifndef VISUALIZER_ATTORNEY_H
 #define VISUALIZER_ATTORNEY_H
 
-#include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <SFML/System/String.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 class VisualizerAttorney
 {
@@ -32,8 +34,15 @@ public:
 	};
 	class Segment
 	{
+	private:
 		friend class VisualizerCommandSegment;
 		static void ShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color);
+	};
+	class Text
+	{
+	private:
+		friend class VisualizerCommandText;
+		static void ShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix);
 	};
 	class Termination
 	{

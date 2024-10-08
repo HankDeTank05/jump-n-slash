@@ -315,6 +315,12 @@
     <ClCompile Include="Engine Code\FontManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\VisualizerCommandText.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\VizCmdTextPool.cpp">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -547,6 +553,12 @@
     </ClInclude>
     <ClInclude Include="Engine Code\FontManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VisualizerCommandText.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\VizCmdTextPool.h">
+      <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

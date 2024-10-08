@@ -4,10 +4,12 @@
 #include "VizCmdCirclePool.h"
 #include "VizCmdRectPool.h"
 #include "VizCmdSegPool.h"
+#include "VizCmdTextPool.h"
 #include "VisualizerCommandPoint.h"
 #include "VisualizerCommandCircle.h"
 #include "VisualizerCommandRect.h"
 #include "VisualizerCommandSegment.h"
+#include "VisualizerCommandText.h"
 
 VizCmdFactory* VizCmdFactory::pInstance = nullptr;
 
@@ -15,13 +17,15 @@ VizCmdFactory::VizCmdFactory()
 	: pPointPool(new VizCmdPointPool()),
 	pCirclePool(new VizCmdCirclePool()),
 	pRectPool(new VizCmdRectPool()),
-	pSegPool(new VizCmdSegPool())
+	pSegPool(new VizCmdSegPool()),
+	pTextPool(new VizCmdTextPool())
 {
 	// do nothing
 }
 
 VizCmdFactory::~VizCmdFactory()
 {
+	delete pTextPool;
 	delete pSegPool;
 	delete pRectPool;
 	delete pCirclePool;
@@ -57,6 +61,11 @@ VisualizerCommandSegment* VizCmdFactory::GetSegmentCommand(sf::Vector2f pos0, sf
 	return Instance().privGetSegmentCommand(pos0, pos1, color);
 }
 
+VisualizerCommandText* VizCmdFactory::GetTextCommand(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	return Instance().privGetTextCommand(str, pos, color, sizeInPix);
+}
+
 void VizCmdFactory::RecyclePointCommand(VisualizerCommandPoint* pCmd)
 {
 	Instance().privRecyclePointCommand(pCmd);
@@ -75,6 +84,11 @@ void VizCmdFactory::RecycleRectCommand(VisualizerCommandRect* pCmd)
 void VizCmdFactory::RecycleSegmentCommand(VisualizerCommandSegment* pCmd)
 {
 	Instance().privRecycleSegmentCommand(pCmd);
+}
+
+void VizCmdFactory::RecycleTextCommand(VisualizerCommandText* pCmd)
+{
+	Instance().privRecycleTextCommand(pCmd);
 }
 
 void VizCmdFactory::Terminate()
@@ -119,6 +133,15 @@ VisualizerCommandSegment* VizCmdFactory::privGetSegmentCommand(sf::Vector2f pos0
 	return pCmd;
 }
 
+VisualizerCommandText* VizCmdFactory::privGetTextCommand(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	VisualizerCommandText* pCmd = pTextPool->GetCommand();
+
+	pCmd->Init(str, pos, color, sizeInPix);
+
+	return pCmd;
+}
+
 void VizCmdFactory::privRecyclePointCommand(VisualizerCommandPoint* pCmd)
 {
 	pPointPool->RecycleCommand(pCmd);
@@ -137,4 +160,9 @@ void VizCmdFactory::privRecycleRectCommand(VisualizerCommandRect* pCmd)
 void VizCmdFactory::privRecycleSegmentCommand(VisualizerCommandSegment* pCmd)
 {
 	pSegPool->RecycleCommand(pCmd);
+}
+
+void VizCmdFactory::privRecycleTextCommand(VisualizerCommandText* pCmd)
+{
+	pTextPool->RecycleCommand(pCmd);
 }

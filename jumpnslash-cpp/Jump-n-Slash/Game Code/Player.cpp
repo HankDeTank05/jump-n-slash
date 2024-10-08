@@ -24,8 +24,8 @@ Player::Player(LevelMap* _pLevel)
 {
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
-	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
+	//RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
 	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyPress);
 	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
@@ -58,6 +58,13 @@ void Player::Update(float deltaTime)
 
 	// set the sprite position for drawing
 	pSprite->setPosition(pos);
+	if (DEBUG_PLAYER_POSITION)
+	{
+		Visualizer::VisualizePoint(pos, sf::Color::Yellow);
+		std::string posStr = "(" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")";
+		Visualizer::VisualizeText(posStr, sf::Vector2f(0.f, 0.f), sf::Color::Yellow);
+		Visualizer::VisualizeSegment(sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE), pos, sf::Color::Yellow);
+	}
 }
 
 void Player::Draw()
@@ -155,8 +162,12 @@ void Player::RaycastRight(float deltaTime)
 		{
 			minX = endPos[i].x;
 		}
-		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizeSegment(startPos[i], endPos[i]);
-		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
+		if (DEBUG_PLAYER_MAP_COLLISION)
+		{
+			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
+			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
+			Visualizer::VisualizeText(endPos[i].x, endPos[i]);
+		}
 	}
 
 	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
@@ -214,8 +225,12 @@ void Player::RaycastLeft(float deltaTime)
 		}
 
 		// only visualize stuff if we're debugging
-		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizeSegment(startPos[i], endPos[i]);
-		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
+		if (DEBUG_PLAYER_MAP_COLLISION)
+		{
+			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
+			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
+			Visualizer::VisualizeText(endPos[i].x, endPos[i]);
+		}
 	}
 
 	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;

@@ -54,7 +54,10 @@ public: // public api functions
 	static void VisualizeLine(sf::Vector2f pos0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
 	static void VisualizeLine(float x0, float y0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
 	
-	static void VisualizeText(sf::Text text, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = 24);
+	static void VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE);
+	static void VisualizeText(int num, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE);
+	static void VisualizeText(float num, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE);
+	static void VisualizeText(bool flag, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE);
 
 private: // engine-only api functions
 	friend class VisualizerAttorney;
@@ -64,6 +67,7 @@ private: // engine-only api functions
 	static void ShowCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter);
 	static void ShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color);
 	static void ShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color);
+	static void ShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix);
 
 	static void Terminate();
 
@@ -72,6 +76,7 @@ private: // private api backend functions
 	void privVisualizeCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter);
 	void privVisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color);
 	void privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color);
+	void privVisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix);
 
 	void privProcessCommands();
 
@@ -79,11 +84,13 @@ private: // private api backend functions
 	void privShowCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter);
 	void privShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color);
 	void privShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color);
+	void privShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix);
 
 private: // member variables
 	VizCmdList cmdList;
 	sf::CircleShape* pCircle;
 	sf::RectangleShape* pRect;
+	sf::Text* pText;
 };
 
 #endif

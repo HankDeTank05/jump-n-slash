@@ -14,6 +14,7 @@
 void JumpSlashEngine::LoadResources()
 {
 	FontManager::LoadFont("arial", "arial.ttf");
+	FontManager::LoadFont("consolas", "consola.ttf");
 
 	TextureManager::LoadTexture("player idle 1", "player/idle_1_32.png");
 	TextureManager::LoadTexture("player idle 2", "player/idle_2_32.png");

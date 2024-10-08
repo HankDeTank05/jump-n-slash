@@ -27,6 +27,11 @@ void VisualizerAttorney::Segment::ShowSegment(sf::Vector2f pos0, sf::Vector2f po
 	Visualizer::ShowSegment(pos0, pos1, color);
 }
 
+void VisualizerAttorney::Text::ShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	Visualizer::ShowText(str, pos, color, sizeInPix);
+}
+
 void VisualizerAttorney::Termination::Terminate()
 {
 	Visualizer::Terminate();

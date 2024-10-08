@@ -1,11 +1,14 @@
 #include "Visualizer.h"
 
+#include "FontManager.h"
+
 #include "VizCmdFactory.h"
 #include "VisualizerCommand.h"
 #include "VisualizerCommandPoint.h"
 #include "VisualizerCommandCircle.h"
 #include "VisualizerCommandRect.h"
 #include "VisualizerCommandSegment.h"
+#include "VisualizerCommandText.h"
 
 #include "../Game Code/Constants.h"
 
@@ -14,16 +17,20 @@ Visualizer* Visualizer::pInstance = nullptr;
 Visualizer::Visualizer()
 	: cmdList(),
 	pCircle(new sf::CircleShape(1.0f)),
-	pRect(new sf::RectangleShape())
+	pRect(new sf::RectangleShape()),
+	pText(new sf::Text())
 {
 	pCircle->setOutlineThickness(1.0f); // set the line thickness, since the default is 0.0f
 
 	pRect->setFillColor(sf::Color(0, 0, 0, 0));
 	pRect->setOutlineThickness(1.0f);
+
+	pText->setFont(*FontManager::GetFont("consolas"));
 }
 
 Visualizer::~Visualizer()
 {
+	delete pText;
 	delete pRect;
 	delete pCircle;
 	if (cmdList.size() > 0)
@@ -99,6 +106,26 @@ void Visualizer::VisualizeSegment(float x0, float y0, float x1, float y1, sf::Co
 	Instance().privVisualizeSegment(sf::Vector2f(x0, y0), sf::Vector2f(x1, y1), color);
 }
 
+void Visualizer::VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	Instance().privVisualizeText(str, pos, color, sizeInPix);
+}
+
+void Visualizer::VisualizeText(int num, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	Instance().privVisualizeText(std::to_string(num), pos, color, sizeInPix);
+}
+
+void Visualizer::VisualizeText(float num, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	Instance().privVisualizeText(std::to_string(num), pos, color, sizeInPix);
+}
+
+void Visualizer::VisualizeText(bool flag, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	Instance().privVisualizeText(std::to_string(flag), pos, color, sizeInPix);
+}
+
 void Visualizer::ProcessCommands()
 {
 	Instance().privProcessCommands();
@@ -122,6 +149,11 @@ void Visualizer::ShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
 void Visualizer::ShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
 {
 	Instance().privShowSegment(pos0, pos1, color);
+}
+
+void Visualizer::ShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	Instance().privShowText(str, pos, color, sizeInPix);
 }
 
 void Visualizer::Terminate()
@@ -148,6 +180,11 @@ void Visualizer::privVisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Colo
 void Visualizer::privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
 {
 	cmdList.push_back(VizCmdFactory::GetSegmentCommand(pos0, pos1, color));
+}
+
+void Visualizer::privVisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	cmdList.push_back(VizCmdFactory::GetTextCommand(str, pos, color, sizeInPix));
 }
 
 void Visualizer::privProcessCommands()
@@ -207,4 +244,14 @@ void Visualizer::privShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color
 	line[1].color = color;
 
 	Render(line, 2);
+}
+
+void Visualizer::privShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	pText->setString(str);
+	pText->setPosition(pos);
+	pText->setFillColor(color);
+	pText->setCharacterSize(sizeInPix);
+
+	Render(*pText);
 }
