@@ -4,6 +4,7 @@
 
 #include "../Engine Code/Visualizer.h"
 
+#include "PlayerFSM.h"
 #include "PlayerAttorney.h"
 #include "Constants.h"
 #include "LevelMap.h"
@@ -50,7 +51,15 @@ const PlayerMoveState* PlayerStateWalking::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;
 
-	// logic goes here
+	if (PlayerAttorney::State::GetPosDelta(pPlayer).y < 0.0f) {
+		pNextState = &PlayerFSM::jumping;
+	}
+	else if (PlayerAttorney::State::GetPosDelta(pPlayer).y > 0.0f) {
+		pNextState = &PlayerFSM::falling;
+	}
+	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x == 0.0f) {
+		pNextState = &PlayerFSM::idle;
+	}
 
 	return pNextState;
 }
