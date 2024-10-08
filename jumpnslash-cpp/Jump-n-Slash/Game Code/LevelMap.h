@@ -37,7 +37,7 @@ private:
 public:
 	using RoomListRef = RoomList::iterator;
 
-	sf::Vector2f GetStartingSpawnPoint(); // TODO: documentation for LevelMap::GetStartingSpawnPoint
+	sf::Vector2f GetStartingSpawnPoint(); // TODO: docs for LevelMap::GetStartingSpawnPoint
 
 	/*!
 	* \brief	Get the tile at a given world-space position.

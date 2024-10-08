@@ -14,13 +14,13 @@ public:
 	Camera& operator=(const Camera& c) = delete;
 	virtual ~Camera();
 
-	void SetCenter(float newCenterX, float newCenterY); // TODO: documentation for Camera::SetCenter
-	void Move(float centerDeltaX, float centerDeltaY); // TODO: documentation for Camera::Move
-	void SetRotation(float rotationDegrees); // TODO: documentation for Camera::SetRotation
-	void Rotate(float degreesDelta); // TODO: documentation for Camera::Rotate
-	void SetSize(float viewWidth, float viewHeight); // TODO: documentation for Camera::SetSize
-	void Zoom(float relativeScale); // TODO: documentation for Camera::Zoom
-	void SetViewport(float screenX, float screenY, float screenWidth, float screenHeight); // TODO: documentation for Camera::SetViewport
+	void SetCenter(float newCenterX, float newCenterY); // TODO: docs for Camera::SetCenter
+	void Move(float centerDeltaX, float centerDeltaY); // TODO: docs for Camera::Move
+	void SetRotation(float rotationDegrees); // TODO: docs for Camera::SetRotation
+	void Rotate(float degreesDelta); // TODO: docs for Camera::Rotate
+	void SetSize(float viewWidth, float viewHeight); // TODO: docs for Camera::SetSize
+	void Zoom(float relativeScale); // TODO: docs for Camera::Zoom
+	void SetViewport(float screenX, float screenY, float screenWidth, float screenHeight); // TODO: docs for Camera::SetViewport
 
 private:
 	sf::View view;

@@ -102,10 +102,10 @@ private:
 	void Deregister();
 
 private:
-	RegistrationState regState; // TODO: documentation for member variable
-	UpdateRegistrationCommand* pRegCmd; // TODO: documentation for member variable
-	UpdateDeregistrationCommand* pDeregCmd; // TODO: documentation for member variable
-	UpdateManager::UpdateListRef deleteRef; // TODO: documentation for member variable
+	RegistrationState regState; // TODO: docs for member variable
+	UpdateRegistrationCommand* pRegCmd; // TODO: docs for member variable
+	UpdateDeregistrationCommand* pDeregCmd; // TODO: docs for member variable
+	UpdateManager::UpdateListRef deleteRef; // TODO: docs for member variable
 };
 
 #endif

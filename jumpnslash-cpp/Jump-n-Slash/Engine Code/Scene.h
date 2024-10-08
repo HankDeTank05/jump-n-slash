@@ -19,8 +19,8 @@ public:
 	Scene& operator=(const Scene& s) = delete;
 	virtual ~Scene();
 
-	virtual void Init() = 0; // TODO: documentation for Scene::Init
-	virtual void End() = 0; // TODO: documentation for Scene::End
+	virtual void Init() = 0; // TODO: docs for Scene::Init
+	virtual void End() = 0; // TODO: docs for Scene::End
 
 private:
 	friend class SceneAttorney;

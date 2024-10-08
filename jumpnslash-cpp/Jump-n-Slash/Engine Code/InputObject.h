@@ -306,7 +306,7 @@ protected:
 	* \return	Does not return anything.
 	* 
 	* \section example Example
-	* TODO: documentation for InputObject::MouseCursorMoved needs example code
+	* TODO: docs for InputObject::MouseCursorMoved needs example code
 	* 
 	* \see InputObject::KeyPressed
 	* \see InputObject::KeyReleased
@@ -503,7 +503,7 @@ protected:
 	* \return	Does not return anything.
 	* 
 	* \section example Example
-	* TODO: documentation for InputObject::RequestMouseCursorRegistration needs example code
+	* TODO: docs for InputObject::RequestMouseCursorRegistration needs example code
 	* 
 	* \see InputObject::KeyPressed
 	* \see InputObject::KeyReleased
@@ -536,7 +536,7 @@ protected:
 	* \return	Does not return anything.
 	* 
 	* \section example Example
-	* TODO: documentation for InputObject::RequestMouseCursorDeregistration need example code
+	* TODO: docs for InputObject::RequestMouseCursorDeregistration need example code
 	* 
 	* \see InputObject::KeyPressed
 	* \see InputObject::KeyReleased

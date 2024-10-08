@@ -19,8 +19,8 @@ private:
 public:
 	using UpdateListRef = UpdateList::iterator;
 
-	UpdateListRef Register(UpdateObject* pUpdatable); // TODO: documentation for UpdateManager::Register
-	void Deregister(UpdateListRef updateListRef); // TODO: documentation for UpdateManager::Deregister
+	UpdateListRef Register(UpdateObject* pUpdatable); // TODO: docs for UpdateManager::Register
+	void Deregister(UpdateListRef updateListRef); // TODO: docs for UpdateManager::Deregister
 
 	void Update(float deltaTime);
 

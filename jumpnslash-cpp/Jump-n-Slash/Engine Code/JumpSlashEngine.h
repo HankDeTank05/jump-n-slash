@@ -23,13 +23,13 @@ public: // public api functions
 	/*!
 	* \brief Set the name of the window.
 	* 
-	* TODO: documentation for JumpSlashEngine::SetWindowName is incomplete
+	* TODO: docs for JumpSlashEngine::SetWindowName is incomplete
 	*/
 	static void SetWindowName(sf::String winName);
 	/*!
 	* \brief Set the size of the window.
 	* 
-	* TODO: documentation for JumpSlashEngine::SetWindowSize is incomplete
+	* TODO: docs for JumpSlashEngine::SetWindowSize is incomplete
 	*/
 	static void SetWindowSize(int winWidth, int winHeight);
 	// TODO: create function JumpSlashEngine::SetFullscreenMode
@@ -38,8 +38,8 @@ public: // public api functions
 	static Scene* GetCurrentScene();
 	
 	// TODO: should these be public?
-	static void Run(); // TODO: documentation for JumpSlashEngine::Run
-	static void Terminate(); // TODO: documentation for JumpSlashEngine::Terminate
+	static void Run(); // TODO: docs for JumpSlashEngine::Run
+	static void Terminate(); // TODO: docs for JumpSlashEngine::Terminate
 
 private: // engine-only api functions
 	friend class EngineAttorney;
