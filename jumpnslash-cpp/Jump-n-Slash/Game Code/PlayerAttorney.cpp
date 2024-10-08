@@ -26,3 +26,13 @@ void PlayerAttorney::State::RaycastLeft(Player* pPlayer, float deltaTime)
 {
 	pPlayer->RaycastLeft(deltaTime);
 }
+
+void PlayerAttorney::State::RaycastUp(Player* pPlayer, float deltaTime)
+{
+	pPlayer->RaycastUp(deltaTime);
+}
+
+void PlayerAttorney::State::RaycastDown(Player* pPlayer, float deltaTime)
+{
+	pPlayer->RaycastDown(deltaTime);
+}

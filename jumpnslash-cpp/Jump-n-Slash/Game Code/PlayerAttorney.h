@@ -28,6 +28,8 @@ public:
 
 		static void RaycastRight(Player* pPlayer, float deltaTime);
 		static void RaycastLeft(Player* pPlayer, float deltaTime);
+		static void RaycastUp(Player* pPlayer, float deltaTime);
+		static void RaycastDown(Player* pPlayer, float deltaTime);
 	};
 };
 

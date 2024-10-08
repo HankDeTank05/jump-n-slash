@@ -30,6 +30,10 @@ Player::Player(LevelMap* _pLevel)
 	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
+	RequestKeyRegistration(sf::Keyboard::Up, KeyEvent::KeyPress);
+	RequestKeyRegistration(sf::Keyboard::Up, KeyEvent::KeyRelease);
+	RequestKeyRegistration(sf::Keyboard::Down, KeyEvent::KeyPress);
+	RequestKeyRegistration(sf::Keyboard::Down, KeyEvent::KeyRelease);
 	
 	assert(pCurrentState != nullptr);
 }
@@ -71,6 +75,13 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 	case WALK_RIGHT_KEY:
 		posDelta.x = speed;
 		break;
+	case sf::Keyboard::Up:
+		posDelta.y = -speed;
+		break;
+	case sf::Keyboard::Down:
+		posDelta.y = speed;
+		break;
+
 	}
 }
 
@@ -213,4 +224,14 @@ void Player::RaycastLeft(float deltaTime)
 		maxX = mayMoveTo.x;
 	}
 	pos.x = maxX;
+}
+
+void Player::RaycastUp(float deltaTime)
+{
+	assert(false);
+}
+
+void Player::RaycastDown(float deltaTime)
+{
+	assert(false);
 }
