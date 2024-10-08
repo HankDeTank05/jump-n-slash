@@ -54,10 +54,10 @@ public: // public api functions
 	static void VisualizeLine(sf::Vector2f pos0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
 	static void VisualizeLine(float x0, float y0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
 	
-	static void VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE);
-	static void VisualizeText(int num, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE);
-	static void VisualizeText(float num, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE);
-	static void VisualizeText(bool flag, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE);
+	static void VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
+	static void VisualizeText(int num, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
+	static void VisualizeText(float num, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
+	static void VisualizeText(bool flag, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
 
 private: // engine-only api functions
 	friend class VisualizerAttorney;

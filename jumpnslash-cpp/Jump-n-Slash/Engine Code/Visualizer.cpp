@@ -123,7 +123,16 @@ void Visualizer::VisualizeText(float num, sf::Vector2f pos, sf::Color color, int
 
 void Visualizer::VisualizeText(bool flag, sf::Vector2f pos, sf::Color color, int sizeInPix)
 {
-	Instance().privVisualizeText(std::to_string(flag), pos, color, sizeInPix);
+	std::string str;
+	if (flag == true)
+	{
+		str = "true";
+	}
+	else
+	{
+		str = "false";
+	}
+	Instance().privVisualizeText(str, pos, color, sizeInPix);
 }
 
 void Visualizer::ProcessCommands()
