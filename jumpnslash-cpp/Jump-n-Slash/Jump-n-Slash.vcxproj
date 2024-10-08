@@ -147,6 +147,7 @@
     <ClInclude Include="Game Code\BlockHazard.h" />
     <ClInclude Include="Game Code\BlockSolid.h" />
     <ClInclude Include="Game Code\Constants.h" />
+    <ClInclude Include="Game Code\DebugFlags.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
     <ClInclude Include="Game Code\JsonParser.h" />
     <ClInclude Include="Game Code\Level0.h" />

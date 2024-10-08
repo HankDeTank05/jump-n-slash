@@ -533,6 +533,9 @@
     <ClInclude Include="Engine Code\VizCmdFactoryAttorney.h">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClInclude>
+    <ClInclude Include="Game Code\DebugFlags.h">
+      <Filter>Source Files\Game Code</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\0_DocsHome.txt">

@@ -4,10 +4,12 @@
 #include "../Engine Code/Visualizer.h"
 
 #include "Constants.h"
+#include "DebugFlags.h"
 #include "DesignerControls.h"
 #include "PlayerMoveState.h"
 #include "PlayerFSM.h"
 #include "LevelMap.h"
+#include "LevelTile.h"
 
 Player::Player(LevelMap* _pLevel)
 	: pos(_pLevel->GetStartingSpawnPoint()),
@@ -112,4 +114,115 @@ void Player::SetPosX(float newX)
 void Player::SetPosY(float newY)
 {
 	pos.y = newY;
+}
+
+void Player::RaycastRight(float deltaTime)
+{
+	const int RAY_COUNT = 2;
+	std::array<sf::Vector2f, RAY_COUNT> startPos;
+	std::array<sf::Vector2f, RAY_COUNT> endPos;
+
+	// cast a ray from the top (index=0) and the bottom (index=1) of the sprite
+	startPos[0] = pos;
+	startPos[1] = pos + sf::Vector2f(0.f, TILE_SIZE_F);
+
+	float minX = MAX_LEVEL_SIZE * TILE_SIZE_F;
+
+	for (int i = 0; i < RAY_COUNT; i++)
+	{
+		sf::Vector2f currPos = startPos[i];
+
+		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnSides() == false) &&
+			currPos.x < MAX_LEVEL_SIZE * TILE_SIZE_F)
+		{
+			if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(currPos, sf::Color::Green);
+			if (currPos != startPos[i])
+			{
+				// increment by tile size, since we only want to check every tile space
+				currPos.x += TILE_SIZE_F;
+			}
+			else // we may be in the middle of a tile space, so we want to increment to the edge of the next tile space
+			{
+				// if we divide by tile size, and cast to an int (remove the fractional part), we get the x-index of the tile
+				int tileIndex = static_cast<int>(currPos.x / TILE_SIZE_F);
+
+				// re-multiply by tile size to get the edge of the next tile space
+				currPos.x = static_cast<float>(tileIndex) * TILE_SIZE_F;
+
+				// increment by tile size, since the above math gets a point that is behind the starting pos
+				currPos.x += TILE_SIZE_F;
+			}
+		}
+		currPos.x -= TILE_SIZE_F; // decrement by one tile size because everything is relative to the top left corner
+
+		endPos[i] = currPos;
+		if (endPos[i].x < minX)
+		{
+			minX = endPos[i].x;
+		}
+		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizeSegment(startPos[i], endPos[i]);
+		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
+	}
+
+	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
+
+	if (mayMoveTo.x < minX)
+	{
+		minX = mayMoveTo.x;
+	}
+	pos.x = minX;
+}
+
+void Player::RaycastLeft(float deltaTime)
+{
+	const int RAY_COUNT = 2;
+	std::array<sf::Vector2f, RAY_COUNT> startPos;
+	std::array<sf::Vector2f, RAY_COUNT> endPos;
+
+	// cast a ray from the top (index=0) and the bottom (index=1) of the sprite
+	startPos[0] = pos;
+	startPos[1] = pos + sf::Vector2f(0.f, TILE_SIZE_F);
+
+	float maxX = 0;
+
+	for (int i = 0; i < RAY_COUNT; i++)
+	{
+		sf::Vector2f currPos = startPos[i];
+
+		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnSides() == false) &&
+			currPos.x >= 0.f)
+		{
+			if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(currPos, sf::Color::Green);
+			if (currPos != startPos[i])
+			{
+				// decrement by tile size, since we only want to check every tile space
+				currPos.x -= TILE_SIZE_F;
+			}
+			else // we may be in the middle of a tile space, so we want to decrement to the edge of the next tile space
+			{
+				// if we divide by tile size, and cast to an int (remove the fractional part), we get the x-index of the tile
+				int tileIndex = static_cast<int>(currPos.x / TILE_SIZE_F);
+
+				// re-multiply by tile size to get the edge of the next tile space
+				currPos.x = static_cast<float>(tileIndex) * TILE_SIZE_F;
+
+				currPos.x -= 0.001f;
+			}
+		}
+
+		endPos[i] = currPos;
+		if (endPos[i].x > maxX)
+		{
+			maxX = endPos[i].x;
+		}
+		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizeSegment(startPos[i], endPos[i]);
+		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
+	}
+
+	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
+	if (mayMoveTo.x > maxX)
+	{
+		maxX = mayMoveTo.x;
+	}
+	pos.x = maxX;
 }

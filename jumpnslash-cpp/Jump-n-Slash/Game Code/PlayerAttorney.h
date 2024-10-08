@@ -28,6 +28,9 @@ public:
 
 		static void SetPosX(Player* pPlayer, float newX);
 		static void SetPosY(Player* pPlayer, float newY);
+
+		static void RaycastRight(Player* pPlayer, float deltaTime);
+		static void RaycastLeft(Player* pPlayer, float deltaTime);
 	};
 };
 

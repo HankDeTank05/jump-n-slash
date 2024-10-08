@@ -26,3 +26,13 @@ void PlayerAttorney::State::SetPosY(Player* pPlayer, float newY)
 {
 	pPlayer->SetPosY(newY);
 }
+
+void PlayerAttorney::State::RaycastRight(Player* pPlayer, float deltaTime)
+{
+	pPlayer->RaycastRight(deltaTime);
+}
+
+void PlayerAttorney::State::RaycastLeft(Player* pPlayer, float deltaTime)
+{
+	pPlayer->RaycastLeft(deltaTime);
+}

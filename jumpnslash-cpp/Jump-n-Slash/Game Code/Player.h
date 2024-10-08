@@ -35,6 +35,10 @@ private: // player accessors. for selective access only (thru attorney)
 private: // player mutators. for selective access only (thru attorney)
 	void SetPosX(float newX);
 	void SetPosY(float newY);
+	void RaycastRight(float deltaTime);
+	void RaycastLeft(float deltaTime);
+	void RaycastUp(float deltaTime);
+	void RaycastDown(float deltaTime);
 
 private:
 	sf::Vector2f pos;
