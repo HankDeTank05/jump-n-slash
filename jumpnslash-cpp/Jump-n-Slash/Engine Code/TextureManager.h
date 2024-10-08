@@ -24,14 +24,15 @@ public: // api functions
 	* Load a texture into the engine. You must specify a key with which to identify the texture, and the name of the file to load.
 	* 
 	* \param[in]	key			The key used to identify the texture. (Duplicate keys are not allowed!)
-	* \param[in]	filename	The name of the file to load. The file must be in \c Assets/Textures/ or a subfolder within it.
+	* \param[in]	filename	The name of the file to load. The file must be in \c assets/textures/ or a subfolder within it.
 	* \param[in]	smooth		Whether or not a texture should be smoothed. If omitted, this argument is \c true by default.
 	* 
-	* \note		The \c filename argument can include subfolders within the Textures folder. See examples below.
+	* \note		The \c filename argument can include subfolders within the \c textures folder. See examples below.
 	* 
 	* \return	Does not return anything.
 	* 
 	* \section example1 Example 1
+	* The following example demonstrates how to load textures located in the \c textures folder.
 	* \code
 	* // LoadResources.cpp
 	* #include "../Engine Code/JumpSlashEngine.h"
@@ -54,6 +55,7 @@ public: // api functions
 	* \endcode
 	* 
 	* \section example2 Example 2
+	* The following example demonstrates how to load textures located a subfolder within the \c textures folder.
 	* \code
 	* // LoadResources.cpp
 	* #include "../Engine Code/JumpSlashEngine.h"

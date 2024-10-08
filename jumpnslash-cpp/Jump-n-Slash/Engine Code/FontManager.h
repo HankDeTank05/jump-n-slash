@@ -19,7 +19,50 @@ private:
 	static FontManager& Instance();
 
 public: // public api functions
-	static void LoadFont(std::string key, std::string filename); // TODO: docs for FontManager::LoadFont
+	/*!
+	* \brief	Load a font into the engine.
+	* 
+	* Load a font into the engine. You must specify a key with which to identify the font, and the name of the file to load.
+	* 
+	* \param[in]	key			The key used to identify the font. (Duplicate keys are not allowed!)
+	* \param[in]	filename	The name of the file to load. The file must be in \c assets/fonts/ or a subfolder within it.
+	* 
+	* \note		The \c filename argument can include subfolders within the \c fonts folder. See examples below.
+	* 
+	* \return	Does not return anything.
+	* 
+	* \section example1 Example 1
+	* The following example demonstrates how to load a font located in the \c fonts folder.
+	* \code
+	* // LoadResources.cpp
+	* #include "../Engine Code/JumpSlashEngine.h"
+	* #include "../Engine Code/FontManager.h"
+	* 
+	* void JumpSlashEngine::LoadResources()
+	* {
+	*	// load fonts
+	*	FontManager::LoadFont("arial", "arial.ttf");
+	*	FontManager::LoadFont("consolas", "consola.tff");
+	*	FontManager::LoadFont("delfino", "Delfino.ttf");
+	* }
+	* \endcode
+	* \section example2 Example 2
+	* The following example demonstrates how to load fonts located a subfolder within the \c fonts folder.
+	* \code
+	* // LoadResources.cpp
+	* #include "../Engine Code/JumpSlashEngine.h"
+	* #include "../Engine Code/FontManager.h"
+	* 
+	* void JumpSlashEngine::LoadResources()
+	* {
+	*	// load fonts
+	*	FontManager::LoadFont("arial", "standard/arial.ttf");
+	*	FontManager::LoadFont("consolas", "monospaced/consola.tff");
+	*	FontManager::LoadFont("delfino", "standard/Delfino.ttf");
+	* }
+	* \endcode
+	*/
+	static void LoadFont(std::string key, std::string filename);
 	static sf::Font* GetFont(std::string key); // TODO: docs for FontManager::GetFont
 
 private: // engine-only api functions
