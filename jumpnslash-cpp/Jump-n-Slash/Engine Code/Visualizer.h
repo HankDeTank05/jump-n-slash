@@ -29,20 +29,20 @@ private:
 	using VizCmdList = std::list<VisualizerCommand*>;
 
 public: // public api functions
-	static void VisualizePoint(sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR);
+	static void VisualizePoint(sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizePoint
 
-	static void VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true);
-	static void VisualizeCircle(float x, float y, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true);
+	static void VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true); // TODO: docs for Visualizer::VisualizeCircle
+	static void VisualizeCircle(float x, float y, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true); // TODO: docs for Visualizer::VisualizeCircle
 
-	static void VisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeRect(float x, float y, sf::Vector2f size, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeRect(sf::Vector2f pos, float width, float height, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeRect(float x, float y, float width, float height, sf::Color color = VIZ_DEFAULT_COLOR);
+	static void VisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeRect
+	static void VisualizeRect(float x, float y, sf::Vector2f size, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeRect
+	static void VisualizeRect(sf::Vector2f pos, float width, float height, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeRect
+	static void VisualizeRect(float x, float y, float width, float height, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeRect
 	
-	static void VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeSegment(float x0, float y0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeSegment(sf::Vector2f pos0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeSegment(float x0, float y0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
+	static void VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeSegment
+	static void VisualizeSegment(float x0, float y0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeSegment
+	static void VisualizeSegment(sf::Vector2f pos0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeSegment
+	static void VisualizeSegment(float x0, float y0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeSegment
 
 	static void VisualizeRay(sf::Vector2f pos, sf::Vector2f dir, sf::Color color = VIZ_DEFAULT_COLOR);
 	static void VisualizeRay(float x, float y, sf::Vector2f dir, sf::Color color = VIZ_DEFAULT_COLOR);
@@ -54,7 +54,7 @@ public: // public api functions
 	static void VisualizeLine(sf::Vector2f pos0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
 	static void VisualizeLine(float x0, float y0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
 	
-	// TODO: add text visualization
+	static void VisualizeText(sf::Text text, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = 24);
 
 private: // engine-only api functions
 	friend class VisualizerAttorney;

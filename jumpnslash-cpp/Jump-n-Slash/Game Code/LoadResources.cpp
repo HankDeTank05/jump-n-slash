@@ -6,12 +6,15 @@
 
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
+#include "../Engine Code/FontManager.h"
 #include "../Engine Code/GridManager.h"
 
 #include "Level0.h"
 
 void JumpSlashEngine::LoadResources()
 {
+	FontManager::LoadFont("arial", "arial.ttf");
+
 	TextureManager::LoadTexture("player idle 1", "player/idle_1_32.png");
 	TextureManager::LoadTexture("player idle 2", "player/idle_2_32.png");
 	TextureManager::LoadTexture("player idle 3", "player/idle_3_32.png");

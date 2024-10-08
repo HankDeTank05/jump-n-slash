@@ -17,16 +17,6 @@ LevelMap* PlayerAttorney::State::GetLevel(Player* pPlayer)
 	return pPlayer->GetLevel();
 }
 
-void PlayerAttorney::State::SetPosX(Player* pPlayer, float newX)
-{
-	pPlayer->SetPosX(newX);
-}
-
-void PlayerAttorney::State::SetPosY(Player* pPlayer, float newY)
-{
-	pPlayer->SetPosY(newY);
-}
-
 void PlayerAttorney::State::RaycastRight(Player* pPlayer, float deltaTime)
 {
 	pPlayer->RaycastRight(deltaTime);

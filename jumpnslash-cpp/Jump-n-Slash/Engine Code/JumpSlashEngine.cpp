@@ -5,6 +5,7 @@
 #include "SpriteManagerAttorney.h"
 #include "GridManagerAttorney.h"
 #include "VisualizerAttorney.h"
+#include "FontManagerAttorney.h"
 #include "VizCmdFactoryAttorney.h"
 #include "SceneAttorney.h" // TODO: remove this when SceneManager is created
 #include "Scene.h" // TODO: remove this when SceneManager is created
@@ -137,6 +138,7 @@ void JumpSlashEngine::UnloadContent()
 	TextureManagerAttorney::Termination::Terminate();
 	SpriteManagerAttorney::Termination::Terminate();
 	GridManagerAttorney::Termination::Terminate();
+	FontManagerAttorney::Termination::Terminate();
 	VisualizerAttorney::Termination::Terminate();
 	VizCmdFactoryAttorney::Termination::Terminate();
 }

@@ -13,12 +13,14 @@
 
 Player::Player(LevelMap* _pLevel)
 	: pos(_pLevel->GetStartingSpawnPoint()),
-	posDelta(0.0f, 0.0f),
+	posDelta(0.f, 0.f),
 	speed(PLAYER_WALK_SPEED),
 	pSprite(SpriteManager::GetSprite("player idle 1")),
 	pCurrentState(&PlayerFSM::idle),
 	respawnPoint(_pLevel->GetStartingSpawnPoint()),
-	pLevel(_pLevel)
+	pLevel(_pLevel),
+	walkLeftHeld(false),
+	walkRightHeld(false)
 {
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
@@ -39,27 +41,19 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
-	/*
-	pos += posDelta * deltaTime;
-	pSprite->setPosition(pos);
-
-	// map collision
-	Visualizer::VisualizePoint(pos + sf::Vector2f(0.f, TILE_SIZE_F), sf::Color::Green);
-	Visualizer::VisualizePoint(pos + sf::Vector2f(TILE_SIZE_F, TILE_SIZE_F), sf::Color::Green);
-	Visualizer::VisualizeSegment(pos + sf::Vector2f(0.f, TILE_SIZE_F), pos + sf::Vector2f(0.f, TILE_SIZE_F * 4), sf::Color::Yellow);
-	//Visualizer::VisualizePoint(pos);
-	//Visualizer::VisualizePoint(pos + sf::Vector2f(TILE_SIZE_F, 0.f));
-	//*/
-	pCurrentState->Update(this, deltaTime);
-
-	pSprite->setPosition(pos);
-
+	// update the move state
 	const PlayerMoveState* pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);
 	if (pCurrentState != pPrevState)
 	{
 		pCurrentState->Enter(this);
 	}
+
+	// update based on the current move state
+	pCurrentState->Update(this, deltaTime);
+
+	// set the sprite position for drawing
+	pSprite->setPosition(pos);
 }
 
 void Player::Draw()
@@ -104,16 +98,6 @@ sf::Vector2f Player::GetPosDelta()
 LevelMap* Player::GetLevel()
 {
 	return pLevel;
-}
-
-void Player::SetPosX(float newX)
-{
-	pos.x = newX;
-}
-
-void Player::SetPosY(float newY)
-{
-	pos.y = newY;
 }
 
 void Player::RaycastRight(float deltaTime)
@@ -192,7 +176,9 @@ void Player::RaycastLeft(float deltaTime)
 		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnSides() == false) &&
 			currPos.x >= 0.f)
 		{
+			// only visualize stuff if we're debugging
 			if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(currPos, sf::Color::Green);
+
 			if (currPos != startPos[i])
 			{
 				// decrement by tile size, since we only want to check every tile space
@@ -215,6 +201,8 @@ void Player::RaycastLeft(float deltaTime)
 		{
 			maxX = endPos[i].x;
 		}
+
+		// only visualize stuff if we're debugging
 		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 		if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
 	}

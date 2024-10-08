@@ -33,21 +33,21 @@ private: // player accessors. for selective access only (thru attorney)
 	LevelMap* GetLevel();
 
 private: // player mutators. for selective access only (thru attorney)
-	void SetPosX(float newX);
-	void SetPosY(float newY);
 	void RaycastRight(float deltaTime);
 	void RaycastLeft(float deltaTime);
 	void RaycastUp(float deltaTime);
 	void RaycastDown(float deltaTime);
 
 private:
-	sf::Vector2f pos;
-	sf::Vector2f posDelta;
-	float speed;
-	sf::Sprite* pSprite;
-	const PlayerMoveState* pCurrentState;
-	sf::Vector2f respawnPoint;
-	LevelMap* pLevel;
+	sf::Vector2f pos; // current world-space position
+	sf::Vector2f posDelta; // player movement for the current frame (aka, the change from previous frame)
+	float speed; // horizontal movement speed
+	sf::Sprite* pSprite; // the sprite to be drawn
+	const PlayerMoveState* pCurrentState; // the current movement state
+	sf::Vector2f respawnPoint; // where the player will respawn after dying
+	LevelMap* pLevel; // pointer to the current level (for map collision)
+	bool walkLeftHeld; // flag indicating if the walk left key is currently pressed
+	bool walkRightHeld; // flag indicating if the walk right key is currently pressed
 };
 
 #endif

@@ -26,6 +26,8 @@
     <ClCompile Include="Engine Code\DrawManager.cpp" />
     <ClCompile Include="Engine Code\DrawRegistrationCommand.cpp" />
     <ClCompile Include="Engine Code\EngineAttorney.cpp" />
+    <ClCompile Include="Engine Code\FontManager.cpp" />
+    <ClCompile Include="Engine Code\FontManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\GridManager.cpp" />
     <ClCompile Include="Engine Code\GridManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\InputManager.cpp" />
@@ -99,6 +101,8 @@
     <ClInclude Include="Engine Code\DrawManager.h" />
     <ClInclude Include="Engine Code\DrawRegistrationCommand.h" />
     <ClInclude Include="Engine Code\EngineAttorney.h" />
+    <ClInclude Include="Engine Code\FontManager.h" />
+    <ClInclude Include="Engine Code\FontManagerAttorney.h" />
     <ClInclude Include="Engine Code\GridManager.h" />
     <ClInclude Include="Engine Code\GridManagerAttorney.h" />
     <ClInclude Include="Engine Code\InputEvent.h" />
