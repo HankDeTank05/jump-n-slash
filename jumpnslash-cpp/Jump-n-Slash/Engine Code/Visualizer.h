@@ -29,7 +29,54 @@ private:
 	using VizCmdList = std::list<VisualizerCommand*>;
 
 public: // public api functions
-	static void VisualizePoint(sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizePoint
+	/*!
+	* \brief	Visualize a point in space for debugging.
+	* 
+	* This function allows you visualize a world-space position by drawing a dot on screen.
+	* 
+	* \note		This function may be called anywhere, by anyone. This function does not need to be called inside a draw
+	* function, or by an object deriving from DrawObject.
+	* 
+	* \param[in]	pos		The world-space position at which a dot should be drawn.
+	* \param[in]	color	The color of the dot to be drawn (if this argument is omitted, Cyan will be used)
+	* 
+	* \return	Does not return anything.
+	* 
+	* \section example1 Example 1
+	* \code
+	* // Player.cpp
+	* #include "Player.h"
+	* #include "../Engine Code/Visualizer.h"
+	* 
+	* void Player::Update(float deltaTime)
+	* {
+	*	Visualizer::VisualizePoint(this->pos);
+	* }
+	* \endcode
+	* 
+	* \section example2 Example 2
+	* \code
+	* // Player.cpp
+	* #include "Player.h"
+	* #include "../Engine Code/Visualizer.h"
+	* 
+	* void Player::Update(float deltaTime)
+	* {
+	*	Visualizer::VisualizePoint(this->pos, sf::Color::Red);
+	* }
+	* \endcode
+	* 
+	* \see	Visualizer::VisualizePoint(float x, float y, sf::Color color)
+	* 
+	* \see	Visualizer::VisualizeCircle
+	* \see	Visualizer::VisualizeRect
+	* \see	Visualizer::VisualizeSegment
+	* \see	Visualizer::VisualizeRay
+	* \see	Visualizer::VisualizeLine
+	* \see	Visualizer::VisualizeText
+	*/
+	static void VisualizePoint(sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR);
+	static void VisualizePoint(float x, float y, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizePoint
 
 	static void VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true); // TODO: docs for Visualizer::VisualizeCircle
 	static void VisualizeCircle(float x, float y, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true); // TODO: docs for Visualizer::VisualizeCircle

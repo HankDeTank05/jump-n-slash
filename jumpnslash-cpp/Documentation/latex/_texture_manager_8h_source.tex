@@ -22,22 +22,22 @@
 \DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_texture_manager}{TextureManager}}\&\ Instance();}
 \DoxyCodeLine{00019\ }
 \DoxyCodeLine{00020\ \textcolor{keyword}{public}:\ \textcolor{comment}{//\ api\ functions}}
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{LoadTexture}}(std::string\ key,\ std::string\ filename,\ \textcolor{keywordtype}{bool}\ smooth\ =\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{static}\ sf::Texture*\ \mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{GetTexture}}(std::string\ key);}
-\DoxyCodeLine{00109\ }
-\DoxyCodeLine{00110\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_texture_manager_attorney}{TextureManagerAttorney}};}
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
-\DoxyCodeLine{00113\ }
-\DoxyCodeLine{00114\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ api\ backend\ functions}}
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadTexture(std::string\ key,\ std::string\ filename,\ \textcolor{keywordtype}{bool}\ smooth);}
-\DoxyCodeLine{00116\ \ \ \ \ sf::Texture*\ privGetTexture(std::string\ key);}
-\DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
-\DoxyCodeLine{00119\ \ \ \ \ std::map<std::string,\ sf::Texture*>\ textures;\ }
-\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ FOLDER\_NAME\ =\ \textcolor{stringliteral}{"{}assets/textures/"{}};\ }
-\DoxyCodeLine{00121\ \};}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{LoadTexture}}(std::string\ key,\ std::string\ filename,\ \textcolor{keywordtype}{bool}\ smooth\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ sf::Texture*\ \mbox{\hyperlink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{GetTexture}}(std::string\ key);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_texture_manager_attorney}{TextureManagerAttorney}};}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ api\ backend\ functions}}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadTexture(std::string\ key,\ std::string\ filename,\ \textcolor{keywordtype}{bool}\ smooth);}
+\DoxyCodeLine{00121\ \ \ \ \ sf::Texture*\ privGetTexture(std::string\ key);}
 \DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00123\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
+\DoxyCodeLine{00124\ \ \ \ \ std::map<std::string,\ sf::Texture*>\ textures;\ \textcolor{comment}{//\ The\ map\ containing\ every\ texture\ loaded\ into\ the\ engine.}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ FOLDER\_NAME\ =\ \textcolor{stringliteral}{"{}assets/textures/"{}};\ \textcolor{comment}{//\ The\ name\ of\ the\ folder\ that\ texture\ files\ will\ be\ loaded\ from.}}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

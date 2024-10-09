@@ -1,0 +1,74 @@
+\doxysection{Viz\+Cmd\+Factory.\+h}
+\hypertarget{_viz_cmd_factory_8h_source}{}\label{_viz_cmd_factory_8h_source}\index{Jump-\/n-\/Slash/Engine Code/VizCmdFactory.h@{Jump-\/n-\/Slash/Engine Code/VizCmdFactory.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VIZ\_CMD\_FACTORY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VIZ\_CMD\_FACTORY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/System/Vector2.hpp>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <SFML/System/String.hpp>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Color.hpp>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer_command_point}{VisualizerCommandPoint}};}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer_command_circle}{VisualizerCommandCircle}};}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer_command_rect}{VisualizerCommandRect}};}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer_command_segment}{VisualizerCommandSegment}};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer_command_text}{VisualizerCommandText}};}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_viz_cmd_point_pool}{VizCmdPointPool}};}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_viz_cmd_circle_pool}{VizCmdCirclePool}};}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_viz_cmd_rect_pool}{VizCmdRectPool}};}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_viz_cmd_seg_pool}{VizCmdSegPool}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_viz_cmd_text_pool}{VizCmdTextPool}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_viz_cmd_factory}{VizCmdFactory}}\ \textcolor{comment}{//\ this\ class\ is\ written\ as\ a\ singleton}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_viz_cmd_factory}{VizCmdFactory}}*\ pInstance;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_factory}{VizCmdFactory}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_factory}{VizCmdFactory}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_viz_cmd_factory}{VizCmdFactory}}\&\ vcf)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_factory}{VizCmdFactory}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_viz_cmd_factory}{VizCmdFactory}}\&\ vcf)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_viz_cmd_factory}{\string~VizCmdFactory}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_viz_cmd_factory}{VizCmdFactory}}\&\ Instance();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:\ \textcolor{comment}{//\ public\ api\ functions}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_visualizer_command_point}{VisualizerCommandPoint}}*\ GetPointCommand(sf::Vector2f\ pos,\ sf::Color\ color);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_visualizer_command_circle}{VisualizerCommandCircle}}*\ GetCircleCommand(sf::Vector2f\ pos,\ \textcolor{keywordtype}{float}\ radius,\ sf::Color\ color,\ \textcolor{keywordtype}{bool}\ showCenter);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_visualizer_command_rect}{VisualizerCommandRect}}*\ GetRectCommand(sf::Vector2f\ pos,\ sf::Vector2f\ size,\ sf::Color\ color);}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_visualizer_command_segment}{VisualizerCommandSegment}}*\ GetSegmentCommand(sf::Vector2f\ pos0,\ sf::Vector2f\ pos1,\ sf::Color\ color);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_visualizer_command_text}{VisualizerCommandText}}*\ GetTextCommand(sf::String\ str,\ sf::Vector2f\ pos,\ sf::Color\ color,\ \textcolor{keywordtype}{int}\ sizeInPix);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ RecyclePointCommand(\mbox{\hyperlink{class_visualizer_command_point}{VisualizerCommandPoint}}*\ pCmd);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ RecycleCircleCommand(\mbox{\hyperlink{class_visualizer_command_circle}{VisualizerCommandCircle}}*\ pCmd);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ RecycleRectCommand(\mbox{\hyperlink{class_visualizer_command_rect}{VisualizerCommandRect}}*\ pCmd);}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ RecycleSegmentCommand(\mbox{\hyperlink{class_visualizer_command_segment}{VisualizerCommandSegment}}*\ pCmd);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ RecycleTextCommand(\mbox{\hyperlink{class_visualizer_command_text}{VisualizerCommandText}}*\ pCmd);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_viz_cmd_factory_attorney}{VizCmdFactoryAttorney}};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ api\ backend\ functions}}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{class_visualizer_command_point}{VisualizerCommandPoint}}*\ privGetPointCommand(sf::Vector2f\ pos,\ sf::Color\ color);}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{class_visualizer_command_circle}{VisualizerCommandCircle}}*\ privGetCircleCommand(sf::Vector2f\ pos,\ \textcolor{keywordtype}{float}\ radius,\ sf::Color\ color,\ \textcolor{keywordtype}{bool}\ showCenter);}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_visualizer_command_rect}{VisualizerCommandRect}}*\ privGetRectCommand(sf::Vector2f\ pos,\ sf::Vector2f\ size,\ sf::Color\ color);}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_visualizer_command_segment}{VisualizerCommandSegment}}*\ privGetSegmentCommand(sf::Vector2f\ pos0,\ sf::Vector2f\ pos1,\ sf::Color\ color);}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_visualizer_command_text}{VisualizerCommandText}}*\ privGetTextCommand(sf::String\ str,\ sf::Vector2f\ pos,\ sf::Color\ color,\ \textcolor{keywordtype}{int}\ sizeInPix);}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ privRecyclePointCommand(\mbox{\hyperlink{class_visualizer_command_point}{VisualizerCommandPoint}}*\ pCmd);}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ privRecycleCircleCommand(\mbox{\hyperlink{class_visualizer_command_circle}{VisualizerCommandCircle}}*\ pCmd);}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ privRecycleRectCommand(\mbox{\hyperlink{class_visualizer_command_rect}{VisualizerCommandRect}}*\ pCmd);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ privRecycleSegmentCommand(\mbox{\hyperlink{class_visualizer_command_segment}{VisualizerCommandSegment}}*\ pCmd);}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ privRecycleTextCommand(\mbox{\hyperlink{class_visualizer_command_text}{VisualizerCommandText}}*\ pCmd);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_point_pool}{VizCmdPointPool}}*\ pPointPool;}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_circle_pool}{VizCmdCirclePool}}*\ pCirclePool;}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_rect_pool}{VizCmdRectPool}}*\ pRectPool;}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_seg_pool}{VizCmdSegPool}}*\ pSegPool;}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_text_pool}{VizCmdTextPool}}*\ pTextPool;}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

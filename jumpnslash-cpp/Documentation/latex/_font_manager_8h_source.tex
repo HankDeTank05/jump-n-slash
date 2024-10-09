@@ -1,0 +1,45 @@
+\doxysection{Font\+Manager.\+h}
+\hypertarget{_font_manager_8h_source}{}\label{_font_manager_8h_source}\index{Jump-\/n-\/Slash/Engine Code/FontManager.h@{Jump-\/n-\/Slash/Engine Code/FontManager.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FONT\_MANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FONT\_MANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/Font.hpp>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_font_manager}{FontManager}}\ \textcolor{comment}{//\ this\ class\ is\ written\ as\ a\ singleton}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_font_manager}{FontManager}}*\ pInstance;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_font_manager}{FontManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_font_manager}{FontManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_font_manager}{FontManager}}\&\ fm)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_font_manager}{FontManager}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_font_manager}{FontManager}}\&\ fm)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_font_manager}{\string~FontManager}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_font_manager}{FontManager}}\&\ Instance();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:\ \textcolor{comment}{//\ public\ api\ functions}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}{LoadFont}}(std::string\ key,\ std::string\ filename);}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{static}\ sf::Font*\ \mbox{\hyperlink{class_font_manager_ad08a9f0b8fcf38a73d4e31ff0e20d673}{GetFont}}(std::string\ key);\ \textcolor{comment}{//\ TODO:\ docs\ for\ FontManager::GetFont\ needs\ example\ code}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_font_manager_attorney}{FontManagerAttorney}};}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ api\ backend\ functions}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadFont(std::string\ key,\ std::string\ filename);}
+\DoxyCodeLine{00091\ \ \ \ \ sf::Font*\ privGetFont(std::string\ key);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
+\DoxyCodeLine{00094\ \ \ \ \ std::map<std::string,\ sf::Font*>\ fonts;\ \textcolor{comment}{//\ the\ map\ containing\ every\ font\ loaded\ into\ the\ engine}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ FOLDER\_NAME\ =\ \textcolor{stringliteral}{"{}assets/fonts/"{}};\ \textcolor{comment}{//\ the\ name\ of\ the\ folder\ that\ font\ files\ will\ be\ loaded\ from}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

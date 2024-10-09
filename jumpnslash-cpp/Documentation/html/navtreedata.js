@@ -25,47 +25,6 @@
 var NAVTREE =
 [
   [ "Jump n Slash", "index.html", [
-    [ "Jump-n-Slash Documentation", "index.html", "index" ],
-    [ "Engine Basics", "_engine_basics.html", [
-      [ "Files required by the engine", "_engine_basics.html#requiredByEngine", [
-        [ "GameInitialize.cpp", "_engine_basics.html#gameInitCpp", null ],
-        [ "LoadResources.cpp", "_engine_basics.html#loadResourcesCpp", null ]
-      ] ]
-    ] ],
-    [ "Using the Asset Managers", "_using_asset_managers.html", [
-      [ "Overview", "_using_asset_managers.html#overview_assetMgr", null ],
-      [ "Texture Manager", "_using_asset_managers.html#textureManager", [
-        [ "Loading a Texture", "_using_asset_managers.html#textureManager_load", null ],
-        [ "Getting a Texture", "_using_asset_managers.html#textureManager_get", null ]
-      ] ],
-      [ "Sprite Manager", "_using_asset_managers.html#spriteManager", [
-        [ "Loading a Sprites", "_using_asset_managers.html#spriteManager_load", null ],
-        [ "Getting a Sprite", "_using_asset_managers.html#spriteManager_get", null ]
-      ] ],
-      [ "Functions referenced in this tutorial", "_using_asset_managers.html#seeAlso", null ]
-    ] ],
-    [ "Creating a Scene", "_creating_scene.html", [
-      [ "Overview", "_creating_scene.html#overview_scene", null ],
-      [ "The Scene Base Class", "_creating_scene.html#baseClass", null ],
-      [ "Your Derived Scene Class", "_creating_scene.html#derivedClass", [
-        [ "The Essentials", "_creating_scene.html#derivedClass_essentials", null ],
-        [ "The Init() and End() Functions", "_creating_scene.html#derivedClass_initEnd", null ],
-        [ "Member Variables", "_creating_scene.html#derivedClass_members", null ]
-      ] ]
-    ] ],
-    [ "Creating a Game Object", "_creating_game_object.html", [
-      [ "The Update System", "_creating_game_object.html#go_updateSystem", [
-        [ "Example", "_creating_game_object.html#go_updateSystem_exampleCode", null ]
-      ] ],
-      [ "The Draw System", "_creating_game_object.html#go_drawSystem", [
-        [ "Example", "_creating_game_object.html#go_drawSystem_exampleCode", null ]
-      ] ],
-      [ "The Input System", "_creating_game_object.html#go_inputSystem", [
-        [ "Example", "_creating_game_object.html#go_inputSystem_exampleCode", null ]
-      ] ],
-      [ "The Alarm System (coming soon)", "_creating_game_object.html#go_alarmSystem", null ],
-      [ "The Collision System (coming soon)", "_creating_game_object.html#go_collisionSystem", null ]
-    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

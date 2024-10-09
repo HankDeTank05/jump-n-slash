@@ -1,0 +1,32 @@
+\doxysection{Viz\+Cmd\+Text\+Pool.\+h}
+\hypertarget{_viz_cmd_text_pool_8h_source}{}\label{_viz_cmd_text_pool_8h_source}\index{Jump-\/n-\/Slash/Engine Code/VizCmdTextPool.h@{Jump-\/n-\/Slash/Engine Code/VizCmdTextPool.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VIZ\_CMD\_TEXT\_POOL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VIZ\_CMD\_TEXT\_POOL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer_command_text}{VisualizerCommandText}};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_viz_cmd_text_pool}{VizCmdTextPool}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_text_pool}{VizCmdTextPool}}();}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_text_pool}{VizCmdTextPool}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_viz_cmd_text_pool}{VizCmdTextPool}}\&\ vctp)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_viz_cmd_text_pool}{VizCmdTextPool}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_viz_cmd_text_pool}{VizCmdTextPool}}\&\ vctp)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_viz_cmd_text_pool}{\string~VizCmdTextPool}}();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{using\ }TextCmdPool\ =\ std::stack<VisualizerCommandText*>;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_visualizer_command_text}{VisualizerCommandText}}*\ GetCommand();}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ RecycleCommand(\mbox{\hyperlink{class_visualizer_command_text}{VisualizerCommandText}}*\ pCmd);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ \ \ TextCmdPool\ pool;}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

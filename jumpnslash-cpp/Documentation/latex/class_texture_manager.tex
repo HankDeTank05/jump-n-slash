@@ -26,7 +26,7 @@ sf\+::\+Texture \texorpdfstring{$\ast$}{*} Texture\+Manager\+::\+Get\+Texture (\
 
 Get a texture which has already been loaded into the engine. 
 
-Get a texture from the engine. In order to get a texture from the engine, it must already be loaded it into the engine.
+Get a texture from the engine. In order to get a texture from the engine, it must already be loaded into the engine.
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -36,7 +36,8 @@ Get a texture from the engine. In order to get a texture from the engine, it mus
 \begin{DoxyReturn}{Returns}
 Returns a pointer to an SFML texture.
 \end{DoxyReturn}
-{\bfseries{Example}} 
+\hypertarget{class_update_object_example}{}\doxysubsection{\texorpdfstring{Example}{Example}}\label{class_update_object_example}
+
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
@@ -55,11 +56,13 @@ Returns a pointer to an SFML texture.
 
 
 \begin{DoxySeeAlso}{See also}
-\doxylink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{Texture\+Manager\+::\+Load\+Texture} 
+\doxylink{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}{Texture\+Manager\+::\+Load\+Texture}
 
-\doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite} 
+\doxylink{class_sprite_manager}{Sprite\+Manager} 
 
-\doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite} 
+\doxylink{class_grid_manager}{Grid\+Manager} 
+
+\doxylink{class_font_manager}{Font\+Manager} 
 \end{DoxySeeAlso}
 \Hypertarget{class_texture_manager_a770e03552151570f7a3cb06f48b66c01}\index{TextureManager@{TextureManager}!LoadTexture@{LoadTexture}}
 \index{LoadTexture@{LoadTexture}!TextureManager@{TextureManager}}
@@ -77,19 +80,19 @@ Load a texture into the engine. You must specify a key with which to identify th
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em key} & The key used to identify the texture. (Duplicate keys are not allowed!) \\
 \hline
-\mbox{\texttt{ in}}  & {\em filename} & The name of the file to load. The file must be in {\ttfamily Assets/\+Textures/} or a subfolder within it. \\
+\mbox{\texttt{ in}}  & {\em filename} & The name of the file to load. The file must be in {\ttfamily assets/textures/} or a subfolder within it. \\
 \hline
 \mbox{\texttt{ in}}  & {\em smooth} & Whether or not a texture should be smoothed. If omitted, this argument is {\ttfamily true} by default.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyNote}{Note}
-The {\ttfamily filename} argument can include subfolders within the Textures folder. See examples below.
+The {\ttfamily filename} argument can include subfolders within the {\ttfamily textures} folder. See examples below.
 \end{DoxyNote}
 \begin{DoxyReturn}{Returns}
 Does not return anything.
 \end{DoxyReturn}
-\hypertarget{class_texture_manager_example1}{}\doxysubsection{\texorpdfstring{Example 1}{Example 1}}\label{class_texture_manager_example1}
-
+\hypertarget{class_visualizer_example1}{}\doxysubsection{\texorpdfstring{Example 1}{Example 1}}\label{class_visualizer_example1}
+The following example demonstrates how to load textures located in the {\ttfamily textures} folder. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
@@ -111,8 +114,8 @@ Does not return anything.
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-\hypertarget{class_texture_manager_example2}{}\doxysubsection{\texorpdfstring{Example 2}{Example 2}}\label{class_texture_manager_example2}
-
+\hypertarget{class_visualizer_example2}{}\doxysubsection{\texorpdfstring{Example 2}{Example 2}}\label{class_visualizer_example2}
+The following example demonstrates how to load textures located a subfolder within the {\ttfamily textures} folder. 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
@@ -134,9 +137,11 @@ Does not return anything.
 \begin{DoxySeeAlso}{See also}
 \doxylink{class_texture_manager_aadcf6c9d978195ef308f9f38e88fd0ba}{Texture\+Manager\+::\+Get\+Texture}
 
-\doxylink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{Sprite\+Manager\+::\+Load\+Sprite} 
+\doxylink{class_sprite_manager}{Sprite\+Manager} 
 
-\doxylink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{Sprite\+Manager\+::\+Get\+Sprite} 
+\doxylink{class_grid_manager}{Grid\+Manager} 
+
+\doxylink{class_font_manager}{Font\+Manager} 
 \end{DoxySeeAlso}
 
 

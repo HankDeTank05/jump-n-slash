@@ -3,6 +3,7 @@ var hierarchy =
     [ "MemTrace::_CrtMemBlockHeader", "struct_mem_trace_1_1___crt_mem_block_header.html", null ],
     [ "Align16", "class_align16.html", null ],
     [ "Camera", "class_camera.html", null ],
+    [ "VisualizerAttorney::Circle", "class_visualizer_attorney_1_1_circle.html", null ],
     [ "CollisionManager", "class_collision_manager.html", null ],
     [ "CollisionObject", "class_collision_object.html", null ],
     [ "Command", "class_command.html", [
@@ -15,10 +16,18 @@ var hierarchy =
       [ "MouseCursorDeregistrationCommand", "class_mouse_cursor_deregistration_command.html", null ],
       [ "MouseCursorRegistrationCommand", "class_mouse_cursor_registration_command.html", null ],
       [ "UpdateDeregistrationCommand", "class_update_deregistration_command.html", null ],
-      [ "UpdateRegistrationCommand", "class_update_registration_command.html", null ]
+      [ "UpdateRegistrationCommand", "class_update_registration_command.html", null ],
+      [ "VisualizerCommand", "class_visualizer_command.html", [
+        [ "VisualizerCommandCircle", "class_visualizer_command_circle.html", null ],
+        [ "VisualizerCommandPoint", "class_visualizer_command_point.html", null ],
+        [ "VisualizerCommandRect", "class_visualizer_command_rect.html", null ],
+        [ "VisualizerCommandSegment", "class_visualizer_command_segment.html", null ],
+        [ "VisualizerCommandText", "class_visualizer_command_text.html", null ]
+      ] ]
     ] ],
     [ "SceneAttorney::Commands", "class_scene_attorney_1_1_commands.html", null ],
     [ "SceneAttorney::Draw", "class_scene_attorney_1_1_draw.html", null ],
+    [ "VisualizerAttorney::Draw", "class_visualizer_attorney_1_1_draw.html", null ],
     [ "DrawManager", "class_draw_manager.html", null ],
     [ "DrawObject", "class_draw_object.html", [
       [ "LevelTile", "class_level_tile.html", [
@@ -28,11 +37,14 @@ var hierarchy =
         [ "PlatformSemisolid", "class_platform_semisolid.html", null ]
       ] ],
       [ "Player", "class_player.html", null ],
-      [ "TestClass", "class_test_class.html", null ]
+      [ "TestClass", "class_test_class.html", null ],
+      [ "Visualizer", "class_visualizer.html", null ]
     ] ],
     [ "DrawObjectAttorney", "class_draw_object_attorney.html", null ],
     [ "EngineAttorney", "class_engine_attorney.html", null ],
     [ "FileIO", "class_file_i_o.html", null ],
+    [ "FontManager", "class_font_manager.html", null ],
+    [ "FontManagerAttorney", "class_font_manager_attorney.html", null ],
     [ "DrawObjectAttorney::GameLoop", "class_draw_object_attorney_1_1_game_loop.html", null ],
     [ "SceneAttorney::GameLoop", "class_scene_attorney_1_1_game_loop.html", null ],
     [ "UpdateObjectAttorney::GameLoop", "class_update_object_attorney_1_1_game_loop.html", null ],
@@ -64,6 +76,8 @@ var hierarchy =
       [ "PlayerStateJumping", "class_player_state_jumping.html", null ],
       [ "PlayerStateWalking", "class_player_state_walking.html", null ]
     ] ],
+    [ "VisualizerAttorney::Point", "class_visualizer_attorney_1_1_point.html", null ],
+    [ "VisualizerAttorney::Rect", "class_visualizer_attorney_1_1_rect.html", null ],
     [ "DrawObjectAttorney::Registration", "class_draw_object_attorney_1_1_registration.html", null ],
     [ "InputObjectAttorney::Registration", "class_input_object_attorney_1_1_registration.html", null ],
     [ "UpdateObjectAttorney::Registration", "class_update_object_attorney_1_1_registration.html", null ],
@@ -73,13 +87,18 @@ var hierarchy =
       [ "TestScene", "class_test_scene.html", null ]
     ] ],
     [ "SceneAttorney", "class_scene_attorney.html", null ],
+    [ "VisualizerAttorney::Segment", "class_visualizer_attorney_1_1_segment.html", null ],
     [ "SpriteManager", "class_sprite_manager.html", null ],
     [ "SpriteManagerAttorney", "class_sprite_manager_attorney.html", null ],
     [ "PlayerAttorney::State", "class_player_attorney_1_1_state.html", null ],
+    [ "FontManagerAttorney::Termination", "class_font_manager_attorney_1_1_termination.html", null ],
     [ "GridManagerAttorney::Termination", "class_grid_manager_attorney_1_1_termination.html", null ],
     [ "SpriteManagerAttorney::Termination", "class_sprite_manager_attorney_1_1_termination.html", null ],
     [ "TextureManagerAttorney::Termination", "class_texture_manager_attorney_1_1_termination.html", null ],
+    [ "VisualizerAttorney::Termination", "class_visualizer_attorney_1_1_termination.html", null ],
+    [ "VizCmdFactoryAttorney::Termination", "class_viz_cmd_factory_attorney_1_1_termination.html", null ],
     [ "TestRegistry", "class_test_registry.html", null ],
+    [ "VisualizerAttorney::Text", "class_visualizer_attorney_1_1_text.html", null ],
     [ "TextureManager", "class_texture_manager.html", null ],
     [ "TextureManagerAttorney", "class_texture_manager_attorney.html", null ],
     [ "Trace", "class_trace.html", null ],
@@ -96,5 +115,13 @@ var hierarchy =
       [ "Player", "class_player.html", null ],
       [ "TestClass", "class_test_class.html", null ]
     ] ],
-    [ "UpdateObjectAttorney", "class_update_object_attorney.html", null ]
+    [ "UpdateObjectAttorney", "class_update_object_attorney.html", null ],
+    [ "VisualizerAttorney", "class_visualizer_attorney.html", null ],
+    [ "VizCmdCirclePool", "class_viz_cmd_circle_pool.html", null ],
+    [ "VizCmdFactory", "class_viz_cmd_factory.html", null ],
+    [ "VizCmdFactoryAttorney", "class_viz_cmd_factory_attorney.html", null ],
+    [ "VizCmdPointPool", "class_viz_cmd_point_pool.html", null ],
+    [ "VizCmdRectPool", "class_viz_cmd_rect_pool.html", null ],
+    [ "VizCmdSegPool", "class_viz_cmd_seg_pool.html", null ],
+    [ "VizCmdTextPool", "class_viz_cmd_text_pool.html", null ]
 ];

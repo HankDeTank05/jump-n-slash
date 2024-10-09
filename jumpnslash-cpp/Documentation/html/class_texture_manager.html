@@ -144,7 +144,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>TextureManagerAttorn
 </div><div class="memdoc">
 
 <p>Get a texture which has already been loaded into the engine. </p>
-<p>Get a texture from the engine. In order to get a texture from the engine, it must already be loaded it into the engine.</p>
+<p>Get a texture from the engine. In order to get a texture from the engine, it must already be loaded into the engine.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>The key used to identify the texture. This is the same key used when loading the texture.</td></tr>
@@ -152,7 +152,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>TextureManagerAttorn
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns a pointer to an SFML texture.</dd></dl>
-<p><b>Example</b> </p><div class="fragment"><div class="line"><span class="comment">// LoadResources.cpp</span></div>
+<h1><a class="anchor" id="example"></a>
+Example</h1>
+<div class="fragment"><div class="line"><span class="comment">// LoadResources.cpp</span></div>
 <div class="line"><span class="preprocessor">#include &quot;../Engine Code/JumpSlashEngine.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;../Engine Code/TextureManager.h&quot;</span></div>
 <div class="line"> </div>
@@ -165,11 +167,13 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>TextureManagerAttorn
 <div class="line">  assert(<a class="code hl_function" href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a>(<span class="stringliteral">&quot;clouds&quot;</span>).isSmooth() == <span class="keyword">false</span>);</div>
 <div class="line">}</div>
 <div class="ttc" id="aclass_texture_manager_html_aadcf6c9d978195ef308f9f38e88fd0ba"><div class="ttname"><a href="#aadcf6c9d978195ef308f9f38e88fd0ba">TextureManager::GetTexture</a></div><div class="ttdeci">static sf::Texture * GetTexture(std::string key)</div><div class="ttdoc">Get a texture which has already been loaded into the engine.</div><div class="ttdef"><b>Definition</b> TextureManager.cpp:29</div></div>
-</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="#a770e03552151570f7a3cb06f48b66c01" title="Load a texture into the engine.">TextureManager::LoadTexture</a> </dd>
+</div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="#a770e03552151570f7a3cb06f48b66c01" title="Load a texture into the engine.">TextureManager::LoadTexture</a></dd>
 <dd>
-<a class="el" href="class_sprite_manager.html#a0ed3095680ba68bde1eda070234c3631" title="Load a sprite into the engine with a texture pointer, using the whole texture.">SpriteManager::LoadSprite</a> </dd>
+<a class="el" href="class_sprite_manager.html">SpriteManager</a> </dd>
 <dd>
-<a class="el" href="class_sprite_manager.html#a39d303a2a32e575c412693c49235a8c5" title="Get a sprite which has already been loaded into the engine.">SpriteManager::GetSprite</a> </dd></dl>
+<a class="el" href="class_grid_manager.html">GridManager</a> </dd>
+<dd>
+<a class="el" href="class_font_manager.html">FontManager</a> </dd></dl>
 
 </div>
 </div>
@@ -210,16 +214,16 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>TextureManagerAttorn
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">key</td><td>The key used to identify the texture. (Duplicate keys are not allowed!) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>The name of the file to load. The file must be in <code>Assets/Textures/</code> or a subfolder within it. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>The name of the file to load. The file must be in <code>assets/textures/</code> or a subfolder within it. </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">smooth</td><td>Whether or not a texture should be smoothed. If omitted, this argument is <code>true</code> by default.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>The <code>filename</code> argument can include subfolders within the Textures folder. See examples below.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The <code>filename</code> argument can include subfolders within the <code>textures</code> folder. See examples below.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example1"></a>
 Example 1</h1>
-<div class="fragment"><div class="line"><span class="comment">// LoadResources.cpp</span></div>
+<p>The following example demonstrates how to load textures located in the <code>textures</code> folder. </p><div class="fragment"><div class="line"><span class="comment">// LoadResources.cpp</span></div>
 <div class="line"><span class="preprocessor">#include &quot;../Engine Code/JumpSlashEngine.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;../Engine Code/TextureManager.h&quot;</span></div>
 <div class="line"> </div>
@@ -240,7 +244,7 @@ Example 1</h1>
 <div class="ttc" id="aclass_texture_manager_html_a770e03552151570f7a3cb06f48b66c01"><div class="ttname"><a href="#a770e03552151570f7a3cb06f48b66c01">TextureManager::LoadTexture</a></div><div class="ttdeci">static void LoadTexture(std::string key, std::string filename, bool smooth=true)</div><div class="ttdoc">Load a texture into the engine.</div><div class="ttdef"><b>Definition</b> TextureManager.cpp:24</div></div>
 </div><!-- fragment --><h1><a class="anchor" id="example2"></a>
 Example 2</h1>
-<div class="fragment"><div class="line"><span class="comment">// LoadResources.cpp</span></div>
+<p>The following example demonstrates how to load textures located a subfolder within the <code>textures</code> folder. </p><div class="fragment"><div class="line"><span class="comment">// LoadResources.cpp</span></div>
 <div class="line"><span class="preprocessor">#include &quot;../Engine Code/JumpSlashEngine.h&quot;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;../Engine Code/TextureManager.h&quot;</span></div>
 <div class="line"> </div>
@@ -255,9 +259,11 @@ Example 2</h1>
 <div class="line">}</div>
 </div><!-- fragment --><dl class="section see"><dt>See also</dt><dd><a class="el" href="#aadcf6c9d978195ef308f9f38e88fd0ba" title="Get a texture which has already been loaded into the engine.">TextureManager::GetTexture</a></dd>
 <dd>
-<a class="el" href="class_sprite_manager.html#a0ed3095680ba68bde1eda070234c3631" title="Load a sprite into the engine with a texture pointer, using the whole texture.">SpriteManager::LoadSprite</a> </dd>
+<a class="el" href="class_sprite_manager.html">SpriteManager</a> </dd>
 <dd>
-<a class="el" href="class_sprite_manager.html#a39d303a2a32e575c412693c49235a8c5" title="Get a sprite which has already been loaded into the engine.">SpriteManager::GetSprite</a> </dd></dl>
+<a class="el" href="class_grid_manager.html">GridManager</a> </dd>
+<dd>
+<a class="el" href="class_font_manager.html">FontManager</a> </dd></dl>
 
 </div>
 </div>

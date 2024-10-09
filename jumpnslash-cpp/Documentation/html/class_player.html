@@ -117,9 +117,9 @@ Inheritance diagram for Player:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1ff921d722476bca1e2732536a081e75" id="r_a1ff921d722476bca1e2732536a081e75"><td class="memItemLeft" align="right" valign="top"><a id="a1ff921d722476bca1e2732536a081e75" name="a1ff921d722476bca1e2732536a081e75"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Player</b> (sf::Vector2f spawnPoint)</td></tr>
-<tr class="separator:a1ff921d722476bca1e2732536a081e75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3388d5c5164a4321319d151bdd1e39b" id="r_ab3388d5c5164a4321319d151bdd1e39b"><td class="memItemLeft" align="right" valign="top"><a id="ab3388d5c5164a4321319d151bdd1e39b" name="ab3388d5c5164a4321319d151bdd1e39b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Player</b> (<a class="el" href="class_level_map.html">LevelMap</a> *pLevel)</td></tr>
+<tr class="separator:ab3388d5c5164a4321319d151bdd1e39b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91d1e792414561a3efa33058b3c7635f" id="r_a91d1e792414561a3efa33058b3c7635f"><td class="memItemLeft" align="right" valign="top"><a id="a91d1e792414561a3efa33058b3c7635f" name="a91d1e792414561a3efa33058b3c7635f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Player</b> (const <a class="el" href="class_player.html">Player</a> &amp;p)=delete</td></tr>
 <tr class="separator:a91d1e792414561a3efa33058b3c7635f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,6 +179,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a29574cbabc6c837e048587857def8ca3 inherit pro_methods_class_draw_object" id="r_a29574cbabc6c837e048587857def8ca3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_object.html#a29574cbabc6c837e048587857def8ca3">Render</a> (sf::Drawable &amp;drawable)</td></tr>
 <tr class="memdesc:a29574cbabc6c837e048587857def8ca3 inherit pro_methods_class_draw_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render a drawable SFML object.  <br /></td></tr>
 <tr class="separator:a29574cbabc6c837e048587857def8ca3 inherit pro_methods_class_draw_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa14b7527a824752abf0116dd9251d441 inherit pro_methods_class_draw_object" id="r_aa14b7527a824752abf0116dd9251d441"><td class="memItemLeft" align="right" valign="top">
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Render</b> (sf::Vertex *array, int vtexCount)</td></tr>
+<tr class="separator:aa14b7527a824752abf0116dd9251d441 inherit pro_methods_class_draw_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object" id="r_a0d223751f7022545e5387488fd2a5ef6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6">RequestDrawRegistration</a> ()</td></tr>
 <tr class="memdesc:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request that the engine draw this object.  <br /></td></tr>
 <tr class="separator:a0d223751f7022545e5387488fd2a5ef6 inherit pro_methods_class_draw_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -242,7 +245,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the <a class="el" href="_creating_game_object.html#go_drawSystem_exampleCode">Draw System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the Draw System Example Code section from the Creating a Game Object tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_draw_object.html#a29574cbabc6c837e048587857def8ca3" title="Render a drawable SFML object.">DrawObject::Render</a> </dd>
 <dd>
 <a class="el" href="class_draw_object.html#a0d223751f7022545e5387488fd2a5ef6" title="Request that the engine draw this object.">DrawObject::RequestDrawRegistration</a> </dd>
@@ -295,7 +298,7 @@ AlarmObject </dd>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the <a class="el" href="_creating_game_object.html#go_inputSystem_exampleCode">Input System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the Input System Example Code section from the Creating a Game Object tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_input_object.html#a562ec6b13331e068efa163ef47827f19" title="Do something when a key is released.">InputObject::KeyReleased</a> </dd>
 <dd>
 <a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a> </dd>
@@ -362,7 +365,7 @@ AlarmObject </dd>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the <a class="el" href="_creating_game_object.html#go_inputSystem_exampleCode">Input System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the Input System Example Code section from the Creating a Game Object tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_input_object.html#aa5efffbaa424815e3caa1c7b5caee920" title="Do something when a key is pressed.">InputObject::KeyPressed</a> </dd>
 <dd>
 <a class="el" href="class_input_object.html#a08a9295dcd211e267ad769364041d725">InputObject::RequestKeyRegistration</a> </dd>
@@ -430,7 +433,7 @@ AlarmObject </dd>
 <dl class="section return"><dt>Returns</dt><dd>Does not return anything.</dd></dl>
 <h1><a class="anchor" id="example"></a>
 Example</h1>
-<p>See the <a class="el" href="_creating_game_object.html#go_updateSystem_exampleCode">Update System Example Code</a> section from the <a class="el" href="_creating_game_object.html">Creating a Game Object</a> tutorial for example code.</p>
+<p>See the Update System Example Code section from the Creating a Game Object tutorial for example code.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="class_update_object.html#ad60cbe12fe88bf7566a904900378c934" title="Request that the engine update this object.">UpdateObject::RequestUpdateRegistration</a> </dd>
 <dd>
 <a class="el" href="class_update_object.html#ac2573c3f88943d35dd98154cfb96dd4b" title="Request that the engine stop updating this object.">UpdateObject::RequestUpdateDeregistration</a> </dd>

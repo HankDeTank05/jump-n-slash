@@ -1,0 +1,117 @@
+\doxysection{Font\+Manager Class Reference}
+\hypertarget{class_font_manager}{}\label{class_font_manager}\index{FontManager@{FontManager}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}{Load\+Font}} (std\+::string key, std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Load a font into the engine. \end{DoxyCompactList}\item 
+static sf\+::\+Font \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_font_manager_ad08a9f0b8fcf38a73d4e31ff0e20d673}{Get\+Font}} (std\+::string key)
+\begin{DoxyCompactList}\small\item\em Get a font which has already been loaded into the engine. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_font_manager_af2b4d89011f2e5b57dcdf2da37d3e38c}\label{class_font_manager_af2b4d89011f2e5b57dcdf2da37d3e38c} 
+class {\bfseries Font\+Manager\+Attorney}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_font_manager_ad08a9f0b8fcf38a73d4e31ff0e20d673}\index{FontManager@{FontManager}!GetFont@{GetFont}}
+\index{GetFont@{GetFont}!FontManager@{FontManager}}
+\doxysubsubsection{\texorpdfstring{GetFont()}{GetFont()}}
+{\footnotesize\ttfamily \label{class_font_manager_ad08a9f0b8fcf38a73d4e31ff0e20d673} 
+sf\+::\+Font \texorpdfstring{$\ast$}{*} Font\+Manager\+::\+Get\+Font (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get a font which has already been loaded into the engine. 
+
+Get a font from the engine. In order to get a font from the engine, it must already be loaded into the engine.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the font. This is the same key used when loading the font.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to an SFML font.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_texture_manager}{Texture\+Manager} 
+
+\doxylink{class_sprite_manager}{Sprite\+Manager} 
+
+\doxylink{class_grid_manager}{Grid\+Manager} 
+\end{DoxySeeAlso}
+\Hypertarget{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}\index{FontManager@{FontManager}!LoadFont@{LoadFont}}
+\index{LoadFont@{LoadFont}!FontManager@{FontManager}}
+\doxysubsubsection{\texorpdfstring{LoadFont()}{LoadFont()}}
+{\footnotesize\ttfamily \label{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1} 
+void Font\+Manager\+::\+Load\+Font (\begin{DoxyParamCaption}\item[{std\+::string}]{key}{, }\item[{std\+::string}]{filename}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load a font into the engine. 
+
+Load a font into the engine. You must specify a key with which to identify the font, and the name of the file to load.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em key} & The key used to identify the font. (Duplicate keys are not allowed!) \\
+\hline
+\mbox{\texttt{ in}}  & {\em filename} & The name of the file to load. The file must be in {\ttfamily assets/fonts/} or a subfolder within it.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The {\ttfamily filename} argument can include subfolders within the {\ttfamily fonts} folder. See examples below.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+Does not return anything.
+\end{DoxyReturn}
+\hypertarget{class_visualizer_example1}{}\doxysubsection{\texorpdfstring{Example 1}{Example 1}}\label{class_visualizer_example1}
+The following example demonstrates how to load a font located in the {\ttfamily fonts} folder. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/FontManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ JumpSlashEngine::LoadResources()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ load\ fonts}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}{FontManager::LoadFont}}(\textcolor{stringliteral}{"{}arial"{}},\ \textcolor{stringliteral}{"{}arial.ttf"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}{FontManager::LoadFont}}(\textcolor{stringliteral}{"{}consolas"{}},\ \textcolor{stringliteral}{"{}consola.tff"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}{FontManager::LoadFont}}(\textcolor{stringliteral}{"{}delfino"{}},\ \textcolor{stringliteral}{"{}Delfino.ttf"{}});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \hypertarget{class_visualizer_example2}{}\doxysubsection{\texorpdfstring{Example 2}{Example 2}}\label{class_visualizer_example2}
+The following example demonstrates how to load fonts located a subfolder within the {\ttfamily fonts} folder. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ LoadResources.cpp}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/JumpSlashEngine.h"{}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}../Engine\ Code/FontManager.h"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ JumpSlashEngine::LoadResources()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \textcolor{comment}{//\ load\ fonts}}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}{FontManager::LoadFont}}(\textcolor{stringliteral}{"{}arial"{}},\ \textcolor{stringliteral}{"{}standard/arial.ttf"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}{FontManager::LoadFont}}(\textcolor{stringliteral}{"{}consolas"{}},\ \textcolor{stringliteral}{"{}monospaced/consola.tff"{}});}
+\DoxyCodeLine{\ \ \mbox{\hyperlink{class_font_manager_a16c4cea93ab4e1f690165cebcd3fa4c1}{FontManager::LoadFont}}(\textcolor{stringliteral}{"{}delfino"{}},\ \textcolor{stringliteral}{"{}standard/Delfino.ttf"{}});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{class_texture_manager}{Texture\+Manager} 
+
+\doxylink{class_sprite_manager}{Sprite\+Manager} 
+
+\doxylink{class_grid_manager}{Grid\+Manager} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Jump-\/n-\/\+Slash/\+Engine Code/Font\+Manager.\+h\item 
+Jump-\/n-\/\+Slash/\+Engine Code/Font\+Manager.\+cpp\end{DoxyCompactItemize}

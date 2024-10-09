@@ -17,6 +17,8 @@ Inheritance diagram for Player\+State\+Jumping\+:\begin{figure}[H]
 \item 
 virtual void \mbox{\hyperlink{class_player_state_jumping_a50048c04ca5c7a25782ab4ad5eb8fd9d}{Enter}} (\mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*}p\+Player) const override
 \item 
+virtual void \mbox{\hyperlink{class_player_state_jumping_a8c2e715af93d59bbf5f0f19cbb99d8f1}{Update}} (\mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*}p\+Player, float delta\+Time) const override
+\item 
 virtual const \mbox{\hyperlink{class_player_move_state}{Player\+Move\+State}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_player_state_jumping_af311505d65fca9bfdf8ea94b4decc3f1}{Get\+Next\+State}} (\mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*}p\+Player) const override
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_player_move_state}{Player\+Move\+State}}}
@@ -44,6 +46,16 @@ Implements \mbox{\hyperlink{class_player_move_state}{Player\+Move\+State}}.
 \doxysubsubsection{\texorpdfstring{GetNextState()}{GetNextState()}}
 {\footnotesize\ttfamily \label{class_player_state_jumping_af311505d65fca9bfdf8ea94b4decc3f1} 
 const \mbox{\hyperlink{class_player_move_state}{Player\+Move\+State}} \texorpdfstring{$\ast$}{*} Player\+State\+Jumping\+::\+Get\+Next\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*}}]{p\+Player}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_player_move_state}{Player\+Move\+State}}.
+
+\Hypertarget{class_player_state_jumping_a8c2e715af93d59bbf5f0f19cbb99d8f1}\index{PlayerStateJumping@{PlayerStateJumping}!Update@{Update}}
+\index{Update@{Update}!PlayerStateJumping@{PlayerStateJumping}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_player_state_jumping_a8c2e715af93d59bbf5f0f19cbb99d8f1} 
+void Player\+State\+Jumping\+::\+Update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*}}]{p\+Player}{, }\item[{float}]{delta\+Time}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 

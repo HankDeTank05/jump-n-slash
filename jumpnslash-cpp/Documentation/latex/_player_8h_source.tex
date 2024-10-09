@@ -13,39 +13,47 @@
 \DoxyCodeLine{00009\ }
 \DoxyCodeLine{00010\ \textcolor{comment}{//\ forward\ declarations}}
 \DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player_move_state}{PlayerMoveState}};}
-\DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_update_object}{UpdateObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_draw_object}{DrawObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_input_object}{InputObject}}}
-\DoxyCodeLine{00014\ \{}
-\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}()\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(sf::Vector2f\ spawnPoint);}
-\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player}{Player}}\&\ p)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player}{Player}}\&\ p)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_player}{\string~Player}}();}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a20bfb1cb738f6b00f589207ce460491e}{Update}}(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a5b60ad157bb1e8debca89ed6903ca2a4}{Draw}}()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a726a2a91a52257abf1d4c8614421644b}{KeyPressed}}(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a490acdcc808e1581a8094bf2571d7b2d}{KeyReleased}}(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ player\ accessors.\ for\ selective\ access\ only\ (thru\ attorney)}}
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player_attorney}{PlayerAttorney}};}
-\DoxyCodeLine{00030\ \ \ \ \ sf::Vector2f\ GetPos();}
-\DoxyCodeLine{00031\ \ \ \ \ sf::Vector2f\ GetPosDelta();}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ player\ mutators.\ for\ selective\ access\ only\ (thru\ attorney)}}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ SetSpawnPoint(sf::Vector2f\ spawnPoint);}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00037\ \ \ \ \ sf::Vector2f\ pos;}
-\DoxyCodeLine{00038\ \ \ \ \ sf::Vector2f\ posDelta;}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ speed;}
-\DoxyCodeLine{00040\ \ \ \ \ sf::Sprite*\ pSprite;}
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}*\ pCurrentState;}
-\DoxyCodeLine{00042\ \ \ \ \ sf::Vector2f\ respawnPoint;}
-\DoxyCodeLine{00043\ \};}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_level_map}{LevelMap}};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_update_object}{UpdateObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_draw_object}{DrawObject}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_input_object}{InputObject}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}()\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(\mbox{\hyperlink{class_level_map}{LevelMap}}*\ pLevel);}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player}{Player}}\&\ p)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_player}{Player}}\&\ p)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_player}{\string~Player}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a20bfb1cb738f6b00f589207ce460491e}{Update}}(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a5b60ad157bb1e8debca89ed6903ca2a4}{Draw}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a726a2a91a52257abf1d4c8614421644b}{KeyPressed}}(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a490acdcc808e1581a8094bf2571d7b2d}{KeyReleased}}(sf::Keyboard::Key\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ player\ accessors.\ for\ selective\ access\ only\ (thru\ attorney)}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player_attorney}{PlayerAttorney}};}
+\DoxyCodeLine{00031\ \ \ \ \ sf::Vector2f\ GetPos();}
+\DoxyCodeLine{00032\ \ \ \ \ sf::Vector2f\ GetPosDelta();}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_level_map}{LevelMap}}*\ GetLevel();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ player\ mutators.\ for\ selective\ access\ only\ (thru\ attorney)}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ RaycastRight(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ RaycastLeft(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ RaycastUp(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ RaycastDown(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ sf::Vector2f\ pos;\ \textcolor{comment}{//\ current\ world-\/space\ position}}
+\DoxyCodeLine{00043\ \ \ \ \ sf::Vector2f\ posDelta;\ \textcolor{comment}{//\ player\ movement\ for\ the\ current\ frame\ (aka,\ the\ change\ from\ previous\ frame)}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ speed;\ \textcolor{comment}{//\ horizontal\ movement\ speed}}
+\DoxyCodeLine{00045\ \ \ \ \ sf::Sprite*\ pSprite;\ \textcolor{comment}{//\ the\ sprite\ to\ be\ drawn}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_player_move_state}{PlayerMoveState}}*\ pCurrentState;\ \textcolor{comment}{//\ the\ current\ movement\ state}}
+\DoxyCodeLine{00047\ \ \ \ \ sf::Vector2f\ respawnPoint;\ \textcolor{comment}{//\ where\ the\ player\ will\ respawn\ after\ dying}}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_level_map}{LevelMap}}*\ pLevel;\ \textcolor{comment}{//\ pointer\ to\ the\ current\ level\ (for\ map\ collision)}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ walkLeftHeld;\ \textcolor{comment}{//\ flag\ indicating\ if\ the\ walk\ left\ key\ is\ currently\ pressed}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ walkRightHeld;\ \textcolor{comment}{//\ flag\ indicating\ if\ the\ walk\ right\ key\ is\ currently\ pressed}}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

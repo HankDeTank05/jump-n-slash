@@ -74,20 +74,21 @@ public: // api functions
 	* 
 	* \see	TextureManager::GetTexture
 	* 
-	* \see	SpriteManager::LoadSprite
-	* \see	SpriteManager::GetSprite
+	* \see	SpriteManager
+	* \see	GridManager
+	* \see	FontManager
 	*/
 	static void LoadTexture(std::string key, std::string filename, bool smooth = true);
 	/*!
 	* \brief	Get a texture which has already been loaded into the engine.
 	* 
-	* Get a texture from the engine. In order to get a texture from the engine, it must already be loaded it into the engine.
+	* Get a texture from the engine. In order to get a texture from the engine, it must already be loaded into the engine.
 	* 
 	* \param[in]	key		The key used to identify the texture. This is the same key used when loading the texture.
 	* 
 	* \return	Returns a pointer to an SFML texture.
 	* 
-	* \b Example
+	* \section example Example
 	* \code
 	* // LoadResources.cpp
 	* #include "../Engine Code/JumpSlashEngine.h"
@@ -104,8 +105,10 @@ public: // api functions
 	* \endcode
 	* 
 	* \see	TextureManager::LoadTexture
-	* \see	SpriteManager::LoadSprite
-	* \see	SpriteManager::GetSprite
+	* 
+	* \see	SpriteManager
+	* \see	GridManager
+	* \see	FontManager
 	*/
 	static sf::Texture* GetTexture(std::string key);
 

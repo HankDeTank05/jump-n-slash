@@ -1,0 +1,103 @@
+\doxysection{Visualizer.\+h}
+\hypertarget{_visualizer_8h_source}{}\label{_visualizer_8h_source}\index{Jump-\/n-\/Slash/Engine Code/Visualizer.h@{Jump-\/n-\/Slash/Engine Code/Visualizer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VISUALIZER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VISUALIZER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/CircleShape.hpp>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/RectangleShape.hpp>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <SFML/Graphics/VertexArray.hpp>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}DrawObject.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}../Game\ Code/Constants.h"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ forward\ declarations}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer_command}{VisualizerCommand}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer}{Visualizer}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_draw_object}{DrawObject}}\ \textcolor{comment}{//\ this\ class\ is\ written\ as\ a\ singleton}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_visualizer}{Visualizer}}*\ pInstance;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_visualizer}{Visualizer}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_visualizer}{Visualizer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_visualizer}{Visualizer}}\&\ v)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_visualizer}{Visualizer}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_visualizer}{Visualizer}}\&\ v)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_visualizer}{\string~Visualizer}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_visualizer}{Visualizer}}\&\ Instance();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{using\ }VizCmdList\ =\ std::list<VisualizerCommand*>;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:\ \textcolor{comment}{//\ public\ api\ functions}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_visualizer_a4d9f5e29124ee85c27d9d503930e95cc}{VisualizePoint}}(sf::Vector2f\ pos,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_visualizer_a4d9f5e29124ee85c27d9d503930e95cc}{VisualizePoint}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizePoint}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeCircle(sf::Vector2f\ pos,\ \textcolor{keywordtype}{float}\ radius,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR,\ \textcolor{keywordtype}{bool}\ showCenter\ =\ \textcolor{keyword}{true});\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeCircle}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeCircle(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ radius,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR,\ \textcolor{keywordtype}{bool}\ showCenter\ =\ \textcolor{keyword}{true});\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeCircle}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeRect(sf::Vector2f\ pos,\ sf::Vector2f\ size,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeRect}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeRect(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ sf::Vector2f\ size,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeRect}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeRect(sf::Vector2f\ pos,\ \textcolor{keywordtype}{float}\ width,\ \textcolor{keywordtype}{float}\ height,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeRect}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeRect(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ width,\ \textcolor{keywordtype}{float}\ height,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeRect}}
+\DoxyCodeLine{00088\ \ \ \ \ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeSegment(sf::Vector2f\ pos0,\ sf::Vector2f\ pos1,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeSegment}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeSegment(\textcolor{keywordtype}{float}\ x0,\ \textcolor{keywordtype}{float}\ y0,\ sf::Vector2f\ pos1,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeSegment}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeSegment(sf::Vector2f\ pos0,\ \textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ y1,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeSegment}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeSegment(\textcolor{keywordtype}{float}\ x0,\ \textcolor{keywordtype}{float}\ y0,\ \textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ y1,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeSegment}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeRay(sf::Vector2f\ pos,\ sf::Vector2f\ dir,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeRay(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ sf::Vector2f\ dir,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeRay(sf::Vector2f\ pos,\ \textcolor{keywordtype}{float}\ dirX,\ \textcolor{keywordtype}{float}\ dirY,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeRay(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ dirX,\ \textcolor{keywordtype}{float}\ dirY,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeLine(sf::Vector2f\ pos0,\ sf::Vector2f\ pos1,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeLine(\textcolor{keywordtype}{float}\ x0,\ \textcolor{keywordtype}{float}\ y0,\ sf::Vector2f\ pos1,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeLine(sf::Vector2f\ pos0,\ \textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ y1,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeLine(\textcolor{keywordtype}{float}\ x0,\ \textcolor{keywordtype}{float}\ y0,\ \textcolor{keywordtype}{float}\ x1,\ \textcolor{keywordtype}{float}\ y1,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR);}
+\DoxyCodeLine{00103\ \ \ \ \ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeText(sf::String\ str,\ sf::Vector2f\ pos,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR,\ \textcolor{keywordtype}{int}\ sizeInPix\ =\ VIZ\_DEFAULT\_TEXT\_SIZE);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeText}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeText(\textcolor{keywordtype}{int}\ num,\ sf::Vector2f\ pos,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR,\ \textcolor{keywordtype}{int}\ sizeInPix\ =\ VIZ\_DEFAULT\_TEXT\_SIZE);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeText}}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeText(\textcolor{keywordtype}{float}\ num,\ sf::Vector2f\ pos,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR,\ \textcolor{keywordtype}{int}\ sizeInPix\ =\ VIZ\_DEFAULT\_TEXT\_SIZE);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeText}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ VisualizeText(\textcolor{keywordtype}{bool}\ flag,\ sf::Vector2f\ pos,\ sf::Color\ color\ =\ VIZ\_DEFAULT\_COLOR,\ \textcolor{keywordtype}{int}\ sizeInPix\ =\ VIZ\_DEFAULT\_TEXT\_SIZE);\ \textcolor{comment}{//\ TODO:\ docs\ for\ Visualizer::VisualizeText}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_visualizer_attorney}{VisualizerAttorney}};}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ProcessCommands();}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ShowPoint(sf::Vector2f\ pos,\ sf::Color\ color);}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ShowCircle(sf::Vector2f\ pos,\ \textcolor{keywordtype}{float}\ radius,\ sf::Color\ color,\ \textcolor{keywordtype}{bool}\ showCenter);}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ShowRect(sf::Vector2f\ pos,\ sf::Vector2f\ size,\ sf::Color\ color);}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ShowSegment(sf::Vector2f\ pos0,\ sf::Vector2f\ pos1,\ sf::Color\ color);}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ ShowText(sf::String\ str,\ sf::Vector2f\ pos,\ sf::Color\ color,\ \textcolor{keywordtype}{int}\ sizeInPix);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ api\ backend\ functions}}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ privVisualizePoint(sf::Vector2f\ pos,\ sf::Color\ color);}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ privVisualizeCircle(sf::Vector2f\ pos,\ \textcolor{keywordtype}{float}\ radius,\ sf::Color\ color,\ \textcolor{keywordtype}{bool}\ showCenter);}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ privVisualizeRect(sf::Vector2f\ pos,\ sf::Vector2f\ size,\ sf::Color\ color);}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ privVisualizeSegment(sf::Vector2f\ pos0,\ sf::Vector2f\ pos1,\ sf::Color\ color);}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ privVisualizeText(sf::String\ str,\ sf::Vector2f\ pos,\ sf::Color\ color,\ \textcolor{keywordtype}{int}\ sizeInPix);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ privProcessCommands();}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ privShowPoint(sf::Vector2f\ pos,\ sf::Color\ color);}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ privShowCircle(sf::Vector2f\ pos,\ \textcolor{keywordtype}{float}\ radius,\ sf::Color\ color,\ \textcolor{keywordtype}{bool}\ showCenter);}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ privShowRect(sf::Vector2f\ pos,\ sf::Vector2f\ size,\ sf::Color\ color);}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ privShowSegment(sf::Vector2f\ pos0,\ sf::Vector2f\ pos1,\ sf::Color\ color);}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ privShowText(sf::String\ str,\ sf::Vector2f\ pos,\ sf::Color\ color,\ \textcolor{keywordtype}{int}\ sizeInPix);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
+\DoxyCodeLine{00137\ \ \ \ \ VizCmdList\ cmdList;}
+\DoxyCodeLine{00138\ \ \ \ \ sf::CircleShape*\ pCircle;}
+\DoxyCodeLine{00139\ \ \ \ \ sf::RectangleShape*\ pRect;}
+\DoxyCodeLine{00140\ \ \ \ \ sf::Text*\ pText;}
+\DoxyCodeLine{00141\ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

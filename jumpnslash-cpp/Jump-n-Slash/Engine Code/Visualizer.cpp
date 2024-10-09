@@ -56,6 +56,11 @@ void Visualizer::VisualizePoint(sf::Vector2f pos, sf::Color color)
 	Instance().privVisualizePoint(pos, color);
 }
 
+void Visualizer::VisualizePoint(float x, float y, sf::Color color)
+{
+	Instance().privVisualizePoint(sf::Vector2f(x, y), color);
+}
+
 void Visualizer::VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter)
 {
 	Instance().privVisualizeCircle(pos, radius, color, showCenter);

@@ -61,9 +61,26 @@ public: // public api functions
 	*	FontManager::LoadFont("delfino", "standard/Delfino.ttf");
 	* }
 	* \endcode
+	* 
+	* \see	TextureManager
+	* \see	SpriteManager
+	* \see	GridManager
 	*/
 	static void LoadFont(std::string key, std::string filename);
-	static sf::Font* GetFont(std::string key); // TODO: docs for FontManager::GetFont
+	/*!
+	* \brief	Get a font which has already been loaded into the engine.
+	* 
+	* Get a font from the engine. In order to get a font from the engine, it must already be loaded into the engine.
+	* 
+	* \param[in]	key		The key used to identify the font. This is the same key used when loading the font.
+	* 
+	* \return	Returns a pointer to an SFML font.
+	* 
+	* \see	TextureManager
+	* \see	SpriteManager
+	* \see	GridManager
+	*/
+	static sf::Font* GetFont(std::string key); // TODO: docs for FontManager::GetFont needs example code
 
 private: // engine-only api functions
 	friend class FontManagerAttorney;

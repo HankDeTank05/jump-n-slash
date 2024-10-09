@@ -4,6 +4,7 @@ var dir_c0484fe76e3c52e36d93b6996b160aad =
     [ "BlockHazard.h", "_block_hazard_8h_source.html", null ],
     [ "BlockSolid.h", "_block_solid_8h_source.html", null ],
     [ "Constants.h", "_constants_8h_source.html", null ],
+    [ "DebugFlags.h", "_debug_flags_8h_source.html", null ],
     [ "DesignerControls.h", "_designer_controls_8h_source.html", null ],
     [ "JsonParser.h", "_json_parser_8h_source.html", null ],
     [ "Level0.h", "_level0_8h_source.html", null ],

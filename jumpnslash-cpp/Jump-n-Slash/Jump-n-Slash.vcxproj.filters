@@ -103,6 +103,18 @@
     <Filter Include="Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling">
       <UniqueIdentifier>{30a8b4b1-237d-4a5f-8bf6-1d6c6ce43d52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Font Manager">
+      <UniqueIdentifier>{e6525ae9-845f-40a8-8983-4bf36f7072c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Grid Manager">
+      <UniqueIdentifier>{9f71b241-f18f-4cab-b051-a7b7e3ce3c80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Sprite Manager">
+      <UniqueIdentifier>{e917a951-3980-4f00-9c79-c128e9159c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Texture Manager">
+      <UniqueIdentifier>{3763d391-f152-47af-bfc8-35d41d4d81dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -111,17 +123,11 @@
     <ClCompile Include="Engine Code\main.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\TextureManager.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\GameInitialize.cpp">
       <Filter>Source Files\Game Code\Files Required by Engine</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\LoadResources.cpp">
       <Filter>Source Files\Game Code\Files Required by Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\SpriteManager.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\DrawManager.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
@@ -146,12 +152,6 @@
     </ClCompile>
     <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\TextureManagerAttorney.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\SpriteManagerAttorney.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\UpdateManager.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
@@ -243,12 +243,6 @@
     <ClCompile Include="Game Code\LevelMap.cpp">
       <Filter>Source Files\Game Code\Level Data</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\GridManager.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\GridManagerAttorney.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\LevelTile.cpp">
       <Filter>Source Files\Game Code\Level Data</Filter>
     </ClCompile>
@@ -309,17 +303,35 @@
     <ClCompile Include="Engine Code\VizCmdFactoryAttorney.cpp">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\FontManager.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\FontManagerAttorney.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\VisualizerCommandText.cpp">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\VizCmdTextPool.cpp">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\FontManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Font Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\FontManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Font Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GridManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GridManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Sprite Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Sprite Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\TextureManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Texture Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\TextureManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Texture Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -328,12 +340,6 @@
     </ClInclude>
     <ClInclude Include="Game Code\Constants.h">
       <Filter>Source Files\Game Code</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\TextureManager.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\SpriteManager.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\RegistrationState.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
@@ -373,12 +379,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\MemTracker\ProjectSettings.h">
       <Filter>Source Files\Engine Code\MemTracker</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\TextureManagerAttorney.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\SpriteManagerAttorney.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\UpdateManager.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
@@ -482,12 +482,6 @@
     <ClInclude Include="Game Code\LevelMap.h">
       <Filter>Source Files\Game Code\Level Data</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\GridManager.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\GridManagerAttorney.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\LevelTile.h">
       <Filter>Source Files\Game Code\Level Data</Filter>
     </ClInclude>
@@ -548,17 +542,35 @@
     <ClInclude Include="Game Code\DebugFlags.h">
       <Filter>Source Files\Game Code</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\FontManager.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\FontManagerAttorney.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\VisualizerCommandText.h">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Commands</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\VizCmdTextPool.h">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\FontManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Font Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\FontManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Font Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GridManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GridManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Sprite Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Sprite Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TextureManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Texture Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TextureManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Texture Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

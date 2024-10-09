@@ -22,27 +22,27 @@
 \DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_sprite_manager}{SpriteManager}}\&\ Instance();}
 \DoxyCodeLine{00019\ }
 \DoxyCodeLine{00020\ \textcolor{keyword}{public}:\ \textcolor{comment}{//\ api\ functions}}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{LoadSprite}}(std::string\ key,\ sf::Texture*\ pTex);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ SpriteManager::LoadSprite(key,\ pTex)\ needs\ example\ code}}
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{LoadSprite}}(std::string\ key,\ sf::Texture*\ pTex,\ sf::IntRect\ spriteRect);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ SpriteManager::LoadSprite(key,\ pTex,\ spriteRect)\ need\ example\ code}}
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{LoadSprite}}(std::string\ key,\ std::string\ texKey);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ SpriteManager::LoadSprite(key,\ texKey)\ needs\ example\ code}}
-\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{LoadSprite}}(std::string\ key,\ std::string\ texKey,\ sf::IntRect\ spriteRect);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ SpriteManager::LoadSprite(key,\ texKey,\ spriteRect)\ needs\ example\ code}}
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{static}\ sf::Sprite*\ \mbox{\hyperlink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{GetSprite}}(std::string\ key);\ \textcolor{comment}{//\ TODO:\ documentation\ for\ SpriteManager::GetSprite(key)\ needs\ example\ code}}
-\DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
-\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sprite_manager_attorney}{SpriteManagerAttorney}};}
-\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
-\DoxyCodeLine{00121\ }
-\DoxyCodeLine{00122\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ api\ backend\ functions}}
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadSprite(std::string\ key,\ sf::Texture*\ pTex);}
-\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadSprite(std::string\ key,\ sf::Texture*\ pTex,\ sf::IntRect\ spriteRect);}
-\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadSprite(std::string\ key,\ std::string\ texKey);}
-\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadSprite(std::string\ key,\ std::string\ texKey,\ sf::IntRect\ spriteRect);}
-\DoxyCodeLine{00127\ \ \ \ \ sf::Sprite*\ privGetSprite(std::string\ key);}
-\DoxyCodeLine{00128\ }
-\DoxyCodeLine{00129\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
-\DoxyCodeLine{00130\ \ \ \ \ std::map<std::string,\ sf::Sprite*>\ sprites;\ }
-\DoxyCodeLine{00131\ \};}
-\DoxyCodeLine{00132\ }
-\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{LoadSprite}}(std::string\ key,\ sf::Texture*\ pTex);\ \textcolor{comment}{//\ TODO:\ docs\ for\ SpriteManager::LoadSprite(key,\ pTex)\ needs\ example\ code}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{LoadSprite}}(std::string\ key,\ sf::Texture*\ pTex,\ sf::IntRect\ spriteRect);\ \textcolor{comment}{//\ TODO:\ docs\ for\ SpriteManager::LoadSprite(key,\ pTex,\ spriteRect)\ need\ example\ code}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{LoadSprite}}(std::string\ key,\ std::string\ texKey);\ \textcolor{comment}{//\ TODO:\ docs\ for\ SpriteManager::LoadSprite(key,\ texKey)\ needs\ example\ code}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sprite_manager_a0ed3095680ba68bde1eda070234c3631}{LoadSprite}}(std::string\ key,\ std::string\ texKey,\ sf::IntRect\ spriteRect);\ \textcolor{comment}{//\ TODO:\ docs\ for\ SpriteManager::LoadSprite(key,\ texKey,\ spriteRect)\ needs\ example\ code}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ sf::Sprite*\ \mbox{\hyperlink{class_sprite_manager_a39d303a2a32e575c412693c49235a8c5}{GetSprite}}(std::string\ key);\ \textcolor{comment}{//\ TODO:\ docs\ for\ SpriteManager::GetSprite(key)\ needs\ example\ code}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ engine-\/only\ api\ functions}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sprite_manager_attorney}{SpriteManagerAttorney}};}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ Terminate();}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ private\ api\ backend\ functions}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadSprite(std::string\ key,\ sf::Texture*\ pTex);}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadSprite(std::string\ key,\ sf::Texture*\ pTex,\ sf::IntRect\ spriteRect);}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadSprite(std::string\ key,\ std::string\ texKey);}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ privLoadSprite(std::string\ key,\ std::string\ texKey,\ sf::IntRect\ spriteRect);}
+\DoxyCodeLine{00132\ \ \ \ \ sf::Sprite*\ privGetSprite(std::string\ key);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{keyword}{private}:\ \textcolor{comment}{//\ member\ variables}}
+\DoxyCodeLine{00135\ \ \ \ \ std::map<std::string,\ sf::Sprite*>\ sprites;\ }
+\DoxyCodeLine{00136\ \};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
