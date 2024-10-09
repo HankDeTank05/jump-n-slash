@@ -38,7 +38,7 @@ public: // public api functions
 	* function, or by an object deriving from DrawObject.
 	* 
 	* \param[in]	pos		The world-space position at which a dot should be drawn.
-	* \param[in]	color	The color of the dot to be drawn (if this argument is omitted, Cyan will be used)
+	* \param[in]	color	The color of the dot to be drawn (Cyan by default).
 	* 
 	* \return	Does not return anything.
 	* 
@@ -76,8 +76,85 @@ public: // public api functions
 	* \see	Visualizer::VisualizeText
 	*/
 	static void VisualizePoint(sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizePoint(float x, float y, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizePoint
+	/*!
+	* \brief	Visualize a point in space for debugging.
+	*
+	* This function allows you visualize a world-space position by drawing a dot on screen.
+	*
+	* \note		This function may be called anywhere, by anyone. This function does not need to be called inside a draw
+	* function, or by an object deriving from DrawObject.
+	*
+	* \param[in]	x		The x-coordinate of the world-space position at which a dot should be drawn.
+	* \param[in]	y		The y-coordinate of the world-space position at which a dot should be drawn.
+	* \param[in]	color	The color of the dot to be drawn (Cyan by default).
+	*
+	* \return	Does not return anything.
+	*
+	* \section example1 Example 1
+	* \code
+	* // Player.cpp
+	* #include "Player.h"
+	* #include "../Engine Code/Visualizer.h"
+	*
+	* void Player::Update(float deltaTime)
+	* {
+	*	float xPos = 420.69f;
+	*	float yPos = 96.024f;
+	*	Visualizer::VisualizePoint(xPos, yPos);
+	* }
+	* \endcode
+	*
+	* \section example2 Example 2
+	* \code
+	* // Player.cpp
+	* #include "Player.h"
+	* #include "../Engine Code/Visualizer.h"
+	*
+	* void Player::Update(float deltaTime)
+	* {
+	*	float xPos = 420.69f;
+	*	float yPos = 96.024f;
+	*	Visualizer::VisualizePoint(xPos, yPos, sf::Color::Red);
+	* }
+	* \endcode
+	*
+	* \see	Visualizer::VisualizePoint(sf::Vector2f pos, sf::Color color)
+	*
+	* \see	Visualizer::VisualizeCircle
+	* \see	Visualizer::VisualizeRect
+	* \see	Visualizer::VisualizeSegment
+	* \see	Visualizer::VisualizeRay
+	* \see	Visualizer::VisualizeLine
+	* \see	Visualizer::VisualizeText
+	*/
+	static void VisualizePoint(float x, float y, sf::Color color = VIZ_DEFAULT_COLOR);
 
+	/*!
+	* \brief	Visualize a circle for debugging.
+	* 
+	* This function allows you to visualize a circle in world-space for debugging purposes.
+	* 
+	* \param[in]	pos				The position of the center of the circle in world-space.
+	* \param[in]	radius			The radius of the circle, in pixels.
+	* \param[in]	color			The color of the circle to be drawn (Cyan by default).
+	* \param[in]	showCenter		Whether or not to visualize the center point of the circle (\c true by default).
+	* 
+	* \return	Does not return anything.
+	* 
+	* \section example1 Example 1
+	* \code
+	* // Player.cpp
+	* #include "Player.h"
+	* #include "../Engine Code/Visualizer.h"
+	* 
+	* void Player::Update(float deltaTime)
+	* {
+	*	// visualize a distance from the center of the player sprite
+	*	float distance = 100.f;
+	*	Visualizer::VisualizeCircle(pos + sf::Vector2f(TILE_SIZE_F/2.f, TILE_SIZE_F/2.f), distance);
+	* }
+	* \endcode
+	*/
 	static void VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true); // TODO: docs for Visualizer::VisualizeCircle
 	static void VisualizeCircle(float x, float y, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true); // TODO: docs for Visualizer::VisualizeCircle
 
