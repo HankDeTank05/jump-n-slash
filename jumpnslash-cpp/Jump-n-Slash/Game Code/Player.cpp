@@ -134,7 +134,7 @@ void Player::RaycastRight(float deltaTime)
 
 	// cast a ray from the top (index=0) and the bottom (index=1) of the sprite
 	startPos[0] = pos;
-	startPos[1] = pos + sf::Vector2f(0.f, TILE_SIZE_F);
+	startPos[1] = pos + sf::Vector2f(0.f, TILE_SIZE_F - 0.001f); // subtract a little just in case we reach into the next tile (this only happens when pos.y is a whole number)
 
 	float minX = MAX_LEVEL_SIZE * TILE_SIZE_F;
 
@@ -195,7 +195,7 @@ void Player::RaycastLeft(float deltaTime)
 
 	// cast a ray from the top (index=0) and the bottom (index=1) of the sprite
 	startPos[0] = pos;
-	startPos[1] = pos + sf::Vector2f(0.f, TILE_SIZE_F);
+	startPos[1] = pos + sf::Vector2f(0.f, TILE_SIZE_F - 0.001f); // subtract a little just in case we reach into the next tile (this only happens when pos.y is a whole number)
 
 	float maxX = 0;
 
@@ -264,7 +264,7 @@ void Player::RaycastUp(float deltaTime)
 
 	// Cast a ray from the left (index=0) and right (index=1) of the sprite
 	startPos[0] = pos;
-	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F, 0.0f);
+	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, 0.f); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
 
 	// The highest point the player can move to without being inside of a wall
 	float maxY = 0;
@@ -333,7 +333,7 @@ void Player::RaycastDown(float deltaTime)
 
 	// Cast a ray from the left (index=0) and right (index=1) of the sprite
 	startPos[0] = pos;
-	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F, 0.f);
+	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, 0.f); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
 
 	// The lowest point the player can move to without being inside of a wall
 	float minY = MAX_LEVEL_SIZE * TILE_SIZE_F;
@@ -400,7 +400,6 @@ void Player::RaycastDown(float deltaTime)
 	isGrounded = pos.y == minY;
 
 	pos.y = minY;
-
 }
 
 void Player::ApplyGravity(float deltaTime)
