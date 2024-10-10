@@ -15,6 +15,7 @@ void JumpSlashEngine::LoadResources()
 {
 	FontManager::LoadFont("arial", "arial.ttf");
 	FontManager::LoadFont("consolas", "consola.ttf");
+	FontManager::LoadFont("delfino", "Delfino.ttf");
 
 	TextureManager::LoadTexture("player idle 1", "player/idle_1_32.png");
 	TextureManager::LoadTexture("player idle 2", "player/idle_2_32.png");
@@ -52,6 +53,7 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::LoadSprite("indicator spawn player right", "indicator spawn player right");
 
 	GridManager::LoadGrid("test", "test.txt");
+	GridManager::LoadGrid("test 2", "test2.txt");
 
 	SetStartScene(new Level0());
 }

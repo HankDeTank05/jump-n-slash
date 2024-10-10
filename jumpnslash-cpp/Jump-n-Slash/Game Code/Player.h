@@ -7,9 +7,10 @@
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/InputObject.h"
 
+#include "LevelMap.h"
+
 // forward declarations
 class PlayerMoveState;
-class LevelMap;
 
 class Player : public UpdateObject, public DrawObject, public InputObject
 {
@@ -54,6 +55,7 @@ private: // Member variables
 	bool walkRightKeyDown; // flag indicating if the walk right key is currently pressed
 	bool jumpKeyDown; // flag indicating if the jump jey is currently pressed
 	bool isGrounded; // flag indicating if the player is touching the ground
+	LevelMap::RoomListRef currentRoom; // the reference to the current room the player is in
 };
 
 #endif

@@ -116,6 +116,16 @@ void Visualizer::VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color
 	Instance().privVisualizeText(str, pos, color, sizeInPix);
 }
 
+void Visualizer::VisualizeText(sf::Vector2f vect, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	Instance().privVisualizeText("(" + std::to_string(vect.x) + ", " + std::to_string(vect.y) + ")", pos, color, sizeInPix);
+}
+
+void Visualizer::VisualizeText(sf::Vector2i vect, sf::Vector2f pos, sf::Color color, int sizeInPix)
+{
+	Instance().privVisualizeText("(" + std::to_string(vect.x) + ", " + std::to_string(vect.y) + ")", pos, color, sizeInPix);
+}
+
 void Visualizer::VisualizeText(int num, sf::Vector2f pos, sf::Color color, int sizeInPix)
 {
 	Instance().privVisualizeText(std::to_string(num), pos, color, sizeInPix);

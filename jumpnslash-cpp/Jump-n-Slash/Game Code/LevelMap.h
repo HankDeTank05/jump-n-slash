@@ -31,13 +31,19 @@ private:
 		sf::Vector2f* playerSpawnPoint; // if hasPlayerSpawn == false, this is nullptr
 		std::list<sf::Vector2f> enemyLeftSpawns;
 		std::list<sf::Vector2f> enemyRightSpawns;
+		float scrollLeftBoundsX;
+		float scrollRightBoundsX;
+		float scrollTopBoundsY;
+		float scrollBottomBoundsY;
 	};
 
-	using RoomList = std::list<RoomData*>;
 public:
+	using RoomList = std::list<RoomData*>;
 	using RoomListRef = RoomList::iterator;
 
 	sf::Vector2f GetStartingSpawnPoint(); // TODO: docs for LevelMap::GetStartingSpawnPoint
+	RoomListRef GetStartingRoomRef(); // TODO: docs for LevelMap::GetStartingRoomRef
+	RoomListRef GetRoomAtPos(sf::Vector2f worldPos); // TODO: docs for LevelMap::GetRoomAtPos
 
 	/*!
 	* \brief	Get the tile at a given world-space position.
@@ -56,7 +62,9 @@ public:
 	* 
 	* \see LevelTile
 	*/
-	LevelTile* GetTileAtPos(sf::Vector2f worldPos);
+	LevelTile* GetTileAtPos(sf::Vector2f worldPos); // TODO: docs for LevelMap::GetTileAtPos needs example code
+
+	void DebugLevelScrollBounds(RoomListRef roomListRef);
 
 private:
 	std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;

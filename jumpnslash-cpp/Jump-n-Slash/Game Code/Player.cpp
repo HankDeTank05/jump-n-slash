@@ -23,7 +23,8 @@ Player::Player(LevelMap* _pLevel)
 	walkLeftKeyDown(false),
 	walkRightKeyDown(false),
 	jumpKeyDown(false),
-	isGrounded(false)
+	isGrounded(false),
+	currentRoom(_pLevel->GetStartingRoomRef())
 {
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
@@ -44,6 +45,9 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
+	// new frame, so update the previous state
+	pPrevState = pCurrentState;
+
 	// update the move state
 	pCurrentState = pCurrentState->GetNextState(this);
 	if (pCurrentState != pPrevState)
@@ -51,8 +55,11 @@ void Player::Update(float deltaTime)
 		pCurrentState->Enter(this);
 	}
 
-	// update based on the current move state
+	// update player based on the current move state
 	pCurrentState->Update(this, deltaTime);
+
+	// update which room we're currently in
+	currentRoom = pLevel->GetRoomAtPos(pos);
 
 	// reset the player's y-velocity if they're grounded (so we don't continuously accelerate downwards)
 	if (isGrounded && !jumpKeyDown)
@@ -60,7 +67,7 @@ void Player::Update(float deltaTime)
 		posDelta.y = 0.f;
 	}
 
-	// temporary code, to make sure jump force is only applied for the first frame the jump key is pressed
+	// TEMPORARY CODE, to make sure jump force is only applied for the first frame the jump key is pressed
 	if (jumpKeyDown)
 	{
 		jumpKeyDown = false;
@@ -68,7 +75,6 @@ void Player::Update(float deltaTime)
 
 	// set the sprite position for drawing
 	pSprite->setPosition(pos);
-	pPrevState = pCurrentState;
 
 	// debug visualizations
 	if (DEBUG_PLAYER_POSITION)
@@ -78,9 +84,9 @@ void Player::Update(float deltaTime)
 
 		sf::Color posColor = sf::Color::Yellow;
 		Visualizer::VisualizePoint(pos, posColor);
-		std::string posStr = "(" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")";
+		//std::string posStr = "(" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")";
 		sf::Vector2f textPos(0.f, 0.f);
-		Visualizer::VisualizeText(posStr, textPos, posColor);
+		Visualizer::VisualizeText(pos, textPos, posColor);
 		Visualizer::VisualizeSegment(sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE), pos, posColor);
 
 		// Visualize posDelta
@@ -88,9 +94,9 @@ void Player::Update(float deltaTime)
 		sf::Color posDeltaColor = sf::Color::Magenta;
 		sf::Vector2f halfTileDelta(TILE_SIZE_F / 2.f, TILE_SIZE_F / 2.f);
 		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + posDelta, posDeltaColor);
-		std::string posDeltaStr = "(" + std::to_string(posDelta.x) + ", " + std::to_string(posDelta.y) + ")";
+		//std::string posDeltaStr = "(" + std::to_string(posDelta.x) + ", " + std::to_string(posDelta.y) + ")";
 		textPos.y += VIZ_DEFAULT_TEXT_SIZE;
-		Visualizer::VisualizeText(posDeltaStr, textPos, posDeltaColor);
+		Visualizer::VisualizeText(posDelta, textPos, posDeltaColor);
 	}
 	if (DEBUG_PLAYER_STATE)
 	{
@@ -102,6 +108,10 @@ void Player::Update(float deltaTime)
 		else assert(false); // just in case we add any states and forget to update the debug code, this'll crash to remind us
 		sf::Vector2f textPos(0.f, VIZ_DEFAULT_TEXT_SIZE * 2);
 		Visualizer::VisualizeText(stateStr, textPos, sf::Color::Cyan);
+	}
+	if (DEBUG_LEVEL_SCROLL_BOUNDS)
+	{
+		pLevel->DebugLevelScrollBounds(currentRoom);
 	}
 }
 

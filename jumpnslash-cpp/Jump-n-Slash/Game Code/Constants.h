@@ -14,6 +14,11 @@ const int MAX_LEVEL_SIZE = 1024;
 const int TILE_SIZE = 32;
 const float TILE_SIZE_F = static_cast<float>(TILE_SIZE);
 
+// LevelMap constants
+
+const int ROOM_TILE_WIDTH = 40;
+const int ROOM_TILE_HEIGHT = 20;
+
 // level tile keys, for ease of use
 
 const std::string KEY_BLOCK_BREAKABLE = "block breakable";
