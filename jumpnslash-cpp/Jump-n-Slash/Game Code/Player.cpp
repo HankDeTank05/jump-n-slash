@@ -17,6 +17,7 @@ Player::Player(LevelMap* _pLevel)
 	speed(PLAYER_WALK_SPEED),
 	pSprite(SpriteManager::GetSprite("player idle 1")),
 	pCurrentState(&PlayerFSM::idle),
+	pPrevState(pCurrentState),
 	respawnPoint(_pLevel->GetStartingSpawnPoint()),
 	pLevel(_pLevel),
 	walkLeftHeld(false),
@@ -46,7 +47,6 @@ Player::~Player()
 void Player::Update(float deltaTime)
 {
 	// update the move state
-	const PlayerMoveState* pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);
 	if (pCurrentState != pPrevState)
 	{
@@ -65,6 +65,7 @@ void Player::Update(float deltaTime)
 		Visualizer::VisualizeText(posStr, sf::Vector2f(0.f, 0.f), sf::Color::Yellow);
 		Visualizer::VisualizeSegment(sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE), pos, sf::Color::Yellow);
 	}
+	pPrevState = pCurrentState;
 }
 
 void Player::Draw()

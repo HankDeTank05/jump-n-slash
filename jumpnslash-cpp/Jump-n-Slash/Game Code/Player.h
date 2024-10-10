@@ -44,6 +44,7 @@ private:
 	float speed; // horizontal movement speed
 	sf::Sprite* pSprite; // the sprite to be drawn
 	const PlayerMoveState* pCurrentState; // the current movement state
+	const PlayerMoveState* pPrevState; // the move state during the previous frame
 	sf::Vector2f respawnPoint; // where the player will respawn after dying
 	LevelMap* pLevel; // pointer to the current level (for map collision)
 	bool walkLeftHeld; // flag indicating if the walk left key is currently pressed
