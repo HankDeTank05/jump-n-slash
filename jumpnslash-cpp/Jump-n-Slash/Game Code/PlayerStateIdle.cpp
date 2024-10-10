@@ -4,6 +4,7 @@
 
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
+#include "DebugFlags.h"
 
 PlayerStateIdle::PlayerStateIdle()
 {
@@ -27,7 +28,7 @@ PlayerStateIdle::~PlayerStateIdle()
 
 void PlayerStateIdle::Enter(Player* pPlayer) const
 {
-	std::cout << "Entered PlayerStateIdle" << std::endl;
+	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateIdle" << std::endl;
 }
 
 void PlayerStateIdle::Update(Player* pPlayer, float deltaTime) const

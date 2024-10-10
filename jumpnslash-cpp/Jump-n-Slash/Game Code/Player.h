@@ -39,6 +39,7 @@ private: // player mutators. for selective access only (thru attorney)
 	void RaycastUp(float deltaTime);
 	void RaycastDown(float deltaTime);
 	void ApplyGravity(float deltaTime);
+	void Move(float deltaTime);
 
 private: // Member variables
 	sf::Vector2f pos; // current world-space position
@@ -49,8 +50,9 @@ private: // Member variables
 	const PlayerMoveState* pPrevState; // the move state during the previous frame
 	sf::Vector2f respawnPoint; // where the player will respawn after dying
 	LevelMap* pLevel; // pointer to the current level (for map collision)
-	bool walkLeftHeld; // flag indicating if the walk left key is currently pressed
-	bool walkRightHeld; // flag indicating if the walk right key is currently pressed
+	bool walkLeftKeyDown; // flag indicating if the walk left key is currently pressed
+	bool walkRightKeyDown; // flag indicating if the walk right key is currently pressed
+	bool jumpKeyDown; // flag indicating if the jump jey is currently pressed
 	bool isGrounded; // flag indicating if the player is touching the ground
 };
 

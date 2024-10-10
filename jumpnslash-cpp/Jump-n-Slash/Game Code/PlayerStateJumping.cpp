@@ -4,6 +4,7 @@
 
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
+#include "DebugFlags.h"
 
 PlayerStateJumping::PlayerStateJumping()
 {
@@ -27,7 +28,7 @@ PlayerStateJumping::~PlayerStateJumping()
 
 void PlayerStateJumping::Enter(Player* pPlayer) const
 {
-	std::cout << "Entered PlayerStateJumping" << std::endl;
+	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateJumping" << std::endl;
 }
 
 void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const

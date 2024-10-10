@@ -20,8 +20,9 @@ Player::Player(LevelMap* _pLevel)
 	pPrevState(pCurrentState),
 	respawnPoint(_pLevel->GetStartingSpawnPoint()),
 	pLevel(_pLevel),
-	walkLeftHeld(false),
-	walkRightHeld(false),
+	walkLeftKeyDown(false),
+	walkRightKeyDown(false),
+	jumpKeyDown(false),
 	isGrounded(false)
 {
 	RequestUpdateRegistration();
@@ -50,13 +51,19 @@ void Player::Update(float deltaTime)
 		pCurrentState->Enter(this);
 	}
 
+	Move(deltaTime);
+
 	// update based on the current move state
 	pCurrentState->Update(this, deltaTime);
 
 	// reset the player's y-velocity if they're grounded (so we don't continuously accelerate downwards)
-	if (isGrounded)
+	if (isGrounded && !jumpKeyDown)
 	{
-		posDelta.y = 0;
+		posDelta.y = 0.f;
+	}
+	if (jumpKeyDown)
+	{
+		jumpKeyDown = false;
 	}
 
 	// set the sprite position for drawing
@@ -64,14 +71,26 @@ void Player::Update(float deltaTime)
 	if (DEBUG_PLAYER_POSITION)
 	{
 		// Visualize player coordinates in world space
-		Visualizer::VisualizePoint(pos, sf::Color::Yellow);
+		sf::Color posColor = sf::Color::Yellow;
+		Visualizer::VisualizePoint(pos, posColor);
 		std::string posStr = "(" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")";
-		Visualizer::VisualizeText(posStr, sf::Vector2f(0.f, 0.f), sf::Color::Yellow);
-		Visualizer::VisualizeSegment(sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE), pos, sf::Color::Yellow);
+		Visualizer::VisualizeText(posStr, sf::Vector2f(0.f, 0.f), posColor);
+		Visualizer::VisualizeSegment(sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE), pos, posColor);
 
 		// Visualize posDelta
+		sf::Color posDeltaColor = sf::Color::Magenta;
 		sf::Vector2f halfTileDelta(TILE_SIZE_F / 2.f, TILE_SIZE_F / 2.f);
-		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + posDelta, sf::Color::Magenta);
+		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + posDelta, posDeltaColor);
+	}
+	if (DEBUG_PLAYER_STATE)
+	{
+		std::string stateStr;
+		if (pCurrentState == &PlayerFSM::falling) stateStr = "falling";
+		else if (pCurrentState == &PlayerFSM::idle) stateStr = "idle";
+		else if (pCurrentState == &PlayerFSM::jumping) stateStr = "jumping";
+		else if (pCurrentState == &PlayerFSM::walking) stateStr = "walking";
+		else assert(false); // just in case we add any states and forget to update the debug code, this'll crash to remind us
+		Visualizer::VisualizeText(stateStr, sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE * 1), sf::Color::Cyan);
 	}
 	pPrevState = pCurrentState;
 }
@@ -86,12 +105,14 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 	switch (key)
 	{
 	case WALK_LEFT_KEY:
-		posDelta.x = -speed;
+		walkLeftKeyDown = true;
 		break;
 	case WALK_RIGHT_KEY:
-		posDelta.x = speed;
+		walkRightKeyDown = true;
 		break;
-
+	case JUMP_KEY:
+		jumpKeyDown = true;
+		break;
 	}
 }
 
@@ -100,8 +121,10 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	switch (key)
 	{
 	case WALK_LEFT_KEY:
+		walkLeftKeyDown = false;
+		break;
 	case WALK_RIGHT_KEY:
-		posDelta.x = 0.f;
+		walkRightKeyDown = false;
 		break;
 	}
 }
@@ -322,6 +345,9 @@ void Player::RaycastUp(float deltaTime)
 	if (mayMoveTo.y > maxY) {
 		maxY = mayMoveTo.y;
 	}
+
+	isGrounded = pos.y == maxY;
+
 	pos.y = maxY;
 }
 
@@ -405,4 +431,22 @@ void Player::RaycastDown(float deltaTime)
 void Player::ApplyGravity(float deltaTime)
 {
 	posDelta.y += GRAVITY_WEIGHT * deltaTime;
+}
+
+void Player::Move(float deltaTime)
+{
+	posDelta.x = 0.f;
+
+	if (walkLeftKeyDown)
+	{
+		posDelta.x -= speed;
+	}
+	if (walkRightKeyDown)
+	{
+		posDelta.x += speed;
+	}
+	if (isGrounded && jumpKeyDown)
+	{
+		posDelta.y = JUMP_FORCE;
+	}
 }

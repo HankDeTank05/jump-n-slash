@@ -10,6 +10,7 @@
 #include "Constants.h"
 #include "LevelMap.h"
 #include "LevelTile.h"
+#include "DebugFlags.h"
 
 PlayerStateWalking::PlayerStateWalking()
 {
@@ -33,7 +34,7 @@ PlayerStateWalking::~PlayerStateWalking()
 
 void PlayerStateWalking::Enter(Player* pPlayer) const
 {
-	std::cout << "Entered PlayerSateWalking" << std::endl;
+	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerSateWalking" << std::endl;
 }
 
 void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const

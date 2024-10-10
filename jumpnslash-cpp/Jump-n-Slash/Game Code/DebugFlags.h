@@ -3,5 +3,6 @@
 
 const bool DEBUG_PLAYER_POSITION = true;
 const bool DEBUG_PLAYER_MAP_COLLISION = true;
+const bool DEBUG_PLAYER_STATE = true;
 
 #endif

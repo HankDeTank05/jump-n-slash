@@ -4,6 +4,7 @@
 
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
+#include "DebugFlags.h"
 
 PlayerStateFalling::PlayerStateFalling()
 {
@@ -27,7 +28,7 @@ PlayerStateFalling::~PlayerStateFalling()
 
 void PlayerStateFalling::Enter(Player* pPlayer) const
 {
-	std::cout << "Entered PlayerStateFalling" << std::endl;
+	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateFalling" << std::endl;
 }
 
 void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const
