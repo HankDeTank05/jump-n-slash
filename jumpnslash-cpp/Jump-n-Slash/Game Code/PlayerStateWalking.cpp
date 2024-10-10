@@ -55,13 +55,16 @@ const PlayerMoveState* PlayerStateWalking::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;
 
-	if (PlayerAttorney::State::GetPosDelta(pPlayer).y < 0.0f) {
+	if (PlayerAttorney::State::GetPosDelta(pPlayer).y < 0.0f)
+	{
 		pNextState = &PlayerFSM::jumping;
 	}
-	else if (PlayerAttorney::State::GetPosDelta(pPlayer).y > 0.0f) {
+	else if (PlayerAttorney::State::GetPosDelta(pPlayer).y > 0.0f)
+	{
 		pNextState = &PlayerFSM::falling;
 	}
-	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x == 0.0f) {
+	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x == 0.0f)
+	{
 		pNextState = &PlayerFSM::idle;
 	}
 
