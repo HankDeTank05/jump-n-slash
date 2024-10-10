@@ -1,6 +1,7 @@
 #include "PlayerStateWalking.h"
 
 #include <array>
+#include <iostream>
 
 #include "../Engine Code/Visualizer.h"
 
@@ -32,7 +33,7 @@ PlayerStateWalking::~PlayerStateWalking()
 
 void PlayerStateWalking::Enter(Player* pPlayer) const
 {
-	// code goes here
+	std::cout << "Entered PlayerSateWalking" << std::endl;
 }
 
 void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
@@ -45,6 +46,9 @@ void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 	{
 		PlayerAttorney::State::RaycastLeft(pPlayer, deltaTime);
 	}
+
+	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+	PlayerAttorney::State::RaycastDown(pPlayer, deltaTime);
 }
 
 const PlayerMoveState* PlayerStateWalking::GetNextState(Player* pPlayer) const

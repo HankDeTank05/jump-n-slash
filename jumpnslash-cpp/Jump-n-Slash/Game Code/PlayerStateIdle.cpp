@@ -1,5 +1,7 @@
 #include "PlayerStateIdle.h"
 
+#include <iostream>
+
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
 
@@ -25,12 +27,13 @@ PlayerStateIdle::~PlayerStateIdle()
 
 void PlayerStateIdle::Enter(Player* pPlayer) const
 {
-	// code goes here
+	std::cout << "Entered PlayerStateIdle" << std::endl;
 }
 
 void PlayerStateIdle::Update(Player* pPlayer, float deltaTime) const
 {
-	// do nothing
+	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+	PlayerAttorney::State::RaycastDown(pPlayer, deltaTime);
 }
 
 const PlayerMoveState* PlayerStateIdle::GetNextState(Player* pPlayer) const

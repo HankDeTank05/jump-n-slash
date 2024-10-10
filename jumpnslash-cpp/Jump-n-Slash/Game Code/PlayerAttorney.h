@@ -23,6 +23,7 @@ public:
 		static sf::Vector2f GetPos(Player* pPlayer);
 		static sf::Vector2f GetPosDelta(Player* pPlayer);
 		static LevelMap* GetLevel(Player* pPlayer);
+		static bool IsGrounded(Player* pPlayer);
 
 		// mutators
 
@@ -30,6 +31,7 @@ public:
 		static void RaycastLeft(Player* pPlayer, float deltaTime);
 		static void RaycastUp(Player* pPlayer, float deltaTime);
 		static void RaycastDown(Player* pPlayer, float deltaTime);
+		static void ApplyGravity(Player* pPlayer, float deltaTime);
 	};
 };
 

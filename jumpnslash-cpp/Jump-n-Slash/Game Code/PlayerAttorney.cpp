@@ -17,6 +17,11 @@ LevelMap* PlayerAttorney::State::GetLevel(Player* pPlayer)
 	return pPlayer->GetLevel();
 }
 
+bool PlayerAttorney::State::IsGrounded(Player* pPlayer)
+{
+	return pPlayer->IsGrounded();
+}
+
 void PlayerAttorney::State::RaycastRight(Player* pPlayer, float deltaTime)
 {
 	pPlayer->RaycastRight(deltaTime);
@@ -35,4 +40,9 @@ void PlayerAttorney::State::RaycastUp(Player* pPlayer, float deltaTime)
 void PlayerAttorney::State::RaycastDown(Player* pPlayer, float deltaTime)
 {
 	pPlayer->RaycastDown(deltaTime);
+}
+
+void PlayerAttorney::State::ApplyGravity(Player* pPlayer, float deltaTime)
+{
+	pPlayer->ApplyGravity(deltaTime);
 }

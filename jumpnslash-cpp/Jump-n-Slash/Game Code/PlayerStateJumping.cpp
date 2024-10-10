@@ -1,5 +1,7 @@
 #include "PlayerStateJumping.h"
 
+#include <iostream>
+
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
 
@@ -25,7 +27,7 @@ PlayerStateJumping::~PlayerStateJumping()
 
 void PlayerStateJumping::Enter(Player* pPlayer) const
 {
-	// code goes here
+	std::cout << "Entered PlayerStateJumping" << std::endl;
 }
 
 void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const
@@ -41,6 +43,8 @@ void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const
 	{
 		PlayerAttorney::State::RaycastLeft(pPlayer, deltaTime);
 	}
+
+	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
 }
 
 const PlayerMoveState* PlayerStateJumping::GetNextState(Player* pPlayer) const
@@ -51,7 +55,7 @@ const PlayerMoveState* PlayerStateJumping::GetNextState(Player* pPlayer) const
 	{
 		pNextState = &PlayerFSM::falling;
 	}
-	else if (PlayerAttorney::State::GetPosDelta(pPlayer).y == 0.0f) // Would prefer to check if the player is grounded
+	else if (PlayerAttorney::State::IsGrounded(pPlayer))
 	{ 
 		if (PlayerAttorney::State::GetPosDelta(pPlayer).x != 0.0f)
 		{

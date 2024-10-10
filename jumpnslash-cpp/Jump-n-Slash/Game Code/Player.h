@@ -28,17 +28,19 @@ public:
 
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
-	sf::Vector2f GetPos();
-	sf::Vector2f GetPosDelta();
-	LevelMap* GetLevel();
+	sf::Vector2f GetPos() const;
+	sf::Vector2f GetPosDelta() const;
+	LevelMap* GetLevel() const;
+	bool IsGrounded() const;
 
 private: // player mutators. for selective access only (thru attorney)
 	void RaycastRight(float deltaTime);
 	void RaycastLeft(float deltaTime);
 	void RaycastUp(float deltaTime);
 	void RaycastDown(float deltaTime);
+	void ApplyGravity(float deltaTime);
 
-private:
+private: // Member variables
 	sf::Vector2f pos; // current world-space position
 	sf::Vector2f posDelta; // player movement for the current frame (aka, the change from previous frame)
 	float speed; // horizontal movement speed
@@ -49,6 +51,7 @@ private:
 	LevelMap* pLevel; // pointer to the current level (for map collision)
 	bool walkLeftHeld; // flag indicating if the walk left key is currently pressed
 	bool walkRightHeld; // flag indicating if the walk right key is currently pressed
+	bool isGrounded; // flag indicating if the player is touching the ground
 };
 
 #endif

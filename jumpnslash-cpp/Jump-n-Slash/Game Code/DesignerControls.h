@@ -13,6 +13,6 @@ const sf::Keyboard::Key WALK_RIGHT_KEY = sf::Keyboard::Right;
 // player properties
 
 const float PLAYER_WALK_SPEED = 50.f;
-const float GRAVITY_WEIGHT = -1.f;
+const float GRAVITY_WEIGHT = 10.f;
 
 #endif

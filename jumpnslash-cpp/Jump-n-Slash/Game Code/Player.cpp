@@ -21,20 +21,17 @@ Player::Player(LevelMap* _pLevel)
 	respawnPoint(_pLevel->GetStartingSpawnPoint()),
 	pLevel(_pLevel),
 	walkLeftHeld(false),
-	walkRightHeld(false)
+	walkRightHeld(false),
+	isGrounded(false)
 {
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
-	//RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
-	//RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
+	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
+	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
 	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyPress);
 	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
-	RequestKeyRegistration(sf::Keyboard::Up, KeyEvent::KeyPress);
-	RequestKeyRegistration(sf::Keyboard::Up, KeyEvent::KeyRelease);
-	RequestKeyRegistration(sf::Keyboard::Down, KeyEvent::KeyPress);
-	RequestKeyRegistration(sf::Keyboard::Down, KeyEvent::KeyRelease);
 	
 	assert(pCurrentState != nullptr);
 }
@@ -56,14 +53,25 @@ void Player::Update(float deltaTime)
 	// update based on the current move state
 	pCurrentState->Update(this, deltaTime);
 
+	// reset the player's y-velocity if they're grounded (so we don't continuously accelerate downwards)
+	if (isGrounded)
+	{
+		posDelta.y = 0;
+	}
+
 	// set the sprite position for drawing
 	pSprite->setPosition(pos);
 	if (DEBUG_PLAYER_POSITION)
 	{
+		// Visualize player coordinates in world space
 		Visualizer::VisualizePoint(pos, sf::Color::Yellow);
 		std::string posStr = "(" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")";
 		Visualizer::VisualizeText(posStr, sf::Vector2f(0.f, 0.f), sf::Color::Yellow);
 		Visualizer::VisualizeSegment(sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE), pos, sf::Color::Yellow);
+
+		// Visualize posDelta
+		sf::Vector2f halfTileDelta(TILE_SIZE_F / 2.f, TILE_SIZE_F / 2.f);
+		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + posDelta, sf::Color::Magenta);
 	}
 	pPrevState = pCurrentState;
 }
@@ -83,12 +91,6 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 	case WALK_RIGHT_KEY:
 		posDelta.x = speed;
 		break;
-	case sf::Keyboard::Up:
-		posDelta.y = -speed;
-		break;
-	case sf::Keyboard::Down:
-		posDelta.y = speed;
-		break;
 
 	}
 }
@@ -101,26 +103,27 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	case WALK_RIGHT_KEY:
 		posDelta.x = 0.f;
 		break;
-	case sf::Keyboard::Up:
-	case sf::Keyboard::Down:
-		posDelta.y = 0.f;
-		break;
 	}
 }
 
-sf::Vector2f Player::GetPos()
+sf::Vector2f Player::GetPos() const
 {
 	return pos;
 }
 
-sf::Vector2f Player::GetPosDelta()
+sf::Vector2f Player::GetPosDelta() const
 {
 	return posDelta;
 }
 
-LevelMap* Player::GetLevel()
+LevelMap* Player::GetLevel() const
 {
 	return pLevel;
+}
+
+bool Player::IsGrounded() const
+{
+	return isGrounded;
 }
 
 void Player::RaycastRight(float deltaTime)
@@ -171,7 +174,7 @@ void Player::RaycastRight(float deltaTime)
 		{
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
-			Visualizer::VisualizeText(endPos[i].x, endPos[i]);
+			Visualizer::VisualizeText(endPos[i].x, endPos[i], sf::Color::Red);
 		}
 	}
 
@@ -241,7 +244,7 @@ void Player::RaycastLeft(float deltaTime)
 		{
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
-			Visualizer::VisualizeText(endPos[i].x, endPos[i]);
+			Visualizer::VisualizeText(endPos[i].x, endPos[i], sf::Color::Red);
 		}
 	}
 
@@ -308,8 +311,8 @@ void Player::RaycastUp(float deltaTime)
 		if (DEBUG_PLAYER_MAP_COLLISION) {
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
-			if (i == 0) Visualizer::VisualizeText(endPos[i].y, endPos[i] + sf::Vector2f(0.f, -VIZ_DEFAULT_TEXT_SIZE));
-			else Visualizer::VisualizeText(endPos[i].y, endPos[i]);
+			if (i == 0) Visualizer::VisualizeText(endPos[i].y, endPos[i] + sf::Vector2f(0.f, -VIZ_DEFAULT_TEXT_SIZE), sf::Color::Red);
+			else Visualizer::VisualizeText(endPos[i].y, endPos[i], sf::Color::Red);
 		}
 	}
 
@@ -380,8 +383,8 @@ void Player::RaycastDown(float deltaTime)
 		{
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
-			if (i == 0) Visualizer::VisualizeText(endPos[i].y, endPos[i] + sf::Vector2f(0, VIZ_DEFAULT_TEXT_SIZE));
-			else Visualizer::VisualizeText(endPos[i].y, endPos[i]);
+			if (i == 0) Visualizer::VisualizeText(endPos[i].y, endPos[i] + sf::Vector2f(0, -VIZ_DEFAULT_TEXT_SIZE), sf::Color::Red);
+			else Visualizer::VisualizeText(endPos[i].y, endPos[i], sf::Color::Red);
 		}
 	}
 
@@ -393,4 +396,12 @@ void Player::RaycastDown(float deltaTime)
 		minY = mayMoveTo.y;
 	}
 	pos.y = minY;
+
+	// Determine if we is grounded or not
+	isGrounded = pos.y == minY;
+}
+
+void Player::ApplyGravity(float deltaTime)
+{
+	posDelta.y += GRAVITY_WEIGHT * deltaTime;
 }
