@@ -243,7 +243,61 @@ void Player::RaycastLeft(float deltaTime)
 
 void Player::RaycastUp(float deltaTime)
 {
-	assert(false);
+	const int RAY_COUNT = 2;
+	std::array<sf::Vector2f, RAY_COUNT> startPos;
+	std::array<sf::Vector2f, RAY_COUNT> endPos;
+
+	// Cast a ray from the left (index=0) and right (index=1) of the sprite
+	startPos[0] = pos;
+	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F, 0.0f);
+
+	// The highest point the play can move to without being inside of a wall
+	float maxY = 0;
+
+	for (int i = 0; i < RAY_COUNT; i++) {
+		sf::Vector2f curPos = startPos[i];
+
+		// While the current position is empty or NOT solid underneath, and within the bounds of the map
+		while ((pLevel->GetTileAtPos(curPos) == nullptr || !pLevel->GetTileAtPos(curPos)->IsSolidOnBottom()) && curPos.y >= 0.0f) {
+			// Visuals for debugging ONLY
+			if (DEBUG_PLAYER_MAP_COLLISION) {
+				Visualizer::VisualizePoint(curPos, sf::Color::Green);
+			}
+
+			// For iterations through the while loop after the first
+			if (curPos != startPos[i]) {
+				// We only need to check every tile space, so decrement by tile size
+				curPos.y -= TILE_SIZE_F;
+			}
+			else { // First iteration through the while loop; we may be in the middle of a tile, so decrement to the edge of the nearest tile space
+				// We can get the y-index of a tile by dividing the y position by tile size and casting to an int to remove the decimal
+				int tileIndex = static_cast<int>(curPos.y / TILE_SIZE_F);
+
+				// Multiplying by tile size again gets the position of the edge of the current tile
+				curPos.y = static_cast<float>(tileIndex) * TILE_SIZE_F;
+			}
+		}
+
+		endPos[i] = curPos;
+		if (endPos[i].y > maxY) {
+			maxY = endPos[i].y;
+		}
+
+		// Visuals for debugging ONLY
+		if (DEBUG_PLAYER_MAP_COLLISION) {
+			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
+			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
+			Visualizer::VisualizeText(endPos[i].y, endPos[i]);
+		}
+	}
+
+	// The position the player wants to move to
+	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
+	// If the player's projected movement is in an invalid location, move them the maximum distance allowed
+	if (mayMoveTo.y > maxY) {
+		maxY = mayMoveTo.y;
+	}
+	pos.y = maxY;
 }
 
 void Player::RaycastDown(float deltaTime)
