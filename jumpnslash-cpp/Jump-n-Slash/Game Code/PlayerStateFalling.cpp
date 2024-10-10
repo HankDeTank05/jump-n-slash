@@ -30,7 +30,17 @@ void PlayerStateFalling::Enter(Player* pPlayer) const
 
 void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const
 {
-	assert(false);
+	PlayerAttorney::State::RaycastDown(pPlayer, deltaTime);
+	
+	// Player can move left or right while falling
+	if (PlayerAttorney::State::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
+	{
+		PlayerAttorney::State::RaycastRight(pPlayer, deltaTime);
+	}
+	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
+	{
+		PlayerAttorney::State::RaycastLeft(pPlayer, deltaTime);
+	}
 }
 
 const PlayerMoveState* PlayerStateFalling::GetNextState(Player* pPlayer) const
