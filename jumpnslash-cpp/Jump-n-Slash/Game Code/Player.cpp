@@ -395,10 +395,12 @@ void Player::RaycastDown(float deltaTime)
 	{
 		minY = mayMoveTo.y;
 	}
-	pos.y = minY;
-
+	
 	// Determine if we is grounded or not
 	isGrounded = pos.y == minY;
+
+	pos.y = minY;
+
 }
 
 void Player::ApplyGravity(float deltaTime)
