@@ -51,8 +51,6 @@ void Player::Update(float deltaTime)
 		pCurrentState->Enter(this);
 	}
 
-	Move(deltaTime);
-
 	// update based on the current move state
 	pCurrentState->Update(this, deltaTime);
 
@@ -61,6 +59,8 @@ void Player::Update(float deltaTime)
 	{
 		posDelta.y = 0.f;
 	}
+
+	// temporary code, to make sure jump force is only applied for the first frame the jump key is pressed
 	if (jumpKeyDown)
 	{
 		jumpKeyDown = false;
@@ -68,19 +68,29 @@ void Player::Update(float deltaTime)
 
 	// set the sprite position for drawing
 	pSprite->setPosition(pos);
+	pPrevState = pCurrentState;
+
+	// debug visualizations
 	if (DEBUG_PLAYER_POSITION)
 	{
+
 		// Visualize player coordinates in world space
+
 		sf::Color posColor = sf::Color::Yellow;
 		Visualizer::VisualizePoint(pos, posColor);
 		std::string posStr = "(" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")";
-		Visualizer::VisualizeText(posStr, sf::Vector2f(0.f, 0.f), posColor);
+		sf::Vector2f textPos(0.f, 0.f);
+		Visualizer::VisualizeText(posStr, textPos, posColor);
 		Visualizer::VisualizeSegment(sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE), pos, posColor);
 
 		// Visualize posDelta
+
 		sf::Color posDeltaColor = sf::Color::Magenta;
 		sf::Vector2f halfTileDelta(TILE_SIZE_F / 2.f, TILE_SIZE_F / 2.f);
 		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + posDelta, posDeltaColor);
+		std::string posDeltaStr = "(" + std::to_string(posDelta.x) + ", " + std::to_string(posDelta.y) + ")";
+		textPos.y += VIZ_DEFAULT_TEXT_SIZE;
+		Visualizer::VisualizeText(posDeltaStr, textPos, posDeltaColor);
 	}
 	if (DEBUG_PLAYER_STATE)
 	{
@@ -90,9 +100,9 @@ void Player::Update(float deltaTime)
 		else if (pCurrentState == &PlayerFSM::jumping) stateStr = "jumping";
 		else if (pCurrentState == &PlayerFSM::walking) stateStr = "walking";
 		else assert(false); // just in case we add any states and forget to update the debug code, this'll crash to remind us
-		Visualizer::VisualizeText(stateStr, sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE * 1), sf::Color::Cyan);
+		sf::Vector2f textPos(0.f, VIZ_DEFAULT_TEXT_SIZE * 2);
+		Visualizer::VisualizeText(stateStr, textPos, sf::Color::Cyan);
 	}
-	pPrevState = pCurrentState;
 }
 
 void Player::Draw()
@@ -125,6 +135,8 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 		break;
 	case WALK_RIGHT_KEY:
 		walkRightKeyDown = false;
+		break;
+	case JUMP_KEY:
 		break;
 	}
 }
@@ -202,6 +214,7 @@ void Player::RaycastRight(float deltaTime)
 	}
 
 	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
+	//sf::Vector2f mayMoveTo = pos + posDelta;
 
 	if (mayMoveTo.x < minX)
 	{
@@ -272,6 +285,8 @@ void Player::RaycastLeft(float deltaTime)
 	}
 
 	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
+	//sf::Vector2f mayMoveTo = pos + posDelta;
+
 	if (mayMoveTo.x > maxX)
 	{
 		maxX = mayMoveTo.x;
@@ -339,8 +354,9 @@ void Player::RaycastUp(float deltaTime)
 		}
 	}
 
-	// The position the player wants to move to
-	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
+	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime; // The position the player wants to move to
+	//sf::Vector2f mayMoveTo = pos + posDelta;
+
 	// If the player's projected movement is in an invalid location, then move them the maximum distance allowed
 	if (mayMoveTo.y > maxY) {
 		maxY = mayMoveTo.y;
@@ -414,8 +430,9 @@ void Player::RaycastDown(float deltaTime)
 		}
 	}
 
-	// The position the player wants to move to
-	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
+	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime; // The position the player wants to move to
+	//sf::Vector2f mayMoveTo = pos + posDelta;
+	
 	// If the player's projected movement is in an invalid location, then move them the maximum distance allowed
 	if (mayMoveTo.y < minY)
 	{
@@ -430,23 +447,27 @@ void Player::RaycastDown(float deltaTime)
 
 void Player::ApplyGravity(float deltaTime)
 {
-	posDelta.y += GRAVITY_WEIGHT * deltaTime;
+	//posDelta.y += GRAVITY_WEIGHT * deltaTime;
+	posDelta.y += GRAVITY_WEIGHT;
 }
 
-void Player::Move(float deltaTime)
+void Player::ProcessInputs(float deltaTime)
 {
 	posDelta.x = 0.f;
 
 	if (walkLeftKeyDown)
 	{
+		//posDelta.x -= speed * deltaTime;
 		posDelta.x -= speed;
 	}
 	if (walkRightKeyDown)
 	{
+		//posDelta.x += speed * deltaTime;
 		posDelta.x += speed;
 	}
 	if (isGrounded && jumpKeyDown)
 	{
+		//posDelta.y = JUMP_FORCE * deltaTime;
 		posDelta.y = JUMP_FORCE;
 	}
 }

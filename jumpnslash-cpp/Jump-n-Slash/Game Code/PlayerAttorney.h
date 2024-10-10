@@ -32,6 +32,7 @@ public:
 		static void RaycastUp(Player* pPlayer, float deltaTime);
 		static void RaycastDown(Player* pPlayer, float deltaTime);
 		static void ApplyGravity(Player* pPlayer, float deltaTime);
+		static void ProcessInputs(Player* pPlayer, float deltaTime);
 	};
 };
 

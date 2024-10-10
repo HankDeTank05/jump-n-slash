@@ -33,8 +33,9 @@ void PlayerStateFalling::Enter(Player* pPlayer) const
 
 void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const
 {
-	PlayerAttorney::State::RaycastDown(pPlayer, deltaTime);
-	
+	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
+	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+
 	// Player can move left or right while falling
 	if (PlayerAttorney::State::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
 	{
@@ -44,8 +45,7 @@ void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const
 	{
 		PlayerAttorney::State::RaycastLeft(pPlayer, deltaTime);
 	}
-
-	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+	PlayerAttorney::State::RaycastDown(pPlayer, deltaTime);
 }
 
 const PlayerMoveState* PlayerStateFalling::GetNextState(Player* pPlayer) const

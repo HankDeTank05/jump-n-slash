@@ -46,3 +46,8 @@ void PlayerAttorney::State::ApplyGravity(Player* pPlayer, float deltaTime)
 {
 	pPlayer->ApplyGravity(deltaTime);
 }
+
+void PlayerAttorney::State::ProcessInputs(Player* pPlayer, float deltaTime)
+{
+	pPlayer->ProcessInputs(deltaTime);
+}

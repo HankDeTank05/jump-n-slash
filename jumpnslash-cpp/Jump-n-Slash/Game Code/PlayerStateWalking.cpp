@@ -39,6 +39,9 @@ void PlayerStateWalking::Enter(Player* pPlayer) const
 
 void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 {
+	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
+	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+
 	if (PlayerAttorney::State::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
 	{
 		PlayerAttorney::State::RaycastRight(pPlayer, deltaTime);
@@ -48,7 +51,6 @@ void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 		PlayerAttorney::State::RaycastLeft(pPlayer, deltaTime);
 	}
 
-	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
 	PlayerAttorney::State::RaycastDown(pPlayer, deltaTime);
 }
 

@@ -33,7 +33,8 @@ void PlayerStateJumping::Enter(Player* pPlayer) const
 
 void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const
 {
-	PlayerAttorney::State::RaycastUp(pPlayer, deltaTime);
+	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
+	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
 	
 	// Player can move left or right while jumping
 	if (PlayerAttorney::State::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
@@ -45,7 +46,7 @@ void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const
 		PlayerAttorney::State::RaycastLeft(pPlayer, deltaTime);
 	}
 
-	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+	PlayerAttorney::State::RaycastUp(pPlayer, deltaTime);
 }
 
 const PlayerMoveState* PlayerStateJumping::GetNextState(Player* pPlayer) const

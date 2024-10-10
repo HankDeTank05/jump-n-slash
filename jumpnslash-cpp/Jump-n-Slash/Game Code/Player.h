@@ -39,7 +39,7 @@ private: // player mutators. for selective access only (thru attorney)
 	void RaycastUp(float deltaTime);
 	void RaycastDown(float deltaTime);
 	void ApplyGravity(float deltaTime);
-	void Move(float deltaTime);
+	void ProcessInputs(float deltaTime);
 
 private: // Member variables
 	sf::Vector2f pos; // current world-space position
