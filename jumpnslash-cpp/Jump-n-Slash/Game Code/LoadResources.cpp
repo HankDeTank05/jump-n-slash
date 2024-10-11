@@ -8,6 +8,7 @@
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/FontManager.h"
 #include "../Engine Code/GridManager.h"
+#include "../Engine Code/SceneManager.h"
 
 #include "Level0.h"
 
@@ -55,5 +56,5 @@ void JumpSlashEngine::LoadResources()
 	GridManager::LoadGrid("test", "test.txt");
 	GridManager::LoadGrid("test 2", "test2.txt");
 
-	SetStartScene(new Level0());
+	SceneManager::SetStartScene(new Level0());
 }

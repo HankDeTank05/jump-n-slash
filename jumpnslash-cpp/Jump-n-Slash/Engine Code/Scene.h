@@ -10,6 +10,8 @@ class Command;
 class RegistrationBroker;
 class UpdateObject;
 class DrawObject;
+class Camera;
+class CameraManager;
 
 class Scene
 {
@@ -21,6 +23,9 @@ public:
 
 	virtual void Init() = 0; // TODO: docs for Scene::Init
 	virtual void End() = 0; // TODO: docs for Scene::End
+
+	void SetCurrentCamera(Camera* pCam);
+	Camera* GetCurrentCamera();
 
 private:
 	friend class SceneAttorney;
@@ -47,11 +52,13 @@ private:
 	void AddCommand(Command* pCmd);
 
 private:
-	RegistrationBroker* pRegBroker;
+	RegistrationBroker* pRegBroker; // manages registration with gameobject managers
 
-	UpdateManager* pUpdateMgr;
-	DrawManager* pDrawMgr;
-	InputManager* pInputMgr;
+	UpdateManager* pUpdateMgr; // manages update objects
+	DrawManager* pDrawMgr; // manages draw objects
+	InputManager* pInputMgr; // manages input objects
+
+	CameraManager* pCamMgr; // manages the camera(s)
 };
 
 #endif

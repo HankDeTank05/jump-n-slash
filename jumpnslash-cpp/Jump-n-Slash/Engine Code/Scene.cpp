@@ -1,24 +1,38 @@
 #include "Scene.h"
 
+#include <cassert>
+
 #include "RegistrationBroker.h"
 #include "DrawManager.h"
-#include <cassert>
+#include "CameraManager.h"
 
 Scene::Scene()
 	: pRegBroker(new RegistrationBroker()),
 	pUpdateMgr(new UpdateManager()),
 	pDrawMgr(new DrawManager()),
-	pInputMgr(new InputManager())
+	pInputMgr(new InputManager()),
+	pCamMgr(new CameraManager())
 {
 	// do nothing
 }
 
 Scene::~Scene()
 {
+	delete pCamMgr;
 	delete pInputMgr;
 	delete pDrawMgr;
 	delete pUpdateMgr;
 	delete pRegBroker;
+}
+
+void Scene::SetCurrentCamera(Camera* pCam)
+{
+	pCamMgr->SetCurrentCamera(pCam);
+}
+
+Camera* Scene::GetCurrentCamera()
+{
+	return pCamMgr->GetCurrentCamera();
 }
 
 void Scene::Update(float deltaTime)

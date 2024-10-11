@@ -2,6 +2,9 @@
 
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/Visualizer.h"
+#include "../Engine Code/Math.h"
+#include "../Engine Code/SceneManager.h"
+#include "../Engine Code/Camera.h"
 
 #include "Constants.h"
 #include "DebugFlags.h"
@@ -10,6 +13,7 @@
 #include "PlayerFSM.h"
 #include "LevelMap.h"
 #include "LevelTile.h"
+#include "RoomData.h"
 
 Player::Player(LevelMap* _pLevel)
 	: pos(_pLevel->GetStartingSpawnPoint()),
@@ -20,11 +24,11 @@ Player::Player(LevelMap* _pLevel)
 	pPrevState(pCurrentState),
 	respawnPoint(_pLevel->GetStartingSpawnPoint()),
 	pLevel(_pLevel),
+	pCurrentRoom(_pLevel->GetStartingRoom()),
 	walkLeftKeyDown(false),
 	walkRightKeyDown(false),
 	jumpKeyDown(false),
-	isGrounded(false),
-	currentRoom(_pLevel->GetStartingRoomRef())
+	isGrounded(false)
 {
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
@@ -59,7 +63,9 @@ void Player::Update(float deltaTime)
 	pCurrentState->Update(this, deltaTime);
 
 	// update which room we're currently in
-	currentRoom = pLevel->GetRoomAtPos(pos);
+	pCurrentRoom = pLevel->GetRoomAtPos(pos);
+	sf::Vector2f newCamCenter = Math::ClampPoint(pos, pCurrentRoom->GetScrollMinBounds(), pCurrentRoom->GetScrollMaxBounds());
+	SceneManager::GetCurrentCamera()->SetCenter(newCamCenter);
 
 	// reset the player's y-velocity if they're grounded (so we don't continuously accelerate downwards)
 	if (isGrounded && !jumpKeyDown)
@@ -111,7 +117,7 @@ void Player::Update(float deltaTime)
 	}
 	if (DEBUG_LEVEL_SCROLL_BOUNDS)
 	{
-		pLevel->DebugLevelScrollBounds(currentRoom);
+		pLevel->DebugLevelScrollBounds(pCurrentRoom);
 	}
 }
 

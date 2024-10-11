@@ -115,6 +115,15 @@
     <Filter Include="Source Files\Engine Code\Asset Managers\Texture Manager">
       <UniqueIdentifier>{3763d391-f152-47af-bfc8-35d41d4d81dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scene Management">
+      <UniqueIdentifier>{a5ade6b3-e40b-43fd-b0de-62685db80ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scenes">
+      <UniqueIdentifier>{d097332a-c047-408f-b7b4-e29381258dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Tools and Conveniences">
+      <UniqueIdentifier>{954d1eef-d3bf-4d20-b589-1d27c9b4107d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -135,17 +144,8 @@
     <ClCompile Include="Engine Code\DrawObject.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\RegistrationBroker.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\DrawRegistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\Scene.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\SceneAttorney.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\DrawObjectAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
@@ -236,9 +236,6 @@
     </ClCompile>
     <ClCompile Include="Game Code\JsonParser.cpp">
       <Filter>Source Files\Game Code\Misc. files</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\Camera.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\LevelMap.cpp">
       <Filter>Source Files\Game Code\Level Data</Filter>
@@ -333,6 +330,45 @@
     <ClCompile Include="Engine Code\TextureManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Texture Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\RegistrationBroker.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Scene.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneChangeCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneChangeNullCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\CameraManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Camera.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\CameraAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Math.cpp">
+      <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\RoomData.cpp">
+      <Filter>Source Files\Game Code\Level Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -356,17 +392,8 @@
     <ClInclude Include="Game Code\DesignerControls.h">
       <Filter>Source Files\Game Code</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\RegistrationBroker.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\DrawRegistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\Scene.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\SceneAttorney.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\DrawObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
@@ -476,9 +503,6 @@
     <ClInclude Include="Game Code\JsonParser.h">
       <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\Camera.h">
-      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\LevelMap.h">
       <Filter>Source Files\Game Code\Level Data</Filter>
     </ClInclude>
@@ -571,6 +595,45 @@
     </ClInclude>
     <ClInclude Include="Engine Code\TextureManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers\Texture Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Scene.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\RegistrationBroker.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneChangeCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneChangeNullCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CameraManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Camera.h">
+      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CameraAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Camera System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Math.h">
+      <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\RoomData.h">
+      <Filter>Source Files\Game Code\Level Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

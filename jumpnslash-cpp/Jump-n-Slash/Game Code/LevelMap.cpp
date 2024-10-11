@@ -6,6 +6,8 @@
 #include "../Engine Code/JumpSlashEngine.h"
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/Visualizer.h"
+#include "../Engine Code/SceneManager.h"
+#include "../Engine Code/Camera.h"
 
 #include "BlockBreakable.h"
 #include "BlockHazard.h"
@@ -13,6 +15,7 @@
 #include "PlatformSemisolid.h"
 #include "Constants.h"
 #include "DebugFlags.h"
+#include "RoomData.h"
 
 LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 	: map(),
@@ -234,12 +237,9 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 			}
 		}
 
-		// set all the room data
-
-		RoomData* pRoomData = new RoomData();
 
 		// set the room origin
-		pRoomData->origin = sf::Vector2f(origin.x * TILE_SIZE_F, origin.y * TILE_SIZE_F);
+		sf::Vector2f roomOrigin(origin.x * TILE_SIZE_F, origin.y * TILE_SIZE_F);
 
 		// set the room size
 		int tileWidth = widthPos.x - origin.x + 1;
@@ -248,27 +248,25 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 		assert(tileHeight % ROOM_TILE_HEIGHT == 0);
 		float worldSpaceWidth = static_cast<float>(tileWidth) * TILE_SIZE_F;
 		float worldSpaceHeight = static_cast<float>(tileHeight) * TILE_SIZE_F;
-		pRoomData->size = sf::Vector2f(worldSpaceWidth, worldSpaceHeight);
+		sf::Vector2f roomSize = sf::Vector2f(worldSpaceWidth, worldSpaceHeight);
 
-		// set the starting room flag
-		pRoomData->isStartingRoom = origin == startOrigin;
-
-		// set the player spawn flag
-		pRoomData->hasPlayerSpawn = playerSpawn.x >= 0 && playerSpawn.y >= 0;
+		// set the player spawn point flag
+		bool hasPlayerSpawn = playerSpawn.x >= 0 && playerSpawn.y >= 0;
 
 		// set the player spawn point (if applicable)
-		if (pRoomData->hasPlayerSpawn)
+		sf::Vector2f* pPlayerSpawnPoint;
+		if (hasPlayerSpawn)
 		{
-			pRoomData->playerSpawnPoint = new sf::Vector2f(playerSpawn.x * TILE_SIZE_F, playerSpawn.y * TILE_SIZE_F);
+			pPlayerSpawnPoint = new sf::Vector2f(playerSpawn.x * TILE_SIZE_F, playerSpawn.y * TILE_SIZE_F);
 		}
 		else
 		{
-			pRoomData->playerSpawnPoint = nullptr;
+			pPlayerSpawnPoint = nullptr;
 		}
 		
 		// set the enemy spawn points
-		pRoomData->enemyLeftSpawns = std::list<sf::Vector2f>(); // TODO: finish this line
-		pRoomData->enemyRightSpawns = std::list<sf::Vector2f>(); // TODO: finish this line
+		std::list<sf::Vector2f> enemyLeftSpawns; // TODO: finish this line
+		std::list<sf::Vector2f> enemyRightSpawns; // TODO: finish this line
 
 		// add any enemy spawns to the room
 		if (tiles.count(KEY_INDICATOR_SPAWN_ENEMY_LEFT) > 0)
@@ -279,7 +277,7 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 				if (origin.x <= (*searchIt).x && (*searchIt).x <= widthPos.x &&
 					origin.y <= (*searchIt).y && (*searchIt).y <= heightPos.y)
 				{
-					pRoomData->enemyLeftSpawns.push_back(sf::Vector2f(static_cast<float>((*searchIt).x), static_cast<float>((*searchIt).y)));
+					enemyLeftSpawns.push_back(sf::Vector2f(static_cast<float>((*searchIt).x), static_cast<float>((*searchIt).y)));
 				}
 			}
 		}
@@ -291,17 +289,23 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 				if (origin.x <= (*searchIt).x && (*searchIt).x <= widthPos.x &&
 					origin.y <= (*searchIt).y && (*searchIt).y <= heightPos.y)
 				{
-					pRoomData->enemyRightSpawns.push_back(sf::Vector2f(static_cast<float>((*searchIt).x), static_cast<float>((*searchIt).y)));
+					enemyRightSpawns.push_back(sf::Vector2f(static_cast<float>((*searchIt).x), static_cast<float>((*searchIt).y)));
 				}
 			}
 		}
 
 		// set scroll bounds
-		pRoomData->scrollLeftBoundsX = origin.x + (static_cast<float>(ROOM_TILE_WIDTH) / 2.f) * TILE_SIZE_F;
-		pRoomData->scrollRightBoundsX = origin.x + worldSpaceWidth - (static_cast<float>(ROOM_TILE_WIDTH) / 2.f) * TILE_SIZE_F;
-		pRoomData->scrollTopBoundsY = origin.y + (static_cast<float>(ROOM_TILE_HEIGHT) / 2.f) * TILE_SIZE_F;
-		pRoomData->scrollBottomBoundsY = origin.y + worldSpaceHeight - (static_cast<float>(ROOM_TILE_HEIGHT) / 2.f) * TILE_SIZE_F;
+		float scrollLeftBoundsX = (origin.x + static_cast<float>(ROOM_TILE_WIDTH / 2)) * TILE_SIZE_F;
+		float scrollRightBoundsX = (origin.x * TILE_SIZE_F) + worldSpaceWidth - (static_cast<float>(ROOM_TILE_WIDTH / 2) * TILE_SIZE_F);
+		float scrollTopBoundsY = (origin.y + static_cast<float>(ROOM_TILE_HEIGHT / 2)) * TILE_SIZE_F;
+		float scrollBottomBoundsY = (origin.y * TILE_SIZE_F) + worldSpaceHeight - (static_cast<float>(ROOM_TILE_HEIGHT / 2) * TILE_SIZE_F);
 		
+		// set all the room data
+		RoomData* pRoomData = new RoomData(roomOrigin, roomSize, origin == startOrigin,
+			hasPlayerSpawn, pPlayerSpawnPoint,
+			enemyLeftSpawns, enemyRightSpawns,
+			scrollLeftBoundsX, scrollRightBoundsX, scrollTopBoundsY, scrollBottomBoundsY);
+
 		// add the created room data to the list
 		rooms.push_back(pRoomData);
 
@@ -309,13 +313,13 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 		int startRoomCount = 0;
 		for (RoomList::iterator it = rooms.begin(); it != rooms.end(); it++)
 		{
-			if ((*it)->isStartingRoom == true)
+			if ((*it)->IsStartRoom() == true)
 			{
 				startRoomCount++;
 			}
 		}
 		assert(startRoomCount == 1);
-		assert(rooms.front()->isStartingRoom == true); // the starting room should always be the first one in the list
+		assert(rooms.front()->IsStartRoom() == true); // the starting room should always be the first one in the list
 	}
 }
 
@@ -324,12 +328,7 @@ LevelMap::~LevelMap()
 	// delete owned pointers in room data
 	for (std::list<RoomData*>::iterator it = rooms.begin(); it != rooms.end(); it++)
 	{
-		RoomData* pRoomData = (*it);
-		if (pRoomData->playerSpawnPoint != nullptr)
-		{
-			delete pRoomData->playerSpawnPoint;
-		}
-		delete pRoomData;
+		delete (*it);
 	}
 
 	// delete owned pointers in the levelmap
@@ -348,31 +347,40 @@ LevelMap::~LevelMap()
 
 sf::Vector2f LevelMap::GetStartingSpawnPoint()
 {
-	assert(rooms.front()->isStartingRoom == true);
-	assert(rooms.front()->playerSpawnPoint != nullptr);
-	return *(rooms.front()->playerSpawnPoint);
+	assert(rooms.front()->IsStartRoom() == true);
+	assert(rooms.front()->HasPlayerSpawn() == true);
+	assert(rooms.front()->GetPlayerSpawnPoint() != nullptr);
+	return *(rooms.front()->GetPlayerSpawnPoint());
 }
 
-LevelMap::RoomListRef LevelMap::GetStartingRoomRef()
+RoomData* LevelMap::GetStartingRoom()
 {
-	assert(rooms.front()->isStartingRoom == true); // the starting room should always be the first one in the list
-	return rooms.begin();
+	assert(rooms.front()->IsStartRoom() == true); // the starting room should always be the first one in the list
+	return *(rooms.begin());
 }
 
-LevelMap::RoomListRef LevelMap::GetRoomAtPos(sf::Vector2f worldPos)
+RoomData* LevelMap::GetRoomAtPos(sf::Vector2f worldPos)
 {
-	for (RoomList::iterator it = rooms.begin(); it != rooms.end(); it++)
+	RoomListRef room = rooms.begin();
+	bool searching = true;
+	do
 	{
-		sf::Vector2f rmOrigin = (*it)->origin;
-		sf::Vector2f rmSize = (*it)->size;
+		sf::Vector2f rmOrigin = (*room)->GetOrigin();
+		sf::Vector2f rmSize = (*room)->GetSize();
 		if (rmOrigin.x <= worldPos.x && worldPos.x < rmOrigin.x + rmSize.x &&
 			rmOrigin.y <= worldPos.y && worldPos.y < rmOrigin.y + rmSize.y)
 		{
-			return it;
+			searching = false;
 		}
-	}
 
-	assert(false); // TODO: this is bad code. rewrite this better.
+		if (searching)
+		{
+			room++;
+			assert(room != rooms.end());
+		}
+	} while (searching == true);
+
+	return *room;
 }
 
 LevelTile* LevelMap::GetTileAtPos(sf::Vector2f worldPos)
@@ -390,25 +398,40 @@ LevelTile* LevelMap::GetTileAtPos(sf::Vector2f worldPos)
 	return row[x];
 }
 
-void LevelMap::DebugLevelScrollBounds(RoomListRef roomListRef)
+void LevelMap::DebugLevelScrollBounds(RoomData* pRoom)
 {
 	if (DEBUG_LEVEL_SCROLL_BOUNDS)
 	{
-		float leftX = (*roomListRef)->scrollLeftBoundsX;
-		float rightX = (*roomListRef)->scrollRightBoundsX;
-		float topY = (*roomListRef)->scrollTopBoundsY;
-		float bottomY = (*roomListRef)->scrollBottomBoundsY;
+		float leftX = pRoom->GetScrollBoundsLeftX();
+		float rightX = pRoom->GetScrollBoundsRightX();
+		float topY = pRoom->GetScrollBoundsTopY();
+		float bottomY = pRoom->GetScrollBoundsBottomY();
+
+		sf::String vizText;
 
 		// debug left edge
 		Visualizer::VisualizeSegment(sf::Vector2f(leftX, 0.f), sf::Vector2f(leftX, static_cast<float>(WINDOW_HEIGHT)));
+		vizText = "scroll bounds left x";
+		Visualizer::VisualizeText(vizText, sf::Vector2f(leftX - vizText.getSize() * 8.f, static_cast<float>(WINDOW_HEIGHT / 2)));
 
 		// debug right edge
 		Visualizer::VisualizeSegment(sf::Vector2f(rightX, 0.f), sf::Vector2f(rightX, static_cast<float>(WINDOW_HEIGHT)));
+		vizText = "scroll bounds right x";
+		Visualizer::VisualizeText(vizText, sf::Vector2f(rightX, static_cast<float>(WINDOW_HEIGHT / 2)));
 
 		// debug top edge
 		Visualizer::VisualizeSegment(sf::Vector2f(0.f, topY), sf::Vector2f(static_cast<float>(WINDOW_WIDTH), topY));
+		vizText = "scroll bounds top y";
+		Visualizer::VisualizeText(vizText, sf::Vector2f(static_cast<float>(WINDOW_WIDTH / 2), topY - VIZ_DEFAULT_TEXT_SIZE));
 
 		// debug bottom edge
 		Visualizer::VisualizeSegment(sf::Vector2f(0.f, bottomY), sf::Vector2f(static_cast<float>(WINDOW_WIDTH), bottomY));
+		vizText = "scroll bounds bottom y";
+		Visualizer::VisualizeText(vizText, sf::Vector2f(static_cast<float>(WINDOW_WIDTH / 2), bottomY + VIZ_DEFAULT_TEXT_SIZE));
+
+		// visualize camera center position
+		sf::Vector2f pos = SceneManager::GetCurrentCamera()->GetCenter();
+		Visualizer::VisualizePoint(pos, sf::Color::Red);
+		Visualizer::VisualizeText(pos, pos, sf::Color::Red);
 	}
 }

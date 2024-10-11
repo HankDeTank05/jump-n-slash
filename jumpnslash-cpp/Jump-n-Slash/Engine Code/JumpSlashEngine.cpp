@@ -7,15 +7,13 @@
 #include "VisualizerAttorney.h"
 #include "FontManagerAttorney.h"
 #include "VizCmdFactoryAttorney.h"
-#include "SceneAttorney.h" // TODO: remove this when SceneManager is created
-#include "Scene.h" // TODO: remove this when SceneManager is created
+#include "SceneManagerAttorney.h"
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
 
 JumpSlashEngine::~JumpSlashEngine()
 {
-	pCurrentScene->End();
-	delete pCurrentScene;
+	// do nothing?
 }
 
 JumpSlashEngine& JumpSlashEngine::Instance()
@@ -35,16 +33,6 @@ void JumpSlashEngine::SetWindowName(sf::String winName)
 void JumpSlashEngine::SetWindowSize(int winWidth, int winHeight)
 {
 	Instance().privSetWindowSize(winWidth, winHeight);
-}
-
-void JumpSlashEngine::SetStartScene(Scene* pStartScene)
-{
-	Instance().privSetStartScene(pStartScene);
-}
-
-Scene* JumpSlashEngine::GetCurrentScene()
-{
-	return Instance().privGetCurrentScene();
 }
 
 void JumpSlashEngine::Run()
@@ -69,22 +57,11 @@ void JumpSlashEngine::privSetWindowSize(int _winWidth, int _winHeight)
 	winHeight = _winHeight;
 }
 
-void JumpSlashEngine::privSetStartScene(Scene* _pStartScene)
-{
-	pCurrentScene = _pStartScene;
-}
-
-Scene* JumpSlashEngine::privGetCurrentScene()
-{
-	assert(pCurrentScene != nullptr);
-	return pCurrentScene;
-}
-
 void JumpSlashEngine::privRun()
 {
 	Initialize();
-	LoadContent();
 	window.create(sf::VideoMode(winWidth, winHeight), winName);
+	LoadContent();
 	while (window.isOpen())
 	{
 		sf::Time deltaTime = clock.restart();
@@ -115,32 +92,37 @@ void JumpSlashEngine::LoadContent()
 {
 	LoadResources();
 
-	assert(pCurrentScene != nullptr); // You forgot to call SetStartScene at the end of LoadContent!
-	pCurrentScene->Init();
+	SceneManagerAttorney::Initialization::InitStartScene();
 }
 
 void JumpSlashEngine::Update(float deltaTime)
 {
-	SceneAttorney::GameLoop::Update(pCurrentScene, deltaTime);
+	SceneManagerAttorney::GameLoop::UpdateCurrentScene(deltaTime);
 }
 
 void JumpSlashEngine::Draw()
 {
 	window.clear();
 
-	SceneAttorney::GameLoop::Draw(pCurrentScene);
+	SceneManagerAttorney::GameLoop::DrawCurrentScene();
 
 	window.display();
 }
 
 void JumpSlashEngine::UnloadContent()
 {
+	// asset managers
 	TextureManagerAttorney::Termination::Terminate();
 	SpriteManagerAttorney::Termination::Terminate();
 	GridManagerAttorney::Termination::Terminate();
 	FontManagerAttorney::Termination::Terminate();
+
+	// debug tools
 	VisualizerAttorney::Termination::Terminate();
 	VizCmdFactoryAttorney::Termination::Terminate();
+
+	// main systems
+	SceneManagerAttorney::Termination::Terminate();
 }
 
 sf::RenderWindow& JumpSlashEngine::GetWindow()
@@ -148,7 +130,17 @@ sf::RenderWindow& JumpSlashEngine::GetWindow()
 	return Instance().privGetWindow();
 }
 
+void JumpSlashEngine::SetView(sf::View view)
+{
+	Instance().privSetView(view);
+}
+
 sf::RenderWindow& JumpSlashEngine::privGetWindow()
 {
 	return window;
+}
+
+void JumpSlashEngine::privSetView(sf::View view)
+{
+	window.setView(view);
 }

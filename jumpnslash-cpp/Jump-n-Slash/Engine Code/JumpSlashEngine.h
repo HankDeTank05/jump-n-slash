@@ -33,9 +33,6 @@ public: // public api functions
 	*/
 	static void SetWindowSize(int winWidth, int winHeight);
 	// TODO: create function JumpSlashEngine::SetFullscreenMode
-
-	static void SetStartScene(Scene* pStartScene);
-	static Scene* GetCurrentScene();
 	
 	// TODO: should these be public?
 	static void Run(); // TODO: docs for JumpSlashEngine::Run
@@ -44,17 +41,16 @@ public: // public api functions
 private: // engine-only api functions
 	friend class EngineAttorney;
 	static sf::RenderWindow& GetWindow();
+	static void SetView(sf::View view);
 
 private: // private api backend functions
 	void privSetWindowName(sf::String winName);
 	void privSetWindowSize(int winWidth, int winHeight);
 
-	void privSetStartScene(Scene* pStartScene);
-	Scene* privGetCurrentScene();
-
 	void privRun();
 
 	sf::RenderWindow& privGetWindow();
+	void privSetView(sf::View view);
 
 private:
 	void Initialize();
@@ -108,8 +104,6 @@ private: // member variables
 	int winWidth;
 	int winHeight;
 	sf::Clock clock;
-
-	Scene* pCurrentScene;
 	
 };
 

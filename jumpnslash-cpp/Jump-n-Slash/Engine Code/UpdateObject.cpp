@@ -3,7 +3,7 @@
 #include "UpdateRegistrationCommand.h"
 #include "UpdateDeregistrationCommand.h"
 #include "SceneAttorney.h"
-#include "JumpSlashEngine.h"
+#include "SceneManager.h"
 
 UpdateObject::UpdateObject()
 	: regState(RegistrationState::CURRENTLY_DEREGISTERED),
@@ -28,7 +28,7 @@ void UpdateObject::RequestUpdateRegistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_DEREGISTERED);
 
-	SceneAttorney::Commands::AddCommand(JumpSlashEngine::GetCurrentScene(), pRegCmd);
+	SceneAttorney::Commands::AddCommand(SceneManager::GetCurrentScene(), pRegCmd);
 
 	regState = RegistrationState::PENDING_REGISTRATION;
 }
@@ -37,7 +37,7 @@ void UpdateObject::RequestUpdateDeregistration()
 {
 	assert(regState == RegistrationState::CURRENTLY_REGISTERED);
 
-	SceneAttorney::Commands::AddCommand(JumpSlashEngine::GetCurrentScene(), pDeregCmd);
+	SceneAttorney::Commands::AddCommand(SceneManager::GetCurrentScene(), pDeregCmd);
 
 	regState = RegistrationState::PENDING_DEREGISTRATION;
 }
@@ -46,7 +46,7 @@ void UpdateObject::Register()
 {
 	assert(regState == RegistrationState::PENDING_REGISTRATION);
 
-	deleteRef = SceneAttorney::Update::Register(JumpSlashEngine::GetCurrentScene(), this);
+	deleteRef = SceneAttorney::Update::Register(SceneManager::GetCurrentScene(), this);
 
 	regState = RegistrationState::CURRENTLY_REGISTERED;
 }
@@ -55,7 +55,7 @@ void UpdateObject::Deregister()
 {
 	assert(regState == RegistrationState::PENDING_DEREGISTRATION);
 
-	SceneAttorney::Update::Deregister(JumpSlashEngine::GetCurrentScene(), deleteRef);
+	SceneAttorney::Update::Deregister(SceneManager::GetCurrentScene(), deleteRef);
 
 	regState = RegistrationState::CURRENTLY_DEREGISTERED;
 }

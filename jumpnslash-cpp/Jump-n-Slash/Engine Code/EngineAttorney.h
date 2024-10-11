@@ -1,7 +1,8 @@
 #ifndef ENGINE_ATTORNEY_H
 #define ENGINE_ATTORNEY_H
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/View.hpp>
 
 class EngineAttorney
 {
@@ -11,7 +12,10 @@ public:
 	private:
 		friend class DrawObject;
 		friend class MouseCursorListener;
+		friend class CameraManager;
+		friend class Camera;
 		static sf::RenderWindow& GetWindow();
+		static void SetView(sf::View view);
 	};
 };
 

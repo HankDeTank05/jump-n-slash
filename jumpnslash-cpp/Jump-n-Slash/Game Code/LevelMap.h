@@ -5,12 +5,13 @@
 #include <list>
 #include <vector>
 
-#include <SFML/Graphics.hpp>
+#include <SFML/System/Vector2.hpp>
 
 #include "Constants.h"
 
 // forward declarations
 class LevelTile;
+class RoomData;
 
 class LevelMap
 {
@@ -21,29 +22,12 @@ public:
 	LevelMap& operator=(const LevelMap& lm) = delete;
 	virtual ~LevelMap();
 
-private:
-	struct RoomData
-	{
-		sf::Vector2f origin; // in world space!!
-		sf::Vector2f size; // in world space!!
-		bool isStartingRoom;
-		bool hasPlayerSpawn;
-		sf::Vector2f* playerSpawnPoint; // if hasPlayerSpawn == false, this is nullptr
-		std::list<sf::Vector2f> enemyLeftSpawns;
-		std::list<sf::Vector2f> enemyRightSpawns;
-		float scrollLeftBoundsX;
-		float scrollRightBoundsX;
-		float scrollTopBoundsY;
-		float scrollBottomBoundsY;
-	};
-
-public:
 	using RoomList = std::list<RoomData*>;
 	using RoomListRef = RoomList::iterator;
 
 	sf::Vector2f GetStartingSpawnPoint(); // TODO: docs for LevelMap::GetStartingSpawnPoint
-	RoomListRef GetStartingRoomRef(); // TODO: docs for LevelMap::GetStartingRoomRef
-	RoomListRef GetRoomAtPos(sf::Vector2f worldPos); // TODO: docs for LevelMap::GetRoomAtPos
+	RoomData* GetStartingRoom(); // TODO: docs for LevelMap::GetStartingRoom
+	RoomData* GetRoomAtPos(sf::Vector2f worldPos); // TODO: docs for LevelMap::GetRoomAtPos
 
 	/*!
 	* \brief	Get the tile at a given world-space position.
@@ -64,7 +48,7 @@ public:
 	*/
 	LevelTile* GetTileAtPos(sf::Vector2f worldPos); // TODO: docs for LevelMap::GetTileAtPos needs example code
 
-	void DebugLevelScrollBounds(RoomListRef roomListRef);
+	void DebugLevelScrollBounds(RoomData* pRoom);
 
 private:
 	std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
