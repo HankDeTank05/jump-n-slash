@@ -1,50 +1,63 @@
-from PyQt5.QtCore import QObject, pyqtSlot, pyqtProperty, pyqtSignal
-from PyQt5.QtCore import QUrl
-from PyQt5.QtQml import qmlRegisterType
+from PyQt5.QtCore import QObject, pyqtSlot, pyqtProperty, pyqtSignal # type: ignore
+from PyQt5.QtCore import QUrl # type: ignore
+from PyQt5.QtQml import qmlRegisterType #type: ignore
 import json
-
+#supressing errors never goes wrong...
 class Backend(QObject):
-    colorSelected = pyqtSignal(str)#need to implement in qml
-    tileSelected = pyqtSignal(int)
+    levelChanged = pyqtSignal()
 
-    def __init__(self):
+    def __init__(self, grid_width=100, grid_height=100):
         super().__init__()
-        self._selectedColor = "white"
-        self.grid_data = [["white" for _ in range(100)] for _ in range(100)]
-
-    @pyqtProperty(str)
-    def selectedColor(self):
-        return self._selectedColor
-
-    @selectedColor.setter
-    def selectedColor(self, value):
-        self._selectedColor = value
+        self.grid_width = grid_width
+        self.grid_height = grid_height
+        # Default selected sprite (e.g., an empty tile image)
+        self._selectedSprite = "assets/empty.png"
+        # Initialize grid data with the default sprite
+        self.grid_data = [[self._selectedSprite for _ in range(self.grid_width)] for _ in range(self.grid_height)]
 
     @pyqtSlot(str)
-    def setSelectedColor(self, color):
-        self.selectedColor = color
-        print(f"Selected color set to: {color}")
+    def setSelectedSprite(self, imageSource):
+        self._selectedSprite = imageSource
+        print(f"Selected sprite set to: {imageSource}")
 
     @pyqtSlot(int)
-    def setTileColor(self, index):
-        # Calculate row and column from index.
-        row = index // 100  # Example size, can change if needed.
-        col = index % 100
-        self.grid_data[row][col] = self.selectedColor
-        print(f"Tile {index} set to color {self.selectedColor}")
+    def setTileSprite(self, index):
+        row = index // self.grid_width
+        col = index % self.grid_width
+        self.grid_data[row][col] = self._selectedSprite
+        print(f"Tile at index {index} set to sprite {self._selectedSprite}")
+        # Optionally emit a signal if you want to update individual tiles
+
+    @pyqtSlot(int, result=str)
+    def getTileImageSource(self, index):
+        row = index // self.grid_width
+        col = index % self.grid_width
+        return self.grid_data[row][col]
+
+    @pyqtSlot()
+    def clearLevel(self):
+        self.grid_data = [[self._selectedSprite for _ in range(self.grid_width)] for _ in range(self.grid_height)]
+        print("Level cleared.")
+        self.levelChanged.emit()
 
     @pyqtSlot()
     def saveToFile(self):
-        with open('path_to_file/level_data.txt', 'w') as f:
-            for row in self.grid_data:
-                f.write(" ".join(row) + "\n")
+        with open('level_data.json', 'w') as f:
+            json.dump(self.grid_data, f)
         print("Level data saved.")
 
     @pyqtSlot()
-    def loadFromFile(self):#want to make this better, choose file maybe?
-        with open('path_to_file/level_data.txt', 'r') as f:
-            for row_idx, line in enumerate(f):
-                colors = line.strip().split()
-                for col_idx, color in enumerate(colors):
-                    self.grid_data[row_idx][col_idx] = color
-        print("Level data loaded.")
+    def loadFromFile(self):
+        try:
+            with open('level_data.json', 'r') as f:
+                self.grid_data = json.load(f)
+            print("Level data loaded.")
+            self.levelChanged.emit()
+        except FileNotFoundError:
+            print("No saved level data found.")
+        except json.JSONDecodeError:
+            print("Error decoding level data.")
+
+    @pyqtProperty(str)
+    def selectedSprite(self):
+        return self._selectedSprite
