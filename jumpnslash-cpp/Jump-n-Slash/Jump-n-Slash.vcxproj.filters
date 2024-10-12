@@ -124,6 +124,15 @@
     <Filter Include="Source Files\Engine Code\Tools and Conveniences">
       <UniqueIdentifier>{954d1eef-d3bf-4d20-b589-1d27c9b4107d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Design Patterns">
+      <UniqueIdentifier>{5967d6c2-08fc-48b9-a93e-9e63afe35c71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Design Patterns\Command">
+      <UniqueIdentifier>{9bfe10f3-a2f3-4f83-a518-e5879a0c7c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Design Patterns\Observer">
+      <UniqueIdentifier>{1624e9be-4314-4237-b015-2ced0b6325df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -369,6 +378,9 @@
     <ClCompile Include="Game Code\RoomData.cpp">
       <Filter>Source Files\Game Code\Level Data</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\Subject.cpp">
+      <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -379,9 +391,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\RegistrationState.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\Command.h">
-      <Filter>Source Files\Engine Code\Misc. files</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\DrawManager.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
@@ -634,6 +643,18 @@
     </ClInclude>
     <ClInclude Include="Game Code\RoomData.h">
       <Filter>Source Files\Game Code\Level Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Command.h">
+      <Filter>Source Files\Engine Code\Design Patterns\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Observer.h">
+      <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Subject.h">
+      <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\ObserverEvent.h">
+      <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

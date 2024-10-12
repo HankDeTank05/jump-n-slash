@@ -16,11 +16,13 @@
 #include "Constants.h"
 #include "DebugFlags.h"
 #include "RoomData.h"
+#include "PlayerAttorney.h"
 
 LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 	: map(),
 	usedSize(0, 0),
-	rooms()
+	rooms(),
+	pPlayer(nullptr)
 {
 	std::map<std::string, std::list<sf::Vector2i>> tiles;
 
@@ -396,6 +398,25 @@ LevelTile* LevelMap::GetTileAtPos(sf::Vector2f worldPos)
 	std::array<LevelTile*, MAX_LEVEL_SIZE> row = map[y];
 
 	return row[x];
+}
+
+void LevelMap::OnNotify(ObserverEvent event)
+{
+	switch (event)
+	{
+	case ObserverEvent::PlayerOutsideCurrentRoom:
+	{
+		RoomData* pNextRoom = GetRoomAtPos(PlayerAttorney::Level::GetPos(pPlayer));
+		PlayerAttorney::Level::SetCurrentRoom(pPlayer, pNextRoom);
+	}
+		break;
+	case ObserverEvent::PlayerInScrollArea:
+		assert(false);
+		break;
+	default:
+		assert(false);
+		break;
+	}
 }
 
 void LevelMap::DebugLevelScrollBounds(RoomData* pRoom)

@@ -29,7 +29,11 @@ Level0::~Level0()
 void Level0::Init()
 {
 	pMap = new LevelMap(GridManager::GetGrid("test 2"));
-	pPlayer = new Player(pMap);
+	pPlayer = new Player();
+
+	pPlayer->AddObserver(pMap);
+	pPlayer->LinkToMap();
+
 	float viewWidth = ROOM_TILE_WIDTH * TILE_SIZE_F;
 	float viewHeight = ROOM_TILE_HEIGHT * TILE_SIZE_F;
 	Camera* pCamera = SceneManager::GetCurrentScene()->GetCurrentCamera();

@@ -2,19 +2,9 @@
 
 #include "Player.h"
 
-sf::Vector2f PlayerAttorney::State::GetPos(Player* pPlayer)
-{
-	return pPlayer->GetPos();
-}
-
 sf::Vector2f PlayerAttorney::State::GetPosDelta(Player* pPlayer)
 {
 	return pPlayer->GetPosDelta();
-}
-
-LevelMap* PlayerAttorney::State::GetLevel(Player* pPlayer)
-{
-	return pPlayer->GetLevel();
 }
 
 bool PlayerAttorney::State::IsGrounded(Player* pPlayer)
@@ -50,4 +40,14 @@ void PlayerAttorney::State::ApplyGravity(Player* pPlayer, float deltaTime)
 void PlayerAttorney::State::ProcessInputs(Player* pPlayer, float deltaTime)
 {
 	pPlayer->ProcessInputs(deltaTime);
+}
+
+sf::Vector2f PlayerAttorney::Level::GetPos(Player* pPlayer)
+{
+	return pPlayer->GetPos();
+}
+
+void PlayerAttorney::Level::SetCurrentRoom(Player* pPlayer, RoomData* pNextRoom)
+{
+	pPlayer->SetCurrentRoom(pNextRoom);
 }

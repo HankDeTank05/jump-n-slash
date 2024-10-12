@@ -57,6 +57,7 @@
     <ClCompile Include="Engine Code\SceneManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\SpriteManager.cpp" />
     <ClCompile Include="Engine Code\SpriteManagerAttorney.cpp" />
+    <ClCompile Include="Engine Code\Subject.cpp" />
     <ClCompile Include="Engine Code\TextureManager.cpp" />
     <ClCompile Include="Engine Code\TextureManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\UpdateObject.cpp" />
@@ -135,6 +136,8 @@
     <ClInclude Include="Engine Code\MouseCursorDeregistrationCommand.h" />
     <ClInclude Include="Engine Code\MouseCursorListener.h" />
     <ClInclude Include="Engine Code\MouseCursorRegistrationCommand.h" />
+    <ClInclude Include="Engine Code\Observer.h" />
+    <ClInclude Include="Engine Code\ObserverEvent.h" />
     <ClInclude Include="Engine Code\RegistrationBroker.h" />
     <ClInclude Include="Engine Code\RegistrationState.h" />
     <ClInclude Include="Engine Code\Scene.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="Engine Code\SceneManagerAttorney.h" />
     <ClInclude Include="Engine Code\SpriteManager.h" />
     <ClInclude Include="Engine Code\SpriteManagerAttorney.h" />
+    <ClInclude Include="Engine Code\Subject.h" />
     <ClInclude Include="Engine Code\TextureManager.h" />
     <ClInclude Include="Engine Code\TextureManagerAttorney.h" />
     <ClInclude Include="Engine Code\UpdateObject.h" />

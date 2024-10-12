@@ -6,6 +6,7 @@
 // forward declarations
 class Player;
 class LevelMap;
+class RoomData;
 
 class PlayerAttorney
 {
@@ -20,9 +21,7 @@ public:
 
 		// accessors
 
-		static sf::Vector2f GetPos(Player* pPlayer);
 		static sf::Vector2f GetPosDelta(Player* pPlayer);
-		static LevelMap* GetLevel(Player* pPlayer);
 		static bool IsGrounded(Player* pPlayer);
 
 		// mutators
@@ -33,6 +32,19 @@ public:
 		static void RaycastDown(Player* pPlayer, float deltaTime);
 		static void ApplyGravity(Player* pPlayer, float deltaTime);
 		static void ProcessInputs(Player* pPlayer, float deltaTime);
+	};
+	class Level
+	{
+	private:
+		friend class LevelMap;
+
+		// accessors
+
+		static sf::Vector2f GetPos(Player* pPlayer);
+
+		// mutators
+
+		static void SetCurrentRoom(Player* pPlayer, RoomData* pNextRoom);
 	};
 };
 

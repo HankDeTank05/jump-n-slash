@@ -15,30 +15,21 @@
 #include "LevelTile.h"
 #include "RoomData.h"
 
-Player::Player(LevelMap* _pLevel)
-	: pos(_pLevel->GetStartingSpawnPoint()),
+Player::Player()
+	: pos(),
 	posDelta(0.f, 0.f),
 	speed(PLAYER_WALK_SPEED),
 	pSprite(SpriteManager::GetSprite("player idle 1")),
 	pCurrentState(&PlayerFSM::idle),
-	pPrevState(pCurrentState),
-	respawnPoint(_pLevel->GetStartingSpawnPoint()),
-	pLevel(_pLevel),
-	pCurrentRoom(_pLevel->GetStartingRoom()),
+	pPrevState(nullptr),
+	respawnPoint(),
+	pLevel(nullptr),
+	pCurrentRoom(nullptr),
 	walkLeftKeyDown(false),
 	walkRightKeyDown(false),
 	jumpKeyDown(false),
 	isGrounded(false)
-{
-	RequestUpdateRegistration();
-	RequestDrawRegistration();
-	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
-	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
-	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
-	
+{	
 	assert(pCurrentState != nullptr);
 }
 
@@ -62,8 +53,15 @@ void Player::Update(float deltaTime)
 	// update player based on the current move state
 	pCurrentState->Update(this, deltaTime);
 
-	// update which room we're currently in
-	pCurrentRoom = pLevel->GetRoomAtPos(pos);
+	// check if we're still inside the room
+	sf::Vector2f roomMin = pCurrentRoom->GetOrigin();
+	sf::Vector2f roomMax = roomMin + pCurrentRoom->GetSize();
+	if (pos.x < roomMin.x || roomMin.x <= pos.x || pos.y < roomMin.y || roomMin.y < pos.y)
+	{
+		Notify(ObserverEvent::PlayerOutsideCurrentRoom);
+	}
+
+	// update the camera
 	sf::Vector2f newCamCenter = Math::ClampPoint(pos, pCurrentRoom->GetScrollMinBounds(), pCurrentRoom->GetScrollMaxBounds());
 	SceneManager::GetCurrentCamera()->SetCenter(newCamCenter);
 
@@ -155,6 +153,19 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	case JUMP_KEY:
 		break;
 	}
+}
+
+void Player::LinkToMap(LevelMap* _pLevel)
+{
+	pLevel->LinkToPlayer(this);
+	RequestUpdateRegistration();
+	RequestDrawRegistration();
+	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
+	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
+	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyPress);
+	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
+	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
+	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
 }
 
 sf::Vector2f Player::GetPos() const
@@ -486,4 +497,9 @@ void Player::ProcessInputs(float deltaTime)
 		//posDelta.y = JUMP_FORCE * deltaTime;
 		posDelta.y = JUMP_FORCE;
 	}
+}
+
+void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
+{
+	pCurrentRoom = _pCurrentRoom;
 }
