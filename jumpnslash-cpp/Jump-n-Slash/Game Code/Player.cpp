@@ -5,6 +5,8 @@
 #include "../Engine Code/Math.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/Camera.h"
+#include "../Engine Code/AnimationSet.h"
+#include "../Engine Code/Animation.h"
 
 #include "Constants.h"
 #include "DebugFlags.h"
@@ -19,8 +21,7 @@ Player::Player()
 	: pos(),
 	posDelta(0.f, 0.f),
 	speed(PLAYER_WALK_SPEED),
-	animations(),
-	currentAnimation(),
+	animComp(),
 	pSprite(nullptr),
 	pCurrentState(&PlayerFSM::idle),
 	pPrevState(nullptr),
@@ -30,38 +31,43 @@ Player::Player()
 	walkLeftKeyDown(false),
 	walkRightKeyDown(false),
 	jumpKeyDown(false),
-	isGrounded(false)
+	isGrounded(false),
+	facing(1)
 {	
 	assert(pCurrentState != nullptr);
 
-	AnimationList idle;
-	idle.push_back(SpriteManager::GetSprite("player idle 1"));
-	idle.push_back(SpriteManager::GetSprite("player idle 2"));
-	idle.push_back(SpriteManager::GetSprite("player idle 3"));
-	idle.push_back(SpriteManager::GetSprite("player idle 4"));
+	Animation* pIdle = new Animation(7.f);
+	pIdle->AddFrame(SpriteManager::GetSprite("player idle 1"));
+	pIdle->AddFrame(SpriteManager::GetSprite("player idle 2"));
+	pIdle->AddFrame(SpriteManager::GetSprite("player idle 3"));
+	pIdle->AddFrame(SpriteManager::GetSprite("player idle 4"));
 
-	AnimationList walk;
-	walk.push_back(SpriteManager::GetSprite("player walk 1"));
-	walk.push_back(SpriteManager::GetSprite("player walk 2"));
-	walk.push_back(SpriteManager::GetSprite("player walk 3"));
-	walk.push_back(SpriteManager::GetSprite("player walk 4"));
+	Animation* pWalk = new Animation(7.f);
+	pWalk->AddFrame(SpriteManager::GetSprite("player walk 1"));
+	pWalk->AddFrame(SpriteManager::GetSprite("player walk 2"));
+	pWalk->AddFrame(SpriteManager::GetSprite("player walk 3"));
+	pWalk->AddFrame(SpriteManager::GetSprite("player walk 4"));
 
-	AnimationList jump;
-	jump.push_back(SpriteManager::GetSprite("player jump 1"));
-	jump.push_back(SpriteManager::GetSprite("player jump 2"));
-	jump.push_back(SpriteManager::GetSprite("player jump 3"));
-	jump.push_back(SpriteManager::GetSprite("player jump 4"));
+	Animation* pJump = new Animation(7.f);
+	pJump->AddFrame(SpriteManager::GetSprite("player jump 1"));
+	pJump->AddFrame(SpriteManager::GetSprite("player jump 2"));
+	pJump->AddFrame(SpriteManager::GetSprite("player jump 3"));
+	pJump->AddFrame(SpriteManager::GetSprite("player jump 4"));
 
-	AnimationList fall;
-	fall.push_back(SpriteManager::GetSprite("player fall 1"));
-	fall.push_back(SpriteManager::GetSprite("player fall 2"));
-	fall.push_back(SpriteManager::GetSprite("player fall 3"));
-	fall.push_back(SpriteManager::GetSprite("player fall 4"));
+	Animation* pFall = new Animation(7.f);
+	pFall->AddFrame(SpriteManager::GetSprite("player fall 1"));
+	pFall->AddFrame(SpriteManager::GetSprite("player fall 2"));
+	pFall->AddFrame(SpriteManager::GetSprite("player fall 3"));
+	pFall->AddFrame(SpriteManager::GetSprite("player fall 4"));
 
-	animations.emplace("idle", idle);
-	animations.emplace("walk", walk);
-	animations.emplace("jump", jump);
-	animations.emplace("fall", fall);
+	AnimationSet* pAnimSet = new AnimationSet();
+	pAnimSet->AddAnimation("idle", pIdle);
+	pAnimSet->AddAnimation("walk", pWalk);
+	pAnimSet->AddAnimation("jump", pJump);
+	pAnimSet->AddAnimation("fall", pFall);
+
+	animComp.DefineAnimationSet(pAnimSet);
+	animComp.SetAnimation("idle");
 }
 
 Player::~Player()
@@ -109,6 +115,16 @@ void Player::Update(float deltaTime)
 	}
 
 	// set the sprite position for drawing
+	pSprite = animComp.GetCurrentFrame();
+	if (facing == 1)
+	{
+		pSprite->setOrigin(0.f, 0.f);
+	}
+	else if (facing == -1)
+	{
+		pSprite->setOrigin(32.f, 0.f);
+	}
+	pSprite->setScale(static_cast<float>(facing), 1.f);
 	pSprite->setPosition(pos);
 
 	// update the previous state for the next frame
@@ -170,9 +186,11 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 	{
 	case WALK_LEFT_KEY:
 		walkLeftKeyDown = true;
+		facing = -1;
 		break;
 	case WALK_RIGHT_KEY:
 		walkRightKeyDown = true;
+		facing = 1;
 		break;
 	case JUMP_KEY:
 		jumpKeyDown = true;
@@ -560,36 +578,20 @@ void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
 
 void Player::SetAnimationIdle()
 {
-	if (currentAnimation != "idle")
-	{
-		currentAnimation = "idle";
-		pSprite = animations.at(currentAnimation).front();
-	}
+	animComp.SetAnimation("idle");
 }
 
 void Player::SetAnimationWalk()
 {
-	if (currentAnimation != "walk")
-	{
-		currentAnimation = "walk";
-		pSprite = animations.at(currentAnimation).front();
-	}
+	animComp.SetAnimation("walk");
 }
 
 void Player::SetAnimationJump()
 {
-	if (currentAnimation != "jump")
-	{
-		currentAnimation = "jump";
-		pSprite = animations.at(currentAnimation).front();
-	}
+	animComp.SetAnimation("jump");
 }
 
 void Player::SetAnimationFall()
 {
-	if (currentAnimation != "fall")
-	{
-		currentAnimation = "fall";
-		pSprite = animations.at(currentAnimation).front();
-	}
+	animComp.SetAnimation("fall");
 }

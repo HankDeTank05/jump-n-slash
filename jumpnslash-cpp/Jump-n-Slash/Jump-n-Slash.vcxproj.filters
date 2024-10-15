@@ -136,6 +136,9 @@
     <Filter Include="Source Files\Engine Code\Main Systems\Time Management System">
       <UniqueIdentifier>{b22f1041-5d46-4510-b007-430b7931fc90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Animation System">
+      <UniqueIdentifier>{5308157a-26bd-4529-811c-175a9e9a846e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -404,6 +407,15 @@
     </ClCompile>
     <ClCompile Include="Engine Code\TimeManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Animation.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AnimationComponent.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AnimationSet.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -703,6 +715,15 @@
     </ClInclude>
     <ClInclude Include="Engine Code\TimeManager.h">
       <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Animation.h">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationSet.h">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationComponent.h">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

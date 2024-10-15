@@ -11,6 +11,7 @@
 #include "../Engine Code/InputObject.h"
 #include "../Engine Code/AlarmObject.h"
 #include "../Engine Code/Subject.h"
+#include "../Engine Code/AnimationComponent.h"
 
 // forward declarations
 class PlayerMoveState;
@@ -34,9 +35,6 @@ public:
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
 
 	void LinkToMap(LevelMap* pLevel);
-
-	using AnimationList = std::list<sf::Sprite*>;
-	using AnimationSet = std::map<std::string, AnimationList>;
 
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
@@ -75,8 +73,7 @@ private: // Member variables
 	sf::Vector2f pos; // current world-space position
 	sf::Vector2f posDelta; // player movement for the current frame (aka, the change from previous frame)
 	float speed; // horizontal movement speed
-	AnimationSet animations; // the map containing all the animation frames
-	std::string currentAnimation;
+	AnimationComponent animComp; // animation component
 	sf::Sprite* pSprite; // the sprite to be drawn
 	const PlayerMoveState* pCurrentState; // the current movement state
 	const PlayerMoveState* pPrevState; // the move state during the previous frame
@@ -87,6 +84,7 @@ private: // Member variables
 	bool walkRightKeyDown; // flag indicating if the walk right key is currently pressed
 	bool jumpKeyDown; // flag indicating if the jump jey is currently pressed
 	bool isGrounded; // flag indicating if the player is touching the ground
+	int facing; // 1 for right, -1 for left
 };
 
 #endif

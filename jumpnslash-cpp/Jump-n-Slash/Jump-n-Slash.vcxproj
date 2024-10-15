@@ -24,6 +24,9 @@
     <ClCompile Include="Engine Code\AlarmObject.cpp" />
     <ClCompile Include="Engine Code\AlarmObjectAttorney.cpp" />
     <ClCompile Include="Engine Code\AlarmRegistrationCommand.cpp" />
+    <ClCompile Include="Engine Code\Animation.cpp" />
+    <ClCompile Include="Engine Code\AnimationComponent.cpp" />
+    <ClCompile Include="Engine Code\AnimationSet.cpp" />
     <ClCompile Include="Engine Code\Camera.cpp" />
     <ClCompile Include="Engine Code\CameraAttorney.cpp" />
     <ClCompile Include="Engine Code\CameraManager.cpp" />
@@ -116,6 +119,9 @@
     <ClInclude Include="Engine Code\AlarmObject.h" />
     <ClInclude Include="Engine Code\AlarmObjectAttorney.h" />
     <ClInclude Include="Engine Code\AlarmRegistrationCommand.h" />
+    <ClInclude Include="Engine Code\Animation.h" />
+    <ClInclude Include="Engine Code\AnimationComponent.h" />
+    <ClInclude Include="Engine Code\AnimationSet.h" />
     <ClInclude Include="Engine Code\Camera.h" />
     <ClInclude Include="Engine Code\CameraAttorney.h" />
     <ClInclude Include="Engine Code\CameraManager.h" />
