@@ -727,6 +727,7 @@
     </ClInclude>
     <ClInclude Include="Engine Code\AnimationComponent.h">
       <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClInclude>
     <ClInclude Include="Game Code\Actor.h">
       <Filter>Source Files\Game Code\Actors</Filter>
     </ClInclude>
