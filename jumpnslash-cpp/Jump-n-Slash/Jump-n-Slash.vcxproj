@@ -187,6 +187,7 @@
     <ClInclude Include="Engine Code\VizCmdRectPool.h" />
     <ClInclude Include="Engine Code\VizCmdSegPool.h" />
     <ClInclude Include="Engine Code\VizCmdTextPool.h" />
+    <ClInclude Include="Game Code\Actor.h" />
     <ClInclude Include="Game Code\BlockBreakable.h" />
     <ClInclude Include="Game Code\BlockHazard.h" />
     <ClInclude Include="Game Code\BlockSolid.h" />

@@ -136,6 +136,9 @@
     <Filter Include="Source Files\Engine Code\Main Systems\Time Management System">
       <UniqueIdentifier>{b22f1041-5d46-4510-b007-430b7931fc90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Actors">
+      <UniqueIdentifier>{2e03c227-788a-4f50-a465-c762a2138c41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -703,6 +706,9 @@
     </ClInclude>
     <ClInclude Include="Engine Code\TimeManager.h">
       <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Actor.h">
+      <Filter>Source Files\Game Code\Actors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
