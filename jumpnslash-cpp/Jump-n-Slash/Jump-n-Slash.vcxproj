@@ -105,6 +105,7 @@
     <ClCompile Include="Game Code\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine Code\AlarmObject.h" />
     <ClInclude Include="Engine Code\Camera.h" />
     <ClInclude Include="Engine Code\CameraAttorney.h" />
     <ClInclude Include="Engine Code\CameraManager.h" />
