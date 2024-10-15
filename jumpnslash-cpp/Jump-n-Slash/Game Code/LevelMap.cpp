@@ -347,6 +347,17 @@ LevelMap::~LevelMap()
 	}
 }
 
+void LevelMap::LinkToPlayer(Player* _pPlayer)
+{
+	pPlayer = _pPlayer;
+
+	// set player spawn point
+	PlayerAttorney::Level::SetCurrentRoom(pPlayer, rooms.front());
+	
+	// set player pos
+	PlayerAttorney::Level::SetPos(pPlayer, *(rooms.front()->GetPlayerSpawnPoint()));
+}
+
 sf::Vector2f LevelMap::GetStartingSpawnPoint()
 {
 	assert(rooms.front()->IsStartRoom() == true);

@@ -16,7 +16,6 @@ class RoomData;
 class Player : public UpdateObject, public DrawObject, public InputObject, public Subject
 {
 public:
-	Player() = delete;
 	Player();
 	Player(const Player& p) = delete;
 	Player& operator=(const Player& p) = delete;
@@ -38,13 +37,21 @@ private: // player accessors. for selective access only (thru attorney)
 	bool IsGrounded() const;
 
 private: // player mutators. for selective access only (thru attorney)
+
+	// map collision
+
 	void RaycastRight(float deltaTime);
 	void RaycastLeft(float deltaTime);
 	void RaycastUp(float deltaTime);
 	void RaycastDown(float deltaTime);
 
+	// position and movement
+
+	void SetPos(sf::Vector2f newPos);
 	void ApplyGravity(float deltaTime);
 	void ProcessInputs(float deltaTime);
+
+	// other
 
 	void SetCurrentRoom(RoomData* pCurrentRoom);
 

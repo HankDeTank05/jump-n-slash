@@ -47,6 +47,11 @@ sf::Vector2f PlayerAttorney::Level::GetPos(Player* pPlayer)
 	return pPlayer->GetPos();
 }
 
+void PlayerAttorney::Level::SetPos(Player* pPlayer, sf::Vector2f newPos)
+{
+	pPlayer->SetPos(newPos);
+}
+
 void PlayerAttorney::Level::SetCurrentRoom(Player* pPlayer, RoomData* pNextRoom)
 {
 	pPlayer->SetCurrentRoom(pNextRoom);

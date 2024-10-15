@@ -40,6 +40,9 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
+	assert(pLevel != nullptr);
+	assert(pCurrentRoom != nullptr);
+
 	// new frame, so update the previous state
 	pPrevState = pCurrentState;
 
@@ -157,6 +160,7 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 
 void Player::LinkToMap(LevelMap* _pLevel)
 {
+	pLevel = _pLevel;
 	pLevel->LinkToPlayer(this);
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
@@ -400,8 +404,8 @@ void Player::RaycastDown(float deltaTime)
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
 
-	// Cast a ray from the left (index=0) and right (index=1) of the sprite
-	startPos[0] = pos;
+	// Cast a ray downwards from the left (index=0) and right (index=1) edges of the sprite
+	startPos[0] = pos + sf::Vector2f(0.f, 0.f);
 	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, 0.f); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
 
 	// The lowest point the player can move to without being inside of a wall
@@ -411,9 +415,13 @@ void Player::RaycastDown(float deltaTime)
 	{
 		sf::Vector2f currPos = startPos[i];
 
+		// account for an edge case where raycasting begins inside of a block, so it never continues past the start
+
 		// While the current position is empty or NOT solid on top, and within the bounds of the map
-		while ((pLevel->GetTileAtPos(currPos) == nullptr || !pLevel->GetTileAtPos(currPos)->IsSolidOnTop()) && currPos.y <= MAX_LEVEL_SIZE * TILE_SIZE_F)
+		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnTop() == false) &&
+			currPos.y <= MAX_LEVEL_SIZE * TILE_SIZE_F)
 		{
+
 			// Visuals for debugging ONLY
 			if (DEBUG_PLAYER_MAP_COLLISION)
 			{
@@ -425,7 +433,7 @@ void Player::RaycastDown(float deltaTime)
 			{
 				currPos.y += TILE_SIZE_F;
 			}
-			else // First iteration through the while loop; we may be in the middle of a tile, so increment to the edge of the nearest tile space
+			else // First iteration through the while loop; we may be in the middle of a tile, so increment to the top edge of the next tile below
 			{
 				// We can get the y-index of a tile by dividing the y position by tile size and casting to an int to remove the decimal
 				int tileIndex = static_cast<int>(currPos.y / TILE_SIZE_F);
@@ -433,7 +441,7 @@ void Player::RaycastDown(float deltaTime)
 				// Multiplying by tile size again gets the position of the edge of the current tile
 				currPos.y = static_cast<float>(tileIndex) * TILE_SIZE_F;
 
-				// Increment by tile size because currPos is above of startPos[i]
+				// Increment by tile size because currPos is above startPos[i]
 				currPos.y += TILE_SIZE_F;
 			}
 		}
@@ -472,6 +480,11 @@ void Player::RaycastDown(float deltaTime)
 	pos.y = minY;
 }
 
+void Player::SetPos(sf::Vector2f newPos)
+{
+	pos = newPos;
+}
+
 void Player::ApplyGravity(float deltaTime)
 {
 	//posDelta.y += GRAVITY_WEIGHT * deltaTime;
@@ -502,4 +515,8 @@ void Player::ProcessInputs(float deltaTime)
 void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
 {
 	pCurrentRoom = _pCurrentRoom;
+	if (pCurrentRoom->HasPlayerSpawn())
+	{
+		respawnPoint = *(pCurrentRoom->GetPlayerSpawnPoint());
+	}
 }
