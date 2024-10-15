@@ -7,13 +7,16 @@
 
 #include <SFML/System/Vector2.hpp>
 
+#include "../Engine Code/Observer.h"
+
 #include "Constants.h"
 
 // forward declarations
 class LevelTile;
 class RoomData;
+class Player;
 
-class LevelMap
+class LevelMap : public Observer
 {
 public:
 	LevelMap() = delete;
@@ -24,6 +27,8 @@ public:
 
 	using RoomList = std::list<RoomData*>;
 	using RoomListRef = RoomList::iterator;
+
+	void LinkToPlayer(Player* pPlayer);
 
 	sf::Vector2f GetStartingSpawnPoint(); // TODO: docs for LevelMap::GetStartingSpawnPoint
 	RoomData* GetStartingRoom(); // TODO: docs for LevelMap::GetStartingRoom
@@ -48,12 +53,17 @@ public:
 	*/
 	LevelTile* GetTileAtPos(sf::Vector2f worldPos); // TODO: docs for LevelMap::GetTileAtPos needs example code
 
+	virtual void OnNotify(ObserverEvent event) override;
+
+	// debug stuff
+
 	void DebugLevelScrollBounds(RoomData* pRoom);
 
 private:
 	std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
 	sf::Vector2i usedSize;
 	RoomList rooms;
+	Player* pPlayer;
 };
 
 #endif

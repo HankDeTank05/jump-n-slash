@@ -6,17 +6,17 @@
 #include "../Engine Code/UpdateObject.h"
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/InputObject.h"
+#include "../Engine Code/Subject.h"
 
 // forward declarations
 class PlayerMoveState;
 class LevelMap;
 class RoomData;
 
-class Player : public UpdateObject, public DrawObject, public InputObject
+class Player : public UpdateObject, public DrawObject, public InputObject, public Subject
 {
 public:
-	Player() = delete;
-	Player(LevelMap* pLevel);
+	Player();
 	Player(const Player& p) = delete;
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
@@ -27,6 +27,8 @@ public:
 	virtual void KeyPressed(sf::Keyboard::Key key) override;
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
 
+	void LinkToMap(LevelMap* pLevel);
+
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
 	sf::Vector2f GetPos() const;
@@ -35,12 +37,23 @@ private: // player accessors. for selective access only (thru attorney)
 	bool IsGrounded() const;
 
 private: // player mutators. for selective access only (thru attorney)
+
+	// map collision
+
 	void RaycastRight(float deltaTime);
 	void RaycastLeft(float deltaTime);
 	void RaycastUp(float deltaTime);
 	void RaycastDown(float deltaTime);
+
+	// position and movement
+
+	void SetPos(sf::Vector2f newPos);
 	void ApplyGravity(float deltaTime);
 	void ProcessInputs(float deltaTime);
+
+	// other
+
+	void SetCurrentRoom(RoomData* pCurrentRoom);
 
 private: // Member variables
 	sf::Vector2f pos; // current world-space position
