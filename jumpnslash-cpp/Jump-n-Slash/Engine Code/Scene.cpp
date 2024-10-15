@@ -11,6 +11,7 @@ Scene::Scene()
 	pUpdateMgr(new UpdateManager()),
 	pDrawMgr(new DrawManager()),
 	pInputMgr(new InputManager()),
+	pAlarmMgr(new AlarmManager()),
 	pCamMgr(new CameraManager())
 {
 	// do nothing
@@ -19,6 +20,7 @@ Scene::Scene()
 Scene::~Scene()
 {
 	delete pCamMgr;
+	delete pAlarmMgr;
 	delete pInputMgr;
 	delete pDrawMgr;
 	delete pUpdateMgr;
@@ -98,6 +100,16 @@ void Scene::RegisterMouseCursor(InputObject* pInputable)
 void Scene::DeregisterMouseCursor(InputObject* pInputable)
 {
 	pInputMgr->DeregisterMouseCursor(pInputable);
+}
+
+AlarmManager::TimelineRef Scene::Register(float triggerTime, AlarmObject* pAlarmable, AlarmID id)
+{
+	return pAlarmMgr->Register(triggerTime, pAlarmable, id);
+}
+
+void Scene::Deregister(AlarmManager::TimelineRef timelineRef)
+{
+	pAlarmMgr->Deregister(timelineRef);
 }
 
 void Scene::AddCommand(Command* pCmd)

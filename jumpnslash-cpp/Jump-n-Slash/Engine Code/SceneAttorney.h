@@ -7,6 +7,7 @@
 #include "DrawManager.h"
 #include "UpdateManager.h"
 #include "InputEvent.h"
+#include "AlarmManager.h"
 
 // forward declarations
 class Scene;
@@ -29,6 +30,7 @@ public:
 		friend class UpdateObject;
 		friend class DrawObject;
 		friend class InputObject;
+		friend class AlarmObject;
 		static void AddCommand(Scene* pScene, Command* pCmd);
 	};
 
@@ -58,6 +60,14 @@ public:
 		static void DeregisterMouseBtn(Scene* pScene, sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg);
 		static void RegisterMouseCursor(Scene* pScene, InputObject* pInputable);
 		static void DeregisterMouseCursor(Scene* pScene, InputObject* pInputable);
+	};
+
+	class Alarm
+	{
+	private:
+		friend class AlarmObject;
+		static AlarmManager::TimelineRef Register(Scene* pScene, float triggerTime, AlarmObject* pAlarmable, AlarmID id);
+		static void Deregister(Scene* pScene, AlarmManager::TimelineRef timelineRef);
 	};
 };
 

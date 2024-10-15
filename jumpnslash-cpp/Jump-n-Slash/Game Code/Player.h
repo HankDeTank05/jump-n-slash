@@ -9,6 +9,7 @@
 #include "../Engine Code/UpdateObject.h"
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/InputObject.h"
+#include "../Engine Code/AlarmObject.h"
 #include "../Engine Code/Subject.h"
 
 // forward declarations
@@ -16,7 +17,7 @@ class PlayerMoveState;
 class LevelMap;
 class RoomData;
 
-class Player : public UpdateObject, public DrawObject, public InputObject, public Subject
+class Player : public UpdateObject, public DrawObject, public InputObject, public AlarmObject, public Subject
 {
 public:
 	Player();

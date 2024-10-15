@@ -4,6 +4,8 @@
 #include "UpdateManager.h"
 #include "DrawManager.h"
 #include "InputManager.h"
+#include "AlarmManager.h"
+#include "AlarmID.h"
 
 // forward declarations
 class Command;
@@ -33,14 +35,17 @@ private:
 	void Draw();
 
 	// update registration
+
 	UpdateManager::UpdateListRef Register(UpdateObject* pUpdatable);
 	void Deregister(UpdateManager::UpdateListRef updateListRef);
 
 	// draw registration
+
 	DrawManager::DrawListRef Register(DrawObject* pDrawable);
 	void Deregister(DrawManager::DrawListRef drawListRef);
 
 	// input registration
+
 	void RegisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToReg);
 	void DeregisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToDereg);
 	void RegisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToReg);
@@ -48,7 +53,13 @@ private:
 	void RegisterMouseCursor(InputObject* pInputable);
 	void DeregisterMouseCursor(InputObject* pInputable);
 
+	// alarm registration
+
+	AlarmManager::TimelineRef Register(float triggerTime, AlarmObject* pAlarmable, AlarmID id);
+	void Deregister(AlarmManager::TimelineRef timelineRef);
+
 	// registration broker
+
 	void AddCommand(Command* pCmd);
 
 private:
@@ -57,6 +68,7 @@ private:
 	UpdateManager* pUpdateMgr; // manages update objects
 	DrawManager* pDrawMgr; // manages draw objects
 	InputManager* pInputMgr; // manages input objects
+	AlarmManager* pAlarmMgr; // manages alarm objects
 
 	CameraManager* pCamMgr; // manages the camera(s)
 };

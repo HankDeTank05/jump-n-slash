@@ -66,3 +66,13 @@ void SceneAttorney::Input::DeregisterMouseCursor(Scene* pScene, InputObject* pIn
 {
 	pScene->DeregisterMouseCursor(pInputable);
 }
+
+AlarmManager::TimelineRef SceneAttorney::Alarm::Register(Scene* pScene, float triggerTime, AlarmObject* pAlarmable, AlarmID id)
+{
+	return pScene->Register(triggerTime, pAlarmable, id);
+}
+
+void SceneAttorney::Alarm::Deregister(Scene* pScene, AlarmManager::TimelineRef timelineRef)
+{
+	pScene->Deregister(timelineRef);
+}

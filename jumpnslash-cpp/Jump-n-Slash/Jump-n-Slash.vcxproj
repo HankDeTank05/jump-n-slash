@@ -19,6 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine Code\AlarmDeregistrationCommand.cpp" />
+    <ClCompile Include="Engine Code\AlarmManager.cpp" />
+    <ClCompile Include="Engine Code\AlarmObject.cpp" />
+    <ClCompile Include="Engine Code\AlarmObjectAttorney.cpp" />
+    <ClCompile Include="Engine Code\AlarmRegistrationCommand.cpp" />
     <ClCompile Include="Engine Code\Camera.cpp" />
     <ClCompile Include="Engine Code\CameraAttorney.cpp" />
     <ClCompile Include="Engine Code\CameraManager.cpp" />
@@ -105,7 +110,12 @@
     <ClCompile Include="Game Code\TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine Code\AlarmDeregistrationCommand.h" />
+    <ClInclude Include="Engine Code\AlarmID.h" />
+    <ClInclude Include="Engine Code\AlarmManager.h" />
     <ClInclude Include="Engine Code\AlarmObject.h" />
+    <ClInclude Include="Engine Code\AlarmObjectAttorney.h" />
+    <ClInclude Include="Engine Code\AlarmRegistrationCommand.h" />
     <ClInclude Include="Engine Code\Camera.h" />
     <ClInclude Include="Engine Code\CameraAttorney.h" />
     <ClInclude Include="Engine Code\CameraManager.h" />

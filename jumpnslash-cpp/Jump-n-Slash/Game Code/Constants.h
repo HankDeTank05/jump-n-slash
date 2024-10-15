@@ -14,6 +14,10 @@ const int MAX_LEVEL_SIZE = 1024;
 const int TILE_SIZE = 32;
 const float TILE_SIZE_F = static_cast<float>(TILE_SIZE);
 
+// GameObject constants
+
+const int ALARM_COUNT = 10;
+
 // LevelMap constants
 
 const int ROOM_TILE_WIDTH = 40;
