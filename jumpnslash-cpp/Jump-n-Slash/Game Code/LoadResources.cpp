@@ -18,15 +18,49 @@ void JumpSlashEngine::LoadResources()
 	FontManager::LoadFont("consolas", "consola.ttf");
 	FontManager::LoadFont("delfino", "Delfino.ttf");
 
+	// load player idle animation
+
 	TextureManager::LoadTexture("player idle 1", "player/idle_1_32.png");
 	TextureManager::LoadTexture("player idle 2", "player/idle_2_32.png");
 	TextureManager::LoadTexture("player idle 3", "player/idle_3_32.png");
 	TextureManager::LoadTexture("player idle 4", "player/idle_4_32.png");
-
 	SpriteManager::LoadSprite("player idle 1", "player idle 1");
 	SpriteManager::LoadSprite("player idle 2", "player idle 2");
 	SpriteManager::LoadSprite("player idle 3", "player idle 3");
 	SpriteManager::LoadSprite("player idle 4", "player idle 4");
+
+	// load player walk animation
+
+	TextureManager::LoadTexture("player walk 1", "player/walk_1_32.png");
+	TextureManager::LoadTexture("player walk 2", "player/walk_2_32.png");
+	TextureManager::LoadTexture("player walk 3", "player/walk_3_32.png");
+	TextureManager::LoadTexture("player walk 4", "player/walk_4_32.png");
+	SpriteManager::LoadSprite("player walk 1", "player walk 1");
+	SpriteManager::LoadSprite("player walk 2", "player walk 2");
+	SpriteManager::LoadSprite("player walk 3", "player walk 3");
+	SpriteManager::LoadSprite("player walk 4", "player walk 4");
+
+	// load player jump animation
+
+	TextureManager::LoadTexture("player jump 1", "player/jump_1_32.png");
+	TextureManager::LoadTexture("player jump 2", "player/jump_2_32.png");
+	TextureManager::LoadTexture("player jump 3", "player/jump_3_32.png");
+	TextureManager::LoadTexture("player jump 4", "player/jump_4_32.png");
+	SpriteManager::LoadSprite("player jump 1", "player jump 1");
+	SpriteManager::LoadSprite("player jump 2", "player jump 2");
+	SpriteManager::LoadSprite("player jump 3", "player jump 3");
+	SpriteManager::LoadSprite("player jump 4", "player jump 4");
+
+	// load player fall animation
+
+	TextureManager::LoadTexture("player fall 1", "player/fall_1_32.png");
+	TextureManager::LoadTexture("player fall 2", "player/fall_2_32.png");
+	TextureManager::LoadTexture("player fall 3", "player/fall_3_32.png");
+	TextureManager::LoadTexture("player fall 4", "player/fall_4_32.png");
+	SpriteManager::LoadSprite("player fall 1", "player fall 1");
+	SpriteManager::LoadSprite("player fall 2", "player fall 2");
+	SpriteManager::LoadSprite("player fall 3", "player fall 3");
+	SpriteManager::LoadSprite("player fall 4", "player fall 4");
 
 	// parse the json file for level tiles to add
 	//std::ifstream file("..\\..\\..\\tools\\formatting_rules.json");

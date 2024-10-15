@@ -29,6 +29,8 @@ PlayerStateFalling::~PlayerStateFalling()
 void PlayerStateFalling::Enter(Player* pPlayer) const
 {
 	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateFalling" << std::endl;
+
+	PlayerAttorney::State::SetAnimationFall(pPlayer);
 }
 
 void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const

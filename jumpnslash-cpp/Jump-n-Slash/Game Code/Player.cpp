@@ -19,7 +19,8 @@ Player::Player()
 	: pos(),
 	posDelta(0.f, 0.f),
 	speed(PLAYER_WALK_SPEED),
-	pSprite(SpriteManager::GetSprite("player idle 1")),
+	animations(),
+	pSprite(nullptr),
 	pCurrentState(&PlayerFSM::idle),
 	pPrevState(nullptr),
 	respawnPoint(),
@@ -31,6 +32,35 @@ Player::Player()
 	isGrounded(false)
 {	
 	assert(pCurrentState != nullptr);
+
+	AnimationList idle;
+	idle.push_back(SpriteManager::GetSprite("player idle 1"));
+	idle.push_back(SpriteManager::GetSprite("player idle 2"));
+	idle.push_back(SpriteManager::GetSprite("player idle 3"));
+	idle.push_back(SpriteManager::GetSprite("player idle 4"));
+
+	AnimationList walk;
+	walk.push_back(SpriteManager::GetSprite("player walk 1"));
+	walk.push_back(SpriteManager::GetSprite("player walk 2"));
+	walk.push_back(SpriteManager::GetSprite("player walk 3"));
+	walk.push_back(SpriteManager::GetSprite("player walk 4"));
+
+	AnimationList jump;
+	jump.push_back(SpriteManager::GetSprite("player jump 1"));
+	jump.push_back(SpriteManager::GetSprite("player jump 2"));
+	jump.push_back(SpriteManager::GetSprite("player jump 3"));
+	jump.push_back(SpriteManager::GetSprite("player jump 4"));
+
+	AnimationList fall;
+	fall.push_back(SpriteManager::GetSprite("player fall 1"));
+	fall.push_back(SpriteManager::GetSprite("player fall 2"));
+	fall.push_back(SpriteManager::GetSprite("player fall 3"));
+	fall.push_back(SpriteManager::GetSprite("player fall 4"));
+
+	animations.emplace("idle", idle);
+	animations.emplace("walk", walk);
+	animations.emplace("jump", jump);
+	animations.emplace("fall", fall);
 }
 
 Player::~Player()
@@ -42,9 +72,6 @@ void Player::Update(float deltaTime)
 {
 	assert(pLevel != nullptr);
 	assert(pCurrentRoom != nullptr);
-
-	// new frame, so update the previous state
-	pPrevState = pCurrentState;
 
 	// update the move state
 	pCurrentState = pCurrentState->GetNextState(this);
@@ -82,6 +109,9 @@ void Player::Update(float deltaTime)
 
 	// set the sprite position for drawing
 	pSprite->setPosition(pos);
+
+	// update the previous state for the next frame
+	pPrevState = pCurrentState;
 
 	// debug visualizations
 	if (DEBUG_PLAYER_POSITION)
@@ -124,6 +154,7 @@ void Player::Update(float deltaTime)
 
 void Player::Draw()
 {
+	assert(pSprite != nullptr);
 	Render(*pSprite);
 }
 
@@ -519,4 +550,24 @@ void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
 	{
 		respawnPoint = *(pCurrentRoom->GetPlayerSpawnPoint());
 	}
+}
+
+void Player::SetAnimationIdle()
+{
+	pSprite = animations.at("idle").front();
+}
+
+void Player::SetAnimationWalk()
+{
+	pSprite = animations.at("walk").front();
+}
+
+void Player::SetAnimationJump()
+{
+	pSprite = animations.at("jump").front();
+}
+
+void Player::SetAnimationFall()
+{
+	pSprite = animations.at("fall").front();
 }

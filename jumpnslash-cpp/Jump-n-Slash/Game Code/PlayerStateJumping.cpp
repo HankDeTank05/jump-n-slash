@@ -29,6 +29,8 @@ PlayerStateJumping::~PlayerStateJumping()
 void PlayerStateJumping::Enter(Player* pPlayer) const
 {
 	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateJumping" << std::endl;
+
+	PlayerAttorney::State::SetAnimationJump(pPlayer);
 }
 
 void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const

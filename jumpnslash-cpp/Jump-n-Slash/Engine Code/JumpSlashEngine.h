@@ -55,7 +55,7 @@ private: // private api backend functions
 private:
 	void Initialize();
 	void LoadContent();
-	void Update(float deltaTime);
+	void Update();
 	void Draw();
 	void UnloadContent();
 
@@ -103,7 +103,6 @@ private: // member variables
 	sf::String winName;
 	int winWidth;
 	int winHeight;
-	sf::Clock clock;
 	
 };
 

@@ -35,6 +35,8 @@ PlayerStateWalking::~PlayerStateWalking()
 void PlayerStateWalking::Enter(Player* pPlayer) const
 {
 	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerSateWalking" << std::endl;
+
+	PlayerAttorney::State::SetAnimationWalk(pPlayer);
 }
 
 void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const

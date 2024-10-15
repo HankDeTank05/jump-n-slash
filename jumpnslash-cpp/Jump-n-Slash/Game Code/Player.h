@@ -1,6 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <map>
+#include <list>
+
 #include <SFML/Graphics.hpp>
 
 #include "../Engine Code/UpdateObject.h"
@@ -29,6 +32,9 @@ public:
 
 	void LinkToMap(LevelMap* pLevel);
 
+	using AnimationList = std::list<sf::Sprite*>;
+	using AnimationSet = std::map<std::string, AnimationList>;
+
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
 	sf::Vector2f GetPos() const;
@@ -55,10 +61,18 @@ private: // player mutators. for selective access only (thru attorney)
 
 	void SetCurrentRoom(RoomData* pCurrentRoom);
 
+	// animation
+
+	void SetAnimationIdle();
+	void SetAnimationWalk();
+	void SetAnimationJump();
+	void SetAnimationFall();
+
 private: // Member variables
 	sf::Vector2f pos; // current world-space position
 	sf::Vector2f posDelta; // player movement for the current frame (aka, the change from previous frame)
 	float speed; // horizontal movement speed
+	AnimationSet animations; // the map containing all the animation frames
 	sf::Sprite* pSprite; // the sprite to be drawn
 	const PlayerMoveState* pCurrentState; // the current movement state
 	const PlayerMoveState* pPrevState; // the move state during the previous frame

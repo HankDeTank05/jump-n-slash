@@ -30,8 +30,14 @@ public:
 		static void RaycastLeft(Player* pPlayer, float deltaTime);
 		static void RaycastUp(Player* pPlayer, float deltaTime);
 		static void RaycastDown(Player* pPlayer, float deltaTime);
+
 		static void ApplyGravity(Player* pPlayer, float deltaTime);
 		static void ProcessInputs(Player* pPlayer, float deltaTime);
+
+		static void SetAnimationIdle(Player* pPlayer);
+		static void SetAnimationWalk(Player* pPlayer);
+		static void SetAnimationJump(Player* pPlayer);
+		static void SetAnimationFall(Player* pPlayer);
 	};
 	class Level
 	{

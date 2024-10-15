@@ -29,6 +29,8 @@ PlayerStateIdle::~PlayerStateIdle()
 void PlayerStateIdle::Enter(Player* pPlayer) const
 {
 	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateIdle" << std::endl;
+
+	PlayerAttorney::State::SetAnimationIdle(pPlayer);
 }
 
 void PlayerStateIdle::Update(Player* pPlayer, float deltaTime) const

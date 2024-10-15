@@ -42,6 +42,26 @@ void PlayerAttorney::State::ProcessInputs(Player* pPlayer, float deltaTime)
 	pPlayer->ProcessInputs(deltaTime);
 }
 
+void PlayerAttorney::State::SetAnimationIdle(Player* pPlayer)
+{
+	pPlayer->SetAnimationIdle();
+}
+
+void PlayerAttorney::State::SetAnimationWalk(Player* pPlayer)
+{
+	pPlayer->SetAnimationWalk();
+}
+
+void PlayerAttorney::State::SetAnimationJump(Player* pPlayer)
+{
+	pPlayer->SetAnimationJump();
+}
+
+void PlayerAttorney::State::SetAnimationFall(Player* pPlayer)
+{
+	pPlayer->SetAnimationFall();
+}
+
 sf::Vector2f PlayerAttorney::Level::GetPos(Player* pPlayer)
 {
 	return pPlayer->GetPos();

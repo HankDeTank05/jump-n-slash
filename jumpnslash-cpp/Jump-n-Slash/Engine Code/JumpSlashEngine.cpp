@@ -8,6 +8,8 @@
 #include "FontManagerAttorney.h"
 #include "VizCmdFactoryAttorney.h"
 #include "SceneManagerAttorney.h"
+#include "TimeManagerAttorney.h"
+#include "TimeManager.h"
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
 
@@ -62,11 +64,10 @@ void JumpSlashEngine::privRun()
 	Initialize();
 	window.create(sf::VideoMode(winWidth, winHeight), winName);
 	LoadContent();
+	TimeManagerAttorney::Time::Start();
 	while (window.isOpen())
 	{
-		sf::Time deltaTime = clock.restart();
-
-		Update(deltaTime.asSeconds());
+		Update();
 		Draw();
 
 		sf::Event event;
@@ -95,8 +96,12 @@ void JumpSlashEngine::LoadContent()
 	SceneManagerAttorney::Initialization::InitStartScene();
 }
 
-void JumpSlashEngine::Update(float deltaTime)
+void JumpSlashEngine::Update()
 {
+	TimeManagerAttorney::Time::ProcessTime();
+
+	float deltaTime = TimeManager::GetFrameTime();
+	
 	SceneManagerAttorney::GameLoop::UpdateCurrentScene(deltaTime);
 }
 
@@ -123,6 +128,7 @@ void JumpSlashEngine::UnloadContent()
 
 	// main systems
 	SceneManagerAttorney::Termination::Terminate();
+	TimeManagerAttorney::Termination::Terminate();
 }
 
 sf::RenderWindow& JumpSlashEngine::GetWindow()

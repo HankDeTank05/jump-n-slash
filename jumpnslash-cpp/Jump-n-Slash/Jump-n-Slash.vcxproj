@@ -60,6 +60,8 @@
     <ClCompile Include="Engine Code\Subject.cpp" />
     <ClCompile Include="Engine Code\TextureManager.cpp" />
     <ClCompile Include="Engine Code\TextureManagerAttorney.cpp" />
+    <ClCompile Include="Engine Code\TimeManager.cpp" />
+    <ClCompile Include="Engine Code\TimeManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\UpdateObject.cpp" />
     <ClCompile Include="Engine Code\UpdateObjectAttorney.cpp" />
     <ClCompile Include="Engine Code\UpdateDeregistrationCommand.cpp" />
@@ -152,6 +154,8 @@
     <ClInclude Include="Engine Code\Subject.h" />
     <ClInclude Include="Engine Code\TextureManager.h" />
     <ClInclude Include="Engine Code\TextureManagerAttorney.h" />
+    <ClInclude Include="Engine Code\TimeManager.h" />
+    <ClInclude Include="Engine Code\TimeManagerAttorney.h" />
     <ClInclude Include="Engine Code\UpdateObject.h" />
     <ClInclude Include="Engine Code\UpdateObjectAttorney.h" />
     <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h" />
