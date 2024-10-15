@@ -28,6 +28,8 @@ public:
 	virtual void Update(float deltaTime) override;
 	virtual void Draw() override;
 
+	virtual void Alarm0() override;
+
 	virtual void KeyPressed(sf::Keyboard::Key key) override;
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
 
@@ -74,6 +76,7 @@ private: // Member variables
 	sf::Vector2f posDelta; // player movement for the current frame (aka, the change from previous frame)
 	float speed; // horizontal movement speed
 	AnimationSet animations; // the map containing all the animation frames
+	std::string currentAnimation;
 	sf::Sprite* pSprite; // the sprite to be drawn
 	const PlayerMoveState* pCurrentState; // the current movement state
 	const PlayerMoveState* pPrevState; // the move state during the previous frame

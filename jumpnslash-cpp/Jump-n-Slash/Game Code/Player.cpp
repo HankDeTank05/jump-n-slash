@@ -20,6 +20,7 @@ Player::Player()
 	posDelta(0.f, 0.f),
 	speed(PLAYER_WALK_SPEED),
 	animations(),
+	currentAnimation(),
 	pSprite(nullptr),
 	pCurrentState(&PlayerFSM::idle),
 	pPrevState(nullptr),
@@ -156,6 +157,11 @@ void Player::Draw()
 {
 	assert(pSprite != nullptr);
 	Render(*pSprite);
+}
+
+void Player::Alarm0()
+{
+	assert(false);
 }
 
 void Player::KeyPressed(sf::Keyboard::Key key)
@@ -554,20 +560,36 @@ void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
 
 void Player::SetAnimationIdle()
 {
-	pSprite = animations.at("idle").front();
+	if (currentAnimation != "idle")
+	{
+		currentAnimation = "idle";
+		pSprite = animations.at(currentAnimation).front();
+	}
 }
 
 void Player::SetAnimationWalk()
 {
-	pSprite = animations.at("walk").front();
+	if (currentAnimation != "walk")
+	{
+		currentAnimation = "walk";
+		pSprite = animations.at(currentAnimation).front();
+	}
 }
 
 void Player::SetAnimationJump()
 {
-	pSprite = animations.at("jump").front();
+	if (currentAnimation != "jump")
+	{
+		currentAnimation = "jump";
+		pSprite = animations.at(currentAnimation).front();
+	}
 }
 
 void Player::SetAnimationFall()
 {
-	pSprite = animations.at("fall").front();
+	if (currentAnimation != "fall")
+	{
+		currentAnimation = "fall";
+		pSprite = animations.at(currentAnimation).front();
+	}
 }
