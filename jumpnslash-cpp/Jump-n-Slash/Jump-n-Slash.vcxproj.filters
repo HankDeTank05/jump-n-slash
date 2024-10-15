@@ -133,6 +133,9 @@
     <Filter Include="Source Files\Engine Code\Design Patterns\Observer">
       <UniqueIdentifier>{1624e9be-4314-4237-b015-2ced0b6325df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Time Management System">
+      <UniqueIdentifier>{b22f1041-5d46-4510-b007-430b7931fc90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -380,6 +383,27 @@
     </ClCompile>
     <ClCompile Include="Engine Code\Subject.cpp">
       <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AlarmDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AlarmManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AlarmObject.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AlarmObjectAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AlarmRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\TimeManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\TimeManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -655,6 +679,30 @@
     </ClInclude>
     <ClInclude Include="Engine Code\ObserverEvent.h">
       <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AlarmDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AlarmManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AlarmObject.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AlarmObjectAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AlarmRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AlarmID.h">
+      <Filter>Source Files\Engine Code\Misc. files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TimeManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TimeManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

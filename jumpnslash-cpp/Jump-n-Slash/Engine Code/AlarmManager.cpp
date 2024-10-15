@@ -3,9 +3,20 @@
 #include "TimeManager.h"
 #include "AlarmObjectAttorney.h"
 
+AlarmManager::AlarmManager()
+    : timeline()
+{
+    // do nothing
+}
+
+AlarmManager::~AlarmManager()
+{
+    timeline.clear();
+}
+
 AlarmManager::TimelineRef AlarmManager::Register(float triggerTime, AlarmObject* pAlarmable, AlarmID id)
 {
-    return timeline.insert(std::pair<float, AlarmEvent>(time, AlarmEvent(pAlarmable, id)));
+    return timeline.insert(std::pair<float, AlarmEvent>(triggerTime, AlarmEvent(pAlarmable, id)));
 }
 
 void AlarmManager::Deregister(TimelineRef timelineRef)

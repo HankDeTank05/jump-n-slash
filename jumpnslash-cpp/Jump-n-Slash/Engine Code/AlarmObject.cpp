@@ -12,8 +12,8 @@ AlarmObject::AlarmObject()
 	{
 		regData[i].triggerTime = -1.f;
 		regData[i].regState = RegistrationState::CURRENTLY_DEREGISTERED;
-		assert(false); // create alarm registration command
-		assert(false); // create alarm deregistration command
+		regData[i].pRegCmd = new AlarmRegistrationCommand(this, static_cast<AlarmID>(i));
+		regData[i].pDeregCmd = new AlarmDeregistrationCommand(this, static_cast<AlarmID>(i));
 	}
 }
 
@@ -21,59 +21,59 @@ AlarmObject::~AlarmObject()
 {
 	for (int i = 0; i < ALARM_COUNT; i++)
 	{
-		delete regData[i].pDeregCmd; assert(false); // remove this when the alarm deregistration command is new'd
-		delete regData[i].pRegCmd; assert(false); // remove this when the alarm registration command is new'd
+		delete regData[i].pDeregCmd;
+		delete regData[i].pRegCmd;
 	}
 }
 
 void AlarmObject::Alarm0()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm1()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm2()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm3()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm4()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm5()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm6()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm7()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm8()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::Alarm9()
 {
-	// do nothing
+	// do nothing. override to make it do something
 }
 
 void AlarmObject::RequestAlarmRegistration(AlarmID id, float triggerTime)
