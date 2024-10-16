@@ -1,6 +1,7 @@
 #include "JumpSlashEngine.h"
 
 #include <cassert>
+
 #include "TextureManagerAttorney.h"
 #include "SpriteManagerAttorney.h"
 #include "GridManagerAttorney.h"
@@ -10,6 +11,8 @@
 #include "SceneManagerAttorney.h"
 #include "TimeManagerAttorney.h"
 #include "TimeManager.h"
+
+#include "../Game Code/Constants.h"
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
 
@@ -63,6 +66,7 @@ void JumpSlashEngine::privRun()
 {
 	Initialize();
 	window.create(sf::VideoMode(winWidth, winHeight), winName);
+	window.setFramerateLimit(MAX_FRAMERATE);
 	LoadContent();
 	TimeManagerAttorney::Time::Start();
 	while (window.isOpen())

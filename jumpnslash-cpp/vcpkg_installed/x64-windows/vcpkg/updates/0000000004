@@ -1,0 +1,9 @@
+Package: simdjson
+Version: 3.10.1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 7cbda0eeade9b1a917572025818c4839a5715565c34650266df60bcfcf74b59d
+Description: An extremely fast JSON library that can parse gigabytes of JSON per second
+Default-Features: deprecated, exceptions, threads, utf8-validation
+Status: install ok half-installed

@@ -1,0 +1,5 @@
+texture "player spritesheet" "player/player_sheet.png" false
+sprite "player idle 1" "player spritesheet" 0 0 32 32
+sprite "player idle 2" "player spritesheet" 32 0 32 32
+sprite "player idle 3" "player spritesheet" 64 0 32 32
+sprite "player idle 4" "player spritesheet" 96 0 32 32

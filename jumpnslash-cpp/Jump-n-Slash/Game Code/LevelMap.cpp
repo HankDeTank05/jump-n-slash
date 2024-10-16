@@ -8,6 +8,7 @@
 #include "../Engine Code/Visualizer.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/Camera.h"
+#include "../Engine Code/ConvenienceFunctions.h"
 
 #include "BlockBreakable.h"
 #include "BlockHazard.h"
@@ -464,6 +465,6 @@ void LevelMap::DebugLevelScrollBounds(RoomData* pRoom)
 		// visualize camera center position
 		sf::Vector2f pos = SceneManager::GetCurrentCamera()->GetCenter();
 		Visualizer::VisualizePoint(pos, sf::Color::Red);
-		Visualizer::VisualizeText(pos, pos, sf::Color::Red);
+		Visualizer::VisualizeText(Convenience::ConvertToString(pos), pos, sf::Color::Red);
 	}
 }

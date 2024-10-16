@@ -156,36 +156,19 @@ public: // public api functions
 	* \endcode
 	*/
 	static void VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true); // TODO: docs for Visualizer::VisualizeCircle
-	static void VisualizeCircle(float x, float y, float radius, sf::Color color = VIZ_DEFAULT_COLOR, bool showCenter = true); // TODO: docs for Visualizer::VisualizeCircle
 
 	static void VisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeRect
-	static void VisualizeRect(float x, float y, sf::Vector2f size, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeRect
-	static void VisualizeRect(sf::Vector2f pos, float width, float height, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeRect
-	static void VisualizeRect(float x, float y, float width, float height, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeRect
 	
-	static void VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeSegment
-	static void VisualizeSegment(float x0, float y0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeSegment
-	static void VisualizeSegment(sf::Vector2f pos0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeSegment
-	static void VisualizeSegment(float x0, float y0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR); // TODO: docs for Visualizer::VisualizeSegment
+	static void VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR, bool visualizeEndpoints = false); // TODO: docs for Visualizer::VisualizeSegment
 
 	static void VisualizeRay(sf::Vector2f pos, sf::Vector2f dir, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeRay(float x, float y, sf::Vector2f dir, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeRay(sf::Vector2f pos, float dirX, float dirY, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeRay(float x, float y, float dirX, float dirY, sf::Color color = VIZ_DEFAULT_COLOR);
 
 	static void VisualizeLine(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeLine(float x0, float y0, sf::Vector2f pos1, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeLine(sf::Vector2f pos0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
-	static void VisualizeLine(float x0, float y0, float x1, float y1, sf::Color color = VIZ_DEFAULT_COLOR);
 	
 	// TODO: add an option for a backdrop behind the text in case it is difficult to read
 
 	static void VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
-	static void VisualizeText(sf::Vector2f vect, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
-	static void VisualizeText(sf::Vector2i vect, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
-	static void VisualizeText(int num, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
-	static void VisualizeText(float num, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
-	static void VisualizeText(bool flag, sf::Vector2f pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
+	static void VisualizeText(sf::String str, sf::Vector2i pos, sf::Color color = VIZ_DEFAULT_COLOR, int sizeInPix = VIZ_DEFAULT_TEXT_SIZE); // TODO: docs for Visualizer::VisualizeText
 
 private: // engine-only api functions
 	friend class VisualizerAttorney;
@@ -203,7 +186,7 @@ private: // private api backend functions
 	void privVisualizePoint(sf::Vector2f pos, sf::Color color);
 	void privVisualizeCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter);
 	void privVisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color);
-	void privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color);
+	void privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color, bool visualizeEndpoints);
 	void privVisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix);
 
 	void privProcessCommands();

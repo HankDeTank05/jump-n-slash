@@ -60,6 +60,16 @@ sf::Vector2f RoomData::GetScrollMaxBounds()
 	return sf::Vector2f(scrollBoundsRightX, scrollBoundsBottomY);
 }
 
+sf::Vector2f RoomData::GetRoomMinBounds()
+{
+	return origin;
+}
+
+sf::Vector2f RoomData::GetRoomMaxBounds()
+{
+	return origin + size;
+}
+
 sf::Vector2f RoomData::GetOrigin()
 {
 	return origin;

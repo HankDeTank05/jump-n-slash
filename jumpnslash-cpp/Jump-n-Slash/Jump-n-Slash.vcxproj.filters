@@ -252,9 +252,6 @@
     <ClCompile Include="Game Code\PlayerAttorney.cpp">
       <Filter>Source Files\Game Code\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\JsonParser.cpp">
-      <Filter>Source Files\Game Code\Misc. files</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\LevelMap.cpp">
       <Filter>Source Files\Game Code\Level Data</Filter>
     </ClCompile>
@@ -420,6 +417,12 @@
     <ClCompile Include="Engine Code\AnimationSet.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\ConvenienceFunctions.cpp">
+      <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\AssetLoader.cpp">
+      <Filter>Source Files\Game Code\Misc. files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -547,9 +550,6 @@
     </ClInclude>
     <ClInclude Include="Game Code\PlayerAttorney.h">
       <Filter>Source Files\Game Code\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\JsonParser.h">
-      <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\LevelMap.h">
       <Filter>Source Files\Game Code\Level Data</Filter>
@@ -730,6 +730,15 @@
     </ClInclude>
     <ClInclude Include="Game Code\Actor.h">
       <Filter>Source Files\Game Code\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\ConvenienceFunctions.h">
+      <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AssetLoader.h">
+      <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

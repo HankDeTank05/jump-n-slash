@@ -30,6 +30,7 @@
     <ClCompile Include="Engine Code\Camera.cpp" />
     <ClCompile Include="Engine Code\CameraAttorney.cpp" />
     <ClCompile Include="Engine Code\CameraManager.cpp" />
+    <ClCompile Include="Engine Code\ConvenienceFunctions.cpp" />
     <ClCompile Include="Engine Code\DrawObject.cpp" />
     <ClCompile Include="Engine Code\DrawObjectAttorney.cpp" />
     <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp" />
@@ -90,11 +91,11 @@
     <ClCompile Include="Engine Code\VizCmdRectPool.cpp" />
     <ClCompile Include="Engine Code\VizCmdSegPool.cpp" />
     <ClCompile Include="Engine Code\VizCmdTextPool.cpp" />
+    <ClCompile Include="Game Code\AssetLoader.cpp" />
     <ClCompile Include="Game Code\BlockBreakable.cpp" />
     <ClCompile Include="Game Code\BlockHazard.cpp" />
     <ClCompile Include="Game Code\BlockSolid.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
-    <ClCompile Include="Game Code\JsonParser.cpp" />
     <ClCompile Include="Game Code\Level0.cpp" />
     <ClCompile Include="Game Code\LevelMap.cpp" />
     <ClCompile Include="Game Code\LevelTile.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Engine Code\AlarmRegistrationCommand.h" />
     <ClInclude Include="Engine Code\Animation.h" />
     <ClInclude Include="Engine Code\AnimationComponent.h" />
+    <ClInclude Include="Engine Code\AnimationManager.h" />
     <ClInclude Include="Engine Code\AnimationSet.h" />
     <ClInclude Include="Engine Code\Camera.h" />
     <ClInclude Include="Engine Code\CameraAttorney.h" />
@@ -128,6 +130,7 @@
     <ClInclude Include="Engine Code\CollisionManager.h" />
     <ClInclude Include="Engine Code\CollisionObject.h" />
     <ClInclude Include="Engine Code\Command.h" />
+    <ClInclude Include="Engine Code\ConvenienceFunctions.h" />
     <ClInclude Include="Engine Code\DrawObject.h" />
     <ClInclude Include="Engine Code\DrawObjectAttorney.h" />
     <ClInclude Include="Engine Code\DrawDeregistrationCommand.h" />
@@ -194,13 +197,13 @@
     <ClInclude Include="Engine Code\VizCmdSegPool.h" />
     <ClInclude Include="Engine Code\VizCmdTextPool.h" />
     <ClInclude Include="Game Code\Actor.h" />
+    <ClInclude Include="Game Code\AssetLoader.h" />
     <ClInclude Include="Game Code\BlockBreakable.h" />
     <ClInclude Include="Game Code\BlockHazard.h" />
     <ClInclude Include="Game Code\BlockSolid.h" />
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\DebugFlags.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
-    <ClInclude Include="Game Code\JsonParser.h" />
     <ClInclude Include="Game Code\Level0.h" />
     <ClInclude Include="Game Code\LevelMap.h" />
     <ClInclude Include="Game Code\LevelTile.h" />
@@ -277,6 +280,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>false</VcpkgEnableManifest>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

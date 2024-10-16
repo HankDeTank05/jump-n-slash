@@ -3,6 +3,8 @@
 
 #include <map>
 
+#include <SFML/Graphics/Sprite.hpp>
+
 // forward declarations
 class Animation;
 

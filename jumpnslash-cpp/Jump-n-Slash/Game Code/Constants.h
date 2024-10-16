@@ -10,9 +10,10 @@
 const std::string WINDOW_NAME = "Jump n Slash";
 const int WINDOW_WIDTH = 1280;
 const int WINDOW_HEIGHT = 720;
-const int MAX_LEVEL_SIZE = 1024;
+const unsigned int MAX_FRAMERATE = 60;
 const int TILE_SIZE = 32;
 const float TILE_SIZE_F = static_cast<float>(TILE_SIZE);
+const std::string ASSET_SETUP_FILE = "assets/assetSetupFile.txt";
 
 // GameObject constants
 
@@ -20,6 +21,7 @@ const int ALARM_COUNT = 10;
 
 // LevelMap constants
 
+const int MAX_LEVEL_SIZE = 1024;
 const int ROOM_TILE_WIDTH = 40;
 const int ROOM_TILE_HEIGHT = 20;
 

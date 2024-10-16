@@ -31,6 +31,8 @@ public:
 	float GetScrollBoundsBottomY();
 	sf::Vector2f GetScrollMinBounds();
 	sf::Vector2f GetScrollMaxBounds();
+	sf::Vector2f GetRoomMinBounds();
+	sf::Vector2f GetRoomMaxBounds();
 
 private:
 	sf::Vector2f origin; // in world space!!
