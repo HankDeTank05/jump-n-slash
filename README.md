@@ -15,7 +15,7 @@ Joseph Turzitti
 
 ## Programming
 
-### Game Programming
+### Gameplay Programming
 
 Henry Holman
 
