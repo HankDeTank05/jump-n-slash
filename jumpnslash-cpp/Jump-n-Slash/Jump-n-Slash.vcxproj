@@ -222,6 +222,7 @@
     <ClInclude Include="Game Code\RoomData.h" />
     <ClInclude Include="Game Code\TestClass.h" />
     <ClInclude Include="Game Code\TestScene.h" />
+    <ClInclude Include="Game Code\Tileset.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\4_CreatingGameObject.txt" />
