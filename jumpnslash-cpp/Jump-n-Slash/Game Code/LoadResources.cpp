@@ -29,6 +29,8 @@ void JumpSlashEngine::LoadResources()
 	AssetLoader loader;
 	loader.ReadAssetSetupFile();
 
+	/*
+
 	// load player idle animation
 	//TextureManager::LoadTexture("player idle 1", "player/idle_1_32.png");
 	//TextureManager::LoadTexture("player idle 2", "player/idle_2_32.png");
@@ -68,6 +70,8 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::LoadSprite("player fall 2", "player fall 2");
 	SpriteManager::LoadSprite("player fall 3", "player fall 3");
 	SpriteManager::LoadSprite("player fall 4", "player fall 4");
+
+	//*/
 
 	// parse the json file for level tiles to add
 

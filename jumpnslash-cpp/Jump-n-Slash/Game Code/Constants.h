@@ -13,7 +13,7 @@ const int WINDOW_HEIGHT = 720;
 const unsigned int MAX_FRAMERATE = 60;
 const int TILE_SIZE = 32;
 const float TILE_SIZE_F = static_cast<float>(TILE_SIZE);
-const std::string ASSET_SETUP_FILE = "assets/assetSetupFile.txt";
+const std::string ASSET_SETUP_FILE = "assets/assetSetupFile_test.txt";
 
 // GameObject constants
 

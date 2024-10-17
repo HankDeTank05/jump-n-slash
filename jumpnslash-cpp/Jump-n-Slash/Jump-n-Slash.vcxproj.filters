@@ -142,6 +142,9 @@
     <Filter Include="Source Files\Game Code\Actors">
       <UniqueIdentifier>{2e03c227-788a-4f50-a465-c762a2138c41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Animation Manager">
+      <UniqueIdentifier>{45197d60-b3e8-47b9-a365-65de532c418f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -422,6 +425,9 @@
     </ClCompile>
     <ClCompile Include="Game Code\AssetLoader.cpp">
       <Filter>Source Files\Game Code\Misc. files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AnimationManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -734,11 +740,11 @@
     <ClInclude Include="Engine Code\ConvenienceFunctions.h">
       <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\AnimationManager.h">
-      <Filter>Source Files\Engine Code\Asset Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\AssetLoader.h">
       <Filter>Source Files\Game Code\Misc. files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

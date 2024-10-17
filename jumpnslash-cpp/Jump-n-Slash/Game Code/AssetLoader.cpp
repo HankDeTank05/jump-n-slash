@@ -8,16 +8,23 @@
 
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
+#include "../Engine Code/AnimationManager.h"
 
 #include "Constants.h"
+#include "DesignerControls.h"
 
 const std::string AssetLoader::COMMAND_TEXTURE = "texture";
 const std::string AssetLoader::COMMAND_SPRITE = "sprite";
+const std::string AssetLoader::COMMAND_ANIMATION = "animation";
 
 const std::string AssetLoader::TYPE_STRING = "string";
 const std::string AssetLoader::TYPE_FLOAT = "float";
 const std::string AssetLoader::TYPE_INT = "int";
 const std::string AssetLoader::TYPE_BOOL = "bool";
+const std::string AssetLoader::TYPE_LIST_STRING = "list<" + AssetLoader::TYPE_STRING + ">";
+const std::string AssetLoader::TYPE_LIST_FLOAT = "list<" + AssetLoader::TYPE_FLOAT + ">";
+const std::string AssetLoader::TYPE_LIST_INT = "list<" + AssetLoader::TYPE_INT + ">";
+const std::string AssetLoader::TYPE_LIST_BOOL = "list<" + AssetLoader::TYPE_BOOL + ">";
 
 
 AssetLoader::AssetLoader()
@@ -27,7 +34,7 @@ AssetLoader::AssetLoader()
 	// define the "texture" command
 
 	std::list<std::string> textureArgs;
-	textureArgs.push_back(AssetLoader::TYPE_STRING); // key
+	textureArgs.push_back(AssetLoader::TYPE_STRING); // texture key
 	textureArgs.push_back(AssetLoader::TYPE_STRING); // file name
 	textureArgs.push_back(AssetLoader::TYPE_BOOL); // smooth
 	commands.emplace(AssetLoader::COMMAND_TEXTURE, textureArgs);
@@ -42,6 +49,15 @@ AssetLoader::AssetLoader()
 	spriteArgs.push_back(AssetLoader::TYPE_INT); // texture width
 	spriteArgs.push_back(AssetLoader::TYPE_INT); // texture height
 	commands.emplace(AssetLoader::COMMAND_SPRITE, spriteArgs);
+
+	// define the "animation" command
+
+	std::list<std::string> animArgs;
+	animArgs.push_back(AssetLoader::TYPE_STRING); // animation key
+	animArgs.push_back(AssetLoader::TYPE_LIST_STRING); // list of sprite keys
+	// NOTE: there is no argument for animation fps here, since we set that in DesignerControls.h
+	animArgs.push_back(AssetLoader::TYPE_BOOL); // loop flag
+	commands.emplace(AssetLoader::COMMAND_ANIMATION, animArgs);
 }
 
 AssetLoader::~AssetLoader()
@@ -89,6 +105,10 @@ void AssetLoader::ParseCommand(std::string line, std::string command)
 	else if (command == AssetLoader::COMMAND_SPRITE)
 	{
 		ParseSpriteCommand(line);
+	}
+	else if (command == AssetLoader::COMMAND_ANIMATION)
+	{
+		ParseAnimationCommand(line);
 	}
 	else
 	{
@@ -197,6 +217,31 @@ void AssetLoader::ParseSpriteCommand(std::string line)
 	SpriteManager::LoadSprite(arg1, arg2, sf::IntRect(arg3, arg4, arg5, arg6));
 }
 
+void AssetLoader::ParseAnimationCommand(std::string line)
+{
+	int startIndex = AssetLoader::COMMAND_ANIMATION.size() + 1;
+
+	std::pair<std::string, int> result1;
+	std::pair<std::list<std::string>, int> result2;
+	std::pair<bool, int> result3;
+
+	result1 = ParseForString(line, startIndex);
+	startIndex = result1.second;
+
+	result2 = ParseForListString(line, startIndex);
+	startIndex = result2.second;
+
+	result3 = ParseForBool(line, startIndex);
+	startIndex = result3.second;
+
+	std::string arg1 = result1.first;
+	std::list<std::string> arg2 = result2.first;
+	bool arg3 = result3.first;
+
+	//                                          vvvvvvvvvvvvvvvvvvv this is why we don't take four arguments for the animation command
+	AnimationManager::LoadAnimation(arg1, arg2, ANIMATION_FRAMERATE, arg3);
+}
+
 std::pair<std::string, int> AssetLoader::ParseForString(std::string line, int startIndex)
 {
 	std::string parsedString = "none";
@@ -234,7 +279,7 @@ std::pair<std::string, int> AssetLoader::ParseForString(std::string line, int st
 	parsedString = line.substr(stringStartIndex, stringEndIndex - stringStartIndex);
 
 	assert(parsedString != "none");
-	return std::pair<std::string, int>(parsedString, currentIndex + 1); // return the parsed string and the new starting index
+	return std::pair<std::string, int>(parsedString, currentIndex); // return the parsed string and the new starting index
 }
 
 std::pair<int, int> AssetLoader::ParseForInt(std::string line, int startIndex)
@@ -295,5 +340,38 @@ std::pair<bool, int> AssetLoader::ParseForBool(std::string line, int startIndex)
 
 	assert(parseSuccessful == true); // unable to parse boolean value!
 
-	return std::pair<bool, int>(parsedBool, currentIndex + 1);
+	return std::pair<bool, int>(parsedBool, currentIndex);
+}
+
+std::pair<std::list<std::string>, int> AssetLoader::ParseForListString(std::string line, int startIndex)
+{
+	int currentIndex = startIndex;
+
+	int listStartIndex = -1;
+	int listEndIndex = -1;
+
+	std::list<std::string> spriteKeyList;
+
+	while (listEndIndex == -1 && currentIndex < line.size())
+	{
+		std::string currentChar = line.substr(currentIndex, 1);
+		if (listStartIndex == -1 && currentChar == "[")
+		{
+			listStartIndex = currentIndex;
+			currentIndex++;
+		}
+		else if(listStartIndex > -1 && currentChar != "]")
+		{
+			std::pair<std::string, int> result = ParseForString(line, currentIndex);
+			spriteKeyList.push_back(result.first);
+			currentIndex = result.second;
+		}
+		else if (currentChar == "]")
+		{
+			assert(listStartIndex > -1);
+			listEndIndex = currentIndex;
+		}
+	}
+
+	return std::pair<std::list<std::string>, int>(spriteKeyList, currentIndex + 1);
 }
