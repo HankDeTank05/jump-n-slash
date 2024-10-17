@@ -1,11 +1,10 @@
 #include "AnimationSet.h"
 
+#include "Animation.h"
+
 AnimationSet::~AnimationSet()
 {
-	for (std::map<std::string, Animation*>::iterator it = animations.begin(); it != animations.end(); it++)
-	{
-		delete (it->second);
-	}
+	animations.clear();
 }
 
 void AnimationSet::AddAnimation(std::string animName, Animation* pAnim)

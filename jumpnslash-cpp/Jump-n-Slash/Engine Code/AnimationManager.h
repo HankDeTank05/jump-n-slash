@@ -24,6 +24,7 @@ public: // api functions
 	static Animation* GetAnimation(std::string key); // TODO: docs for AnimationManager::GetAnimation
 
 private: // engine-only api functions
+	friend class AnimationManagerAttorney;
 	static void Terminate();
 
 private: // api backend functions

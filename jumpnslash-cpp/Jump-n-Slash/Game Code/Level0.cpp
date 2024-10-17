@@ -28,7 +28,7 @@ Level0::~Level0()
 
 void Level0::Init()
 {
-	pMap = new LevelMap(GridManager::GetGrid("test 2"));
+	pMap = new LevelMap(GridManager::GetGrid("test2"));
 	pPlayer = new Player();
 
 	pPlayer->LinkToMap(pMap);

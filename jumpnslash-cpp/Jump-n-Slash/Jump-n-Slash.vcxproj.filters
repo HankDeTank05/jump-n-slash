@@ -429,6 +429,9 @@
     <ClCompile Include="Engine Code\AnimationManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\AnimationManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -744,6 +747,9 @@
       <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\AnimationManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
     </ClInclude>
   </ItemGroup>

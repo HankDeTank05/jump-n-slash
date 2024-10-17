@@ -19,6 +19,7 @@ private:
 	void ParseTextureCommand(std::string line);
 	void ParseSpriteCommand(std::string line);
 	void ParseAnimationCommand(std::string line);
+	void ParseGridCommand(std::string line);
 
 	std::pair<std::string, int> ParseForString(std::string line, int startIndex);
 	std::pair<float, int> ParseForFloat(std::string line, int startIndex);
@@ -31,6 +32,7 @@ private:
 	static const std::string COMMAND_TEXTURE;
 	static const std::string COMMAND_SPRITE;
 	static const std::string COMMAND_ANIMATION;
+	static const std::string COMMAND_GRID;
 
 	static const std::string TYPE_STRING;
 	static const std::string TYPE_FLOAT;

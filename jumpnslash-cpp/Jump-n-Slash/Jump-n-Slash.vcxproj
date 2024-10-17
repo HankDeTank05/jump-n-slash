@@ -27,6 +27,7 @@
     <ClCompile Include="Engine Code\Animation.cpp" />
     <ClCompile Include="Engine Code\AnimationComponent.cpp" />
     <ClCompile Include="Engine Code\AnimationManager.cpp" />
+    <ClCompile Include="Engine Code\AnimationManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\AnimationSet.cpp" />
     <ClCompile Include="Engine Code\Camera.cpp" />
     <ClCompile Include="Engine Code\CameraAttorney.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="Engine Code\Animation.h" />
     <ClInclude Include="Engine Code\AnimationComponent.h" />
     <ClInclude Include="Engine Code\AnimationManager.h" />
+    <ClInclude Include="Engine Code\AnimationManagerAttorney.h" />
     <ClInclude Include="Engine Code\AnimationSet.h" />
     <ClInclude Include="Engine Code\Camera.h" />
     <ClInclude Include="Engine Code\CameraAttorney.h" />

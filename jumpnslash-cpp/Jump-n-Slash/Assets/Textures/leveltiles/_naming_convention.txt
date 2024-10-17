@@ -1,4 +1,13 @@
-tile_X.ext
+<tile type>_<tile name>.png
 
-X = the size of the square tile, in pixels
-ext = the file extension, such as jpg, png, or gif
+<tile type> must be one of the following...
+- indicator
+- block
+- platform
+- background
+(if you would like to add more, please @ Henry in the discord)
+
+NOTES
+- Spritesheets will be created by the automator. You do not need to create your own.
+- Everything between angle brackets <shouldBeCamelCase>. Do not use underscores in names unless it's part of the naming convention.
+- Files you would like to store in this folder but you don't want to be processed by asset automation should begin with a leading underscore.

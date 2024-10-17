@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include "../Engine Code/SpriteManager.h"
+#include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Visualizer.h"
 #include "../Engine Code/Math.h"
 #include "../Engine Code/SceneManager.h"
@@ -39,6 +40,7 @@ Player::Player()
 {	
 	assert(pCurrentState != nullptr);
 
+	/*
 	Animation* pIdle = new Animation(ANIMATION_FRAMERATE);
 	pIdle->AddFrame(SpriteManager::GetSprite("player idle 1"));
 	pIdle->AddFrame(SpriteManager::GetSprite("player idle 2"));
@@ -62,12 +64,21 @@ Player::Player()
 	pFall->AddFrame(SpriteManager::GetSprite("player fall 2"));
 	pFall->AddFrame(SpriteManager::GetSprite("player fall 3"));
 	pFall->AddFrame(SpriteManager::GetSprite("player fall 4"));
+	//*/
 
 	AnimationSet* pAnimSet = new AnimationSet();
+	/*
 	pAnimSet->AddAnimation("idle", pIdle);
 	pAnimSet->AddAnimation("walk", pWalk);
 	pAnimSet->AddAnimation("jump", pJump);
 	pAnimSet->AddAnimation("fall", pFall);
+	//*/
+	//*
+	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("player idle"));
+	pAnimSet->AddAnimation("walk", AnimationManager::GetAnimation("player walk"));
+	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
+	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
+	//*/
 
 	animComp.DefineAnimationSet(pAnimSet);
 	animComp.SetAnimation("idle");

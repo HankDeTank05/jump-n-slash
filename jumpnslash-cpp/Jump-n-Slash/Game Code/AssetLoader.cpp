@@ -9,6 +9,7 @@
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/AnimationManager.h"
+#include "../Engine Code/GridManager.h"
 
 #include "Constants.h"
 #include "DesignerControls.h"
@@ -16,6 +17,7 @@
 const std::string AssetLoader::COMMAND_TEXTURE = "texture";
 const std::string AssetLoader::COMMAND_SPRITE = "sprite";
 const std::string AssetLoader::COMMAND_ANIMATION = "animation";
+const std::string AssetLoader::COMMAND_GRID = "grid";
 
 const std::string AssetLoader::TYPE_STRING = "string";
 const std::string AssetLoader::TYPE_FLOAT = "float";
@@ -58,6 +60,13 @@ AssetLoader::AssetLoader()
 	// NOTE: there is no argument for animation fps here, since we set that in DesignerControls.h
 	animArgs.push_back(AssetLoader::TYPE_BOOL); // loop flag
 	commands.emplace(AssetLoader::COMMAND_ANIMATION, animArgs);
+
+	// define the "grid" command
+
+	std::list<std::string> gridArgs;
+	gridArgs.push_back(AssetLoader::TYPE_STRING); // grid key
+	gridArgs.push_back(AssetLoader::TYPE_STRING); // filename
+	commands.emplace(AssetLoader::COMMAND_GRID, gridArgs);
 }
 
 AssetLoader::~AssetLoader()
@@ -109,6 +118,10 @@ void AssetLoader::ParseCommand(std::string line, std::string command)
 	else if (command == AssetLoader::COMMAND_ANIMATION)
 	{
 		ParseAnimationCommand(line);
+	}
+	else if (command == AssetLoader::COMMAND_GRID)
+	{
+		ParseGridCommand(line);
 	}
 	else
 	{
@@ -167,7 +180,7 @@ void AssetLoader::ParseTextureCommand(std::string line)
 	startIndex = result1.second;
 
 	result2 = ParseForString(line, startIndex);
-	startIndex = result2.second;
+	startIndex = result2.second + 1; // +1 so we skip the expected space
 
 	result3 = ParseForBool(line, startIndex);
 
@@ -226,10 +239,10 @@ void AssetLoader::ParseAnimationCommand(std::string line)
 	std::pair<bool, int> result3;
 
 	result1 = ParseForString(line, startIndex);
-	startIndex = result1.second;
+	startIndex = result1.second + 1; // +1 to skip the expected space
 
 	result2 = ParseForListString(line, startIndex);
-	startIndex = result2.second;
+	startIndex = result2.second + 1; // +1 to skip the expected space
 
 	result3 = ParseForBool(line, startIndex);
 	startIndex = result3.second;
@@ -240,6 +253,25 @@ void AssetLoader::ParseAnimationCommand(std::string line)
 
 	//                                          vvvvvvvvvvvvvvvvvvv this is why we don't take four arguments for the animation command
 	AnimationManager::LoadAnimation(arg1, arg2, ANIMATION_FRAMERATE, arg3);
+}
+
+void AssetLoader::ParseGridCommand(std::string line)
+{
+	int startIndex = AssetLoader::COMMAND_GRID.size() + 1;
+
+	std::pair<std::string, int> result1;
+	std::pair<std::string, int> result2;
+
+	result1 = ParseForString(line, startIndex);
+	startIndex = result1.second;
+	
+	result2 = ParseForString(line, startIndex);
+	startIndex = result2.second;
+
+	std::string arg1 = result1.first;
+	std::string arg2 = result2.first;
+
+	GridManager::LoadGrid(arg1, arg2);
 }
 
 std::pair<std::string, int> AssetLoader::ParseForString(std::string line, int startIndex)

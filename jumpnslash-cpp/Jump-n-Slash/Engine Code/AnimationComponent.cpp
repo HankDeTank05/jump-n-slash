@@ -41,10 +41,14 @@ sf::Sprite* AnimationComponent::GetCurrentFrame()
 	assert(pAnimSet != nullptr);
 
 	animTimer += TimeManager::GetFrameTime();
-	while (animTimer >= pCurrentAnim->GetSPF())
+	if (pCurrentAnim->IsLooping() == true ||
+		(pCurrentAnim->IsLooping() == false && pCurrentAnim->IsLastFrame(currentFrameIt) == false))
 	{
-		animTimer -= pCurrentAnim->GetSPF();
-		currentFrameIt = pCurrentAnim->GetNextFrame(currentFrameIt);
+		while (animTimer >= pCurrentAnim->GetSPF())
+		{
+			animTimer -= pCurrentAnim->GetSPF();
+			currentFrameIt = pCurrentAnim->GetNextFrame(currentFrameIt);
+		}
 	}
 
 	return (*currentFrameIt);

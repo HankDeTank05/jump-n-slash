@@ -1,0 +1,15 @@
+FOR ANIMATION FRAMES: <animation name>_<animation frame number>.png
+
+NOTES
+- Spritesheets will be created by the automator. You do not need to create your own.
+- Everything between angle brackets <shouldBeCamelCase>. Do not use underscores in names unless it's part of the naming convention.
+- Files you would like to store in this folder but you don't want to be processed by asset automation should begin with a leading underscore.
+
+Examples:
+supermanPose_1.png
+supermanPose_2.png
+_supermanPose_3.png (this file will not be processed by the automator)
+run_1.png
+run_2.png
+gottaGoFast_69.png
+gottaGoFast_70.png

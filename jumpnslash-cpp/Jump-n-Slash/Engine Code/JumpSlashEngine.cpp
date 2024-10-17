@@ -5,6 +5,7 @@
 #include "TextureManagerAttorney.h"
 #include "SpriteManagerAttorney.h"
 #include "GridManagerAttorney.h"
+#include "AnimationManagerAttorney.h"
 #include "VisualizerAttorney.h"
 #include "FontManagerAttorney.h"
 #include "VizCmdFactoryAttorney.h"
@@ -13,6 +14,7 @@
 #include "TimeManager.h"
 
 #include "../Game Code/Constants.h"
+#include "AnimationManagerAttorney.h"
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
 
@@ -125,6 +127,7 @@ void JumpSlashEngine::UnloadContent()
 	SpriteManagerAttorney::Termination::Terminate();
 	GridManagerAttorney::Termination::Terminate();
 	FontManagerAttorney::Termination::Terminate();
+	AnimationManagerAttorney::Termination::Terminate();
 
 	// debug tools
 	VisualizerAttorney::Termination::Terminate();

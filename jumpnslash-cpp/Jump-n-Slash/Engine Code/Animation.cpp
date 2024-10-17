@@ -36,9 +36,26 @@ Animation::Iterator Animation::GetNextFrame(Iterator it)
 	return it;
 }
 
+bool Animation::IsLastFrame(Iterator it)
+{
+	Iterator tempIt = ++it;
+	it--;
+	return tempIt == frames.end();
+}
+
 void Animation::AddFrame(sf::Sprite* pNextFrame)
 {
 	frames.push_back(pNextFrame);
+}
+
+void Animation::SetLoop(bool newLoop)
+{
+	loop = newLoop;
+}
+
+bool Animation::IsLooping()
+{
+	return loop;
 }
 
 float Animation::GetFPS()
