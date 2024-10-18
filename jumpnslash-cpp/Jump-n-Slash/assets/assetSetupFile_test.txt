@@ -1,0 +1,36 @@
+grid "test" "test.txt"
+grid "test2" "test2.txt"
+texture "player spritesheet" "player\sheet_test.png" false
+sprite "player attack 1" "player spritesheet" 0 0 32 32
+sprite "player attack 2" "player spritesheet" 32 0 32 32
+sprite "player attack 3" "player spritesheet" 64 0 32 32
+sprite "player attack 4" "player spritesheet" 96 0 32 32
+sprite "player fall 1" "player spritesheet" 0 32 32 32
+sprite "player fall 2" "player spritesheet" 32 32 32 32
+sprite "player fall 3" "player spritesheet" 64 32 32 32
+sprite "player fall 4" "player spritesheet" 96 32 32 32
+sprite "player idle 1" "player spritesheet" 0 64 32 32
+sprite "player idle 2" "player spritesheet" 32 64 32 32
+sprite "player idle 3" "player spritesheet" 64 64 32 32
+sprite "player idle 4" "player spritesheet" 96 64 32 32
+sprite "player jump 1" "player spritesheet" 0 96 32 32
+sprite "player jump 2" "player spritesheet" 32 96 32 32
+sprite "player jump 3" "player spritesheet" 64 96 32 32
+sprite "player jump 4" "player spritesheet" 96 96 32 32
+sprite "player walk 1" "player spritesheet" 0 128 32 32
+sprite "player walk 2" "player spritesheet" 32 128 32 32
+sprite "player walk 3" "player spritesheet" 64 128 32 32
+sprite "player walk 4" "player spritesheet" 96 128 32 32
+animation "player attack" ["player attack 1" "player attack 2" "player attack 3" "player attack 4"] true
+animation "player fall" ["player fall 1" "player fall 2" "player fall 3" "player fall 4"] true
+animation "player idle" ["player idle 1" "player idle 2" "player idle 3" "player idle 4"] true
+animation "player jump" ["player jump 1" "player jump 2" "player jump 3" "player jump 4"] true
+animation "player walk" ["player walk 1" "player walk 2" "player walk 3" "player walk 4"] true
+texture "sword spritesheet" "sword\sheet_test.png" false
+sprite "sword idle 1" "sword spritesheet" 0 0 8 8
+sprite "sword swing 1" "sword spritesheet" 0 8 8 8
+sprite "sword swing 2" "sword spritesheet" 8 8 8 8
+sprite "sword swing 3" "sword spritesheet" 16 8 8 8
+sprite "sword swing 4" "sword spritesheet" 24 8 8 8
+animation "sword idle" ["sword idle 1"] true
+animation "sword swing" ["sword swing 1" "sword swing 2" "sword swing 3" "sword swing 4"] true

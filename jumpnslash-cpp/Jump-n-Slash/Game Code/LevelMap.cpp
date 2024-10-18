@@ -8,6 +8,7 @@
 #include "../Engine Code/Visualizer.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/Camera.h"
+#include "../Engine Code/ConvenienceFunctions.h"
 
 #include "BlockBreakable.h"
 #include "BlockHazard.h"
@@ -52,84 +53,72 @@ LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 				map[y][x] = nullptr;
 				key = "empty";
 			}
-
 			// block breakable
 			else if (tileID == "01")
 			{
 				map[y][x] = new BlockBreakable(worldPos);
 				key = KEY_BLOCK_BREAKABLE;
 			}
-
 			// block hazard
 			else if (tileID == "02")
 			{
 				map[y][x] = new BlockHazard(worldPos);
 				key = KEY_BLOCK_HAZARD;
 			}
-
 			// block solid
 			else if (tileID == "03")
 			{
 				map[y][x] = new BlockSolid(worldPos);
 				key = KEY_BLOCK_SOLID;
 			}
-
 			// indicator room height
 			else if (tileID == "04")
 			{
 				map[y][x] = new BlockSolid(worldPos); // TODO: make some formal definition for this replacement
 				key = KEY_INDICATOR_ROOM_HEIGHT;
 			}
-
 			// indicator room origin
 			else if (tileID == "05") 
 			{
 				map[y][x] = new BlockSolid(worldPos);
 				key = KEY_INDICATOR_ROOM_ORIGIN;
 			}
-
 			// indicator room origin start
 			else if (tileID == "06")
 			{
 				map[y][x] = new BlockSolid(worldPos);
 				key = KEY_INDICATOR_ROOM_ORIGIN_START;
 			}
-
 			// indicator room width
 			else if (tileID == "07") 
 			{
 				map[y][x] = new BlockSolid(worldPos);
 				key = KEY_INDICATOR_ROOM_WIDTH;
 			}
-
 			// indicator spawn enemy left
 			else if (tileID == "08")
 			{
 				map[y][x] = nullptr; // TODO: make some formal definition for this replacement
 				key = KEY_INDICATOR_SPAWN_ENEMY_LEFT;
 			}
-
 			// indicator spawn enemy right
 			else if (tileID == "09")
 			{
 				map[y][x] = nullptr;
 				key = KEY_INDICATOR_SPAWN_ENEMY_RIGHT;
 			}
-
 			// indicator spawn player left
 			else if (tileID == "10")
 			{
 				map[y][x] = nullptr;
 				key = KEY_INDICATOR_SPAWN_PLAYER_LEFT;
 			}
-
 			// indicator spawn player right
 			else if (tileID == "11")
 			{
 				map[y][x] = nullptr;
 				key = KEY_INDICATOR_SPAWN_PLAYER_RIGHT;
 			}
-
 			// platform semisolid
 			else if (tileID == "12")
 			{
@@ -464,6 +453,6 @@ void LevelMap::DebugLevelScrollBounds(RoomData* pRoom)
 		// visualize camera center position
 		sf::Vector2f pos = SceneManager::GetCurrentCamera()->GetCenter();
 		Visualizer::VisualizePoint(pos, sf::Color::Red);
-		Visualizer::VisualizeText(pos, pos, sf::Color::Red);
+		Visualizer::VisualizeText(Convenience::ConvertToString(pos), pos, sf::Color::Red);
 	}
 }

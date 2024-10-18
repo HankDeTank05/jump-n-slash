@@ -1,0 +1,6 @@
+Package: simdjson
+Feature: utf8-validation
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enable UTF-8 validation
+Status: install ok half-installed

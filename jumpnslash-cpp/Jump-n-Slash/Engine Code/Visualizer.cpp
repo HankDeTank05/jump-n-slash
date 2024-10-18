@@ -9,6 +9,7 @@
 #include "VisualizerCommandRect.h"
 #include "VisualizerCommandSegment.h"
 #include "VisualizerCommandText.h"
+#include "EngineAttorney.h"
 
 #include "../Game Code/Constants.h"
 
@@ -66,49 +67,14 @@ void Visualizer::VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color
 	Instance().privVisualizeCircle(pos, radius, color, showCenter);
 }
 
-void Visualizer::VisualizeCircle(float x, float y, float radius, sf::Color color, bool showCenter)
-{
-	Instance().privVisualizeCircle(sf::Vector2f(x, y), radius, color, showCenter);
-}
-
 void Visualizer::VisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
 {
 	Instance().privVisualizeRect(pos, size, color);
 }
 
-void Visualizer::VisualizeRect(float x, float y, sf::Vector2f size, sf::Color color)
+void Visualizer::VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color, bool visualizeEndpoints)
 {
-	Instance().privVisualizeRect(sf::Vector2f(x, y), size, color);
-}
-
-void Visualizer::VisualizeRect(sf::Vector2f pos, float width, float height, sf::Color color)
-{
-	Instance().privVisualizeRect(pos, sf::Vector2f(width, height), color);
-}
-
-void Visualizer::VisualizeRect(float x, float y, float width, float height, sf::Color color)
-{
-	Instance().privVisualizeRect(sf::Vector2f(x, y), sf::Vector2f(width, height), color);
-}
-
-void Visualizer::VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
-{
-	Instance().privVisualizeSegment(pos0, pos1, color);
-}
-
-void Visualizer::VisualizeSegment(float x0, float y0, sf::Vector2f pos1, sf::Color color)
-{
-	Instance().privVisualizeSegment(sf::Vector2f(x0, y0), pos1, color);
-}
-
-void Visualizer::VisualizeSegment(sf::Vector2f pos0, float x1, float y1, sf::Color color)
-{
-	Instance().privVisualizeSegment(pos0, sf::Vector2f(x1, y1), color);
-}
-
-void Visualizer::VisualizeSegment(float x0, float y0, float x1, float y1, sf::Color color)
-{
-	Instance().privVisualizeSegment(sf::Vector2f(x0, y0), sf::Vector2f(x1, y1), color);
+	Instance().privVisualizeSegment(pos0, pos1, color, visualizeEndpoints);
 }
 
 void Visualizer::VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
@@ -116,38 +82,9 @@ void Visualizer::VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color
 	Instance().privVisualizeText(str, pos, color, sizeInPix);
 }
 
-void Visualizer::VisualizeText(sf::Vector2f vect, sf::Vector2f pos, sf::Color color, int sizeInPix)
+void Visualizer::VisualizeText(sf::String str, sf::Vector2i pos, sf::Color color, int sizeInPix)
 {
-	Instance().privVisualizeText("(" + std::to_string(vect.x) + ", " + std::to_string(vect.y) + ")", pos, color, sizeInPix);
-}
-
-void Visualizer::VisualizeText(sf::Vector2i vect, sf::Vector2f pos, sf::Color color, int sizeInPix)
-{
-	Instance().privVisualizeText("(" + std::to_string(vect.x) + ", " + std::to_string(vect.y) + ")", pos, color, sizeInPix);
-}
-
-void Visualizer::VisualizeText(int num, sf::Vector2f pos, sf::Color color, int sizeInPix)
-{
-	Instance().privVisualizeText(std::to_string(num), pos, color, sizeInPix);
-}
-
-void Visualizer::VisualizeText(float num, sf::Vector2f pos, sf::Color color, int sizeInPix)
-{
-	Instance().privVisualizeText(std::to_string(num), pos, color, sizeInPix);
-}
-
-void Visualizer::VisualizeText(bool flag, sf::Vector2f pos, sf::Color color, int sizeInPix)
-{
-	std::string str;
-	if (flag == true)
-	{
-		str = "true";
-	}
-	else
-	{
-		str = "false";
-	}
-	Instance().privVisualizeText(str, pos, color, sizeInPix);
+	Instance().privVisualizeText(str, sf::Vector2f(static_cast<float>(pos.x), static_cast<float>(pos.y)), color, sizeInPix);
 }
 
 void Visualizer::ProcessCommands()
@@ -201,9 +138,16 @@ void Visualizer::privVisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Colo
 	cmdList.push_back(VizCmdFactory::GetRectCommand(pos, size, color));
 }
 
-void Visualizer::privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
+void Visualizer::privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color, bool visualizeEndpoints)
 {
 	cmdList.push_back(VizCmdFactory::GetSegmentCommand(pos0, pos1, color));
+	
+	if (visualizeEndpoints)
+	{
+		// visualize the endpoints of the segment as well
+		cmdList.push_back(VizCmdFactory::GetPointCommand(pos0, color));
+		cmdList.push_back(VizCmdFactory::GetPointCommand(pos1, color));
+	}
 }
 
 void Visualizer::privVisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)

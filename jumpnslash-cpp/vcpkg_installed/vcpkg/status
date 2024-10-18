@@ -1,0 +1,62 @@
+Package: vcpkg-cmake-config
+Version: 2024-05-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: aa65866d9c09c093ee5e17e9f5de5215bc48dadbdc02093c14e07727bc9cc1cf
+Status: install ok installed
+
+Package: vcpkg-cmake
+Version: 2024-04-23
+Architecture: x64-windows
+Multi-Arch: same
+Abi: f37ddf85e220d5ba18bfeac902aee3da7005895dbdc941b7a311421d4c5543ee
+Status: install ok installed
+
+Package: fmt
+Version: 11.0.2
+Port-Version: 1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: f40bf72bef0eb49bf347bbefe2cffe4960ee1114d4f5b222cc94aaf6b5f4a5a3
+Description: {fmt} is an open-source formatting library providing a fast and safe alternative to C stdio and C++ iostreams.
+Status: install ok installed
+
+Package: simdjson
+Version: 3.10.1
+Depends: vcpkg-cmake, vcpkg-cmake-config
+Architecture: x64-windows
+Multi-Arch: same
+Abi: 7cbda0eeade9b1a917572025818c4839a5715565c34650266df60bcfcf74b59d
+Description: An extremely fast JSON library that can parse gigabytes of JSON per second
+Default-Features: deprecated, exceptions, threads, utf8-validation
+Status: install ok installed
+
+Package: simdjson
+Feature: deprecated
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enable deprecated APIs
+Status: install ok installed
+
+Package: simdjson
+Feature: exceptions
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enable exception-throwing interface
+Status: install ok installed
+
+Package: simdjson
+Feature: threads
+Architecture: x64-windows
+Multi-Arch: same
+Description: Link with thread support
+Status: install ok installed
+
+Package: simdjson
+Feature: utf8-validation
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enable UTF-8 validation
+Status: install ok installed
+

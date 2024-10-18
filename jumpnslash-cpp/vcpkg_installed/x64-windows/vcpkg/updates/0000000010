@@ -1,0 +1,6 @@
+Package: simdjson
+Feature: deprecated
+Architecture: x64-windows
+Multi-Arch: same
+Description: Enable deprecated APIs
+Status: install ok installed

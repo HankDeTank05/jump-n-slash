@@ -14,6 +14,7 @@ public:
 		friend class MouseCursorListener;
 		friend class CameraManager;
 		friend class Camera;
+		friend class Math;
 		static sf::RenderWindow& GetWindow();
 		static void SetView(sf::View view);
 	};

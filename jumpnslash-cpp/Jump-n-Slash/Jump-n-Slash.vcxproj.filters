@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -136,8 +136,17 @@
     <Filter Include="Source Files\Engine Code\Main Systems\Time Management System">
       <UniqueIdentifier>{b22f1041-5d46-4510-b007-430b7931fc90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Animation System">
+      <UniqueIdentifier>{5308157a-26bd-4529-811c-175a9e9a846e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Game Code\Actors">
       <UniqueIdentifier>{2e03c227-788a-4f50-a465-c762a2138c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Animation Manager">
+      <UniqueIdentifier>{45197d60-b3e8-47b9-a365-65de532c418f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Level Data\Tileset">
+      <UniqueIdentifier>{55712ed0-db1a-4a8e-ab06-52db385587cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -248,9 +257,6 @@
     </ClCompile>
     <ClCompile Include="Game Code\PlayerAttorney.cpp">
       <Filter>Source Files\Game Code\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\JsonParser.cpp">
-      <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\LevelMap.cpp">
       <Filter>Source Files\Game Code\Level Data</Filter>
@@ -408,6 +414,27 @@
     <ClCompile Include="Engine Code\TimeManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\Animation.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AnimationComponent.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AnimationSet.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\ConvenienceFunctions.cpp">
+      <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\AssetLoader.cpp">
+      <Filter>Source Files\Game Code\Misc. files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AnimationManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AnimationManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -535,9 +562,6 @@
     </ClInclude>
     <ClInclude Include="Game Code\PlayerAttorney.h">
       <Filter>Source Files\Game Code\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\JsonParser.h">
-      <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\LevelMap.h">
       <Filter>Source Files\Game Code\Level Data</Filter>
@@ -707,8 +731,32 @@
     <ClInclude Include="Engine Code\TimeManager.h">
       <Filter>Source Files\Engine Code\Main Systems\Time Management System</Filter>
     </ClInclude>
+    <ClInclude Include="Engine Code\Animation.h">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationSet.h">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationComponent.h">
+      <Filter>Source Files\Engine Code\Main Systems\Animation System</Filter>
+    </ClInclude>
     <ClInclude Include="Game Code\Actor.h">
       <Filter>Source Files\Game Code\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\ConvenienceFunctions.h">
+      <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AssetLoader.h">
+      <Filter>Source Files\Game Code\Misc. files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AnimationManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Tileset.h">
+      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

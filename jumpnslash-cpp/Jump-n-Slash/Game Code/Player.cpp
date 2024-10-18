@@ -1,10 +1,15 @@
 #include "Player.h"
 
 #include "../Engine Code/SpriteManager.h"
+#include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Visualizer.h"
 #include "../Engine Code/Math.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/Camera.h"
+#include "../Engine Code/AnimationSet.h"
+#include "../Engine Code/Animation.h"
+#include "../Engine Code/Math.h"
+#include "../Engine Code/ConvenienceFunctions.h"
 
 #include "Constants.h"
 #include "DebugFlags.h"
@@ -14,13 +19,13 @@
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "RoomData.h"
+#include <iostream>
 
 Player::Player()
 	: pos(),
 	posDelta(0.f, 0.f),
 	speed(PLAYER_WALK_SPEED),
-	animations(),
-	currentAnimation(),
+	animComp(),
 	pSprite(nullptr),
 	pCurrentState(&PlayerFSM::idle),
 	pPrevState(nullptr),
@@ -30,38 +35,53 @@ Player::Player()
 	walkLeftKeyDown(false),
 	walkRightKeyDown(false),
 	jumpKeyDown(false),
-	isGrounded(false)
+	isGrounded(false),
+	facing(1)
 {	
 	assert(pCurrentState != nullptr);
 
-	AnimationList idle;
-	idle.push_back(SpriteManager::GetSprite("player idle 1"));
-	idle.push_back(SpriteManager::GetSprite("player idle 2"));
-	idle.push_back(SpriteManager::GetSprite("player idle 3"));
-	idle.push_back(SpriteManager::GetSprite("player idle 4"));
+	/*
+	Animation* pIdle = new Animation(ANIMATION_FRAMERATE);
+	pIdle->AddFrame(SpriteManager::GetSprite("player idle 1"));
+	pIdle->AddFrame(SpriteManager::GetSprite("player idle 2"));
+	pIdle->AddFrame(SpriteManager::GetSprite("player idle 3"));
+	pIdle->AddFrame(SpriteManager::GetSprite("player idle 4"));
 
-	AnimationList walk;
-	walk.push_back(SpriteManager::GetSprite("player walk 1"));
-	walk.push_back(SpriteManager::GetSprite("player walk 2"));
-	walk.push_back(SpriteManager::GetSprite("player walk 3"));
-	walk.push_back(SpriteManager::GetSprite("player walk 4"));
+	Animation* pWalk = new Animation(ANIMATION_FRAMERATE);
+	pWalk->AddFrame(SpriteManager::GetSprite("player walk 1"));
+	pWalk->AddFrame(SpriteManager::GetSprite("player walk 2"));
+	pWalk->AddFrame(SpriteManager::GetSprite("player walk 3"));
+	pWalk->AddFrame(SpriteManager::GetSprite("player walk 4"));
 
-	AnimationList jump;
-	jump.push_back(SpriteManager::GetSprite("player jump 1"));
-	jump.push_back(SpriteManager::GetSprite("player jump 2"));
-	jump.push_back(SpriteManager::GetSprite("player jump 3"));
-	jump.push_back(SpriteManager::GetSprite("player jump 4"));
+	Animation* pJump = new Animation(ANIMATION_FRAMERATE);
+	pJump->AddFrame(SpriteManager::GetSprite("player jump 1"));
+	pJump->AddFrame(SpriteManager::GetSprite("player jump 2"));
+	pJump->AddFrame(SpriteManager::GetSprite("player jump 3"));
+	pJump->AddFrame(SpriteManager::GetSprite("player jump 4"));
 
-	AnimationList fall;
-	fall.push_back(SpriteManager::GetSprite("player fall 1"));
-	fall.push_back(SpriteManager::GetSprite("player fall 2"));
-	fall.push_back(SpriteManager::GetSprite("player fall 3"));
-	fall.push_back(SpriteManager::GetSprite("player fall 4"));
+	Animation* pFall = new Animation(ANIMATION_FRAMERATE);
+	pFall->AddFrame(SpriteManager::GetSprite("player fall 1"));
+	pFall->AddFrame(SpriteManager::GetSprite("player fall 2"));
+	pFall->AddFrame(SpriteManager::GetSprite("player fall 3"));
+	pFall->AddFrame(SpriteManager::GetSprite("player fall 4"));
+	//*/
 
-	animations.emplace("idle", idle);
-	animations.emplace("walk", walk);
-	animations.emplace("jump", jump);
-	animations.emplace("fall", fall);
+	AnimationSet* pAnimSet = new AnimationSet();
+	/*
+	pAnimSet->AddAnimation("idle", pIdle);
+	pAnimSet->AddAnimation("walk", pWalk);
+	pAnimSet->AddAnimation("jump", pJump);
+	pAnimSet->AddAnimation("fall", pFall);
+	//*/
+	//*
+	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("player idle"));
+	pAnimSet->AddAnimation("walk", AnimationManager::GetAnimation("player walk"));
+	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
+	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
+	//*/
+
+	animComp.DefineAnimationSet(pAnimSet);
+	animComp.SetAnimation("idle");
 }
 
 Player::~Player()
@@ -85,8 +105,8 @@ void Player::Update(float deltaTime)
 	pCurrentState->Update(this, deltaTime);
 
 	// check if we're still inside the room
-	sf::Vector2f roomMin = pCurrentRoom->GetOrigin();
-	sf::Vector2f roomMax = roomMin + pCurrentRoom->GetSize();
+	sf::Vector2f roomMin = pCurrentRoom->GetRoomMinBounds();
+	sf::Vector2f roomMax = pCurrentRoom->GetRoomMaxBounds();
 	if (pos.x < roomMin.x || roomMin.x <= pos.x || pos.y < roomMin.y || roomMin.y < pos.y)
 	{
 		Notify(ObserverEvent::PlayerOutsideCurrentRoom);
@@ -109,6 +129,16 @@ void Player::Update(float deltaTime)
 	}
 
 	// set the sprite position for drawing
+	pSprite = animComp.GetCurrentFrame();
+	if (facing == 1)
+	{
+		pSprite->setOrigin(0.f, 0.f);
+	}
+	else if (facing == -1)
+	{
+		pSprite->setOrigin(32.f, 0.f);
+	}
+	pSprite->setScale(static_cast<float>(facing), 1.f);
 	pSprite->setPosition(pos);
 
 	// update the previous state for the next frame
@@ -121,30 +151,32 @@ void Player::Update(float deltaTime)
 		// Visualize player coordinates in world space
 
 		sf::Color posColor = sf::Color::Yellow;
-		Visualizer::VisualizePoint(pos, posColor);
 		//std::string posStr = "(" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")";
-		sf::Vector2f textPos(0.f, 0.f);
-		Visualizer::VisualizeText(pos, textPos, posColor);
-		Visualizer::VisualizeSegment(sf::Vector2f(0.f, VIZ_DEFAULT_TEXT_SIZE), pos, posColor);
+		sf::Vector2f textPos = Math::ConvertScreenToWorldSpace(sf::Vector2i(0, 0));
+		sf::Vector2f lineStart(static_cast<float>(textPos.x), static_cast<float>(textPos.y));
+		lineStart.y += VIZ_DEFAULT_TEXT_SIZE;
+		Visualizer::VisualizeText(Convenience::ConvertToString(pos), textPos, posColor);
+		Visualizer::VisualizeSegment(lineStart, pos, posColor);
 
 		// Visualize posDelta
 
 		sf::Color posDeltaColor = sf::Color::Magenta;
 		sf::Vector2f halfTileDelta(TILE_SIZE_F / 2.f, TILE_SIZE_F / 2.f);
-		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + posDelta, posDeltaColor);
 		//std::string posDeltaStr = "(" + std::to_string(posDelta.x) + ", " + std::to_string(posDelta.y) + ")";
 		textPos.y += VIZ_DEFAULT_TEXT_SIZE;
-		Visualizer::VisualizeText(posDelta, textPos, posDeltaColor);
+		sf::Vector2f tempPosDelta = posDelta / deltaTime;
+		Visualizer::VisualizeText(Convenience::ConvertToString(tempPosDelta), textPos, posDeltaColor);
+		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + tempPosDelta, posDeltaColor);
 	}
 	if (DEBUG_PLAYER_STATE)
 	{
 		std::string stateStr;
-		if (pCurrentState == &PlayerFSM::falling) stateStr = "falling";
+		if (pCurrentState == &PlayerFSM::falling) stateStr = "fall";
 		else if (pCurrentState == &PlayerFSM::idle) stateStr = "idle";
-		else if (pCurrentState == &PlayerFSM::jumping) stateStr = "jumping";
-		else if (pCurrentState == &PlayerFSM::walking) stateStr = "walking";
+		else if (pCurrentState == &PlayerFSM::jumping) stateStr = "jump";
+		else if (pCurrentState == &PlayerFSM::walking) stateStr = "walk";
 		else assert(false); // just in case we add any states and forget to update the debug code, this'll crash to remind us
-		sf::Vector2f textPos(0.f, VIZ_DEFAULT_TEXT_SIZE * 2);
+		sf::Vector2f textPos = Math::ConvertScreenToWorldSpace(sf::Vector2i(0, VIZ_DEFAULT_TEXT_SIZE * 2));
 		Visualizer::VisualizeText(stateStr, textPos, sf::Color::Cyan);
 	}
 	if (DEBUG_LEVEL_SCROLL_BOUNDS)
@@ -170,9 +202,11 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 	{
 	case WALK_LEFT_KEY:
 		walkLeftKeyDown = true;
+		facing = -1;
 		break;
 	case WALK_RIGHT_KEY:
 		walkRightKeyDown = true;
+		facing = 1;
 		break;
 	case JUMP_KEY:
 		jumpKeyDown = true;
@@ -299,12 +333,11 @@ void Player::RaycastRight(float deltaTime)
 		{
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
-			Visualizer::VisualizeText(endPos[i].x, endPos[i], sf::Color::Red);
+			Visualizer::VisualizeText(std::to_string(endPos[i].x), endPos[i], sf::Color::Red);
 		}
 	}
 
-	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime + sf::Vector2f(TILE_SIZE_F, 0.f); // The position the player wants to move to
-	//sf::Vector2f mayMoveTo = pos + posDelta;
+	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(TILE_SIZE_F, 0.f); // The position the player wants to move to
 
 	if (mayMoveTo.x < minX)
 	{
@@ -370,12 +403,12 @@ void Player::RaycastLeft(float deltaTime)
 		{
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
-			Visualizer::VisualizeText(endPos[i].x, endPos[i], sf::Color::Red);
+			Visualizer::VisualizeText(std::to_string(endPos[i].x), endPos[i], sf::Color::Red);
 		}
 	}
 
-	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
-	//sf::Vector2f mayMoveTo = pos + posDelta;
+	//sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
+	sf::Vector2f mayMoveTo = pos + posDelta;
 
 	if (mayMoveTo.x > maxX)
 	{
@@ -439,13 +472,13 @@ void Player::RaycastUp(float deltaTime)
 		if (DEBUG_PLAYER_MAP_COLLISION) {
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
-			if (i == 0) Visualizer::VisualizeText(endPos[i].y, endPos[i] + sf::Vector2f(0.f, -VIZ_DEFAULT_TEXT_SIZE), sf::Color::Red);
-			else Visualizer::VisualizeText(endPos[i].y, endPos[i], sf::Color::Red);
+			if (i == 0) Visualizer::VisualizeText(std::to_string(endPos[i].y), endPos[i] + sf::Vector2f(0.f, -VIZ_DEFAULT_TEXT_SIZE), sf::Color::Red);
+			else Visualizer::VisualizeText(std::to_string(endPos[i].y), endPos[i], sf::Color::Red);
 		}
 	}
 
-	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime; // The position the player wants to move to
-	//sf::Vector2f mayMoveTo = pos + posDelta;
+	//sf::Vector2f mayMoveTo = pos + posDelta * deltaTime; // The position the player wants to move to
+	sf::Vector2f mayMoveTo = pos + posDelta;
 
 	// If the player's projected movement is in an invalid location, then move them the maximum distance allowed
 	if (mayMoveTo.y > maxY) {
@@ -530,13 +563,12 @@ void Player::RaycastDown(float deltaTime)
 		{
 			Visualizer::VisualizeSegment(startPos[i], endPos[i]);
 			Visualizer::VisualizePoint(endPos[i], sf::Color::Red);
-			if (i == 0) Visualizer::VisualizeText(endPos[i].y, endPos[i] + sf::Vector2f(0, -VIZ_DEFAULT_TEXT_SIZE), sf::Color::Red);
-			else Visualizer::VisualizeText(endPos[i].y, endPos[i], sf::Color::Red);
+			if (i == 0) Visualizer::VisualizeText(std::to_string(endPos[i].y), endPos[i] + sf::Vector2f(0, -VIZ_DEFAULT_TEXT_SIZE), sf::Color::Red);
+			else Visualizer::VisualizeText(std::to_string(endPos[i].y), endPos[i], sf::Color::Red);
 		}
 	}
 
-	sf::Vector2f mayMoveTo = pos + posDelta * deltaTime + sf::Vector2f(0.f, TILE_SIZE_F); // The position the player wants to move to
-	//sf::Vector2f mayMoveTo = pos + posDelta;
+	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(0.f, TILE_SIZE_F); // The position the player wants to move to
 	
 	// If the player's projected movement is in an invalid location, then move them the maximum distance allowed
 	if (mayMoveTo.y < minY)
@@ -558,8 +590,8 @@ void Player::SetPos(sf::Vector2f newPos)
 
 void Player::ApplyGravity(float deltaTime)
 {
-	//posDelta.y += GRAVITY_WEIGHT * deltaTime;
-	posDelta.y += GRAVITY_WEIGHT;
+	posDelta.y += GRAVITY_WEIGHT * deltaTime;
+	//posDelta.y += GRAVITY_WEIGHT;
 }
 
 void Player::ProcessInputs(float deltaTime)
@@ -568,18 +600,18 @@ void Player::ProcessInputs(float deltaTime)
 
 	if (walkLeftKeyDown)
 	{
-		//posDelta.x -= speed * deltaTime;
-		posDelta.x -= speed;
+		posDelta.x -= speed * deltaTime;
+		//posDelta.x -= speed;
 	}
 	if (walkRightKeyDown)
 	{
-		//posDelta.x += speed * deltaTime;
-		posDelta.x += speed;
+		posDelta.x += speed * deltaTime;
+		//posDelta.x += speed;
 	}
 	if (isGrounded && jumpKeyDown)
 	{
-		//posDelta.y = JUMP_FORCE * deltaTime;
-		posDelta.y = JUMP_FORCE;
+		posDelta.y = JUMP_FORCE * deltaTime;
+		//posDelta.y = JUMP_FORCE;
 	}
 }
 
@@ -594,36 +626,20 @@ void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
 
 void Player::SetAnimationIdle()
 {
-	if (currentAnimation != "idle")
-	{
-		currentAnimation = "idle";
-		pSprite = animations.at(currentAnimation).front();
-	}
+	animComp.SetAnimation("idle");
 }
 
 void Player::SetAnimationWalk()
 {
-	if (currentAnimation != "walk")
-	{
-		currentAnimation = "walk";
-		pSprite = animations.at(currentAnimation).front();
-	}
+	animComp.SetAnimation("walk");
 }
 
 void Player::SetAnimationJump()
 {
-	if (currentAnimation != "jump")
-	{
-		currentAnimation = "jump";
-		pSprite = animations.at(currentAnimation).front();
-	}
+	animComp.SetAnimation("jump");
 }
 
 void Player::SetAnimationFall()
 {
-	if (currentAnimation != "fall")
-	{
-		currentAnimation = "fall";
-		pSprite = animations.at(currentAnimation).front();
-	}
+	animComp.SetAnimation("fall");
 }
