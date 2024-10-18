@@ -270,8 +270,8 @@ void Player::RaycastRight(float deltaTime)
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
 
 	// cast a ray from the top (index=0) and the bottom (index=1) of the sprite
-	startPos[0] = pos;
-	startPos[1] = pos + sf::Vector2f(0.f, TILE_SIZE_F - 0.001f); // subtract a little just in case we reach into the next tile (this only happens when pos.y is a whole number)
+	startPos[0] = pos + sf::Vector2f(TILE_SIZE_F, 0.f);
+	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F, TILE_SIZE_F - 0.001f); // subtract a little just in case we reach into the next tile (this only happens when pos.y is a whole number)
 
 	float minX = MAX_LEVEL_SIZE * TILE_SIZE_F;
 
@@ -279,11 +279,34 @@ void Player::RaycastRight(float deltaTime)
 	{
 		sf::Vector2f currPos = startPos[i];
 
+		// Edge case: the player is partially inside a tile that's solid on the left
+		LevelTile* pTile = pLevel->GetTileAtPos(currPos); // The tile in which the raycast begins
+
+		if (pTile != nullptr && // Is this tile empty
+			pTile->IsSolidOnSides() && // Is this tile solid on the sides
+			pos.x + TILE_SIZE_F > pTile->GetPos().x) // Is the right edge of the player to the right of the left edge of this tile
+		{
+			// Visuals for debugging ONLY
+			if (DEBUG_PLAYER_MAP_COLLISION)
+			{
+				Visualizer::VisualizePoint(currPos, sf::Color::Green);
+			}
+
+			currPos.x += TILE_SIZE_F;
+		}
+
+		// While the current position is empty or NOT solid on the sides, and within the bounds of the map
 		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnSides() == false) &&
 			currPos.x < MAX_LEVEL_SIZE * TILE_SIZE_F)
 		{
-			if (DEBUG_PLAYER_MAP_COLLISION) Visualizer::VisualizePoint(currPos, sf::Color::Green);
-			if (currPos != startPos[i])
+			// Visuals for debugging ONLY
+			if (DEBUG_PLAYER_MAP_COLLISION)
+			{
+				Visualizer::VisualizePoint(currPos, sf::Color::Green);
+			}
+
+			// For iterations through the while loop after the first
+			if (std::floorf(currPos.x) == currPos.x)
 			{
 				// increment by tile size, since we only want to check every tile space
 				currPos.x += TILE_SIZE_F;
@@ -300,7 +323,6 @@ void Player::RaycastRight(float deltaTime)
 				currPos.x += TILE_SIZE_F;
 			}
 		}
-		currPos.x -= TILE_SIZE_F; // decrement by one tile size because everything is relative to the top left corner
 
 		endPos[i] = currPos;
 		if (endPos[i].x < minX)
@@ -315,14 +337,13 @@ void Player::RaycastRight(float deltaTime)
 		}
 	}
 
-	//sf::Vector2f mayMoveTo = pos + posDelta * deltaTime;
-	sf::Vector2f mayMoveTo = pos + posDelta;
+	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(TILE_SIZE_F, 0.f); // The position the player wants to move to
 
 	if (mayMoveTo.x < minX)
 	{
 		minX = mayMoveTo.x;
 	}
-	pos.x = minX;
+	pos.x = minX - TILE_SIZE_F;
 }
 
 void Player::RaycastLeft(float deltaTime)
@@ -475,9 +496,9 @@ void Player::RaycastDown(float deltaTime)
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
 
-	// Cast a ray downwards from the left (index=0) and right (index=1) edges of the sprite
-	startPos[0] = pos + sf::Vector2f(0.f, 0.f);
-	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, 0.f); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
+	// Cast a ray downwards from the left (index=0) and right (index=1) edges of the sprite; we add tile size to the y-value to begin our raycast at the bottom of the player's sprite
+	startPos[0] = pos + sf::Vector2f(0.f, TILE_SIZE_F);
+	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, TILE_SIZE_F); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
 
 	// The lowest point the player can move to without being inside of a wall
 	float minY = MAX_LEVEL_SIZE * TILE_SIZE_F;
@@ -486,7 +507,21 @@ void Player::RaycastDown(float deltaTime)
 	{
 		sf::Vector2f currPos = startPos[i];
 
-		// account for an edge case where raycasting begins inside of a block, so it never continues past the start
+		// Edge case: the player is partially inside a tile that's solid on top
+		LevelTile* pTile = pLevel->GetTileAtPos(currPos); // The tile in which the raycast begins
+
+		if (pTile != nullptr && // Is this tile empty
+			pTile->IsSolidOnTop() && // Is this tile solid on top
+			pos.y + TILE_SIZE_F > pTile->GetPos().y) // Is the bottom edge of the player below the top edge of this tile
+		{
+			// Visuals for debugging ONLY
+			if (DEBUG_PLAYER_MAP_COLLISION)
+			{
+				Visualizer::VisualizePoint(currPos, sf::Color::Green);
+			}
+
+			currPos.y += TILE_SIZE_F;
+		}
 
 		// While the current position is empty or NOT solid on top, and within the bounds of the map
 		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnTop() == false) &&
@@ -500,7 +535,7 @@ void Player::RaycastDown(float deltaTime)
 			}
 
 			// For iterations through the while loop after the first
-			if (currPos != startPos[i])
+			if (std::floorf(currPos.y) == currPos.y)
 			{
 				currPos.y += TILE_SIZE_F;
 			}
@@ -516,9 +551,6 @@ void Player::RaycastDown(float deltaTime)
 				currPos.y += TILE_SIZE_F;
 			}
 		}
-
-		// Decrement by tile size because position is relative to the top left corner of the player
-		currPos.y -= TILE_SIZE_F;
 
 		endPos[i] = currPos;
 		if (endPos[i].y < minY)
@@ -536,8 +568,7 @@ void Player::RaycastDown(float deltaTime)
 		}
 	}
 
-	//sf::Vector2f mayMoveTo = pos + posDelta * deltaTime; // The position the player wants to move to
-	sf::Vector2f mayMoveTo = pos + posDelta;
+	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(0.f, TILE_SIZE_F); // The position the player wants to move to
 	
 	// If the player's projected movement is in an invalid location, then move them the maximum distance allowed
 	if (mayMoveTo.y < minY)
@@ -546,6 +577,7 @@ void Player::RaycastDown(float deltaTime)
 	}
 	
 	// Determine if we is grounded or not
+	minY -= TILE_SIZE_F;
 	isGrounded = pos.y == minY;
 
 	pos.y = minY;

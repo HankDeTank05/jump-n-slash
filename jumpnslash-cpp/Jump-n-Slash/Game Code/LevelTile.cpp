@@ -24,22 +24,27 @@ void LevelTile::Draw()
 	Render(*pSprite);
 }
 
-bool LevelTile::IsSolidOnTop()
+bool LevelTile::IsSolidOnTop() const
 {
 	return solidOnTop;
 }
 
-bool LevelTile::IsSolidOnSides()
+bool LevelTile::IsSolidOnSides() const
 {
 	return solidOnSides;
 }
 
-bool LevelTile::IsSolidOnBottom()
+bool LevelTile::IsSolidOnBottom() const
 {
 	return solidOnBottom;
 }
 
-bool LevelTile::IsBreakable()
+bool LevelTile::IsBreakable() const
 {
 	return breakable;
+}
+
+sf::Vector2f LevelTile::GetPos() const
+{
+	return pos;
 }
