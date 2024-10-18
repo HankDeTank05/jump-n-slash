@@ -442,8 +442,8 @@ void Player::RaycastDown(float deltaTime)
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
 
 	// Cast a ray downwards from the left (index=0) and right (index=1) edges of the sprite; we add tile size to the y-value to begin our raycast at the bottom of the player's sprite
-	startPos[0] = pos + sf::Vector2f(0.f, 0.f + TILE_SIZE_F);
-	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, 0.f + TILE_SIZE_F); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
+	startPos[0] = pos + sf::Vector2f(0.f, TILE_SIZE_F);
+	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, TILE_SIZE_F); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
 
 	// The lowest point the player can move to without being inside of a wall
 	float minY = MAX_LEVEL_SIZE * TILE_SIZE_F;
@@ -453,7 +453,11 @@ void Player::RaycastDown(float deltaTime)
 		sf::Vector2f currPos = startPos[i];
 
 		// Edge case: the player is partially inside a tile that's solid on top
-		if (pLevel->GetTileAtPos(currPos) != nullptr && pLevel->GetTileAtPos(currPos)->IsSolidOnTop() && pos.y + TILE_SIZE_F > std::floorf(currPos.y))
+		LevelTile* pTile = pLevel->GetTileAtPos(currPos); // The tile in which the raycast begins
+
+		if (pTile != nullptr && // Is this tile empty
+			pTile->IsSolidOnTop() && // Is this tile solid on top
+			pos.y + TILE_SIZE_F > pTile->GetPos().y) // Is the bottom edge of the player below this tile
 		{
 			// Visuals for debugging ONLY
 			if (DEBUG_PLAYER_MAP_COLLISION)
@@ -465,7 +469,7 @@ void Player::RaycastDown(float deltaTime)
 		}
 
 		// While the current position is empty or NOT solid on top, and within the bounds of the map
-		while ((pLevel->GetTileAtPos(currPos) == nullptr || (pLevel->GetTileAtPos(currPos)->IsSolidOnTop() == false)) &&
+		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnTop() == false) &&
 			currPos.y <= MAX_LEVEL_SIZE * TILE_SIZE_F)
 		{
 
@@ -476,7 +480,7 @@ void Player::RaycastDown(float deltaTime)
 			}
 
 			// For iterations through the while loop after the first
-			if (std::abs(currPos.y) != currPos.y)
+			if (std::floorf(currPos.y) == currPos.y)
 			{
 				currPos.y += TILE_SIZE_F;
 			}

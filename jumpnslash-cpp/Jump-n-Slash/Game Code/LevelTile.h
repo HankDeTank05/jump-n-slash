@@ -17,10 +17,12 @@ public:
 
 	virtual void Draw() override final;
 
-	bool IsSolidOnTop();
-	bool IsSolidOnSides();
-	bool IsSolidOnBottom();
-	bool IsBreakable();
+	bool IsSolidOnTop() const;
+	bool IsSolidOnSides() const;
+	bool IsSolidOnBottom() const;
+	bool IsBreakable() const;
+
+	sf::Vector2f GetPos() const;
 
 private:
 	sf::Vector2f pos;
