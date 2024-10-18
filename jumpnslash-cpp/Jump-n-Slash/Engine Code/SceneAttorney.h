@@ -12,6 +12,8 @@
 // forward declarations
 class Scene;
 class Command;
+class InputObject;
+class CollisionManager;
 
 class SceneAttorney
 {
@@ -31,6 +33,7 @@ public:
 		friend class DrawObject;
 		friend class InputObject;
 		friend class AlarmObject;
+		friend class CollisionObject;
 		static void AddCommand(Scene* pScene, Command* pCmd);
 	};
 
@@ -68,6 +71,13 @@ public:
 		friend class AlarmObject;
 		static AlarmManager::TimelineRef Register(Scene* pScene, float triggerTime, AlarmObject* pAlarmable, AlarmID id);
 		static void Deregister(Scene* pScene, AlarmManager::TimelineRef timelineRef);
+	};
+
+	class Collision
+	{
+	private:
+		friend class CollisionObject;
+		static CollisionManager* GetCollisionManager(Scene* pScene);
 	};
 };
 

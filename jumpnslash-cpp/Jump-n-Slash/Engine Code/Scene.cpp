@@ -5,6 +5,7 @@
 #include "RegistrationBroker.h"
 #include "DrawManager.h"
 #include "CameraManager.h"
+#include "CollisionManager.h"
 
 Scene::Scene()
 	: pRegBroker(new RegistrationBroker()),
@@ -12,6 +13,7 @@ Scene::Scene()
 	pDrawMgr(new DrawManager()),
 	pInputMgr(new InputManager()),
 	pAlarmMgr(new AlarmManager()),
+	pColMgr(new CollisionManager()),
 	pCamMgr(new CameraManager())
 {
 	// do nothing
@@ -110,6 +112,11 @@ AlarmManager::TimelineRef Scene::Register(float triggerTime, AlarmObject* pAlarm
 void Scene::Deregister(AlarmManager::TimelineRef timelineRef)
 {
 	pAlarmMgr->Deregister(timelineRef);
+}
+
+CollisionManager* Scene::GetCollisionManager()
+{
+	return pColMgr;
 }
 
 void Scene::AddCommand(Command* pCmd)

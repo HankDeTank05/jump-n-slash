@@ -39,8 +39,8 @@ private:
 	friend class AlarmObjectAttorney;
 	void TriggerAlarm(AlarmID id);
 
-	void AlarmRegistration(AlarmID id);
-	void AlarmDeregistration(AlarmID id);
+	void Register(AlarmID id);
+	void Deregister(AlarmID id);
 
 private:
 	struct RegistrationData

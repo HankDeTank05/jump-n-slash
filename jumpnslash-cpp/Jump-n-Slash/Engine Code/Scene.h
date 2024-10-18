@@ -14,6 +14,7 @@ class UpdateObject;
 class DrawObject;
 class Camera;
 class CameraManager;
+class CollisionManager;
 
 class Scene
 {
@@ -58,6 +59,10 @@ private:
 	AlarmManager::TimelineRef Register(float triggerTime, AlarmObject* pAlarmable, AlarmID id);
 	void Deregister(AlarmManager::TimelineRef timelineRef);
 
+	// collision registration
+
+	CollisionManager* GetCollisionManager();
+
 	// registration broker
 
 	void AddCommand(Command* pCmd);
@@ -69,6 +74,7 @@ private:
 	DrawManager* pDrawMgr; // manages draw objects
 	InputManager* pInputMgr; // manages input objects
 	AlarmManager* pAlarmMgr; // manages alarm objects
+	CollisionManager* pColMgr; // manages collision objects
 
 	CameraManager* pCamMgr; // manages the camera(s)
 };
