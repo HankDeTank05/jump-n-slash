@@ -72,7 +72,7 @@ public:
 	void ComputeData();
 	void ProcessCollisions();
 
-	CollisionGroup* GetCollisionGroup();
+	CollisionGroup* GetCollisionGroup(JNSTypeID id);
 
 private:
 	void SetGroupForTypeID(JNSTypeID id);

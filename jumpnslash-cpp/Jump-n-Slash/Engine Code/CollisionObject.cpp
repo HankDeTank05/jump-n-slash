@@ -22,3 +22,10 @@ void CollisionObject::RequestCollisionDeregistration()
 
 	regState = RegistrationState::PENDING_DEREGISTRATION;
 }
+
+void CollisionObject::Register()
+{
+	assert(regState == RegistrationState::PENDING_REGISTRATION);
+
+	deleteRef = SceneAttorney::Collision::GetCollisionManager()->GetCollisionGroup(typeID)->Register(this);
+}

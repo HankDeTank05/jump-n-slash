@@ -4,12 +4,12 @@
 
 void AlarmObjectAttorney::Registration::Register(AlarmObject* pAlarmable, AlarmID id)
 {
-	pAlarmable->AlarmRegistration(id);
+	pAlarmable->Register(id);
 }
 
 void AlarmObjectAttorney::Registration::Deregister(AlarmObject* pAlarmable, AlarmID id)
 {
-	pAlarmable->AlarmDeregistration(id);
+	pAlarmable->Deregister(id);
 }
 
 void AlarmObjectAttorney::GameLoop::TriggerAlarm(AlarmObject* pAlarmable, AlarmID id)
