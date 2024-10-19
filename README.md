@@ -9,22 +9,22 @@ We are planning on having a playable demo publicly available by the end of 2024.
 
 # Credits
 
-## Game Design
+## Henry Holman
 
-Joseph Turzitti
+Director, Game Engine Programmer, Gameplay Programmer, Tools Developer
 
-## Programming
+## Joseph Turzitti
 
-### Gameplay Programming
+Game Designer, Narrative Designer
 
-Henry Holman
+## Len Jensen
 
-Katie Holman
+Tools Developer
 
-### Game Engine Programming
+## Katie Holman
 
-Henry Holman
+Gameplay Programmer
 
-### Tools Development
+## Ruben Rojas
 
-Len Jensen
+Narrative Designer, Game Designer
