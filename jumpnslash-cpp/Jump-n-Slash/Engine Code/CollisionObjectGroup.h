@@ -1,5 +1,5 @@
-#ifndef COLLISION_GROUP_H
-#define COLLISION_GROUP_H
+#ifndef COLLISION_OBJECT_GROUP_H
+#define COLLISION_OBJECT_GROUP_H
 
 #include <list>
 
@@ -8,13 +8,13 @@
 // forward declarations
 class CollisionObject;
 
-class CollisionGroup
+class CollisionObjectGroup
 {
 public:
-	CollisionGroup();
-	CollisionGroup(const CollisionGroup& cg) = delete;
-	CollisionGroup& operator=(const CollisionGroup& cg) = delete;
-	virtual ~CollisionGroup();
+	CollisionObjectGroup();
+	CollisionObjectGroup(const CollisionObjectGroup& cg) = delete;
+	CollisionObjectGroup& operator=(const CollisionObjectGroup& cg) = delete;
+	virtual ~CollisionObjectGroup();
 
 	using CollisionObjectList = std::list<CollisionObject*>;
 	using CollisionObjectListRef = CollisionObjectList::iterator;
@@ -29,7 +29,7 @@ public:
 
 private:
 	CollisionObjectList collisionObjectList;
-	sf::FloatRect* pGroupAABB
+	sf::FloatRect* pGroupAABB;
 };
 
 #endif

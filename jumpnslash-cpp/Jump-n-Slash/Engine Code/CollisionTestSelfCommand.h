@@ -4,14 +4,14 @@
 #include "CollisionTestCommand.h"
 
 // forward declarations
-class CollisionGroup;
+class CollisionObjectGroup;
 class CollisionDispatchBase;
 
 class CollisionTestSelfCommand : public CollisionTestCommand
 {
 public:
 	CollisionTestSelfCommand() = delete;
-	CollisionTestSelfCommand(CollisionGroup* pGroup, CollisionDispatchBase* pDispatch);
+	CollisionTestSelfCommand(CollisionObjectGroup* pGroup, CollisionDispatchBase* pDispatch);
 	CollisionTestSelfCommand(const CollisionTestSelfCommand& ctsc) = delete;
 	CollisionTestSelfCommand& operator=(const CollisionTestSelfCommand& ctsc) = delete;
 	virtual ~CollisionTestSelfCommand();
@@ -19,7 +19,7 @@ public:
 	virtual void Execute() override;
 
 private:
-	CollisionGroup* pGroup;
+	CollisionObjectGroup* pGroup;
 	CollisionDispatchBase* pDispatch;
 };
 

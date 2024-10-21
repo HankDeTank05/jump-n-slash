@@ -7,9 +7,10 @@
 
 #include "CollisionTestPairCommand.h"
 #include "CollisionTestSelfCommand.h"
+#include "CollisionDispatch.h"
 
 // forward declarations
-class CollisionGroup;
+class CollisionObjectGroup;
 class CollisionTestCommand;
 
 class CollisionManager
@@ -26,7 +27,7 @@ public:
 private:
 	static JNSTypeID TypeIDNextNumber; // TODO: set in .cpp
 
-	using CollisionGroupCollection = std::vector<CollisionGroup*>;
+	using CollisionObjectGroupCollection = std::vector<CollisionObjectGroup*>;
 	using CollisionTestCommandList = std::list<CollisionTestCommand*>;
 
 public:
@@ -45,8 +46,8 @@ public:
 	template <typename C1, typename C2>
 	void SetCollisionPair()
 	{
-		CollisionGroup* pGroup1 = collisionGroupCollection[GetTypeID<C1>()];
-		CollisionGroup* pGroup2 = collisionGroupCollection[GetTypeID<C2>()];
+		CollisionObjectGroup* pGroup1 = collObjGroupCollection[GetTypeID<C1>()];
+		CollisionObjectGroup* pGroup2 = collObjGroupCollection[GetTypeID<C2>()];
 
 		CollisionDispatch<C1, C2>* pDispatch = new CollisionDispatch<C1, C2>();
 
@@ -56,7 +57,7 @@ public:
 	template <typename C>
 	void SetCollisionSelf()
 	{
-		CollisionGroup* pGroup = collisionGroupCollection[GetTypeID<C>()];
+		CollisionObjectGroup* pGroup = collObjGroupCollection[GetTypeID<C>()];
 
 		CollisionDispatch<C, C>* pDispatch = new CollisionDispatch<C, C>();
 
@@ -66,13 +67,13 @@ public:
 	//template <typename C>
 	//void SetCollisionMap(LevelMap* pLevelMap)
 	//{
-	//	CollisionGroup* pGroup = collisionGroupCollection[GetTypeID<C>()];
+	//	CollisionObjectGroup* pGroup = collObjGroupCollection[GetTypeID<C>()];
 	//	colTestCmdList.push_back(new CollisionTestMapCommand(pLevelMap, pGroup));
 	//}
 	void ComputeData();
 	void ProcessCollisions();
 
-	CollisionGroup* GetCollisionGroup(JNSTypeID id);
+	CollisionObjectGroup* GetObjectGroup(JNSTypeID id);
 
 private:
 	void SetGroupForTypeID(JNSTypeID id);
@@ -81,7 +82,7 @@ public:
 	static const JNSTypeID JNSID_UNDEFINED = -1;
 
 private: // member varables
-	CollisionGroupCollection collisionGroupCollection;
+	CollisionObjectGroupCollection collObjGroupCollection;
 	CollisionTestCommandList colTestCmdList;
 };
 

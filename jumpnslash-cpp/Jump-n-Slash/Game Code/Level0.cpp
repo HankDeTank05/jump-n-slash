@@ -6,16 +6,22 @@
 
 #include "LevelMap.h"
 #include "Player.h"
+#include "Enemy.h"
 
 Level0::Level0()
 	: pMap(nullptr),
-	pPlayer(nullptr)
+	pPlayer(nullptr),
+	pEnemy(nullptr)
 {
 	// do nothing
 }
 
 Level0::~Level0()
 {
+	if (pEnemy != nullptr)
+	{
+		delete pEnemy;
+	}
 	if (pPlayer != nullptr)
 	{
 		delete pPlayer;
@@ -30,6 +36,7 @@ void Level0::Init()
 {
 	pMap = new LevelMap(GridManager::GetGrid("test2"));
 	pPlayer = new Player();
+	pEnemy = new Enemy();
 
 	pPlayer->LinkToMap(pMap);
 	pPlayer->AddObserver(pMap);
@@ -44,6 +51,9 @@ void Level0::Init()
 
 void Level0::End()
 {
+	delete pEnemy;
+	pEnemy = nullptr;
+
 	delete pPlayer;
 	pPlayer = nullptr;
 

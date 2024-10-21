@@ -2,7 +2,10 @@
 #define COLLISION_OBJECT_H
 
 #include "CollisionManager.h"
+#include "CollisionObjectGroup.h"
 #include "RegistrationState.h"
+#include "SceneAttorney.h"
+#include "SceneManager.h"
 
 // forward declarations
 class CollisionRegistrationCommand;
@@ -21,7 +24,7 @@ protected:
 	template <typename C>
 	void SetCollidableGroup()
 	{
-		typeID = SceneAttorney::Collision::GetCollisionManager()->GetTypeID<C>():
+		typeID = SceneAttorney::Collision::GetCollisionManager(SceneManager::GetCurrentScene())->GetTypeID<C>();
 	}
 	
 	void RequestCollisionRegistration(); // TODO: docs for CollisionObject::RequestCollisionRegistration
@@ -35,7 +38,7 @@ private:
 private: // member variables
 	CollisionManager::JNSTypeID typeID;
 	RegistrationState regState;
-	// collision list deleteref
+	CollisionObjectGroup::CollisionObjectListRef deleteRef;
 	CollisionRegistrationCommand* pRegCmd;
 	CollisionDeregistrationCommand* pDeregCmd;
 

@@ -22,6 +22,7 @@ Scene::Scene()
 Scene::~Scene()
 {
 	delete pCamMgr;
+	delete pColMgr;
 	delete pAlarmMgr;
 	delete pInputMgr;
 	delete pDrawMgr;
