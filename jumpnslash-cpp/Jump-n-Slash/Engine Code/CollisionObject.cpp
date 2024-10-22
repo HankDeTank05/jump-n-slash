@@ -20,6 +20,7 @@ CollisionObject::CollisionObject()
 
 CollisionObject::~CollisionObject()
 {
+	if (pColVol != nullptr) delete pColVol;
 	delete pDeregCmd;
 	delete pRegCmd;
 }

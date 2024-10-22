@@ -52,37 +52,37 @@ Visualizer& Visualizer::Instance()
 	return *pInstance;
 }
 
-void Visualizer::VisualizePoint(sf::Vector2f pos, sf::Color color)
+void Visualizer::VisualizePoint(const sf::Vector2f& pos, const sf::Color& color)
 {
 	Instance().privVisualizePoint(pos, color);
 }
 
-void Visualizer::VisualizePoint(float x, float y, sf::Color color)
+void Visualizer::VisualizePoint(float x, float y, const sf::Color& color)
 {
 	Instance().privVisualizePoint(sf::Vector2f(x, y), color);
 }
 
-void Visualizer::VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter)
+void Visualizer::VisualizeCircle(const sf::Vector2f& pos, float radius, const sf::Color& color, bool showCenter)
 {
 	Instance().privVisualizeCircle(pos, radius, color, showCenter);
 }
 
-void Visualizer::VisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
+void Visualizer::VisualizeRect(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color)
 {
 	Instance().privVisualizeRect(pos, size, color);
 }
 
-void Visualizer::VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color, bool visualizeEndpoints)
+void Visualizer::VisualizeSegment(const sf::Vector2f& pos0, const sf::Vector2f& pos1, const sf::Color& color, bool visualizeEndpoints)
 {
 	Instance().privVisualizeSegment(pos0, pos1, color, visualizeEndpoints);
 }
 
-void Visualizer::VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+void Visualizer::VisualizeText(const sf::String& str, const sf::Vector2f& pos, const sf::Color& color, int sizeInPix)
 {
 	Instance().privVisualizeText(str, pos, color, sizeInPix);
 }
 
-void Visualizer::VisualizeText(sf::String str, sf::Vector2i pos, sf::Color color, int sizeInPix)
+void Visualizer::VisualizeText(const sf::String& str, const sf::Vector2i& pos, const sf::Color& color, int sizeInPix)
 {
 	Instance().privVisualizeText(str, sf::Vector2f(static_cast<float>(pos.x), static_cast<float>(pos.y)), color, sizeInPix);
 }

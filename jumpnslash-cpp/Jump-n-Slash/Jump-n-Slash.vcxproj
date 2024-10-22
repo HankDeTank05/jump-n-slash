@@ -154,6 +154,7 @@
     <ClInclude Include="Engine Code\CollisionVolume.h" />
     <ClInclude Include="Engine Code\CollisionVolumeAABB.h" />
     <ClInclude Include="Engine Code\CollisionVolumeBoundingBox.h" />
+    <ClInclude Include="Engine Code\CollisionVolumeBSphere.h" />
     <ClInclude Include="Engine Code\Command.h" />
     <ClInclude Include="Engine Code\ConvenienceFunctions.h" />
     <ClInclude Include="Engine Code\DrawObject.h" />

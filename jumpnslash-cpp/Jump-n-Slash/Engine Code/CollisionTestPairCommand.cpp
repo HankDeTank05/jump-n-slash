@@ -16,11 +16,17 @@ CollisionTestPairCommand::CollisionTestPairCommand(CollisionObjectGroup* _pGroup
 	// do nothing?
 }
 
+CollisionTestPairCommand::~CollisionTestPairCommand()
+{
+	delete pDispatch;
+}
+
 void CollisionTestPairCommand::Execute()
 {
-	// TODO: actual collision testing occurs here
 	CollisionObjectGroup::CollisionObjectList list1 = pGroup1->GetCollisionObjectList();
 	CollisionObjectGroup::CollisionObjectList list2 = pGroup2->GetCollisionObjectList();
+
+	// TODO: add tiered collision testing
 
 	for (CollisionObjectGroup::CollisionObjectList::iterator it1 = list1.begin(); it1 != list1.end(); it1++)
 	{
