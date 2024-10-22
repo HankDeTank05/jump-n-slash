@@ -41,6 +41,7 @@
     <ClCompile Include="Engine Code\CollisionTestPairCommand.cpp" />
     <ClCompile Include="Engine Code\CollisionVolumeAABB.cpp" />
     <ClCompile Include="Engine Code\CollisionVolumeBoundingBox.cpp" />
+    <ClCompile Include="Engine Code\CollisionVolumeBSphere.cpp" />
     <ClCompile Include="Engine Code\ConvenienceFunctions.cpp" />
     <ClCompile Include="Engine Code\DrawObject.cpp" />
     <ClCompile Include="Engine Code\DrawObjectAttorney.cpp" />
