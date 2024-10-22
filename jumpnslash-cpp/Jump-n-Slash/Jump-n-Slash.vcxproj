@@ -93,6 +93,7 @@
     <ClCompile Include="Engine Code\VizCmdRectPool.cpp" />
     <ClCompile Include="Engine Code\VizCmdSegPool.cpp" />
     <ClCompile Include="Engine Code\VizCmdTextPool.cpp" />
+    <ClCompile Include="Game Code\Actor.cpp" />
     <ClCompile Include="Game Code\AssetLoader.cpp" />
     <ClCompile Include="Game Code\BlockBreakable.cpp" />
     <ClCompile Include="Game Code\BlockHazard.cpp" />

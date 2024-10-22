@@ -1,135 +1,37 @@
-#include "Player.h"
+#include "Actor.h"
 
-#include "../Engine Code/SpriteManager.h"
-#include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Visualizer.h"
-#include "../Engine Code/Math.h"
-#include "../Engine Code/SceneManager.h"
-#include "../Engine Code/Camera.h"
+#include "../Engine Code/AnimationComponent.h"
 #include "../Engine Code/AnimationSet.h"
-#include "../Engine Code/Animation.h"
-#include "../Engine Code/Math.h"
-#include "../Engine Code/ConvenienceFunctions.h"
 
 #include "Constants.h"
 #include "DebugFlags.h"
 #include "DesignerControls.h"
-#include "PlayerMoveState.h"
-#include "PlayerFSM.h"
-#include "LevelMap.h"
 #include "LevelTile.h"
-#include "RoomData.h"
-#include <iostream>
+#include "LevelMap.h"
 
-Player::Player()
+
+
+Actor::Actor(float _speed, LevelMap* _pLevel)
 	: pos(),
 	posDelta(0.f, 0.f),
-	speed(PLAYER_WALK_SPEED),
-	animComp(),
+	speed(_speed),
+	pAnimComp(new AnimationComponent()),
 	pSprite(nullptr),
-	pCurrentState(&PlayerFSM::idle),
-	pPrevState(nullptr),
-	respawnPoint(),
-	pLevel(nullptr),
+	pLevel(_pLevel),
 	pCurrentRoom(nullptr),
-	walkLeftKeyDown(false),
-	walkRightKeyDown(false),
-	jumpKeyDown(false),
 	isGrounded(false),
 	facing(1)
-{	
-	assert(pCurrentState != nullptr);
-
-	/*
-	Animation* pIdle = new Animation(ANIMATION_FRAMERATE);
-	pIdle->AddFrame(SpriteManager::GetSprite("player idle 1"));
-	pIdle->AddFrame(SpriteManager::GetSprite("player idle 2"));
-	pIdle->AddFrame(SpriteManager::GetSprite("player idle 3"));
-	pIdle->AddFrame(SpriteManager::GetSprite("player idle 4"));
-
-	Animation* pWalk = new Animation(ANIMATION_FRAMERATE);
-	pWalk->AddFrame(SpriteManager::GetSprite("player walk 1"));
-	pWalk->AddFrame(SpriteManager::GetSprite("player walk 2"));
-	pWalk->AddFrame(SpriteManager::GetSprite("player walk 3"));
-	pWalk->AddFrame(SpriteManager::GetSprite("player walk 4"));
-
-	Animation* pJump = new Animation(ANIMATION_FRAMERATE);
-	pJump->AddFrame(SpriteManager::GetSprite("player jump 1"));
-	pJump->AddFrame(SpriteManager::GetSprite("player jump 2"));
-	pJump->AddFrame(SpriteManager::GetSprite("player jump 3"));
-	pJump->AddFrame(SpriteManager::GetSprite("player jump 4"));
-
-	Animation* pFall = new Animation(ANIMATION_FRAMERATE);
-	pFall->AddFrame(SpriteManager::GetSprite("player fall 1"));
-	pFall->AddFrame(SpriteManager::GetSprite("player fall 2"));
-	pFall->AddFrame(SpriteManager::GetSprite("player fall 3"));
-	pFall->AddFrame(SpriteManager::GetSprite("player fall 4"));
-	//*/
-
-	AnimationSet* pAnimSet = new AnimationSet();
-	/*
-	pAnimSet->AddAnimation("idle", pIdle);
-	pAnimSet->AddAnimation("walk", pWalk);
-	pAnimSet->AddAnimation("jump", pJump);
-	pAnimSet->AddAnimation("fall", pFall);
-	//*/
-	//*
-	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("player idle"));
-	pAnimSet->AddAnimation("walk", AnimationManager::GetAnimation("player walk"));
-	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
-	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
-	//*/
-
-	animComp.DefineAnimationSet(pAnimSet);
-	animComp.SetAnimation("idle");
-}
-
-Player::~Player()
-{
-	// do nothing
-}
-
-void Player::Update(float deltaTime)
 {
 	assert(pLevel != nullptr);
-	assert(pCurrentRoom != nullptr);
+}
 
-	// update the move state
-	pCurrentState = pCurrentState->GetNextState(this);
-	if (pCurrentState != pPrevState)
-	{
-		pCurrentState->Enter(this);
-	}
+void Actor::Draw()
+{
+	assert(pCurrentRoom != nullptr); // TODO: this is bad and stupid but Henry told me to do it (bitch)
 
-	// update player based on the current move state
-	pCurrentState->Update(this, deltaTime);
+	assert(pSprite != nullptr);
 
-	// check if we're still inside the room
-	sf::Vector2f roomMin = pCurrentRoom->GetRoomMinBounds();
-	sf::Vector2f roomMax = pCurrentRoom->GetRoomMaxBounds();
-	if (pos.x < roomMin.x || roomMin.x <= pos.x || pos.y < roomMin.y || roomMin.y < pos.y)
-	{
-		Notify(ObserverEvent::PlayerOutsideCurrentRoom);
-	}
-
-	// update the camera
-	sf::Vector2f newCamCenter = Math::ClampPoint(pos, pCurrentRoom->GetScrollMinBounds(), pCurrentRoom->GetScrollMaxBounds());
-	SceneManager::GetCurrentCamera()->SetCenter(newCamCenter);
-
-	// reset the player's y-velocity if they're grounded (so we don't continuously accelerate downwards)
-	if (isGrounded && !jumpKeyDown)
-	{
-		posDelta.y = 0.f;
-	}
-
-	// TEMPORARY CODE, to make sure jump force is only applied for the first frame the jump key is pressed
-	if (jumpKeyDown)
-	{
-		jumpKeyDown = false;
-	}
-
-	// set the sprite position for drawing
-	pSprite = animComp.GetCurrentFrame();
 	if (facing == 1)
 	{
 		pSprite->setOrigin(0.f, 0.f);
@@ -140,130 +42,30 @@ void Player::Update(float deltaTime)
 	}
 	pSprite->setScale(static_cast<float>(facing), 1.f);
 	pSprite->setPosition(pos);
-
-	// update the previous state for the next frame
-	pPrevState = pCurrentState;
-
-	// debug visualizations
-	if (DEBUG_PLAYER_POSITION)
-	{
-
-		// Visualize player coordinates in world space
-
-		sf::Color posColor = sf::Color::Yellow;
-		//std::string posStr = "(" + std::to_string(pos.x) + ", " + std::to_string(pos.y) + ")";
-		sf::Vector2f textPos = Math::ConvertScreenToWorldSpace(sf::Vector2i(0, 0));
-		sf::Vector2f lineStart(static_cast<float>(textPos.x), static_cast<float>(textPos.y));
-		lineStart.y += VIZ_DEFAULT_TEXT_SIZE;
-		Visualizer::VisualizeText(Convenience::ConvertToString(pos), textPos, posColor);
-		Visualizer::VisualizeSegment(lineStart, pos, posColor);
-
-		// Visualize posDelta
-
-		sf::Color posDeltaColor = sf::Color::Magenta;
-		sf::Vector2f halfTileDelta(TILE_SIZE_F / 2.f, TILE_SIZE_F / 2.f);
-		//std::string posDeltaStr = "(" + std::to_string(posDelta.x) + ", " + std::to_string(posDelta.y) + ")";
-		textPos.y += VIZ_DEFAULT_TEXT_SIZE;
-		sf::Vector2f tempPosDelta = posDelta / deltaTime;
-		Visualizer::VisualizeText(Convenience::ConvertToString(tempPosDelta), textPos, posDeltaColor);
-		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + tempPosDelta, posDeltaColor);
-	}
-	if (DEBUG_PLAYER_STATE)
-	{
-		std::string stateStr;
-		if (pCurrentState == &PlayerFSM::falling) stateStr = "fall";
-		else if (pCurrentState == &PlayerFSM::idle) stateStr = "idle";
-		else if (pCurrentState == &PlayerFSM::jumping) stateStr = "jump";
-		else if (pCurrentState == &PlayerFSM::walking) stateStr = "walk";
-		else assert(false); // just in case we add any states and forget to update the debug code, this'll crash to remind us
-		sf::Vector2f textPos = Math::ConvertScreenToWorldSpace(sf::Vector2i(0, VIZ_DEFAULT_TEXT_SIZE * 2));
-		Visualizer::VisualizeText(stateStr, textPos, sf::Color::Cyan);
-	}
-	if (DEBUG_LEVEL_SCROLL_BOUNDS)
-	{
-		pLevel->DebugLevelScrollBounds(pCurrentRoom);
-	}
-}
-
-void Player::Draw()
-{
-	assert(pSprite != nullptr);
 	Render(*pSprite);
 }
 
-void Player::Alarm0()
-{
-	assert(false);
-}
-
-void Player::KeyPressed(sf::Keyboard::Key key)
-{
-	switch (key)
-	{
-	case WALK_LEFT_KEY:
-		walkLeftKeyDown = true;
-		facing = -1;
-		break;
-	case WALK_RIGHT_KEY:
-		walkRightKeyDown = true;
-		facing = 1;
-		break;
-	case JUMP_KEY:
-		jumpKeyDown = true;
-		break;
-	}
-}
-
-void Player::KeyReleased(sf::Keyboard::Key key)
-{
-	switch (key)
-	{
-	case WALK_LEFT_KEY:
-		walkLeftKeyDown = false;
-		break;
-	case WALK_RIGHT_KEY:
-		walkRightKeyDown = false;
-		break;
-	case JUMP_KEY:
-		break;
-	}
-}
-
-void Player::LinkToMap(LevelMap* _pLevel)
-{
-	pLevel = _pLevel;
-	pLevel->LinkToPlayer(this);
-	RequestUpdateRegistration();
-	RequestDrawRegistration();
-	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
-	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
-	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
-}
-
-sf::Vector2f Player::GetPos() const
+sf::Vector2f Actor::GetPos() const
 {
 	return pos;
 }
 
-sf::Vector2f Player::GetPosDelta() const
+sf::Vector2f Actor::GetPosDelta() const
 {
 	return posDelta;
 }
 
-LevelMap* Player::GetLevel() const
+LevelMap* Actor::GetLevel() const
 {
 	return pLevel;
 }
 
-bool Player::IsGrounded() const
+bool Actor::IsGrounded() const
 {
 	return isGrounded;
 }
 
-void Player::RaycastRight(float deltaTime)
+void Actor::RaycastRight()
 {
 	const int RAY_COUNT = 2;
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
@@ -346,7 +148,7 @@ void Player::RaycastRight(float deltaTime)
 	pos.x = minX - TILE_SIZE_F;
 }
 
-void Player::RaycastLeft(float deltaTime)
+void Actor::RaycastLeft()
 {
 	const int RAY_COUNT = 2;
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
@@ -417,7 +219,7 @@ void Player::RaycastLeft(float deltaTime)
 	pos.x = maxX;
 }
 
-void Player::RaycastUp(float deltaTime)
+void Actor::RaycastUp()
 {
 	const int RAY_COUNT = 2;
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
@@ -490,7 +292,7 @@ void Player::RaycastUp(float deltaTime)
 	pos.y = maxY;
 }
 
-void Player::RaycastDown(float deltaTime)
+void Actor::RaycastDown()
 {
 	const int RAY_COUNT = 2;
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
@@ -569,13 +371,13 @@ void Player::RaycastDown(float deltaTime)
 	}
 
 	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(0.f, TILE_SIZE_F); // The position the player wants to move to
-	
+
 	// If the player's projected movement is in an invalid location, then move them the maximum distance allowed
 	if (mayMoveTo.y < minY)
 	{
 		minY = mayMoveTo.y;
 	}
-	
+
 	// Determine if we is grounded or not
 	minY -= TILE_SIZE_F;
 	isGrounded = pos.y == minY;
@@ -583,63 +385,13 @@ void Player::RaycastDown(float deltaTime)
 	pos.y = minY;
 }
 
-void Player::SetPos(sf::Vector2f newPos)
+void Actor::SetPos(sf::Vector2f newPos)
 {
 	pos = newPos;
 }
 
-void Player::ApplyGravity(float deltaTime)
+void Actor::ApplyGravity(float deltaTime)
 {
 	posDelta.y += GRAVITY_WEIGHT * deltaTime;
 	//posDelta.y += GRAVITY_WEIGHT;
-}
-
-void Player::ProcessInputs(float deltaTime)
-{
-	posDelta.x = 0.f;
-
-	if (walkLeftKeyDown)
-	{
-		posDelta.x -= speed * deltaTime;
-		//posDelta.x -= speed;
-	}
-	if (walkRightKeyDown)
-	{
-		posDelta.x += speed * deltaTime;
-		//posDelta.x += speed;
-	}
-	if (isGrounded && jumpKeyDown)
-	{
-		posDelta.y = JUMP_FORCE * deltaTime;
-		//posDelta.y = JUMP_FORCE;
-	}
-}
-
-void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
-{
-	pCurrentRoom = _pCurrentRoom;
-	if (pCurrentRoom->HasPlayerSpawn())
-	{
-		respawnPoint = *(pCurrentRoom->GetPlayerSpawnPoint());
-	}
-}
-
-void Player::SetAnimationIdle()
-{
-	animComp.SetAnimation("idle");
-}
-
-void Player::SetAnimationWalk()
-{
-	animComp.SetAnimation("walk");
-}
-
-void Player::SetAnimationJump()
-{
-	animComp.SetAnimation("jump");
-}
-
-void Player::SetAnimationFall()
-{
-	animComp.SetAnimation("fall");
 }

@@ -435,6 +435,9 @@
     <ClCompile Include="Engine Code\AnimationManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\Actor.cpp">
+      <Filter>Source Files\Game Code\Actors</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
