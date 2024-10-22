@@ -22,6 +22,8 @@ Enemy::Enemy()
 	RequestDrawRegistration();
 
 	SetCollidableGroup<Enemy>();
+	pSprite = animComp.GetCurrentFrame();
+	SetCollisionSprite(pSprite, VolumeType::AABB);
 	RequestCollisionRegistration();
 }
 
@@ -34,6 +36,7 @@ void Enemy::Update(float deltaTime)
 {
 	pSprite = animComp.GetCurrentFrame();
 	pSprite->setPosition(pos);
+	UpdateCollisionData(pSprite);
 }
 
 void Enemy::Draw()

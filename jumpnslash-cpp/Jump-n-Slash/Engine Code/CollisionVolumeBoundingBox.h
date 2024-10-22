@@ -26,7 +26,9 @@ public:
 	virtual bool IntersectVisit(const CollisionVolumeAABB& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeOBB& other) const = 0;
 
-private:
+	virtual void DebugView(const sf::Color& color) const = 0;
+
+protected:
 	sf::Transform tform;
 	sf::Vector2f min;
 	sf::Vector2f max;

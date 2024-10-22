@@ -140,6 +140,7 @@ void Player::Update(float deltaTime)
 	}
 	pSprite->setScale(static_cast<float>(facing), 1.f);
 	pSprite->setPosition(pos);
+	UpdateCollisionData(pSprite);
 
 	// update the previous state for the next frame
 	pPrevState = pCurrentState;
@@ -248,6 +249,8 @@ void Player::LinkToMap(LevelMap* _pLevel)
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
 	SetCollidableGroup<Player>();
+	pSprite = animComp.GetCurrentFrame();
+	SetCollisionSprite(pSprite, VolumeType::AABB);
 	RequestCollisionRegistration();
 }
 

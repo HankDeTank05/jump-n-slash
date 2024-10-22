@@ -1,6 +1,8 @@
 #ifndef COLLISION_OBJECT_H
 #define COLLISION_OBJECT_H
 
+#include <SFML/Graphics/Sprite.hpp>
+
 #include "CollisionManager.h"
 #include "CollisionObjectGroup.h"
 #include "RegistrationState.h"
@@ -10,6 +12,7 @@
 // forward declarations
 class CollisionRegistrationCommand;
 class CollisionDeregistrationCommand;
+class CollisionVolume;
 
 class CollisionObject
 {
@@ -19,7 +22,15 @@ public:
 	CollisionObject& operator=(const CollisionObject& co) = delete;
 	virtual ~CollisionObject();
 
+	const CollisionVolume& GetCollisionVolume(); // TODO: docs for CollisionObject::GetCollisionVolume
+
 protected:
+	enum class VolumeType
+	{
+		BSphere,
+		AABB,
+		OBB
+	};
 
 	template <typename C>
 	void SetCollidableGroup()
@@ -29,6 +40,9 @@ protected:
 	
 	void RequestCollisionRegistration(); // TODO: docs for CollisionObject::RequestCollisionRegistration
 	void RequestCollisionDeregistration(); // TODO: docs for CollisionObject::RequestCollisionDeregistration
+
+	void SetCollisionSprite(sf::Sprite* pSprite, VolumeType colVolType); // TODO: docs for CollisionObject::SetCollisionSprite
+	void UpdateCollisionData(sf::Sprite* pSprite); // TODO: docs for CollisionObject::UpdateCollisionData
 
 private:
 	friend class CollisionObjectAttorney;
@@ -41,6 +55,9 @@ private: // member variables
 	CollisionObjectGroup::CollisionObjectListRef deleteRef;
 	CollisionRegistrationCommand* pRegCmd;
 	CollisionDeregistrationCommand* pDeregCmd;
+	CollisionVolume* pColVol;
+	VolumeType* pVolType;
+	sf::Sprite* pColSpr;
 
 };
 

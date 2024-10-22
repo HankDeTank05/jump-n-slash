@@ -3,13 +3,17 @@
 #include "CollisionRegistrationCommand.h"
 #include "CollisionDeregistrationCommand.h"
 #include "CollisionObjectGroup.h"
+#include "CollisionVolumeAABB.h"
 
 CollisionObject::CollisionObject()
 	: typeID(CollisionManager::JNSID_UNDEFINED),
 	regState(RegistrationState::CURRENTLY_DEREGISTERED),
 	deleteRef(),
 	pRegCmd(new CollisionRegistrationCommand(this)),
-	pDeregCmd(new CollisionDeregistrationCommand(this))
+	pDeregCmd(new CollisionDeregistrationCommand(this)),
+	pColVol(nullptr),
+	pVolType(nullptr),
+	pColSpr(nullptr)
 {
 	// do nothing
 }
@@ -18,6 +22,12 @@ CollisionObject::~CollisionObject()
 {
 	delete pDeregCmd;
 	delete pRegCmd;
+}
+
+const CollisionVolume& CollisionObject::GetCollisionVolume()
+{
+	assert(pColVol != nullptr); // did you ever call SetCollisionSprite()?
+	return *pColVol;
 }
 
 void CollisionObject::RequestCollisionRegistration()
@@ -36,6 +46,33 @@ void CollisionObject::RequestCollisionDeregistration()
 	SceneAttorney::Commands::AddCommand(SceneManager::GetCurrentScene(), pDeregCmd);
 
 	regState = RegistrationState::PENDING_DEREGISTRATION;
+}
+
+void CollisionObject::SetCollisionSprite(sf::Sprite* pSprite, VolumeType colVolType)
+{
+	pColSpr = pSprite;
+	pVolType = &colVolType;
+	switch (colVolType)
+	{
+	case VolumeType::BSphere:
+		assert(false);
+		break;
+	case VolumeType::AABB:
+		pColVol = new CollisionVolumeAABB(pSprite->getGlobalBounds().getPosition(),
+			pSprite->getGlobalBounds().getPosition() + pSprite->getGlobalBounds().getSize());
+		break;
+	case VolumeType::OBB:
+		assert(false);
+		break;
+	default:
+		assert(false);
+	}
+}
+
+void CollisionObject::UpdateCollisionData(sf::Sprite* pSprite)
+{
+	pColSpr = pSprite; // TODO: doing this is necessary because of how animation works, which might invalidate the existence of pColSpr as a member variable. Consider removing it.
+	pColVol->ComputeData(pColSpr, pColSpr->getTransform());
 }
 
 void CollisionObject::Register()

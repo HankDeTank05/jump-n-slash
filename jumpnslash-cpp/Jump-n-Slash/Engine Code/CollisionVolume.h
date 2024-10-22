@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics/Transform.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 // forward declarations
 class CollisionVolumeBSphere;
@@ -22,6 +23,8 @@ public:
 	virtual bool IntersectVisit(const CollisionVolumeBSphere& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeAABB& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeOBB& other) const = 0;
+
+	virtual void DebugView(const sf::Color& color) const = 0;
 };
 
 #endif
