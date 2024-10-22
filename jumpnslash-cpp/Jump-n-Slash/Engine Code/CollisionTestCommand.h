@@ -6,10 +6,10 @@
 class CollisionTestCommand : public Command
 {
 public:
-	CollisionTestCommand();
+	CollisionTestCommand() = default;
 	CollisionTestCommand(const CollisionTestCommand& ctc) = delete;
 	CollisionTestCommand& operator=(const CollisionTestCommand& ctc) = delete;
-	virtual ~CollisionTestCommand();
+	virtual ~CollisionTestCommand() = default;
 
 	virtual void Execute() = 0;
 };

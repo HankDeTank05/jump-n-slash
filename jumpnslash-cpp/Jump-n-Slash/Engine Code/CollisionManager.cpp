@@ -2,8 +2,10 @@
 
 #include "CollisionObjectGroup.h"
 
+CollisionManager::JNSTypeID CollisionManager::TypeIDNextNumber = 0;
+
 CollisionManager::CollisionManager()
-	: collObjGroupCollection(),
+	: colObjGroupCollection(),
 	colTestCmdList()
 {
 	// do nothing
@@ -11,10 +13,10 @@ CollisionManager::CollisionManager()
 
 CollisionManager::~CollisionManager()
 {
-	while (collObjGroupCollection.empty() == false)
+	while (colObjGroupCollection.empty() == false)
 	{
-		delete collObjGroupCollection.back();
-		collObjGroupCollection.pop_back();
+		delete colObjGroupCollection.back();
+		colObjGroupCollection.pop_back();
 	}
 
 	while (colTestCmdList.empty() == false)
@@ -26,28 +28,34 @@ CollisionManager::~CollisionManager()
 
 void CollisionManager::ComputeData()
 {
-	assert(false);
+	for (CollisionObjectGroupCollection::iterator it = colObjGroupCollection.begin(); it != colObjGroupCollection.end(); it++)
+	{
+		(*it)->ComputeData();
+	}
 }
 
 void CollisionManager::ProcessCollisions()
 {
-	assert(false);
+	for (CollisionTestCommandList::iterator it = colTestCmdList.begin(); it != colTestCmdList.end(); it++)
+	{
+		(*it)->Execute();
+	}
 }
 
 CollisionObjectGroup* CollisionManager::GetObjectGroup(JNSTypeID id)
 {
 	// did you forget to call SetCollidableGroup<type>()?
 	// did you properly deregister collision when switching scenes?
-	assert(id < static_cast<int>(collObjGroupCollection.size()));
+	assert(id < static_cast<int>(colObjGroupCollection.size()));
 	assert(id >= 0);
 
-	return collObjGroupCollection[id];
+	return colObjGroupCollection[id];
 }
 
 void CollisionManager::SetGroupForTypeID(JNSTypeID id)
 {
-	while (id >= static_cast<int>(collObjGroupCollection.size()))
+	while (id >= static_cast<int>(colObjGroupCollection.size()))
 	{
-		collObjGroupCollection.push_back(new CollisionObjectGroup());
+		colObjGroupCollection.push_back(new CollisionObjectGroup());
 	}
 }

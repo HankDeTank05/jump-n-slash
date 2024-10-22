@@ -41,4 +41,5 @@ sf::FloatRect* CollisionObjectGroup::GetGroupAABB()
 void CollisionObjectGroup::ComputeData()
 {
 	// TODO: recompute group AABB here
+	//assert(false);
 }

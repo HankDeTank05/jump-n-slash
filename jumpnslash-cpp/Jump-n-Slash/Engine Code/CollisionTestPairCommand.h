@@ -14,7 +14,7 @@ public:
 	CollisionTestPairCommand(CollisionObjectGroup* pGroup1, CollisionObjectGroup* pGroup2, CollisionDispatchBase* pDispatch);
 	CollisionTestPairCommand(const CollisionTestPairCommand& ctpc) = delete;
 	CollisionTestPairCommand& operator=(const CollisionTestPairCommand& ctpc) = delete;
-	virtual ~CollisionTestPairCommand();
+	virtual ~CollisionTestPairCommand() = default;
 
 	virtual void Execute() override;
 

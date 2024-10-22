@@ -10,6 +10,7 @@
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/InputObject.h"
 #include "../Engine Code/AlarmObject.h"
+#include "../Engine Code/CollisionObject.h"
 #include "../Engine Code/Subject.h"
 #include "../Engine Code/AnimationComponent.h"
 
@@ -17,8 +18,14 @@
 class PlayerMoveState;
 class LevelMap;
 class RoomData;
+class Enemy;
 
-class Player : public UpdateObject, public DrawObject, public InputObject, public AlarmObject, public Subject
+class Player : public UpdateObject,
+	public DrawObject,
+	public InputObject,
+	public AlarmObject,
+	public CollisionObject,
+	public Subject
 {
 public:
 	Player();
@@ -26,14 +33,23 @@ public:
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
 
+	// update stuff
 	virtual void Update(float deltaTime) override;
+	
+	// draw stuff
 	virtual void Draw() override;
 
+	// alarm stuff
 	virtual void Alarm0() override;
 
+	// input stuff
 	virtual void KeyPressed(sf::Keyboard::Key key) override;
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
 
+	// collision stuff
+	void Collision(Enemy* pEnemy);
+
+	// other stuff
 	void LinkToMap(LevelMap* pLevel);
 
 private: // player accessors. for selective access only (thru attorney)

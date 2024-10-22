@@ -46,8 +46,8 @@ public:
 	template <typename C1, typename C2>
 	void SetCollisionPair()
 	{
-		CollisionObjectGroup* pGroup1 = collObjGroupCollection[GetTypeID<C1>()];
-		CollisionObjectGroup* pGroup2 = collObjGroupCollection[GetTypeID<C2>()];
+		CollisionObjectGroup* pGroup1 = colObjGroupCollection[GetTypeID<C1>()];
+		CollisionObjectGroup* pGroup2 = colObjGroupCollection[GetTypeID<C2>()];
 
 		CollisionDispatch<C1, C2>* pDispatch = new CollisionDispatch<C1, C2>();
 
@@ -57,7 +57,7 @@ public:
 	template <typename C>
 	void SetCollisionSelf()
 	{
-		CollisionObjectGroup* pGroup = collObjGroupCollection[GetTypeID<C>()];
+		CollisionObjectGroup* pGroup = colObjGroupCollection[GetTypeID<C>()];
 
 		CollisionDispatch<C, C>* pDispatch = new CollisionDispatch<C, C>();
 
@@ -67,7 +67,7 @@ public:
 	//template <typename C>
 	//void SetCollisionMap(LevelMap* pLevelMap)
 	//{
-	//	CollisionObjectGroup* pGroup = collObjGroupCollection[GetTypeID<C>()];
+	//	CollisionObjectGroup* pGroup = colObjGroupCollection[GetTypeID<C>()];
 	//	colTestCmdList.push_back(new CollisionTestMapCommand(pLevelMap, pGroup));
 	//}
 	void ComputeData();
@@ -82,7 +82,7 @@ public:
 	static const JNSTypeID JNSID_UNDEFINED = -1;
 
 private: // member varables
-	CollisionObjectGroupCollection collObjGroupCollection;
+	CollisionObjectGroupCollection colObjGroupCollection;
 	CollisionTestCommandList colTestCmdList;
 };
 

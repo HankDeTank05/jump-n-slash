@@ -32,9 +32,13 @@
     <ClCompile Include="Engine Code\Camera.cpp" />
     <ClCompile Include="Engine Code\CameraAttorney.cpp" />
     <ClCompile Include="Engine Code\CameraManager.cpp" />
+    <ClCompile Include="Engine Code\CollisionDeregistrationCommand.cpp" />
     <ClCompile Include="Engine Code\CollisionManager.cpp" />
     <ClCompile Include="Engine Code\CollisionObject.cpp" />
+    <ClCompile Include="Engine Code\CollisionObjectAttorney.cpp" />
     <ClCompile Include="Engine Code\CollisionObjectGroup.cpp" />
+    <ClCompile Include="Engine Code\CollisionRegistrationCommand.cpp" />
+    <ClCompile Include="Engine Code\CollisionTestPairCommand.cpp" />
     <ClCompile Include="Engine Code\ConvenienceFunctions.cpp" />
     <ClCompile Include="Engine Code\DrawObject.cpp" />
     <ClCompile Include="Engine Code\DrawObjectAttorney.cpp" />
@@ -137,6 +141,7 @@
     <ClInclude Include="Engine Code\CollisionDeregistrationCommand.h" />
     <ClInclude Include="Engine Code\CollisionDispatch.h" />
     <ClInclude Include="Engine Code\CollisionDispatchBase.h" />
+    <ClInclude Include="Engine Code\CollisionObjectAttorney.h" />
     <ClInclude Include="Engine Code\CollisionObjectGroup.h" />
     <ClInclude Include="Engine Code\CollisionManager.h" />
     <ClInclude Include="Engine Code\CollisionObject.h" />

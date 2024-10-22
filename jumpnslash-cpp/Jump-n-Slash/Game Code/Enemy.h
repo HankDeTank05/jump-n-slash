@@ -8,7 +8,12 @@
 #include "../Engine Code/CollisionObject.h"
 #include "../Engine Code/AnimationComponent.h"
 
-class Enemy : public UpdateObject, public DrawObject, public CollisionObject
+// forward declarations
+class Player;
+
+class Enemy : public UpdateObject,
+	public DrawObject,
+	public CollisionObject
 {
 public:
 	Enemy();
@@ -16,8 +21,14 @@ public:
 	Enemy& operator=(const Enemy& e) = delete;
 	virtual ~Enemy();
 
+	// update stuff
 	virtual void Update(float deltaTime) override;
+
+	// draw stuff
 	virtual void Draw() override;
+
+	// collision stuff
+	void Collision(Player* pPlayer);
 
 private:
 	sf::Vector2f pos;

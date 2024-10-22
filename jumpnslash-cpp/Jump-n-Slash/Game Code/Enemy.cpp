@@ -6,7 +6,7 @@
 #include "../Engine Code/AnimationManager.h"
 
 Enemy::Enemy()
-	: pos(30 * TILE_SIZE_F, 19* TILE_SIZE_F),
+	: pos(10 * TILE_SIZE_F, 18 * TILE_SIZE_F),
 	posDelta(0.f, 0.f),
 	pSprite(nullptr),
 	animComp()
@@ -17,6 +17,12 @@ Enemy::Enemy()
 
 	animComp.DefineAnimationSet(pAnimSet);
 	animComp.SetAnimation("idle");
+
+	RequestUpdateRegistration();
+	RequestDrawRegistration();
+
+	SetCollidableGroup<Enemy>();
+	RequestCollisionRegistration();
 }
 
 Enemy::~Enemy()
@@ -34,4 +40,10 @@ void Enemy::Draw()
 {
 	assert(pSprite != nullptr);
 	Render(*pSprite);
+}
+
+void Enemy::Collision(Player* pPlayer)
+{
+	// TODO: make a debug flag for this
+	std::cout << "Enemy::Collision(Player* pPlayer) function call" << std::endl;
 }

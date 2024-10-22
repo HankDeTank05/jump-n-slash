@@ -13,7 +13,7 @@ public:
 	CollisionRegistrationCommand(CollisionObject* pCollidable);
 	CollisionRegistrationCommand(const CollisionRegistrationCommand& crc) = delete;
 	CollisionRegistrationCommand& operator=(const CollisionRegistrationCommand& crc) = delete;
-	virtual ~CollisionRegistrationCommand();
+	virtual ~CollisionRegistrationCommand() = default;
 
 	virtual void Execute() override;
 

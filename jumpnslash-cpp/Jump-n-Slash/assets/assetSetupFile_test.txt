@@ -1,5 +1,11 @@
 grid "test" "test.txt"
 grid "test2" "test2.txt"
+texture "enemy spritesheet" "enemy\sheet_test.png" false
+sprite "enemy idle 1" "enemy spritesheet" 0 0 32 32
+sprite "enemy idle 2" "enemy spritesheet" 32 0 32 32
+sprite "enemy idle 3" "enemy spritesheet" 64 0 32 32
+sprite "enemy idle 4" "enemy spritesheet" 96 0 32 32
+animation "enemy idle" ["enemy idle 1" "enemy idle 2" "enemy idle 3" "enemy idle 4"] true
 texture "player spritesheet" "player\sheet_test.png" false
 sprite "player attack 1" "player spritesheet" 0 0 32 32
 sprite "player attack 2" "player spritesheet" 32 0 32 32

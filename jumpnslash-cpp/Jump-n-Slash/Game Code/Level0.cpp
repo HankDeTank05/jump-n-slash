@@ -41,6 +41,8 @@ void Level0::Init()
 	pPlayer->LinkToMap(pMap);
 	pPlayer->AddObserver(pMap);
 
+	SetCollisionPair<Player, Enemy>();
+
 	float viewWidth = ROOM_TILE_WIDTH * TILE_SIZE_F;
 	float viewHeight = ROOM_TILE_HEIGHT * TILE_SIZE_F;
 	Camera* pCamera = SceneManager::GetCurrentScene()->GetCurrentCamera();

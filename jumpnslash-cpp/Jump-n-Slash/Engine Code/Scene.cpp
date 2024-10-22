@@ -44,10 +44,15 @@ void Scene::Update(float deltaTime)
 {
 	pRegBroker->ExecuteCommands();
 
+	pAlarmMgr->ProcessAlarms(); // TODO: make sure this actually works
+
 	pInputMgr->ProcessKeyboardEvents();
 	pInputMgr->ProcessMouseEvents();
 
 	pUpdateMgr->Update(deltaTime);
+
+	pColMgr->ComputeData();
+	pColMgr->ProcessCollisions();
 }
 
 void Scene::Draw()

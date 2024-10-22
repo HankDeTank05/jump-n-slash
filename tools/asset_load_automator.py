@@ -11,6 +11,8 @@ texture_actor_naming_convention = "[a-z]+(_){1}[0-9]+([.]png){1}"
 texture_tile_naming_convention = ""
 leveldata_naming_convention = "[a-z0-9]+([.]txt){1}"
 
+ACTOR_FOLDERS = ["player", "sword", "enemy"]
+
 test_mode_enabled = True
 print_texture_actor_output = False
 print_texture_tile_output = True
@@ -79,7 +81,7 @@ def process_textures(path):
     for folder in subfolders:
         if folder == "leveltiles": # process level tiles differently than actors
             pass
-        elif folder != "leveltiles": # process actors using animations
+        elif folder in ACTOR_FOLDERS: # process actors using animations
             width = 0 # the overall width of the spritesheet
             height = 0 # the overall height of the spritesheet
             sprites = {} # keep track of which file goes where in the sheet

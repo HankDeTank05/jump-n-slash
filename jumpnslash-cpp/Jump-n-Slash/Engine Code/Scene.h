@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "AlarmManager.h"
 #include "AlarmID.h"
+#include "CollisionManager.h"
 
 // forward declarations
 class Command;
@@ -66,6 +67,19 @@ private:
 	// registration broker
 
 	void AddCommand(Command* pCmd);
+
+protected: // collision functions
+	template <typename C1, typename C2>
+	void SetCollisionPair() // TODO: docs for Scene::SetCollisionPair
+	{
+		pColMgr->SetCollisionPair<C1, C2>();
+	}
+
+	template <typename C>
+	void SetCollisionSelf() // TODO: docs for Scene::SetCollisionSelf
+	{
+		pColMgr->SetCollisionSelf<C>();
+	}
 
 private:
 	RegistrationBroker* pRegBroker; // manages registration with gameobject managers

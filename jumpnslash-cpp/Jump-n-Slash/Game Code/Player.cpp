@@ -229,6 +229,12 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	}
 }
 
+void Player::Collision(Enemy* pEnemy)
+{
+	// TODO: make a debug flag for this
+	std::cout << "Player::Collision(Enemy* pEnemy) function call" << std::endl;
+}
+
 void Player::LinkToMap(LevelMap* _pLevel)
 {
 	pLevel = _pLevel;
@@ -241,6 +247,8 @@ void Player::LinkToMap(LevelMap* _pLevel)
 	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
+	SetCollidableGroup<Player>();
+	RequestCollisionRegistration();
 }
 
 sf::Vector2f Player::GetPos() const
