@@ -12,8 +12,13 @@ bool Math::Intersect(const CollisionVolume& a, const CollisionVolume& b)
 
 bool Math::Intersect(const CollisionVolumeBSphere& bs1, const CollisionVolumeBSphere& bs2)
 {
-	assert(false);
-	return false;
+	bool intersection = false;
+
+	float radiiDist = DistanceSqr(bs1.GetCenter(), bs2.GetCenter());
+
+	intersection = radiiDist <= (bs1.GetRadius() + bs2.GetRadius()) * (bs1.GetRadius() + bs2.GetRadius());
+
+	return intersection;
 }
 
 bool Math::Intersect(const CollisionVolumeBSphere& bs, const CollisionVolumeAABB& aabb)
@@ -125,4 +130,28 @@ float Math::DistanceSqr(const sf::Vector2f& fromA, const sf::Vector2f& toB)
 {
 	sf::Vector2f delta = toB - fromA;
 	return delta.x * delta.x + delta.y * delta.y;
+}
+
+float Math::Max(float val1, float val2)
+{
+	if (val1 > val2)
+	{
+		return val1;
+	}
+	else
+	{
+		return val1;
+	}
+}
+
+float Math::Min(float val1, float val2)
+{
+	if (val1 < val2)
+	{
+		return val1;
+	}
+	else
+	{
+		return val2;
+	}
 }

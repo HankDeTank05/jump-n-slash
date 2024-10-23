@@ -23,7 +23,7 @@ Enemy::Enemy()
 
 	SetCollidableGroup<Enemy>();
 	pSprite = animComp.GetCurrentFrame();
-	SetCollisionSprite(pSprite, VolumeType::AABB);
+	SetCollisionSprite(pSprite, VolumeType::BSphere);
 	RequestCollisionRegistration();
 }
 

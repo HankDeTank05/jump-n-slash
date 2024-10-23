@@ -30,18 +30,10 @@ float CollisionVolumeBSphere::GetRadiusSqr() const
 
 void CollisionVolumeBSphere::ComputeData(sf::Sprite* pSprite, const sf::Transform& tform)
 {
-	sf::FloatRect aabb = pSprite->getGlobalBounds();
-	float largestDimension;
-	if (aabb.getSize().x > aabb.getSize().y)
-	{
-		largestDimension = aabb.getSize().x;
-	}
-	else
-	{
-		largestDimension = aabb.getSize().y;
-	}
-	center = aabb.getPosition() + aabb.getSize() * 0.5f;
-	radius = largestDimension * 0.5f;
+	sf::Vector2f aabbPos = pSprite->getGlobalBounds().getPosition();
+	sf::Vector2f aabbSize = pSprite->getGlobalBounds().getSize();
+	center = aabbPos + aabbSize * 0.5f;
+	radius = Math::Max(aabbSize.x, aabbSize.y) * 0.5f;
 }
 
 bool CollisionVolumeBSphere::IntersectAccept(const CollisionVolume& other) const

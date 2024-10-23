@@ -46,6 +46,8 @@ public:
 	static bool IntervalOverlap(float min0, float max0, float min1, float max1); // TODO: docs for Math::IntervalOverlap
 	static bool PointInSphere(const sf::Vector2f& point, const sf::Vector2f& sphereCenter, float sphereRadiusSqr); // TODO: docs for Math::PointInSphere
 	static float DistanceSqr(const sf::Vector2f& fromA, const sf::Vector2f& toB); // TODO: docs for Math::DistanceSqr
+	static float Max(float val1, float val2); // TODO: docs for Math::Max
+	static float Min(float val1, float val2); // TODO: docs for Math::Min
 };
 
 #endif

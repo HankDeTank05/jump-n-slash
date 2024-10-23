@@ -5,6 +5,7 @@
 #include "CollisionObjectGroup.h"
 #include "CollisionVolumeAABB.h"
 #include "CollisionVolumeBSphere.h"
+#include "Math.h"
 
 CollisionObject::CollisionObject()
 	: typeID(CollisionManager::JNSID_UNDEFINED),
@@ -56,25 +57,10 @@ void CollisionObject::SetCollisionSprite(sf::Sprite* pSprite, VolumeType colVolT
 	pVolType = &colVolType;
 	if (colVolType == VolumeType::BSphere)
 	{
-		// 1. get sprite obb (pSprite->getLocalBounds())
-		sf::FloatRect obb = pSprite->getLocalBounds();
-
-		// 2. get the center point of the obb
-		sf::Vector2f obbCenter = obb.getPosition() + (obb.getSize() * 0.5f);
-
-		// 3. get the vector from the center of the obb to a corner
-		sf::Vector2f centerToCorner = obb.getPosition() - obbCenter;
-
-		// 4. transform that vector into world space (tform.transformPoint(vect))
-		sf::Vector2f centerToCornerWS = pSprite->getTransform() * centerToCorner;
-
-		// 5. get the magnitude of that vector	
-		// 6. set it as the bsphere radius
-		float radius = sqrtf(centerToCornerWS.x * centerToCornerWS.x + centerToCornerWS.y * centerToCornerWS.y);
-
-		// 7. transform the center point into world space
-		// 8. set it as the bsphere center
-		sf::Vector2f center = pSprite->getTransform() * obbCenter;
+		sf::Vector2f aabbPos = pSprite->getGlobalBounds().getPosition();
+		sf::Vector2f aabbSize = pSprite->getGlobalBounds().getSize();
+		sf::Vector2f center = aabbPos + aabbSize * 0.5f;
+		float radius = Math::Max(aabbSize.x, aabbSize.y) * 0.5f;
 		pColVol = new CollisionVolumeBSphere(center, radius);
 	}
 	else if (colVolType == VolumeType::AABB)
