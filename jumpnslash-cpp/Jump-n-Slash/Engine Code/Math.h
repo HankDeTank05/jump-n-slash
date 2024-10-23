@@ -44,6 +44,8 @@ public:
 	static sf::Vector2i ConvertWorldToScreenSpace(sf::Vector2f worldSpaceCoords); // TODO: docs for Math::ConvertWorldToScreenSpace
 	static sf::Vector2f ConvertScreenToWorldSpace(sf::Vector2i screenSpaceCoords); // TODO: docs for Math::ConvertScreenToWorldSpace
 	static bool IntervalOverlap(float min0, float max0, float min1, float max1); // TODO: docs for Math::IntervalOverlap
+	static bool PointInSphere(const sf::Vector2f& point, const sf::Vector2f& sphereCenter, float sphereRadiusSqr); // TODO: docs for Math::PointInSphere
+	static float DistanceSqr(const sf::Vector2f& fromA, const sf::Vector2f& toB); // TODO: docs for Math::DistanceSqr
 };
 
 #endif

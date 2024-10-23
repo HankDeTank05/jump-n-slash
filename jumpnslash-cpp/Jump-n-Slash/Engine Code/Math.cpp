@@ -3,6 +3,7 @@
 #include "EngineAttorney.h"
 #include "CollisionVolume.h"
 #include "CollisionVolumeAABB.h"
+#include "CollisionVolumeBSphere.h"
 
 bool Math::Intersect(const CollisionVolume& a, const CollisionVolume& b)
 {
@@ -29,8 +30,13 @@ bool Math::Intersect(const CollisionVolumeBSphere& bs, const CollisionVolumeOBB&
 
 bool Math::Intersect(const CollisionVolumeAABB& aabb, const CollisionVolumeBSphere& bs)
 {
-	assert(false);
-	return false;
+	bool intersection = false;
+
+	sf::Vector2f clampedPoint = ClampPoint(bs.GetCenter(), aabb.GetMin(), aabb.GetMax());
+
+	intersection = PointInSphere(clampedPoint, bs.GetCenter(), bs.GetRadiusSqr());
+
+	return intersection;
 }
 
 bool Math::Intersect(const CollisionVolumeAABB& aabb1, const CollisionVolumeAABB& aabb2)
@@ -108,4 +114,15 @@ bool Math::IntervalOverlap(float min0, float max0, float min1, float max1)
 		(min1 <= max0 && max0 <= max1) || // check if max0 is inside range 1
 		(min0 <= min1 && min1 <= max0) || // check if min1 is inside range 0
 		(min0 <= max1 && max1 <= max0); // check if max1 is inside range 0
+}
+
+bool Math::PointInSphere(const sf::Vector2f& point, const sf::Vector2f& sphereCenter, float sphereRadiusSqr)
+{
+	return DistanceSqr(sphereCenter, point) <= sphereRadiusSqr;
+}
+
+float Math::DistanceSqr(const sf::Vector2f& fromA, const sf::Vector2f& toB)
+{
+	sf::Vector2f delta = toB - fromA;
+	return delta.x * delta.x + delta.y * delta.y;
 }

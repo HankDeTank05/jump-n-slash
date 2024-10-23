@@ -250,7 +250,7 @@ void Player::LinkToMap(LevelMap* _pLevel)
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
 	SetCollidableGroup<Player>();
 	pSprite = animComp.GetCurrentFrame();
-	SetCollisionSprite(pSprite, VolumeType::AABB);
+	SetCollisionSprite(pSprite, VolumeType::BSphere);
 	RequestCollisionRegistration();
 }
 

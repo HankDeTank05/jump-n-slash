@@ -66,7 +66,7 @@ public: // public api functions
 	* }
 	* \endcode
 	* 
-	* \see	Visualizer::VisualizePoint(float x, float y, sf::Color color)
+	* \see	Visualizer::VisualizePoint(float x, float y, const sf::Color& color)
 	* 
 	* \see	Visualizer::VisualizeCircle
 	* \see	Visualizer::VisualizeRect
@@ -118,7 +118,7 @@ public: // public api functions
 	* }
 	* \endcode
 	*
-	* \see	Visualizer::VisualizePoint(sf::Vector2f pos, sf::Color color)
+	* \see	Visualizer::VisualizePoint(const sf::Vector2f& pos, const sf::Color& color)
 	*
 	* \see	Visualizer::VisualizeCircle
 	* \see	Visualizer::VisualizeRect
@@ -174,28 +174,28 @@ private: // engine-only api functions
 	friend class VisualizerAttorney;
 	static void ProcessCommands();
 
-	static void ShowPoint(sf::Vector2f pos, sf::Color color); // TODO: convert parameters to const ref
-	static void ShowCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter); // TODO: convert parameters to const ref
-	static void ShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color); // TODO: convert parameters to const ref
-	static void ShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color); // TODO: convert parameters to const ref
-	static void ShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix); // TODO: convert parameters to const ref
+	static void ShowPoint(const sf::Vector2f& pos, const sf::Color& color);
+	static void ShowCircle(const sf::Vector2f& pos, float radius, const sf::Color& color, bool showCenter);
+	static void ShowRect(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color);
+	static void ShowSegment(const sf::Vector2f& pos0, const sf::Vector2f& pos1, const sf::Color& color);
+	static void ShowText(const sf::String& str, const sf::Vector2f& pos, const sf::Color& color, int sizeInPix);
 
 	static void Terminate();
 
 private: // private api backend functions
-	void privVisualizePoint(sf::Vector2f pos, sf::Color color); // TODO: convert parameters to const ref
-	void privVisualizeCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter); // TODO: convert parameters to const ref
-	void privVisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color); // TODO: convert parameters to const ref
-	void privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color, bool visualizeEndpoints); // TODO: convert parameters to const ref
-	void privVisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix); // TODO: convert parameters to const ref
+	void privVisualizePoint(const sf::Vector2f& pos, const sf::Color& color);
+	void privVisualizeCircle(const sf::Vector2f& pos, float radius, const sf::Color& color, bool showCenter);
+	void privVisualizeRect(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color);
+	void privVisualizeSegment(const sf::Vector2f& pos0, const sf::Vector2f& pos1, const sf::Color& color, bool visualizeEndpoints);
+	void privVisualizeText(const sf::String& str, const sf::Vector2f& pos, const sf::Color& color, int sizeInPix);
 
 	void privProcessCommands();
 
-	void privShowPoint(sf::Vector2f pos, sf::Color color); // TODO: convert parameters to const ref
-	void privShowCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter); // TODO: convert parameters to const ref
-	void privShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color); // TODO: convert parameters to const ref
-	void privShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color); // TODO: convert parameters to const ref
-	void privShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix); // TODO: convert parameters to const ref
+	void privShowPoint(const sf::Vector2f& pos, const sf::Color& color);
+	void privShowCircle(const sf::Vector2f& pos, float radius, const sf::Color& color, bool showCenter);
+	void privShowRect(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color);
+	void privShowSegment(const sf::Vector2f& pos0, const sf::Vector2f& pos1, const sf::Color& color);
+	void privShowText(const sf::String& str, const sf::Vector2f& pos, const sf::Color& color, int sizeInPix);
 
 private: // member variables
 	VizCmdList cmdList;

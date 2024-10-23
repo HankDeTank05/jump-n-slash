@@ -4,6 +4,7 @@
 // collision debug flags
 
 const bool DEBUG_COLLISION = true;
+const bool DEBUG_COLLISION_SHOW_NUMBERS = false;
 
 // player debug flags
 
