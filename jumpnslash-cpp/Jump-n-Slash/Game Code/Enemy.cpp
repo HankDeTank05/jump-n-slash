@@ -1,16 +1,16 @@
 #include "Enemy.h"
 
-#include "Constants.h"
-
 #include "../Engine Code/AnimationSet.h"
 #include "../Engine Code/AnimationManager.h"
+
+#include "Constants.h"
+#include "DebugFlags.h"
 
 Enemy::Enemy()
 	: pos(10 * TILE_SIZE_F, 18 * TILE_SIZE_F),
 	posDelta(0.f, 0.f),
 	pSprite(nullptr),
-	animComp(),
-	rotation(45.f)
+	animComp()
 {
 	AnimationSet* pAnimSet = new AnimationSet();
 
@@ -37,7 +37,6 @@ void Enemy::Update(float deltaTime)
 {
 	pSprite = animComp.GetCurrentFrame();
 	pSprite->setPosition(pos);
-	pSprite->setRotation(rotation);
 	UpdateCollisionData(pSprite);
 }
 
@@ -49,8 +48,7 @@ void Enemy::Draw()
 
 void Enemy::OnCollisionEnter(CollisionObject* pOther)
 {
-	// TODO: make a debug flag for this
-	std::cout << "Enemy has entered collision" << std::endl;
+	if (DEBUG_COLLISION) std::cout << "Enemy has entered collision" << std::endl;
 }
 
 void Enemy::OnCollisionDuring(CollisionObject* pOther)
@@ -60,6 +58,5 @@ void Enemy::OnCollisionDuring(CollisionObject* pOther)
 
 void Enemy::OnCollisionExit(CollisionObject* pOther)
 {
-	// TODO: make a debug flag for this
-	std::cout << "Enemy has exited collision" << std::endl;
+	if (DEBUG_COLLISION) std::cout << "Enemy has exited collision" << std::endl;
 }

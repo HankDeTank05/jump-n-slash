@@ -37,7 +37,6 @@ private:
 	sf::Vector2f posDelta;
 	sf::Sprite* pSprite;
 	AnimationComponent animComp;
-	float rotation;
 };
 
 #endif
