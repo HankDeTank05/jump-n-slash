@@ -36,39 +36,39 @@ void PlayerStateWalking::Enter(Player* pPlayer) const
 {
 	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerSateWalking" << std::endl;
 
-	PlayerAttorney::State::SetAnimationWalk(pPlayer);
+	PlayerAttorney::StateAccess::SetAnimationWalk(pPlayer);
 }
 
 void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 {
-	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
-	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
+	PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
 
-	if (PlayerAttorney::State::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
+	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
 	{
-		PlayerAttorney::State::RaycastRight(pPlayer, deltaTime);
+		PlayerAttorney::StateAccess::RaycastRight(pPlayer, deltaTime);
 	}
-	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
+	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
 	{
-		PlayerAttorney::State::RaycastLeft(pPlayer, deltaTime);
+		PlayerAttorney::StateAccess::RaycastLeft(pPlayer, deltaTime);
 	}
 
-	PlayerAttorney::State::RaycastDown(pPlayer, deltaTime);
+	PlayerAttorney::StateAccess::RaycastDown(pPlayer, deltaTime);
 }
 
 const PlayerMoveState* PlayerStateWalking::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;
 
-	if (PlayerAttorney::State::GetPosDelta(pPlayer).y < 0.0f)
+	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y < 0.0f)
 	{
 		pNextState = &PlayerFSM::jumping;
 	}
-	else if (PlayerAttorney::State::GetPosDelta(pPlayer).y > 0.0f)
+	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y > 0.0f)
 	{
 		pNextState = &PlayerFSM::falling;
 	}
-	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x == 0.0f)
+	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x == 0.0f)
 	{
 		pNextState = &PlayerFSM::idle;
 	}

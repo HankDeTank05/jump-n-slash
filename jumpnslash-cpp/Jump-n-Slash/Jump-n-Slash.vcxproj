@@ -118,12 +118,13 @@
     <ClCompile Include="Game Code\Player.cpp" />
     <ClCompile Include="Game Code\PlayerAttorney.cpp" />
     <ClCompile Include="Game Code\PlayerFSM.cpp" />
-    <ClCompile Include="Game Code\PlayerMoveState.cpp" />
     <ClCompile Include="Game Code\PlayerStateFalling.cpp" />
     <ClCompile Include="Game Code\PlayerStateIdle.cpp" />
     <ClCompile Include="Game Code\PlayerStateJumping.cpp" />
     <ClCompile Include="Game Code\PlayerStateWalking.cpp" />
     <ClCompile Include="Game Code\RoomData.cpp" />
+    <ClCompile Include="Game Code\Sword.cpp" />
+    <ClCompile Include="Game Code\SwordFSM.cpp" />
     <ClCompile Include="Game Code\TestClass.cpp" />
     <ClCompile Include="Game Code\TestScene.cpp" />
   </ItemGroup>
@@ -247,6 +248,11 @@
     <ClInclude Include="Game Code\PlayerStateJumping.h" />
     <ClInclude Include="Game Code\PlayerStateWalking.h" />
     <ClInclude Include="Game Code\RoomData.h" />
+    <ClInclude Include="Game Code\Sword.h" />
+    <ClInclude Include="Game Code\SwordFSM.h" />
+    <ClInclude Include="Game Code\SwordState.h" />
+    <ClInclude Include="Game Code\SwordStateIdle.h" />
+    <ClInclude Include="Game Code\SwordStateSwing.h" />
     <ClInclude Include="Game Code\TestClass.h" />
     <ClInclude Include="Game Code\TestScene.h" />
     <ClInclude Include="Game Code\Tileset.h" />

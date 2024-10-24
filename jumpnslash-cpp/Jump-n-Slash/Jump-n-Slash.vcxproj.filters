@@ -160,6 +160,12 @@
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching">
       <UniqueIdentifier>{f71274b0-ff57-44ca-bf9e-a02bc532b6cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Sword">
+      <UniqueIdentifier>{4d852e8c-8ee3-4aa4-8a22-ae9c292a4f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Sword\FSM + States">
+      <UniqueIdentifier>{ccef38b6-441b-4e2a-99f6-b7ca8319fa5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -287,9 +293,6 @@
     </ClCompile>
     <ClCompile Include="Game Code\PlatformSemisolid.cpp">
       <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\PlayerMoveState.cpp">
-      <Filter>Source Files\Game Code\Player</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\EngineAttorney.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
@@ -482,6 +485,12 @@
     </ClCompile>
     <ClCompile Include="Engine Code\CollisionTestSelfCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Sword.cpp">
+      <Filter>Source Files\Game Code\Sword</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\SwordFSM.cpp">
+      <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -850,6 +859,21 @@
     </ClInclude>
     <ClInclude Include="Engine Code\NoCollisionDispatch.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Sword.h">
+      <Filter>Source Files\Game Code\Sword</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\SwordFSM.h">
+      <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\SwordState.h">
+      <Filter>Source Files\Game Code\Sword</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\SwordStateIdle.h">
+      <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\SwordStateSwing.h">
+      <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
