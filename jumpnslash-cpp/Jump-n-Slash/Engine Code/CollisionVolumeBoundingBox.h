@@ -24,7 +24,6 @@ public:
 	virtual bool IntersectAccept(const CollisionVolume& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeBSphere& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeAABB& other) const = 0;
-	virtual bool IntersectVisit(const CollisionVolumeOBB& other) const = 0;
 
 	virtual void DebugView(const sf::Color& color) const = 0;
 

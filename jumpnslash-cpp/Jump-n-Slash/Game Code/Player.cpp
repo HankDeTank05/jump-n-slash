@@ -230,10 +230,21 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	}
 }
 
-void Player::Collision(Enemy* pEnemy)
+void Player::OnCollisionEnter(CollisionObject* pOther)
 {
 	// TODO: make a debug flag for this
-	std::cout << "Player::Collision(Enemy* pEnemy) function call" << std::endl;
+	std::cout << "Player has entered collision" << std::endl;
+}
+
+void Player::OnCollisionDuring(CollisionObject* pOther)
+{
+	// do nothing
+}
+
+void Player::OnCollisionExit(CollisionObject* pOther)
+{
+	// TODO: make a debug flag for this
+	std::cout << "Player has exited collision" << std::endl;
 }
 
 void Player::LinkToMap(LevelMap* _pLevel)

@@ -11,7 +11,7 @@ class CollisionTestSelfCommand : public CollisionTestCommand
 {
 public:
 	CollisionTestSelfCommand() = delete;
-	CollisionTestSelfCommand(CollisionObjectGroup* pGroup, CollisionDispatchBase* pDispatch);
+	CollisionTestSelfCommand(CollisionObjectGroup* pGroup, CollisionDispatchBase* pColDispatch, CollisionDispatchBase* pNoColDispatch);
 	CollisionTestSelfCommand(const CollisionTestSelfCommand& ctsc) = delete;
 	CollisionTestSelfCommand& operator=(const CollisionTestSelfCommand& ctsc) = delete;
 	virtual ~CollisionTestSelfCommand();
@@ -20,7 +20,8 @@ public:
 
 private:
 	CollisionObjectGroup* pGroup;
-	CollisionDispatchBase* pDispatch;
+	CollisionDispatchBase* pColDispatch;
+	CollisionDispatchBase* pNoColDispatch;
 };
 
 #endif

@@ -28,13 +28,16 @@ public:
 	virtual void Draw() override;
 
 	// collision stuff
-	void Collision(Player* pPlayer);
+	virtual void OnCollisionEnter(CollisionObject* pOther) override;
+	virtual void OnCollisionDuring(CollisionObject* pOther) override;
+	virtual void OnCollisionExit(CollisionObject* pOther) override;
 
 private:
 	sf::Vector2f pos;
 	sf::Vector2f posDelta;
 	sf::Sprite* pSprite;
 	AnimationComponent animComp;
+	float rotation;
 };
 
 #endif

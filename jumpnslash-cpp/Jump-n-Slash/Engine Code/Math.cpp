@@ -27,12 +27,6 @@ bool Math::Intersect(const CollisionVolumeBSphere& bs, const CollisionVolumeAABB
 	return false;
 }
 
-bool Math::Intersect(const CollisionVolumeBSphere& bs, const CollisionVolumeOBB& obb)
-{
-	assert(false);
-	return false;
-}
-
 bool Math::Intersect(const CollisionVolumeAABB& aabb, const CollisionVolumeBSphere& bs)
 {
 	bool intersection = false;
@@ -48,30 +42,6 @@ bool Math::Intersect(const CollisionVolumeAABB& aabb1, const CollisionVolumeAABB
 {
 	return IntervalOverlap(aabb1.GetMin().x, aabb1.GetMax().x, aabb2.GetMin().x, aabb2.GetMax().x) && // check for overlap on x-axis
 		IntervalOverlap(aabb1.GetMin().y, aabb1.GetMax().y, aabb2.GetMin().y, aabb2.GetMax().y); // check for overlap on y-axis
-}
-
-bool Math::Intersect(const CollisionVolumeAABB& aabb, const CollisionVolumeOBB& obb)
-{
-	assert(false);
-	return false;
-}
-
-bool Math::Intersect(const CollisionVolumeOBB& obb, const CollisionVolumeBSphere& bs)
-{
-	assert(false);
-	return false;
-}
-
-bool Math::Intersect(const CollisionVolumeOBB& obb, const CollisionVolumeAABB& aabb)
-{
-	assert(false);
-	return false;
-}
-
-bool Math::Intersect(const CollisionVolumeOBB& obb1, const CollisionVolumeOBB& obb2)
-{
-	assert(false);
-	return false;
 }
 
 float Math::ClampValue(float valToClamp, float clampMin, float clampMax)

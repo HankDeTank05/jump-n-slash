@@ -9,7 +9,8 @@ Enemy::Enemy()
 	: pos(10 * TILE_SIZE_F, 18 * TILE_SIZE_F),
 	posDelta(0.f, 0.f),
 	pSprite(nullptr),
-	animComp()
+	animComp(),
+	rotation(45.f)
 {
 	AnimationSet* pAnimSet = new AnimationSet();
 
@@ -36,6 +37,7 @@ void Enemy::Update(float deltaTime)
 {
 	pSprite = animComp.GetCurrentFrame();
 	pSprite->setPosition(pos);
+	pSprite->setRotation(rotation);
 	UpdateCollisionData(pSprite);
 }
 
@@ -45,8 +47,19 @@ void Enemy::Draw()
 	Render(*pSprite);
 }
 
-void Enemy::Collision(Player* pPlayer)
+void Enemy::OnCollisionEnter(CollisionObject* pOther)
 {
 	// TODO: make a debug flag for this
-	std::cout << "Enemy::Collision(Player* pPlayer) function call" << std::endl;
+	std::cout << "Enemy has entered collision" << std::endl;
+}
+
+void Enemy::OnCollisionDuring(CollisionObject* pOther)
+{
+	// do nothing
+}
+
+void Enemy::OnCollisionExit(CollisionObject* pOther)
+{
+	// TODO: make a debug flag for this
+	std::cout << "Enemy has exited collision" << std::endl;
 }

@@ -21,7 +21,6 @@ public:
 	virtual bool IntersectAccept(const CollisionVolume& other) const override;
 	virtual bool IntersectVisit(const CollisionVolumeBSphere& other) const override;
 	virtual bool IntersectVisit(const CollisionVolumeAABB& other) const override;
-	virtual bool IntersectVisit(const CollisionVolumeOBB& other) const override;
 
 	virtual void DebugView(const sf::Color& color) const override;
 };

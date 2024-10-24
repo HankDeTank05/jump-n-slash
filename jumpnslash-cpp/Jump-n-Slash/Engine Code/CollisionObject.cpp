@@ -15,7 +15,9 @@ CollisionObject::CollisionObject()
 	pDeregCmd(new CollisionDeregistrationCommand(this)),
 	pColVol(nullptr),
 	pVolType(nullptr),
-	pColSpr(nullptr)
+	pColSpr(nullptr),
+	collisionThisFrame(false),
+	collisionPrevFrame(false)
 {
 	// do nothing
 }
@@ -57,8 +59,8 @@ void CollisionObject::SetCollisionSprite(sf::Sprite* pSprite, VolumeType colVolT
 	pVolType = &colVolType;
 	if (colVolType == VolumeType::BSphere)
 	{
-		sf::Vector2f aabbPos = pSprite->getGlobalBounds().getPosition();
-		sf::Vector2f aabbSize = pSprite->getGlobalBounds().getSize();
+		sf::Vector2f aabbPos = pSprite->getLocalBounds().getPosition();
+		sf::Vector2f aabbSize = pSprite->getLocalBounds().getSize();
 		sf::Vector2f center = aabbPos + aabbSize * 0.5f;
 		float radius = Math::Max(aabbSize.x, aabbSize.y) * 0.5f;
 		pColVol = new CollisionVolumeBSphere(center, radius);
@@ -68,10 +70,6 @@ void CollisionObject::SetCollisionSprite(sf::Sprite* pSprite, VolumeType colVolT
 		sf::Vector2f min = pSprite->getGlobalBounds().getPosition();
 		sf::Vector2f max = min + pSprite->getGlobalBounds().getSize();
 		pColVol = new CollisionVolumeAABB(min, max);
-	}
-	else if (colVolType == VolumeType::OBB)
-	{
-		assert(false);
 	}
 	else
 	{
@@ -83,6 +81,47 @@ void CollisionObject::UpdateCollisionData(sf::Sprite* pSprite)
 {
 	pColSpr = pSprite; // TODO: doing this is necessary because of how animation works, which might invalidate the existence of pColSpr as a member variable. Consider removing it.
 	pColVol->ComputeData(pColSpr, pColSpr->getTransform());
+}
+
+void CollisionObject::Collision(CollisionObject* pOther)
+{
+	collisionPrevFrame = collisionThisFrame;
+	collisionThisFrame = true;
+
+	if (collisionPrevFrame == true && collisionThisFrame == true)
+	{
+		OnCollisionDuring(pOther);
+	}
+	else if (collisionPrevFrame == false && collisionThisFrame == true)
+	{
+		OnCollisionEnter(pOther);
+	}
+}
+
+void CollisionObject::NoCollision(CollisionObject* pOther)
+{
+	collisionPrevFrame = collisionThisFrame;
+	collisionThisFrame = false;
+
+	if (collisionPrevFrame == true && collisionThisFrame == false)
+	{
+		OnCollisionExit(pOther);
+	}
+}
+
+void CollisionObject::OnCollisionEnter(CollisionObject* pOther)
+{
+	// do nothing. override to make it do something
+}
+
+void CollisionObject::OnCollisionDuring(CollisionObject* pOther)
+{
+	// do nothing. override to make it do something
+}
+
+void CollisionObject::OnCollisionExit(CollisionObject* pOther)
+{
+	// do nothing. override to make it do something
 }
 
 void CollisionObject::Register()

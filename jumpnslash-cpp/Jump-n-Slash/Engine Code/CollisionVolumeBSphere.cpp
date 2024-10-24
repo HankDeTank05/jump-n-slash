@@ -51,11 +51,6 @@ bool CollisionVolumeBSphere::IntersectVisit(const CollisionVolumeAABB& other) co
 	return Math::Intersect(*this, other);
 }
 
-bool CollisionVolumeBSphere::IntersectVisit(const CollisionVolumeOBB& other) const
-{
-	return Math::Intersect(*this, other);
-}
-
 void CollisionVolumeBSphere::DebugView(const sf::Color& color) const
 {
 	// visualize bsphere with center point

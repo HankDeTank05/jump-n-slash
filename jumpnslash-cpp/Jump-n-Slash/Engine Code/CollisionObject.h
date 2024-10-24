@@ -24,12 +24,12 @@ public:
 
 	const CollisionVolume& GetCollisionVolume(); // TODO: docs for CollisionObject::GetCollisionVolume
 
+
 protected:
 	enum class VolumeType
 	{
 		BSphere,
-		AABB,
-		OBB
+		AABB
 	};
 
 	template <typename C>
@@ -44,10 +44,17 @@ protected:
 	void SetCollisionSprite(sf::Sprite* pSprite, VolumeType colVolType); // TODO: docs for CollisionObject::SetCollisionSprite
 	void UpdateCollisionData(sf::Sprite* pSprite); // TODO: docs for CollisionObject::UpdateCollisionData
 
+	virtual void OnCollisionEnter(CollisionObject* pOther);
+	virtual void OnCollisionDuring(CollisionObject* pOther);
+	virtual void OnCollisionExit(CollisionObject* pOther);
+
 private:
 	friend class CollisionObjectAttorney;
 	void Register();
 	void Deregister();
+
+	void Collision(CollisionObject* pOther);
+	void NoCollision(CollisionObject* pOther);
 
 private: // member variables
 	CollisionManager::JNSTypeID typeID;
@@ -58,6 +65,8 @@ private: // member variables
 	CollisionVolume* pColVol;
 	VolumeType* pVolType;
 	sf::Sprite* pColSpr;
+	bool collisionThisFrame;
+	bool collisionPrevFrame;
 
 };
 

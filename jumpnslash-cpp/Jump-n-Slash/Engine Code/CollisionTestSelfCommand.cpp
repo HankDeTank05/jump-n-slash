@@ -1,4 +1,4 @@
-#include "CollisionTestPairCommand.h"
+#include "CollisionTestSelfCommand.h"
 
 #include "CollisionObjectGroup.h"
 #include "CollisionObject.h"
@@ -7,37 +7,39 @@
 
 #include "../Game Code/DebugFlags.h"
 
-CollisionTestPairCommand::CollisionTestPairCommand(CollisionObjectGroup* _pGroup1, CollisionObjectGroup* _pGroup2,
+CollisionTestSelfCommand::CollisionTestSelfCommand(CollisionObjectGroup* _pGroup,
 	CollisionDispatchBase* _pColDispatch, CollisionDispatchBase* _pNoColDispatch)
-	: pGroup1(_pGroup1),
-	pGroup2(_pGroup2),
+	: pGroup(_pGroup),
 	pColDispatch(_pColDispatch),
 	pNoColDispatch(_pNoColDispatch)
 {
-	// do nothing?
+	// do nothing
 }
 
-CollisionTestPairCommand::~CollisionTestPairCommand()
+CollisionTestSelfCommand::~CollisionTestSelfCommand()
 {
 	delete pNoColDispatch;
 	delete pColDispatch;
 }
 
-void CollisionTestPairCommand::Execute()
+void CollisionTestSelfCommand::Execute()
 {
-	CollisionObjectGroup::CollisionObjectList list1 = pGroup1->GetCollisionObjectList();
-	CollisionObjectGroup::CollisionObjectList list2 = pGroup2->GetCollisionObjectList();
+	const CollisionObjectGroup::CollisionObjectList& list = pGroup->GetCollisionObjectList();
 
-	// TODO: add tiered collision testing
-
-	for (CollisionObjectGroup::CollisionObjectList::iterator it1 = list1.begin(); it1 != list1.end(); it1++)
+	for (auto it1 = list.begin(); it1 != list.end(); it1++)
 	{
-		for (CollisionObjectGroup::CollisionObjectList::iterator it2 = list2.begin(); it2 != list2.end(); it2++)
+		// this syntax is stupid, but it works
+		// found here: https://cplusplus.com/forum/beginner/13379/
+		auto it2 = it1;
+		for (++it2; it2 != list.end(); it2++)
 		{
+			assert(it1 != it2);
+			assert((*it1) != (*it2));
+
 			const CollisionVolume& cv1 = (*it1)->GetCollisionVolume();
 			const CollisionVolume& cv2 = (*it2)->GetCollisionVolume();
 
-			if (Math::Intersect(cv1, cv2) == true)
+			if (Math::Intersect(cv1, cv2))
 			{
 				if (DEBUG_COLLISION)
 				{

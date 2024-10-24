@@ -8,6 +8,7 @@
 #include "CollisionTestPairCommand.h"
 #include "CollisionTestSelfCommand.h"
 #include "CollisionDispatch.h"
+#include "NoCollisionDispatch.h"
 
 // forward declarations
 class CollisionObjectGroup;
@@ -49,9 +50,10 @@ public:
 		CollisionObjectGroup* pGroup1 = colObjGroupCollection[GetTypeID<C1>()];
 		CollisionObjectGroup* pGroup2 = colObjGroupCollection[GetTypeID<C2>()];
 
-		CollisionDispatch<C1, C2>* pDispatch = new CollisionDispatch<C1, C2>();
+		CollisionDispatch<C1, C2>* pColDispatch = new CollisionDispatch<C1, C2>();
+		NoCollisionDispatch<C1, C2>* pNoColDispatch = new NoCollisionDispatch<C1, C2>();
 
-		colTestCmdList.push_back(new CollisionTestPairCommand(pGroup1, pGroup2, pDispatch));
+		colTestCmdList.push_back(new CollisionTestPairCommand(pGroup1, pGroup2, pColDispatch, pNoColDispatch));
 	}
 
 	template <typename C>
@@ -60,6 +62,7 @@ public:
 		CollisionObjectGroup* pGroup = colObjGroupCollection[GetTypeID<C>()];
 
 		CollisionDispatch<C, C>* pDispatch = new CollisionDispatch<C, C>();
+		// TODO: add no collision dispatch here
 
 		colTestCmdList.push_back(new CollisionTestSelfCommand(pGroup, pDispatch));
 	}

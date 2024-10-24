@@ -11,3 +11,13 @@ void CollisionObjectAttorney::Registration::Deregister(CollisionObject* pCollida
 {
 	pCollidable->Deregister();
 }
+
+void CollisionObjectAttorney::ColDispatch::Collision(CollisionObject* pThis, CollisionObject* pOther)
+{
+	pThis->Collision(pOther);
+}
+
+void CollisionObjectAttorney::NoColDispatch::NoCollision(CollisionObject* pThis, CollisionObject* pOther)
+{
+	pThis->NoCollision(pOther);
+}

@@ -47,7 +47,9 @@ public:
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
 
 	// collision stuff
-	void Collision(Enemy* pEnemy);
+	virtual void OnCollisionEnter(CollisionObject* pOther) override;
+	virtual void OnCollisionDuring(CollisionObject* pOther) override;
+	virtual void OnCollisionExit(CollisionObject* pOther) override;
 
 	// other stuff
 	void LinkToMap(LevelMap* pLevel);

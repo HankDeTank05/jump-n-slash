@@ -59,12 +59,6 @@ bool CollisionVolumeAABB::IntersectVisit(const CollisionVolumeAABB& other) const
 	return Math::Intersect(*this, other);
 }
 
-bool CollisionVolumeAABB::IntersectVisit(const CollisionVolumeOBB& other) const
-{
-	assert(false);
-	return false;
-}
-
 void CollisionVolumeAABB::DebugView(const sf::Color& color) const
 {
 	// visualize aabb

@@ -157,6 +157,9 @@
     <Filter Include="Source Files\Game Code\Enemy">
       <UniqueIdentifier>{c91225e8-1d66-4c95-bd60-f6e19584b008}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching">
+      <UniqueIdentifier>{f71274b0-ff57-44ca-bf9e-a02bc532b6cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -476,6 +479,9 @@
     </ClCompile>
     <ClCompile Include="Game Code\Enemy.cpp">
       <Filter>Source Files\Game Code\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\CollisionTestSelfCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -815,12 +821,6 @@
     <ClInclude Include="Engine Code\CollisionDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\CollisionDispatchBase.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\CollisionDispatch.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\CollisionObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
     </ClInclude>
@@ -841,6 +841,15 @@
     </ClInclude>
     <ClInclude Include="Game Code\Enemy.h">
       <Filter>Source Files\Game Code\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CollisionDispatchBase.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CollisionDispatch.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\NoCollisionDispatch.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

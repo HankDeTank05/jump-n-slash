@@ -11,7 +11,7 @@ class CollisionTestPairCommand : public CollisionTestCommand
 {
 public:
 	CollisionTestPairCommand() = delete;
-	CollisionTestPairCommand(CollisionObjectGroup* pGroup1, CollisionObjectGroup* pGroup2, CollisionDispatchBase* pDispatch);
+	CollisionTestPairCommand(CollisionObjectGroup* pGroup1, CollisionObjectGroup* pGroup2, CollisionDispatchBase* pColDispatch, CollisionDispatchBase* pNoColDispatch);
 	CollisionTestPairCommand(const CollisionTestPairCommand& ctpc) = delete;
 	CollisionTestPairCommand& operator=(const CollisionTestPairCommand& ctpc) = delete;
 	virtual ~CollisionTestPairCommand();
@@ -24,7 +24,8 @@ private:
 private:
 	CollisionObjectGroup* pGroup1;
 	CollisionObjectGroup* pGroup2;
-	CollisionDispatchBase* pDispatch;
+	CollisionDispatchBase* pColDispatch;
+	CollisionDispatchBase* pNoColDispatch;
 };
 
 #endif
