@@ -52,37 +52,37 @@ Visualizer& Visualizer::Instance()
 	return *pInstance;
 }
 
-void Visualizer::VisualizePoint(sf::Vector2f pos, sf::Color color)
+void Visualizer::VisualizePoint(const sf::Vector2f& pos, const sf::Color& color)
 {
 	Instance().privVisualizePoint(pos, color);
 }
 
-void Visualizer::VisualizePoint(float x, float y, sf::Color color)
+void Visualizer::VisualizePoint(float x, float y, const sf::Color& color)
 {
 	Instance().privVisualizePoint(sf::Vector2f(x, y), color);
 }
 
-void Visualizer::VisualizeCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter)
+void Visualizer::VisualizeCircle(const sf::Vector2f& pos, float radius, const sf::Color& color, bool showCenter)
 {
 	Instance().privVisualizeCircle(pos, radius, color, showCenter);
 }
 
-void Visualizer::VisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
+void Visualizer::VisualizeRect(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color)
 {
 	Instance().privVisualizeRect(pos, size, color);
 }
 
-void Visualizer::VisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color, bool visualizeEndpoints)
+void Visualizer::VisualizeSegment(const sf::Vector2f& pos0, const sf::Vector2f& pos1, const sf::Color& color, bool visualizeEndpoints)
 {
 	Instance().privVisualizeSegment(pos0, pos1, color, visualizeEndpoints);
 }
 
-void Visualizer::VisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+void Visualizer::VisualizeText(const sf::String& str, const sf::Vector2f& pos, const sf::Color& color, int sizeInPix)
 {
 	Instance().privVisualizeText(str, pos, color, sizeInPix);
 }
 
-void Visualizer::VisualizeText(sf::String str, sf::Vector2i pos, sf::Color color, int sizeInPix)
+void Visualizer::VisualizeText(const sf::String& str, const sf::Vector2i& pos, const sf::Color& color, int sizeInPix)
 {
 	Instance().privVisualizeText(str, sf::Vector2f(static_cast<float>(pos.x), static_cast<float>(pos.y)), color, sizeInPix);
 }
@@ -92,27 +92,27 @@ void Visualizer::ProcessCommands()
 	Instance().privProcessCommands();
 }
 
-void Visualizer::ShowPoint(sf::Vector2f pos, sf::Color color)
+void Visualizer::ShowPoint(const sf::Vector2f& pos, const sf::Color& color)
 {
 	Instance().privShowPoint(pos, color);
 }
 
-void Visualizer::ShowCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter)
+void Visualizer::ShowCircle(const sf::Vector2f& pos, float radius, const sf::Color& color, bool showCenter)
 {
 	Instance().privShowCircle(pos, radius, color, showCenter);
 }
 
-void Visualizer::ShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
+void Visualizer::ShowRect(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color)
 {
 	Instance().privShowRect(pos, size, color);
 }
 
-void Visualizer::ShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
+void Visualizer::ShowSegment(const sf::Vector2f& pos0, const sf::Vector2f& pos1, const sf::Color& color)
 {
 	Instance().privShowSegment(pos0, pos1, color);
 }
 
-void Visualizer::ShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+void Visualizer::ShowText(const sf::String& str, const sf::Vector2f& pos, const sf::Color& color, int sizeInPix)
 {
 	Instance().privShowText(str, pos, color, sizeInPix);
 }
@@ -123,22 +123,22 @@ void Visualizer::Terminate()
 	pInstance = nullptr;
 }
 
-void Visualizer::privVisualizePoint(sf::Vector2f pos, sf::Color color)
+void Visualizer::privVisualizePoint(const sf::Vector2f& pos, const sf::Color& color)
 {
 	cmdList.push_back(VizCmdFactory::GetPointCommand(pos, color));
 }
 
-void Visualizer::privVisualizeCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter)
+void Visualizer::privVisualizeCircle(const sf::Vector2f& pos, float radius, const sf::Color& color, bool showCenter)
 {
 	cmdList.push_back(VizCmdFactory::GetCircleCommand(pos, radius, color, showCenter));
 }
 
-void Visualizer::privVisualizeRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
+void Visualizer::privVisualizeRect(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color)
 {
 	cmdList.push_back(VizCmdFactory::GetRectCommand(pos, size, color));
 }
 
-void Visualizer::privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color, bool visualizeEndpoints)
+void Visualizer::privVisualizeSegment(const sf::Vector2f& pos0, const sf::Vector2f& pos1, const sf::Color& color, bool visualizeEndpoints)
 {
 	cmdList.push_back(VizCmdFactory::GetSegmentCommand(pos0, pos1, color));
 	
@@ -150,7 +150,7 @@ void Visualizer::privVisualizeSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::
 	}
 }
 
-void Visualizer::privVisualizeText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+void Visualizer::privVisualizeText(const sf::String& str, const sf::Vector2f& pos, const sf::Color& color, int sizeInPix)
 {
 	cmdList.push_back(VizCmdFactory::GetTextCommand(str, pos, color, sizeInPix));
 }
@@ -165,7 +165,7 @@ void Visualizer::privProcessCommands()
 	cmdList.clear();
 }
 
-void Visualizer::privShowPoint(sf::Vector2f pos, sf::Color color)
+void Visualizer::privShowPoint(const sf::Vector2f& pos, const sf::Color& color)
 {
 	pCircle->setFillColor(color); // but give it a fill color
 	pCircle->setRadius(VIZ_POINT_RADIUS);
@@ -175,7 +175,7 @@ void Visualizer::privShowPoint(sf::Vector2f pos, sf::Color color)
 	Render(*pCircle);
 }
 
-void Visualizer::privShowCircle(sf::Vector2f pos, float radius, sf::Color color, bool showCenter)
+void Visualizer::privShowCircle(const sf::Vector2f& pos, float radius, const sf::Color& color, bool showCenter)
 {
 	// draw the circle
 	pCircle->setRadius(radius);
@@ -192,7 +192,7 @@ void Visualizer::privShowCircle(sf::Vector2f pos, float radius, sf::Color color,
 	}
 }
 
-void Visualizer::privShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color color)
+void Visualizer::privShowRect(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color)
 {
 	pRect->setPosition(pos);
 	pRect->setSize(size);
@@ -201,7 +201,7 @@ void Visualizer::privShowRect(sf::Vector2f pos, sf::Vector2f size, sf::Color col
 	Render(*pRect);
 }
 
-void Visualizer::privShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color color)
+void Visualizer::privShowSegment(const sf::Vector2f& pos0, const sf::Vector2f& pos1, const sf::Color& color)
 {
 	sf::Vertex line[] = {
 		sf::Vertex(pos0),
@@ -214,7 +214,7 @@ void Visualizer::privShowSegment(sf::Vector2f pos0, sf::Vector2f pos1, sf::Color
 	Render(line, 2);
 }
 
-void Visualizer::privShowText(sf::String str, sf::Vector2f pos, sf::Color color, int sizeInPix)
+void Visualizer::privShowText(const sf::String& str, const sf::Vector2f& pos, const sf::Color& color, int sizeInPix)
 {
 	pText->setString(str);
 	pText->setPosition(pos);

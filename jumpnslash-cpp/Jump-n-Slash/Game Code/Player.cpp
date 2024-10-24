@@ -140,6 +140,7 @@ void Player::Update(float deltaTime)
 	}
 	pSprite->setScale(static_cast<float>(facing), 1.f);
 	pSprite->setPosition(pos);
+	UpdateCollisionData(pSprite);
 
 	// update the previous state for the next frame
 	pPrevState = pCurrentState;
@@ -229,6 +230,21 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	}
 }
 
+void Player::OnCollisionEnter(CollisionObject* pOther)
+{
+	if (DEBUG_COLLISION) std::cout << "Player has entered collision" << std::endl;
+}
+
+void Player::OnCollisionDuring(CollisionObject* pOther)
+{
+	// do nothing
+}
+
+void Player::OnCollisionExit(CollisionObject* pOther)
+{
+	if (DEBUG_COLLISION) std::cout << "Player has exited collision" << std::endl;
+}
+
 void Player::LinkToMap(LevelMap* _pLevel)
 {
 	pLevel = _pLevel;
@@ -241,6 +257,10 @@ void Player::LinkToMap(LevelMap* _pLevel)
 	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
+	SetCollidableGroup<Player>();
+	pSprite = animComp.GetCurrentFrame();
+	SetCollisionSprite(pSprite, VolumeType::BSphere);
+	RequestCollisionRegistration();
 }
 
 sf::Vector2f Player::GetPos() const
