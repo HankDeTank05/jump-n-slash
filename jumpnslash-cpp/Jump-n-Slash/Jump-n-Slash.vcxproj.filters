@@ -492,6 +492,12 @@
     <ClCompile Include="Game Code\SwordFSM.cpp">
       <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\SwordStateIdle.cpp">
+      <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\SwordStateSwing.cpp">
+      <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">

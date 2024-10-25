@@ -23,8 +23,7 @@ bool Math::Intersect(const CollisionVolumeBSphere& bs1, const CollisionVolumeBSp
 
 bool Math::Intersect(const CollisionVolumeBSphere& bs, const CollisionVolumeAABB& aabb)
 {
-	assert(false);
-	return false;
+	return Math::Intersect(aabb, bs);
 }
 
 bool Math::Intersect(const CollisionVolumeAABB& aabb, const CollisionVolumeBSphere& bs)

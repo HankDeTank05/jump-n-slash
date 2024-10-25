@@ -6,11 +6,13 @@
 
 #include "LevelMap.h"
 #include "Player.h"
+#include "Sword.h"
 #include "Enemy.h"
 
 Level0::Level0()
 	: pMap(nullptr),
 	pPlayer(nullptr),
+	pSword(nullptr),
 	pEnemy(nullptr)
 {
 	// do nothing
@@ -21,6 +23,10 @@ Level0::~Level0()
 	if (pEnemy != nullptr)
 	{
 		delete pEnemy;
+	}
+	if (pSword != nullptr)
+	{
+		delete pSword;
 	}
 	if (pPlayer != nullptr)
 	{
@@ -36,12 +42,14 @@ void Level0::Init()
 {
 	pMap = new LevelMap(GridManager::GetGrid("test2"));
 	pPlayer = new Player();
+	pSword = new Sword(pPlayer);
 	pEnemy = new Enemy();
 
 	pPlayer->LinkToMap(pMap);
 	pPlayer->AddObserver(pMap);
 
 	SetCollisionPair<Player, Enemy>();
+	SetCollisionPair<Sword, Enemy>();
 
 	float viewWidth = ROOM_TILE_WIDTH * TILE_SIZE_F;
 	float viewHeight = ROOM_TILE_HEIGHT * TILE_SIZE_F;

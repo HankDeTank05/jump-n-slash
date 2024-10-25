@@ -77,7 +77,7 @@ void PlayerAttorney::LevelAccess::SetCurrentRoom(Player* pPlayer, RoomData* pNex
 	pPlayer->SetCurrentRoom(pNextRoom);
 }
 
-sf::Vector2f PlayerAttorney::Sword::GetPos(Player* pPlayer)
+sf::Vector2f PlayerAttorney::SwordAccess::GetPos(Player* pPlayer)
 {
 	return pPlayer->GetPos();
 }

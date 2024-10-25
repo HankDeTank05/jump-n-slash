@@ -125,6 +125,8 @@
     <ClCompile Include="Game Code\RoomData.cpp" />
     <ClCompile Include="Game Code\Sword.cpp" />
     <ClCompile Include="Game Code\SwordFSM.cpp" />
+    <ClCompile Include="Game Code\SwordStateIdle.cpp" />
+    <ClCompile Include="Game Code\SwordStateSwing.cpp" />
     <ClCompile Include="Game Code\TestClass.cpp" />
     <ClCompile Include="Game Code\TestScene.cpp" />
   </ItemGroup>

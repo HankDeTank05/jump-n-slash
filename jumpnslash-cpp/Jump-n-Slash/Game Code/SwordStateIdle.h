@@ -7,7 +7,7 @@ class SwordStateIdle : public SwordState
 {
 public:
 	SwordStateIdle() = default;
-	SwordStateIdle(const SwordStateIdle& ssi) = delete;
+	SwordStateIdle(const SwordStateIdle& ssi);
 	SwordStateIdle& operator=(const SwordStateIdle& ssi) = delete;
 	virtual ~SwordStateIdle() = default;
 
