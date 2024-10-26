@@ -10,8 +10,6 @@
 #include "LevelTile.h"
 #include "LevelMap.h"
 
-
-
 Actor::Actor(float _speed, LevelMap* _pLevel)
 	: pos(),
 	posDelta(0.f, 0.f),
@@ -26,12 +24,17 @@ Actor::Actor(float _speed, LevelMap* _pLevel)
 	assert(pLevel != nullptr);
 }
 
+Actor::~Actor()
+{
+	delete pAnimComp;
+}
+
 void Actor::Draw()
 {
 	assert(pCurrentRoom != nullptr); // TODO: this is bad and stupid but Henry told me to do it (bitch)
 
 	assert(pSprite != nullptr);
-
+	pSprite = pAnimComp->GetCurrentFrame();
 	if (facing == 1)
 	{
 		pSprite->setOrigin(0.f, 0.f);

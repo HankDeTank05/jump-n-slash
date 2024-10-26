@@ -36,8 +36,13 @@ void PlayerStateIdle::Enter(Player* pPlayer) const
 void PlayerStateIdle::Update(Player* pPlayer, float deltaTime) const
 {
 	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
-	PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
-	PlayerAttorney::State::RaycastDown(pPlayer, deltaTime);
+	
+	if (PlayerAttorney::State::IsApplyGravity(pPlayer))
+	{
+		PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+	}
+
+	PlayerAttorney::State::RaycastDown(pPlayer);
 }
 
 const PlayerMoveState* PlayerStateIdle::GetNextState(Player* pPlayer) const

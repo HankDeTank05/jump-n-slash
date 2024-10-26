@@ -29,9 +29,8 @@ Level0::~Level0()
 void Level0::Init()
 {
 	pMap = new LevelMap(GridManager::GetGrid("test2"));
-	pPlayer = new Player();
+	pPlayer = new Player(pMap);
 
-	pPlayer->LinkToMap(pMap);
 	pPlayer->AddObserver(pMap);
 
 	float viewWidth = ROOM_TILE_WIDTH * TILE_SIZE_F;

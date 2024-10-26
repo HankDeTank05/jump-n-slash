@@ -11,7 +11,7 @@ class LevelMap;
 class RoomData;
 class AnimationComponent;
 
-class Actor : public AlarmObject, public CollisionObject, public DrawObject, public UpdateObject
+class Actor : public AlarmObject, public DrawObject, public UpdateObject
 {
 public:
 	Actor() = delete;

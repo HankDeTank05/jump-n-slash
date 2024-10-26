@@ -82,12 +82,6 @@
     <Filter Include="Source Files\Game Code\Misc. files\Extra Documentation">
       <UniqueIdentifier>{5c031f14-77f7-42dd-99df-5344014c8227}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Player">
-      <UniqueIdentifier>{03005a24-48dc-482f-bf47-4221183d0c1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Player\FSM + States">
-      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Code\Scenes">
       <UniqueIdentifier>{5e9b3079-2e05-4406-b849-155b97e9c9f8}</UniqueIdentifier>
     </Filter>
@@ -147,6 +141,12 @@
     </Filter>
     <Filter Include="Source Files\Game Code\Level Data\Tileset">
       <UniqueIdentifier>{55712ed0-db1a-4a8e-ab06-52db385587cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player">
+      <UniqueIdentifier>{03005a24-48dc-482f-bf47-4221183d0c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player\FSM + States">
+      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -235,28 +235,28 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerStateIdle.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerStateWalking.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerStateJumping.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerStateFalling.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\Player.cpp">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\Level0.cpp">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerFSM.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerAttorney.cpp">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\LevelMap.cpp">
       <Filter>Source Files\Game Code\Level Data</Filter>
@@ -277,7 +277,7 @@
       <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerMoveState.cpp">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\EngineAttorney.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
@@ -540,31 +540,31 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\Player.h">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerMoveState.h">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateIdle.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerFSM.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateWalking.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateJumping.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateFalling.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\Level0.h">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerAttorney.h">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\LevelMap.h">
       <Filter>Source Files\Game Code\Level Data</Filter>
