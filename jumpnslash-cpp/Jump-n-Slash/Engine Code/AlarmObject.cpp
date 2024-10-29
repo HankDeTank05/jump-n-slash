@@ -101,6 +101,7 @@ void AlarmObject::RequestAlarmDeregistration(AlarmID id)
 
 void AlarmObject::TriggerAlarm(AlarmID id)
 {
+	regState[static_cast<int>(id)].regState = RegistrationState::CURRENTLY_DEREGISTERED;
 	switch (id)
 	{
 	case AlarmID::Alarm0:
