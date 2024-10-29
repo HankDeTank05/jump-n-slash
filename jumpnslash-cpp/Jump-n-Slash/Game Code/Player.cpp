@@ -94,16 +94,12 @@ void Player::Update(float deltaTime)
 	SceneManager::GetCurrentCamera()->SetCenter(newCamCenter);
 
 	// reset the player's y-velocity if they're grounded (so we don't continuously accelerate downwards)
-	if (isGrounded && !jumpKeyDown)
+	if ((grounded && !jumpKeyDown) || headBonked)
 	{
 		posDelta.y = 0.f;
 	}
 
-	// TEMPORARY CODE, to make sure jump force is only applied for the first frame the jump key is pressed
-	if (jumpKeyDown)
-	{
-		jumpKeyDown = false;
-	}
+	
 
 	// update the previous state for the next frame
 	pPrevState = pCurrentState;
@@ -183,6 +179,7 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 		walkRightKeyDown = false;
 		break;
 	case JUMP_KEY:
+		jumpKeyDown = false;
 		break;
 	}
 }
@@ -206,7 +203,7 @@ void Player::ProcessInputs(float deltaTime)
 		posDelta.x += speed * deltaTime;
 		//posDelta.x += speed;
 	}
-	if (isGrounded && jumpKeyDown)
+	if (grounded && jumpKeyDown)
 	{
 		posDelta.y = JUMP_FORCE * deltaTime;
 		applyGravity = false; // temporarily stop applying gravity to allow variable height jumping

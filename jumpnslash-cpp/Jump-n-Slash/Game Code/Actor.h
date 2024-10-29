@@ -28,6 +28,7 @@ protected:
 	sf::Vector2f GetPosDelta() const;
 	LevelMap* GetLevel() const;
 	bool IsGrounded() const;
+	bool IsHeadBonked() const;
 
 	void RaycastRight();
 	void RaycastLeft();
@@ -45,7 +46,8 @@ protected:
 	sf::Sprite* pSprite;
 	LevelMap* pLevel;
 	RoomData* pCurrentRoom;
-	bool isGrounded;
+	bool grounded; // Flag to indicate if the actor is grounded
+	bool headBonked; // Flag to indicate if the actor is touching a ceiling
 	int facing; // 1 for right, -1 for left
 };
 

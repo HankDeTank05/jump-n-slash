@@ -23,6 +23,7 @@ public:
 
 		static sf::Vector2f GetPosDelta(Player* pPlayer);
 		static bool IsGrounded(Player* pPlayer);
+		static bool IsHeadBonked(Player* pPlayer);
 		static bool IsApplyGravity(Player* pPlayer);
 
 		// mutators

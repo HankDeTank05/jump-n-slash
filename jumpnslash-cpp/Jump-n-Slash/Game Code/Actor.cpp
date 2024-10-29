@@ -18,7 +18,8 @@ Actor::Actor(float _speed, LevelMap* _pLevel)
 	pSprite(nullptr),
 	pLevel(_pLevel),
 	pCurrentRoom(nullptr),
-	isGrounded(false),
+	grounded(false),
+	headBonked(false),
 	facing(1)
 {
 	assert(pLevel != nullptr);
@@ -65,7 +66,12 @@ LevelMap* Actor::GetLevel() const
 
 bool Actor::IsGrounded() const
 {
-	return isGrounded;
+	return grounded;
+}
+
+bool Actor::IsHeadBonked() const
+{
+	return headBonked;
 }
 
 void Actor::RaycastRight()
@@ -290,7 +296,7 @@ void Actor::RaycastUp()
 		maxY = mayMoveTo.y;
 	}
 
-	isGrounded = pos.y == maxY;
+	headBonked = pos.y == maxY;
 
 	pos.y = maxY;
 }
@@ -383,7 +389,7 @@ void Actor::RaycastDown()
 
 	// Determine if we is grounded or not
 	minY -= TILE_SIZE_F;
-	isGrounded = pos.y == minY;
+	grounded = pos.y == minY;
 
 	pos.y = minY;
 }

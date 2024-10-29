@@ -12,6 +12,11 @@ bool PlayerAttorney::State::IsGrounded(Player* pPlayer)
 	return pPlayer->IsGrounded();
 }
 
+bool PlayerAttorney::State::IsHeadBonked(Player* pPlayer)
+{
+	return pPlayer->IsHeadBonked();
+}
+
 bool PlayerAttorney::State::IsApplyGravity(Player* pPlayer)
 {
 	return pPlayer->IsApplyGravity();

@@ -49,7 +49,7 @@ void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 	}
 	else
 	{
-		assert(false); // if you reach this statement, then you fucked up bitch (or ur in space idfk)
+		//assert(false); // if you reach this statement, then you fucked up bitch (or ur in space idfk)
 	}
 
 	if (PlayerAttorney::State::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
