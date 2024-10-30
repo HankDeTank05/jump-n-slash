@@ -59,6 +59,8 @@ Player::Player(LevelMap* pLevel)
 	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
 	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
+
+	SetCollisionSprite(pSprite, VolumeType::BSphere);
 }
 
 Player::~Player()
@@ -103,18 +105,6 @@ void Player::Update(float deltaTime)
 		}
 	}
 
-	// set the sprite position for drawing
-	pSprite = animComp.GetCurrentFrame();
-	if (facing == 1)
-	{
-		pSprite->setOrigin(0.f, 0.f);
-	}
-	else if (facing == -1)
-	{
-		pSprite->setOrigin(32.f, 0.f);
-	}
-	pSprite->setScale(static_cast<float>(facing), 1.f);
-	pSprite->setPosition(pos);
 	UpdateCollisionData(pSprite);
 
 	// update the previous state for the next frame
