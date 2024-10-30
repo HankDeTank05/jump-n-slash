@@ -140,7 +140,7 @@ void AlarmObject::TriggerAlarm(AlarmID id)
 	}
 }
 
-void AlarmObject::AlarmRegistration(AlarmID id)
+void AlarmObject::Register(AlarmID id)
 {
 	int alarmNum = static_cast<int>(id);
 
@@ -151,7 +151,7 @@ void AlarmObject::AlarmRegistration(AlarmID id)
 	regData[alarmNum].regState = RegistrationState::CURRENTLY_REGISTERED;
 }
 
-void AlarmObject::AlarmDeregistration(AlarmID id)
+void AlarmObject::Deregister(AlarmID id)
 {
 	int alarmNum = static_cast<int>(id);
 

@@ -10,6 +10,7 @@
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/InputObject.h"
 #include "../Engine Code/AlarmObject.h"
+#include "../Engine Code/CollisionObject.h"
 #include "../Engine Code/Subject.h"
 #include "../Engine Code/AnimationComponent.h"
 
@@ -29,12 +30,19 @@ public:
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
 
+	// update stuff
 	virtual void Update(float deltaTime) override;
 
+	// alarm stuff
 	virtual void Alarm0() override;
 
+	// input stuff
 	virtual void KeyPressed(sf::Keyboard::Key key) override;
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
+	// collision stuff
+	virtual void OnCollisionEnter(CollisionObject* pOther) override;
+	virtual void OnCollisionDuring(CollisionObject* pOther) override;
+	virtual void OnCollisionExit(CollisionObject* pOther) override;
 
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;

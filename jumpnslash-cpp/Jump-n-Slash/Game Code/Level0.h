@@ -6,6 +6,7 @@
 // forward declarations
 class LevelMap;
 class Player;
+class Enemy;
 
 class Level0 : public Scene
 {
@@ -21,6 +22,7 @@ public:
 private:
 	LevelMap* pMap;
 	Player* pPlayer;
+	Enemy* pEnemy;
 };
 
 #endif

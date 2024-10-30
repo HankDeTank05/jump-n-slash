@@ -103,7 +103,19 @@ void Player::Update(float deltaTime)
 		}
 	}
 
-	
+	// set the sprite position for drawing
+	pSprite = animComp.GetCurrentFrame();
+	if (facing == 1)
+	{
+		pSprite->setOrigin(0.f, 0.f);
+	}
+	else if (facing == -1)
+	{
+		pSprite->setOrigin(32.f, 0.f);
+	}
+	pSprite->setScale(static_cast<float>(facing), 1.f);
+	pSprite->setPosition(pos);
+	UpdateCollisionData(pSprite);
 
 	// update the previous state for the next frame
 	pPrevState = pCurrentState;
@@ -191,6 +203,21 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 bool Player::IsApplyGravity()
 {
 	return applyGravity;
+}
+
+void Player::OnCollisionEnter(CollisionObject* pOther)
+{
+	if (DEBUG_COLLISION) std::cout << "Player has entered collision" << std::endl;
+}
+
+void Player::OnCollisionDuring(CollisionObject* pOther)
+{
+	// do nothing
+}
+
+void Player::OnCollisionExit(CollisionObject* pOther)
+{
+	if (DEBUG_COLLISION) std::cout << "Player has exited collision" << std::endl;
 }
 
 void Player::ProcessInputs(float deltaTime)

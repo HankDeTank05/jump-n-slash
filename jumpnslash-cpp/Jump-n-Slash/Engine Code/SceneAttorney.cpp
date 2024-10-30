@@ -76,3 +76,8 @@ void SceneAttorney::Alarm::Deregister(Scene* pScene, AlarmManager::TimelineRef t
 {
 	pScene->Deregister(timelineRef);
 }
+
+CollisionManager* SceneAttorney::Collision::GetCollisionManager(Scene* pScene)
+{
+	return pScene->GetCollisionManager();
+}

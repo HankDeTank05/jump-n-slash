@@ -13,6 +13,7 @@
 
 #include "Constants.h"
 #include "DesignerControls.h"
+#include "DebugFlags.h"
 
 const std::string AssetLoader::COMMAND_TEXTURE = "texture";
 const std::string AssetLoader::COMMAND_SPRITE = "sprite";
@@ -164,8 +165,7 @@ void AssetLoader::ParseCommand(std::string line, std::string command)
 	}
 	//*/
 
-	// TODO: make a debug flag for this
-	std::cout << "Successfully parsed the following asset command: " << line << std::endl;
+	if (DEBUG_ASSET_LOAD_AUTOMATION) std::cout << "Successfully parsed the following asset command: " << line << std::endl;
 }
 
 void AssetLoader::ParseTextureCommand(std::string line)
