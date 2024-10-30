@@ -10,9 +10,12 @@ const float ANIMATION_FRAMERATE = 7.f;
 // player controls
 // TODO: add link to SFML docs
 
-const sf::Keyboard::Key JUMP_KEY = sf::Keyboard::Up;
+const sf::Keyboard::Key JUMP_KEY = sf::Keyboard::Space;
 const sf::Keyboard::Key WALK_LEFT_KEY = sf::Keyboard::Left;
 const sf::Keyboard::Key WALK_RIGHT_KEY = sf::Keyboard::Right;
+const sf::Keyboard::Key SLASH_ATK_KEY = sf::Keyboard::V; // not yet in use
+const sf::Keyboard::Key DREAM_ATK_KEY = sf::Keyboard::C; // not yet in use
+const sf::Keyboard::Key DASH_KEY = sf::Keyboard::X; // not yet in use
 
 // player properties
 
