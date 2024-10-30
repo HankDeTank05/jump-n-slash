@@ -30,40 +30,40 @@ void PlayerStateFalling::Enter(Player* pPlayer) const
 {
 	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateFalling" << std::endl;
 
-	PlayerAttorney::State::SetAnimationFall(pPlayer);
+	PlayerAttorney::StateAccess::SetAnimationFall(pPlayer);
 }
 
 void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const
 {
-	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
-	if (PlayerAttorney::State::IsApplyGravity(pPlayer))
+	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
+	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
 	{
-		PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+		PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
 	}
 
 	// Player can move left or right while falling
-	if (PlayerAttorney::State::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
+	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
 	{
-		PlayerAttorney::State::RaycastRight(pPlayer);
+		PlayerAttorney::StateAccess::RaycastRight(pPlayer);
 	}
-	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
+	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
 	{
-		PlayerAttorney::State::RaycastLeft(pPlayer);
+		PlayerAttorney::StateAccess::RaycastLeft(pPlayer);
 	}
-	PlayerAttorney::State::RaycastDown(pPlayer);
+	PlayerAttorney::StateAccess::RaycastDown(pPlayer);
 }
 
 const PlayerMoveState* PlayerStateFalling::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;
 
-	if (PlayerAttorney::State::GetPosDelta(pPlayer).y < 0.0f)
+	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y < 0.0f)
 	{
 		pNextState = &PlayerFSM::jumping; // Not technically possible at the moment
 	}
-	else if (PlayerAttorney::State::IsGrounded(pPlayer))
+	else if (PlayerAttorney::StateAccess::IsGrounded(pPlayer))
 	{
-		if (PlayerAttorney::State::GetPosDelta(pPlayer).x != 0.0f)
+		if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x != 0.0f)
 		{
 			pNextState = &PlayerFSM::walking;
 		}

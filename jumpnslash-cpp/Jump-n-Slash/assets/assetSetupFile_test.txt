@@ -33,10 +33,10 @@ animation "player idle" ["player idle 1" "player idle 2" "player idle 3" "player
 animation "player jump" ["player jump 1" "player jump 2" "player jump 3" "player jump 4"] true
 animation "player walk" ["player walk 1" "player walk 2" "player walk 3" "player walk 4"] true
 texture "sword spritesheet" "sword\sheet_test.png" false
-sprite "sword idle 1" "sword spritesheet" 0 0 8 8
-sprite "sword swing 1" "sword spritesheet" 0 8 8 8
-sprite "sword swing 2" "sword spritesheet" 8 8 8 8
-sprite "sword swing 3" "sword spritesheet" 16 8 8 8
-sprite "sword swing 4" "sword spritesheet" 24 8 8 8
+sprite "sword idle 1" "sword spritesheet" 0 0 32 32
+sprite "sword swing 1" "sword spritesheet" 0 32 32 32
+sprite "sword swing 2" "sword spritesheet" 32 32 32 32
+sprite "sword swing 3" "sword spritesheet" 64 32 32 32
+sprite "sword swing 4" "sword spritesheet" 96 32 32 32
 animation "sword idle" ["sword idle 1"] true
 animation "sword swing" ["sword swing 1" "sword swing 2" "sword swing 3" "sword swing 4"] true

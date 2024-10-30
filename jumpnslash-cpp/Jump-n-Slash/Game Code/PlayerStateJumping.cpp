@@ -30,36 +30,36 @@ void PlayerStateJumping::Enter(Player* pPlayer) const
 {
 	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateJumping" << std::endl;
 
-	PlayerAttorney::State::SetAnimationJump(pPlayer);
+	PlayerAttorney::StateAccess::SetAnimationJump(pPlayer);
 }
 
 void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const
 {
 	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
 	
-	if (PlayerAttorney::State::IsApplyGravity(pPlayer))
+	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
 	{
-		PlayerAttorney::State::ApplyGravity(pPlayer, deltaTime);
+		PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
 	}
 	
 	// Player can move left or right while jumping
-	if (PlayerAttorney::State::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
+	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
 	{
-		PlayerAttorney::State::RaycastRight(pPlayer);
+		PlayerAttorney::StateAccess::RaycastRight(pPlayer);
 	}
-	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
+	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
 	{
-		PlayerAttorney::State::RaycastLeft(pPlayer);
+		PlayerAttorney::StateAccess::RaycastLeft(pPlayer);
 	}
 
-	PlayerAttorney::State::RaycastUp(pPlayer);
+	PlayerAttorney::StateAccess::RaycastUp(pPlayer);
 }
 
 const PlayerMoveState* PlayerStateJumping::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;
-
-	if (PlayerAttorney::State::GetPosDelta(pPlayer).y > 0.0f || PlayerAttorney::State::IsHeadBonked(pPlayer))
+	
+	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y > 0.0f || PlayerAttorney::StateAccess::IsHeadBonked(pPlayer))
 	{
 		pNextState = &PlayerFSM::falling;
 	}

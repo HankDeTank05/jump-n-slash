@@ -11,7 +11,7 @@ class RoomData;
 class PlayerAttorney
 {
 public:
-	class State
+	class StateAccess
 	{
 	private:
 		friend class PlayerStateIdle;
@@ -41,7 +41,7 @@ public:
 		static void SetAnimationJump(Player* pPlayer);
 		static void SetAnimationFall(Player* pPlayer);
 	};
-	class Level
+	class LevelAccess
 	{
 	private:
 		friend class LevelMap;
@@ -54,6 +54,12 @@ public:
 
 		static void SetPos(Player* pPlayer, sf::Vector2f newPos);
 		static void SetCurrentRoom(Player* pPlayer, RoomData* pNextRoom);
+	};
+	class SwordAccess
+	{
+	private:
+		friend class Sword;
+		static sf::Vector2f GetPos(Player* pPlayer);
 	};
 };
 

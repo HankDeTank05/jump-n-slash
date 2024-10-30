@@ -341,10 +341,10 @@ void LevelMap::LinkToPlayer(Player* _pPlayer)
 	pPlayer = _pPlayer;
 
 	// set player spawn point
-	PlayerAttorney::Level::SetCurrentRoom(pPlayer, rooms.front());
+	PlayerAttorney::LevelAccess::SetCurrentRoom(pPlayer, rooms.front());
 	
 	// set player pos
-	PlayerAttorney::Level::SetPos(pPlayer, *(rooms.front()->GetPlayerSpawnPoint()));
+	PlayerAttorney::LevelAccess::SetPos(pPlayer, *(rooms.front()->GetPlayerSpawnPoint()));
 }
 
 sf::Vector2f LevelMap::GetStartingSpawnPoint()
@@ -406,8 +406,8 @@ void LevelMap::OnNotify(ObserverEvent event)
 	{
 	case ObserverEvent::PlayerOutsideCurrentRoom:
 	{
-		RoomData* pNextRoom = GetRoomAtPos(PlayerAttorney::Level::GetPos(pPlayer));
-		PlayerAttorney::Level::SetCurrentRoom(pPlayer, pNextRoom);
+		RoomData* pNextRoom = GetRoomAtPos(PlayerAttorney::LevelAccess::GetPos(pPlayer));
+		PlayerAttorney::LevelAccess::SetCurrentRoom(pPlayer, pNextRoom);
 	}
 		break;
 	case ObserverEvent::PlayerInScrollArea:

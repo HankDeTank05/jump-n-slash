@@ -7,10 +7,10 @@ class Player;
 class PlayerMoveState
 {
 public:
-	PlayerMoveState();
+	PlayerMoveState() = default;
 	PlayerMoveState(const PlayerMoveState& pms) = delete;
 	PlayerMoveState& operator=(const PlayerMoveState& pms) = delete;
-	virtual ~PlayerMoveState();
+	virtual ~PlayerMoveState() = default;
 
 	virtual void Enter(Player* pPlayer) const = 0;
 	//virtual const void HandleInput(Player* pPlayer) const = 0;
