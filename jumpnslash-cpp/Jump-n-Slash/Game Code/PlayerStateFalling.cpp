@@ -36,18 +36,21 @@ void PlayerStateFalling::Enter(Player* pPlayer) const
 void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const
 {
 	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
-	PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
+	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
+	{
+		PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
+	}
 
 	// Player can move left or right while falling
 	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
 	{
-		PlayerAttorney::StateAccess::RaycastRight(pPlayer, deltaTime);
+		PlayerAttorney::StateAccess::RaycastRight(pPlayer);
 	}
 	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
 	{
-		PlayerAttorney::StateAccess::RaycastLeft(pPlayer, deltaTime);
+		PlayerAttorney::StateAccess::RaycastLeft(pPlayer);
 	}
-	PlayerAttorney::StateAccess::RaycastDown(pPlayer, deltaTime);
+	PlayerAttorney::StateAccess::RaycastDown(pPlayer);
 }
 
 const PlayerMoveState* PlayerStateFalling::GetNextState(Player* pPlayer) const

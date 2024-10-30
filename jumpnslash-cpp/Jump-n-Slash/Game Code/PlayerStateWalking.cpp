@@ -41,19 +41,27 @@ void PlayerStateWalking::Enter(Player* pPlayer) const
 
 void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 {
-	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
-	PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
+	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
+	
+	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
+	{
+		PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
+	}
+	else
+	{
+		//assert(false); // if you reach this statement, then you fucked up bitch (or ur in space idfk)
+	}
 
 	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
 	{
-		PlayerAttorney::StateAccess::RaycastRight(pPlayer, deltaTime);
+		PlayerAttorney::StateAccess::RaycastRight(pPlayer);
 	}
 	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x < 0) // check for map collision moving left
 	{
-		PlayerAttorney::StateAccess::RaycastLeft(pPlayer, deltaTime);
+		PlayerAttorney::StateAccess::RaycastLeft(pPlayer);
 	}
 
-	PlayerAttorney::StateAccess::RaycastDown(pPlayer, deltaTime);
+	PlayerAttorney::StateAccess::RaycastDown(pPlayer);
 }
 
 const PlayerMoveState* PlayerStateWalking::GetNextState(Player* pPlayer) const

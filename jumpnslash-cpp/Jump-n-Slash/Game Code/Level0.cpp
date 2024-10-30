@@ -41,11 +41,10 @@ Level0::~Level0()
 void Level0::Init()
 {
 	pMap = new LevelMap(GridManager::GetGrid("test2"));
-	pPlayer = new Player();
+	pPlayer = new Player(pMap);
 	pSword = new Sword(pPlayer);
 	pEnemy = new Enemy();
 
-	pPlayer->LinkToMap(pMap);
 	pPlayer->AddObserver(pMap);
 
 	SetCollisionPair<Player, Enemy>();

@@ -12,24 +12,34 @@ bool PlayerAttorney::StateAccess::IsGrounded(Player* pPlayer)
 	return pPlayer->IsGrounded();
 }
 
-void PlayerAttorney::StateAccess::RaycastRight(Player* pPlayer, float deltaTime)
+bool PlayerAttorney::StateAccess::IsHeadBonked(Player* pPlayer)
 {
-	pPlayer->RaycastRight(deltaTime);
+	return pPlayer->IsHeadBonked();
 }
 
-void PlayerAttorney::StateAccess::RaycastLeft(Player* pPlayer, float deltaTime)
+bool PlayerAttorney::StateAccess::IsApplyGravity(Player* pPlayer)
 {
-	pPlayer->RaycastLeft(deltaTime);
+	return pPlayer->IsApplyGravity();
 }
 
-void PlayerAttorney::StateAccess::RaycastUp(Player* pPlayer, float deltaTime)
+void PlayerAttorney::StateAccess::RaycastRight(Player* pPlayer)
 {
-	pPlayer->RaycastUp(deltaTime);
+	pPlayer->RaycastRight();
 }
 
-void PlayerAttorney::StateAccess::RaycastDown(Player* pPlayer, float deltaTime)
+void PlayerAttorney::StateAccess::RaycastLeft(Player* pPlayer)
 {
-	pPlayer->RaycastDown(deltaTime);
+	pPlayer->RaycastLeft();
+}
+
+void PlayerAttorney::StateAccess::RaycastUp(Player* pPlayer)
+{
+	pPlayer->RaycastUp();
+}
+
+void PlayerAttorney::StateAccess::RaycastDown(Player* pPlayer)
+{
+	pPlayer->RaycastDown();
 }
 
 void PlayerAttorney::StateAccess::ApplyGravity(Player* pPlayer, float deltaTime)

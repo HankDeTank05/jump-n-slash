@@ -35,9 +35,14 @@ void PlayerStateIdle::Enter(Player* pPlayer) const
 
 void PlayerStateIdle::Update(Player* pPlayer, float deltaTime) const
 {
-	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
-	PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
-	PlayerAttorney::StateAccess::RaycastDown(pPlayer, deltaTime);
+	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
+	
+	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
+	{
+		PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
+	}
+
+	PlayerAttorney::StateAccess::RaycastDown(pPlayer);
 }
 
 const PlayerMoveState* PlayerStateIdle::GetNextState(Player* pPlayer) const
@@ -50,7 +55,7 @@ const PlayerMoveState* PlayerStateIdle::GetNextState(Player* pPlayer) const
 	}
 	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y > 0.0f)
 	{
-		pNextState = &PlayerFSM::falling; // Not technically possible at the moment
+		pNextState = &PlayerFSM::falling;
 	}
 	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x != 0.0f)
 	{

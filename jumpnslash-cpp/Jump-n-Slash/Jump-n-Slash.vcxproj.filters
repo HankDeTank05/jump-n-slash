@@ -82,12 +82,6 @@
     <Filter Include="Source Files\Game Code\Misc. files\Extra Documentation">
       <UniqueIdentifier>{5c031f14-77f7-42dd-99df-5344014c8227}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Player">
-      <UniqueIdentifier>{03005a24-48dc-482f-bf47-4221183d0c1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Player\FSM + States">
-      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Code\Scenes">
       <UniqueIdentifier>{5e9b3079-2e05-4406-b849-155b97e9c9f8}</UniqueIdentifier>
     </Filter>
@@ -148,17 +142,23 @@
     <Filter Include="Source Files\Game Code\Level Data\Tileset">
       <UniqueIdentifier>{55712ed0-db1a-4a8e-ab06-52db385587cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player">
+      <UniqueIdentifier>{03005a24-48dc-482f-bf47-4221183d0c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player\FSM + States">
+      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands">
-      <UniqueIdentifier>{21be24df-c5aa-4439-8ad5-40426bd128d3}</UniqueIdentifier>
+      <UniqueIdentifier>{53d4d415-d90e-4c33-9bcc-5e113ec647ea}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Volumes">
-      <UniqueIdentifier>{c0a3b356-28ba-4328-9990-d4aeeb53a3b5}</UniqueIdentifier>
+      <UniqueIdentifier>{ddd5f260-9c2d-4445-b2ef-8b60d0109dd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System\Dispatch">
+      <UniqueIdentifier>{2ee3866d-c446-41d6-bd26-525d39d05e84}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game Code\Enemy">
-      <UniqueIdentifier>{c91225e8-1d66-4c95-bd60-f6e19584b008}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching">
-      <UniqueIdentifier>{f71274b0-ff57-44ca-bf9e-a02bc532b6cc}</UniqueIdentifier>
+      <UniqueIdentifier>{6034212f-3ecc-492a-b83b-4d7cb259cc2e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game Code\Sword">
       <UniqueIdentifier>{4d852e8c-8ee3-4aa4-8a22-ae9c292a4f2c}</UniqueIdentifier>
@@ -253,28 +253,28 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerStateIdle.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerStateWalking.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerStateJumping.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerStateFalling.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\Player.cpp">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\Level0.cpp">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerFSM.cpp">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerAttorney.cpp">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\LevelMap.cpp">
       <Filter>Source Files\Game Code\Level Data</Filter>
@@ -293,6 +293,9 @@
     </ClCompile>
     <ClCompile Include="Game Code\PlatformSemisolid.cpp">
       <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerMoveState.cpp">
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\EngineAttorney.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
@@ -450,10 +453,13 @@
     <ClCompile Include="Engine Code\AnimationManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\CollisionObject.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
+    <ClCompile Include="Game Code\Actor.cpp">
+      <Filter>Source Files\Game Code\Actors</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\CollisionManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\CollisionObject.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\CollisionObjectAttorney.cpp">
@@ -468,8 +474,11 @@
     <ClCompile Include="Engine Code\CollisionTestPairCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\CollisionVolumeBSphere.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Volumes</Filter>
+    <ClCompile Include="Engine Code\CollisionTestSelfCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\CollisionDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\CollisionVolumeAABB.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Volumes</Filter>
@@ -477,8 +486,8 @@
     <ClCompile Include="Engine Code\CollisionVolumeBoundingBox.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Volumes</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\CollisionDeregistrationCommand.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
+    <ClCompile Include="Engine Code\CollisionVolumeBSphere.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Volumes</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\Enemy.cpp">
       <Filter>Source Files\Game Code\Enemy</Filter>
@@ -600,31 +609,31 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\Player.h">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerMoveState.h">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateIdle.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerFSM.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateWalking.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateJumping.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateFalling.h">
-      <Filter>Source Files\Game Code\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\Level0.h">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerAttorney.h">
-      <Filter>Source Files\Game Code\Player</Filter>
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\LevelMap.h">
       <Filter>Source Files\Game Code\Level Data</Filter>
@@ -821,6 +830,18 @@
     <ClInclude Include="Game Code\Tileset.h">
       <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
     </ClInclude>
+    <ClInclude Include="Engine Code\CollisionObjectAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CollisionObjectGroup.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CollisionDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CollisionRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
+    </ClInclude>
     <ClInclude Include="Engine Code\CollisionTestCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
     </ClInclude>
@@ -829,18 +850,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\CollisionTestSelfCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\CollisionRegistrationCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\CollisionDeregistrationCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\CollisionObjectAttorney.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\CollisionObjectGroup.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\CollisionVolumeBSphere.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Volumes</Filter>
@@ -854,17 +863,17 @@
     <ClInclude Include="Engine Code\CollisionVolumeBoundingBox.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Volumes</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\Enemy.h">
-      <Filter>Source Files\Game Code\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\CollisionDispatchBase.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching</Filter>
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Dispatch</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\CollisionDispatch.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching</Filter>
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Dispatch</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\NoCollisionDispatch.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Collision Dispatching</Filter>
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System\Dispatch</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Enemy.h">
+      <Filter>Source Files\Game Code\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\Sword.h">
       <Filter>Source Files\Game Code\Sword</Filter>
