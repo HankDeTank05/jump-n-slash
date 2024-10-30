@@ -84,7 +84,7 @@ void Player::Update(float deltaTime)
 	// check if we're still inside the room
 	sf::Vector2f roomMin = pCurrentRoom->GetRoomMinBounds();
 	sf::Vector2f roomMax = pCurrentRoom->GetRoomMaxBounds();
-	if (pos.x < roomMin.x || roomMin.x <= pos.x || pos.y < roomMin.y || roomMin.y < pos.y)
+	if (pos.x < roomMin.x || roomMax.x <= pos.x || pos.y < roomMin.y || roomMax.y < pos.y)
 	{
 		Notify(ObserverEvent::PlayerOutsideCurrentRoom);
 	}
@@ -97,6 +97,10 @@ void Player::Update(float deltaTime)
 	if ((grounded && !jumpKeyDown) || headBonked)
 	{
 		posDelta.y = 0.f;
+		if (headBonked == true)
+		{
+			headBonked = false;
+		}
 	}
 
 	

@@ -55,7 +55,7 @@ const PlayerMoveState* PlayerStateIdle::GetNextState(Player* pPlayer) const
 	}
 	else if (PlayerAttorney::State::GetPosDelta(pPlayer).y > 0.0f)
 	{
-		pNextState = &PlayerFSM::falling; // Not technically possible at the moment
+		pNextState = &PlayerFSM::falling;
 	}
 	else if (PlayerAttorney::State::GetPosDelta(pPlayer).x != 0.0f)
 	{
