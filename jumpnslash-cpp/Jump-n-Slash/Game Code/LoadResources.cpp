@@ -15,6 +15,7 @@
 #include "../Engine Code/SceneManager.h"
 
 #include "Level0.h"
+#include "TestScene.h"
 #include "DesignerControls.h"
 #include "AssetLoader.h"
 
@@ -77,5 +78,6 @@ void JumpSlashEngine::LoadResources()
 	assert(JUMP_FORCE < 0.f);
 	assert(MAX_JUMP_HOLD_TIME >= 0.f);
 
-	SceneManager::SetStartScene(new Level0());
+	//SceneManager::SetStartScene(new Level0());
+	SceneManager::SetStartScene(new TestScene());
 }

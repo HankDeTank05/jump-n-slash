@@ -893,6 +893,9 @@
     <ClInclude Include="Game Code\PlayerControlStrategy.h">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Engine Code\ControllerInputs.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\0_DocsHome.txt">

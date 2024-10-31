@@ -6,6 +6,10 @@
 const bool DEBUG_COLLISION = false;
 const bool DEBUG_COLLISION_SHOW_NUMBERS = false;
 
+// input debug flags
+
+const bool DEBUG_CONTROLLER_INPUT = true;
+
 // player debug flags
 
 const bool DEBUG_PLAYER_POSITION = false; // visualizes player pos and posDelta

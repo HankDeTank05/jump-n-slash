@@ -16,7 +16,9 @@ public:
 	virtual ~TestClass();
 
 	virtual void Update(float deltaTime) override;
+
 	virtual void Draw() override;
+
 	virtual void KeyPressed(sf::Keyboard::Key key) override;
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
 	virtual void MouseBtnPressed(sf::Mouse::Button btn) override;

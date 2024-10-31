@@ -27,11 +27,11 @@ const sf::Keyboard::Key KB_DASH = sf::Keyboard::X; // not yet in use
 
 // gamepad controls
 
-const int GP_JUMP; // not yet in use
-const sf::Joystick::Axis GP_WALK; // not yet in use
-const int GP_SLASH_ATK; // not yet in use
-const int GP_DREAM_ATK; // not yet in use
-const int GP_DASH; // not yet in use
+//const int GP_JUMP; // not yet in use
+//const sf::Joystick::Axis GP_WALK; // not yet in use
+//const int GP_SLASH_ATK; // not yet in use
+//const int GP_DREAM_ATK; // not yet in use
+//const int GP_DASH; // not yet in use
 
 ///////////////////////
 // player properties //
