@@ -33,6 +33,11 @@ void DrawObject::Render(sf::Drawable& drawable)
 	EngineAttorney::GameWindow::GetWindow().draw(drawable);
 }
 
+void DrawObject::Render(const sf::Drawable& drawable, const sf::Transform& tform)
+{
+	EngineAttorney::GameWindow::GetWindow().draw(drawable, tform);
+}
+
 void DrawObject::Render(sf::Vertex* array, int vtexCount)
 {
 	EngineAttorney::GameWindow::GetWindow().draw(array, vtexCount, sf::Lines);

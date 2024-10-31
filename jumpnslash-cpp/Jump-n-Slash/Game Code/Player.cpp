@@ -49,16 +49,18 @@ Player::Player(LevelMap* pLevel)
 	pAnimComp->SetAnimation("idle");
 
 	pSprite = pAnimComp->GetCurrentFrame();
+	SetWidth();
+	SetHeight();
 
 	// register with the engine
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
-	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(JUMP_KEY, KeyEvent::KeyRelease);
-	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(WALK_LEFT_KEY, KeyEvent::KeyRelease);
-	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyPress);
-	RequestKeyRegistration(WALK_RIGHT_KEY, KeyEvent::KeyRelease);
+	RequestKeyRegistration(KB_JUMP, KeyEvent::KeyPress);
+	RequestKeyRegistration(KB_JUMP, KeyEvent::KeyRelease);
+	RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyPress);
+	RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyRelease);
+	RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyPress);
+	RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyRelease);
 
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
 }
@@ -105,6 +107,26 @@ void Player::Update(float deltaTime)
 		}
 	}
 
+	// update the sprite
+	assert(pSprite != nullptr);
+	pSprite = pAnimComp->GetCurrentFrame();
+	SetWidth();
+	SetHeight();
+
+	if (facing == 1)
+	{
+		pSprite->setOrigin(0.f, 0.f);
+	}
+	else if (facing == -1)
+	{
+		pSprite->setOrigin(TILE_SIZE_F, 0.f);
+	}
+	else
+	{
+		assert(false);
+	}
+	pSprite->setScale(sf::Vector2f(static_cast<float>(facing), 1.f));
+	pSprite->setPosition(pos);
 	UpdateCollisionData(pSprite);
 
 	// update the previous state for the next frame
@@ -160,15 +182,15 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 {
 	switch (key)
 	{
-	case WALK_LEFT_KEY:
+	case KB_WALK_LEFT:
 		walkLeftKeyDown = true;
 		facing = -1;
 		break;
-	case WALK_RIGHT_KEY:
+	case KB_WALK_RIGHT:
 		walkRightKeyDown = true;
 		facing = 1;
 		break;
-	case JUMP_KEY:
+	case KB_JUMP:
 		jumpKeyDown = true;
 		break;
 	}
@@ -178,13 +200,13 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 {
 	switch (key)
 	{
-	case WALK_LEFT_KEY:
+	case KB_WALK_LEFT:
 		walkLeftKeyDown = false;
 		break;
-	case WALK_RIGHT_KEY:
+	case KB_WALK_RIGHT:
 		walkRightKeyDown = false;
 		break;
-	case JUMP_KEY:
+	case KB_JUMP:
 		jumpKeyDown = false;
 		break;
 	}

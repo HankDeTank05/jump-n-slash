@@ -344,7 +344,7 @@ void LevelMap::LinkToPlayer(Player* _pPlayer)
 	PlayerAttorney::LevelAccess::SetCurrentRoom(pPlayer, rooms.front());
 	
 	// set player pos
-	PlayerAttorney::LevelAccess::SetPos(pPlayer, *(rooms.front()->GetPlayerSpawnPoint()));
+	PlayerAttorney::LevelAccess::SetPosition(pPlayer, *(rooms.front()->GetPlayerSpawnPoint()));
 }
 
 sf::Vector2f LevelMap::GetStartingSpawnPoint()

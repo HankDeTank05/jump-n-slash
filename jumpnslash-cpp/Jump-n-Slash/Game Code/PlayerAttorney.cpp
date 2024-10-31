@@ -77,9 +77,9 @@ sf::Vector2f PlayerAttorney::LevelAccess::GetPos(Player* pPlayer)
 	return pPlayer->GetPos();
 }
 
-void PlayerAttorney::LevelAccess::SetPos(Player* pPlayer, sf::Vector2f newPos)
+void PlayerAttorney::LevelAccess::SetPosition(Player* pPlayer, const sf::Vector2f& newPos)
 {
-	pPlayer->SetPos(newPos);
+	pPlayer->SetPosition(newPos);
 }
 
 void PlayerAttorney::LevelAccess::SetCurrentRoom(Player* pPlayer, RoomData* pNextRoom)

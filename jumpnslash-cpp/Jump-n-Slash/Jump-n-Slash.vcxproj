@@ -244,6 +244,7 @@
     <ClInclude Include="Game Code\PlatformSemisolid.h" />
     <ClInclude Include="Game Code\Player.h" />
     <ClInclude Include="Game Code\PlayerAttorney.h" />
+    <ClInclude Include="Game Code\PlayerControlStrategy.h" />
     <ClInclude Include="Game Code\PlayerFSM.h" />
     <ClInclude Include="Game Code\PlayerMoveState.h" />
     <ClInclude Include="Game Code\PlayerStateFalling.h" />

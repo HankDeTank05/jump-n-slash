@@ -52,7 +52,7 @@ public:
 
 		// mutators
 
-		static void SetPos(Player* pPlayer, sf::Vector2f newPos);
+		static void SetPosition(Player* pPlayer, const sf::Vector2f& newPos);
 		static void SetCurrentRoom(Player* pPlayer, RoomData* pNextRoom);
 	};
 	class SwordAccess

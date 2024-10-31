@@ -35,7 +35,7 @@ void PlayerStateJumping::Enter(Player* pPlayer) const
 
 void PlayerStateJumping::Update(Player* pPlayer, float deltaTime) const
 {
-	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
+	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
 	
 	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
 	{

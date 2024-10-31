@@ -27,6 +27,8 @@ protected:
 	sf::Vector2f GetPos() const;
 	sf::Vector2f GetPosDelta() const;
 	LevelMap* GetLevel() const;
+	float GetWidth() const;
+	float GetHeight() const;
 	bool IsGrounded() const;
 	bool IsHeadBonked() const;
 
@@ -35,12 +37,16 @@ protected:
 	void RaycastUp();
 	void RaycastDown();
 
-	void SetPos(sf::Vector2f newPos);
+	void SetPosition(const sf::Vector2f& newPos);
 	void ApplyGravity(float deltaTime);
+	void SetWidth();
+	void SetHeight();
 
 protected:
 	sf::Vector2f pos;
 	sf::Vector2f posDelta;
+	float width;
+	float height;
 	float speed;
 	AnimationComponent* pAnimComp;
 	sf::Sprite* pSprite;

@@ -122,6 +122,8 @@ protected:
 	*/
 	void Render(sf::Drawable& drawable);
 
+	void Render(const sf::Drawable& drawable, const sf::Transform& tform);
+
 	void Render(sf::Vertex* array, int vtexCount);
 	/*!
 	* \brief	Request that the engine draw this object.

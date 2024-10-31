@@ -13,6 +13,8 @@
 Actor::Actor(float _speed, LevelMap* _pLevel)
 	: pos(),
 	posDelta(0.f, 0.f),
+	width(0.f),
+	height(0.f),
 	speed(_speed),
 	pAnimComp(new AnimationComponent()),
 	pSprite(nullptr),
@@ -34,18 +36,6 @@ void Actor::Draw()
 {
 	assert(pCurrentRoom != nullptr); // TODO: this is bad and stupid but Henry told me to do it (bitch)
 
-	assert(pSprite != nullptr);
-	pSprite = pAnimComp->GetCurrentFrame();
-	if (facing == 1)
-	{
-		pSprite->setOrigin(0.f, 0.f);
-	}
-	else if (facing == -1)
-	{
-		pSprite->setOrigin(TILE_SIZE_F, 0.f);
-	}
-	pSprite->setScale(static_cast<float>(facing), 1.f);
-	pSprite->setPosition(pos);
 	Render(*pSprite);
 }
 
@@ -62,6 +52,16 @@ sf::Vector2f Actor::GetPosDelta() const
 LevelMap* Actor::GetLevel() const
 {
 	return pLevel;
+}
+
+float Actor::GetWidth() const
+{
+	return width;
+}
+
+float Actor::GetHeight() const
+{
+	return height;
 }
 
 bool Actor::IsGrounded() const
@@ -81,8 +81,8 @@ void Actor::RaycastRight()
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
 
 	// cast a ray from the top (index=0) and the bottom (index=1) of the sprite
-	startPos[0] = pos + sf::Vector2f(TILE_SIZE_F, 0.f);
-	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F, TILE_SIZE_F - 0.001f); // subtract a little just in case we reach into the next tile (this only happens when pos.y is a whole number)
+	startPos[0] = pos + sf::Vector2f(width, 0.f);
+	startPos[1] = pos + sf::Vector2f(width, height - 0.001f); // subtract a little just in case we reach into the next tile (this only happens when pos.y is a whole number)
 
 	float minX = MAX_LEVEL_SIZE * TILE_SIZE_F;
 
@@ -95,7 +95,7 @@ void Actor::RaycastRight()
 
 		if (pTile != nullptr && // Is this tile empty
 			pTile->IsSolidOnSides() && // Is this tile solid on the sides
-			pos.x + TILE_SIZE_F > pTile->GetPos().x) // Is the right edge of the player to the right of the left edge of this tile
+			pos.x + width > pTile->GetPos().x) // Is the right edge of the player to the right of the left edge of this tile
 		{
 			// Visuals for debugging ONLY
 			if (DEBUG_PLAYER_MAP_COLLISION)
@@ -103,7 +103,7 @@ void Actor::RaycastRight()
 				Visualizer::VisualizePoint(currPos, sf::Color::Green);
 			}
 
-			currPos.x += TILE_SIZE_F;
+			currPos.x += width;
 		}
 
 		// While the current position is empty or NOT solid on the sides, and within the bounds of the map
@@ -148,13 +148,13 @@ void Actor::RaycastRight()
 		}
 	}
 
-	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(TILE_SIZE_F, 0.f); // The position the player wants to move to
+	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(width, 0.f); // The position the player wants to move to
 
 	if (mayMoveTo.x < minX)
 	{
 		minX = mayMoveTo.x;
 	}
-	pos.x = minX - TILE_SIZE_F;
+	pos.x = minX - width;
 }
 
 void Actor::RaycastLeft()
@@ -165,7 +165,7 @@ void Actor::RaycastLeft()
 
 	// cast a ray from the top (index=0) and the bottom (index=1) of the sprite
 	startPos[0] = pos;
-	startPos[1] = pos + sf::Vector2f(0.f, TILE_SIZE_F - 0.001f); // subtract a little just in case we reach into the next tile (this only happens when pos.y is a whole number)
+	startPos[1] = pos + sf::Vector2f(0.f, height - 0.001f); // subtract a little just in case we reach into the next tile (this only happens when pos.y is a whole number)
 
 	float maxX = 0;
 
@@ -236,7 +236,7 @@ void Actor::RaycastUp()
 
 	// Cast a ray from the left (index=0) and right (index=1) of the sprite
 	startPos[0] = pos;
-	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, 0.f); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
+	startPos[1] = pos + sf::Vector2f(width - 0.001f, 0.f); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
 
 	// The highest point the player can move to without being inside of a wall
 	float maxY = 0;
@@ -256,7 +256,9 @@ void Actor::RaycastUp()
 				// We only need to check every tile space, so decrement by tile size
 				currPos.y -= TILE_SIZE_F;
 			}
-			else { // First iteration through the while loop; we may be in the middle of a tile, so decrement to the edge of the nearest tile space
+			else {
+				// First iteration through the while loop; we may be in the middle of a tile, so decrement to the edge of the nearest tile space
+				
 				// We can get the y-index of a tile by dividing the y position by tile size and casting to an int to remove the decimal
 				int tileIndex = static_cast<int>(currPos.y / TILE_SIZE_F);
 
@@ -308,8 +310,8 @@ void Actor::RaycastDown()
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
 
 	// Cast a ray downwards from the left (index=0) and right (index=1) edges of the sprite; we add tile size to the y-value to begin our raycast at the bottom of the player's sprite
-	startPos[0] = pos + sf::Vector2f(0.f, TILE_SIZE_F);
-	startPos[1] = pos + sf::Vector2f(TILE_SIZE_F - 0.001f, TILE_SIZE_F); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
+	startPos[0] = pos + sf::Vector2f(0.f, height);
+	startPos[1] = pos + sf::Vector2f(width - 0.001f, height); // subtract a little just in case we reach into the next tile (this only happens when pos.x is a whole number)
 
 	// The lowest point the player can move to without being inside of a wall
 	float minY = MAX_LEVEL_SIZE * TILE_SIZE_F;
@@ -323,7 +325,7 @@ void Actor::RaycastDown()
 
 		if (pTile != nullptr && // Is this tile empty
 			pTile->IsSolidOnTop() && // Is this tile solid on top
-			pos.y + TILE_SIZE_F > pTile->GetPos().y) // Is the bottom edge of the player below the top edge of this tile
+			pos.y + height > pTile->GetPos().y) // Is the bottom edge of the player below the top edge of this tile
 		{
 			// Visuals for debugging ONLY
 			if (DEBUG_PLAYER_MAP_COLLISION)
@@ -331,7 +333,7 @@ void Actor::RaycastDown()
 				Visualizer::VisualizePoint(currPos, sf::Color::Green);
 			}
 
-			currPos.y += TILE_SIZE_F;
+			currPos.y += height;
 		}
 
 		// While the current position is empty or NOT solid on top, and within the bounds of the map
@@ -350,8 +352,10 @@ void Actor::RaycastDown()
 			{
 				currPos.y += TILE_SIZE_F;
 			}
-			else // First iteration through the while loop; we may be in the middle of a tile, so increment to the top edge of the next tile below
+			else 
 			{
+				// First iteration through the while loop; we may be in the middle of a tile, so increment to the top edge of the next tile below
+				
 				// We can get the y-index of a tile by dividing the y position by tile size and casting to an int to remove the decimal
 				int tileIndex = static_cast<int>(currPos.y / TILE_SIZE_F);
 
@@ -379,7 +383,7 @@ void Actor::RaycastDown()
 		}
 	}
 
-	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(0.f, TILE_SIZE_F); // The position the player wants to move to
+	sf::Vector2f mayMoveTo = pos + posDelta + sf::Vector2f(0.f, height); // The position the player wants to move to
 
 	// If the player's projected movement is in an invalid location, then move them the maximum distance allowed
 	if (mayMoveTo.y < minY)
@@ -388,13 +392,13 @@ void Actor::RaycastDown()
 	}
 
 	// Determine if we is grounded or not
-	minY -= TILE_SIZE_F;
+	minY -= height;
 	grounded = pos.y == minY;
 
 	pos.y = minY;
 }
 
-void Actor::SetPos(sf::Vector2f newPos)
+void Actor::SetPosition(const sf::Vector2f& newPos)
 {
 	pos = newPos;
 }
@@ -403,4 +407,14 @@ void Actor::ApplyGravity(float deltaTime)
 {
 	posDelta.y += GRAVITY_WEIGHT * deltaTime;
 	//posDelta.y += GRAVITY_WEIGHT;
+}
+
+void Actor::SetWidth()
+{
+	width = abs(pSprite->getTextureRect().getSize().x * pSprite->getScale().x);
+}
+
+void Actor::SetHeight()
+{
+	height = abs(pSprite->getTextureRect().getSize().y * pSprite->getScale().y);
 }

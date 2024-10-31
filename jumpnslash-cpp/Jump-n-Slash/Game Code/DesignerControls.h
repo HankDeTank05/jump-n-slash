@@ -2,22 +2,40 @@
 #define DESIGNER_CONTROLS_H
 
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Joystick.hpp>
 
-// general settings
+//////////////////////
+// general settings //
+//////////////////////
 
 const float ANIMATION_FRAMERATE = 7.f;
 
-// player controls
-// TODO: add link to SFML docs
+/////////////////////
+// player controls //
+/////////////////////
 
-const sf::Keyboard::Key JUMP_KEY = sf::Keyboard::Space;
-const sf::Keyboard::Key WALK_LEFT_KEY = sf::Keyboard::Left;
-const sf::Keyboard::Key WALK_RIGHT_KEY = sf::Keyboard::Right;
-const sf::Keyboard::Key SLASH_ATK_KEY = sf::Keyboard::V; // not yet in use
-const sf::Keyboard::Key DREAM_ATK_KEY = sf::Keyboard::C; // not yet in use
-const sf::Keyboard::Key DASH_KEY = sf::Keyboard::X; // not yet in use
+// for details on how input works, go here: https://www.sfml-dev.org/tutorials/2.6/window-inputs.php
 
-// player properties
+// keyboard controls
+
+const sf::Keyboard::Key KB_JUMP = sf::Keyboard::Space;
+const sf::Keyboard::Key KB_WALK_LEFT = sf::Keyboard::Left;
+const sf::Keyboard::Key KB_WALK_RIGHT = sf::Keyboard::Right;
+const sf::Keyboard::Key KB_SLASH_ATK = sf::Keyboard::V; // not yet in use
+const sf::Keyboard::Key KB_DREAM_ATK = sf::Keyboard::C; // not yet in use
+const sf::Keyboard::Key KB_DASH = sf::Keyboard::X; // not yet in use
+
+// gamepad controls
+
+const int GP_JUMP; // not yet in use
+const sf::Joystick::Axis GP_WALK; // not yet in use
+const int GP_SLASH_ATK; // not yet in use
+const int GP_DREAM_ATK; // not yet in use
+const int GP_DASH; // not yet in use
+
+///////////////////////
+// player properties //
+///////////////////////
 
 const float PLAYER_WALK_SPEED = 100.0f;
 const float GRAVITY_WEIGHT = 10.0f;

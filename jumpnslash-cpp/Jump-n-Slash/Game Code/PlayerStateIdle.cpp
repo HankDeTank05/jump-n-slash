@@ -35,7 +35,7 @@ void PlayerStateIdle::Enter(Player* pPlayer) const
 
 void PlayerStateIdle::Update(Player* pPlayer, float deltaTime) const
 {
-	PlayerAttorney::State::ProcessInputs(pPlayer, deltaTime);
+	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
 	
 	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
 	{

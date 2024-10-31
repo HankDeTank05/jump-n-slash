@@ -166,6 +166,9 @@
     <Filter Include="Source Files\Game Code\Sword\FSM + States">
       <UniqueIdentifier>{ccef38b6-441b-4e2a-99f6-b7ca8319fa5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player\Control Strategy">
+      <UniqueIdentifier>{18029e27-0d72-42ec-982e-ac71a5cd629a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -293,9 +296,6 @@
     </ClCompile>
     <ClCompile Include="Game Code\PlatformSemisolid.cpp">
       <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\PlayerMoveState.cpp">
-      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\EngineAttorney.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
@@ -889,6 +889,9 @@
     </ClInclude>
     <ClInclude Include="Game Code\SwordStateSwing.h">
       <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerControlStrategy.h">
+      <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
