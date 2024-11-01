@@ -513,9 +513,6 @@
     <ClCompile Include="Engine Code\GamepadBtnListener.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\GamepadAxisListener.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\GamepadBtnDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClCompile>
@@ -524,6 +521,9 @@
     </ClCompile>
     <ClCompile Include="Engine Code\GamepadAxisDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GamepadAxisListener.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
