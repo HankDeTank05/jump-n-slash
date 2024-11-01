@@ -54,6 +54,10 @@ private:
 	void DeregisterMouseBtn(sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg);
 	void RegisterMouseCursor(InputObject* pInputable);
 	void DeregisterMouseCursor(InputObject* pInputable);
+	void RegisterGamepadBtn(int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToReg);
+	void DeregisterGamepadBtn(int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToDereg);
+	void RegisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToReg);
+	void DeregisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToDereg);
 
 	// alarm registration
 

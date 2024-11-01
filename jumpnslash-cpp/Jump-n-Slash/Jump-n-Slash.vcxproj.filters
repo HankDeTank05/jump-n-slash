@@ -507,6 +507,24 @@
     <ClCompile Include="Game Code\SwordStateSwing.cpp">
       <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\GamepadBtnRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GamepadBtnListener.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GamepadAxisListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GamepadBtnDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GamepadAxisRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GamepadAxisDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -895,6 +913,24 @@
     </ClInclude>
     <ClInclude Include="Engine Code\ControllerInputs.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GamepadBtnRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GamepadBtnListener.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GamepadAxisListener.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GamepadBtnDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GamepadAxisRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GamepadAxisDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Window/Joystick.hpp>
 
 #include "InputEvent.h"
 
@@ -29,6 +30,16 @@ public:
 		friend class MouseCursorDeregistrationCommand;
 		static void RegisterMouseCursor(InputObject* pInputable);
 		static void DeregisterMouseCursor(InputObject* pInputable);
+
+		friend class GamepadBtnRegistrationCommand;
+		friend class GamepadBtnDeregistrationCommand;
+		static void RegisterGamepadBtn(InputObject* pInputable, int gamepadIndex, int btnNum, GamepadBtnEvent eventToReg);
+		static void DeregisterGamepadBtn(InputObject* pInputable, int gamepadIndex, int btnNum, GamepadBtnEvent eventToDereg);
+
+		friend class GamepadAxisRegistrationCommand;
+		friend class GamepadAxisDeregistrationCommand;
+		static void RegisterGamepadAxis(InputObject* pInputable, int gamepadIndex, sf::Joystick::Axis axis, GamepadAxisEvent eventToReg);
+		static void DeregisterGamepadAxis(InputObject* pInputable, int gamepadIndex, sf::Joystick::Axis axis, GamepadAxisEvent eventToDereg);
 	};
 
 	class KeyEvents
@@ -47,6 +58,16 @@ public:
 		static void MouseBtnPressed(InputObject* pInputable, sf::Mouse::Button btn);
 		static void MouseBtnReleased(InputObject* pInputable, sf::Mouse::Button btn);
 		static void MouseCursorMoved(InputObject* pInputable, sf::Vector2i pos, sf::Vector2i delta);
+	};
+
+	class GamepadEvents
+	{
+	private:
+		friend class GamepadBtnListener;
+		friend class GamepadAxisListener;
+		static void GamepadBtnPressed(InputObject* pInputable, int gamepadIndex, int btnNum);
+		static void GamepadBtnReleased(InputObject* pInputable, int gamepadIndex, int btnNum);
+		static void GamepadAxisMoved(InputObject* pInputable, int gamepadIndex, sf::Joystick::Axis axis, float axisState, float axisStateDelta);
 	};
 };
 

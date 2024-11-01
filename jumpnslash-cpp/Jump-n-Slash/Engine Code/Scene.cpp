@@ -112,6 +112,26 @@ void Scene::DeregisterMouseCursor(InputObject* pInputable)
 	pInputMgr->DeregisterMouseCursor(pInputable);
 }
 
+void Scene::RegisterGamepadBtn(int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToReg)
+{
+	pInputMgr->RegisterGamepadBtn(gamepadIndex, btnNum, pInputable, eventToReg);
+}
+
+void Scene::DeregisterGamepadBtn(int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToDereg)
+{
+	pInputMgr->DeregisterGamepadBtn(gamepadIndex, btnNum, pInputable, eventToDereg);
+}
+
+void Scene::RegisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToReg)
+{
+	pInputMgr->RegisterGamepadAxis(gamepadIndex, axis, pInputable, eventToReg);
+}
+
+void Scene::DeregisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToDereg)
+{
+	pInputMgr->DeregisterGamepadAxis(gamepadIndex, axis, pInputable, eventToDereg);
+}
+
 AlarmManager::TimelineRef Scene::Register(float triggerTime, AlarmObject* pAlarmable, AlarmID id)
 {
 	return pAlarmMgr->Register(triggerTime, pAlarmable, id);

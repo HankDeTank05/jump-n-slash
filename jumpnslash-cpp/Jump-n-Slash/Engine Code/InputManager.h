@@ -14,6 +14,8 @@ class InputObject;
 class KeyListener;
 class MouseBtnListener;
 class MouseCursorListener;
+class GamepadBtnListener;
+class GamepadAxisListener;
 
 class InputManager
 {
@@ -38,10 +40,20 @@ public:
 	void RegisterMouseCursor(InputObject* pInputable);
 	void DeregisterMouseCursor(InputObject* pInputable);
 
+	using GamepadBtnTracker = std::map<int, std::map<int, GamepadBtnListener*>>;
+	void RegisterGamepadBtn(int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToReg);
+	void DeregisterGamepadBtn(int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToDereg);
+
+	using GamepadAxisTracker = std::map<int, std::map<sf::Joystick::Axis, GamepadAxisListener*>>;
+	void RegisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToReg);
+	void DeregisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToDereg);
+
 private:
 	KeyTracker keyTracker;
 	MouseBtnTracker mouseBtnTracker;
 	MouseCursorListener* pCursorListener;
+	GamepadBtnTracker gpBtnTracker;
+	GamepadAxisTracker gpAxisTracker;
 };
 
 #endif

@@ -67,6 +67,26 @@ void SceneAttorney::Input::DeregisterMouseCursor(Scene* pScene, InputObject* pIn
 	pScene->DeregisterMouseCursor(pInputable);
 }
 
+void SceneAttorney::Input::RegisterGamepadBtn(Scene* pScene, int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToReg)
+{
+	pScene->RegisterGamepadBtn(gamepadIndex, btnNum, pInputable, eventToReg);
+}
+
+void SceneAttorney::Input::DeregisterGamepadBtn(Scene* pScene, int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToDereg)
+{
+	pScene->DeregisterGamepadBtn(gamepadIndex, btnNum, pInputable, eventToDereg);
+}
+
+void SceneAttorney::Input::RegisterGamepadAxis(Scene* pScene, int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToReg)
+{
+	pScene->RegisterGamepadAxis(gamepadIndex, axis, pInputable, eventToReg);
+}
+
+void SceneAttorney::Input::DeregisterGamepadAxis(Scene* pScene, int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToDereg)
+{
+	pScene->DeregisterGamepadAxis(gamepadIndex, axis, pInputable, eventToDereg);
+}
+
 AlarmManager::TimelineRef SceneAttorney::Alarm::Register(Scene* pScene, float triggerTime, AlarmObject* pAlarmable, AlarmID id)
 {
 	return pScene->Register(triggerTime, pAlarmable, id);

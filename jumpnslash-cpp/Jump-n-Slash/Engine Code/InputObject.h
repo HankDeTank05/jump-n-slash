@@ -17,6 +17,10 @@ class MouseBtnRegistrationCommand;
 class MouseBtnDeregistrationCommand;
 class MouseCursorRegistrationCommand;
 class MouseCursorDeregistrationCommand;
+class GamepadBtnRegistrationCommand;
+class GamepadBtnDeregistrationCommand;
+class GamepadAxisRegistrationCommand;
+class GamepadAxisDeregistrationCommand;
 
 class InputObject
 {
@@ -28,6 +32,8 @@ public:
 
 protected:
 	friend class InputObjectAttorney;
+
+	// keyboard callback functions
 
 	/*!
 	* \brief	Do something when a key is pressed.
@@ -92,6 +98,8 @@ protected:
 	*/
 	virtual void KeyReleased(sf::Keyboard::Key key);
 
+	// mouse callback functions
+	
 	/*!
 	* \brief	Do something when a mouse button is pressed.
 	* 
@@ -324,10 +332,17 @@ protected:
 	* \see CollisionObject
 	*/
 	virtual void MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta);
-	// TODO: figure out mouse wheel inputs
 
-	// TODO: figure out gamepad button inputs
-	// TODO: figure out gamepad stick inputs
+	// gamepad callback functions
+
+	// TODO: docs for InputObject::GamepadBtnPressed
+	virtual void GamepadBtnPressed(int gamepadIndex, int btnNum);
+	// TODO: docs for InputObject::GamepadBtnReleased
+	virtual void GamepadBtnReleased(int gamepadIndex, int btnNum);
+	// TODO: docs for InputObject::GamepadAxisMoved
+	virtual void GamepadAxisMoved(int gamepadIndex, sf::Joystick::Axis axis, float axisState, float axisStateDelta);
+
+	// keyboard registration functions
 
 	/*!
 	* /brief	Request that the engine read for key events.
@@ -409,6 +424,8 @@ protected:
 	* \see CollisionObject
 	*/
 	void RequestKeyDeregistration(sf::Keyboard::Key key, KeyEvent eventToDereg); 
+
+	// mouse registration functions
 
 	/*!
 	* \brief	Request that the engine read for mouse button events.
@@ -554,6 +571,18 @@ protected:
 	* \see CollisionObject
 	*/
 	void RequestMouseCursorDeregistration(); 
+	// TODO: figure out mouse wheel inputs
+
+	// gamepad registration functions
+
+	// TODO: docs for InputObject::RequestGamepadBtnRegistration
+	void RequestGamepadBtnRegistration(unsigned int gamepadIndex, int btnNum, GamepadBtnEvent eventToReg);
+	// TODO: docs for InputObject::RequestGamepadBtnDeregistration
+	void RequestGamepadBtnDeregistration(unsigned int gamepadIndex, int btnNum, GamepadBtnEvent eventToDereg);
+	// TODO: docs for InputObject::RequestGamepadAxisRegistration
+	void RequestGamepadAxisRegistration(unsigned int gamepadIndex, sf::Joystick::Axis axis, GamepadAxisEvent eventToReg);
+	// TODO: docs for InputObject::RequestGamepadAxisDeregistration
+	void RequestGamepadAxisDeregistration(unsigned int gamepadIndex, sf::Joystick::Axis axis, GamepadAxisEvent eventToDereg);
 
 private:
 	void RegisterKey(sf::Keyboard::Key key, KeyEvent eventToReg);
@@ -563,6 +592,11 @@ private:
 	void DeregisterMouseBtn(sf::Mouse::Button btn, MouseEvent eventToDereg);
 	void RegisterMouseCursor();
 	void DeregisterMouseCursor();
+
+	void RegisterGamepadBtn(int gamepadIndex, int btnNum, GamepadBtnEvent eventToReg);
+	void DeregisterGamepadBtn(int gamepadIndex, int btnNum, GamepadBtnEvent eventToDereg);
+	void RegisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, GamepadAxisEvent eventToReg);
+	void DeregisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, GamepadAxisEvent eventToDereg);
 
 	struct KeyRegistrationData
 	{
@@ -591,10 +625,33 @@ private:
 		MouseCursorDeregistrationCommand* pDeregCmd;
 	};
 
+	struct GamepadBtnRegistrationData
+	{
+		RegistrationState regState;
+		GamepadBtnRegistrationCommand* pRegCmd;
+		GamepadBtnDeregistrationCommand* pDeregCmd;
+	};
+
+	using GamepadBtnTrackerID = std::pair<std::pair<int, int>, GamepadBtnEvent>;
+	using GamepadBtnTracker = std::map<GamepadBtnTrackerID, GamepadBtnRegistrationData>;
+
+	struct GamepadAxisRegistrationData
+	{
+		RegistrationState regState;
+		GamepadAxisRegistrationCommand* pRegCmd;
+		GamepadAxisDeregistrationCommand* pDeregCmd;
+	};
+
+	using GamepadAxisTrackerID = std::pair<std::pair<int, int>, GamepadAxisEvent>;
+	using GamepadAxisTracker = std::map<GamepadAxisTrackerID, GamepadAxisRegistrationData>;
+
 private:
-	KeyRegTracker keyTracker;
-	MouseBtnRegTracker mouseBtnTracker;
-	MouseCursorRegistrationData mouseCursorRegData;
+	KeyRegTracker keyTracker; // tracks registration state of various keys
+	MouseBtnRegTracker mouseBtnTracker; // tracks the registration state of the mouse buttons
+	MouseCursorRegistrationData mouseCursorRegData; // tracks the registration state of the mouse cursor
+	GamepadBtnTracker gpBtnTracker; // tracks the registration state of various gamepad buttons
+	GamepadAxisTracker gpAxisTracker; // tracks the registration state of various gampad axes
+
 };
 
 #endif

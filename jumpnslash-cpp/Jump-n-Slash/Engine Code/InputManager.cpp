@@ -3,6 +3,8 @@
 #include "KeyListener.h"
 #include "MouseBtnListener.h"
 #include "MouseCursorListener.h"
+#include "GamepadBtnListener.h"
+#include "GamepadAxisListener.h"
 
 InputManager::InputManager()
 	: keyTracker(),
@@ -88,4 +90,54 @@ void InputManager::RegisterMouseCursor(InputObject* pInputable)
 void InputManager::DeregisterMouseCursor(InputObject* pInputable)
 {
 	pCursorListener->Deregister(pInputable);
+}
+
+void InputManager::RegisterGamepadBtn(int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToReg)
+{
+	if (gpBtnTracker.count(gamepadIndex) == 0)
+	{
+		// make new submap
+		gpBtnTracker.emplace(gamepadIndex, std::map<int, GamepadBtnListener*>());
+	}
+
+	if (gpBtnTracker.count(gamepadIndex) > 0 && gpBtnTracker.at(gamepadIndex).count(btnNum) == 0)
+	{
+		// make new GamepadBtnListener
+		gpBtnTracker.at(gamepadIndex).emplace(btnNum, new GamepadBtnListener(gamepadIndex, btnNum));
+	}
+
+	gpBtnTracker.at(gamepadIndex).at(btnNum)->Register(pInputable, eventToReg);
+}
+
+void InputManager::DeregisterGamepadBtn(int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToDereg)
+{
+	assert(gpBtnTracker.count(gamepadIndex) > 0); // gamepadIndex not found
+	assert(gpBtnTracker.at(gamepadIndex).count(btnNum) > 0); // btnNum not found
+
+	gpBtnTracker.at(gamepadIndex).at(btnNum)->Deregister(pInputable, eventToDereg);
+}
+
+void InputManager::RegisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToReg)
+{
+	if (gpAxisTracker.count(gamepadIndex) == 0)
+	{
+		// make new submap
+		gpAxisTracker.emplace(gamepadIndex, std::map<sf::Joystick::Axis, GamepadAxisListener*>());
+	}
+
+	if (gpAxisTracker.count(gamepadIndex) > 0 && gpAxisTracker.at(gamepadIndex).count(axis) == 0)
+	{
+		// make new GamepadAxisListener
+		gpAxisTracker.at(gamepadIndex).emplace(axis, new GamepadAxisListener(gamepadIndex, axis));
+	}
+
+	gpAxisTracker.at(gamepadIndex).at(axis)->Register(pInputable, eventToReg);
+}
+
+void InputManager::DeregisterGamepadAxis(int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToDereg)
+{
+	assert(gpAxisTracker.count(gamepadIndex) > 0); // gamepadIndex not found
+	assert(gpAxisTracker.at(gamepadIndex).count(axis) > 0); // axis not found
+
+	gpAxisTracker.at(gamepadIndex).at(axis)->Deregister(pInputable, eventToDereg);
 }

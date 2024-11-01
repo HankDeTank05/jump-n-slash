@@ -3,6 +3,7 @@
 
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Window/Joystick.hpp>
 
 #include "DrawManager.h"
 #include "UpdateManager.h"
@@ -63,6 +64,10 @@ public:
 		static void DeregisterMouseBtn(Scene* pScene, sf::Mouse::Button btn, InputObject* pInputable, MouseEvent eventToDereg);
 		static void RegisterMouseCursor(Scene* pScene, InputObject* pInputable);
 		static void DeregisterMouseCursor(Scene* pScene, InputObject* pInputable);
+		static void RegisterGamepadBtn(Scene* pScene, int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToReg);
+		static void DeregisterGamepadBtn(Scene* pScene, int gamepadIndex, int btnNum, InputObject* pInputable, GamepadBtnEvent eventToDereg);
+		static void RegisterGamepadAxis(Scene* pScene, int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToReg);
+		static void DeregisterGamepadAxis(Scene* pScene, int gamepadIndex, sf::Joystick::Axis axis, InputObject* pInputable, GamepadAxisEvent eventToDereg);
 	};
 
 	class Alarm

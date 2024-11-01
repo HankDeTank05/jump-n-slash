@@ -32,6 +32,26 @@ void InputObjectAttorney::Registration::DeregisterMouseCursor(InputObject* pInpu
 	pInputable->DeregisterMouseCursor();
 }
 
+void InputObjectAttorney::Registration::RegisterGamepadBtn(InputObject* pInputable, int gamepadIndex, int btnNum, GamepadBtnEvent eventToReg)
+{
+	pInputable->RegisterGamepadBtn(gamepadIndex, btnNum, eventToReg);
+}
+
+void InputObjectAttorney::Registration::DeregisterGamepadBtn(InputObject* pInputable, int gamepadIndex, int btnNum, GamepadBtnEvent eventToDereg)
+{
+	pInputable->DeregisterGamepadBtn(gamepadIndex, btnNum, eventToDereg);
+}
+
+void InputObjectAttorney::Registration::RegisterGamepadAxis(InputObject* pInputable, int gamepadIndex, sf::Joystick::Axis axis, GamepadAxisEvent eventToReg)
+{
+	pInputable->RegisterGamepadAxis(gamepadIndex, axis, eventToReg);
+}
+
+void InputObjectAttorney::Registration::DeregisterGamepadAxis(InputObject* pInputable, int gamepadIndex, sf::Joystick::Axis axis, GamepadAxisEvent eventToDereg)
+{
+	pInputable->DeregisterGamepadAxis(gamepadIndex, axis, eventToDereg);
+}
+
 void InputObjectAttorney::KeyEvents::KeyPressed(InputObject* pInputable, sf::Keyboard::Key key)
 {
 	pInputable->KeyPressed(key);
@@ -55,4 +75,19 @@ void InputObjectAttorney::MouseEvents::MouseBtnReleased(InputObject* pInputable,
 void InputObjectAttorney::MouseEvents::MouseCursorMoved(InputObject* pInputable, sf::Vector2i pos, sf::Vector2i delta)
 {
 	pInputable->MouseCursorMoved(pos, delta);
+}
+
+void InputObjectAttorney::GamepadEvents::GamepadBtnPressed(InputObject* pInputable, int gamepadIndex, int btnNum)
+{
+	pInputable->GamepadBtnPressed(gamepadIndex, btnNum);
+}
+
+void InputObjectAttorney::GamepadEvents::GamepadBtnReleased(InputObject* pInputable, int gamepadIndex, int btnNum)
+{
+	pInputable->GamepadBtnReleased(gamepadIndex, btnNum);
+}
+
+void InputObjectAttorney::GamepadEvents::GamepadAxisMoved(InputObject* pInputable, int gamepadIndex, sf::Joystick::Axis axis, float axisState, float axisStateDelta)
+{
+	pInputable->GamepadAxisMoved(gamepadIndex, axis, axisState, axisStateDelta);
 }
