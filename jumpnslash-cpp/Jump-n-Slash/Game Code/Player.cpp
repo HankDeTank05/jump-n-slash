@@ -29,8 +29,8 @@ Player::Player(LevelMap* pLevel, ControlScheme scheme)
 	pCurrentState(&PlayerFSM::idle),
 	pPrevState(nullptr),
 	respawnPoint(),
-	inputReceivedWalkLeft(false),
-	inputReceivedWalkRight(false),
+	//inputReceivedWalkLeft(false),
+	//inputReceivedWalkRight(false),
 	inputWalkDir(0.f),
 	inputReceivedJump(false),
 	applyGravity(true)
@@ -202,13 +202,13 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 	switch (key)
 	{
 	case KB_WALK_LEFT:
-		inputReceivedWalkLeft = true;
+		//inputReceivedWalkLeft = true;
 		inputWalkDir -= 1.f;
 		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
 		facing = -1;
 		break;
 	case KB_WALK_RIGHT:
-		inputReceivedWalkRight = true;
+		//inputReceivedWalkRight = true;
 		inputWalkDir += 1.f;
 		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
 		facing = 1;
@@ -224,12 +224,12 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	switch (key)
 	{
 	case KB_WALK_LEFT:
-		inputReceivedWalkLeft = false;
+		//inputReceivedWalkLeft = false;
 		inputWalkDir += 1.f;
 		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
 		break;
 	case KB_WALK_RIGHT:
-		inputReceivedWalkRight = false;
+		//inputReceivedWalkRight = false;
 		inputWalkDir -= 1.f;
 		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
 		break;

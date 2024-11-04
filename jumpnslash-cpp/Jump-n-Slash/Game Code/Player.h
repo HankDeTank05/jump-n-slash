@@ -75,8 +75,8 @@ private: // Member variables
 	const PlayerMoveState* pCurrentState; // the current movement state
 	const PlayerMoveState* pPrevState; // the move state during the previous frame
 	sf::Vector2f respawnPoint; // where the player will respawn after dying
-	bool inputReceivedWalkLeft; // flag indicating if the walk left input is currently being received
-	bool inputReceivedWalkRight; // flag indicating if the walk right input is currently being received
+	//bool inputReceivedWalkLeft; // flag indicating if the walk left input is currently being received
+	//bool inputReceivedWalkRight; // flag indicating if the walk right input is currently being received
 	float inputWalkDir; // float in range [-1, 1] indicating which direction to walk and how fast
 	bool inputReceivedJump; // flag indicating if the jump input is currently being received
 	bool applyGravity; // flag indicating if gravity should be applied
