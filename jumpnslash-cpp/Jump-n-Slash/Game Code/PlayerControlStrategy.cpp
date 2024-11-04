@@ -1,9 +1,11 @@
 #include "PlayerControlStrategy.h"
 
 #include "DesignerControls.h"
+#include "PlayerAttorney.h"
 
-PlayerControlStrategy::PlayerControlStrategy(ControlScheme scheme)
-	: jump(false),
+PlayerControlStrategy::PlayerControlStrategy(Player* _pPlayer, ControlScheme scheme)
+	: pPlayer(_pPlayer),
+	jump(false),
 	walk(0.f),
 	slashAtk(false),
 	dreamAtk(false),
@@ -64,4 +66,10 @@ PlayerControlStrategy::PlayerControlStrategy(ControlScheme scheme)
 	default:
 		assert(false); // crash if we don't recognize the specified control scheme
 	}
+}
+
+void PlayerControlStrategy::GetInputs()
+{
+	PlayerAttorney::StrategyAccess::SetJump(pPlayer, jump);
+	PlayerAttorney::StrategyAccess::SetWalk(pPlayer, walk);
 }

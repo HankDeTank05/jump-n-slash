@@ -23,7 +23,7 @@ class PlayerControlStrategy;
 class LevelMap;
 class RoomData;
 
-class Player : public Actor, public InputObject, public Subject
+class Player : public Actor, /*public InputObject,*/ public Subject
 {
 public:
 	Player() = delete;
@@ -39,8 +39,8 @@ public:
 	virtual void Alarm0() override;
 
 	// input stuff
-	virtual void KeyPressed(sf::Keyboard::Key key) override;
-	virtual void KeyReleased(sf::Keyboard::Key key) override;
+	//virtual void KeyPressed(sf::Keyboard::Key key) override;
+	//virtual void KeyReleased(sf::Keyboard::Key key) override;
 
 	// collision stuff
 	virtual void OnCollisionEnter(CollisionObject* pOther) override;

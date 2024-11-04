@@ -2,15 +2,10 @@
 
 #include "DesignerControls.h"
 
-PlayerControlKeyboard::PlayerControlKeyboard()
-	: PlayerControlStrategy(ControlScheme::Keyboard)
+PlayerControlKeyboard::PlayerControlKeyboard(Player* pPlayer)
+	: PlayerControlStrategy(pPlayer, ControlScheme::Keyboard)
 {
 	// do nothing
-}
-
-void PlayerControlKeyboard::SendInputs()
-{
-	assert(false);
 }
 
 void PlayerControlKeyboard::KeyPressed(sf::Keyboard::Key key)

@@ -61,6 +61,16 @@ public:
 		friend class Sword;
 		static sf::Vector2f GetPos(Player* pPlayer);
 	};
+	class StrategyAccess
+	{
+	private:
+		friend class PlayerControlStrategy;
+
+		// mutators
+
+		static void SetWalk(Player* pPlayer, float direction);
+		static void SetJump(Player* pPlayer, bool enabled);
+	};
 };
 
 #endif

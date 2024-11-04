@@ -40,7 +40,7 @@ Player::Player(LevelMap* pLevel, ControlScheme scheme)
 	switch (scheme)
 	{
 	case ControlScheme::Keyboard:
-		pCtrlStrat = new PlayerControlKeyboard();
+		pCtrlStrat = new PlayerControlKeyboard(this);
 		break;
 	case ControlScheme::SwitchPro:
 		assert(false);
@@ -74,12 +74,12 @@ Player::Player(LevelMap* pLevel, ControlScheme scheme)
 	// register with the engine
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
-	RequestKeyRegistration(KB_JUMP, KeyEvent::KeyPress);
-	RequestKeyRegistration(KB_JUMP, KeyEvent::KeyRelease);
-	RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyPress);
-	RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyRelease);
-	RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyPress);
-	RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_JUMP, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_JUMP, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyRelease);
 
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
 }
@@ -93,6 +93,9 @@ void Player::Update(float deltaTime)
 {
 	assert(pLevel != nullptr);
 	assert(pCurrentRoom != nullptr);
+
+	// update the inputs
+	pCtrlStrat->GetInputs();
 
 	// update the move state
 	pCurrentState = pCurrentState->GetNextState(this);
@@ -197,47 +200,47 @@ void Player::Alarm0()
 	applyGravity = true;
 }
 
-void Player::KeyPressed(sf::Keyboard::Key key)
-{
-	switch (key)
-	{
-	case KB_WALK_LEFT:
-		//inputReceivedWalkLeft = true;
-		inputWalkDir -= 1.f;
-		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
-		facing = -1;
-		break;
-	case KB_WALK_RIGHT:
-		//inputReceivedWalkRight = true;
-		inputWalkDir += 1.f;
-		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
-		facing = 1;
-		break;
-	case KB_JUMP:
-		inputReceivedJump = true;
-		break;
-	}
-}
-
-void Player::KeyReleased(sf::Keyboard::Key key)
-{
-	switch (key)
-	{
-	case KB_WALK_LEFT:
-		//inputReceivedWalkLeft = false;
-		inputWalkDir += 1.f;
-		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
-		break;
-	case KB_WALK_RIGHT:
-		//inputReceivedWalkRight = false;
-		inputWalkDir -= 1.f;
-		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
-		break;
-	case KB_JUMP:
-		inputReceivedJump = false;
-		break;
-	}
-}
+//void Player::KeyPressed(sf::Keyboard::Key key)
+//{
+//	switch (key)
+//	{
+//	case KB_WALK_LEFT:
+//		//inputReceivedWalkLeft = true;
+//		inputWalkDir -= 1.f;
+//		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
+//		facing = -1;
+//		break;
+//	case KB_WALK_RIGHT:
+//		//inputReceivedWalkRight = true;
+//		inputWalkDir += 1.f;
+//		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
+//		facing = 1;
+//		break;
+//	case KB_JUMP:
+//		inputReceivedJump = true;
+//		break;
+//	}
+//}
+//
+//void Player::KeyReleased(sf::Keyboard::Key key)
+//{
+//	switch (key)
+//	{
+//	case KB_WALK_LEFT:
+//		//inputReceivedWalkLeft = false;
+//		inputWalkDir += 1.f;
+//		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
+//		break;
+//	case KB_WALK_RIGHT:
+//		//inputReceivedWalkRight = false;
+//		inputWalkDir -= 1.f;
+//		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
+//		break;
+//	case KB_JUMP:
+//		inputReceivedJump = false;
+//		break;
+//	}
+//}
 
 bool Player::IsApplyGravity()
 {
@@ -269,6 +272,19 @@ void Player::ProcessInputs(float deltaTime)
 		applyGravity = false; // temporarily stop applying gravity to allow variable height jumping
 		RequestAlarmRegistration(AlarmID::Alarm0, MAX_JUMP_HOLD_TIME);
 	}
+}
+
+void Player::SetWalk(float direction)
+{
+	assert(-1.f <= direction);
+	assert(direction <= 1.f);
+
+	inputWalkDir = direction;
+}
+
+void Player::SetJump(bool enabled)
+{
+	inputReceivedJump = enabled;
 }
 
 void Player::SetCurrentRoom(RoomData* _pCurrentRoom)

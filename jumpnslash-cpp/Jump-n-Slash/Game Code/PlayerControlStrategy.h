@@ -5,18 +5,22 @@
 
 #include "ControlScheme.h"
 
+// forward declarations
+class Player;
+
 class PlayerControlStrategy : public InputObject
 {
 public:
 	PlayerControlStrategy() = delete;
-	PlayerControlStrategy(ControlScheme scheme);
+	PlayerControlStrategy(Player* pPlayer, ControlScheme scheme);
 	PlayerControlStrategy(const PlayerControlStrategy& pcs) = delete;
 	PlayerControlStrategy& operator=(const PlayerControlStrategy& pcs) = delete;
 	virtual ~PlayerControlStrategy() = default;
 
-	virtual void SendInputs() = 0;
+	void GetInputs();
 
 protected:
+	Player* pPlayer;
 	bool jump;
 	float walk;
 	bool slashAtk;

@@ -3,15 +3,17 @@
 
 #include "PlayerControlStrategy.h"
 
+// forward declarations
+class Player;
+
 class PlayerControlKeyboard : public PlayerControlStrategy
 {
 public:
-	PlayerControlKeyboard();
+	PlayerControlKeyboard() = delete;
+	PlayerControlKeyboard(Player* pPlayer);
 	PlayerControlKeyboard(const PlayerControlKeyboard& pck) = delete;
 	PlayerControlKeyboard& operator=(const PlayerControlKeyboard& pck) = delete;
 	virtual ~PlayerControlKeyboard() = default;
-
-	virtual void SendInputs() override;
 
 	virtual void KeyPressed(sf::Keyboard::Key key) override;
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
