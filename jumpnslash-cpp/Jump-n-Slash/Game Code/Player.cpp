@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include <iostream>
+
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Visualizer.h"
@@ -19,19 +21,35 @@
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "RoomData.h"
-#include <iostream>
+#include "PlayerControlKeyboard.h"
 
-Player::Player(LevelMap* pLevel)
+Player::Player(LevelMap* pLevel, ControlScheme scheme)
 	: Actor(PLAYER_WALK_SPEED, pLevel),
+	pCtrlStrat(nullptr),
 	pCurrentState(&PlayerFSM::idle),
 	pPrevState(nullptr),
 	respawnPoint(),
-	walkLeftKeyDown(false),
-	walkRightKeyDown(false),
-	jumpKeyDown(false),
+	inputReceivedWalkLeft(false),
+	inputReceivedWalkRight(false),
+	inputReceivedJump(false),
 	applyGravity(true)
 {	
 	assert(pCurrentState != nullptr);
+
+	switch (scheme)
+	{
+	case ControlScheme::Keyboard:
+		pCtrlStrat = new PlayerControlKeyboard();
+		break;
+	case ControlScheme::SwitchPro:
+		assert(false);
+		break;
+	case ControlScheme::DualSense:
+		assert(false);
+		break;
+	default:
+		assert(false);
+	}
 
 	// connect to map
 	pLevel->LinkToPlayer(this);
@@ -98,7 +116,7 @@ void Player::Update(float deltaTime)
 	SceneManager::GetCurrentCamera()->SetCenter(newCamCenter);
 
 	// reset the player's y-velocity if they're grounded (so we don't continuously accelerate downwards)
-	if ((grounded && !jumpKeyDown) || headBonked)
+	if ((grounded && !inputReceivedJump) || headBonked)
 	{
 		posDelta.y = 0.f;
 		if (headBonked == true)
@@ -183,15 +201,15 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 	switch (key)
 	{
 	case KB_WALK_LEFT:
-		walkLeftKeyDown = true;
+		inputReceivedWalkLeft = true;
 		facing = -1;
 		break;
 	case KB_WALK_RIGHT:
-		walkRightKeyDown = true;
+		inputReceivedWalkRight = true;
 		facing = 1;
 		break;
 	case KB_JUMP:
-		jumpKeyDown = true;
+		inputReceivedJump = true;
 		break;
 	}
 }
@@ -201,13 +219,13 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	switch (key)
 	{
 	case KB_WALK_LEFT:
-		walkLeftKeyDown = false;
+		inputReceivedWalkLeft = false;
 		break;
 	case KB_WALK_RIGHT:
-		walkRightKeyDown = false;
+		inputReceivedWalkRight = false;
 		break;
 	case KB_JUMP:
-		jumpKeyDown = false;
+		inputReceivedJump = false;
 		break;
 	}
 }
@@ -236,17 +254,17 @@ void Player::ProcessInputs(float deltaTime)
 {
 	posDelta.x = 0.f;
 
-	if (walkLeftKeyDown)
+	if (inputReceivedWalkLeft)
 	{
 		posDelta.x -= speed * deltaTime;
 		//posDelta.x -= speed;
 	}
-	if (walkRightKeyDown)
+	if (inputReceivedWalkRight)
 	{
 		posDelta.x += speed * deltaTime;
 		//posDelta.x += speed;
 	}
-	if (grounded && jumpKeyDown)
+	if (grounded && inputReceivedJump)
 	{
 		posDelta.y = JUMP_FORCE * deltaTime;
 		applyGravity = false; // temporarily stop applying gravity to allow variable height jumping

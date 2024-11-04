@@ -169,6 +169,9 @@
     <Filter Include="Source Files\Game Code\Actors\Player\Control Strategy">
       <UniqueIdentifier>{18029e27-0d72-42ec-982e-ac71a5cd629a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Control Selector">
+      <UniqueIdentifier>{3b956225-6c34-4d67-a7a1-f12b23adcdb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -525,6 +528,18 @@
     <ClCompile Include="Engine Code\GamepadAxisListener.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Input Listeners</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\PlayerControlStrategy.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerControlKeyboard.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ControlSelector.cpp">
+      <Filter>Source Files\Game Code\Control Selector</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ControlSelection.cpp">
+      <Filter>Source Files\Game Code\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -627,9 +642,6 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\Player.h">
-      <Filter>Source Files\Game Code\Actors\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\PlayerMoveState.h">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerStateIdle.h">
@@ -908,9 +920,6 @@
     <ClInclude Include="Game Code\SwordStateSwing.h">
       <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerControlStrategy.h">
-      <Filter>Source Files\Game Code\Actors\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\ControllerInputs.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System</Filter>
     </ClInclude>
@@ -931,6 +940,24 @@
     </ClInclude>
     <ClInclude Include="Engine Code\GamepadAxisDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControlSelection.h">
+      <Filter>Source Files\Game Code\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControlSelector.h">
+      <Filter>Source Files\Game Code\Control Selector</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerMoveState.h">
+      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerControlStrategy.h">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControlScheme.h">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerControlKeyboard.h">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

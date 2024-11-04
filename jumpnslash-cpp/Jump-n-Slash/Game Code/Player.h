@@ -15,9 +15,11 @@
 #include "../Engine Code/AnimationComponent.h"
 
 #include "Actor.h"
+#include "ControlScheme.h"
 
 // forward declarations
 class PlayerMoveState;
+class PlayerControlStrategy;
 class LevelMap;
 class RoomData;
 
@@ -25,7 +27,7 @@ class Player : public Actor, public InputObject, public Subject
 {
 public:
 	Player() = delete;
-	Player(LevelMap* pLevel);
+	Player(LevelMap* pLevel, ControlScheme scheme);
 	Player(const Player& p) = delete;
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
@@ -39,6 +41,7 @@ public:
 	// input stuff
 	virtual void KeyPressed(sf::Keyboard::Key key) override;
 	virtual void KeyReleased(sf::Keyboard::Key key) override;
+
 	// collision stuff
 	virtual void OnCollisionEnter(CollisionObject* pOther) override;
 	virtual void OnCollisionDuring(CollisionObject* pOther) override;
@@ -53,6 +56,9 @@ private: // player mutators. for selective access only (thru attorney)
 	// position and movement
 
 	void ProcessInputs(float deltaTime);
+	void SetWalkLeft(bool enabled);
+	void SetWalkRight(bool enabled);
+	void SetJump(bool enabled);
 
 	// other
 
@@ -66,12 +72,13 @@ private: // player mutators. for selective access only (thru attorney)
 	void SetAnimationFall();
 
 private: // Member variables
+	PlayerControlStrategy* pCtrlStrat;
 	const PlayerMoveState* pCurrentState; // the current movement state
 	const PlayerMoveState* pPrevState; // the move state during the previous frame
 	sf::Vector2f respawnPoint; // where the player will respawn after dying
-	bool walkLeftKeyDown; // flag indicating if the walk left key is currently pressed
-	bool walkRightKeyDown; // flag indicating if the walk right key is currently pressed
-	bool jumpKeyDown; // flag indicating if the jump jey is currently pressed
+	bool inputReceivedWalkLeft; // flag indicating if the walk left input is currently being received
+	bool inputReceivedWalkRight; // flag indicating if the walk right input is currently being received
+	bool inputReceivedJump; // flag indicating if the jump input is currently being received
 	bool applyGravity; // flag indicating if gravity should be applied
 };
 

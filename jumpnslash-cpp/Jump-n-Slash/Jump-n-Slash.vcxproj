@@ -115,6 +115,8 @@
     <ClCompile Include="Game Code\BlockBreakable.cpp" />
     <ClCompile Include="Game Code\BlockHazard.cpp" />
     <ClCompile Include="Game Code\BlockSolid.cpp" />
+    <ClCompile Include="Game Code\ControlSelection.cpp" />
+    <ClCompile Include="Game Code\ControlSelector.cpp" />
     <ClCompile Include="Game Code\Enemy.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
     <ClCompile Include="Game Code\Level0.cpp" />
@@ -124,6 +126,8 @@
     <ClCompile Include="Game Code\PlatformSemisolid.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
     <ClCompile Include="Game Code\PlayerAttorney.cpp" />
+    <ClCompile Include="Game Code\PlayerControlKeyboard.cpp" />
+    <ClCompile Include="Game Code\PlayerControlStrategy.cpp" />
     <ClCompile Include="Game Code\PlayerFSM.cpp" />
     <ClCompile Include="Game Code\PlayerStateFalling.cpp" />
     <ClCompile Include="Game Code\PlayerStateIdle.cpp" />
@@ -248,6 +252,9 @@
     <ClInclude Include="Game Code\BlockHazard.h" />
     <ClInclude Include="Game Code\BlockSolid.h" />
     <ClInclude Include="Game Code\Constants.h" />
+    <ClInclude Include="Game Code\ControlScheme.h" />
+    <ClInclude Include="Game Code\ControlSelection.h" />
+    <ClInclude Include="Game Code\ControlSelector.h" />
     <ClInclude Include="Game Code\DebugFlags.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
     <ClInclude Include="Game Code\Enemy.h" />
@@ -257,6 +264,7 @@
     <ClInclude Include="Game Code\PlatformSemisolid.h" />
     <ClInclude Include="Game Code\Player.h" />
     <ClInclude Include="Game Code\PlayerAttorney.h" />
+    <ClInclude Include="Game Code\PlayerControlKeyboard.h" />
     <ClInclude Include="Game Code\PlayerControlStrategy.h" />
     <ClInclude Include="Game Code\PlayerFSM.h" />
     <ClInclude Include="Game Code\PlayerMoveState.h" />

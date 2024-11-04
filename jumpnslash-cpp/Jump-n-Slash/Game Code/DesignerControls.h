@@ -4,6 +4,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Joystick.hpp>
 
+#include "../Engine Code/ControllerInputs.h"
+
 //////////////////////
 // general settings //
 //////////////////////
@@ -25,13 +27,21 @@ const sf::Keyboard::Key KB_SLASH_ATK = sf::Keyboard::V; // not yet in use
 const sf::Keyboard::Key KB_DREAM_ATK = sf::Keyboard::C; // not yet in use
 const sf::Keyboard::Key KB_DASH = sf::Keyboard::X; // not yet in use
 
-// gamepad controls
+// gamepad controls (switch pro)
 
-//const int GP_JUMP; // not yet in use
-//const sf::Joystick::Axis GP_WALK; // not yet in use
-//const int GP_SLASH_ATK; // not yet in use
-//const int GP_DREAM_ATK; // not yet in use
-//const int GP_DASH; // not yet in use
+const SwitchProButton SP_JUMP = SwitchProButton::B; // not yet in use
+const SwitchProAxis SP_WALK = SwitchProAxis::LeftStickHorizontal; // not yet in use
+const SwitchProAxis SP_WALK_ALT = SwitchProAxis::DpadHorizontal; // not yet in use
+const SwitchProButton SP_SLASH_ATK = SwitchProButton::Y; // not yet in use
+const SwitchProButton SP_DREAM_ATK = SwitchProButton::X; // not yet in use
+const SwitchProButton SP_DASH = SwitchProButton::ZL; // not yet in use
+
+const DualSenseButton DS_JUMP = DualSenseButton::X; // not yet in use
+const DualSenseAxis DS_WALK = DualSenseAxis::LeftStickHorizontal; // not yet in use
+const DualSenseAxis DS_WALK_ALT = DualSenseAxis::DpadHorizontal; // not yet in use
+const DualSenseButton DS_SLASH_ATK = DualSenseButton::Square; // not yet in use
+const DualSenseButton DS_DREAM_ATK = DualSenseButton::Triangle; // not yet in use
+const DualSenseButton DS_DASH = DualSenseButton::L2Digital; // not yet in use
 
 ///////////////////////
 // player properties //
