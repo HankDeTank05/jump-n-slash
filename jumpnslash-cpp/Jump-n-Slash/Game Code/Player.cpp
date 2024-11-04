@@ -31,6 +31,7 @@ Player::Player(LevelMap* pLevel, ControlScheme scheme)
 	respawnPoint(),
 	inputReceivedWalkLeft(false),
 	inputReceivedWalkRight(false),
+	inputWalkDir(0.f),
 	inputReceivedJump(false),
 	applyGravity(true)
 {	
@@ -85,7 +86,7 @@ Player::Player(LevelMap* pLevel, ControlScheme scheme)
 
 Player::~Player()
 {
-	// do nothing
+	delete pCtrlStrat;
 }
 
 void Player::Update(float deltaTime)
@@ -202,10 +203,14 @@ void Player::KeyPressed(sf::Keyboard::Key key)
 	{
 	case KB_WALK_LEFT:
 		inputReceivedWalkLeft = true;
+		inputWalkDir -= 1.f;
+		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
 		facing = -1;
 		break;
 	case KB_WALK_RIGHT:
 		inputReceivedWalkRight = true;
+		inputWalkDir += 1.f;
+		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
 		facing = 1;
 		break;
 	case KB_JUMP:
@@ -220,9 +225,13 @@ void Player::KeyReleased(sf::Keyboard::Key key)
 	{
 	case KB_WALK_LEFT:
 		inputReceivedWalkLeft = false;
+		inputWalkDir += 1.f;
+		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
 		break;
 	case KB_WALK_RIGHT:
 		inputReceivedWalkRight = false;
+		inputWalkDir -= 1.f;
+		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
 		break;
 	case KB_JUMP:
 		inputReceivedJump = false;
@@ -252,18 +261,8 @@ void Player::OnCollisionExit(CollisionObject* pOther)
 
 void Player::ProcessInputs(float deltaTime)
 {
-	posDelta.x = 0.f;
+	posDelta.x = speed * inputWalkDir * deltaTime;
 
-	if (inputReceivedWalkLeft)
-	{
-		posDelta.x -= speed * deltaTime;
-		//posDelta.x -= speed;
-	}
-	if (inputReceivedWalkRight)
-	{
-		posDelta.x += speed * deltaTime;
-		//posDelta.x += speed;
-	}
 	if (grounded && inputReceivedJump)
 	{
 		posDelta.y = JUMP_FORCE * deltaTime;

@@ -56,8 +56,7 @@ private: // player mutators. for selective access only (thru attorney)
 	// position and movement
 
 	void ProcessInputs(float deltaTime);
-	void SetWalkLeft(bool enabled);
-	void SetWalkRight(bool enabled);
+	void SetWalk(float direction);
 	void SetJump(bool enabled);
 
 	// other
@@ -78,6 +77,7 @@ private: // Member variables
 	sf::Vector2f respawnPoint; // where the player will respawn after dying
 	bool inputReceivedWalkLeft; // flag indicating if the walk left input is currently being received
 	bool inputReceivedWalkRight; // flag indicating if the walk right input is currently being received
+	float inputWalkDir; // float in range [-1, 1] indicating which direction to walk and how fast
 	bool inputReceivedJump; // flag indicating if the jump input is currently being received
 	bool applyGravity; // flag indicating if gravity should be applied
 };
