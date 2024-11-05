@@ -18,6 +18,22 @@ InputManager::~InputManager()
 {
 	delete pCursorListener;
 
+	for (GamepadAxisTracker::iterator it = gpAxisTracker.begin(); it != gpAxisTracker.end(); it++)
+	{
+		for (std::map<sf::Joystick::Axis, GamepadAxisListener*>::iterator it2 = it->second.begin(); it2 != it->second.end(); it2++)
+		{
+			delete it2->second;
+		}
+	}
+
+	for (GamepadBtnTracker::iterator it = gpBtnTracker.begin(); it != gpBtnTracker.end(); it++)
+	{
+		for (std::map<int, GamepadBtnListener*>::iterator it2 = it->second.begin(); it2 != it->second.end(); it2++)
+		{
+			delete it2->second;
+		}
+	}
+
 	for (MouseBtnTracker::iterator it = mouseBtnTracker.begin(); it != mouseBtnTracker.end(); it++)
 	{
 		delete it->second;
@@ -43,6 +59,28 @@ void InputManager::ProcessMouseEvents()
 	for (MouseBtnTracker::iterator it = mouseBtnTracker.begin(); it != mouseBtnTracker.end(); it++)
 	{
 		it->second->ProcessMouseBtnEvent();
+	}
+}
+
+void InputManager::ProcessGamepadEvents()
+{
+	for (GamepadBtnTracker::iterator it = gpBtnTracker.begin(); it != gpBtnTracker.end(); it++)
+	{
+		int gamepadIndex = it->first;
+		std::map<int, GamepadBtnListener*>& listenerMap = gpBtnTracker.at(gamepadIndex);
+		for (std::map<int, GamepadBtnListener*>::iterator it2 = listenerMap.begin(); it2 != listenerMap.end(); it2++)
+		{
+			it2->second->ProcessGamepadBtnEvent();
+		}
+	}
+	for (GamepadAxisTracker::iterator it = gpAxisTracker.begin(); it != gpAxisTracker.end(); it++)
+	{
+		int gamepadIndex = it->first;
+		std::map<sf::Joystick::Axis, GamepadAxisListener*>& listenerMap = gpAxisTracker.at(gamepadIndex);
+		for (std::map<sf::Joystick::Axis, GamepadAxisListener*>::iterator it2 = listenerMap.begin(); it2 != listenerMap.end(); it2++)
+		{
+			it2->second->ProcessGamepadAxisEvent();
+		}
 	}
 }
 

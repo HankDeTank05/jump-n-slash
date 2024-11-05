@@ -3,7 +3,7 @@
 
 #include <SFML/Window/Joystick.hpp>
 
-enum class DualSenseButtons
+enum class DualSenseButton
 {
 	Square = 0,
 	X = 1,
@@ -22,7 +22,7 @@ enum class DualSenseButtons
 	MicMuteToggle = 14
 };
 
-enum class DualSenseAxes
+enum class DualSenseAxis
 {
 	LeftStickHorizontal = sf::Joystick::Axis::X,
 	LeftStickVertical = sf::Joystick::Axis::Y,
@@ -34,7 +34,7 @@ enum class DualSenseAxes
 	DpadVertical = sf::Joystick::Axis::PovY
 };
 
-enum class SwitchProButtons
+enum class SwitchProButton
 {
 	B = 0,
 	A = 1,
@@ -52,7 +52,7 @@ enum class SwitchProButtons
 	Capture = 13,
 };
 
-enum class SwitchProAxes
+enum class SwitchProAxis
 {
 	LeftStickHorizontal = sf::Joystick::Axis::X,
 	LeftStickVertical = sf::Joystick::Axis::Y,

@@ -15,13 +15,15 @@
 #include "../Engine Code/AnimationComponent.h"
 
 #include "Actor.h"
+#include "ControlScheme.h"
 
 // forward declarations
 class PlayerMoveState;
+class PlayerControlStrategy;
 class LevelMap;
 class RoomData;
 
-class Player : public Actor, public InputObject, public Subject
+class Player : public Actor, /*public InputObject,*/ public Subject
 {
 public:
 	Player() = delete;
@@ -37,8 +39,9 @@ public:
 	virtual void Alarm0() override;
 
 	// input stuff
-	virtual void KeyPressed(sf::Keyboard::Key key) override;
-	virtual void KeyReleased(sf::Keyboard::Key key) override;
+	//virtual void KeyPressed(sf::Keyboard::Key key) override;
+	//virtual void KeyReleased(sf::Keyboard::Key key) override;
+
 	// collision stuff
 	virtual void OnCollisionEnter(CollisionObject* pOther) override;
 	virtual void OnCollisionDuring(CollisionObject* pOther) override;
@@ -53,6 +56,9 @@ private: // player mutators. for selective access only (thru attorney)
 	// position and movement
 
 	void ProcessInputs(float deltaTime);
+	void SetControls(ControlScheme ctrl);
+	void SetWalk(float direction);
+	void SetJump(bool enabled);
 
 	// other
 
@@ -66,12 +72,14 @@ private: // player mutators. for selective access only (thru attorney)
 	void SetAnimationFall();
 
 private: // Member variables
+	PlayerControlStrategy* pCtrlStrat;
 	const PlayerMoveState* pCurrentState; // the current movement state
 	const PlayerMoveState* pPrevState; // the move state during the previous frame
 	sf::Vector2f respawnPoint; // where the player will respawn after dying
-	bool walkLeftKeyDown; // flag indicating if the walk left key is currently pressed
-	bool walkRightKeyDown; // flag indicating if the walk right key is currently pressed
-	bool jumpKeyDown; // flag indicating if the jump jey is currently pressed
+	//bool inputReceivedWalkLeft; // flag indicating if the walk left input is currently being received
+	//bool inputReceivedWalkRight; // flag indicating if the walk right input is currently being received
+	float inputWalkDir; // float in range [-1, 1] indicating which direction to walk and how fast
+	bool inputReceivedJump; // flag indicating if the jump input is currently being received
 	bool applyGravity; // flag indicating if gravity should be applied
 };
 

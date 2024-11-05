@@ -122,6 +122,8 @@ void JumpSlashEngine::Draw()
 
 void JumpSlashEngine::UnloadContent()
 {
+	GameEnd();
+
 	// asset managers
 	TextureManagerAttorney::Termination::Terminate();
 	SpriteManagerAttorney::Termination::Terminate();

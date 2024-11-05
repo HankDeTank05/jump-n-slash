@@ -14,6 +14,8 @@ GamepadBtnListener::GamepadBtnListener(int _gamepadIndex, int _btnNum)
 
 void GamepadBtnListener::ProcessGamepadBtnEvent()
 {
+	assert(sf::Joystick::isConnected(0));
+
 	bool currState = sf::Joystick::isButtonPressed(gamepadIndex, btnNum);
 
 	if (currState != prevState)

@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include <iostream>
+
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Visualizer.h"
@@ -19,19 +21,27 @@
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "RoomData.h"
-#include <iostream>
+#include "ControlManager.h"
+#include "PlayerControlKeyboard.h"
+#include "PlayerControlSwitchPro.h"
+#include "PlayerControlDualSense.h"
+#include "ControllerDebugger.h"
 
 Player::Player(LevelMap* pLevel)
 	: Actor(PLAYER_WALK_SPEED, pLevel),
+	pCtrlStrat(nullptr),
 	pCurrentState(&PlayerFSM::idle),
 	pPrevState(nullptr),
 	respawnPoint(),
-	walkLeftKeyDown(false),
-	walkRightKeyDown(false),
-	jumpKeyDown(false),
+	//inputReceivedWalkLeft(false),
+	//inputReceivedWalkRight(false),
+	inputWalkDir(0.f),
+	inputReceivedJump(false),
 	applyGravity(true)
 {	
 	assert(pCurrentState != nullptr);
+
+	SetControls(ControlManager::GetControlScheme());
 
 	// connect to map
 	pLevel->LinkToPlayer(this);
@@ -55,25 +65,28 @@ Player::Player(LevelMap* pLevel)
 	// register with the engine
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
-	RequestKeyRegistration(KB_JUMP, KeyEvent::KeyPress);
-	RequestKeyRegistration(KB_JUMP, KeyEvent::KeyRelease);
-	RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyPress);
-	RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyRelease);
-	RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyPress);
-	RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_JUMP, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_JUMP, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyRelease);
 
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
 }
 
 Player::~Player()
 {
-	// do nothing
+	delete pCtrlStrat;
 }
 
 void Player::Update(float deltaTime)
 {
 	assert(pLevel != nullptr);
 	assert(pCurrentRoom != nullptr);
+
+	// update the inputs
+	pCtrlStrat->GetInputs();
 
 	// update the move state
 	pCurrentState = pCurrentState->GetNextState(this);
@@ -98,7 +111,7 @@ void Player::Update(float deltaTime)
 	SceneManager::GetCurrentCamera()->SetCenter(newCamCenter);
 
 	// reset the player's y-velocity if they're grounded (so we don't continuously accelerate downwards)
-	if ((grounded && !jumpKeyDown) || headBonked)
+	if ((grounded && !inputReceivedJump) || headBonked)
 	{
 		posDelta.y = 0.f;
 		if (headBonked == true)
@@ -171,6 +184,10 @@ void Player::Update(float deltaTime)
 	{
 		pLevel->DebugLevelScrollBounds(pCurrentRoom);
 	}
+	if (DEBUG_CONTROLLER_INPUT)
+	{
+		ControllerDebugger::DisplayDebugInfo();
+	}
 }
 
 void Player::Alarm0()
@@ -178,39 +195,47 @@ void Player::Alarm0()
 	applyGravity = true;
 }
 
-void Player::KeyPressed(sf::Keyboard::Key key)
-{
-	switch (key)
-	{
-	case KB_WALK_LEFT:
-		walkLeftKeyDown = true;
-		facing = -1;
-		break;
-	case KB_WALK_RIGHT:
-		walkRightKeyDown = true;
-		facing = 1;
-		break;
-	case KB_JUMP:
-		jumpKeyDown = true;
-		break;
-	}
-}
-
-void Player::KeyReleased(sf::Keyboard::Key key)
-{
-	switch (key)
-	{
-	case KB_WALK_LEFT:
-		walkLeftKeyDown = false;
-		break;
-	case KB_WALK_RIGHT:
-		walkRightKeyDown = false;
-		break;
-	case KB_JUMP:
-		jumpKeyDown = false;
-		break;
-	}
-}
+//void Player::KeyPressed(sf::Keyboard::Key key)
+//{
+//	switch (key)
+//	{
+//	case KB_WALK_LEFT:
+//		//inputReceivedWalkLeft = true;
+//		inputWalkDir -= 1.f;
+//		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
+//		facing = -1;
+//		break;
+//	case KB_WALK_RIGHT:
+//		//inputReceivedWalkRight = true;
+//		inputWalkDir += 1.f;
+//		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
+//		facing = 1;
+//		break;
+//	case KB_JUMP:
+//		inputReceivedJump = true;
+//		break;
+//	}
+//}
+//
+//void Player::KeyReleased(sf::Keyboard::Key key)
+//{
+//	switch (key)
+//	{
+//	case KB_WALK_LEFT:
+//		//inputReceivedWalkLeft = false;
+//		inputWalkDir += 1.f;
+//		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
+//		break;
+//	case KB_WALK_RIGHT:
+//		//inputReceivedWalkRight = false;
+//		inputWalkDir -= 1.f;
+//		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
+//		break;
+//	case KB_JUMP:
+//		inputReceivedJump = false;
+//		break;
+//	}
+//}
 
 bool Player::IsApplyGravity()
 {
@@ -234,24 +259,58 @@ void Player::OnCollisionExit(CollisionObject* pOther)
 
 void Player::ProcessInputs(float deltaTime)
 {
-	posDelta.x = 0.f;
+	posDelta.x = speed * inputWalkDir * deltaTime;
 
-	if (walkLeftKeyDown)
-	{
-		posDelta.x -= speed * deltaTime;
-		//posDelta.x -= speed;
-	}
-	if (walkRightKeyDown)
-	{
-		posDelta.x += speed * deltaTime;
-		//posDelta.x += speed;
-	}
-	if (grounded && jumpKeyDown)
+	if (grounded && inputReceivedJump)
 	{
 		posDelta.y = JUMP_FORCE * deltaTime;
 		applyGravity = false; // temporarily stop applying gravity to allow variable height jumping
 		RequestAlarmRegistration(AlarmID::Alarm0, MAX_JUMP_HOLD_TIME);
 	}
+}
+
+void Player::SetControls(ControlScheme ctrl)
+{
+	if (pCtrlStrat != nullptr)
+	{
+		delete pCtrlStrat;
+	}
+
+	switch (ctrl)
+	{
+	case ControlScheme::Keyboard:
+		pCtrlStrat = new PlayerControlKeyboard(this);
+		break;
+	case ControlScheme::SwitchPro:
+		pCtrlStrat = new PlayerControlSwitchPro(this);
+		break;
+	case ControlScheme::DualSense:
+		pCtrlStrat = new PlayerControlDualSense(this);
+		break;
+	default:
+		assert(false);
+	}
+}
+
+void Player::SetWalk(float direction)
+{
+	assert(-1.f <= direction);
+	assert(direction <= 1.f);
+
+	inputWalkDir = direction;
+	if (inputWalkDir < 0 && facing > 0)
+	{
+		facing = -1;
+	}
+	else if (inputWalkDir > 0 && facing < 0)
+	{
+		facing = 1;
+	}
+}
+
+void Player::SetJump(bool enabled)
+{
+	inputReceivedJump = enabled;
 }
 
 void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
