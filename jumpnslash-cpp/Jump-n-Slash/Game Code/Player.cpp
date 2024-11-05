@@ -24,6 +24,7 @@
 #include "ControlManager.h"
 #include "PlayerControlKeyboard.h"
 #include "PlayerControlSwitchPro.h"
+#include "PlayerControlDualSense.h"
 #include "ControllerDebugger.h"
 
 Player::Player(LevelMap* pLevel)
@@ -284,7 +285,7 @@ void Player::SetControls(ControlScheme ctrl)
 		pCtrlStrat = new PlayerControlSwitchPro(this);
 		break;
 	case ControlScheme::DualSense:
-		assert(false);
+		pCtrlStrat = new PlayerControlDualSense(this);
 		break;
 	default:
 		assert(false);

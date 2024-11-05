@@ -132,6 +132,7 @@
     <ClCompile Include="Game Code\PlatformSemisolid.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
     <ClCompile Include="Game Code\PlayerAttorney.cpp" />
+    <ClCompile Include="Game Code\PlayerControlDualSense.cpp" />
     <ClCompile Include="Game Code\PlayerControlKeyboard.cpp" />
     <ClCompile Include="Game Code\PlayerControlStrategy.cpp" />
     <ClCompile Include="Game Code\PlayerControlSwitchPro.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="Game Code\PlatformSemisolid.h" />
     <ClInclude Include="Game Code\Player.h" />
     <ClInclude Include="Game Code\PlayerAttorney.h" />
+    <ClInclude Include="Game Code\PlayerControlDualSense.h" />
     <ClInclude Include="Game Code\PlayerControlKeyboard.h" />
     <ClInclude Include="Game Code\PlayerControlStrategy.h" />
     <ClInclude Include="Game Code\PlayerControlSwitchPro.h" />

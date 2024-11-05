@@ -17,7 +17,7 @@ public:
 
 	virtual void GamepadBtnPressed(int gamepadIndex, int btnNum) override;
 	virtual void GamepadBtnReleased(int gamepadIndex, int btnNum) override;
-	virtual void GamepadAxisMoved(int gamepadIndex, sf::Joystick::Axis axis, float axisState, float axisStateDelta);
+	virtual void GamepadAxisMoved(int gamepadIndex, sf::Joystick::Axis axis, float axisState, float axisStateDelta) override;
 };
 
 #endif

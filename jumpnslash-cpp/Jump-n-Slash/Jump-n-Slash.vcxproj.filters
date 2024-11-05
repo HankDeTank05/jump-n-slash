@@ -564,6 +564,9 @@
     <ClCompile Include="Game Code\ControllerDebuggerAttorney.cpp">
       <Filter>Source Files\Game Code\Misc. files\Debugging</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\PlayerControlDualSense.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -1000,6 +1003,9 @@
     </ClInclude>
     <ClInclude Include="Game Code\ControllerDebuggerAttorney.h">
       <Filter>Source Files\Game Code\Misc. files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerControlDualSense.h">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
