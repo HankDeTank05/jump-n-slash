@@ -81,6 +81,8 @@
     <ClCompile Include="Engine Code\SceneChangeCommand.cpp" />
     <ClCompile Include="Engine Code\SceneChangeNullCommand.cpp" />
     <ClCompile Include="Engine Code\SceneCommand.cpp" />
+    <ClCompile Include="Engine Code\SceneGraphNode.cpp" />
+    <ClCompile Include="Engine Code\SceneGraphNodeAttorney.cpp" />
     <ClCompile Include="Engine Code\SceneManager.cpp" />
     <ClCompile Include="Engine Code\SceneManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\SpriteManager.cpp" />
@@ -216,6 +218,7 @@
     <ClInclude Include="Engine Code\MouseCursorListener.h" />
     <ClInclude Include="Engine Code\MouseCursorRegistrationCommand.h" />
     <ClInclude Include="Engine Code\NoCollisionDispatch.h" />
+    <ClInclude Include="Engine Code\SceneGraphNode.h" />
     <ClInclude Include="Engine Code\Observer.h" />
     <ClInclude Include="Engine Code\ObserverEvent.h" />
     <ClInclude Include="Engine Code\RegistrationBroker.h" />
@@ -225,6 +228,7 @@
     <ClInclude Include="Engine Code\SceneChangeCommand.h" />
     <ClInclude Include="Engine Code\SceneChangeNullCommand.h" />
     <ClInclude Include="Engine Code\SceneCommand.h" />
+    <ClInclude Include="Engine Code\SceneGraphNodeAttorney.h" />
     <ClInclude Include="Engine Code\SceneManager.h" />
     <ClInclude Include="Engine Code\SceneManagerAttorney.h" />
     <ClInclude Include="Engine Code\SpriteManager.h" />

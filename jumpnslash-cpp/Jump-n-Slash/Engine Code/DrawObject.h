@@ -9,6 +9,7 @@
 // forward declarations
 class DrawRegistrationCommand;
 class DrawDeregistrationCommand;
+//class SceneGraphNode;
 
 class DrawObject
 {
@@ -122,6 +123,7 @@ protected:
 	*/
 	void Render(sf::Drawable& drawable);
 
+	// TODO: docs for DrawObject::Render(drawable, tform)
 	void Render(const sf::Drawable& drawable, const sf::Transform& tform);
 
 	void Render(sf::Vertex* array, int vtexCount);
@@ -183,11 +185,14 @@ private:
 	void Register();
 	void Deregister();
 
+	//void DrawChildren();
+
 private:
 	RegistrationState regState;
 	DrawRegistrationCommand* pRegCmd;
 	DrawDeregistrationCommand* pDeregCmd;
 	DrawManager::DrawListRef deleteRef;
+	//SceneGraphNode* pNode;
 };
 
 #endif

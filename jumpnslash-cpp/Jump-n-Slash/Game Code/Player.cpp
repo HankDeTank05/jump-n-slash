@@ -132,7 +132,7 @@ void Player::Update(float deltaTime)
 	}
 	else if (facing == -1)
 	{
-		pSprite->setOrigin(TILE_SIZE_F, 0.f);
+		pSprite->setOrigin(width, 0.f);
 	}
 	else
 	{

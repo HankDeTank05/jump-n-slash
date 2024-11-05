@@ -175,6 +175,9 @@
     <Filter Include="Source Files\Game Code\Misc. files\Debugging">
       <UniqueIdentifier>{b2f4c5a2-86df-4102-8e51-aac71c0671e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene Graph System">
+      <UniqueIdentifier>{cae3b6fe-e446-4be6-bb30-97fc03393044}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -566,6 +569,12 @@
     </ClCompile>
     <ClCompile Include="Game Code\PlayerControlDualSense.cpp">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneGraphNode.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene Graph System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneGraphNodeAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene Graph System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1006,6 +1015,12 @@
     </ClInclude>
     <ClInclude Include="Game Code\PlayerControlDualSense.h">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneGraphNode.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene Graph System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneGraphNodeAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene Graph System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

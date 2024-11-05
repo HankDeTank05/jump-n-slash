@@ -7,18 +7,22 @@
 #include "DrawDeregistrationCommand.h"
 #include "SceneAttorney.h"
 #include "SceneManager.h"
+//#include "SceneGraphNode.h"
+//#include "SceneGraphNodeAttorney.h"
 
 DrawObject::DrawObject()
 	: regState(RegistrationState::CURRENTLY_DEREGISTERED),
 	pRegCmd(new DrawRegistrationCommand(this)),
 	pDeregCmd(new DrawDeregistrationCommand(this)),
-	deleteRef()
+	deleteRef()/*,
+	pNode(new SceneGraphNode(this))*/
 {
 	// do nothing
 }
 
 DrawObject::~DrawObject()
 {
+	//delete pNode;
 	delete pDeregCmd;
 	delete pRegCmd;
 }

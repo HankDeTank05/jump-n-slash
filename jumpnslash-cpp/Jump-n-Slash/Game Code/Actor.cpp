@@ -74,6 +74,11 @@ bool Actor::IsHeadBonked() const
 	return headBonked;
 }
 
+float Actor::GetFacing() const
+{
+	return facing;
+}
+
 void Actor::RaycastRight()
 {
 	const int RAY_COUNT = 2;
