@@ -14,6 +14,8 @@ GamepadAxisListener::GamepadAxisListener(int _gamepadIndex, sf::Joystick::Axis _
 
 void GamepadAxisListener::ProcessGamepadAxisEvent()
 {
+	assert(sf::Joystick::isConnected(0));
+
 	float currState = sf::Joystick::getAxisPosition(gamepadIndex, axis) * 0.01f; // divide by 100 so that inputs are in the range [-1, 1]
 
 	if (currState != prevState)

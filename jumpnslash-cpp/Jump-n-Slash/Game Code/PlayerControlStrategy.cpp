@@ -3,7 +3,7 @@
 #include "DesignerControls.h"
 #include "PlayerAttorney.h"
 
-PlayerControlStrategy::PlayerControlStrategy(Player* _pPlayer, ControlScheme scheme)
+PlayerControlStrategy::PlayerControlStrategy(Player* _pPlayer, ControlScheme ctrl)
 	: pPlayer(_pPlayer),
 	jump(false),
 	walk(0.f),
@@ -11,7 +11,7 @@ PlayerControlStrategy::PlayerControlStrategy(Player* _pPlayer, ControlScheme sch
 	dreamAtk(false),
 	dash(false)
 {
-	switch (scheme)
+	switch (ctrl)
 	{
 	case ControlScheme::Keyboard:
 		// jump

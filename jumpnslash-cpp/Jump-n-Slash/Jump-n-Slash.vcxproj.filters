@@ -169,8 +169,11 @@
     <Filter Include="Source Files\Game Code\Actors\Player\Control Strategy">
       <UniqueIdentifier>{18029e27-0d72-42ec-982e-ac71a5cd629a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Control Selector">
+    <Filter Include="Source Files\Game Code\Control Mapping &amp; Management">
       <UniqueIdentifier>{3b956225-6c34-4d67-a7a1-f12b23adcdb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Misc. files\Debugging">
+      <UniqueIdentifier>{b2f4c5a2-86df-4102-8e51-aac71c0671e8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -535,10 +538,31 @@
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\ControlSelector.cpp">
-      <Filter>Source Files\Game Code\Control Selector</Filter>
+      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\ControlSelection.cpp">
       <Filter>Source Files\Game Code\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\LevelScene.cpp">
+      <Filter>Source Files\Game Code\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ControlManager.cpp">
+      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\GameEnd.cpp">
+      <Filter>Source Files\Game Code\Files Required by Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ControlManagerAttorney.cpp">
+      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerControlSwitchPro.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ControllerDebugger.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Debugging</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ControllerDebuggerAttorney.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Debugging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -945,7 +969,7 @@
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\ControlSelector.h">
-      <Filter>Source Files\Game Code\Control Selector</Filter>
+      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerMoveState.h">
       <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
@@ -958,6 +982,24 @@
     </ClInclude>
     <ClInclude Include="Game Code\PlayerControlKeyboard.h">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\LevelScene.h">
+      <Filter>Source Files\Game Code\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControlManager.h">
+      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControlManagerAttorney.h">
+      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerControlSwitchPro.h">
+      <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControllerDebugger.h">
+      <Filter>Source Files\Game Code\Misc. files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControllerDebuggerAttorney.h">
+      <Filter>Source Files\Game Code\Misc. files\Debugging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "../Engine Code/FontManager.h"
 
 #include "Level0.h"
+#include "ControlManager.h"
 
 const float ControlSelector::BOX_W = 200.f;
 const float ControlSelector::BOX_H = 50.f;
@@ -12,7 +13,7 @@ const float ControlSelector::BOX_W_SPACING = 10.f;
 const float ControlSelector::BOX_X_START = 100.f;
 
 ControlSelector::ControlSelector()
-	: scheme(ControlScheme::Keyboard),
+	: ctrl(ControlScheme::Keyboard),
 	kbSelectBox(sf::Vector2f(BOX_W, BOX_H)),
 	kbSelectText("Keyboard", *FontManager::GetFont("delfino")),
 	spSelectBox(sf::Vector2f(BOX_W, BOX_H)),
@@ -25,7 +26,6 @@ ControlSelector::ControlSelector()
 	kbSelectBox.setPosition(BOX_X_START, 100.f);
 	sf::Vector2f boxPos = kbSelectBox.getPosition();
 	sf::Vector2f boxSize = kbSelectBox.getSize();
-	int textSize = (kbSelectText.getCharacterSize() /*+ kbSelectText.getLetterSpacing()*/) * kbSelectText.getString().getSize();
 	kbSelectText.setFillColor(sf::Color::Black);
 	kbSelectText.setPosition(
 		((boxPos.x + (boxPos.x + boxSize.x)) / 2) - 75,
@@ -35,10 +35,22 @@ ControlSelector::ControlSelector()
 	// y pos = ((boxPos.y + (boxPos.y + boxSize.y)) / 2) - (textSize.y / 2)
 
 	spSelectBox.setPosition(BOX_X_START + (BOX_W + BOX_W_SPACING) * 1, 100.f);
+	boxPos = spSelectBox.getPosition();
+	boxSize = spSelectBox.getSize();
 	spSelectText.setFillColor(sf::Color::Black);
+	spSelectText.setPosition(
+		((boxPos.x + (boxPos.x + boxSize.x)) / 2) - 75,
+		((boxPos.y + (boxPos.y + boxSize.y)) / 2) - 20
+	);
 
 	dsSelectBox.setPosition(BOX_X_START + (BOX_W + BOX_W_SPACING) * 2, 100.f);
+	boxPos = dsSelectBox.getPosition();
+	boxSize = dsSelectBox.getSize();
 	dsSelectText.setFillColor(sf::Color::Black);
+	dsSelectText.setPosition(
+		((boxPos.x + (boxPos.x + boxSize.x)) / 2) - 75,
+		((boxPos.y + (boxPos.y + boxSize.y)) / 2) - 20
+	);
 
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
@@ -51,7 +63,7 @@ void ControlSelector::Update(float deltaTime)
 	if (kbSelectBox.getGlobalBounds().contains(mousePos.x, mousePos.y))
 	{
 		kbSelectBox.setFillColor(sf::Color::Green);
-		scheme = ControlScheme::Keyboard;
+		ctrl = ControlScheme::Keyboard;
 	}
 	else
 	{
@@ -61,7 +73,7 @@ void ControlSelector::Update(float deltaTime)
 	if (spSelectBox.getGlobalBounds().contains(mousePos.x, mousePos.y))
 	{
 		spSelectBox.setFillColor(sf::Color::Green);
-		scheme = ControlScheme::SwitchPro;
+		ctrl = ControlScheme::SwitchPro;
 	}
 	else
 	{
@@ -71,7 +83,7 @@ void ControlSelector::Update(float deltaTime)
 	if (dsSelectBox.getGlobalBounds().contains(mousePos.x, mousePos.y))
 	{
 		dsSelectBox.setFillColor(sf::Color::Green);
-		scheme = ControlScheme::DualSense;
+		ctrl = ControlScheme::DualSense;
 	}
 	else
 	{
@@ -80,6 +92,7 @@ void ControlSelector::Update(float deltaTime)
 
 	if (mouseClicked == true)
 	{
+		ControlManager::SetControlScheme(ctrl);
 		SceneManager::SetNextScene(new Level0());
 	}
 }

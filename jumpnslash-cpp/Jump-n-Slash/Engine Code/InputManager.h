@@ -27,7 +27,7 @@ public:
 
 	void ProcessKeyboardEvents();
 	void ProcessMouseEvents();
-	//void ProcessGamepadEvents();
+	void ProcessGamepadEvents();
 
 	using KeyTracker = std::map<sf::Keyboard::Key, KeyListener*>;
 	void RegisterKey(sf::Keyboard::Key key, InputObject* pInputable, KeyEvent eventToReg);

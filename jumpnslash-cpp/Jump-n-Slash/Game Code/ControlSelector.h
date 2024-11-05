@@ -29,7 +29,7 @@ private:
 	static const float BOX_H;
 	static const float BOX_W_SPACING;
 	static const float BOX_X_START;
-	ControlScheme scheme;
+	ControlScheme ctrl;
 	sf::RectangleShape kbSelectBox;
 	sf::Text kbSelectText;
 	sf::RectangleShape spSelectBox;

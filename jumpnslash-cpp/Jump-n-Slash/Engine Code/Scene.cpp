@@ -48,6 +48,7 @@ void Scene::Update(float deltaTime)
 
 	pInputMgr->ProcessKeyboardEvents();
 	pInputMgr->ProcessMouseEvents();
+	pInputMgr->ProcessGamepadEvents();
 
 	pAlarmMgr->ProcessAlarms();
 

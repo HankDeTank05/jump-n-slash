@@ -21,9 +21,12 @@
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "RoomData.h"
+#include "ControlManager.h"
 #include "PlayerControlKeyboard.h"
+#include "PlayerControlSwitchPro.h"
+#include "ControllerDebugger.h"
 
-Player::Player(LevelMap* pLevel, ControlScheme scheme)
+Player::Player(LevelMap* pLevel)
 	: Actor(PLAYER_WALK_SPEED, pLevel),
 	pCtrlStrat(nullptr),
 	pCurrentState(&PlayerFSM::idle),
@@ -37,20 +40,7 @@ Player::Player(LevelMap* pLevel, ControlScheme scheme)
 {	
 	assert(pCurrentState != nullptr);
 
-	switch (scheme)
-	{
-	case ControlScheme::Keyboard:
-		pCtrlStrat = new PlayerControlKeyboard(this);
-		break;
-	case ControlScheme::SwitchPro:
-		assert(false);
-		break;
-	case ControlScheme::DualSense:
-		assert(false);
-		break;
-	default:
-		assert(false);
-	}
+	SetControls(ControlManager::GetControlScheme());
 
 	// connect to map
 	pLevel->LinkToPlayer(this);
@@ -193,6 +183,10 @@ void Player::Update(float deltaTime)
 	{
 		pLevel->DebugLevelScrollBounds(pCurrentRoom);
 	}
+	if (DEBUG_CONTROLLER_INPUT)
+	{
+		ControllerDebugger::DisplayDebugInfo();
+	}
 }
 
 void Player::Alarm0()
@@ -274,12 +268,43 @@ void Player::ProcessInputs(float deltaTime)
 	}
 }
 
+void Player::SetControls(ControlScheme ctrl)
+{
+	if (pCtrlStrat != nullptr)
+	{
+		delete pCtrlStrat;
+	}
+
+	switch (ctrl)
+	{
+	case ControlScheme::Keyboard:
+		pCtrlStrat = new PlayerControlKeyboard(this);
+		break;
+	case ControlScheme::SwitchPro:
+		pCtrlStrat = new PlayerControlSwitchPro(this);
+		break;
+	case ControlScheme::DualSense:
+		assert(false);
+		break;
+	default:
+		assert(false);
+	}
+}
+
 void Player::SetWalk(float direction)
 {
 	assert(-1.f <= direction);
 	assert(direction <= 1.f);
 
 	inputWalkDir = direction;
+	if (inputWalkDir < 0 && facing > 0)
+	{
+		facing = -1;
+	}
+	else if (inputWalkDir > 0 && facing < 0)
+	{
+		facing = 1;
+	}
 }
 
 void Player::SetJump(bool enabled)

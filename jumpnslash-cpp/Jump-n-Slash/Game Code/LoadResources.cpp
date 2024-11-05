@@ -81,7 +81,7 @@ void JumpSlashEngine::LoadResources()
 	assert(JUMP_FORCE < 0.f);
 	assert(MAX_JUMP_HOLD_TIME >= 0.f);
 
-	SceneManager::SetStartScene(new Level0());
+	//SceneManager::SetStartScene(new Level0());
 	//SceneManager::SetStartScene(new TestScene());
-	//SceneManager::SetStartScene(new ControlSelection());
+	SceneManager::SetStartScene(new ControlSelection());
 }

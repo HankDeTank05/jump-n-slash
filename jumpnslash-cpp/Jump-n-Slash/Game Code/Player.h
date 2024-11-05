@@ -27,7 +27,7 @@ class Player : public Actor, /*public InputObject,*/ public Subject
 {
 public:
 	Player() = delete;
-	Player(LevelMap* pLevel, ControlScheme scheme);
+	Player(LevelMap* pLevel);
 	Player(const Player& p) = delete;
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
@@ -56,6 +56,7 @@ private: // player mutators. for selective access only (thru attorney)
 	// position and movement
 
 	void ProcessInputs(float deltaTime);
+	void SetControls(ControlScheme ctrl);
 	void SetWalk(float direction);
 	void SetJump(bool enabled);
 

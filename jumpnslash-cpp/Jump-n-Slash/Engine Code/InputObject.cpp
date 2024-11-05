@@ -27,6 +27,18 @@ InputObject::InputObject()
 
 InputObject::~InputObject()
 {
+	for (GamepadAxisTracker::iterator it = gpAxisTracker.begin(); it != gpAxisTracker.end(); it++)
+	{
+		delete it->second.pDeregCmd;
+		delete it->second.pRegCmd;
+	}
+
+	for (GamepadBtnTracker::iterator it = gpBtnTracker.begin(); it != gpBtnTracker.end(); it++)
+	{
+		delete it->second.pDeregCmd;
+		delete it->second.pRegCmd;
+	}
+
 	delete mouseCursorRegData.pDeregCmd;
 	delete mouseCursorRegData.pRegCmd;
 

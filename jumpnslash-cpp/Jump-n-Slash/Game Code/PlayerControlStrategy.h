@@ -12,7 +12,7 @@ class PlayerControlStrategy : public InputObject
 {
 public:
 	PlayerControlStrategy() = delete;
-	PlayerControlStrategy(Player* pPlayer, ControlScheme scheme);
+	PlayerControlStrategy(Player* pPlayer, ControlScheme ctrl);
 	PlayerControlStrategy(const PlayerControlStrategy& pcs) = delete;
 	PlayerControlStrategy& operator=(const PlayerControlStrategy& pcs) = delete;
 	virtual ~PlayerControlStrategy() = default;
