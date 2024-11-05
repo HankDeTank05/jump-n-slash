@@ -43,6 +43,8 @@
     <ClCompile Include="Engine Code\CollisionVolumeAABB.cpp" />
     <ClCompile Include="Engine Code\CollisionVolumeBoundingBox.cpp" />
     <ClCompile Include="Engine Code\CollisionVolumeBSphere.cpp" />
+    <ClCompile Include="Engine Code\ControlManager.cpp" />
+    <ClCompile Include="Engine Code\ControlManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\ConvenienceFunctions.cpp" />
     <ClCompile Include="Engine Code\DrawObject.cpp" />
     <ClCompile Include="Engine Code\DrawObjectAttorney.cpp" />
@@ -119,8 +121,6 @@
     <ClCompile Include="Game Code\BlockSolid.cpp" />
     <ClCompile Include="Game Code\ControllerDebugger.cpp" />
     <ClCompile Include="Game Code\ControllerDebuggerAttorney.cpp" />
-    <ClCompile Include="Game Code\ControlManager.cpp" />
-    <ClCompile Include="Game Code\ControlManagerAttorney.cpp" />
     <ClCompile Include="Game Code\ControlSelection.cpp" />
     <ClCompile Include="Game Code\ControlSelector.cpp" />
     <ClCompile Include="Game Code\Enemy.cpp" />
@@ -183,6 +183,9 @@
     <ClInclude Include="Engine Code\CollisionVolumeBSphere.h" />
     <ClInclude Include="Engine Code\Command.h" />
     <ClInclude Include="Engine Code\ControllerInputs.h" />
+    <ClInclude Include="Engine Code\ControlManager.h" />
+    <ClInclude Include="Engine Code\ControlManagerAttorney.h" />
+    <ClInclude Include="Engine Code\ControlScheme.h" />
     <ClInclude Include="Engine Code\ConvenienceFunctions.h" />
     <ClInclude Include="Engine Code\DrawObject.h" />
     <ClInclude Include="Engine Code\DrawObjectAttorney.h" />
@@ -266,8 +269,6 @@
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\ControllerDebugger.h" />
     <ClInclude Include="Game Code\ControllerDebuggerAttorney.h" />
-    <ClInclude Include="Game Code\ControlManager.h" />
-    <ClInclude Include="Game Code\ControlManagerAttorney.h" />
     <ClInclude Include="Game Code\ControlScheme.h" />
     <ClInclude Include="Game Code\ControlSelection.h" />
     <ClInclude Include="Game Code\ControlSelector.h" />

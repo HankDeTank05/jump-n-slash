@@ -178,6 +178,9 @@
     <Filter Include="Source Files\Engine Code\Main Systems\Scene Graph System">
       <UniqueIdentifier>{cae3b6fe-e446-4be6-bb30-97fc03393044}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management">
+      <UniqueIdentifier>{480a4628-e7d5-44bc-bc57-77e703fd9032}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -549,14 +552,8 @@
     <ClCompile Include="Game Code\LevelScene.cpp">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\ControlManager.cpp">
-      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\GameEnd.cpp">
       <Filter>Source Files\Game Code\Files Required by Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\ControlManagerAttorney.cpp">
-      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerControlSwitchPro.cpp">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
@@ -575,6 +572,12 @@
     </ClCompile>
     <ClCompile Include="Engine Code\SceneGraphNodeAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Scene Graph System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\ControlManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\ControlManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -998,12 +1001,6 @@
     <ClInclude Include="Game Code\LevelScene.h">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\ControlManager.h">
-      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\ControlManagerAttorney.h">
-      <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\PlayerControlSwitchPro.h">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
     </ClInclude>
@@ -1021,6 +1018,15 @@
     </ClInclude>
     <ClInclude Include="Engine Code\SceneGraphNodeAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\Scene Graph System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\ControlScheme.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\ControlManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\ControlManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

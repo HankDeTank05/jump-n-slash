@@ -26,6 +26,18 @@ public:
 		friend class SceneChangeCommand;
 		static void ChangeScene(Scene* pScene);
 	};
+	class SceneSuspend
+	{
+	private:
+		friend class SceneSuspendCommand;
+		static void SuspendCurrentScene(Scene* pForegroundScene);
+	};
+	class SceneResume
+	{
+	private:
+		friend class SceneResumeCommand;
+		static void ResumeSuspendedScene();
+	};
 	class Termination
 	{
 	private:

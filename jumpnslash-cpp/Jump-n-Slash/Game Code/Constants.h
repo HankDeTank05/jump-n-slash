@@ -15,6 +15,11 @@ const int TILE_SIZE = 32;
 const float TILE_SIZE_F = static_cast<float>(TILE_SIZE);
 const std::string ASSET_SETUP_FILE = "assets/assetSetupFile_test.txt";
 
+// controller constants
+
+const std::string spGamepadName = "Pro Controller";
+const std::string dsGamepadName = "DualSense Wireless Controller";
+
 // GameObject constants
 
 const int ALARM_COUNT = 10;

@@ -26,7 +26,7 @@ void ControllerDebugger::Terminate()
 
 void ControllerDebugger::privDisplayDebugInfo()
 {
-	const float INPUT_LINE_SPACING = 10.f;
+	const float INPUT_LINE_SPACING = 50.f;
 	const float BTN_START_X = 100.f;
 	const float BTN_RECT_SIZE = 20.f;
 	const float BTN_RECT_SPACING = 10.f;
@@ -39,6 +39,10 @@ void ControllerDebugger::privDisplayDebugInfo()
 		float axisLineSize = 10.f;
 		if (sf::Joystick::isConnected(c))
 		{
+			// visualize the name of the controller
+
+			Visualizer::VisualizeText(sf::Joystick::getIdentification(c).name, sf::Vector2f(0.f, (c + 1) * (BTN_RECT_SIZE + INPUT_LINE_SPACING) - BTN_RECT_SIZE));
+			
 			// visualize the controller index
 
 			Visualizer::VisualizeText(std::to_string(c), sf::Vector2f(0.f, (c + 1) * (BTN_RECT_SIZE + INPUT_LINE_SPACING)));

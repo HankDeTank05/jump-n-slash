@@ -4,6 +4,8 @@
 #include "SceneCommand.h"
 #include "SceneChangeCommand.h"
 #include "SceneChangeNullCommand.h"
+#include "SceneSuspendCommand.h"
+#include "SceneResumeCommand.h"
 #include "SceneAttorney.h"
 
 SceneManager* SceneManager::pInstance = nullptr;
@@ -12,7 +14,10 @@ SceneManager::SceneManager()
 	: pCurrentScene(nullptr),
 	pChangeCmd(new SceneChangeCommand()),
 	pDontChangeCmd(new SceneChangeNullCommand()),
-	pCmdToExe(pDontChangeCmd)
+	pSuspendCmd(new SceneSuspendCommand()),
+	pResumeCmd(new SceneResumeCommand()),
+	pCmdToExe(pDontChangeCmd),
+	suspensionStack()
 {
 	// do nothing
 }
@@ -49,9 +54,19 @@ Camera* SceneManager::GetCurrentCamera()
 	return Instance().privGetCurrentCamera();
 }
 
-void SceneManager::SetNextScene(Scene* pNextScene)
+void SceneManager::SetNextSceneChange(Scene* pNextScene)
 {
-	Instance().privSetNextScene(pNextScene);
+	Instance().privSetNextSceneChange(pNextScene);
+}
+
+void SceneManager::SetNextSceneSuspend(Scene* pNextScene)
+{
+	Instance().privSetNextSceneSuspend(pNextScene);
+}
+
+void SceneManager::SetNextSceneResume()
+{
+	Instance().privSetNextSceneResume();
 }
 
 void SceneManager::InitStartScene()
@@ -62,6 +77,16 @@ void SceneManager::InitStartScene()
 void SceneManager::ChangeScene(Scene* pScene)
 {
 	Instance().privChangeScene(pScene);
+}
+
+void SceneManager::SuspendCurrentScene(Scene* pForegroundScene)
+{
+	Instance().privSuspendCurrentScene(pForegroundScene);
+}
+
+void SceneManager::ResumeSuspendedScene()
+{
+	Instance().privResumeSuspendedScene();
 }
 
 void SceneManager::UpdateCurrentScene(float deltaTime)
@@ -95,13 +120,29 @@ Camera* SceneManager::privGetCurrentCamera()
 	return pCurrentScene->GetCurrentCamera();
 }
 
-void SceneManager::privSetNextScene(Scene* pNextScene)
+void SceneManager::privSetNextSceneChange(Scene* pNextScene)
 {
 	assert(pCmdToExe != pChangeCmd);
 	assert(pNextScene != pCurrentScene); // tom foolery such as this is strictly prohibited
 
 	pChangeCmd->SetNextScene(pNextScene);
 	pCmdToExe = pChangeCmd;
+}
+
+void SceneManager::privSetNextSceneSuspend(Scene* pNextScene)
+{
+	assert(pCmdToExe != pSuspendCmd);
+	assert(pNextScene != pCurrentScene); // tom foolery such as this is strictly prohibited
+
+	pSuspendCmd->SetNextScene(pNextScene);
+	pCmdToExe = pSuspendCmd;
+}
+
+void SceneManager::privSetNextSceneResume()
+{
+	assert(suspensionStack.size() > 0);
+	
+	pCmdToExe = pResumeCmd;
 }
 
 void SceneManager::privInitStartScene()
@@ -121,6 +162,33 @@ void SceneManager::privChangeScene(Scene* pScene)
 	pCmdToExe = pDontChangeCmd;
 }
 
+void SceneManager::privSuspendCurrentScene(Scene* pForegroundScene)
+{
+	//pCurrentScene->Suspend();
+
+	suspensionStack.push(pCurrentScene);
+
+	pCurrentScene = pForegroundScene;
+	pCurrentScene->Init();
+
+	pCmdToExe = pDontChangeCmd;
+}
+
+void SceneManager::privResumeSuspendedScene()
+{
+	assert(suspensionStack.size() > 0);
+
+	pCurrentScene->End();
+
+	delete pCurrentScene;
+
+	pCurrentScene = suspensionStack.top();
+	suspensionStack.pop();
+	//pCurrentScene->Resume();
+
+	pCmdToExe = pDontChangeCmd;
+}
+
 void SceneManager::privUpdateCurrentScene(float deltaTime)
 {
 	pCmdToExe->Execute();
@@ -130,5 +198,9 @@ void SceneManager::privUpdateCurrentScene(float deltaTime)
 
 void SceneManager::privDrawCurrentScene()
 {
+	// draw the most recently suspended scene first (if applicable)
+	SceneAttorney::GameLoop::Draw(suspensionStack.top());
+
+	// then draw the current scene on top of it
 	SceneAttorney::GameLoop::Draw(pCurrentScene);
 }

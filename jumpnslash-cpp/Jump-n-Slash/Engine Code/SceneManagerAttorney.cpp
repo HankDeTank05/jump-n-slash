@@ -26,3 +26,8 @@ void SceneManagerAttorney::Termination::Terminate()
 {
 	SceneManager::Terminate();
 }
+
+void SceneManagerAttorney::SceneResume::ResumeSuspendedScene()
+{
+	SceneManager::ResumeSuspendedScene();
+}

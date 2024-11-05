@@ -3,8 +3,6 @@
 
 #include "../Engine Code/Scene.h"
 
-#include "ControlScheme.h"
-
 // forward declarations
 class LevelMap;
 class Player;
@@ -13,10 +11,13 @@ class LevelScene : public Scene
 {
 public:
 	LevelScene() = delete;
-	LevelScene(ControlScheme ctrl);
+	LevelScene(LevelMap* pMap, Player* pPlayer);
 	LevelScene(const LevelScene& ls) = delete;
 	LevelScene& operator=(const LevelScene& ls) = delete;
 	virtual ~LevelScene() = default;
+
+	virtual void Init() = 0;
+	virtual void End() = 0;
 
 protected:
 	LevelMap* pMap;

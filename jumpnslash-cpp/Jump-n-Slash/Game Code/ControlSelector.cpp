@@ -3,9 +3,9 @@
 #include "../Engine Code/Visualizer.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/FontManager.h"
+#include "../Engine Code/ControlManager.h"
 
 #include "Level0.h"
-#include "ControlManager.h"
 
 const float ControlSelector::BOX_W = 200.f;
 const float ControlSelector::BOX_H = 50.f;

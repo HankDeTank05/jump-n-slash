@@ -7,7 +7,7 @@
 #include "../Engine Code/UpdateObject.h"
 #include "../Engine Code/InputObject.h"
 
-#include "ControlScheme.h"
+#include "../Engine Code/ControlScheme.h"
 
 class ControlSelector : public UpdateObject, public DrawObject, public InputObject
 {

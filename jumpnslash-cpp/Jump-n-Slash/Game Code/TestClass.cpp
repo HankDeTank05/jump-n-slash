@@ -101,7 +101,7 @@ void TestClass::Update(float deltaTime)
 
 				// visualize the available buttons
 
-				unsigned int btnCount = sf::Joystick::getButtonCount(c);
+				int btnCount = static_cast<int>(sf::Joystick::getButtonCount(c));
 				for (int b = 0; b < btnCount; b++)
 				{
 					sf::Color color = sf::Joystick::isButtonPressed(c, b) ? sf::Color::Green : sf::Color::Red;

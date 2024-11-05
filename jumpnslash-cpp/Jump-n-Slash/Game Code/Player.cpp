@@ -12,6 +12,7 @@
 #include "../Engine Code/Animation.h"
 #include "../Engine Code/Math.h"
 #include "../Engine Code/ConvenienceFunctions.h"
+#include "../Engine Code/ControlManager.h"
 
 #include "Constants.h"
 #include "DebugFlags.h"
@@ -21,7 +22,6 @@
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "RoomData.h"
-#include "ControlManager.h"
 #include "PlayerControlKeyboard.h"
 #include "PlayerControlSwitchPro.h"
 #include "PlayerControlDualSense.h"
