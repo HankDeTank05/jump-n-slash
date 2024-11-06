@@ -181,6 +181,18 @@
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management">
       <UniqueIdentifier>{480a4628-e7d5-44bc-bc57-77e703fd9032}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands">
+      <UniqueIdentifier>{2cd44a46-f87c-458e-8ada-ea361cc44c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\LevelScene">
+      <UniqueIdentifier>{d1e5d5ff-6af0-4d66-9f82-ef2cbdf0dbbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\MenuScene">
+      <UniqueIdentifier>{130bee99-e083-447e-9d13-89c3a168bfc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\MenuScene\PauseMenu">
+      <UniqueIdentifier>{f38f8dfd-ed6e-420b-bb72-485ec97a192d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -393,15 +405,6 @@
     <ClCompile Include="Engine Code\SceneManager.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\SceneCommand.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\SceneChangeCommand.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\SceneChangeNullCommand.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\SceneManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
     </ClCompile>
@@ -549,9 +552,6 @@
     <ClCompile Include="Game Code\ControlSelection.cpp">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\LevelScene.cpp">
-      <Filter>Source Files\Game Code\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\GameEnd.cpp">
       <Filter>Source Files\Game Code\Files Required by Engine</Filter>
     </ClCompile>
@@ -578,6 +578,30 @@
     </ClCompile>
     <ClCompile Include="Engine Code\ControlManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneChangeCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneChangeNullCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneSuspendCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneResumeCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\LevelScene.cpp">
+      <Filter>Source Files\Game Code\Scenes\LevelScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PauseMenu.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\PauseMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Menu.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -809,16 +833,7 @@
     <ClInclude Include="Engine Code\SceneManager.h">
       <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\SceneCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\SceneChangeCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\SceneManagerAttorney.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\SceneChangeNullCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\CameraManager.h">
@@ -998,9 +1013,6 @@
     <ClInclude Include="Game Code\PlayerControlKeyboard.h">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\LevelScene.h">
-      <Filter>Source Files\Game Code\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\PlayerControlSwitchPro.h">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
     </ClInclude>
@@ -1027,6 +1039,36 @@
     </ClInclude>
     <ClInclude Include="Engine Code\ControlManagerAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Control Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneChangeNullCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneChangeCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneSuspendCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneResumeCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\LevelScene.h">
+      <Filter>Source Files\Game Code\Scenes\LevelScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MenuScene.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Menu.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PauseMenu.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\PauseMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MenuCommand.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

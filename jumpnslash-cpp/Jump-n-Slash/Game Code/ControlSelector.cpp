@@ -93,7 +93,7 @@ void ControlSelector::Update(float deltaTime)
 	if (mouseClicked == true)
 	{
 		ControlManager::SetControlScheme(ctrl);
-		SceneManager::SetNextScene(new Level0());
+		SceneManager::SetNextSceneChange(new Level0());
 	}
 }
 

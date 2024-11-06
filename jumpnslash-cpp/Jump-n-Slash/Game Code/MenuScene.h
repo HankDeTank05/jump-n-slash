@@ -1,10 +1,6 @@
 #ifndef MENU_SCENE_H
 #define MENU_SCENE_H
 
-#include <list>
-
-#include <SFML/Graphics/RectangleShape.hpp>
-
 #include "../Engine Code/Scene.h"
 
 // forward declarations
