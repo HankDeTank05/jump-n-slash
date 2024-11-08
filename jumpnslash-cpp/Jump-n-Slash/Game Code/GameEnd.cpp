@@ -1,11 +1,11 @@
 #include "../Engine Code/JumpSlashEngine.h"
 
-#include "../Engine Code/ControlManagerAttorney.h"
-
+// game includes
 #include "ControllerDebuggerAttorney.h"
+#include "GameManagerAttorney.h"
 
 void JumpSlashEngine::GameEnd()
 {
-	ControlManagerAttorney::EngineAccess::Terminate();
 	ControllerDebuggerAttorney::EngineAccess::Terminate();
+	GameManagerAttorney::EngineAccess::Terminate();
 }

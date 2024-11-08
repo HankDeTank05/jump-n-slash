@@ -1,30 +1,12 @@
 #include "PlayerStateIdle.h"
 
+// language includes
 #include <iostream>
 
+// game includes
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
 #include "DebugFlags.h"
-
-PlayerStateIdle::PlayerStateIdle()
-{
-	// do nothing
-}
-
-PlayerStateIdle::PlayerStateIdle(const PlayerStateIdle& psi)
-{
-	// do nothing
-}
-
-PlayerStateIdle& PlayerStateIdle::operator=(const PlayerStateIdle& psi)
-{
-	return *this;
-}
-
-PlayerStateIdle::~PlayerStateIdle()
-{
-	// do nothing
-}
 
 void PlayerStateIdle::Enter(Player* pPlayer) const
 {

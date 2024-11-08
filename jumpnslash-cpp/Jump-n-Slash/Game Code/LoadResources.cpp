@@ -1,11 +1,14 @@
 #include "../Engine Code/JumpSlashEngine.h"
 
+// language includes
 //#include <fstream>
 //#include <iostream>
 
+// library includes
 //#include <nlohmann/json.hpp>
 //#include <simdjson.h>
 
+// engine includes
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/FontManager.h"
@@ -14,13 +17,10 @@
 #include "../Engine Code/Animation.h"
 #include "../Engine Code/SceneManager.h"
 
+// game includes
 #include "DesignerControls.h"
 #include "AssetLoader.h"
-
-// scenes
-#include "Level0.h"
-#include "TestScene.h"
-#include "ControlSelection.h"
+#include "GameManager.h"
 
 //using namespace simdjson;
 //using json = nlohmann::json;
@@ -81,7 +81,5 @@ void JumpSlashEngine::LoadResources()
 	assert(JUMP_FORCE < 0.f);
 	assert(MAX_JUMP_HOLD_TIME >= 0.f);
 
-	//SceneManager::SetStartScene(new Level0());
-	//SceneManager::SetStartScene(new TestScene());
-	SceneManager::SetStartScene(new ControlSelection());
+	GameManager::StartGame();
 }

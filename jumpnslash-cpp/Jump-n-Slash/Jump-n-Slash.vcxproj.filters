@@ -190,8 +190,20 @@
     <Filter Include="Source Files\Game Code\Scenes\MenuScene">
       <UniqueIdentifier>{130bee99-e083-447e-9d13-89c3a168bfc0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Scenes\MenuScene\PauseMenu">
+    <Filter Include="Source Files\Game Code\Game Management">
+      <UniqueIdentifier>{2f7e37d4-28b4-4a37-9674-f27970ee4283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Game Management\FSM + States">
+      <UniqueIdentifier>{1168bd8d-a799-4cf4-9a0e-22adbd5e9bb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\MenuScene\Pause Menu Scene">
       <UniqueIdentifier>{f38f8dfd-ed6e-420b-bb72-485ec97a192d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\MenuScene\Menu Commands">
+      <UniqueIdentifier>{310e41b1-4fd1-48f5-8366-c496720b7f36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\MenuScene\Menus">
+      <UniqueIdentifier>{a0c68726-5f69-4963-b611-e0dfb360250c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -597,11 +609,53 @@
     <ClCompile Include="Game Code\LevelScene.cpp">
       <Filter>Source Files\Game Code\Scenes\LevelScene</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PauseMenu.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\PauseMenu</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\Menu.cpp">
       <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\GameManager.cpp">
+      <Filter>Source Files\Game Code\Game Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\GameFSM.cpp">
+      <Filter>Source Files\Game Code\Game Management\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\GameStatePlaying.cpp">
+      <Filter>Source Files\Game Code\Game Management\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\GameStateMenu.cpp">
+      <Filter>Source Files\Game Code\Game Management\FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\GameManagerAttorney.cpp">
+      <Filter>Source Files\Game Code\Game Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\MenuScene.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PauseMenuScene.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Pause Menu Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\MenuManager.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ResumeGameCommand.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\EnterSubmenuCommand.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ExitSubmenuCommand.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ChangeControlsCommand.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\QuitGameCommand.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PauseMenu.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ChangeControlsMenu.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1064,11 +1118,53 @@
     <ClInclude Include="Game Code\Menu.h">
       <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PauseMenu.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\PauseMenu</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\MenuCommand.h">
       <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\GameManager.h">
+      <Filter>Source Files\Game Code\Game Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\GameState.h">
+      <Filter>Source Files\Game Code\Game Management\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\GameStatePlaying.h">
+      <Filter>Source Files\Game Code\Game Management\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\GameStateMenu.h">
+      <Filter>Source Files\Game Code\Game Management\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\GameFSM.h">
+      <Filter>Source Files\Game Code\Game Management\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\GameManagerAttorney.h">
+      <Filter>Source Files\Game Code\Game Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PauseMenuScene.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Pause Menu Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MenuManager.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ResumeGameCommand.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\EnterSubmenuCommand.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ExitSubmenuCommand.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ChangeControlsCommand.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\QuitGameCommand.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PauseMenu.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ChangeControlsMenu.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

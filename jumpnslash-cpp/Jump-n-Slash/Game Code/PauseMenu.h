@@ -6,7 +6,8 @@
 class PauseMenu : public Menu
 {
 public:
-	PauseMenu();
+	PauseMenu() = delete;
+	PauseMenu(MenuManager* pMgr);
 	PauseMenu(const PauseMenu& pm) = delete;
 	PauseMenu& operator=(const PauseMenu& pm) = delete;
 	virtual ~PauseMenu() = default;

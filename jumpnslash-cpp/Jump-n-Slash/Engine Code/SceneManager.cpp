@@ -25,9 +25,11 @@ SceneManager::SceneManager()
 SceneManager::~SceneManager()
 {
 	pCurrentScene->End();
-	delete pCurrentScene;
-	delete pChangeCmd;
+	delete pResumeCmd;
+	delete pSuspendCmd;
 	delete pDontChangeCmd;
+	delete pChangeCmd;
+	delete pCurrentScene;
 }
 
 SceneManager& SceneManager::Instance()
@@ -199,7 +201,10 @@ void SceneManager::privUpdateCurrentScene(float deltaTime)
 void SceneManager::privDrawCurrentScene()
 {
 	// draw the most recently suspended scene first (if applicable)
-	SceneAttorney::GameLoop::Draw(suspensionStack.top());
+	if (suspensionStack.size() > 0) // TODO: maybe make this a command instead of an if statement
+	{
+		SceneAttorney::GameLoop::Draw(suspensionStack.top());
+	}
 
 	// then draw the current scene on top of it
 	SceneAttorney::GameLoop::Draw(pCurrentScene);

@@ -5,20 +5,25 @@
 
 // forward declarations
 class Menu;
+class MenuManager;
 
 class MenuScene : public Scene
 {
 public:
-	MenuScene() = default;
+	MenuScene();
 	MenuScene(const MenuScene& ms) = delete;
 	MenuScene& operator=(const MenuScene& ms) = delete;
-	virtual ~MenuScene() = default;
+	virtual ~MenuScene();
 
 	virtual void Init() = 0;
 	virtual void End() = 0;
 
 protected:
-	Menu* pMenu;
+	MenuManager* GetMenuManager();
+	void SetStartingMenu(Menu* pStartingMenu);
+
+protected:
+	MenuManager* pMenuMgr;
 };
 
 #endif

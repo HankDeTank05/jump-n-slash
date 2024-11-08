@@ -1,36 +1,19 @@
 #include "PlayerStateWalking.h"
 
+// language includes
 #include <array>
 #include <iostream>
 
-#include "../Engine Code/Visualizer.h"
+// engine includes
+//#include "../Engine Code/Visualizer.h"
 
+// game includes
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
 #include "Constants.h"
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "DebugFlags.h"
-
-PlayerStateWalking::PlayerStateWalking()
-{
-	// do nothing
-}
-
-PlayerStateWalking::PlayerStateWalking(const PlayerStateWalking& psw)
-{
-	// do nothing
-}
-
-PlayerStateWalking& PlayerStateWalking::operator=(const PlayerStateWalking& psw)
-{
-	return *this;
-}
-
-PlayerStateWalking::~PlayerStateWalking()
-{
-	// do nothing
-}
 
 void PlayerStateWalking::Enter(Player* pPlayer) const
 {
