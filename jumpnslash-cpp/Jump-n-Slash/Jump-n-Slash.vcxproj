@@ -456,7 +456,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include;$(SolutionDir)\external_libs\nlohman-json-3.11.3\single_include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>"$(SolutionDir)\Jump-n-Slash\Engine Code\MemTracker\Framework.h"</ForcedIncludeFiles>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
@@ -465,7 +465,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\SFML-2.6.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics.lib;sfml-system.lib;sfml-window.lib;sfml-audio.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
