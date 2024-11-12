@@ -121,20 +121,34 @@
     <ClCompile Include="Game Code\BlockBreakable.cpp" />
     <ClCompile Include="Game Code\BlockHazard.cpp" />
     <ClCompile Include="Game Code\BlockSolid.cpp" />
+    <ClCompile Include="Game Code\ChangeControlsCommand.cpp" />
+    <ClCompile Include="Game Code\ChangeControlsMenu.cpp" />
     <ClCompile Include="Game Code\ControllerDebugger.cpp" />
     <ClCompile Include="Game Code\ControllerDebuggerAttorney.cpp" />
     <ClCompile Include="Game Code\ControlSelection.cpp" />
     <ClCompile Include="Game Code\ControlSelector.cpp" />
     <ClCompile Include="Game Code\Enemy.cpp" />
+    <ClCompile Include="Game Code\EnterSubmenuCommand.cpp" />
+    <ClCompile Include="Game Code\ExitSubmenuCommand.cpp" />
     <ClCompile Include="Game Code\GameEnd.cpp" />
+    <ClCompile Include="Game Code\GameFSM.cpp" />
     <ClCompile Include="Game Code\GameInitialize.cpp" />
+    <ClCompile Include="Game Code\GameManager.cpp" />
+    <ClCompile Include="Game Code\GameManagerAttorney.cpp" />
+    <ClCompile Include="Game Code\GameStateMenu.cpp" />
+    <ClCompile Include="Game Code\GameStatePlaying.cpp" />
     <ClCompile Include="Game Code\Level0.cpp" />
     <ClCompile Include="Game Code\LevelMap.cpp" />
     <ClCompile Include="Game Code\LevelScene.cpp" />
     <ClCompile Include="Game Code\LevelTile.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
     <ClCompile Include="Game Code\Menu.cpp" />
+    <ClCompile Include="Game Code\MenuAttorney.cpp" />
+    <ClCompile Include="Game Code\MenuControlStrategy.cpp" />
+    <ClCompile Include="Game Code\MenuManager.cpp" />
+    <ClCompile Include="Game Code\MenuScene.cpp" />
     <ClCompile Include="Game Code\PauseMenu.cpp" />
+    <ClCompile Include="Game Code\PauseMenuScene.cpp" />
     <ClCompile Include="Game Code\PlatformSemisolid.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
     <ClCompile Include="Game Code\PlayerAttorney.cpp" />
@@ -147,6 +161,8 @@
     <ClCompile Include="Game Code\PlayerStateIdle.cpp" />
     <ClCompile Include="Game Code\PlayerStateJumping.cpp" />
     <ClCompile Include="Game Code\PlayerStateWalking.cpp" />
+    <ClCompile Include="Game Code\QuitGameCommand.cpp" />
+    <ClCompile Include="Game Code\ResumeGameCommand.cpp" />
     <ClCompile Include="Game Code\RoomData.cpp" />
     <ClCompile Include="Game Code\Sword.cpp" />
     <ClCompile Include="Game Code\SwordFSM.cpp" />
@@ -272,6 +288,8 @@
     <ClInclude Include="Game Code\BlockBreakable.h" />
     <ClInclude Include="Game Code\BlockHazard.h" />
     <ClInclude Include="Game Code\BlockSolid.h" />
+    <ClInclude Include="Game Code\ChangeControlsCommand.h" />
+    <ClInclude Include="Game Code\ChangeControlsMenu.h" />
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\ControllerDebugger.h" />
     <ClInclude Include="Game Code\ControllerDebuggerAttorney.h" />
@@ -281,14 +299,26 @@
     <ClInclude Include="Game Code\DebugFlags.h" />
     <ClInclude Include="Game Code\DesignerControls.h" />
     <ClInclude Include="Game Code\Enemy.h" />
+    <ClInclude Include="Game Code\EnterSubmenuCommand.h" />
+    <ClInclude Include="Game Code\ExitSubmenuCommand.h" />
+    <ClInclude Include="Game Code\GameFSM.h" />
+    <ClInclude Include="Game Code\GameManager.h" />
+    <ClInclude Include="Game Code\GameManagerAttorney.h" />
+    <ClInclude Include="Game Code\GameState.h" />
+    <ClInclude Include="Game Code\GameStateMenu.h" />
+    <ClInclude Include="Game Code\GameStatePlaying.h" />
     <ClInclude Include="Game Code\Level0.h" />
     <ClInclude Include="Game Code\LevelMap.h" />
     <ClInclude Include="Game Code\LevelScene.h" />
     <ClInclude Include="Game Code\LevelTile.h" />
     <ClInclude Include="Game Code\Menu.h" />
+    <ClInclude Include="Game Code\MenuAttorney.h" />
     <ClInclude Include="Game Code\MenuCommand.h" />
+    <ClInclude Include="Game Code\MenuControlStrategy.h" />
+    <ClInclude Include="Game Code\MenuManager.h" />
     <ClInclude Include="Game Code\MenuScene.h" />
     <ClInclude Include="Game Code\PauseMenu.h" />
+    <ClInclude Include="Game Code\PauseMenuScene.h" />
     <ClInclude Include="Game Code\PlatformSemisolid.h" />
     <ClInclude Include="Game Code\Player.h" />
     <ClInclude Include="Game Code\PlayerAttorney.h" />
@@ -302,6 +332,8 @@
     <ClInclude Include="Game Code\PlayerStateIdle.h" />
     <ClInclude Include="Game Code\PlayerStateJumping.h" />
     <ClInclude Include="Game Code\PlayerStateWalking.h" />
+    <ClInclude Include="Game Code\QuitGameCommand.h" />
+    <ClInclude Include="Game Code\ResumeGameCommand.h" />
     <ClInclude Include="Game Code\RoomData.h" />
     <ClInclude Include="Game Code\Sword.h" />
     <ClInclude Include="Game Code\SwordFSM.h" />
@@ -428,7 +460,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);WINDOWS_TARGET_PLATFORM="$(TargetPlatformVersion";MEMORY_LOGS_DIR=R"($(SolutionDir))";</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\include;$(SolutionDir)\external_libs\nlohman-json-3.11.3\single_include</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>"$(SolutionDir)\Jump-n-Slash\Engine Code\MemTracker\Framework.h"</ForcedIncludeFiles>
       <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
@@ -437,7 +469,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\..\SFML-2.6.1\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\external_libs\SFML-2.6.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics.lib;sfml-system.lib;sfml-window.lib;sfml-audio.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

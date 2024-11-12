@@ -3,22 +3,43 @@
 // engine includes
 #include "../Engine Code/Math.h"
 
-Menu::Menu(const sf::Text& _menuTitle, const sf::Vector2f& _firstBoxPos, float _boxVertSpacing, const sf::Vector2f& _textOffsetInBox,
-	const sf::Color& _baseColor, const sf::Color& _highlightColor)
-	: menuTitle(_menuTitle),
+// game includes
+#include "MenuManager.h"
+#include "MenuCommand.h"
+
+Menu::Menu(MenuManager* _pMgr, const sf::Text& _menuTitle, const sf::Vector2f& _firstBoxPos, float _boxVertSpacing, const sf::Vector2f& _textOffsetInBox,
+	const sf::Color& _baseColor, const sf::Color& _highlightColor,
+	const sf::Color& _textColorBase, const sf::Color& _textColorHighlight,
+	int _selected)
+	: pMgr(_pMgr),
+	menuTitle(_menuTitle),
 	firstBoxPos(_firstBoxPos),
 	boxVertSpacing(_boxVertSpacing),
 	textOffsetInBox(_textOffsetInBox),
-	baseColor(_baseColor),
-	highlightColor(_highlightColor),
+	boxColorBase(_baseColor),
+	boxColorHighlight(_highlightColor),
+	boxColors(),
+	textColorBase(_textColorBase),
+	textColorHighlight(_textColorHighlight),
+	menuOptions(),
 	menuOptionBox(),
 	setMenuOptionBox(false),
-	menuOptions(),
 	boxPositions(),
-	selected(-1),
+	selected(_selected),
 	setMenuOptionsList(false)
 {
-	// do nothing
+	//RequestUpdateRegistration();
+	//RequestDrawRegistration();
+	//RequestMouseCursorRegistration();
+	//RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
+}
+
+Menu::~Menu()
+{
+	for (MenuOptionList::iterator it = menuOptions.begin(); it != menuOptions.end(); it++)
+	{
+		delete it->second;
+	}
 }
 
 void Menu::Draw()
@@ -29,25 +50,15 @@ void Menu::Draw()
 	// draw menu title
 
 	// draw menu boxes + text
-	int optNum = 0;
-	for (MenuOptionList::iterator it = menuOptions.begin(); it != menuOptions.end(); it++)
-	{
-		// set position of menu option box
-		sf::Vector2f drawPos = firstBoxPos + static_cast<float>(optNum) * sf::Vector2f(0.f, boxVertSpacing + menuOptionBox.getSize().y);
-		menuOptionBox.setPosition(drawPos);
-
-		// set position of menu option text
-		drawPos += textOffsetInBox;
-		it->first.setPosition(drawPos);
-
-		Render(menuOptionBox);
-		Render(it->first);
-
-		optNum++;
-	}
 	for (int i = 0; i < menuOptions.size(); i++)
 	{
 		menuOptionBox.setPosition(boxPositions[i]);
+		menuOptionBox.setFillColor(boxColors[i]);
+
+		menuOptions[i].first.setPosition(boxPositions[i] + textOffsetInBox);
+
+		Render(menuOptionBox);
+		Render(menuOptions[i].first);
 	}
 }
 
@@ -58,9 +69,24 @@ void Menu::MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta)
 	{
 		if (Math::PointInRect(pos, boxPositions[i], menuOptionBox.getSize()) == true)
 		{
-
+			boxColors[i] = boxColorHighlight;
+			menuOptions[i].first.setFillColor(textColorHighlight);
+			selected = i;
+		}
+		else
+		{
+			boxColors[i] = boxColorBase;
+			menuOptions[i].first.setFillColor(textColorBase);
 		}
 	}
+}
+
+void Menu::MouseBtnPressed(sf::Mouse::Button btn)
+{
+	assert(0 <= selected);
+	assert(selected < menuOptions.size());
+
+	menuOptions[selected].second->Execute();
 }
 
 void Menu::SetMenuOptionBox(const sf::RectangleShape& _menuOptionBox)
@@ -78,5 +104,34 @@ void Menu::AddMenuOption(const sf::Text& optionName, MenuCommand* pOptionFunctio
 	menuOptions.push_back(MenuOption(optionName, pOptionFunction));
 	menuOptions.at(menuOptions.size() - 1).first.setPosition(boxPositions.at(boxPositions.size() - 1) + textOffsetInBox);
 
+	// set the box color
+	boxColors.push_back(boxColorBase);
+
 	setMenuOptionsList = true;
+}
+
+void Menu::EnterSubmenu(Menu* pSubmenu)
+{
+	pMgr->EnterSubmenu(pSubmenu);
+}
+
+void Menu::ReturnToPrevMenu()
+{
+	pMgr->ReturnToPrevMenu();
+}
+
+void Menu::Init()
+{
+	RequestUpdateRegistration();
+	RequestDrawRegistration();
+	RequestMouseCursorRegistration();
+	RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
+}
+
+void Menu::End()
+{
+	RequestUpdateDeregistration();
+	RequestDrawDeregistration();
+	RequestMouseCursorDeregistration();
+	RequestMouseBtnDeregistration(sf::Mouse::Left, MouseEvent::BtnPress);
 }

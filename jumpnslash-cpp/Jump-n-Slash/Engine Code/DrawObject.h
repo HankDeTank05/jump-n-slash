@@ -126,6 +126,7 @@ protected:
 	// TODO: docs for DrawObject::Render(drawable, tform)
 	void Render(const sf::Drawable& drawable, const sf::Transform& tform);
 
+	// TODO: docs for DrawObject::Render(vertex, vtex count)
 	void Render(sf::Vertex* array, int vtexCount);
 	/*!
 	* \brief	Request that the engine draw this object.

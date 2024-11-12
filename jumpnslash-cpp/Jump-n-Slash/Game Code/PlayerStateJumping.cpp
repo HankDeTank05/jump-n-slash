@@ -1,30 +1,12 @@
 #include "PlayerStateJumping.h"
 
+// language includes
 #include <iostream>
 
+// game includes
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
 #include "DebugFlags.h"
-
-PlayerStateJumping::PlayerStateJumping()
-{
-	// do nothing
-}
-
-PlayerStateJumping::PlayerStateJumping(const PlayerStateJumping& psj)
-{
-	// do nothing
-}
-
-PlayerStateJumping& PlayerStateJumping::operator=(const PlayerStateJumping& psj)
-{
-	return *this;
-}
-
-PlayerStateJumping::~PlayerStateJumping()
-{
-	// do nothing
-}
 
 void PlayerStateJumping::Enter(Player* pPlayer) const
 {

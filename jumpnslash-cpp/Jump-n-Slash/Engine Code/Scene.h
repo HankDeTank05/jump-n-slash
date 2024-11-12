@@ -25,10 +25,14 @@ public:
 	Scene& operator=(const Scene& s) = delete;
 	virtual ~Scene();
 
-	virtual void Init() = 0; // TODO: docs for Scene::Init
-	virtual void End() = 0; // TODO: docs for Scene::End
+	// TODO: docs for Scene::Init
+	virtual void Init() = 0; 
+	// TODO: docs for Scene::End
+	virtual void End() = 0; 
 
+	// TODO: docs for Scene::SetCurrentCamera
 	void SetCurrentCamera(Camera* pCam);
+	// TODO: docs for Scene::GetCurrentCamera
 	Camera* GetCurrentCamera();
 
 private:
@@ -73,14 +77,16 @@ private:
 	void AddCommand(Command* pCmd);
 
 protected: // collision functions
+	// TODO: docs for Scene::SetCollisionPair
 	template <typename C1, typename C2>
-	void SetCollisionPair() // TODO: docs for Scene::SetCollisionPair
+	void SetCollisionPair()
 	{
 		pColMgr->SetCollisionPair<C1, C2>();
 	}
 
+	// TODO: docs for Scene::SetCollisionSelf
 	template <typename C>
-	void SetCollisionSelf() // TODO: docs for Scene::SetCollisionSelf
+	void SetCollisionSelf()
 	{
 		pColMgr->SetCollisionSelf<C>();
 	}

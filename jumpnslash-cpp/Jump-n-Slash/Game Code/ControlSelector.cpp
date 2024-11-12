@@ -1,11 +1,12 @@
 #include "ControlSelector.h"
 
+// engine includes
 #include "../Engine Code/Visualizer.h"
-#include "../Engine Code/SceneManager.h"
 #include "../Engine Code/FontManager.h"
 #include "../Engine Code/ControlManager.h"
 
-#include "Level0.h"
+// game includes
+#include "GameManager.h"
 
 const float ControlSelector::BOX_W = 200.f;
 const float ControlSelector::BOX_H = 50.f;
@@ -93,7 +94,7 @@ void ControlSelector::Update(float deltaTime)
 	if (mouseClicked == true)
 	{
 		ControlManager::SetControlScheme(ctrl);
-		SceneManager::SetNextSceneChange(new Level0());
+		GameManager::ResumeFromPause();
 	}
 }
 

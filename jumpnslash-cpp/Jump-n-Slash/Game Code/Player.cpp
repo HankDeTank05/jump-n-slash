@@ -65,12 +65,12 @@ Player::Player(LevelMap* pLevel)
 	// register with the engine
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
-	//RequestKeyRegistration(KB_JUMP, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_JUMP, KeyEvent::KeyRelease);
-	//RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_WALK_LEFT, KeyEvent::KeyRelease);
-	//RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_WALK_RIGHT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_GAME_JUMP, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_GAME_JUMP, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_GAME_WALK_LEFT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_GAME_WALK_LEFT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(KB_GAME_WALK_RIGHT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(KB_GAME_WALK_RIGHT, KeyEvent::KeyRelease);
 
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
 }
@@ -199,19 +199,19 @@ void Player::Alarm0()
 //{
 //	switch (key)
 //	{
-//	case KB_WALK_LEFT:
+//	case KB_GAME_WALK_LEFT:
 //		//inputReceivedWalkLeft = true;
 //		inputWalkDir -= 1.f;
 //		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
 //		facing = -1;
 //		break;
-//	case KB_WALK_RIGHT:
+//	case KB_GAME_WALK_RIGHT:
 //		//inputReceivedWalkRight = true;
 //		inputWalkDir += 1.f;
 //		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
 //		facing = 1;
 //		break;
-//	case KB_JUMP:
+//	case KB_GAME_JUMP:
 //		inputReceivedJump = true;
 //		break;
 //	}
@@ -221,17 +221,17 @@ void Player::Alarm0()
 //{
 //	switch (key)
 //	{
-//	case KB_WALK_LEFT:
+//	case KB_GAME_WALK_LEFT:
 //		//inputReceivedWalkLeft = false;
 //		inputWalkDir += 1.f;
 //		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
 //		break;
-//	case KB_WALK_RIGHT:
+//	case KB_GAME_WALK_RIGHT:
 //		//inputReceivedWalkRight = false;
 //		inputWalkDir -= 1.f;
 //		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
 //		break;
-//	case KB_JUMP:
+//	case KB_GAME_JUMP:
 //		inputReceivedJump = false;
 //		break;
 //	}
@@ -271,6 +271,8 @@ void Player::ProcessInputs(float deltaTime)
 
 void Player::SetControls(ControlScheme ctrl)
 {
+	// TODO: consider factory/obj pool pattern for changing control schemes
+	
 	if (pCtrlStrat != nullptr)
 	{
 		delete pCtrlStrat;

@@ -4,7 +4,7 @@
 class ControlManagerAttorney
 {
 public:
-	class EngineAccess
+	class Termination
 	{
 	private:
 		friend class JumpSlashEngine;

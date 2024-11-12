@@ -1,30 +1,12 @@
 #include "PlayerStateFalling.h"
 
+// language includes
 #include <iostream>
 
+// game includes
 #include "PlayerFSM.h"
 #include "PlayerAttorney.h"
 #include "DebugFlags.h"
-
-PlayerStateFalling::PlayerStateFalling()
-{
-	// do nothing
-}
-
-PlayerStateFalling::PlayerStateFalling(const PlayerStateFalling& psf)
-{
-	// do nothing
-}
-
-PlayerStateFalling& PlayerStateFalling::operator=(const PlayerStateFalling& psf)
-{
-	return *this;
-}
-
-PlayerStateFalling::~PlayerStateFalling()
-{
-	// do nothing
-}
 
 void PlayerStateFalling::Enter(Player* pPlayer) const
 {

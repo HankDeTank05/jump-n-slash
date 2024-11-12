@@ -1,12 +1,13 @@
 #ifndef CONTROL_SELECTOR_H
 #define CONTROL_SELECTOR_H
 
+// library includes
 #include <SFML/Graphics/Rect.hpp>
 
+// engine includes
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/UpdateObject.h"
 #include "../Engine Code/InputObject.h"
-
 #include "../Engine Code/ControlScheme.h"
 
 class ControlSelector : public UpdateObject, public DrawObject, public InputObject

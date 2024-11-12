@@ -20,7 +20,7 @@ const sf::Transform& CollisionVolumeBoundingBox::GetTransform() const
 
 const sf::Vector2f& CollisionVolumeBoundingBox::GetMin() const
 {
-    return max;
+    return min;
 }
 
 const sf::Vector2f& CollisionVolumeBoundingBox::GetMax() const
