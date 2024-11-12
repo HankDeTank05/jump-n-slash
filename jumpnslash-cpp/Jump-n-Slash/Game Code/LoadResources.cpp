@@ -76,6 +76,7 @@ void JumpSlashEngine::LoadResources()
 	//GridManager::LoadGrid("test 2", "test2.txt");
 
 	// asserts to make sure designer controls are set properly
+
 	assert(PLAYER_WALK_SPEED > 0.f);
 	assert(GRAVITY_WEIGHT > 0.f);
 	assert(JUMP_FORCE < 0.f);

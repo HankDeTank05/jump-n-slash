@@ -205,6 +205,15 @@
     <Filter Include="Source Files\Game Code\Scenes\MenuScene\Menus">
       <UniqueIdentifier>{a0c68726-5f69-4963-b611-e0dfb360250c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Draw System\Commands">
+      <UniqueIdentifier>{109ec4c9-76fd-4ac9-aec8-f7e69ee45bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Alarm System\Commands">
+      <UniqueIdentifier>{63ac596f-32a2-4fc8-a8ce-3cb5ead42885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Update System\Commands">
+      <UniqueIdentifier>{53adc85c-9744-4837-9cde-67ab40fbf730}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -225,13 +234,7 @@
     <ClCompile Include="Engine Code\DrawObject.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\DrawRegistrationCommand.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\DrawObjectAttorney.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\UpdateManager.cpp">
@@ -240,13 +243,7 @@
     <ClCompile Include="Engine Code\UpdateObject.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\UpdateRegistrationCommand.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\UpdateObjectAttorney.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\UpdateDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\InputObject.cpp">
@@ -438,9 +435,6 @@
     <ClCompile Include="Engine Code\Subject.cpp">
       <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\AlarmDeregistrationCommand.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\AlarmManager.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
     </ClCompile>
@@ -448,9 +442,6 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\AlarmObjectAttorney.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\AlarmRegistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\TimeManager.cpp">
@@ -657,6 +648,30 @@
     <ClCompile Include="Game Code\ChangeControlsMenu.cpp">
       <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\MenuAttorney.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\MenuControlStrategy.cpp">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\DrawRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AlarmDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\AlarmRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\UpdateRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\UpdateDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -677,13 +692,7 @@
     <ClInclude Include="Game Code\DesignerControls.h">
       <Filter>Source Files\Game Code</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\DrawRegistrationCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\DrawObjectAttorney.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\DrawDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\MemTracker\Framework.h">
@@ -698,13 +707,7 @@
     <ClInclude Include="Engine Code\UpdateObject.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\UpdateRegistrationCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\UpdateObjectAttorney.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\InputObject.h">
@@ -917,9 +920,6 @@
     <ClInclude Include="Engine Code\ObserverEvent.h">
       <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\AlarmDeregistrationCommand.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\AlarmManager.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
     </ClInclude>
@@ -927,9 +927,6 @@
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\AlarmObjectAttorney.h">
-      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\AlarmRegistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\AlarmID.h">
@@ -1165,6 +1162,30 @@
     </ClInclude>
     <ClInclude Include="Game Code\ChangeControlsMenu.h">
       <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MenuAttorney.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MenuControlStrategy.h">
+      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\DrawDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\DrawRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AlarmDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\AlarmRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Alarm System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\UpdateRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System\Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

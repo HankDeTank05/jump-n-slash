@@ -28,7 +28,7 @@ public:
 		int selected = -1);
 	Menu(const Menu& m) = delete;
 	Menu& operator=(const Menu& m) = delete;
-	virtual ~Menu() = default;
+	virtual ~Menu();
 
 	using MenuOption = std::pair<sf::Text, MenuCommand*>;
 	using MenuOptionList = std::vector<MenuOption>;
@@ -43,6 +43,11 @@ protected:
 	void AddMenuOption(const sf::Text& optionName, MenuCommand* pOptionFunction);
 	void EnterSubmenu(Menu* pSubmenu);
 	void ReturnToPrevMenu();
+
+private:
+	friend class MenuAttorney;
+	void Init();
+	void End();
 
 private:
 	MenuManager* pMgr;

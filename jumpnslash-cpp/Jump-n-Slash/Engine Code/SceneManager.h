@@ -42,11 +42,16 @@ private: // engine-only api functions
 	friend class SceneManagerAttorney;
 	static void InitStartScene();
 
+	// TODO: docs for SceneManager::ChangeScene
 	static void ChangeScene(Scene* pScene);
+	// TODO: docs for SceneManager::SuspendCurrentScene
 	static void SuspendCurrentScene(Scene* pForegroundScene); 
+	// TODO: docs for SceneManager::ResumeSuspendedScene
 	static void ResumeSuspendedScene();
 
+	// TODO: docs for SceneManager::UpdateCurrentScene
 	static void UpdateCurrentScene(float deltaTime);
+	// TODO: docs for SceneManager::DrawCurrentScene
 	static void DrawCurrentScene();
 
 	static void Terminate();
@@ -69,13 +74,13 @@ private: // private api backend functions
 	void privDrawCurrentScene();
 
 private: // member variables
-	Scene* pCurrentScene;
-	SceneChangeCommand* pChangeCmd;
-	SceneChangeNullCommand* pDontChangeCmd;
-	SceneSuspendCommand* pSuspendCmd;
-	SceneResumeCommand* pResumeCmd;
-	SceneCommand* pCmdToExe;
-	std::stack<Scene*> suspensionStack;
+	Scene* pCurrentScene; // TODO: docs for member variable
+	SceneChangeCommand* pChangeCmd; // TODO: docs for member variable
+	SceneChangeNullCommand* pDontChangeCmd; // TODO: docs for member variable
+	SceneSuspendCommand* pSuspendCmd; // TODO: docs for member variable
+	SceneResumeCommand* pResumeCmd; // TODO: docs for member variable
+	SceneCommand* pCmdToExe; // TODO: docs for member variable
+	std::stack<Scene*> suspensionStack; // TODO: docs for member variable
 };
 
 #endif

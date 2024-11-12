@@ -28,10 +28,18 @@ Menu::Menu(MenuManager* _pMgr, const sf::Text& _menuTitle, const sf::Vector2f& _
 	selected(_selected),
 	setMenuOptionsList(false)
 {
-	RequestUpdateRegistration();
-	RequestDrawRegistration();
-	RequestMouseCursorRegistration();
-	RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
+	//RequestUpdateRegistration();
+	//RequestDrawRegistration();
+	//RequestMouseCursorRegistration();
+	//RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
+}
+
+Menu::~Menu()
+{
+	for (MenuOptionList::iterator it = menuOptions.begin(); it != menuOptions.end(); it++)
+	{
+		delete it->second;
+	}
 }
 
 void Menu::Draw()
@@ -110,4 +118,20 @@ void Menu::EnterSubmenu(Menu* pSubmenu)
 void Menu::ReturnToPrevMenu()
 {
 	pMgr->ReturnToPrevMenu();
+}
+
+void Menu::Init()
+{
+	RequestUpdateRegistration();
+	RequestDrawRegistration();
+	RequestMouseCursorRegistration();
+	RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
+}
+
+void Menu::End()
+{
+	RequestUpdateDeregistration();
+	RequestDrawDeregistration();
+	RequestMouseCursorDeregistration();
+	RequestMouseBtnDeregistration(sf::Mouse::Left, MouseEvent::BtnPress);
 }

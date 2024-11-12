@@ -15,17 +15,16 @@ public:
 
 	// collision detection functions
 
-	// generic collision volume intersection test
-	static bool Intersect(const CollisionVolume& a, const CollisionVolume& b); // TODO: docs for Math::Intersect(volume, volume)
-
-	// BSphere vs. BSphere
-	static bool Intersect(const CollisionVolumeBSphere& bs1, const CollisionVolumeBSphere& bs2); // TODO: docs for intersect bs/bs
-	// BSphere vs. AABB
-	static bool Intersect(const CollisionVolumeBSphere& bs, const CollisionVolumeAABB& aabb); // TODO: docs for intersect bs/aabb
-	// AABB vs. BSphere
-	static bool Intersect(const CollisionVolumeAABB& aabb, const CollisionVolumeBSphere& bs); // TODO: docs for intersect aabb/bs
-	// AABB vs. AABB
-	static bool Intersect(const CollisionVolumeAABB& aabb1, const CollisionVolumeAABB& aabb2); // TODO: docs for intersect aabb/aabb
+	// TODO: docs for Math::Intersect(volume, volume)
+	static bool Intersect(const CollisionVolume& a, const CollisionVolume& b); // generic collision volume intersection test
+	// TODO: docs for intersect bs/bs
+	static bool Intersect(const CollisionVolumeBSphere& bs1, const CollisionVolumeBSphere& bs2); 
+	// TODO: docs for intersect bs/aabb
+	static bool Intersect(const CollisionVolumeBSphere& bs, const CollisionVolumeAABB& aabb); 
+	// TODO: docs for intersect aabb/bs
+	static bool Intersect(const CollisionVolumeAABB& aabb, const CollisionVolumeBSphere& bs); 
+	// TODO: docs for intersect aabb/aabb
+	static bool Intersect(const CollisionVolumeAABB& aabb1, const CollisionVolumeAABB& aabb2); 
 	
 	// general math support functions
 
@@ -50,7 +49,7 @@ public:
 	// TODO: docs for Math::Max
 	static float Max(float val1, float val2); 
 	// TODO: docs for Math::Min
-	static float Min(float val1, float val2); 
+	static float Min(float val1, float val2);
 };
 
 #endif

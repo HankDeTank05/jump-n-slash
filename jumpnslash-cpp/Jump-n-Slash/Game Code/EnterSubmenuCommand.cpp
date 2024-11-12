@@ -2,6 +2,7 @@
 
 // game includes
 #include "MenuManager.h"
+#include "Menu.h"
 
 EnterSubmenuCommand::EnterSubmenuCommand(MenuManager* _pMgr, Menu* _pSubmenu)
 	: pMgr(_pMgr),

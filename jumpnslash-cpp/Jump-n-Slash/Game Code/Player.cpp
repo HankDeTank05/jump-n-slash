@@ -271,6 +271,8 @@ void Player::ProcessInputs(float deltaTime)
 
 void Player::SetControls(ControlScheme ctrl)
 {
+	// TODO: consider factory/obj pool pattern for changing control schemes
+	
 	if (pCtrlStrat != nullptr)
 	{
 		delete pCtrlStrat;

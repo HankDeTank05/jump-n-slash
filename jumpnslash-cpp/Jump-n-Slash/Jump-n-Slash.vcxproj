@@ -143,6 +143,8 @@
     <ClCompile Include="Game Code\LevelTile.cpp" />
     <ClCompile Include="Game Code\LoadResources.cpp" />
     <ClCompile Include="Game Code\Menu.cpp" />
+    <ClCompile Include="Game Code\MenuAttorney.cpp" />
+    <ClCompile Include="Game Code\MenuControlStrategy.cpp" />
     <ClCompile Include="Game Code\MenuManager.cpp" />
     <ClCompile Include="Game Code\MenuScene.cpp" />
     <ClCompile Include="Game Code\PauseMenu.cpp" />
@@ -310,7 +312,9 @@
     <ClInclude Include="Game Code\LevelScene.h" />
     <ClInclude Include="Game Code\LevelTile.h" />
     <ClInclude Include="Game Code\Menu.h" />
+    <ClInclude Include="Game Code\MenuAttorney.h" />
     <ClInclude Include="Game Code\MenuCommand.h" />
+    <ClInclude Include="Game Code\MenuControlStrategy.h" />
     <ClInclude Include="Game Code\MenuManager.h" />
     <ClInclude Include="Game Code\MenuScene.h" />
     <ClInclude Include="Game Code\PauseMenu.h" />

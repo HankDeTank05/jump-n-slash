@@ -37,7 +37,7 @@ void ControlManager::privSetControlScheme(ControlScheme _ctrl)
 {
 	if (_ctrl != ctrl)
 	{
-
+		assert(false);
 	}
 
 	ctrl = _ctrl;

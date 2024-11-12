@@ -14,9 +14,6 @@ public:
 	CollisionVolumeAABB& operator=(const CollisionVolumeAABB& cva) = delete;
 	virtual ~CollisionVolumeAABB() = default;
 
-	const sf::Vector2f& GetMin() const;
-	const sf::Vector2f& GetMax() const;
-
 	virtual void ComputeData(sf::Sprite* pSprite, const sf::Transform& tform) override;
 	virtual bool IntersectAccept(const CollisionVolume& other) const override;
 	virtual bool IntersectVisit(const CollisionVolumeBSphere& other) const override;
