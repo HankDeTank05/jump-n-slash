@@ -22,6 +22,16 @@ void SceneManagerAttorney::SceneChange::ChangeScene(Scene* pScene)
 	SceneManager::ChangeScene(pScene);
 }
 
+void SceneManagerAttorney::SceneSuspend::SuspendCurrentScene(Scene* pForegroundScene)
+{
+	SceneManager::SuspendCurrentScene(pForegroundScene);
+}
+
+void SceneManagerAttorney::SceneResume::ResumeSuspendedScene()
+{
+	SceneManager::ResumeSuspendedScene();
+}
+
 void SceneManagerAttorney::Termination::Terminate()
 {
 	SceneManager::Terminate();

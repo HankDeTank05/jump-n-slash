@@ -20,8 +20,10 @@ private:
 	static GridManager& Instance();
 
 public: // public api functions
-	static void LoadGrid(std::string key, std::string filename); // TODO: docs for GridManager::LoadGrid
-	static std::vector<std::vector<std::string>>* GetGrid(std::string key); // TODO: docs for GridManager::GetGrid
+	// TODO: docs for GridManager::LoadGrid
+	static void LoadGrid(std::string key, std::string filename);
+	// TODO: docs for GridManager::GetGrid
+	static std::vector<std::vector<std::string>>* GetGrid(std::string key); 
 
 private: // engine-only api functions
 	friend class GridManagerAttorney;

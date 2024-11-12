@@ -92,6 +92,11 @@ sf::Vector2f PlayerAttorney::SwordAccess::GetPos(Player* pPlayer)
 	return pPlayer->GetPos();
 }
 
+float PlayerAttorney::SwordAccess::GetFacing(Player* pPlayer)
+{
+	return pPlayer->GetFacing();
+}
+
 void PlayerAttorney::StrategyAccess::SetWalk(Player* pPlayer, float direction)
 {
 	pPlayer->SetWalk(direction);

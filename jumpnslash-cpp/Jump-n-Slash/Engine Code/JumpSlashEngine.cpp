@@ -1,7 +1,9 @@
 #include "JumpSlashEngine.h"
 
+// language includes
 #include <cassert>
 
+// engine includes
 #include "TextureManagerAttorney.h"
 #include "SpriteManagerAttorney.h"
 #include "GridManagerAttorney.h"
@@ -12,9 +14,10 @@
 #include "SceneManagerAttorney.h"
 #include "TimeManagerAttorney.h"
 #include "TimeManager.h"
+#include "ControlManagerAttorney.h"
 
-#include "../Game Code/Constants.h"
-#include "AnimationManagerAttorney.h"
+// game includes
+#include "../Game Code/Constants.h" // TODO: this is awful form. make a separate one for the engine!
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
 
@@ -138,6 +141,9 @@ void JumpSlashEngine::UnloadContent()
 	// main systems
 	SceneManagerAttorney::Termination::Terminate();
 	TimeManagerAttorney::Termination::Terminate();
+
+	// other
+	ControlManagerAttorney::Termination::Terminate();
 }
 
 sf::RenderWindow& JumpSlashEngine::GetWindow()

@@ -95,6 +95,17 @@ bool Math::PointInSphere(const sf::Vector2f& point, const sf::Vector2f& sphereCe
 	return DistanceSqr(sphereCenter, point) <= sphereRadiusSqr;
 }
 
+bool Math::PointInRect(const sf::Vector2f& point, const sf::Vector2f& rectPos, const sf::Vector2f& rectSize)
+{
+	return rectPos.x <= point.x && point.x < rectPos.x + rectSize.x &&
+		rectPos.y <= point.y && point.y < rectPos.y + rectSize.y;
+}
+
+bool Math::PointInRect(const sf::Vector2i& point, const sf::Vector2f& rectPos, const sf::Vector2f& rectSize)
+{
+	return PointInRect(sf::Vector2f(static_cast<float>(point.x), static_cast<float>(point.y)), rectPos, rectSize);
+}
+
 float Math::DistanceSqr(const sf::Vector2f& fromA, const sf::Vector2f& toB)
 {
 	sf::Vector2f delta = toB - fromA;

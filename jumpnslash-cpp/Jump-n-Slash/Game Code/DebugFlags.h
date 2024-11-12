@@ -8,7 +8,7 @@ const bool DEBUG_COLLISION_SHOW_NUMBERS = false;
 
 // input debug flags
 
-const bool DEBUG_CONTROLLER_INPUT = false;
+const bool DEBUG_CONTROLLER_INPUT = true;
 
 // player debug flags
 

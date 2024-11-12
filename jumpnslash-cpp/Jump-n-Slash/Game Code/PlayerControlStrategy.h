@@ -2,8 +2,7 @@
 #define PLAYER_CONTROL_STRATEGY_H
 
 #include "../Engine Code/InputObject.h"
-
-#include "ControlScheme.h"
+#include "../Engine Code/ControlScheme.h"
 
 // forward declarations
 class Player;

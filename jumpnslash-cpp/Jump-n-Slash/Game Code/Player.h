@@ -13,9 +13,9 @@
 #include "../Engine Code/CollisionObject.h"
 #include "../Engine Code/Subject.h"
 #include "../Engine Code/AnimationComponent.h"
+#include "../Engine Code/ControlScheme.h"
 
 #include "Actor.h"
-#include "ControlScheme.h"
 
 // forward declarations
 class PlayerMoveState;

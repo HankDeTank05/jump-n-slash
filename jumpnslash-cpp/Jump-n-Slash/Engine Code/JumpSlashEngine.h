@@ -96,7 +96,7 @@ private:
 	* \see	JumpSlashEngine::LoadResources
 	* TODO: figure out what the purpose of this function is
 	*/
-	void GameEnd(); // TODO: function not defined JumpSlashEngine::GameEnd
+	void GameEnd(); 
 
 private: // member variables
 	sf::RenderWindow window;

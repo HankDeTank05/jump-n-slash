@@ -16,13 +16,16 @@ private:
 	static TimeManager& Instance();
 
 public: // api functions
-	static float GetCurrentEngineTime(); // TODO: docs for TimeManager::GetCurrentEngineTime
-	static float GetFrameTime(); // TODO: docs for TimeManager::GetFrameTime
+	// TODO: docs for TimeManager::GetCurrentEngineTime
+	static float GetCurrentEngineTime(); 
+	// TODO: docs for TimeManager::GetFrameTime
+	static float GetFrameTime(); 
 
 private: // engine-only api functions
 	friend class TimeManagerAttorney;
 	static void Terminate();
-	static void ProcessTime(); // TODO: docs for TimeManager::ProcessTime
+	// TODO: docs for TimeManager::ProcessTime
+	static void ProcessTime(); 
 	static void Start();
 
 private: // api backend functions

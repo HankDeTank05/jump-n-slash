@@ -2,7 +2,7 @@
 
 #include "ControlManager.h"
 
-void ControlManagerAttorney::EngineAccess::Terminate()
+void ControlManagerAttorney::Termination::Terminate()
 {
 	ControlManager::Terminate();
 }

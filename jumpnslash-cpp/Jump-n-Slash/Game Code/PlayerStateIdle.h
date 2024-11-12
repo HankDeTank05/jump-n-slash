@@ -1,15 +1,16 @@
 #ifndef PLAYER_STATE_IDLE_H
 #define PLAYER_STATE_IDLE_H
 
+// game includes
 #include "PlayerMoveState.h"
 
 class PlayerStateIdle : public PlayerMoveState
 {
 public:
-	PlayerStateIdle();
-	PlayerStateIdle(const PlayerStateIdle& psi);
-	PlayerStateIdle& operator=(const PlayerStateIdle& psi);
-	virtual ~PlayerStateIdle();
+	PlayerStateIdle() = default;
+	PlayerStateIdle(const PlayerStateIdle& psi) = delete;
+	PlayerStateIdle& operator=(const PlayerStateIdle& psi) = delete;
+	virtual ~PlayerStateIdle() = default;
 
 	virtual void Enter(Player* pPlayer) const override;
 	virtual void Update(Player* pPlayer, float deltaTime) const override;

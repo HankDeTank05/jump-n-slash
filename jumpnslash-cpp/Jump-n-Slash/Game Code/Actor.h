@@ -31,6 +31,7 @@ protected:
 	float GetHeight() const;
 	bool IsGrounded() const;
 	bool IsHeadBonked() const;
+	float GetFacing() const;
 
 	void RaycastRight();
 	void RaycastLeft();

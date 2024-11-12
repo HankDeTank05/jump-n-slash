@@ -20,8 +20,10 @@ private:
 	static AnimationManager& Instance();
 
 public: // api functions
-	static void LoadAnimation(std::string key, std::list<std::string> spriteKeyList, float fps, bool loop); // TODO: docs for AnimationManager::LoadAnimation
-	static Animation* GetAnimation(std::string key); // TODO: docs for AnimationManager::GetAnimation
+	// TODO: docs for AnimationManager::LoadAnimation
+	static void LoadAnimation(std::string key, std::list<std::string> spriteKeyList, float fps, bool loop); 
+	// TODO: docs for AnimationManager::GetAnimation
+	static Animation* GetAnimation(std::string key);
 
 private: // engine-only api functions
 	friend class AnimationManagerAttorney;

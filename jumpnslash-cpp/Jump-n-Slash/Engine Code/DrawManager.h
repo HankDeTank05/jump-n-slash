@@ -19,8 +19,10 @@ private:
 public:
 	using DrawListRef = DrawList::iterator;
 
-	DrawListRef Register(DrawObject* pDrawable); // TODO: docs for DrawManager::Register
-	void Deregister(DrawListRef drawListRef); // TODO: docs for DrawManager::Deregister
+	// TODO: docs for DrawManager::Register
+	DrawListRef Register(DrawObject* pDrawable); 
+	// TODO: docs for DrawManager::Deregister
+	void Deregister(DrawListRef drawListRef); 
 
 	void Draw();
 

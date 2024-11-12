@@ -1,11 +1,12 @@
 #ifndef CONTROL_MANAGER_H
 #define CONTROL_MANAGER_H
 
+// library includes
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Joystick.hpp>
 
-#include "../Engine Code/ControllerInputs.h"
-
+// engine incldes
+#include "ControllerInputs.h"
 #include "ControlScheme.h"
 
 class ControlManager // this class is written as a singleton
