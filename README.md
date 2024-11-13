@@ -30,16 +30,16 @@ Narrative Designer, Game Designer
 
 ## Kai Langevin
 
-Engine, Gameplay Programmer
+Engine Programmer, Gameplay Programmer
 
 ## Adam Tollios
 
-Engine, Gameplay Programmer
+Engine Programmer, Gameplay Programmer
 
 ## Kelsey Clements
 
-2D Animator, Artist
+2D Animator, 2D Artist
 
 ## Serenity Simpson
 
-2D Artist, Animator
+2D Artist, 2D Animator
