@@ -14,10 +14,11 @@ public:
 	class StateAccess
 	{
 	private:
-		friend class PlayerStateIdle;
-		friend class PlayerStateWalking;
-		friend class PlayerStateJumping;
-		friend class PlayerStateFalling;
+		friend class PlayerMoveStateIdle;
+		friend class PlayerMoveStateWalking;
+		friend class PlayerMoveStateJumping;
+		friend class PlayerMoveStateFalling;
+		friend class PlayerMoveStateDashing;
 
 		// accessors
 

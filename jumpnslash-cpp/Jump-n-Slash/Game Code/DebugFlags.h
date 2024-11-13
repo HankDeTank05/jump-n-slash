@@ -12,9 +12,10 @@ const bool DEBUG_CONTROLLER_INPUT = true;
 
 // player debug flags
 
-const bool DEBUG_PLAYER_POSITION = false; // visualizes player pos and posDelta
+const bool DEBUG_PLAYER_POSITION = true; // visualizes player pos and posDelta
 const bool DEBUG_PLAYER_MAP_COLLISION = false; // visualizes raycasting
-const bool DEBUG_PLAYER_STATE = false; // visualizes player move state
+const bool DEBUG_PLAYER_MOVE_STATE = true; // visualizes player move state
+const bool DEBUG_PLAYER_ACTION_STATE = true; // visualizes player action state
 
 // sword debug flags
 

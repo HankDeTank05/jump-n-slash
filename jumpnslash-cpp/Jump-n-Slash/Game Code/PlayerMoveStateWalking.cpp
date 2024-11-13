@@ -1,4 +1,4 @@
-#include "PlayerStateWalking.h"
+#include "PlayerMoveStateWalking.h"
 
 // language includes
 #include <array>
@@ -8,31 +8,27 @@
 //#include "../Engine Code/Visualizer.h"
 
 // game includes
-#include "PlayerFSM.h"
+#include "PlayerMoveFSM.h"
 #include "PlayerAttorney.h"
 #include "Constants.h"
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "DebugFlags.h"
 
-void PlayerStateWalking::Enter(Player* pPlayer) const
+void PlayerMoveStateWalking::Enter(Player* pPlayer) const
 {
-	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerSateWalking" << std::endl;
+	if (DEBUG_PLAYER_MOVE_STATE) std::cout << "Entered PlayerMoveStateWalking" << std::endl;
 
 	PlayerAttorney::StateAccess::SetAnimationWalk(pPlayer);
 }
 
-void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
+void PlayerMoveStateWalking::Update(Player* pPlayer, float deltaTime) const
 {
 	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
 	
 	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
 	{
 		PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
-	}
-	else
-	{
-		//assert(false); // if you reach this statement, then you fucked up bitch (or ur in space idfk)
 	}
 
 	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
@@ -47,21 +43,23 @@ void PlayerStateWalking::Update(Player* pPlayer, float deltaTime) const
 	PlayerAttorney::StateAccess::RaycastDown(pPlayer);
 }
 
-const PlayerMoveState* PlayerStateWalking::GetNextState(Player* pPlayer) const
+const PlayerMoveState* PlayerMoveStateWalking::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;
 
+	// TODO: update state change logic to include PlayerMoveStateDashing (if applicable)
+
 	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y < 0.0f)
 	{
-		pNextState = &PlayerFSM::jumping;
+		pNextState = &PlayerMoveFSM::jumping;
 	}
 	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y > 0.0f)
 	{
-		pNextState = &PlayerFSM::falling;
+		pNextState = &PlayerMoveFSM::falling;
 	}
 	else if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x == 0.0f)
 	{
-		pNextState = &PlayerFSM::idle;
+		pNextState = &PlayerMoveFSM::idle;
 	}
 
 	return pNextState;

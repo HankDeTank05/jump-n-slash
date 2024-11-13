@@ -1,21 +1,21 @@
-#include "PlayerStateFalling.h"
+#include "PlayerMoveStateFalling.h"
 
 // language includes
 #include <iostream>
 
 // game includes
-#include "PlayerFSM.h"
+#include "PlayerMoveFSM.h"
 #include "PlayerAttorney.h"
 #include "DebugFlags.h"
 
-void PlayerStateFalling::Enter(Player* pPlayer) const
+void PlayerMoveStateFalling::Enter(Player* pPlayer) const
 {
-	if (DEBUG_PLAYER_STATE) std::cout << "Entered PlayerStateFalling" << std::endl;
+	if (DEBUG_PLAYER_MOVE_STATE) std::cout << "Entered PlayerMoveStateFalling" << std::endl;
 
 	PlayerAttorney::StateAccess::SetAnimationFall(pPlayer);
 }
 
-void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const
+void PlayerMoveStateFalling::Update(Player* pPlayer, float deltaTime) const
 {
 	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
 	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
@@ -35,23 +35,25 @@ void PlayerStateFalling::Update(Player* pPlayer, float deltaTime) const
 	PlayerAttorney::StateAccess::RaycastDown(pPlayer);
 }
 
-const PlayerMoveState* PlayerStateFalling::GetNextState(Player* pPlayer) const
+const PlayerMoveState* PlayerMoveStateFalling::GetNextState(Player* pPlayer) const
 {
 	const PlayerMoveState* pNextState = this;
 
+	// TODO: update state change logic to include PlayerMoveStateDashing (if applicable)
+
 	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y < 0.0f)
 	{
-		pNextState = &PlayerFSM::jumping; // Not technically possible at the moment
+		pNextState = &PlayerMoveFSM::jumping; // Not technically possible at the moment
 	}
 	else if (PlayerAttorney::StateAccess::IsGrounded(pPlayer))
 	{
 		if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x != 0.0f)
 		{
-			pNextState = &PlayerFSM::walking;
+			pNextState = &PlayerMoveFSM::walking;
 		}
 		else // If this statement is reached, then the player is not moving vertically or horizontally
 		{
-			pNextState = &PlayerFSM::idle;
+			pNextState = &PlayerMoveFSM::idle;
 		}
 	}
 

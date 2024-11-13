@@ -142,9 +142,6 @@
     <Filter Include="Source Files\Game Code\Actors\Player">
       <UniqueIdentifier>{03005a24-48dc-482f-bf47-4221183d0c1f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Actors\Player\FSM + States">
-      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands">
       <UniqueIdentifier>{53d4d415-d90e-4c33-9bcc-5e113ec647ea}</UniqueIdentifier>
     </Filter>
@@ -217,14 +214,23 @@
     <Filter Include="Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene">
       <UniqueIdentifier>{f38f8dfd-ed6e-420b-bb72-485ec97a192d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene\Menus">
-      <UniqueIdentifier>{a0c68726-5f69-4963-b611-e0dfb360250c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene\Commands">
-      <UniqueIdentifier>{310e41b1-4fd1-48f5-8366-c496720b7f36}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine Code\Core Files\Commands">
       <UniqueIdentifier>{147c121f-aefa-45af-a51f-4dcbf9ac6510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\Menu Scenes\Commands">
+      <UniqueIdentifier>{310e41b1-4fd1-48f5-8366-c496720b7f36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\Menu Scenes\Menus">
+      <UniqueIdentifier>{a0c68726-5f69-4963-b611-e0dfb360250c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Dreamcatcher System">
+      <UniqueIdentifier>{f52aedb8-cb79-4b39-b8df-d72ab47361b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player\Movement FSM + States">
+      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player\Action FSM + States">
+      <UniqueIdentifier>{f9fc89c4-a081-47d0-a723-683c2284a84a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -300,17 +306,17 @@
     <ClCompile Include="Engine Code\MouseCursorDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerStateIdle.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveStateIdle.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerStateWalking.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveStateWalking.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerStateJumping.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveStateJumping.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerStateFalling.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveStateFalling.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\Player.cpp">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
@@ -318,8 +324,8 @@
     <ClCompile Include="Game Code\Level0.cpp">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerFSM.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveFSM.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerAttorney.cpp">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
@@ -673,10 +679,10 @@
       <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\ChangeControlsMenu.cpp">
-      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene\Menus</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Menus</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PauseMenu.cpp">
-      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene\Menus</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Menus</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\EngineQuitCommand.cpp">
       <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
@@ -685,7 +691,22 @@
       <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\ResumeGameCommand.cpp">
-      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene\Commands</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerMoveStateDashing.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerActionStateNone.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerActionFSM.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerActionStateSlashAtk.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerActionStateDreamAtk.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -779,20 +800,20 @@
     <ClInclude Include="Game Code\Player.h">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerStateIdle.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveStateIdle.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerFSM.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveFSM.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerStateWalking.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveStateWalking.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerStateJumping.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveStateJumping.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerStateFalling.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveStateFalling.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\Level0.h">
       <Filter>Source Files\Game Code\Scenes</Filter>
@@ -1059,7 +1080,7 @@
       <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerMoveState.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerControlStrategy.h">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
@@ -1191,10 +1212,10 @@
       <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PauseMenu.h">
-      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene\Menus</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Menus</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\ChangeControlsMenu.h">
-      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene\Menus</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Menus</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\EngineQuitCommandBase.h">
       <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
@@ -1206,7 +1227,31 @@
       <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\ResumeGameCommand.h">
-      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene\Commands</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Dreamcatcher.h">
+      <Filter>Source Files\Game Code\Dreamcatcher System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\GhostDreamcatcher.h">
+      <Filter>Source Files\Game Code\Dreamcatcher System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerMoveStateDashing.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerActionFSM.h">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerActionState.h">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerActionStateNone.h">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerActionStateSlashAtk.h">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerActionStateDreamAtk.h">
+      <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

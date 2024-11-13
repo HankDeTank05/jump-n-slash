@@ -18,7 +18,7 @@
 #include "DebugFlags.h"
 #include "DesignerControls.h"
 #include "PlayerMoveState.h"
-#include "PlayerFSM.h"
+#include "PlayerMoveFSM.h"
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "RoomData.h"
@@ -30,7 +30,7 @@
 Player::Player(LevelMap* pLevel)
 	: Actor(PLAYER_WALK_SPEED, pLevel),
 	pCtrlStrat(nullptr),
-	pCurrentState(&PlayerFSM::idle),
+	pCurrentState(&PlayerMoveFSM::idle),
 	pPrevState(nullptr),
 	respawnPoint(),
 	//inputReceivedWalkLeft(false),
@@ -169,13 +169,13 @@ void Player::Update(float deltaTime)
 		Visualizer::VisualizeText(Convenience::ConvertToString(tempPosDelta), textPos, posDeltaColor);
 		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + tempPosDelta, posDeltaColor);
 	}
-	if (DEBUG_PLAYER_STATE)
+	if (DEBUG_PLAYER_MOVE_STATE)
 	{
 		std::string stateStr;
-		if (pCurrentState == &PlayerFSM::falling) stateStr = "fall";
-		else if (pCurrentState == &PlayerFSM::idle) stateStr = "idle";
-		else if (pCurrentState == &PlayerFSM::jumping) stateStr = "jump";
-		else if (pCurrentState == &PlayerFSM::walking) stateStr = "walk";
+		if (pCurrentState == &PlayerMoveFSM::falling) stateStr = "fall";
+		else if (pCurrentState == &PlayerMoveFSM::idle) stateStr = "idle";
+		else if (pCurrentState == &PlayerMoveFSM::jumping) stateStr = "jump";
+		else if (pCurrentState == &PlayerMoveFSM::walking) stateStr = "walk";
 		else assert(false); // just in case we add any states and forget to update the debug code, this'll crash to remind us
 		sf::Vector2f textPos = Math::ConvertScreenToWorldSpace(sf::Vector2i(0, VIZ_DEFAULT_TEXT_SIZE * 2));
 		Visualizer::VisualizeText(stateStr, textPos, sf::Color::Cyan);
