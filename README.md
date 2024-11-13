@@ -1,12 +1,10 @@
 # Codename: Jump 'n' Slash
 
-An action/platforming game we're developing for fun in our free time!
+An action/platforming game we're developing, inspired by Zero's Gameplay in Mega Man X!
 
 We began prototyping in PICO-8, and had moved over to Love2D after our prototype exceeded the file size limit in PICO-8.
-We have since moved to C++ to continue prototyping. We are using a custom-made engine, built using SFML.
-Once prototyping has finished, development will continue in our custom engine.
-
-We are planning on having a playable demo publicly available by the end of 2024.
+We have since moved to C++ to continue development. We are using a custom-made engine, built using SFML.
+Now that prototyping has finished, development is continuing in our custom engine.
 
 # Credits
 
@@ -29,3 +27,19 @@ Gameplay Programmer
 ## Ruben Rojas
 
 Narrative Designer, Game Designer
+
+## Kai Langevin
+
+Engine, Gameplay Programmer
+
+## Adam Tollios
+
+Engine, Gameplay Programmer
+
+## Kelsey Clements
+
+2D Animator, Artist
+
+## Serenity Simpson
+
+2D Artist, Animator
