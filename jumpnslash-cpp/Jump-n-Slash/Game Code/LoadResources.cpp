@@ -82,5 +82,20 @@ void JumpSlashEngine::LoadResources()
 	assert(JUMP_FORCE < 0.f);
 	assert(MAX_JUMP_HOLD_TIME >= 0.f);
 
+	// escape key cannot be used for any controls, as it is reserved for closing the window
+	assert(KB_GAME_JUMP != sf::Keyboard::Escape);
+	assert(KB_GAME_WALK_LEFT != sf::Keyboard::Escape);
+	assert(KB_GAME_WALK_RIGHT != sf::Keyboard::Escape);
+	assert(KB_GAME_SLASH_ATK != sf::Keyboard::Escape);
+	assert(KB_GAME_DREAM_ATK != sf::Keyboard::Escape);
+	assert(KB_GAME_DASH != sf::Keyboard::Escape);
+	assert(KB_GAME_PAUSE != sf::Keyboard::Escape);
+	assert(KB_MENU_NAV_UP != sf::Keyboard::Escape);
+	assert(KB_MENU_NAV_DOWN != sf::Keyboard::Escape);
+	assert(KB_MENU_NAV_LEFT != sf::Keyboard::Escape);
+	assert(KB_MENU_NAV_RIGHT != sf::Keyboard::Escape);
+	assert(KB_MENU_SELECT != sf::Keyboard::Escape);
+	assert(KB_MENU_BACK != sf::Keyboard::Escape);
+
 	GameManager::StartGame();
 }

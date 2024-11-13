@@ -55,10 +55,10 @@ void PlayerControlKeyboard::KeyReleased(sf::Keyboard::Key key)
 		jump = false;
 		break;
 	case KB_GAME_WALK_LEFT:
-		if (walk < 0.f) walk = 0.f;
+		walk += 1.f;
 		break;
 	case KB_GAME_WALK_RIGHT:
-		if (walk > 0.f) walk = 0.f;
+		walk -= 1.f;
 		break;
 	case KB_GAME_SLASH_ATK:
 		slashAtk = false;

@@ -2,7 +2,7 @@
 #define MENU_COMMAND_H
 
 // engine includes
-#include "../Engine Code/Command.h"
+#include "Command.h"
 
 class MenuCommand : public Command
 {

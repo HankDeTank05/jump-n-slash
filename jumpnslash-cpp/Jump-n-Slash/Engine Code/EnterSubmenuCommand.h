@@ -15,13 +15,13 @@ public:
 	EnterSubmenuCommand(MenuManager* pMgr, Menu* pSubmenu);
 	EnterSubmenuCommand(const EnterSubmenuCommand& esc) = delete;
 	EnterSubmenuCommand& operator=(const EnterSubmenuCommand& esc) = delete;
-	virtual ~EnterSubmenuCommand();
+	virtual ~EnterSubmenuCommand() = default;
 
 	virtual void Execute() override final;
 
 protected:
-	MenuManager* pMgr;
-	Menu* pSubmenu;
+	MenuManager* pMgr; // EnterSubmenuCommand class DOES NOT OWN this pointer
+	Menu* pSubmenu; // EnterSubmenuCommand class DOES NOT OWN this pointer
 };
 
 #endif

@@ -10,9 +10,9 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 
 // engine includes
-#include "../Engine Code/DrawObject.h"
-#include "../Engine Code/UpdateObject.h"
-#include "../Engine Code/InputObject.h"
+#include "DrawObject.h"
+#include "UpdateObject.h"
+#include "InputObject.h"
 
 // forward declarations
 class MenuManager;
@@ -34,6 +34,7 @@ public:
 	using MenuOptionList = std::vector<MenuOption>;
 
 	virtual void Draw() override final;
+	virtual void Update(float deltaTime) override;
 
 	virtual void MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta) override final;
 	virtual void MouseBtnPressed(sf::Mouse::Button btn) override final;
@@ -50,7 +51,7 @@ private:
 	void End();
 
 private:
-	MenuManager* pMgr;
+	MenuManager* pMgr; // Menu class DOES NOT OWN this pointer
 	sf::Text menuTitle;
 	sf::Vector2f firstBoxPos;
 	float boxVertSpacing;
@@ -60,7 +61,7 @@ private:
 	std::vector<sf::Color> boxColors;
 	sf::Color textColorBase;
 	sf::Color textColorHighlight;
-	MenuOptionList menuOptions;
+	MenuOptionList menuOptions; // Menu class DOES OWN the MenuCommand pointers in this list
 	sf::RectangleShape menuOptionBox;
 	bool setMenuOptionBox; // flag to prevent running the menu if the menuOptionBox is not set
 	std::vector<sf::Vector2f> boxPositions;

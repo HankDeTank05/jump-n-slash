@@ -12,16 +12,6 @@ CollisionVolumeAABB::CollisionVolumeAABB(const sf::Vector2f& min, const sf::Vect
 	// do nothing
 }
 
-const sf::Vector2f& CollisionVolumeAABB::GetMin() const
-{
-	return min;
-}
-
-const sf::Vector2f& CollisionVolumeAABB::GetMax() const
-{
-	return max;
-}
-
 void CollisionVolumeAABB::ComputeData(sf::Sprite* pSprite, const sf::Transform& _tform)
 {
 	// do some obb stuff

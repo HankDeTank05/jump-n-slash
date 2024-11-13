@@ -13,15 +13,15 @@ public:
 	MenuManager();
 	MenuManager(const MenuManager& mm) = delete;
 	MenuManager& operator=(const MenuManager& mm) = delete;
-	virtual ~MenuManager();
+	virtual ~MenuManager() = default;
 
 	void SetStartingMenu(Menu* pStartingMenu);
 	void EnterSubmenu(Menu* pSubmenu);
 	void ReturnToPrevMenu();
 
 private: // member variables
-	Menu* pStartingMenu;
-	Menu* pCurrentMenu;
+	Menu* pStartingMenu; // MenuManager class DOES NOT OWN this pointer
+	Menu* pCurrentMenu; // MenuManager class DOES NOT OWN this pointer
 	std::stack<Menu*> menuStack;
 };
 

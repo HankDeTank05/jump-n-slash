@@ -1,8 +1,8 @@
 #ifndef RESUME_GAME_COMMAND_H
 #define RESUME_GAME_COMMAND_H
 
-// game includes
-#include "MenuCommand.h"
+// engine includes
+#include "../Engine Code/MenuCommand.h"
 
 class ResumeGameCommand : public MenuCommand
 {

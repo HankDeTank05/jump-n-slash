@@ -26,7 +26,7 @@ const sf::Keyboard::Key KB_GAME_WALK_RIGHT = sf::Keyboard::Right;
 const sf::Keyboard::Key KB_GAME_SLASH_ATK = sf::Keyboard::V; // not yet in use
 const sf::Keyboard::Key KB_GAME_DREAM_ATK = sf::Keyboard::C; // not yet in use
 const sf::Keyboard::Key KB_GAME_DASH = sf::Keyboard::X; // not yet in use
-const sf::Keyboard::Key KB_GAME_PAUSE = sf::Keyboard::Escape; // not yet in use
+const sf::Keyboard::Key KB_GAME_PAUSE = sf::Keyboard::Backspace; // not yet in use
 
 const sf::Keyboard::Key KB_MENU_NAV_UP = sf::Keyboard::Up; // not yet in use
 const sf::Keyboard::Key KB_MENU_NAV_DOWN = sf::Keyboard::Down; // not yet in use

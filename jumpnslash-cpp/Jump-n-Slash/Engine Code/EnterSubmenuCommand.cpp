@@ -12,11 +12,6 @@ EnterSubmenuCommand::EnterSubmenuCommand(MenuManager* _pMgr, Menu* _pSubmenu)
 	assert(pSubmenu != nullptr);
 }
 
-EnterSubmenuCommand::~EnterSubmenuCommand()
-{
-	delete pSubmenu;
-}
-
 void EnterSubmenuCommand::Execute()
 {
 	pMgr->EnterSubmenu(pSubmenu);

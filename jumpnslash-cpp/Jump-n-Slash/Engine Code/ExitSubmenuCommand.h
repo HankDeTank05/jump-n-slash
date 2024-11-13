@@ -18,7 +18,7 @@ public:
 	virtual void Execute() override;
 
 protected:
-	MenuManager* pMgr;
+	MenuManager* pMgr; // ExitSubmenuCommand class DOES NOT OWN this pointer
 };
 
 #endif

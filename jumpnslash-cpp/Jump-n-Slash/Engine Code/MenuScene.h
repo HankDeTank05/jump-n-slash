@@ -1,6 +1,7 @@
 #ifndef MENU_SCENE_H
 #define MENU_SCENE_H
 
+// engine includes
 #include "../Engine Code/Scene.h"
 
 // forward declarations
@@ -23,7 +24,7 @@ protected:
 	void SetStartingMenu(Menu* pStartingMenu);
 
 protected:
-	MenuManager* pMenuMgr;
+	MenuManager* pMenuMgr; // MenuScene class DOES OWN this pointer
 };
 
 #endif

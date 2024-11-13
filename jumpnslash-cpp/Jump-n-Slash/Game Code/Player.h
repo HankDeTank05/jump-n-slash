@@ -1,11 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+// language includes
 #include <map>
 #include <list>
 
+// library includes
 #include <SFML/Graphics.hpp>
 
+// engine includes
 #include "../Engine Code/UpdateObject.h"
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/InputObject.h"
@@ -15,6 +18,7 @@
 #include "../Engine Code/AnimationComponent.h"
 #include "../Engine Code/ControlScheme.h"
 
+// game includes
 #include "Actor.h"
 
 // forward declarations

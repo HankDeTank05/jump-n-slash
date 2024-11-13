@@ -1,5 +1,6 @@
 #include "MenuManager.h"
 
+// engine includes
 #include "MenuAttorney.h"
 
 MenuManager::MenuManager()
@@ -8,11 +9,6 @@ MenuManager::MenuManager()
 	menuStack()
 {
 	// do nothing
-}
-
-MenuManager::~MenuManager()
-{
-	//delete pStartingMenu;
 }
 
 void MenuManager::SetStartingMenu(Menu* _pStartingMenu)
@@ -24,19 +20,28 @@ void MenuManager::SetStartingMenu(Menu* _pStartingMenu)
 
 void MenuManager::EnterSubmenu(Menu* pSubmenu)
 {
+	// end the current menu
 	assert(pCurrentMenu != nullptr);
 	MenuAttorney::MenuManagerAccess::End(pCurrentMenu);
+
+	// push the current menu to the stack to be restored later
 	menuStack.push(pCurrentMenu);
+
+	// set and init the new current menu
 	pCurrentMenu = pSubmenu;
 	MenuAttorney::MenuManagerAccess::Init(pCurrentMenu);
 }
 
 void MenuManager::ReturnToPrevMenu()
 {
-	assert(menuStack.size() > 0);
+	// end the current menu
 	MenuAttorney::MenuManagerAccess::End(pCurrentMenu);
-	// TODO: mem leak here. either delete or make a factory/object pool
+
+	// restore the most recent menu
+	assert(menuStack.size() > 0);
 	pCurrentMenu = menuStack.top();
 	menuStack.pop();
+
+	// init the new current menu
 	MenuAttorney::MenuManagerAccess::Init(pCurrentMenu);
 }

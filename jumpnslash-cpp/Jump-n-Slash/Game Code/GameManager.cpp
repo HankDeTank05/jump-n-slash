@@ -2,6 +2,7 @@
 
 // engine includes
 #include "../Engine Code/SceneManager.h"
+#include "../Engine Code/EngineAttorney.h"
 
 // game includes
 #include "GameFSM.h"
@@ -72,7 +73,6 @@ void GameManager::privStartGame()
 
 void GameManager::privPauseGame()
 {
-	
 	//SceneManager::SetNextSceneSuspend(new ControlSelection());
 	SceneManager::SetNextSceneSuspend(new PauseMenuScene());
 	pCurrentState = &GameFSM::menu;
@@ -86,5 +86,5 @@ void GameManager::privResumeFromPause()
 
 void GameManager::privQuitGame()
 {
-	assert(false);
+	EngineAttorney::QuitGameAccess::RequestQuitGame();
 }

@@ -30,6 +30,11 @@ SceneManager::~SceneManager()
 	delete pDontChangeCmd;
 	delete pChangeCmd;
 	delete pCurrentScene;
+	while (suspensionStack.size() > 0)
+	{
+		delete suspensionStack.top();
+		suspensionStack.pop();
+	}
 }
 
 SceneManager& SceneManager::Instance()

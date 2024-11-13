@@ -1,9 +1,7 @@
 #include "Menu.h"
 
 // engine includes
-#include "../Engine Code/Math.h"
-
-// game includes
+#include "Math.h"
 #include "MenuManager.h"
 #include "MenuCommand.h"
 
@@ -28,10 +26,7 @@ Menu::Menu(MenuManager* _pMgr, const sf::Text& _menuTitle, const sf::Vector2f& _
 	selected(_selected),
 	setMenuOptionsList(false)
 {
-	//RequestUpdateRegistration();
-	//RequestDrawRegistration();
-	//RequestMouseCursorRegistration();
-	//RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
+	// do nothing
 }
 
 Menu::~Menu()
@@ -62,8 +57,18 @@ void Menu::Draw()
 	}
 }
 
+void Menu::Update(float deltaTime)
+{
+	assert(setMenuOptionBox == true); // did you forget to call SetMenuOptionBox() in your Menu-derived class constructor?
+	assert(setMenuOptionsList == true); // did you forget to call AddMenuOption() at least once in your Menu-derived class constructor?
+
+	// TODO: move code here instead of in the input processing functions
+}
+
 void Menu::MouseCursorMoved(sf::Vector2i pos, sf::Vector2i delta)
 {
+	// TODO: move all of the logic for this into the update function
+
 	// check if mouse cursor is in any of the menu option boxes
 	for (int i = 0; i < boxPositions.size(); i++)
 	{
@@ -125,7 +130,7 @@ void Menu::Init()
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
 	RequestMouseCursorRegistration();
-	RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress);
+	RequestMouseBtnRegistration(sf::Mouse::Left, MouseEvent::BtnPress); // TODO: this will change with the strategy
 }
 
 void Menu::End()
@@ -133,5 +138,5 @@ void Menu::End()
 	RequestUpdateDeregistration();
 	RequestDrawDeregistration();
 	RequestMouseCursorDeregistration();
-	RequestMouseBtnDeregistration(sf::Mouse::Left, MouseEvent::BtnPress);
+	RequestMouseBtnDeregistration(sf::Mouse::Left, MouseEvent::BtnPress); // TODO: this will change with the strategy
 }
