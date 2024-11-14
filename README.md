@@ -12,6 +12,8 @@ Now that prototyping has finished, development is continuing in our custom engin
 
 Director, Game Engine Programmer, Gameplay Programmer, Tools Developer
 
+Click [here](https://www.henryholman.com/) to see his portfolio.
+
 ## Joseph Turzitti
 
 Game Designer, Narrative Designer
