@@ -12,7 +12,7 @@ Now that prototyping has finished, development is continuing in our custom engin
 
 Director, Game Engine Programmer, Gameplay Programmer, Tools Developer
 
-Click [here](https://www.henryholman.com/) to see his portfolio.
+Click [here](https://www.henryholman.com/) to see his portfolio!
 
 ## Joseph Turzitti
 
@@ -45,3 +45,5 @@ Engine Programmer, Gameplay Programmer
 ## Serenity Simpson
 
 2D Artist, 2D Animator
+
+Click [here](https://www.serenitydigital.net/) to see her portfolio!
