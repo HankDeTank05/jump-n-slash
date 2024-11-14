@@ -22,6 +22,8 @@ Game Designer, Narrative Designer
 
 Tools Developer
 
+Click [here](https://lenjen222.github.io/) to see his portfolio!
+
 ## Katie Holman
 
 Gameplay Programmer
