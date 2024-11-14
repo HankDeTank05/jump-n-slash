@@ -34,6 +34,8 @@ Narrative Designer, Game Designer
 
 Engine Programmer, Gameplay Programmer
 
+Click [here](https://www.kaianlangevin.com/) to see her portfolio!
+
 ## Adam Tollios
 
 Engine Programmer, Gameplay Programmer
