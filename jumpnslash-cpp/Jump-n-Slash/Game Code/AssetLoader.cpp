@@ -1,18 +1,21 @@
 #include "AssetLoader.h"
 
+// language includes
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <ctype.h>
 
+// engine includes
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/GridManager.h"
 
+// game includes
 #include "Constants.h"
-#include "DesignerControls.h"
+#include "ParamsPlayer.h"
 #include "DebugFlags.h"
 
 const std::string AssetLoader::COMMAND_TEXTURE = "texture";

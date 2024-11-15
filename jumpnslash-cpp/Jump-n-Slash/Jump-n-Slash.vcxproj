@@ -314,7 +314,7 @@
     <ClInclude Include="Game Code\ControlSelection.h" />
     <ClInclude Include="Game Code\ControlSelector.h" />
     <ClInclude Include="Game Code\DebugFlags.h" />
-    <ClInclude Include="Game Code\DesignerControls.h" />
+    <ClInclude Include="Game Code\ControlMapping.h" />
     <ClInclude Include="Game Code\Dreamcatcher.h" />
     <ClInclude Include="Game Code\Enemy.h" />
     <ClInclude Include="Game Code\GameFSM.h" />
@@ -329,6 +329,8 @@
     <ClInclude Include="Game Code\LevelScene.h" />
     <ClInclude Include="Game Code\LevelTile.h" />
     <ClInclude Include="Game Code\MenuControlStrategy.h" />
+    <ClInclude Include="Game Code\ParamsDreamcatchers.h" />
+    <ClInclude Include="Game Code\ParamsPlayer.h" />
     <ClInclude Include="Game Code\PauseMenu.h" />
     <ClInclude Include="Game Code\PauseMenuScene.h" />
     <ClInclude Include="Game Code\PlatformSemisolid.h" />

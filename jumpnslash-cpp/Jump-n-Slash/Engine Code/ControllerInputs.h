@@ -1,7 +1,36 @@
 #ifndef CONTROLLER_INPUTS_H
 #define CONTROLLER_INPUTS_H
 
+// library includes
 #include <SFML/Window/Joystick.hpp>
+
+enum class SwitchProButton
+{
+	B = 0,
+	A = 1,
+	Y = 2,
+	X = 3,
+	L = 4,
+	R = 5,
+	ZL = 6,
+	ZR = 7,
+	Minus = 8,
+	Plus = 9,
+	LeftStickClick = 10,
+	RightStickClick = 11,
+	Home = 12,
+	Capture = 13,
+};
+
+enum class SwitchProAxis
+{
+	LeftStickHorizontal = sf::Joystick::Axis::X,
+	LeftStickVertical = sf::Joystick::Axis::Y,
+	RightStickHorizontal = sf::Joystick::Axis::U,
+	RightStickVertical = sf::Joystick::Axis::V,
+	DpadHorizontal = sf::Joystick::Axis::PovX,
+	DpadVertical = sf::Joystick::Axis::PovY
+};
 
 enum class DualSenseButton
 {
@@ -34,32 +63,44 @@ enum class DualSenseAxis
 	DpadVertical = sf::Joystick::Axis::PovY
 };
 
-enum class SwitchProButton
+enum class DualShock4Button
 {
-	B = 0,
-	A = 1,
-	Y = 2,
-	X = 3,
-	L = 4,
-	R = 5,
-	ZL = 6,
-	ZR = 7,
-	Minus = 8,
-	Plus = 9,
-	LeftStickClick = 10,
-	RightStickClick = 11,
-	Home = 12,
-	Capture = 13,
+	// TODO: determine DualShock 4 controller buttons
 };
 
-enum class SwitchProAxis
+enum class DualShock4Axis
 {
-	LeftStickHorizontal = sf::Joystick::Axis::X,
-	LeftStickVertical = sf::Joystick::Axis::Y,
-	RightStickHorizontal = sf::Joystick::Axis::U,
-	RightStickVertical = sf::Joystick::Axis::V,
-	DpadHorizontal = sf::Joystick::Axis::PovX,
-	DpadVertical = sf::Joystick::Axis::PovY
+	// TODO: determine DualShock 4 controller axes
+};
+
+enum class XboxSeriesButton
+{
+	// TODO: determine Xbox Series controller buttons
+};
+
+enum class XboxSeriesAxis
+{
+	// TOOD: determine Xbox Series controller axes
+};
+
+enum class XboxOneButton
+{
+	// TODO: determine Xbox One controller buttons
+};
+
+enum class XboxOneAxes
+{
+	// TODO: determine Xbox One controller axes
+};
+
+enum class Xbox360Button
+{
+	// TODO: determine Xbox 360 controller buttons
+};
+
+enum class Xbox360Axes
+{
+	// TODO: determine Xbox 360 controller axes
 };
 
 #endif

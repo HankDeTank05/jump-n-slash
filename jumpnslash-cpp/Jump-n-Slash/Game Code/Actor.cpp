@@ -6,7 +6,7 @@
 
 #include "Constants.h"
 #include "DebugFlags.h"
-#include "DesignerControls.h"
+#include "ParamsPlayer.h"
 #include "LevelTile.h"
 #include "LevelMap.h"
 

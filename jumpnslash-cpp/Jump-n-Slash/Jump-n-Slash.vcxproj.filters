@@ -232,6 +232,9 @@
     <Filter Include="Source Files\Game Code\Actors\Player\Action FSM + States">
       <UniqueIdentifier>{f9fc89c4-a081-47d0-a723-683c2284a84a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Designer Controls">
+      <UniqueIdentifier>{445aa9ec-4e28-49e9-b432-b0892ca6f838}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -724,9 +727,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\DrawObject.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\DesignerControls.h">
-      <Filter>Source Files\Game Code</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\DrawObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
@@ -1255,6 +1255,15 @@
     </ClInclude>
     <ClInclude Include="Engine Code\EngineConstants.h">
       <Filter>Source Files\Engine Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControlMapping.h">
+      <Filter>Source Files\Game Code\Designer Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ParamsDreamcatchers.h">
+      <Filter>Source Files\Game Code\Designer Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ParamsPlayer.h">
+      <Filter>Source Files\Game Code\Designer Controls</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

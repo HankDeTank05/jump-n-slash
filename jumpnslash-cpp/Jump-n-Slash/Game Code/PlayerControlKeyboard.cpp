@@ -4,7 +4,7 @@
 //#include "../Engine Code/SceneManager.h"
 
 // game includes
-#include "DesignerControls.h"
+#include "ControlMapping.h"
 #include "ControlSelection.h"
 #include "GameManager.h"
 
@@ -18,27 +18,27 @@ void PlayerControlKeyboard::KeyPressed(sf::Keyboard::Key key)
 {
 	switch (key)
 	{
-	case KB_GAME_JUMP:
+	case Keyboard::Game::JUMP:
 		jump = true;
 		break;
-	case KB_GAME_WALK_LEFT:
+	case Keyboard::Game::WALK_LEFT:
 		walk -= 1.f;
 		if (walk < -1.f) walk = -1.f;
 		break;
-	case KB_GAME_WALK_RIGHT:
+	case Keyboard::Game::WALK_RIGHT:
 		walk += 1.f;
 		if (walk > 1.f) walk = 1.f;
 		break;
-	case KB_GAME_SLASH_ATK:
+	case Keyboard::Game::SLASH_ATK:
 		slashAtk = true;
 		break;
-	case KB_GAME_DREAM_ATK:
+	case Keyboard::Game::DREAM_ATK:
 		dreamAtk = true;
 		break;
-	case KB_GAME_DASH:
+	case Keyboard::Game::DASH:
 		dash = true;
 		break;
-	case KB_GAME_PAUSE:
+	case Keyboard::Game::PAUSE:
 		//assert(false);
 		GameManager::PauseGame();
 		break;
@@ -51,22 +51,22 @@ void PlayerControlKeyboard::KeyReleased(sf::Keyboard::Key key)
 {
 	switch (key)
 	{
-	case KB_GAME_JUMP:
+	case Keyboard::Game::JUMP:
 		jump = false;
 		break;
-	case KB_GAME_WALK_LEFT:
+	case Keyboard::Game::WALK_LEFT:
 		walk += 1.f;
 		break;
-	case KB_GAME_WALK_RIGHT:
+	case Keyboard::Game::WALK_RIGHT:
 		walk -= 1.f;
 		break;
-	case KB_GAME_SLASH_ATK:
+	case Keyboard::Game::SLASH_ATK:
 		slashAtk = false;
 		break;
-	case KB_GAME_DREAM_ATK:
+	case Keyboard::Game::DREAM_ATK:
 		dreamAtk = false;
 		break;
-	case KB_GAME_DASH:
+	case Keyboard::Game::DASH:
 		dash = false;
 		break;
 	default:

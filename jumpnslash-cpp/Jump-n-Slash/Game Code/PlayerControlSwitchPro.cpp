@@ -2,7 +2,7 @@
 
 #include "../Engine Code/ControllerInputs.h"
 
-#include "DesignerControls.h"
+#include "ControlMapping.h"
 
 PlayerControlSwitchPro::PlayerControlSwitchPro(Player* pPlayer)
 	: PlayerControlStrategy(pPlayer, ControlScheme::SwitchPro)
@@ -15,19 +15,19 @@ void PlayerControlSwitchPro::GamepadBtnPressed(int gamepadIndex, int btnNum)
 	SwitchProButton btn = static_cast<SwitchProButton>(btnNum);
 	switch (btn)
 	{
-	case SP_GAME_JUMP:
+	case SwitchPro::Game::JUMP:
 		jump = true;
 		break;
-	case SP_GAME_SLASH_ATK:
+	case SwitchPro::Game::SLASH_ATK:
 		slashAtk = true;
 		break;
-	case SP_GAME_DREAM_ATK:
+	case SwitchPro::Game::DREAM_ATK:
 		dreamAtk = true;
 		break;
-	case SP_GAME_DASH:
+	case SwitchPro::Game::DASH:
 		dash = true;
 		break;
-	case SP_GAME_PAUSE:
+	case SwitchPro::Game::PAUSE:
 		assert(false);
 		break;
 	default:
@@ -40,16 +40,16 @@ void PlayerControlSwitchPro::GamepadBtnReleased(int gamepadIndex, int btnNum)
 	SwitchProButton btn = static_cast<SwitchProButton>(btnNum);
 	switch (btn)
 	{
-	case SP_GAME_JUMP:
+	case SwitchPro::Game::JUMP:
 		jump = false;
 		break;
-	case SP_GAME_SLASH_ATK:
+	case SwitchPro::Game::SLASH_ATK:
 		slashAtk = false;
 		break;
-	case SP_GAME_DREAM_ATK:
+	case SwitchPro::Game::DREAM_ATK:
 		dreamAtk = false;
 		break;
-	case SP_GAME_DASH:
+	case SwitchPro::Game::DASH:
 		dash = false;
 		break;
 	default:
@@ -62,8 +62,8 @@ void PlayerControlSwitchPro::GamepadAxisMoved(int gamepadIndex, sf::Joystick::Ax
 	SwitchProAxis spAxis = static_cast<SwitchProAxis>(axis);
 	switch (spAxis)
 	{
-	case SP_GAME_WALK:
-	case SP_GAME_WALK_ALT:
+	case SwitchPro::Game::WALK:
+	case SwitchPro::Game::WALK_ALT:
 		walk = axisState;
 		break;
 	default:

@@ -16,7 +16,7 @@
 
 #include "Constants.h"
 #include "DebugFlags.h"
-#include "DesignerControls.h"
+#include "ParamsPlayer.h"
 #include "PlayerMoveState.h"
 #include "PlayerMoveFSM.h"
 #include "LevelMap.h"
@@ -65,12 +65,12 @@ Player::Player(LevelMap* pLevel)
 	// register with the engine
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
-	//RequestKeyRegistration(KB_GAME_JUMP, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_GAME_JUMP, KeyEvent::KeyRelease);
-	//RequestKeyRegistration(KB_GAME_WALK_LEFT, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_GAME_WALK_LEFT, KeyEvent::KeyRelease);
-	//RequestKeyRegistration(KB_GAME_WALK_RIGHT, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_GAME_WALK_RIGHT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(JUMP, KeyEvent::KeyPress);
+	//RequestKeyRegistration(JUMP, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(WALK_LEFT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(WALK_LEFT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(WALK_RIGHT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(WALK_RIGHT, KeyEvent::KeyRelease);
 
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
 }
@@ -199,19 +199,19 @@ void Player::Alarm0()
 //{
 //	switch (key)
 //	{
-//	case KB_GAME_WALK_LEFT:
+//	case WALK_LEFT:
 //		//inputReceivedWalkLeft = true;
 //		inputWalkDir -= 1.f;
 //		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
 //		facing = -1;
 //		break;
-//	case KB_GAME_WALK_RIGHT:
+//	case WALK_RIGHT:
 //		//inputReceivedWalkRight = true;
 //		inputWalkDir += 1.f;
 //		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
 //		facing = 1;
 //		break;
-//	case KB_GAME_JUMP:
+//	case JUMP:
 //		inputReceivedJump = true;
 //		break;
 //	}
@@ -221,17 +221,17 @@ void Player::Alarm0()
 //{
 //	switch (key)
 //	{
-//	case KB_GAME_WALK_LEFT:
+//	case WALK_LEFT:
 //		//inputReceivedWalkLeft = false;
 //		inputWalkDir += 1.f;
 //		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
 //		break;
-//	case KB_GAME_WALK_RIGHT:
+//	case WALK_RIGHT:
 //		//inputReceivedWalkRight = false;
 //		inputWalkDir -= 1.f;
 //		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
 //		break;
-//	case KB_GAME_JUMP:
+//	case JUMP:
 //		inputReceivedJump = false;
 //		break;
 //	}
