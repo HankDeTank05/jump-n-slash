@@ -3,7 +3,7 @@
 
 #include <array>
 
-#include "../Game Code/Constants.h"
+#include "EngineConstants.h"
 #include "RegistrationState.h"
 #include "AlarmID.h"
 #include "AlarmManager.h"

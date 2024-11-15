@@ -1,9 +1,11 @@
 #include "Level0.h"
 
+// engine includes
 #include "../Engine Code/GridManager.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/Camera.h"
 
+// game includes
 #include "LevelMap.h"
 #include "Player.h"
 #include "Sword.h"

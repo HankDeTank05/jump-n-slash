@@ -208,6 +208,7 @@
     <ClInclude Include="Engine Code\CollisionVolumeBoundingBox.h" />
     <ClInclude Include="Engine Code\CollisionVolumeBSphere.h" />
     <ClInclude Include="Engine Code\Command.h" />
+    <ClInclude Include="Engine Code\EngineConstants.h" />
     <ClInclude Include="Engine Code\ControllerInputs.h" />
     <ClInclude Include="Engine Code\ControlManager.h" />
     <ClInclude Include="Engine Code\ControlManagerAttorney.h" />

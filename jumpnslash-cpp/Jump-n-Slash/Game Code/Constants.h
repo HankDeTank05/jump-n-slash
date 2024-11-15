@@ -3,14 +3,8 @@
 
 #include <string>
 
-#include <SFML/Graphics/Color.hpp>
-
 // general constants
 
-const std::string WINDOW_NAME = "Jump n Slash";
-const int WINDOW_WIDTH = 1280;
-const int WINDOW_HEIGHT = 720;
-const unsigned int MAX_FRAMERATE = 60;
 const int TILE_SIZE = 32;
 const float TILE_SIZE_F = static_cast<float>(TILE_SIZE);
 const std::string ASSET_SETUP_FILE = "assets/assetSetupFile_test.txt";
@@ -19,10 +13,6 @@ const std::string ASSET_SETUP_FILE = "assets/assetSetupFile_test.txt";
 
 const std::string spGamepadName = "Pro Controller";
 const std::string dsGamepadName = "DualSense Wireless Controller";
-
-// GameObject constants
-
-const int ALARM_COUNT = 10;
 
 // LevelMap constants
 
@@ -44,12 +34,5 @@ const std::string KEY_INDICATOR_SPAWN_PLAYER_LEFT = "indicator spawn player left
 const std::string KEY_INDICATOR_SPAWN_PLAYER_RIGHT = "indicator spawn player right";
 const std::string KEY_INDICATOR_SPAWN_ENEMY_LEFT = "indicator spawn enemy left";
 const std::string KEY_INDICATOR_SPAWN_ENEMY_RIGHT = "indicator spawn enemy right";
-
-// visualizer default settings
-
-const sf::Color VIZ_DEFAULT_COLOR = sf::Color::Cyan;
-const float VIZ_DEFAULT_LINE_SIZE = 1.0f;
-const float VIZ_POINT_RADIUS = 1.0f;
-const int VIZ_DEFAULT_TEXT_SIZE = 15;
 
 #endif

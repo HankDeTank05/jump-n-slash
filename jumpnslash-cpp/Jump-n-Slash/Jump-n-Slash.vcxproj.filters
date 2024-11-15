@@ -1253,6 +1253,9 @@
     <ClInclude Include="Game Code\PlayerActionStateDreamAtk.h">
       <Filter>Source Files\Game Code\Actors\Player\Action FSM + States</Filter>
     </ClInclude>
+    <ClInclude Include="Engine Code\EngineConstants.h">
+      <Filter>Source Files\Engine Code</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\0_DocsHome.txt">

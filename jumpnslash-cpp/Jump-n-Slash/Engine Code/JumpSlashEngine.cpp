@@ -20,7 +20,7 @@
 #include "EngineDontQuitCommand.h"
 
 // game includes
-#include "../Game Code/Constants.h" // TODO: this is awful form. make a separate one for the engine!
+#include "EngineConstants.h" 
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
 
