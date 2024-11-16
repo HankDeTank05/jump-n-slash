@@ -123,28 +123,75 @@ protected:
 	*/
 	void Render(sf::Drawable& drawable);
 
-	// TODO: docs for DrawObject::Render(drawable, tform)
-	void Render(const sf::Drawable& drawable, const sf::Transform& tform);
-
-	// TODO: docs for DrawObject::Render(vertex, vtex count)
-	void Render(sf::Vertex* array, int vtexCount);
 	/*!
-	* \brief	Request that the engine draw this object.
+	* \brief	Render a SFML drawable with a transform.
 	* 
-	* Call this function in a \c DrawObject -derived class to let the engine know you would like to begin drawing the object.
-	*
+	* This function renders the \c sf::Drawable object passed to it. The following types are \c sf::Drawable -derived, and therefore may
+	* be passed to this function:
+	* - \c sf::Shape
+	* - \c sf::Sprite
+	* - \c sf::Text
+	* - \c sf::VertexArray
+	* - \c sf::VertexBuffer
+	* 
 	* \note This function is only accessible to classes deriving from \c DrawObject .
 	* 
-	* \note As the name of this function implies, this puts in a request with the engine for your object to be drawn. The request is
-	* processed by the engine on the same frame this function is called, and calls to \c DrawObject::Draw  will begin \b the \b following
-	* frame.
+	* \param[in]	drawable	The object to draw.
+	* 
+	* \param[in]	tform	A \c sf::Transform. 
 	* 
 	* \return	Does not return anything.
 	* 
+	* \see DrawObject::Draw
+	* \see DrawObject::RequestDrawRegistration
+	* \see DrawObject::RequestDrawDeregistration
+	* \see UpdateObject
+	* \see InputObject
+	* \see AlarmObject
+	* \see CollisionObject
+	*/
+	void Render(const sf::Drawable& drawable, const sf::Transform& tform);
+
+	/*!
+	* \brief	Render a primitive by passing in a vertex array.
+	*
+	* \note This function is only accessible to classes deriving from \c DrawObject .
+	* 
+	* \note Vertices are rendered with \c sf::Lines .
+	*
+	* \param[in]	array	An sf::Vertex array. 
+	* 
+	* \param[in]	count	Number of vertices in the array as an integer. 
+	*
+	* \return	Does not return anything.
+	*
+	* \see DrawObject::Draw
+	* \see DrawObject::RequestDrawRegistration
+	* \see DrawObject::RequestDrawDeregistration
+	* \see UpdateObject
+	* \see InputObject
+	* \see AlarmObject
+	* \see CollisionObject
+	*/
+	void Render(sf::Vertex* array, int vtexCount);
+
+	/*!
+	* \brief	Request that the engine draw this object.
+	*
+	* Call this function in a \c DrawObject -derived class to let the engine know you would like to begin drawing the object.
+	*
+	* \note This function is only accessible to classes deriving from \c DrawObject .
+	*
+	* \note As the name of this function implies, this puts in a request with the engine for your object to be drawn. The request is
+	* processed by the engine on the same frame this function is called, and calls to \c DrawObject::Draw  will begin \b the \b following
+	* frame.
+	*
+	* \return	Does not return anything.
+	*
 	* \section example Example
 	* See the \ref go_drawSystem_exampleCode "Draw System Example Code" section from the
 	* \ref CreatingGameObject "Creating a Game Object" tutorial for example code.
-	* 
+	*
 	* \see DrawObject::Draw
 	* \see DrawObject::Render
 	* \see DrawObject::RequestDrawDeregistration
@@ -154,23 +201,24 @@ protected:
 	* \see CollisionObject
 	*/
 	void RequestDrawRegistration();
+
 	/*!
 	* \brief	Request that the engine stop drawing this object.
-	* 
+	*
 	* Call this function in a \c DrawObject -derived class to let the engien know you would like to stop drawing the object.
-	* 
+	*
 	* \note This function is only accessible to classes deriving from \c DrawObject .
-	* 
+	*
 	* \note As the name of this function implies, this puts in a request with the engine for your object to stop being drawn. The request
-	* is processed by the engien on the same frame this fucntion is called, and calls to \c DrawObject::Draw will cease \b the
+	* is processed by the engine on the same frame this fucntion is called, and calls to \c DrawObject::Draw will cease \b the
 	* \b following frame.
-	* 
+	*
 	* \return	Does not return anything.
-	* 
+	*
 	* \section example Example
 	* See the \ref go_drawSystem_exampleCode "Draw System Example Code" section from the
 	* \ref CreatingGameObject "Creating a Game Object" tutorial for example code.
-	* 
+	*
 	* \see DrawObject::Draw
 	* \see DrawObject::Render
 	* \see DrawObject::RequestDrawRegistration
@@ -189,9 +237,47 @@ private:
 	//void DrawChildren();
 
 private:
+
+	/*!
+	* \brief	This \c DrawObject 's currrent state in the draw system.
+	* 
+	* An enum representing this \c DrawObjects current state within the draw system, 
+	* either Pending Registration, Currently Registered, Pending Deregistration, or Currently Deregistered. 
+	* 
+	* \see	DrawManager
+	*/
 	RegistrationState regState;
+
+	/*!
+	* \brief	This \c DrawObject 's registration command.
+	* 
+	* A command class for use with the \c SceneManager to allow for the \c DrawObject 
+	* to be registered to the draw list during the right point during a frame. 
+	* 
+	* \see	SceneManager
+	* \see	DrawManager
+	*/
 	DrawRegistrationCommand* pRegCmd;
+
+	/*!
+	* \brief	This \c DrawObject 's deregistration command.
+	*
+	* A command class for use with the \c SceneManager to allow for the \c DrawObject
+	* to be deregistered from the draw list during the right point during a frame. 
+	*
+	* \see	SceneManager
+	* \see	DrawManager
+	*/
 	DrawDeregistrationCommand* pDeregCmd;
+
+	/*!
+	* \brief	An iterator for this \c DrawObject 's position in the draw list. 
+	* 
+	* An iterator to the \c DrawManager::DrawList pointing to this \c DrawObject 's 
+	* position in the list upon registration for use when deleting this object from the draw list. 
+	* 
+	* \see DrawManager
+	*/
 	DrawManager::DrawListRef deleteRef;
 	//SceneGraphNode* pNode;
 };
