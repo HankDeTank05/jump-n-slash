@@ -1,6 +1,12 @@
 #ifndef PARAMS_DREAMCATCHERS_H
 #define PARAMS_DREAMCATCHERS_H
 
+// library includes
+#include <SFML/Window/Joystick.hpp>
+
+// engine includes
+#include "../Engine Code/ControllerInputs.h"
+
 // ghost dreamcatcher parameters
 namespace Ghost
 {
