@@ -16,6 +16,7 @@
 #include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Animation.h"
 #include "../Engine Code/SceneManager.h"
+#include "../Engine Code/Sprite.h"
 
 // game includes
 #include "AssetLoader.h"
@@ -44,6 +45,28 @@ void JumpSlashEngine::LoadResources()
 
 	AnimationManager::GetAnimation("player jump")->SetLoop(false);
 	AnimationManager::GetAnimation("player fall")->SetLoop(false);
+
+	// set connectors for player sprites
+
+	SpriteManager::GetSprite("player idle 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
+	SpriteManager::GetSprite("player idle 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
+	SpriteManager::GetSprite("player idle 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 18.f), 0.f);
+	SpriteManager::GetSprite("player idle 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 19.f), 0.f);
+
+	SpriteManager::GetSprite("player walk 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
+	SpriteManager::GetSprite("player walk 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
+	SpriteManager::GetSprite("player walk 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
+	SpriteManager::GetSprite("player walk 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
+
+	// TODO: add weapon hold points on player jumping sprites
+	
+	// TODO: add weapon hold points on player falling sprites
+
+	// TODO: add weapon hold points on player attack sprites
+
+	SpriteManager::GetSprite("sword idle 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+
+	// TODO: add hold point on sword swing sprites
 
 	// parse the json file for level tiles to add
 	// vvv for nlohman/json vvv

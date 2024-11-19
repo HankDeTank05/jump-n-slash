@@ -1,11 +1,13 @@
 #include "Actor.h"
 
+// engine includes
 #include "../Engine Code/Visualizer.h"
 #include "../Engine Code/AnimationComponent.h"
 #include "../Engine Code/AnimationSet.h"
 
+// game includes
 #include "Constants.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 #include "ParamsPlayer.h"
 #include "LevelTile.h"
 #include "LevelMap.h"
@@ -36,7 +38,7 @@ void Actor::Draw()
 {
 	assert(pCurrentRoom != nullptr); // TODO: this is bad and stupid but Henry told me to do it (bitch)
 
-	Render(*pSprite);
+	Render(pSprite);
 }
 
 sf::Vector2f Actor::GetPos() const
@@ -416,10 +418,15 @@ void Actor::ApplyGravity(float deltaTime)
 
 void Actor::SetWidth()
 {
-	width = abs(pSprite->getTextureRect().getSize().x * pSprite->getScale().x);
+	width = abs(pSprite->GetTextureRect().getSize().x * pSprite->GetScale().x);
 }
 
 void Actor::SetHeight()
 {
-	height = abs(pSprite->getTextureRect().getSize().y * pSprite->getScale().y);
+	height = abs(pSprite->GetTextureRect().getSize().y * pSprite->GetScale().y);
+}
+
+Sprite::Connector Actor::GetConnector(const std::string& name)
+{
+	return pSprite->GetConnector(name);
 }

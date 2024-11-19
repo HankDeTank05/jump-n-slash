@@ -4,7 +4,7 @@
 #include <iostream>
 
 // game includes
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 
 void PlayerActionStateSlashAtk::Enter(Player* pPlayer) const
 {

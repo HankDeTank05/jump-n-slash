@@ -4,7 +4,7 @@
 #include <iostream>
 
 // game includes
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 
 void PlayerActionStateDreamAtk::Enter(Player* pPlayer) const
 {

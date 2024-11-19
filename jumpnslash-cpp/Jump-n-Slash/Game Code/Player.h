@@ -5,9 +5,6 @@
 #include <map>
 #include <list>
 
-// library includes
-#include <SFML/Graphics.hpp>
-
 // engine includes
 #include "../Engine Code/UpdateObject.h"
 #include "../Engine Code/DrawObject.h"

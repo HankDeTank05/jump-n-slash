@@ -1,7 +1,9 @@
 #include "Player.h"
 
+// language includes
 #include <iostream>
 
+// engine includes
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Visualizer.h"
@@ -14,8 +16,9 @@
 #include "../Engine Code/ConvenienceFunctions.h"
 #include "../Engine Code/ControlManager.h"
 
+// game includes
 #include "Constants.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 #include "ParamsPlayer.h"
 #include "PlayerMoveState.h"
 #include "PlayerMoveFSM.h"
@@ -126,20 +129,21 @@ void Player::Update(float deltaTime)
 	SetWidth();
 	SetHeight();
 
+	// TODO: turn this code into a protected Actor function so you don't have to duplicate it
 	if (facing == 1)
 	{
-		pSprite->setOrigin(0.f, 0.f);
+		pSprite->SetOrigin(sf::Vector2f(0.f, 0.f));
 	}
 	else if (facing == -1)
 	{
-		pSprite->setOrigin(width, 0.f);
+		pSprite->SetOrigin(sf::Vector2f(width, 0.f));
 	}
 	else
 	{
 		assert(false);
 	}
-	pSprite->setScale(sf::Vector2f(static_cast<float>(facing), 1.f));
-	pSprite->setPosition(pos);
+	pSprite->SetScale(sf::Vector2f(static_cast<float>(facing), 1.f));
+	pSprite->SetPosition(pos);
 	UpdateCollisionData(pSprite);
 
 	// update the previous state for the next frame
@@ -188,6 +192,7 @@ void Player::Update(float deltaTime)
 	{
 		ControllerDebugger::DisplayDebugInfo();
 	}
+	if (DEBUG_CONNECTORS) pSprite->DebugConnectors();
 }
 
 void Player::Alarm0()

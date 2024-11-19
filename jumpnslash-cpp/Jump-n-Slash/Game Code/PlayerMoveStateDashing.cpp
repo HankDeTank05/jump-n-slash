@@ -4,7 +4,7 @@
 #include <iostream>
 
 // game includes
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 #include "PlayerAttorney.h"
 
 void PlayerMoveStateDashing::Enter(Player* pPlayer) const

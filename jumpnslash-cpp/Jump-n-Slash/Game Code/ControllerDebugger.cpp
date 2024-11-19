@@ -1,5 +1,9 @@
 #include "ControllerDebugger.h"
 
+// library includes
+#include <SFML/Window/Joystick.hpp>
+
+// engine includes
 #include "../Engine Code/Visualizer.h"
 
 ControllerDebugger* ControllerDebugger::pInstance = nullptr;

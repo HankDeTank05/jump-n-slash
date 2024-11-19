@@ -1,10 +1,10 @@
 #include "CollisionVolumeBSphere.h"
 
+// engine includes
 #include "Visualizer.h"
 #include "Math.h"
 #include "ConvenienceFunctions.h"
-
-#include "../Game Code/DebugFlags.h"
+#include "EngineDebugFlags.h"
 
 CollisionVolumeBSphere::CollisionVolumeBSphere(sf::Vector2f _center, float _radius)
 	: center(_center),

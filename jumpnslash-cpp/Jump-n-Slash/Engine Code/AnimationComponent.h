@@ -1,12 +1,12 @@
 #ifndef ANIMATION_COMPONENT_H
 #define ANIMATION_COMPONENT_H
 
-#include <SFML/Graphics/Sprite.hpp>
-
+// engine includes
 #include "Animation.h"
 
 // forward declarations
 class AnimationSet;
+class Sprite;
 
 class AnimationComponent
 {
@@ -18,8 +18,8 @@ public:
 
 	void DefineAnimationSet(AnimationSet* pAnimSet); // TODO: docs for AnimationComponent::DefineAnimationSet
 
-	void SetAnimation(std::string animName); // TODO: docs for AnimationComponent::SetAnimation
-	sf::Sprite* GetCurrentFrame(); // TODO: docs for AnimationComponent::GetCurrentFrame
+	void SetAnimation(const std::string& animName); // TODO: docs for AnimationComponent::SetAnimation
+	Sprite* GetCurrentFrame(); // TODO: docs for AnimationComponent::GetCurrentFrame
 
 private:
 	AnimationSet* pAnimSet;

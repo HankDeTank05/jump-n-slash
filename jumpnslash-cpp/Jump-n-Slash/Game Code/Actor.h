@@ -1,10 +1,12 @@
 #ifndef ACTOR_H
 #define ACTOR_H
 
+// engine includes
 #include "../Engine Code/AlarmObject.h"
 #include "../Engine Code/CollisionObject.h"
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/UpdateObject.h"
+#include "../Engine Code/Sprite.h"
 
 // Forward declarations
 class LevelMap;
@@ -22,6 +24,8 @@ public:
 
 	virtual void Update(float deltaTime) = 0;
 	virtual void Draw() override final;
+
+	Sprite::Connector GetConnector(const std::string& name);
 
 protected:
 	sf::Vector2f GetPos() const;
@@ -50,7 +54,7 @@ protected:
 	float height;
 	float speed;
 	AnimationComponent* pAnimComp;
-	sf::Sprite* pSprite;
+	Sprite* pSprite;
 	LevelMap* pLevel;
 	RoomData* pCurrentRoom;
 	bool grounded; // Flag to indicate if the actor is grounded

@@ -98,6 +98,8 @@
     <ClCompile Include="Engine Code\SceneManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\SceneResumeCommand.cpp" />
     <ClCompile Include="Engine Code\SceneSuspendCommand.cpp" />
+    <ClCompile Include="Engine Code\Sprite.cpp" />
+    <ClCompile Include="Engine Code\SpriteAttorney.cpp" />
     <ClCompile Include="Engine Code\SpriteManager.cpp" />
     <ClCompile Include="Engine Code\SpriteManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\Subject.cpp" />
@@ -208,6 +210,7 @@
     <ClInclude Include="Engine Code\CollisionVolumeBoundingBox.h" />
     <ClInclude Include="Engine Code\CollisionVolumeBSphere.h" />
     <ClInclude Include="Engine Code\Command.h" />
+    <ClInclude Include="Engine Code\EngineDebugFlags.h" />
     <ClInclude Include="Engine Code\EngineConstants.h" />
     <ClInclude Include="Engine Code\ControllerInputs.h" />
     <ClInclude Include="Engine Code\ControlManager.h" />
@@ -274,6 +277,8 @@
     <ClInclude Include="Engine Code\SceneManagerAttorney.h" />
     <ClInclude Include="Engine Code\SceneResumeCommand.h" />
     <ClInclude Include="Engine Code\SceneSuspendCommand.h" />
+    <ClInclude Include="Engine Code\Sprite.h" />
+    <ClInclude Include="Engine Code\SpriteAttorney.h" />
     <ClInclude Include="Engine Code\SpriteManager.h" />
     <ClInclude Include="Engine Code\SpriteManagerAttorney.h" />
     <ClInclude Include="Engine Code\Subject.h" />
@@ -313,7 +318,7 @@
     <ClInclude Include="Game Code\ControlScheme.h" />
     <ClInclude Include="Game Code\ControlSelection.h" />
     <ClInclude Include="Game Code\ControlSelector.h" />
-    <ClInclude Include="Game Code\DebugFlags.h" />
+    <ClInclude Include="Game Code\GameDebugFlags.h" />
     <ClInclude Include="Game Code\ControlMapping.h" />
     <ClInclude Include="Game Code\Dreamcatcher.h" />
     <ClInclude Include="Game Code\Enemy.h" />

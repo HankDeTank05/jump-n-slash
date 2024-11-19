@@ -1,9 +1,15 @@
 #ifndef SPRITE_MANAGER_H
 #define SPRITE_MANAGER_H
 
+// language includes
 #include <map>
 #include <string>
-#include <SFML/Graphics.hpp>
+
+// library includes
+#include <SFML/Graphics/Texture.hpp>
+
+// forward declarations
+class Sprite;
 
 class SpriteManager // this class is written as a singleton
 {
@@ -118,7 +124,7 @@ public: // api functions
 	* \see	GridManager
 	* \see	FontManager
 	*/
-	static sf::Sprite* GetSprite(std::string key); // TODO: docs for SpriteManager::GetSprite(key) needs example code
+	static Sprite* GetSprite(std::string key); // TODO: docs for SpriteManager::GetSprite(key) needs example code
 
 private: // engine-only api functions
 	friend class SpriteManagerAttorney;
@@ -129,10 +135,10 @@ private: // private api backend functions
 	void privLoadSprite(std::string key, sf::Texture* pTex, sf::IntRect spriteRect);
 	void privLoadSprite(std::string key, std::string texKey);
 	void privLoadSprite(std::string key, std::string texKey, sf::IntRect spriteRect);
-	sf::Sprite* privGetSprite(std::string key);
+	Sprite* privGetSprite(std::string key);
 
 private: // member variables
-	std::map<std::string, sf::Sprite*> sprites; /*!< The map containing every sprite loaded into the engine. */
+	std::map<std::string, Sprite*> sprites; /*!< The map containing every sprite loaded into the engine. */
 };
 
 #endif

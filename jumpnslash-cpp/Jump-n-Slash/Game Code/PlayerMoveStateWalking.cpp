@@ -10,7 +10,7 @@
 #include "Constants.h"
 #include "LevelMap.h"
 #include "LevelTile.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 
 void PlayerMoveStateWalking::Enter(Player* pPlayer) const
 {

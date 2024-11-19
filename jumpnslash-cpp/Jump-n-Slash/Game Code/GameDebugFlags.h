@@ -1,10 +1,7 @@
-#ifndef DEBUG_FLAGS_H
-#define DEBUG_FLAGS_H
+#ifndef GAME_DEBUG_FLAGS_H
+#define GAME_DEBUG_FLAGS_H
 
-// collision debug flags
-
-const bool DEBUG_COLLISION = false;
-const bool DEBUG_COLLISION_SHOW_NUMBERS = false;
+#include "../Engine Code/EngineDebugFlags.h"
 
 // input debug flags
 

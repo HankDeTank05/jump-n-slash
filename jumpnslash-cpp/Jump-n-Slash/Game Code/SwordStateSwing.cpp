@@ -1,8 +1,10 @@
 #include "SwordStateSwing.h"
 
+// language includes
 #include <iostream>
 
-#include "DebugFlags.h"
+// game includes
+#include "GameDebugFlags.h"
 
 void SwordStateSwing::Enter(Sword* pSword) const
 {

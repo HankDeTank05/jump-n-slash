@@ -2,7 +2,8 @@
 #define CONTROL_SELECTOR_H
 
 // library includes
-#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 // engine includes
 #include "../Engine Code/DrawObject.h"

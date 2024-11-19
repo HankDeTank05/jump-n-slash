@@ -1,11 +1,11 @@
 #include "CollisionTestSelfCommand.h"
 
+// engine includes
 #include "CollisionObjectGroup.h"
 #include "CollisionObject.h"
 #include "CollisionVolume.h"
 #include "Math.h"
-
-#include "../Game Code/DebugFlags.h"
+#include "EngineDebugFlags.h"
 
 CollisionTestSelfCommand::CollisionTestSelfCommand(CollisionObjectGroup* _pGroup,
 	CollisionDispatchBase* _pColDispatch, CollisionDispatchBase* _pNoColDispatch)

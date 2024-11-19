@@ -1,8 +1,10 @@
 #include "LevelTile.h"
 
+// engine includes
 #include "../Engine Code/JumpSlashEngine.h"
+#include "../Engine Code/Sprite.h"
 
-LevelTile::LevelTile(sf::Vector2f _pos, sf::Sprite* _pSprite, bool _solidOnTop, bool _solidOnSides, bool _solidOnBottom, bool _breakable)
+LevelTile::LevelTile(sf::Vector2f _pos, Sprite* _pSprite, bool _solidOnTop, bool _solidOnSides, bool _solidOnBottom, bool _breakable)
 	: pos(_pos),
 	pSprite(_pSprite),
 	solidOnTop(_solidOnTop),
@@ -20,8 +22,8 @@ LevelTile::~LevelTile()
 
 void LevelTile::Draw()
 {
-	pSprite->setPosition(pos);
-	Render(*pSprite);
+	pSprite->SetPosition(pos);
+	Render(pSprite);
 }
 
 bool LevelTile::IsSolidOnTop() const

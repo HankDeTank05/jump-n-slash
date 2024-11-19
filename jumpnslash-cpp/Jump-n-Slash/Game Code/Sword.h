@@ -9,6 +9,7 @@
 class Player;
 class SwordState;
 class AnimationComponent;
+class Sprite;
 
 class Sword : public UpdateObject, public DrawObject, public CollisionObject
 {
@@ -38,7 +39,7 @@ private:
 	sf::Vector2f pos;
 	const SwordState* pCurrentState;
 	const SwordState* pPrevState;
-	sf::Sprite* pSprite;
+	Sprite* pSprite;
 	AnimationComponent* pAnimComp;
 };
 

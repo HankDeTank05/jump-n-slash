@@ -8,6 +8,8 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/System/String.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 // engine includes
 #include "DrawObject.h"

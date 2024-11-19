@@ -16,7 +16,7 @@
 // game includes
 #include "Constants.h"
 #include "ParamsPlayer.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 
 const std::string AssetLoader::COMMAND_TEXTURE = "texture";
 const std::string AssetLoader::COMMAND_SPRITE = "sprite";

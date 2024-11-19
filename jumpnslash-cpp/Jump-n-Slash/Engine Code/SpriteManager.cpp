@@ -1,13 +1,17 @@
 #include "SpriteManager.h"
 
+// language includes
 #include <cassert>
+
+// engine includes
 #include "TextureManager.h"
+#include "Sprite.h"
 
 SpriteManager* SpriteManager::pInstance = nullptr;
 
 SpriteManager::~SpriteManager()
 {
-	for (std::map<std::string, sf::Sprite*>::iterator it = sprites.begin(); it != sprites.end(); it++)
+	for (std::map<std::string, Sprite*>::iterator it = sprites.begin(); it != sprites.end(); it++)
 	{
 		delete it->second;
 	}
@@ -42,7 +46,7 @@ void SpriteManager::LoadSprite(std::string key, std::string texKey, sf::IntRect 
 	Instance().privLoadSprite(key, texKey, spriteRect);
 }
 
-sf::Sprite* SpriteManager::GetSprite(std::string key)
+Sprite* SpriteManager::GetSprite(std::string key)
 {
 	return Instance().privGetSprite(key);
 }
@@ -59,8 +63,8 @@ void SpriteManager::privLoadSprite(std::string key, sf::Texture* pTex)
 	assert(sprites.count(key) == 0); // Invalid Key: sprite key already exists!
 	assert(pTex != nullptr);
 	
-	sf::Sprite* pSpr = new sf::Sprite();
-	pSpr->setTexture(*pTex);
+	Sprite* pSpr = new Sprite();
+	pSpr->SetTexture(*pTex);
 
 	sprites.emplace(key, pSpr);
 }
@@ -71,9 +75,9 @@ void SpriteManager::privLoadSprite(std::string key, sf::Texture* pTex, sf::IntRe
 	assert(sprites.count(key) == 0); // Invalid Key: sprite key already exists!
 	assert(pTex != nullptr);
 
-	sf::Sprite* pSpr = new sf::Sprite();
-	pSpr->setTexture(*pTex);
-	pSpr->setTextureRect(spriteRect);
+	Sprite* pSpr = new Sprite();
+	pSpr->SetTexture(*pTex);
+	pSpr->SetTextureRect(spriteRect);
 
 	sprites.emplace(key, pSpr);
 }
@@ -83,8 +87,8 @@ void SpriteManager::privLoadSprite(std::string key, std::string texKey)
 
 	assert(sprites.count(key) == 0); // Invalid Key: sprite key already exists!
 
-	sf::Sprite* pSpr = new sf::Sprite();
-	pSpr->setTexture(*TextureManager::GetTexture(texKey));
+	Sprite* pSpr = new Sprite();
+	pSpr->SetTexture(*TextureManager::GetTexture(texKey));
 
 	sprites.emplace(key, pSpr);
 }
@@ -94,14 +98,14 @@ void SpriteManager::privLoadSprite(std::string key, std::string texKey, sf::IntR
 
 	assert(sprites.count(key) == 0); // Invalid Key: sprite key already exists!
 
-	sf::Sprite* pSpr = new sf::Sprite();
-	pSpr->setTexture(*TextureManager::GetTexture(texKey));
-	pSpr->setTextureRect(spriteRect);
+	Sprite* pSpr = new Sprite();
+	pSpr->SetTexture(*TextureManager::GetTexture(texKey));
+	pSpr->SetTextureRect(spriteRect);
 
 	sprites.emplace(key, pSpr);
 }
 
-sf::Sprite* SpriteManager::privGetSprite(std::string key)
+Sprite* SpriteManager::privGetSprite(std::string key)
 {
 	assert(sprites.count(key) > 0); // Invalid Key: sprite key not found!
 

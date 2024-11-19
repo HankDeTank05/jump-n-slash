@@ -6,7 +6,7 @@
 // game includes
 #include "PlayerMoveFSM.h"
 #include "PlayerAttorney.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 
 void PlayerMoveStateFalling::Enter(Player* pPlayer) const
 {

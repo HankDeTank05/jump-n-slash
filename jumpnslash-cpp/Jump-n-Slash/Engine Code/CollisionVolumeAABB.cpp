@@ -1,10 +1,10 @@
 #include "CollisionVolumeAABB.h"
 
+// engine includes
 #include "Math.h"
 #include "Visualizer.h"
 #include "ConvenienceFunctions.h"
-
-#include "../Game Code/DebugFlags.h"
+#include "EngineDebugFlags.h"
 
 CollisionVolumeAABB::CollisionVolumeAABB(const sf::Vector2f& min, const sf::Vector2f& max)
 	: CollisionVolumeBoundingBox(sf::Transform(), min, max)

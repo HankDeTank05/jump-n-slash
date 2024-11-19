@@ -8,6 +8,7 @@
 
 // library includes
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Text.hpp>
 
 // engine includes
 #include "DrawObject.h"

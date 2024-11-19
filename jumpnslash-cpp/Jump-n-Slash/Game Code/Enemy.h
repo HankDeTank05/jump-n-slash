@@ -1,8 +1,10 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+// library includes
 #include <SFML/System/Vector2.hpp>
 
+// engine includes
 #include "../Engine Code/UpdateObject.h"
 #include "../Engine Code/DrawObject.h"
 #include "../Engine Code/CollisionObject.h"
@@ -11,9 +13,7 @@
 // forward declarations
 class Player;
 
-class Enemy : public UpdateObject,
-	public DrawObject,
-	public CollisionObject
+class Enemy : public UpdateObject, public DrawObject, public CollisionObject
 {
 public:
 	Enemy();
@@ -35,7 +35,7 @@ public:
 private:
 	sf::Vector2f pos;
 	sf::Vector2f posDelta;
-	sf::Sprite* pSprite;
+	Sprite* pSprite;
 	AnimationComponent animComp;
 };
 

@@ -1,10 +1,13 @@
 #include "Enemy.h"
 
+// engine includes
 #include "../Engine Code/AnimationSet.h"
 #include "../Engine Code/AnimationManager.h"
+#include "../Engine Code/Sprite.h"
 
+// game includes
 #include "Constants.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 
 Enemy::Enemy()
 	: pos(10 * TILE_SIZE_F, 18 * TILE_SIZE_F),
@@ -36,14 +39,15 @@ Enemy::~Enemy()
 void Enemy::Update(float deltaTime)
 {
 	pSprite = animComp.GetCurrentFrame();
-	pSprite->setPosition(pos);
+	pSprite->SetPosition(pos);
 	UpdateCollisionData(pSprite);
+	if (DEBUG_CONNECTORS) pSprite->DebugConnectors();
 }
 
 void Enemy::Draw()
 {
 	assert(pSprite != nullptr);
-	Render(*pSprite);
+	Render(pSprite);
 }
 
 void Enemy::OnCollisionEnter(CollisionObject* pOther)

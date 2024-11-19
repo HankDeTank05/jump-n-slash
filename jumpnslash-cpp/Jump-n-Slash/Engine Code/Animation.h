@@ -1,9 +1,11 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+// language includes
 #include <list>
 
-#include <SFML/Graphics/Sprite.hpp>
+// forward declarations
+class Sprite;
 
 class Animation
 {
@@ -14,14 +16,14 @@ public:
 	Animation& operator=(const Animation& a) = delete;
 	virtual ~Animation();
 
-	using FrameList = std::list<sf::Sprite*>;
+	using FrameList = std::list<Sprite*>;
 	using Iterator = FrameList::iterator;
 
 	Iterator GetFirstFrame(); // TODO: docs for Animation::GetFirstFrame
 	Iterator GetNextFrame(Iterator it); // TODO: docs for Animation::GetNextFrame
 	bool IsLastFrame(Iterator it); // TODO: docs for Animation::IsLastFrame
 
-	void AddFrame(sf::Sprite* pNextFrame); // TODO: docs for Animation::AddFrame
+	void AddFrame(Sprite* pNextFrame); // TODO: docs for Animation::AddFrame
 
 	void SetLoop(bool newLoop); // TODO: docs for Animation::SetLoop
 	bool IsLooping(); // TODO: docs for Animation::IsLooping

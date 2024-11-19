@@ -1,11 +1,11 @@
 #include "CollisionTestPairCommand.h"
 
+// engine includes
 #include "CollisionObjectGroup.h"
 #include "CollisionObject.h"
 #include "CollisionVolume.h"
 #include "Math.h"
-
-#include "../Game Code/DebugFlags.h"
+#include "EngineDebugFlags.h"
 
 CollisionTestPairCommand::CollisionTestPairCommand(CollisionObjectGroup* _pGroup1, CollisionObjectGroup* _pGroup2,
 	CollisionDispatchBase* _pColDispatch, CollisionDispatchBase* _pNoColDispatch)

@@ -1,8 +1,10 @@
 #include "LevelMap.h"
 
+// language includes
 #include <string>
 #include <vector>
 
+// engine includes
 #include "../Engine Code/JumpSlashEngine.h"
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/Visualizer.h"
@@ -10,12 +12,13 @@
 #include "../Engine Code/Camera.h"
 #include "../Engine Code/ConvenienceFunctions.h"
 
+// game includes
 #include "BlockBreakable.h"
 #include "BlockHazard.h"
 #include "BlockSolid.h"
 #include "PlatformSemisolid.h"
 #include "Constants.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 #include "RoomData.h"
 #include "PlayerAttorney.h"
 

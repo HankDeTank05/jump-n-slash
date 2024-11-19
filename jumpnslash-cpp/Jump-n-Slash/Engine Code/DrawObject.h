@@ -1,15 +1,19 @@
 #ifndef DRAW_OBJECT_H
 #define DRAW_OBJECT_H
 
-#include <SFML/Graphics.hpp>
+// library includes
+#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Transform.hpp>
+#include <SFML/Graphics/Vertex.hpp>
 
+// engine includes
 #include "RegistrationState.h"
 #include "DrawManager.h"
 
 // forward declarations
 class DrawRegistrationCommand;
 class DrawDeregistrationCommand;
-//class SceneGraphNode;
+class Sprite;
 
 class DrawObject
 {
@@ -122,7 +126,8 @@ protected:
 	* \see CollisionObject
 	*/
 	void Render(sf::Drawable& drawable);
-
+	// TODO: docs for DrawObject::Render(sprite)
+	void Render(Sprite* pSprite);
 	/*!
 	* \brief	Render a SFML drawable with a transform.
 	* 
@@ -151,7 +156,6 @@ protected:
 	* \see CollisionObject
 	*/
 	void Render(const sf::Drawable& drawable, const sf::Transform& tform);
-
 	/*!
 	* \brief	Render a primitive by passing in a vertex array.
 	*
@@ -201,7 +205,6 @@ protected:
 	* \see CollisionObject
 	*/
 	void RequestDrawRegistration();
-
 	/*!
 	* \brief	Request that the engine stop drawing this object.
 	*
@@ -237,7 +240,6 @@ private:
 	//void DrawChildren();
 
 private:
-
 	/*!
 	* \brief	This \c DrawObject 's currrent state in the draw system.
 	* 
@@ -247,7 +249,6 @@ private:
 	* \see	DrawManager
 	*/
 	RegistrationState regState;
-
 	/*!
 	* \brief	This \c DrawObject 's registration command.
 	* 
@@ -258,7 +259,6 @@ private:
 	* \see	DrawManager
 	*/
 	DrawRegistrationCommand* pRegCmd;
-
 	/*!
 	* \brief	This \c DrawObject 's deregistration command.
 	*
@@ -269,7 +269,6 @@ private:
 	* \see	DrawManager
 	*/
 	DrawDeregistrationCommand* pDeregCmd;
-
 	/*!
 	* \brief	An iterator for this \c DrawObject 's position in the draw list. 
 	* 

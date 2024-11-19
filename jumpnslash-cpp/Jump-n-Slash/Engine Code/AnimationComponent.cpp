@@ -27,7 +27,7 @@ void AnimationComponent::DefineAnimationSet(AnimationSet* _pAnimSet)
 	pAnimSet = _pAnimSet;
 }
 
-void AnimationComponent::SetAnimation(std::string animName)
+void AnimationComponent::SetAnimation(const std::string& animName)
 {
 	assert(pAnimSet != nullptr);
 
@@ -36,7 +36,7 @@ void AnimationComponent::SetAnimation(std::string animName)
 	animTimer = 0.f;
 }
 
-sf::Sprite* AnimationComponent::GetCurrentFrame()
+Sprite* AnimationComponent::GetCurrentFrame()
 {
 	assert(pAnimSet != nullptr);
 

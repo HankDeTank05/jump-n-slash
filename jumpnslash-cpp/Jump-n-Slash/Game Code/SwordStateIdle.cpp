@@ -1,8 +1,10 @@
 #include "SwordStateIdle.h"
 
+// language includes
 #include <iostream>
 
-#include "DebugFlags.h"
+// game includes
+#include "GameDebugFlags.h"
 #include "SwordFSM.h"
 
 SwordStateIdle::SwordStateIdle(const SwordStateIdle& ssi)
