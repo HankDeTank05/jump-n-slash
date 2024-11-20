@@ -12,7 +12,6 @@
 #include "../Engine Code/Camera.h"
 #include "../Engine Code/AnimationSet.h"
 #include "../Engine Code/Animation.h"
-#include "../Engine Code/Math.h"
 #include "../Engine Code/ConvenienceFunctions.h"
 #include "../Engine Code/ControlManager.h"
 
@@ -129,20 +128,7 @@ void Player::Update(float deltaTime)
 	SetWidth();
 	SetHeight();
 
-	// TODO: turn this code into a protected Actor function so you don't have to duplicate it
-	if (facing == 1)
-	{
-		pSprite->SetOrigin(sf::Vector2f(0.f, 0.f));
-	}
-	else if (facing == -1)
-	{
-		pSprite->SetOrigin(sf::Vector2f(width, 0.f));
-	}
-	else
-	{
-		assert(false);
-	}
-	pSprite->SetScale(sf::Vector2f(static_cast<float>(facing), 1.f));
+	FaceSprite();
 	pSprite->SetPosition(pos);
 	UpdateCollisionData(pSprite);
 
@@ -199,48 +185,6 @@ void Player::Alarm0()
 {
 	applyGravity = true;
 }
-
-//void Player::KeyPressed(sf::Keyboard::Key key)
-//{
-//	switch (key)
-//	{
-//	case WALK_LEFT:
-//		//inputReceivedWalkLeft = true;
-//		inputWalkDir -= 1.f;
-//		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
-//		facing = -1;
-//		break;
-//	case WALK_RIGHT:
-//		//inputReceivedWalkRight = true;
-//		inputWalkDir += 1.f;
-//		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
-//		facing = 1;
-//		break;
-//	case JUMP:
-//		inputReceivedJump = true;
-//		break;
-//	}
-//}
-//
-//void Player::KeyReleased(sf::Keyboard::Key key)
-//{
-//	switch (key)
-//	{
-//	case WALK_LEFT:
-//		//inputReceivedWalkLeft = false;
-//		inputWalkDir += 1.f;
-//		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
-//		break;
-//	case WALK_RIGHT:
-//		//inputReceivedWalkRight = false;
-//		inputWalkDir -= 1.f;
-//		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
-//		break;
-//	case JUMP:
-//		inputReceivedJump = false;
-//		break;
-//	}
-//}
 
 bool Player::IsApplyGravity()
 {

@@ -58,15 +58,27 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::GetSprite("player walk 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
 	SpriteManager::GetSprite("player walk 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
 
-	// TODO: add weapon hold points on player jumping sprites
+	SpriteManager::GetSprite("player jump 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
+	SpriteManager::GetSprite("player jump 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
+	SpriteManager::GetSprite("player jump 3")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
+	SpriteManager::GetSprite("player jump 4")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
 	
-	// TODO: add weapon hold points on player falling sprites
+	SpriteManager::GetSprite("player fall 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
+	SpriteManager::GetSprite("player fall 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
+	SpriteManager::GetSprite("player fall 3")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
+	SpriteManager::GetSprite("player fall 4")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
 
-	// TODO: add weapon hold points on player attack sprites
+	SpriteManager::GetSprite("player attack 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
+	SpriteManager::GetSprite("player attack 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
+	SpriteManager::GetSprite("player attack 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
+	SpriteManager::GetSprite("player attack 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
 
 	SpriteManager::GetSprite("sword idle 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
 
-	// TODO: add hold point on sword swing sprites
+	SpriteManager::GetSprite("sword swing 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+	SpriteManager::GetSprite("sword swing 2")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+	SpriteManager::GetSprite("sword swing 3")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+	SpriteManager::GetSprite("sword swing 4")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
 
 	// parse the json file for level tiles to add
 	// vvv for nlohman/json vvv

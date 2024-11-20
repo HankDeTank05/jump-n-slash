@@ -76,8 +76,9 @@ bool Actor::IsHeadBonked() const
 	return headBonked;
 }
 
-float Actor::GetFacing() const
+int Actor::GetFacing() const
 {
+	assert(facing == 1 || facing == -1);
 	return facing;
 }
 
@@ -424,6 +425,23 @@ void Actor::SetWidth()
 void Actor::SetHeight()
 {
 	height = abs(pSprite->GetTextureRect().getSize().y * pSprite->GetScale().y);
+}
+
+void Actor::FaceSprite()
+{
+	if (facing == 1)
+	{
+		pSprite->SetOrigin(sf::Vector2f(0.f, 0.f));
+	}
+	else if (facing == -1)
+	{
+		pSprite->SetOrigin(sf::Vector2f(width, 0.f));
+	}
+	else
+	{
+		assert(false);
+	}
+	pSprite->SetScale(sf::Vector2f(static_cast<float>(facing), 1.f));
 }
 
 Sprite::Connector Actor::GetConnector(const std::string& name)

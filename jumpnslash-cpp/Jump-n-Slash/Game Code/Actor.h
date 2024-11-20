@@ -35,7 +35,7 @@ protected:
 	float GetHeight() const;
 	bool IsGrounded() const;
 	bool IsHeadBonked() const;
-	float GetFacing() const;
+	int GetFacing() const;
 
 	void RaycastRight();
 	void RaycastLeft();
@@ -46,6 +46,7 @@ protected:
 	void ApplyGravity(float deltaTime);
 	void SetWidth();
 	void SetHeight();
+	void FaceSprite();
 
 protected:
 	sf::Vector2f pos;
