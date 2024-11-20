@@ -23,9 +23,20 @@ public:
 
 	void MarkForDestroy();
 
+	virtual void Update(float deltaTime) = 0;
 	virtual void Draw() override final;
 
 protected:
+	sf::Vector2f GetPos() const;
+	sf::Vector2f GetPosDelta() const;
+	float GetWidth() const;
+	float GetHeight() const;
+
+	void UpdateSprite();
+	void SetWidth();
+	void SetHeight();
+	void SetPosition(const sf::Vector2f& newPos);
+
 	void RequestSceneEntry();
 	void RequestSceneExit();
 
@@ -36,11 +47,13 @@ private:
 	void EnterScene();
 	void ExitScene();
 
-private:
+private: // engine-only member variables
 	RegistrationState regState;
 	GameObjectRegistrationCommand* pRegCmd;
 	GameObjectDeregistrationCommand* pDeregCmd;
+protected: // member variables
 	sf::Vector2f pos;
+	sf::Vector2f posDelta;
 	float width;
 	float height;
 	Sprite* pSprite;

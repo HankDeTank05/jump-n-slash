@@ -24,7 +24,7 @@ class PlayerControlStrategy;
 class LevelMap;
 class RoomData;
 
-class Player : public Actor, /*public InputObject,*/ public Subject
+class Player : public Actor, public Subject
 {
 public:
 	Player() = delete;
@@ -43,6 +43,10 @@ public:
 	virtual void OnCollisionEnter(CollisionObject* pOther) override;
 	virtual void OnCollisionDuring(CollisionObject* pOther) override;
 	virtual void OnCollisionExit(CollisionObject* pOther) override;
+
+	// gameobject stuff
+	virtual void OnSceneEntry() override;
+	virtual void OnSceneExit() override;
 
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;

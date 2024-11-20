@@ -15,8 +15,6 @@ public:
 	virtual void Enter(Player* pPlayer) const = 0;
 	virtual void Update(Player* pPlayer, float deltaTime) const = 0;
 	virtual const PlayerMoveState* GetNextState(Player* pPlayer) const = 0;
-
-private:
 };
 
 #endif

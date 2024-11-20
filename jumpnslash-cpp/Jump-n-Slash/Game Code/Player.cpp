@@ -35,46 +35,13 @@ Player::Player(LevelMap* pLevel)
 	pCurrentState(&PlayerMoveFSM::idle),
 	pPrevState(nullptr),
 	respawnPoint(),
-	//inputReceivedWalkLeft(false),
-	//inputReceivedWalkRight(false),
 	inputWalkDir(0.f),
 	inputReceivedJump(false),
 	applyGravity(true)
 {	
 	assert(pCurrentState != nullptr);
 
-	SetControls(ControlManager::GetControlScheme());
-
-	// connect to map
-	pLevel->LinkToPlayer(this);
-
-	// do animation stuff
-	AnimationSet* pAnimSet = new AnimationSet();
-	
-	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("player idle"));
-	pAnimSet->AddAnimation("walk", AnimationManager::GetAnimation("player walk"));
-	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
-	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
-	
-
-	pAnimComp->DefineAnimationSet(pAnimSet);
-	pAnimComp->SetAnimation("idle");
-
-	pSprite = pAnimComp->GetCurrentFrame();
-	SetWidth();
-	SetHeight();
-
-	// register with the engine
-	RequestUpdateRegistration();
-	RequestDrawRegistration();
-	//RequestKeyRegistration(JUMP, KeyEvent::KeyPress);
-	//RequestKeyRegistration(JUMP, KeyEvent::KeyRelease);
-	//RequestKeyRegistration(WALK_LEFT, KeyEvent::KeyPress);
-	//RequestKeyRegistration(WALK_LEFT, KeyEvent::KeyRelease);
-	//RequestKeyRegistration(WALK_RIGHT, KeyEvent::KeyPress);
-	//RequestKeyRegistration(WALK_RIGHT, KeyEvent::KeyRelease);
-
-	SetCollisionSprite(pSprite, VolumeType::BSphere);
+	RequestSceneEntry();
 }
 
 Player::~Player()
@@ -123,10 +90,7 @@ void Player::Update(float deltaTime)
 	}
 
 	// update the sprite
-	assert(pSprite != nullptr);
-	pSprite = pAnimComp->GetCurrentFrame();
-	SetWidth();
-	SetHeight();
+	UpdateSprite();
 
 	FaceSprite();
 	pSprite->SetPosition(pos);
@@ -204,6 +168,37 @@ void Player::OnCollisionDuring(CollisionObject* pOther)
 void Player::OnCollisionExit(CollisionObject* pOther)
 {
 	if (DEBUG_COLLISION) std::cout << "Player has exited collision" << std::endl;
+}
+
+void Player::OnSceneEntry()
+{
+	SetControls(ControlManager::GetControlScheme());
+
+	// connect to map
+	pLevel->LinkToPlayer(this);
+
+	// do animation stuff
+	AnimationSet* pAnimSet = new AnimationSet();
+
+	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("player idle"));
+	pAnimSet->AddAnimation("walk", AnimationManager::GetAnimation("player walk"));
+	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
+	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
+	pAnimSet->AddAnimation("attack", AnimationManager::GetAnimation("player attack"));
+
+	pAnimComp->DefineAnimationSet(pAnimSet);
+	pAnimComp->SetAnimation("idle");
+
+	pSprite = pAnimComp->GetCurrentFrame();
+	SetWidth();
+	SetHeight();
+
+	SetCollisionSprite(pSprite, VolumeType::BSphere);
+}
+
+void Player::OnSceneExit()
+{
+	assert(false);
 }
 
 void Player::ProcessInputs(float deltaTime)

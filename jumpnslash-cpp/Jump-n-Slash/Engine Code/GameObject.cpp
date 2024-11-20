@@ -6,14 +6,16 @@
 #include "GameObjectRegistrationCommand.h"
 #include "GameObjectDeregistrationCommand.h"
 #include "AnimationComponent.h"
+#include "Sprite.h"
 
 GameObject::GameObject()
 	: regState(RegistrationState::CURRENTLY_DEREGISTERED),
 	pRegCmd(new GameObjectRegistrationCommand(this)),
 	pDeregCmd(new GameObjectDeregistrationCommand(this)),
 	pos(),
-	width(),
-	height(),
+	posDelta(0.f, 0.f),
+	width(0.f),
+	height(0.f),
 	pSprite(nullptr),
 	pAnimComp(new AnimationComponent())
 {
@@ -34,6 +36,49 @@ void GameObject::MarkForDestroy()
 void GameObject::Draw()
 {
 	Render(pSprite);
+}
+
+sf::Vector2f GameObject::GetPos() const
+{
+	return pos;
+}
+
+sf::Vector2f GameObject::GetPosDelta() const
+{
+	return posDelta;
+}
+
+float GameObject::GetWidth() const
+{
+	return width;
+}
+
+float GameObject::GetHeight() const
+{
+	return height;
+}
+
+void GameObject::UpdateSprite()
+{
+	assert(pSprite != nullptr);
+	pSprite = pAnimComp->GetCurrentFrame();
+	SetWidth();
+	SetHeight();
+}
+
+void GameObject::SetWidth()
+{
+	width = abs(pSprite->GetTextureRect().getSize().x * pSprite->GetScale().x);
+}
+
+void GameObject::SetHeight()
+{
+	height = abs(pSprite->GetTextureRect().getSize().y * pSprite->GetScale().y);
+}
+
+void GameObject::SetPosition(const sf::Vector2f& newPos)
+{
+	pos = newPos;
 }
 
 void GameObject::RequestSceneEntry()
