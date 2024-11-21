@@ -3,7 +3,7 @@
 
 // sprite flags
 
-const bool DEBUG_CONNECTORS = false; // visualize connector points, directions and names
+const bool DEBUG_CONNECTORS = true; // visualize connector points, directions and names
 
 // collision debug flags
 
