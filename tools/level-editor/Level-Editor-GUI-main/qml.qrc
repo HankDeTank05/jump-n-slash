@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- Root Level QML Files -->
+        <file>MainEntry.qml</file>
+
+
+        <!-- texture Files -->
+        <file>assets/block_hazard_32.png</file>
+        <file>assets/block_solid_32.png</file>
+        <file>assets/block_breakable_32.png</file>
+        <file>assets/indicator_room_height_32.png</file>
+        <file>assets/indicator_room_origin_32.png</file>
+        <file>assets/indicator_room_origin_start_32.png</file>
+        <file>assets/indicator_room_width_32.png</file>
+        <file>assets/indicator_spawn_enemy_left_32.png</file>
+        <file>assets/indicator_spawn_enemy_right_32.png</file>
+        <file>assets/indicator_spawn_player_left_32.png</file>
+        <file>assets/indicator_spawn_player_right_32.png</file>
+        <file>assets/platform_semisolid_32.png</file>
+
+        <!-- GUIPrototypeContent QML Files -->
+        <file>GUIPrototypeContent/App.qml</file>
+        <file>GUIPrototypeContent/Screen01.qml</file>
+
+        <!-- GUIPrototype QML Files -->
+        <file>GUIPrototype/GUIPrototype/Constants.qml</file>
+        <file>GUIPrototype/GUIPrototype/DirectoryFontLoader.qml</file>
+        <file>GUIPrototype/GUIPrototype/EventListModel.qml</file>
+        <file>GUIPrototype/GUIPrototype/EventListSimulator.qml</file>
+    </qresource>
+</RCC>
