@@ -15,11 +15,8 @@ Enemy::Enemy()
 	pSprite(nullptr),
 	animComp()
 {
-	AnimationSet* pAnimSet = new AnimationSet();
+	animComp.DefineAnimation("idle", AnimationManager::GetAnimation("enemy idle"));
 
-	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("enemy idle"));
-
-	animComp.DefineAnimationSet(pAnimSet);
 	animComp.SetAnimation("idle");
 
 	RequestUpdateRegistration();

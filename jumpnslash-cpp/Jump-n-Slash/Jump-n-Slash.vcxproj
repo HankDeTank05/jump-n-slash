@@ -43,6 +43,7 @@
     <ClCompile Include="Engine Code\CollisionVolumeAABB.cpp" />
     <ClCompile Include="Engine Code\CollisionVolumeBoundingBox.cpp" />
     <ClCompile Include="Engine Code\CollisionVolumeBSphere.cpp" />
+    <ClCompile Include="Engine Code\CompoundSprite.cpp" />
     <ClCompile Include="Engine Code\ControlManager.cpp" />
     <ClCompile Include="Engine Code\ControlManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\ConvenienceFunctions.cpp" />
@@ -89,6 +90,8 @@
     <ClCompile Include="Engine Code\MouseCursorDeregistrationCommand.cpp" />
     <ClCompile Include="Engine Code\MouseCursorListener.cpp" />
     <ClCompile Include="Engine Code\MouseCursorRegistrationCommand.cpp" />
+    <ClCompile Include="Engine Code\MultiSprite.cpp" />
+    <ClCompile Include="Engine Code\SpriteTreeNode.cpp" />
     <ClCompile Include="Engine Code\QuitGameCommand.cpp" />
     <ClCompile Include="Engine Code\RegistrationBroker.cpp" />
     <ClCompile Include="Engine Code\Scene.cpp" />
@@ -137,6 +140,8 @@
     <ClCompile Include="Game Code\BlockHazard.cpp" />
     <ClCompile Include="Game Code\BlockSolid.cpp" />
     <ClCompile Include="Game Code\ChangeControlsMenu.cpp" />
+    <ClCompile Include="Game Code\CompoundSpriteScene.cpp" />
+    <ClCompile Include="Game Code\CompSprTest.cpp" />
     <ClCompile Include="Game Code\ControllerDebugger.cpp" />
     <ClCompile Include="Game Code\ControllerDebuggerAttorney.cpp" />
     <ClCompile Include="Game Code\ControlSelection.cpp" />
@@ -212,6 +217,7 @@
     <ClInclude Include="Engine Code\CollisionVolumeBoundingBox.h" />
     <ClInclude Include="Engine Code\CollisionVolumeBSphere.h" />
     <ClInclude Include="Engine Code\Command.h" />
+    <ClInclude Include="Engine Code\CompoundSprite.h" />
     <ClInclude Include="Engine Code\EngineDebugFlags.h" />
     <ClInclude Include="Engine Code\EngineConstants.h" />
     <ClInclude Include="Engine Code\ControllerInputs.h" />
@@ -266,6 +272,8 @@
     <ClInclude Include="Engine Code\MouseCursorDeregistrationCommand.h" />
     <ClInclude Include="Engine Code\MouseCursorListener.h" />
     <ClInclude Include="Engine Code\MouseCursorRegistrationCommand.h" />
+    <ClInclude Include="Engine Code\MultiSprite.h" />
+    <ClInclude Include="Engine Code\SpriteTreeNode.h" />
     <ClInclude Include="Engine Code\NoCollisionDispatch.h" />
     <ClInclude Include="Engine Code\QuitGameCommand.h" />
     <ClInclude Include="Engine Code\SceneGraphNode.h" />
@@ -292,6 +300,7 @@
     <ClInclude Include="Engine Code\TextureManagerAttorney.h" />
     <ClInclude Include="Engine Code\TimeManager.h" />
     <ClInclude Include="Engine Code\TimeManagerAttorney.h" />
+    <ClInclude Include="Engine Code\TreeTraversal.h" />
     <ClInclude Include="Engine Code\UpdateObject.h" />
     <ClInclude Include="Engine Code\UpdateObjectAttorney.h" />
     <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h" />
@@ -318,6 +327,8 @@
     <ClInclude Include="Game Code\BlockHazard.h" />
     <ClInclude Include="Game Code\BlockSolid.h" />
     <ClInclude Include="Game Code\ChangeControlsMenu.h" />
+    <ClInclude Include="Game Code\CompoundSpriteScene.h" />
+    <ClInclude Include="Game Code\CompSprTest.h" />
     <ClInclude Include="Game Code\Constants.h" />
     <ClInclude Include="Game Code\ControllerDebugger.h" />
     <ClInclude Include="Game Code\ControllerDebuggerAttorney.h" />

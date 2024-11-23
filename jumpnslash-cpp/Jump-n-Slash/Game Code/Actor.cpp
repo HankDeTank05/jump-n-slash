@@ -396,7 +396,7 @@ void Actor::FaceSprite()
 	pSprite->SetScale(sf::Vector2f(static_cast<float>(facing), 1.f));
 }
 
-Sprite::Connector Actor::GetConnector(const std::string& name)
+sf::Vector2f Actor::GetConnector(const std::string& name)
 {
 	return pSprite->GetConnector(name);
 }

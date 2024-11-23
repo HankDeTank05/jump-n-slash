@@ -178,15 +178,12 @@ void Player::OnSceneEntry()
 	pLevel->LinkToPlayer(this);
 
 	// do animation stuff
-	AnimationSet* pAnimSet = new AnimationSet();
+	pAnimComp->DefineAnimation("idle", AnimationManager::GetAnimation("player idle"));
+	pAnimComp->DefineAnimation("walk", AnimationManager::GetAnimation("player walk"));
+	pAnimComp->DefineAnimation("jump", AnimationManager::GetAnimation("player jump"));
+	pAnimComp->DefineAnimation("fall", AnimationManager::GetAnimation("player fall"));
+	pAnimComp->DefineAnimation("attack", AnimationManager::GetAnimation("player attack"));
 
-	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("player idle"));
-	pAnimSet->AddAnimation("walk", AnimationManager::GetAnimation("player walk"));
-	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
-	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
-	pAnimSet->AddAnimation("attack", AnimationManager::GetAnimation("player attack"));
-
-	pAnimComp->DefineAnimationSet(pAnimSet);
 	pAnimComp->SetAnimation("idle");
 
 	pSprite = pAnimComp->GetCurrentFrame();

@@ -21,7 +21,7 @@ public:
 
 	virtual void Update(float deltaTime) = 0;
 
-	Sprite::Connector GetConnector(const std::string& name);
+	sf::Vector2f GetConnector(const std::string& name);
 
 protected:
 	LevelMap* GetLevel() const;

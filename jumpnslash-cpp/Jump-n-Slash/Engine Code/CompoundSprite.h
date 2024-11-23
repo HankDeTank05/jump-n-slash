@@ -8,6 +8,7 @@
 
 // forward declarations
 class Sprite;
+class Animation;
 class AnimationComponent;
 class AnimationSet;
 
@@ -22,7 +23,9 @@ public:
 	void AddSubsprite(const std::string& subsprName, const std::string& reqdConnName);
 	void AddRequiredConnector(const std::string& subsprName, const std::string& connName);
 
-	void DefineAnimationSet(const std::string& subsprName, const std::string& animName, Animation* pAnim);
+	void DefineAnimation(const std::string& subsprName, const std::string& animName, Animation* pAnim);
+
+	std::map<std::string, Sprite*> GetCurrentFrames();
 
 private:
 	std::map<std::string, Sprite*> sprites;

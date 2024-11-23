@@ -25,10 +25,8 @@ Sword::Sword(Player* _pPlayer)
 	pSprite(nullptr),
 	pAnimComp(new AnimationComponent())
 {
-	AnimationSet* pAnimSet = new AnimationSet();
-	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("sword idle"));
-	pAnimSet->AddAnimation("swing", AnimationManager::GetAnimation("sword swing"));
-	pAnimComp->DefineAnimationSet(pAnimSet);
+	pAnimComp->DefineAnimation("idle", AnimationManager::GetAnimation("sword idle"));
+	pAnimComp->DefineAnimation("swing", AnimationManager::GetAnimation("sword swing"));
 
 	pAnimComp->SetAnimation("idle");
 	pSprite = pAnimComp->GetCurrentFrame();
@@ -54,7 +52,7 @@ void Sword::Update(float deltaTime)
 
 	pSprite = pAnimComp->GetCurrentFrame();
 
-	pos = PlayerAttorney::SwordAccess::GetPos(pPlayer) + pPlayer->GetConnector("weapon hold").first;
+	pos = PlayerAttorney::SwordAccess::GetPos(pPlayer) + pPlayer->GetConnector("weapon hold");
 
 	// TODO: make this class derive from actor, so it can use the protected function that does this automagically
 	float facing = PlayerAttorney::SwordAccess::GetFacing(pPlayer);

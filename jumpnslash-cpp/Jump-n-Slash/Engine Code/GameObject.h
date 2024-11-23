@@ -24,7 +24,7 @@ public:
 	void MarkForDestroy();
 
 	virtual void Update(float deltaTime) = 0;
-	virtual void Draw() override final;
+	virtual void Draw() override;
 
 protected:
 	sf::Vector2f GetPos() const;

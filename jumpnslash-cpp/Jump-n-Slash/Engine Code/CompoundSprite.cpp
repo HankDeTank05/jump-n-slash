@@ -15,7 +15,12 @@ void CompoundSprite::AddSubsprite(const std::string& subsprName, const std::stri
 void CompoundSprite::AddRequiredConnector(const std::string& subsprName, const std::string& connName)
 {
 	assert(connsRequired.count(subsprName) > 0); // no subsprite found with the given name!
-	// TODO: make sure there are no duplicate connector names
+
+	for (std::list<std::string>::iterator it = connsRequired.at(subsprName).begin(); it != connsRequired.at(subsprName).end(); it++)
+	{
+		assert((*it) != connName); // no duplicate connection names!
+	}
+
 	connsRequired.at(subsprName).push_back(connName);
 }
 
@@ -23,5 +28,16 @@ void CompoundSprite::DefineAnimation(const std::string& subsprName, const std::s
 {
 	assert(animComps.count(subsprName) > 0); // no subsprite found withthe given name
 
-	animComps.at(subsprName)->DefineAnimation(animName, pAnim);
+	//animComps.at(subsprName)->DefineAnimation(animName, pAnim);
+}
+
+std::map<std::string, Sprite*> CompoundSprite::GetCurrentFrames()
+{
+	for (std::map<std::string, Sprite*>::iterator it = sprites.begin(); it != sprites.end(); it++)
+	{
+		std::string subsprName = it->first;
+		it->second = animComps.at(subsprName)->GetCurrentFrame();
+	}
+
+	return sprites;
 }
