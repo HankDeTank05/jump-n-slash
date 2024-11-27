@@ -23,6 +23,11 @@ bool PlayerAttorney::StateAccess::IsApplyGravity(Player* pPlayer)
 	return pPlayer->IsApplyGravity();
 }
 
+bool PlayerAttorney::StateAccess::IsReceivingSlashInput(Player* pPlayer)
+{
+	return pPlayer->IsReceivingSlashInput();
+}
+
 void PlayerAttorney::StateAccess::RaycastRight(Player* pPlayer)
 {
 	pPlayer->RaycastRight();
@@ -73,6 +78,11 @@ void PlayerAttorney::StateAccess::SetAnimationFall(Player* pPlayer)
 	pPlayer->SetAnimationFall();
 }
 
+void PlayerAttorney::StateAccess::SetAnimationAttack(Player* pPlayer)
+{
+	pPlayer->SetAnimationAttack();
+}
+
 sf::Vector2f PlayerAttorney::LevelAccess::GetPos(Player* pPlayer)
 {
 	return pPlayer->GetPos();
@@ -106,4 +116,9 @@ void PlayerAttorney::StrategyAccess::SetWalk(Player* pPlayer, float direction)
 void PlayerAttorney::StrategyAccess::SetJump(Player* pPlayer, bool enabled)
 {
 	pPlayer->SetJump(enabled);
+}
+
+void PlayerAttorney::StrategyAccess::SetSlash(Player* pPlayer, bool enabled)
+{
+	pPlayer->SetSlash(enabled);
 }

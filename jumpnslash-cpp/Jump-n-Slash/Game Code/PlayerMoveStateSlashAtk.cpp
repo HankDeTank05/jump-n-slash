@@ -5,12 +5,13 @@
 
 // game includes
 #include "GameDebugFlags.h"
+#include "PlayerAttorney.h"
 
 void PlayerMoveStateSlashAtk::Enter(Player* pPlayer) const
 {
 	if (DEBUG_PLAYER_ACTION_STATE) std::cout << "Entered PlayerMoveStateSlashAtk" << std::endl;
 
-	assert(false); // TODO: set slash atk animation (based on equipped slash atk dreamcatcher?)
+	PlayerAttorney::StateAccess::SetAnimationAttack(pPlayer);
 }
 
 void PlayerMoveStateSlashAtk::Update(Player* pPlayer, float deltaTime) const

@@ -37,6 +37,7 @@ Player::Player(LevelMap* pLevel)
 	respawnPoint(),
 	inputWalkDir(0.f),
 	inputReceivedJump(false),
+	inputReceivedSlashAtk(false),
 	applyGravity(true)
 {	
 	assert(pCurrentState != nullptr);
@@ -155,6 +156,11 @@ bool Player::IsApplyGravity()
 	return applyGravity;
 }
 
+bool Player::IsReceivingSlashInput()
+{
+	return inputReceivedSlashAtk;
+}
+
 void Player::OnCollisionEnter(CollisionObject* pOther)
 {
 	if (DEBUG_COLLISION) std::cout << "Player has entered collision" << std::endl;
@@ -256,6 +262,11 @@ void Player::SetJump(bool enabled)
 	inputReceivedJump = enabled;
 }
 
+void Player::SetSlash(bool enabled)
+{
+	inputReceivedSlashAtk = enabled;
+}
+
 void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
 {
 	pCurrentRoom = _pCurrentRoom;
@@ -283,4 +294,9 @@ void Player::SetAnimationJump()
 void Player::SetAnimationFall()
 {
 	pAnimComp->SetAnimation("fall");
+}
+
+void Player::SetAnimationAttack()
+{
+	pAnimComp->SetAnimation("attack");
 }

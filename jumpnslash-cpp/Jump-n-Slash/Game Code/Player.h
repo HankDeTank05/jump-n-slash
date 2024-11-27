@@ -51,6 +51,7 @@ public:
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
 	bool IsApplyGravity();
+	bool IsReceivingSlashInput();
 
 private: // player mutators. for selective access only (thru attorney)
 
@@ -58,8 +59,10 @@ private: // player mutators. for selective access only (thru attorney)
 
 	void ProcessInputs(float deltaTime);
 	void SetControls(ControlScheme ctrl);
+
 	void SetWalk(float direction);
 	void SetJump(bool enabled);
+	void SetSlash(bool enabled);
 
 	// other
 
@@ -71,6 +74,7 @@ private: // player mutators. for selective access only (thru attorney)
 	void SetAnimationWalk();
 	void SetAnimationJump();
 	void SetAnimationFall();
+	void SetAnimationAttack();
 
 private: // Member variables
 	PlayerControlStrategy* pCtrlStrat;
@@ -79,6 +83,7 @@ private: // Member variables
 	sf::Vector2f respawnPoint; // where the player will respawn after dying
 	float inputWalkDir; // float in range [-1, 1] indicating which direction to walk and how fast
 	bool inputReceivedJump; // flag indicating if the jump input is currently being received
+	bool inputReceivedSlashAtk; // flag indicating if the slash attack input is currently being received
 	bool applyGravity; // flag indicating if gravity should be applied
 };
 

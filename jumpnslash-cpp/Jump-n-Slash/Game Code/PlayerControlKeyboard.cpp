@@ -39,7 +39,6 @@ void PlayerControlKeyboard::KeyPressed(sf::Keyboard::Key key)
 		dash = true;
 		break;
 	case Keyboard::Game::PAUSE:
-		//assert(false);
 		GameManager::PauseGame();
 		break;
 	default:
