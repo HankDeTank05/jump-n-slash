@@ -61,7 +61,7 @@ public:
 	private:
 		friend class Sword;
 		static sf::Vector2f GetPos(Player* pPlayer);
-		static float GetFacing(Player* pPlayer);
+		static int GetFacing(Player* pPlayer);
 	};
 	class StrategyAccess
 	{

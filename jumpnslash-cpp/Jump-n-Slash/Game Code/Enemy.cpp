@@ -22,7 +22,7 @@ Enemy::Enemy()
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
 
-	SetCollidableGroup<Enemy>();
+	SetCollisionObjectGroup<Enemy>();
 	pSprite = animComp.GetCurrentFrame();
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
 	RequestCollisionRegistration();

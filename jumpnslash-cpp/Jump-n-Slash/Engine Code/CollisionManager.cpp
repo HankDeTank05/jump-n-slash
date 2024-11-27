@@ -46,7 +46,7 @@ CollisionObjectGroup* CollisionManager::GetObjectGroup(JNSTypeID id)
 {
 	// did you properly deregister collision when switching scenes?
 	assert(id < static_cast<int>(colObjGroupCollection.size()));
-	assert(id >= 0); // did you forget to call SetCollidableGroup<type>()?
+	assert(id >= 0); // did you forget to call SetCollisionObjectGroup<type>()?
 
 	return colObjGroupCollection[id];
 }

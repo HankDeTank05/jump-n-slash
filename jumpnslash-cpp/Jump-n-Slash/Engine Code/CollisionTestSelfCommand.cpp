@@ -6,6 +6,7 @@
 #include "CollisionVolume.h"
 #include "Math.h"
 #include "EngineDebugFlags.h"
+#include "CollisionObjectAttorney.h"
 
 CollisionTestSelfCommand::CollisionTestSelfCommand(CollisionObjectGroup* _pGroup,
 	CollisionDispatchBase* _pColDispatch, CollisionDispatchBase* _pNoColDispatch)
@@ -36,8 +37,8 @@ void CollisionTestSelfCommand::Execute()
 			assert(it1 != it2);
 			assert((*it1) != (*it2));
 
-			const CollisionVolume& cv1 = (*it1)->GetCollisionVolume();
-			const CollisionVolume& cv2 = (*it2)->GetCollisionVolume();
+			const CollisionVolume& cv1 = CollisionObjectAttorney::ColTestAccess::GetCollisionVolume(*it1);
+			const CollisionVolume& cv2 = CollisionObjectAttorney::ColTestAccess::GetCollisionVolume(*it2);
 
 			if (Math::Intersect(cv1, cv2))
 			{

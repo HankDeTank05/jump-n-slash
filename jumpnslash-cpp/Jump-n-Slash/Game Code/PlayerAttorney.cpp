@@ -1,5 +1,6 @@
 #include "PlayerAttorney.h"
 
+// game includes
 #include "Player.h"
 
 sf::Vector2f PlayerAttorney::StateAccess::GetPosDelta(Player* pPlayer)
@@ -92,7 +93,7 @@ sf::Vector2f PlayerAttorney::SwordAccess::GetPos(Player* pPlayer)
 	return pPlayer->GetPos();
 }
 
-float PlayerAttorney::SwordAccess::GetFacing(Player* pPlayer)
+int PlayerAttorney::SwordAccess::GetFacing(Player* pPlayer)
 {
 	return pPlayer->GetFacing();
 }

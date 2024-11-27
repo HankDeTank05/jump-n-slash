@@ -20,7 +20,7 @@ public:
 	const sf::Vector2f& GetWorldSpaceCenter() const;
 	float GetScaleFactorSqr() const;
 
-	virtual void ComputeData(sf::Sprite* pSprite, const sf::Transform& tform) = 0;
+	virtual void ComputeData(Sprite* pSprite, const sf::Transform& tform) = 0;
 	virtual bool IntersectAccept(const CollisionVolume& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeBSphere& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeAABB& other) const = 0;

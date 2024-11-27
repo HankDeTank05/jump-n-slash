@@ -34,7 +34,7 @@ Sword::Sword(Player* _pPlayer)
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
 	SetCollisionSprite(pSprite, VolumeType::AABB);
-	SetCollidableGroup<Sword>();
+	SetCollisionObjectGroup<Sword>();
 	RequestCollisionRegistration();
 }
 
