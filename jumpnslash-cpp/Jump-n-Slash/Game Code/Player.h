@@ -92,7 +92,8 @@ private: // Member variables
 	bool inputReceivedSlashAtk; // flag indicating if the slash attack input is currently being received
 	bool applyGravity; // flag indicating if gravity should be applied
 	bool attacking; // flag indicating if we're currently attacking
-	float jumpHoldTime; // the amount of time the jump button has been held for
+	float heightBeforeJump; // the y-pos of the player before they jump (so we can cap the jump height properly)
+	float peakJumpHeight; // the y-pos of the player at the apex of their jump (so we cna cap the jump height properly)
 };
 
 #endif

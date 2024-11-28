@@ -41,11 +41,7 @@ const PlayerMoveState* PlayerMoveStateFalling::GetNextState(Player* pPlayer) con
 
 	// TODO: update state change logic to include PlayerMoveStateDashing (if applicable)
 
-	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y < 0.0f)
-	{
-		pNextState = &PlayerMoveFSM::jumping; // Not technically possible at the moment
-	}
-	else if (PlayerAttorney::StateAccess::IsGrounded(pPlayer))
+	if (PlayerAttorney::StateAccess::IsGrounded(pPlayer))
 	{
 		if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x != 0.0f)
 		{

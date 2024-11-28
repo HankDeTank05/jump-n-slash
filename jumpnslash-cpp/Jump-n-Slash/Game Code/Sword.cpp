@@ -36,7 +36,7 @@ Sword::Sword(Player* _pPlayer)
 	RequestDrawRegistration();
 	SetCollisionSprite(pSprite, VolumeType::AABB);
 	SetCollisionObjectGroup<Sword>();
-	RequestCollisionRegistration();
+	//RequestCollisionRegistration();
 }
 
 Sword::~Sword()
@@ -46,14 +46,17 @@ Sword::~Sword()
 
 void Sword::Update(float deltaTime)
 {
-	pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);
+	if (pCurrentState != pPrevState)
+	{
+		pCurrentState->Enter(this);
+	}
 	if (attack == true)
 	{
 		attack = false;
 	}
 
-	// TODO: call state update
+	pCurrentState->Update(this, deltaTime);
 
 	pSprite = pAnimComp->GetCurrentFrame();
 
@@ -76,7 +79,9 @@ void Sword::Update(float deltaTime)
 	pSprite->SetScale(sf::Vector2f(facing, 1.f));
 
 	pSprite->SetPositionByConnector("hold", pos);
-	// TODO: update collision data
+	UpdateCollisionData(pSprite);
+
+	pPrevState = pCurrentState;
 
 	if (DEBUG_CONNECTORS) pSprite->DebugConnectors();
 }

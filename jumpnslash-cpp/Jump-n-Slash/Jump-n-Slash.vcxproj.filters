@@ -744,6 +744,9 @@
     <ClCompile Include="Engine Code\MultiSprite.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites</Filter>
     </ClCompile>
+    <ClCompile Include="Game Code\SwordAttorney.cpp">
+      <Filter>Source Files\Game Code\Sword</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">

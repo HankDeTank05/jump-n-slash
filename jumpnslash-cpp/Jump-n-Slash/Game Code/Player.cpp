@@ -29,6 +29,7 @@
 #include "PlayerControlDualSense.h"
 #include "ControllerDebugger.h"
 #include "Sword.h"
+#include "SwordAttorney.h"
 
 Player::Player(LevelMap* pLevel)
 	: Actor(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED, pLevel),
@@ -42,7 +43,8 @@ Player::Player(LevelMap* pLevel)
 	inputReceivedSlashAtk(false),
 	applyGravity(true),
 	attacking(false),
-	jumpHoldTime(0.f)
+	heightBeforeJump(0.f),
+	peakJumpHeight(heightBeforeJump)
 {	
 	assert(pCurrentState != nullptr);
 
@@ -214,35 +216,49 @@ void Player::OnSceneEntry()
 	SetWidth();
 	SetHeight();
 
+	SetCollisionObjectGroup<Player>();
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
+	RequestCollisionRegistration();
 }
 
 void Player::OnSceneExit()
 {
-	assert(false);
+	RequestCollisionDeregistration();
 }
 
 void Player::ProcessInputs(float deltaTime)
 {
 	posDelta.x = speed * inputWalkDir * deltaTime;
 
-	if (inputReceivedJump == true)
+	if (inputReceivedJump == true && heightBeforeJump - peakJumpHeight <= Movement::MAX_JUMP_HEIGHT)
 	{
 		if (grounded)
 		{
-			posDelta.y = JUMP_FORCE * deltaTime;
+			posDelta.y = -Movement::JUMP_RISING_SPEED * deltaTime;
 			applyGravity = false; // temporarily stop applying gravity to allow variable height jumping
-			//RequestAlarmRegistration(AlarmID::Alarm0, Movement::MAX_JUMP_HOLD_TIME);
-			jumpHoldTime = 0.f;
+			heightBeforeJump = pos.y;
 		}
-		else
+		else if(pos.y < peakJumpHeight)
 		{
-			jumpHoldTime += deltaTime;
+			peakJumpHeight = pos.y;
+			//std::cout << peakJumpHeight << std::endl;
 		}
 	}
-	else if(inputReceived)
+	else if(inputReceivedJump == false || heightBeforeJump - peakJumpHeight > Movement::MAX_JUMP_HEIGHT)
 	{
+		// the following if block is what makes the player begin descending the moment they release the jump button
+		if (applyGravity == false)
+		{
+			posDelta.y = 0.f;
+		}
+
 		applyGravity = true;
+		
+		if (grounded)
+		{
+			heightBeforeJump = pos.y;
+			peakJumpHeight = heightBeforeJump;
+		}
 	}
 }
 
@@ -273,7 +289,7 @@ void Player::SetControls(ControlScheme ctrl)
 
 void Player::ApplyGravity(float deltaTime)
 {
-	posDelta.y += Movement::FALLING_SPEED * deltaTime;
+	posDelta.y += Movement::PLAYER_GRAVITY * deltaTime;
 }
 
 void Player::SetWalk(float direction)
@@ -315,9 +331,8 @@ void Player::BeginSlashAtk()
 {
 	if (attacking == false) // only allow attacks if you're not currently attacking
 	{
-		assert(false); // the line below should make the sword attack
-		//pSword->
-		RequestAlarmRegistration(AlarmID::Alarm1, 5.f);
+		SwordAttorney::PlayerAccess::Attack(pSword);
+		RequestAlarmRegistration(AlarmID::Alarm1, SlashAtk::SLASH_ACTIVE_TIME);
 		attacking = true;
 	}
 }

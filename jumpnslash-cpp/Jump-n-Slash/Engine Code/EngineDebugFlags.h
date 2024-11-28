@@ -7,7 +7,7 @@ const bool DEBUG_CONNECTORS = true; // visualize connector points, directions an
 
 // collision debug flags
 
-const bool DEBUG_COLLISION = false;
+const bool DEBUG_COLLISION = true;
 const bool DEBUG_COLLISION_SHOW_NUMBERS = false;
 
 #endif
