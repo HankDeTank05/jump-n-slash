@@ -34,7 +34,6 @@ protected:
 	void RaycastUp();
 	void RaycastDown();
 
-	void ApplyGravity(float deltaTime);
 	void FaceSprite();
 
 protected:

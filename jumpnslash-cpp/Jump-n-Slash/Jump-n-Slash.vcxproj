@@ -376,6 +376,7 @@
     <ClInclude Include="Game Code\ResumeGameCommand.h" />
     <ClInclude Include="Game Code\RoomData.h" />
     <ClInclude Include="Game Code\Sword.h" />
+    <ClInclude Include="Game Code\SwordAttorney.h" />
     <ClInclude Include="Game Code\SwordFSM.h" />
     <ClInclude Include="Game Code\SwordState.h" />
     <ClInclude Include="Game Code\SwordStateIdle.h" />

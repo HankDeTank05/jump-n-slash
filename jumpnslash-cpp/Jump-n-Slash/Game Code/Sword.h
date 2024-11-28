@@ -29,8 +29,13 @@ public:
 	virtual void OnCollisionDuring(CollisionObject* pOther) override;
 	virtual void OnCollisionExit(CollisionObject* pOther) override;
 
-private: // mutators (accessible thru attorney)
+	void Attack();
+
+private: // accessors (accessible thru attorney)
 	friend class SwordAttorney;
+	bool IsAttacking();
+
+private: // mutators (accessible thru attorney)
 	void SetAnimationIdle();
 	void SetAnimationSwing();
 
@@ -42,6 +47,7 @@ private:
 	const SwordState* pPrevState;
 	Sprite* pSprite;
 	AnimationComponent* pAnimComp;
+	bool attack;
 };
 
 #endif

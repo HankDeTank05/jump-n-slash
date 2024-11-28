@@ -28,6 +28,11 @@ bool PlayerAttorney::StateAccess::IsReceivingSlashInput(Player* pPlayer)
 	return pPlayer->IsReceivingSlashInput();
 }
 
+bool PlayerAttorney::StateAccess::IsAttacking(Player* pPlayer)
+{
+	return pPlayer->IsAttacking();
+}
+
 void PlayerAttorney::StateAccess::RaycastRight(Player* pPlayer)
 {
 	pPlayer->RaycastRight();
@@ -56,6 +61,11 @@ void PlayerAttorney::StateAccess::ApplyGravity(Player* pPlayer, float deltaTime)
 void PlayerAttorney::StateAccess::ProcessInputs(Player* pPlayer, float deltaTime)
 {
 	pPlayer->ProcessInputs(deltaTime);
+}
+
+void PlayerAttorney::StateAccess::BeginSlashAtk(Player* pPlayer)
+{
+	pPlayer->BeginSlashAtk();
 }
 
 void PlayerAttorney::StateAccess::SetAnimationIdle(Player* pPlayer)

@@ -16,7 +16,7 @@ AlarmManager::~AlarmManager()
 
 AlarmManager::TimelineRef AlarmManager::Register(float triggerTime, AlarmObject* pAlarmable, AlarmID id)
 {
-    return timeline.insert(std::pair<float, AlarmEvent>(triggerTime, AlarmEvent(pAlarmable, id)));
+    return timeline.insert(std::pair<float, AlarmEvent>(TimeManager::GetCurrentEngineTime() + triggerTime, AlarmEvent(pAlarmable, id)));
 }
 
 void AlarmManager::Deregister(TimelineRef timelineRef)

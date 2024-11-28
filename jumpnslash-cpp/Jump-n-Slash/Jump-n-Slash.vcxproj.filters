@@ -1334,6 +1334,9 @@
     <ClInclude Include="Engine Code\TreeTraversal.h">
       <Filter>Source Files\Engine Code\Misc. files</Filter>
     </ClInclude>
+    <ClInclude Include="Game Code\SwordAttorney.h">
+      <Filter>Source Files\Game Code\Sword</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\0_DocsHome.txt">

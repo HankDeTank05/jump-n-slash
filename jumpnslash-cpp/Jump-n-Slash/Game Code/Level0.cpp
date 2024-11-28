@@ -14,7 +14,6 @@
 Level0::Level0()
 	: pMap(nullptr),
 	pPlayer(nullptr),
-	pSword(nullptr),
 	pEnemy(nullptr)
 {
 	// do nothing
@@ -25,10 +24,6 @@ Level0::~Level0()
 	if (pEnemy != nullptr)
 	{
 		delete pEnemy;
-	}
-	if (pSword != nullptr)
-	{
-		delete pSword;
 	}
 	if (pPlayer != nullptr)
 	{
@@ -44,7 +39,6 @@ void Level0::Init()
 {
 	pMap = new LevelMap(GridManager::GetGrid("test2"));
 	pPlayer = new Player(pMap);
-	pSword = new Sword(pPlayer);
 	pEnemy = new Enemy();
 
 	pPlayer->AddObserver(pMap);

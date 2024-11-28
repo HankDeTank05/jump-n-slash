@@ -28,17 +28,21 @@
 #include "PlayerControlSwitchPro.h"
 #include "PlayerControlDualSense.h"
 #include "ControllerDebugger.h"
+#include "Sword.h"
 
 Player::Player(LevelMap* pLevel)
-	: Actor(PLAYER_WALK_SPEED, pLevel),
+	: Actor(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED, pLevel),
 	pCtrlStrat(nullptr),
 	pCurrentState(&PlayerMoveFSM::idle),
 	pPrevState(nullptr),
+	pSword(new Sword(this)),
 	respawnPoint(),
 	inputWalkDir(0.f),
 	inputReceivedJump(false),
 	inputReceivedSlashAtk(false),
-	applyGravity(true)
+	applyGravity(true),
+	attacking(false),
+	jumpHoldTime(0.f)
 {	
 	assert(pCurrentState != nullptr);
 
@@ -48,6 +52,7 @@ Player::Player(LevelMap* pLevel)
 Player::~Player()
 {
 	delete pCtrlStrat;
+	delete pSword;
 }
 
 void Player::Update(float deltaTime)
@@ -131,6 +136,7 @@ void Player::Update(float deltaTime)
 		else if (pCurrentState == &PlayerMoveFSM::idle) stateStr = "idle";
 		else if (pCurrentState == &PlayerMoveFSM::jumping) stateStr = "jump";
 		else if (pCurrentState == &PlayerMoveFSM::walking) stateStr = "walk";
+		else if (pCurrentState == &PlayerMoveFSM::slashAtk) stateStr = "slashAtk";
 		else assert(false); // just in case we add any states and forget to update the debug code, this'll crash to remind us
 		sf::Vector2f textPos = Math::ConvertScreenToWorldSpace(sf::Vector2i(0, VIZ_DEFAULT_TEXT_SIZE * 2));
 		Visualizer::VisualizeText(stateStr, textPos, sf::Color::Cyan);
@@ -148,7 +154,14 @@ void Player::Update(float deltaTime)
 
 void Player::Alarm0()
 {
+	assert(false);
 	applyGravity = true;
+}
+
+void Player::Alarm1()
+{
+	assert(pCurrentState == &PlayerMoveFSM::slashAtk);
+	attacking = false;
 }
 
 bool Player::IsApplyGravity()
@@ -159,6 +172,11 @@ bool Player::IsApplyGravity()
 bool Player::IsReceivingSlashInput()
 {
 	return inputReceivedSlashAtk;
+}
+
+bool Player::IsAttacking()
+{
+	return attacking;
 }
 
 void Player::OnCollisionEnter(CollisionObject* pOther)
@@ -208,11 +226,23 @@ void Player::ProcessInputs(float deltaTime)
 {
 	posDelta.x = speed * inputWalkDir * deltaTime;
 
-	if (grounded && inputReceivedJump)
+	if (inputReceivedJump == true)
 	{
-		posDelta.y = JUMP_FORCE * deltaTime;
-		applyGravity = false; // temporarily stop applying gravity to allow variable height jumping
-		RequestAlarmRegistration(AlarmID::Alarm0, MAX_JUMP_HOLD_TIME);
+		if (grounded)
+		{
+			posDelta.y = JUMP_FORCE * deltaTime;
+			applyGravity = false; // temporarily stop applying gravity to allow variable height jumping
+			//RequestAlarmRegistration(AlarmID::Alarm0, Movement::MAX_JUMP_HOLD_TIME);
+			jumpHoldTime = 0.f;
+		}
+		else
+		{
+			jumpHoldTime += deltaTime;
+		}
+	}
+	else if(inputReceived)
+	{
+		applyGravity = true;
 	}
 }
 
@@ -239,6 +269,11 @@ void Player::SetControls(ControlScheme ctrl)
 	default:
 		assert(false);
 	}
+}
+
+void Player::ApplyGravity(float deltaTime)
+{
+	posDelta.y += Movement::FALLING_SPEED * deltaTime;
 }
 
 void Player::SetWalk(float direction)
@@ -273,6 +308,17 @@ void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
 	if (pCurrentRoom->HasPlayerSpawn())
 	{
 		respawnPoint = *(pCurrentRoom->GetPlayerSpawnPoint());
+	}
+}
+
+void Player::BeginSlashAtk()
+{
+	if (attacking == false) // only allow attacks if you're not currently attacking
+	{
+		assert(false); // the line below should make the sword attack
+		//pSword->
+		RequestAlarmRegistration(AlarmID::Alarm1, 5.f);
+		attacking = true;
 	}
 }
 

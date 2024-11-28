@@ -373,12 +373,6 @@ void Actor::RaycastDown()
 	pos.y = minY;
 }
 
-void Actor::ApplyGravity(float deltaTime)
-{
-	posDelta.y += GRAVITY_WEIGHT * deltaTime;
-	//posDelta.y += GRAVITY_WEIGHT;
-}
-
 void Actor::FaceSprite()
 {
 	if (facing == 1)

@@ -122,10 +122,11 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::LoadSprite("paper mario hand back", "paper mario spritesheet", sf::IntRect(748, 3963, 119, 119));
 
 	// asserts to make sure player parameters are set properly
-	assert(PLAYER_WALK_SPEED > 0.f);
-	assert(GRAVITY_WEIGHT > 0.f);
+	assert(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED > 0.f);
+	assert(Movement::FALLING_SPEED > 0.f);
 	assert(JUMP_FORCE < 0.f);
-	assert(MAX_JUMP_HOLD_TIME >= 0.f);
+	assert(Movement::MAX_JUMP_HOLD_TIME >= 0.f);
+	assert(Movement::JUMP_RISING_SPEED > 0.f);
 
 	// asserts to make sure dreamcatcher parameters are set properly
 

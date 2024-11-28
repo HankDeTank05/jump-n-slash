@@ -28,6 +28,7 @@ public:
 		static bool IsHeadBonked(Player* pPlayer);
 		static bool IsApplyGravity(Player* pPlayer);
 		static bool IsReceivingSlashInput(Player* pPlayer);
+		static bool IsAttacking(Player* pPlayer);
 
 		// mutators
 
@@ -38,6 +39,8 @@ public:
 
 		static void ApplyGravity(Player* pPlayer, float deltaTime);
 		static void ProcessInputs(Player* pPlayer, float deltaTime);
+
+		static void BeginSlashAtk(Player* pPlayer);
 
 		static void SetAnimationIdle(Player* pPlayer);
 		static void SetAnimationWalk(Player* pPlayer);

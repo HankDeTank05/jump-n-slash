@@ -23,7 +23,8 @@ Sword::Sword(Player* _pPlayer)
 	pCurrentState(&SwordFSM::idle),
 	pPrevState(nullptr),
 	pSprite(nullptr),
-	pAnimComp(new AnimationComponent())
+	pAnimComp(new AnimationComponent()),
+	attack(false)
 {
 	pAnimComp->DefineAnimation("idle", AnimationManager::GetAnimation("sword idle"));
 	pAnimComp->DefineAnimation("swing", AnimationManager::GetAnimation("sword swing"));
@@ -47,6 +48,10 @@ void Sword::Update(float deltaTime)
 {
 	pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);
+	if (attack == true)
+	{
+		attack = false;
+	}
 
 	// TODO: call state update
 
@@ -94,6 +99,16 @@ void Sword::OnCollisionDuring(CollisionObject* pOther)
 void Sword::OnCollisionExit(CollisionObject* pOther)
 {
 	if (DEBUG_COLLISION) std::cout << "Sword has exited collision" << std::endl;
+}
+
+void Sword::Attack()
+{
+	attack = true;
+}
+
+bool Sword::IsAttacking()
+{
+	return attack;
 }
 
 void Sword::SetAnimationIdle()
