@@ -20,15 +20,13 @@
 
 // game includes
 #include "AssetLoader.h"
+#include "JsonParser.h"
 #include "GameManager.h"
 
 // game includes (designer controls)
 #include "ControlMapping.h"
 #include "ParamsPlayer.h"
 #include "ParamsDreamcatchers.h"
-
-//using namespace simdjson;
-//using json = nlohmann::json;
 
 void JumpSlashEngine::LoadResources()
 {
@@ -80,15 +78,8 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::GetSprite("sword swing 3")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
 	SpriteManager::GetSprite("sword swing 4")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
 
-	// parse the json file for level tiles to add
-	// vvv for nlohman/json vvv
-	//std::ifstream file("..\\..\\..\\tools\\formatting_rules.json");
-	//json data = json::parse(file);
-	// vvv for simdjson vvv
-	//ondemand::parser parser;
-	//padded_string json = padded_string::load("..\\..\\..\\tools\\formatting_rules.json");
-	//ondemand::document jsonData = parser.iterate(json);
-	//std::cout << "Tile size: " << jsonData["genericInfo"]["tileSize"] << std::endl;
+	JsonParser parser;
+	parser.ReadJsonFile("../../tools/formatting_rules.json");
 
 	TextureManager::LoadTexture("block solid", "leveltiles/block_solid.png");
 	SpriteManager::LoadSprite("block solid", "block solid");
@@ -124,7 +115,6 @@ void JumpSlashEngine::LoadResources()
 	// asserts to make sure player parameters are set properly
 	assert(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED > 0.f);
 	assert(Movement::PLAYER_GRAVITY > 0.f);
-	assert(JUMP_FORCE < 0.f);
 	assert(Movement::JUMP_RISING_SPEED > 0.f);
 
 	// asserts to make sure dreamcatcher parameters are set properly

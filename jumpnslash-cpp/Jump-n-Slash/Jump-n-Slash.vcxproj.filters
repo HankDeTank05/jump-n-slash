@@ -241,6 +241,15 @@
     <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites">
       <UniqueIdentifier>{e958c73b-19fe-4f7f-a8c2-98b8b06bfdf5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Misc. files\Tools">
+      <UniqueIdentifier>{c0556000-1ed2-4741-a859-08120274542d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Misc. files\Tools\Text Parsing">
+      <UniqueIdentifier>{7cd385d6-7b1f-4c98-9c3a-28d8020ea36a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Misc. files\Tools\JsonParser">
+      <UniqueIdentifier>{22134239-2c6c-4b33-bfa2-e1875ce1b666}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -479,9 +488,6 @@
     </ClCompile>
     <ClCompile Include="Engine Code\ConvenienceFunctions.cpp">
       <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\AssetLoader.cpp">
-      <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\AnimationManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
@@ -746,6 +752,24 @@
     </ClCompile>
     <ClCompile Include="Game Code\SwordAttorney.cpp">
       <Filter>Source Files\Game Code\Sword</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\TextParser.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Tools\Text Parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\AssetLoader.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonParser.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonNode.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonNodeValue.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonNodeList.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1015,9 +1039,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\ConvenienceFunctions.h">
       <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\AssetLoader.h">
-      <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\AnimationManager.h">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
@@ -1339,6 +1360,24 @@
     </ClInclude>
     <ClInclude Include="Game Code\SwordAttorney.h">
       <Filter>Source Files\Game Code\Sword</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\TextParser.h">
+      <Filter>Source Files\Game Code\Misc. files\Tools\Text Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AssetLoader.h">
+      <Filter>Source Files\Game Code\Misc. files\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonParser.h">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonNode.h">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonNodeValue.h">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonNodeList.h">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

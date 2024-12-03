@@ -154,6 +154,10 @@
     <ClCompile Include="Game Code\GameManagerAttorney.cpp" />
     <ClCompile Include="Game Code\GameStateMenu.cpp" />
     <ClCompile Include="Game Code\GameStatePlaying.cpp" />
+    <ClCompile Include="Game Code\JsonNode.cpp" />
+    <ClCompile Include="Game Code\JsonNodeList.cpp" />
+    <ClCompile Include="Game Code\JsonNodeValue.cpp" />
+    <ClCompile Include="Game Code\JsonParser.cpp" />
     <ClCompile Include="Game Code\Level0.cpp" />
     <ClCompile Include="Game Code\LevelMap.cpp" />
     <ClCompile Include="Game Code\LevelScene.cpp" />
@@ -186,6 +190,7 @@
     <ClCompile Include="Game Code\SwordStateSwing.cpp" />
     <ClCompile Include="Game Code\TestClass.cpp" />
     <ClCompile Include="Game Code\TestScene.cpp" />
+    <ClCompile Include="Game Code\TextParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\AlarmDeregistrationCommand.h" />
@@ -347,6 +352,10 @@
     <ClInclude Include="Game Code\GameStateMenu.h" />
     <ClInclude Include="Game Code\GameStatePlaying.h" />
     <ClInclude Include="Game Code\GhostDreamcatcher.h" />
+    <ClInclude Include="Game Code\JsonNode.h" />
+    <ClInclude Include="Game Code\JsonNodeList.h" />
+    <ClInclude Include="Game Code\JsonNodeValue.h" />
+    <ClInclude Include="Game Code\JsonParser.h" />
     <ClInclude Include="Game Code\Level0.h" />
     <ClInclude Include="Game Code\LevelMap.h" />
     <ClInclude Include="Game Code\LevelScene.h" />
@@ -384,6 +393,7 @@
     <ClInclude Include="Game Code\SwordStateSwing.h" />
     <ClInclude Include="Game Code\TestClass.h" />
     <ClInclude Include="Game Code\TestScene.h" />
+    <ClInclude Include="Game Code\TextParser.h" />
     <ClInclude Include="Game Code\Tileset.h" />
   </ItemGroup>
   <ItemGroup>
