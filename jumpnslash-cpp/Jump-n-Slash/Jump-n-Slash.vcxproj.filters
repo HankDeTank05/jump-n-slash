@@ -765,11 +765,11 @@
     <ClCompile Include="Game Code\JsonNodeBase.cpp">
       <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\JsonNodeStr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\JsonNodeList.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonNodeStr.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
