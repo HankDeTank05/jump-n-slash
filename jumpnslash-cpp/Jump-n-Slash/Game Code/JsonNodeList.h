@@ -1,30 +1,29 @@
 #ifndef JSON_NODE_LIST_H
 #define JSON_NODE_LIST_H
 
-// language includes
-#include <string>
-#include <list>
+#include "JsonNodeBase.h"
 
-// game includes
-#include "JsonNode.h"
-
-class JsonNodeList : public JsonNode
+class JsonNodeList : public JsonNodeBase
 {
 public:
 	JsonNodeList() = delete;
 	JsonNodeList(std::string key);
-	JsonNodeList(std::string key, std::list<JsonNode*> subnodes);
 	JsonNodeList(const JsonNodeList& jnl) = delete;
 	JsonNodeList& operator=(const JsonNodeList& jnl) = delete;
 	virtual ~JsonNodeList();
 
-	virtual std::string GetKey() override final;
-	std::list<JsonNode*> GetSubnodes();
-
-	void AddSubnode(JsonNode* pNode);
+	virtual void AddChild(JsonNodeBase* pChild) override;
+	virtual std::list<JsonNodeBase*>& GetListValue() override;
 
 private:
-	std::list<JsonNode*> subnodes;
+	virtual void SetValue(std::string val) override;
+	virtual std::string GetStrValue() override;
+
+	virtual void SetValue(int val) override;
+	virtual int GetIntValue() override;
+
+private:
+	std::list<JsonNodeBase*> children;
 };
 
 #endif

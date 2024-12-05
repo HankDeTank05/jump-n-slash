@@ -1,36 +1,45 @@
 #include "JsonNodeList.h"
 
 JsonNodeList::JsonNodeList(std::string key)
-	: JsonNode(key),
-	subnodes()
-{
-	// do nothing
-}
-
-JsonNodeList::JsonNodeList(std::string key, std::list<JsonNode*> _subnodes)
-	: JsonNode(key),
-	subnodes(_subnodes)
+	: JsonNodeBase(key),
+	children()
 {
 	// do nothing
 }
 
 JsonNodeList::~JsonNodeList()
 {
-	subnodes.clear();
+	children.clear();
 }
 
-std::string JsonNodeList::GetKey()
+void JsonNodeList::AddChild(JsonNodeBase* pChild)
 {
-	return key;
+	children.push_back(pChild);
 }
 
-std::list<JsonNode*> JsonNodeList::GetSubnodes()
+std::list<JsonNodeBase*>& JsonNodeList::GetListValue()
 {
-	return subnodes;
+	return children;
 }
 
-void JsonNodeList::AddSubnode(JsonNode* pNode)
+void JsonNodeList::SetValue(std::string val)
 {
-	assert(pNode != nullptr);
-	subnodes.push_back(pNode);
+	assert(false); // do nothing. this function is not used.
+}
+
+std::string JsonNodeList::GetStrValue()
+{
+	assert(false); // do nothing. this function is not used.
+	return std::string();
+}
+
+void JsonNodeList::SetValue(int val)
+{
+	assert(false); // do nothing. this function is not used.
+}
+
+int JsonNodeList::GetIntValue()
+{
+	assert(false); // do nothing. this function is not used.
+	return 0;
 }
