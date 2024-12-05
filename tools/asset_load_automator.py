@@ -85,6 +85,7 @@ def process_textures(path):
             width = 0 # the overall width of the spritesheet
             height = 0 # the overall height of the spritesheet
             sprites = {} # keep track of which file goes where in the sheet
+            
             # get all the files in a textures subfolder
             files = get_files(os.path.join(path, folder))
 

@@ -191,6 +191,8 @@
     <ClCompile Include="Game Code\TestClass.cpp" />
     <ClCompile Include="Game Code\TestScene.cpp" />
     <ClCompile Include="Game Code\TextParser.cpp" />
+    <ClCompile Include="Game Code\Tileset.cpp" />
+    <ClCompile Include="Game Code\TilesetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\AlarmDeregistrationCommand.h" />
@@ -395,6 +397,7 @@
     <ClInclude Include="Game Code\TestScene.h" />
     <ClInclude Include="Game Code\TextParser.h" />
     <ClInclude Include="Game Code\Tileset.h" />
+    <ClInclude Include="Game Code\TilesetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\4_CreatingGameObject.txt" />

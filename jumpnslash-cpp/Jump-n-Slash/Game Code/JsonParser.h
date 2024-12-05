@@ -13,6 +13,7 @@ public:
 	virtual ~JsonParser();
 
 	void ReadJsonFile(std::string path);
+	JsonNodeList* GetData();
 
 private:
 	JsonNodeList* pHead;

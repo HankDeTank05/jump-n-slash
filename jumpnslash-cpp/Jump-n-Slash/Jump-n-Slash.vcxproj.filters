@@ -241,13 +241,13 @@
     <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites">
       <UniqueIdentifier>{e958c73b-19fe-4f7f-a8c2-98b8b06bfdf5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Misc. files\Tools">
+    <Filter Include="Source Files\Game Code\Tools">
       <UniqueIdentifier>{c0556000-1ed2-4741-a859-08120274542d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Misc. files\Tools\Text Parsing">
+    <Filter Include="Source Files\Game Code\Tools\Text Parsing">
       <UniqueIdentifier>{7cd385d6-7b1f-4c98-9c3a-28d8020ea36a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Misc. files\Tools\JsonParser">
+    <Filter Include="Source Files\Game Code\Tools\JsonParser">
       <UniqueIdentifier>{22134239-2c6c-4b33-bfa2-e1875ce1b666}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -754,22 +754,28 @@
       <Filter>Source Files\Game Code\Sword</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\TextParser.cpp">
-      <Filter>Source Files\Game Code\Misc. files\Tools\Text Parsing</Filter>
+      <Filter>Source Files\Game Code\Tools\Text Parsing</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\AssetLoader.cpp">
-      <Filter>Source Files\Game Code\Misc. files\Tools</Filter>
+      <Filter>Source Files\Game Code\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\JsonParser.cpp">
-      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\JsonNodeBase.cpp">
-      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\JsonNodeList.cpp">
-      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\JsonNodeStr.cpp">
-      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Tileset.cpp">
+      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\TilesetManager.cpp">
+      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1362,22 +1368,25 @@
       <Filter>Source Files\Game Code\Sword</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\TextParser.h">
-      <Filter>Source Files\Game Code\Misc. files\Tools\Text Parsing</Filter>
+      <Filter>Source Files\Game Code\Tools\Text Parsing</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\AssetLoader.h">
-      <Filter>Source Files\Game Code\Misc. files\Tools</Filter>
+      <Filter>Source Files\Game Code\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\JsonParser.h">
-      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\JsonNodeBase.h">
-      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\JsonNodeStr.h">
-      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\JsonNodeList.h">
-      <Filter>Source Files\Game Code\Misc. files\Tools\JsonParser</Filter>
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\TilesetManager.h">
+      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

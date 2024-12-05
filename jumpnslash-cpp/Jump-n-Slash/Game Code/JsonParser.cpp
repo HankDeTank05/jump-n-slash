@@ -134,3 +134,8 @@ void JsonParser::ReadJsonFile(std::string path)
 
 	std::cout << "Done parsing json file" << std::endl;
 }
+
+JsonNodeList* JsonParser::GetData()
+{
+	return pHead;
+}
