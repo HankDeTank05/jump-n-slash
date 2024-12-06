@@ -1,6 +1,7 @@
 import os
 import os.path
 from tkinter import *
+from tkinter import ttk
 
 GRID_WIDTH = 8
 GRID_HEIGHT = 8
@@ -27,67 +28,34 @@ def get_tiles():
             tile_fnames.append(items[i])
             print(tile_fnames[-1])
 
+# pre-creation setup
 create_grid(GRID_WIDTH, GRID_HEIGHT)
 get_tiles()
 
+# create the application
 root = Tk()
-root.title(WINDOW_NAME)
+root.title("Hello World")
 root.minsize(1280, 720)
 
-text = Label(root, text="Henry")
-text.pack()
-text2 = Label(root, text="Holman")
-text2.pack()
+# create the main frame, in which everything will be organized
+mainframe = ttk.Frame(root)
+mainframe.grid(column=0, row=0)
 
-image = PhotoImage(file=tile_fnames[0])
-img = Label(root, image=image)
-img.pack()
+# create the grid view on the top
+gridView = ttk.Frame(mainframe)
+gridView.grid(column=0, row=0)
+
+# create the palette view on the bottom
+paletteView = ttk.Frame(mainframe)
+paletteView.grid(column=0, row=1)
+
+# create the image labels
+images = []
+imgLabels = []
+for i in range(len(tile_fnames)):
+    images.append(PhotoImage(file=os.path.join(tile_read_path, tile_fnames[i])))
+    imgLabels.append(ttk.Label(paletteView))
+    imgLabels[i]['image'] = images[i]
+    imgLabels[i].grid(column=i, row=0)
 
 root.mainloop()
-
-'''
-def run():
-    # pre-creation setup
-    create_grid(GRID_WIDTH, GRID_HEIGHT)
-    get_tiles()
-    
-    # create the application
-    root = Tk()
-    root.title("Hello World")
-    root.minsize(1280, 720)
-
-    # create widgets here
-    
-    root.mainloop()
-
-def create_widgets():
-    # create the main frame, in which everything will be organized
-    mainframe = ttk.Frame(root)
-    mainframe.grid(column=0, row=0)
-
-    # create the grid view on the top
-    gridView = ttk.Frame(mainframe)
-    gridView.grid(column=0, row=0)
-
-    create_grid_view()
-
-    # create the palette view on the bottom
-    paletteView = ttk.Frame(mainframe)
-    paletteView.grid(column=0, row=1)
-
-    images = []
-    imgLabels = []
-    for i in range(len(tile_fnames)):
-        images.append(PhotoImage(file=tile_fnames[i]))
-        imgLabels.append(ttk.Label(paletteView))
-        imgLabels[i]['image'] = images[i]
-        imgLabels[i].grid(column=i, row=0)
-
-def create_grid_view():
-    pass
-
-def create_palette_view():
-    pass
-
-run()
-'''
