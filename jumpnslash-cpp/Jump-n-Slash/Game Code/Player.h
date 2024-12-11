@@ -28,8 +28,7 @@ class Sword;
 class Player : public Actor, public Subject
 {
 public:
-	Player() = delete;
-	Player(LevelMap* pLevel);
+	Player();
 	Player(const Player& p) = delete;
 	Player& operator=(const Player& p) = delete;
 	virtual ~Player();
@@ -49,6 +48,8 @@ public:
 	// gameobject stuff
 	virtual void OnSceneEntry() override;
 	virtual void OnSceneExit() override;
+
+	void PlaceInMap();
 
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;

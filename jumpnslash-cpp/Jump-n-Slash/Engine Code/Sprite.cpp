@@ -6,7 +6,8 @@
 Sprite::Sprite()
 	: pSprite(new sf::Sprite()),
 	connMap(),
-	connMods()
+	connMods(),
+	tformOps() // TODO: this is currently not being used
 {
 	// do nothing
 }
@@ -32,21 +33,21 @@ Sprite::~Sprite()
 	delete pSprite;
 }
 
-void Sprite::AddConnector(const std::string& name, const sf::Vector2f& pos, float rot)
+void Sprite::AddConnector(const std::string& name, const sf::Vector2f& pos)
 {
 	assert(connMap.count(name) == 0); // no duplicate names allowed!
 	assert(connMods.count(name) == 0);
 
-	connMap.emplace(name, Connector(pos, rot));
+	connMap.emplace(name, Connector(pos));
 	connMods.emplace(name, connMap.at(name));
 }
 
-void Sprite::ModifyConnector(const std::string& name, const sf::Vector2f& pos, float rot)
+void Sprite::ModifyConnector(const std::string& name, const sf::Vector2f& pos)
 {
 	assert(connMap.count(name) > 0); // a connector with that name doesn't exist!
 	assert(connMods.count(name) > 0);
 
-	connMap.at(name) = Connector(pos, rot);
+	connMap.at(name) = Connector(pos);
 	connMods.emplace(name, connMap.at(name));
 }
 
@@ -69,17 +70,12 @@ void Sprite::DebugConnectors()
 	for (ConnectorMap::iterator it = connMods.begin(); it != connMods.end(); it++)
 	{
 		std::string name = (*it).first;
-		sf::Vector2f pos = pSprite->getPosition() + pSprite->getOrigin() + (*it).second.first;
-		float rot = (*it).second.second;
-		sf::Vector2f dir(cosf(rot), sinf(rot)); // TODO: trig functions bad!
+		sf::Vector2f pos = pSprite->getPosition() + pSprite->getOrigin() + (*it).second;
 
 		sf::Color color = sf::Color::White;
 
 		// draw the point
 		Visualizer::VisualizePoint(pos, color);
-
-		// draw the rotation
-		Visualizer::VisualizeSegment(pos, pos + dir * 50.f, color);
 
 		// draw the name
 		Visualizer::VisualizeText(name, pos, color);
@@ -88,7 +84,7 @@ void Sprite::DebugConnectors()
 
 void Sprite::SetPositionByConnector(const std::string& name, const sf::Vector2f& pos)
 {
-	sf::Vector2f conn = GetConnector(name);
+	Connector conn = GetConnector(name);
 	SetPosition(pos - conn);
 }
 
@@ -117,10 +113,9 @@ void Sprite::SetOrigin(const sf::Vector2f& newOrigin)
 	for (ConnectorMap::iterator it = connMap.begin(); it != connMap.end(); it++)
 	{
 		std::string name = (*it).first;
-		sf::Vector2f pos = (*it).second.first;
-		float rot = (*it).second.second;
+		sf::Vector2f pos = (*it).second;
 
-		Sprite::Connector connModded(pos - newOrigin, rot);
+		Connector connModded(pos - newOrigin);
 		connMods.at(name) = connModded;
 	}
 
@@ -202,10 +197,9 @@ void Sprite::SetScale(const sf::Vector2f& newScale)
 	for (ConnectorMap::iterator it = connMap.begin(); it != connMap.end(); it++)
 	{
 		std::string name = (*it).first;
-		sf::Vector2f pos = (*it).second.first;
-		float rot = (*it).second.second;
+		sf::Vector2f pos = (*it).second;
 
-		Sprite::Connector connModded(sf::Vector2f(pos.x * newScale.x, pos.y * newScale.y), rot);
+		Connector connModded(sf::Vector2f(pos.x * newScale.x, pos.y * newScale.y));
 		connMods.at(name) = connModded;
 	}
 
@@ -218,10 +212,9 @@ void Sprite::Scale(const sf::Vector2f& scaleRelative)
 	for (ConnectorMap::iterator it = connMods.begin(); it != connMods.end(); it++)
 	{
 		std::string name = (*it).first;
-		sf::Vector2f pos = (*it).second.first;
-		float rot = (*it).second.second;
+		sf::Vector2f pos = (*it).second;
 
-		connMods.at(name) = Sprite::Connector(sf::Vector2f(pos.x * scaleRelative.x, pos.y * scaleRelative.y), rot);
+		connMods.at(name) = Connector(sf::Vector2f(pos.x * scaleRelative.x, pos.y * scaleRelative.y));
 	}
 
 	pSprite->scale(scaleRelative);

@@ -46,15 +46,15 @@ void JumpSlashEngine::LoadResources()
 
 	// set connectors for player sprites
 
-	SpriteManager::GetSprite("player idle 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
-	SpriteManager::GetSprite("player idle 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
-	SpriteManager::GetSprite("player idle 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 18.f), 0.f);
-	SpriteManager::GetSprite("player idle 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 19.f), 0.f);
+	SpriteManager::GetSprite("player idle 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f));
+	SpriteManager::GetSprite("player idle 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f));
+	SpriteManager::GetSprite("player idle 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 18.f));
+	SpriteManager::GetSprite("player idle 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 19.f));
 
-	SpriteManager::GetSprite("player walk 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
-	SpriteManager::GetSprite("player walk 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
-	SpriteManager::GetSprite("player walk 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
-	SpriteManager::GetSprite("player walk 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
+	SpriteManager::GetSprite("player walk 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f));
+	SpriteManager::GetSprite("player walk 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f));
+	SpriteManager::GetSprite("player walk 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f));
+	SpriteManager::GetSprite("player walk 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f));
 
 	SpriteManager::GetSprite("player jump 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
 	SpriteManager::GetSprite("player jump 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
@@ -71,7 +71,7 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::GetSprite("player attack 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
 	SpriteManager::GetSprite("player attack 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
 
-	SpriteManager::GetSprite("sword idle 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+	SpriteManager::GetSprite("sword idle 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f));
 
 	SpriteManager::GetSprite("sword swing 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
 	SpriteManager::GetSprite("sword swing 2")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);

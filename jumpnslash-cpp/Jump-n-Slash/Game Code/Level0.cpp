@@ -6,6 +6,7 @@
 #include "../Engine Code/Camera.h"
 
 // game includes
+#include "GameManagerAttorney.h"
 #include "LevelMap.h"
 #include "Player.h"
 #include "Sword.h"
@@ -38,9 +39,15 @@ Level0::~Level0()
 void Level0::Init()
 {
 	pMap = new LevelMap(GridManager::GetGrid("test2"));
-	pPlayer = new Player(pMap);
+	GameManagerAttorney::SceneAccess::SetLevel(pMap);
+
+	pPlayer = new Player();
+	GameManagerAttorney::SceneAccess::SetPlayer(pPlayer);
+
+	pSword = new Sword(pPlayer);
 	pEnemy = new Enemy();
 
+	pPlayer->PlaceInMap();
 	pPlayer->AddObserver(pMap);
 
 	SetCollisionPair<Player, Enemy>();

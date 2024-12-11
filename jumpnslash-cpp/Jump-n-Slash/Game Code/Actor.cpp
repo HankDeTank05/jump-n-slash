@@ -11,16 +11,22 @@
 #include "ParamsPlayer.h"
 #include "LevelTile.h"
 #include "LevelMap.h"
+#include "GameManagerAttorney.h"
 
-Actor::Actor(float _speed, LevelMap* _pLevel)
-	: speed(_speed),
-	pLevel(_pLevel),
+Actor::Actor(float _speed)
+	: pos(),
+	posDelta(0.f, 0.f),
+	width(0.f),
+	height(0.f),
+	speed(_speed),
+	pAnimComp(new AnimationComponent()),
+	pSprite(nullptr),
 	pCurrentRoom(nullptr),
 	grounded(false),
 	headBonked(false),
 	facing(1)
 {
-	assert(pLevel != nullptr);
+	// do nothing
 }
 
 Actor::~Actor()
@@ -28,9 +34,36 @@ Actor::~Actor()
 	delete pAnimComp;
 }
 
-LevelMap* Actor::GetLevel() const
+void Actor::Draw()
 {
-	return pLevel;
+	assert(pCurrentRoom != nullptr); // TODO: this is bad and stupid but Henry told me to do it (bitch)
+
+	Render(pSprite);
+}
+
+sf::Vector2f Actor::GetPos() const
+{
+	return pos;
+}
+
+sf::Vector2f Actor::GetPosDelta() const
+{
+	return posDelta;
+}
+
+float Actor::GetWidth() const
+{
+	return width;
+}
+
+float Actor::GetHeight() const
+{
+	return height;
+}
+
+float Actor::GetHeight() const
+{
+	return height;
 }
 
 bool Actor::IsGrounded() const
@@ -51,6 +84,8 @@ int Actor::GetFacing() const
 
 void Actor::RaycastRight()
 {
+	LevelMap* pMap = GameManagerAttorney::PlayerAccess::GetMap();
+
 	const int RAY_COUNT = 2;
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
@@ -66,7 +101,7 @@ void Actor::RaycastRight()
 		sf::Vector2f currPos = startPos[i];
 
 		// Edge case: the player is partially inside a tile that's solid on the left
-		LevelTile* pTile = pLevel->GetTileAtPos(currPos); // The tile in which the raycast begins
+		LevelTile* pTile = pMap->GetTileAtPos(currPos); // The tile in which the raycast begins
 
 		if (pTile != nullptr && // Is this tile empty
 			pTile->IsSolidOnSides() && // Is this tile solid on the sides
@@ -82,7 +117,7 @@ void Actor::RaycastRight()
 		}
 
 		// While the current position is empty or NOT solid on the sides, and within the bounds of the map
-		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnSides() == false) &&
+		while ((pMap->GetTileAtPos(currPos) == nullptr || pMap->GetTileAtPos(currPos)->IsSolidOnSides() == false) &&
 			currPos.x < MAX_LEVEL_SIZE * TILE_SIZE_F)
 		{
 			// Visuals for debugging ONLY
@@ -134,6 +169,8 @@ void Actor::RaycastRight()
 
 void Actor::RaycastLeft()
 {
+	LevelMap* pMap = GameManagerAttorney::PlayerAccess::GetMap();
+
 	const int RAY_COUNT = 2;
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
@@ -148,7 +185,7 @@ void Actor::RaycastLeft()
 	{
 		sf::Vector2f currPos = startPos[i];
 
-		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnSides() == false) &&
+		while ((pMap->GetTileAtPos(currPos) == nullptr || pMap->GetTileAtPos(currPos)->IsSolidOnSides() == false) &&
 			currPos.x >= 0.f)
 		{
 			// only visualize stuff if we're debugging
@@ -205,6 +242,8 @@ void Actor::RaycastLeft()
 
 void Actor::RaycastUp()
 {
+	LevelMap* pMap = GameManagerAttorney::PlayerAccess::GetMap();
+
 	const int RAY_COUNT = 2;
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
@@ -220,7 +259,7 @@ void Actor::RaycastUp()
 		sf::Vector2f currPos = startPos[i];
 
 		// While the current position is empty or NOT solid underneath, and within the bounds of the map
-		while ((pLevel->GetTileAtPos(currPos) == nullptr || !pLevel->GetTileAtPos(currPos)->IsSolidOnBottom()) && currPos.y >= 0.0f) {
+		while ((pMap->GetTileAtPos(currPos) == nullptr || !pMap->GetTileAtPos(currPos)->IsSolidOnBottom()) && currPos.y >= 0.0f) {
 			// Visuals for debugging ONLY
 			if (DEBUG_PLAYER_MAP_COLLISION) {
 				Visualizer::VisualizePoint(currPos, sf::Color::Green);
@@ -280,6 +319,8 @@ void Actor::RaycastUp()
 
 void Actor::RaycastDown()
 {
+	LevelMap* pMap = GameManagerAttorney::PlayerAccess::GetMap();
+
 	const int RAY_COUNT = 2;
 	std::array<sf::Vector2f, RAY_COUNT> startPos;
 	std::array<sf::Vector2f, RAY_COUNT> endPos;
@@ -296,7 +337,7 @@ void Actor::RaycastDown()
 		sf::Vector2f currPos = startPos[i];
 
 		// Edge case: the player is partially inside a tile that's solid on top
-		LevelTile* pTile = pLevel->GetTileAtPos(currPos); // The tile in which the raycast begins
+		LevelTile* pTile = pMap->GetTileAtPos(currPos); // The tile in which the raycast begins
 
 		if (pTile != nullptr && // Is this tile empty
 			pTile->IsSolidOnTop() && // Is this tile solid on top
@@ -312,7 +353,7 @@ void Actor::RaycastDown()
 		}
 
 		// While the current position is empty or NOT solid on top, and within the bounds of the map
-		while ((pLevel->GetTileAtPos(currPos) == nullptr || pLevel->GetTileAtPos(currPos)->IsSolidOnTop() == false) &&
+		while ((pMap->GetTileAtPos(currPos) == nullptr || pMap->GetTileAtPos(currPos)->IsSolidOnTop() == false) &&
 			currPos.y <= MAX_LEVEL_SIZE * TILE_SIZE_F)
 		{
 

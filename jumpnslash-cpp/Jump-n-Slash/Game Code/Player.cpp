@@ -28,11 +28,12 @@
 #include "PlayerControlSwitchPro.h"
 #include "PlayerControlDualSense.h"
 #include "ControllerDebugger.h"
+#include "GameManagerAttorney.h"
 #include "Sword.h"
 #include "SwordAttorney.h"
 
-Player::Player(LevelMap* pLevel)
-	: Actor(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED, pLevel),
+Player::Player()
+	: Actor(PLAYER_WALK_SPEED),
 	pCtrlStrat(nullptr),
 	pCurrentState(&PlayerMoveFSM::idle),
 	pPrevState(nullptr),
@@ -48,7 +49,35 @@ Player::Player(LevelMap* pLevel)
 {	
 	assert(pCurrentState != nullptr);
 
-	RequestSceneEntry();
+	SetControls(ControlManager::GetControlScheme());
+
+	// do animation stuff
+	AnimationSet* pAnimSet = new AnimationSet();
+	
+	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("player idle"));
+	pAnimSet->AddAnimation("walk", AnimationManager::GetAnimation("player walk"));
+	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
+	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
+	
+
+	pAnimComp->DefineAnimationSet(pAnimSet);
+	pAnimComp->SetAnimation("idle");
+
+	pSprite = pAnimComp->GetCurrentFrame();
+	SetWidth();
+	SetHeight();
+
+	// register with the engine
+	RequestUpdateRegistration();
+	RequestDrawRegistration();
+	//RequestKeyRegistration(JUMP, KeyEvent::KeyPress);
+	//RequestKeyRegistration(JUMP, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(WALK_LEFT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(WALK_LEFT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(WALK_RIGHT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(WALK_RIGHT, KeyEvent::KeyRelease);
+
+	SetCollisionSprite(pSprite, VolumeType::BSphere);
 }
 
 Player::~Player()
@@ -59,7 +88,6 @@ Player::~Player()
 
 void Player::Update(float deltaTime)
 {
-	assert(pLevel != nullptr);
 	assert(pCurrentRoom != nullptr);
 
 	// update the inputs
@@ -72,7 +100,7 @@ void Player::Update(float deltaTime)
 		pCurrentState->Enter(this);
 	}
 
-	// update player based on the current move state
+	// move player
 	pCurrentState->Update(this, deltaTime);
 
 	// check if we're still inside the room
@@ -145,7 +173,8 @@ void Player::Update(float deltaTime)
 	}
 	if (DEBUG_LEVEL_SCROLL_BOUNDS)
 	{
-		pLevel->DebugLevelScrollBounds(pCurrentRoom);
+		LevelMap* pMap = GameManagerAttorney::PlayerAccess::GetMap();
+		pMap->DebugLevelScrollBounds(pCurrentRoom);
 	}
 	if (DEBUG_CONTROLLER_INPUT)
 	{
@@ -166,34 +195,41 @@ void Player::Alarm1()
 	attacking = false;
 }
 
-bool Player::IsApplyGravity()
+//		inputWalkDir -= 1.f;
+//		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
+//		facing = -1;
+//		break;
+//	case WALK_RIGHT:
+//		//inputReceivedWalkRight = true;
+//		inputWalkDir += 1.f;
+//		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
+//		facing = 1;
+//		break;
+//	case JUMP:
+//		inputReceivedJump = true;
+//		break;
+//	}
+//}
+//
+//void Player::KeyReleased(sf::Keyboard::Key key)
+//{
+//	switch (key)
+//	{
+//	case WALK_LEFT:
+//		//inputReceivedWalkLeft = false;
+//		inputWalkDir += 1.f;
+//		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
+//		break;
+//	case WALK_RIGHT:
+//		//inputReceivedWalkRight = false;
+//		inputWalkDir -= 1.f;
+//		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
+//		break;
+void Player::PlaceInMap()
 {
-	return applyGravity;
-}
-
-bool Player::IsReceivingSlashInput()
-{
-	return inputReceivedSlashAtk;
-}
-
-bool Player::IsAttacking()
-{
-	return attacking;
-}
-
-void Player::OnCollisionEnter(CollisionObject* pOther)
-{
-	if (DEBUG_COLLISION) std::cout << "Player has entered collision" << std::endl;
-}
-
-void Player::OnCollisionDuring(CollisionObject* pOther)
-{
-	// do nothing
-}
-
-void Player::OnCollisionExit(CollisionObject* pOther)
-{
-	if (DEBUG_COLLISION) std::cout << "Player has exited collision" << std::endl;
+	LevelMap* pLevel = GameManagerAttorney::PlayerAccess::GetMap();
+	assert(pLevel != nullptr);
+	pLevel->PlacePlayerInMap();
 }
 
 void Player::OnSceneEntry()
@@ -224,6 +260,42 @@ void Player::OnSceneEntry()
 void Player::OnSceneExit()
 {
 	RequestCollisionDeregistration();
+}
+
+//	case JUMP:
+//		inputReceivedJump = false;
+//		break;
+//	}
+//}
+
+bool Player::IsApplyGravity()
+{
+	return applyGravity;
+}
+
+bool Player::IsReceivingSlashInput()
+{
+	return inputReceivedSlashAtk;
+}
+
+bool Player::IsAttacking()
+{
+	return attacking;
+}
+
+void Player::OnCollisionEnter(CollisionObject* pOther)
+{
+	if (DEBUG_COLLISION) std::cout << "Player has entered collision" << std::endl;
+}
+
+void Player::OnCollisionDuring(CollisionObject* pOther)
+{
+	//if (DEBUG_COLLISION) std::cout << "Player is currently colliding" << std::endl;
+}
+
+void Player::OnCollisionExit(CollisionObject* pOther)
+{
+	if (DEBUG_COLLISION) std::cout << "Player has exited collision" << std::endl;
 }
 
 void Player::ProcessInputs(float deltaTime)

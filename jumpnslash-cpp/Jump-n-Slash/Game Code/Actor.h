@@ -14,7 +14,7 @@ class Actor : public GameObject
 {
 public:
 	Actor() = delete;
-	Actor(float speed, LevelMap* pLevel);
+	Actor(float speed);
 	Actor(const Actor& a) = delete;
 	Actor& operator=(const Actor& a) = delete;
 	virtual ~Actor();
@@ -24,7 +24,10 @@ public:
 	sf::Vector2f GetConnector(const std::string& name);
 
 protected:
-	LevelMap* GetLevel() const;
+	sf::Vector2f GetPos() const;
+	sf::Vector2f GetPosDelta() const;
+	float GetWidth() const;
+	float GetHeight() const;
 	bool IsGrounded() const;
 	bool IsHeadBonked() const;
 	int GetFacing() const;
@@ -38,7 +41,8 @@ protected:
 
 protected:
 	float speed;
-	LevelMap* pLevel;
+	AnimationComponent* pAnimComp;
+	Sprite* pSprite;
 	RoomData* pCurrentRoom;
 	bool grounded; // Flag to indicate if the actor is grounded
 	bool headBonked; // Flag to indicate if the actor is touching a ceiling

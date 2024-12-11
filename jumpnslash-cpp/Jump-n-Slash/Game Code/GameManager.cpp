@@ -15,7 +15,9 @@
 GameManager* GameManager::pInstance = nullptr;
 
 GameManager::GameManager()
-	: pCurrentState(nullptr)
+	: pCurrentState(nullptr),
+	pPlayer(nullptr),
+	pLevel(nullptr)
 {
 	// do nothing
 }
@@ -53,6 +55,26 @@ void GameManager::Terminate()
 void GameManager::QuitGame()
 {
 	Instance().privQuitGame();
+}
+
+void GameManager::SetPlayer(Player* pPlayer)
+{
+	Instance().privSetPlayer(pPlayer);
+}
+
+void GameManager::SetLevel(LevelMap* pLevel)
+{
+	Instance().privSetLevel(pLevel);
+}
+
+Player* GameManager::GetPlayer()
+{
+	return Instance().privGetPlayer();
+}
+
+LevelMap* GameManager::GetMap()
+{
+	return Instance().privGetLevel();
 }
 
 void GameManager::privStartGame()
@@ -94,4 +116,26 @@ void GameManager::privResumeFromPause()
 void GameManager::privQuitGame()
 {
 	EngineAttorney::QuitGameAccess::RequestQuitGame();
+}
+
+void GameManager::privSetPlayer(Player* _pPlayer)
+{
+	assert(_pPlayer != nullptr);
+	pPlayer = _pPlayer;
+}
+
+void GameManager::privSetLevel(LevelMap* _pLevel)
+{
+	assert(_pLevel != nullptr);
+	pLevel = _pLevel;
+}
+
+Player* GameManager::privGetPlayer()
+{
+	return pPlayer;
+}
+
+LevelMap* GameManager::privGetLevel()
+{
+	return pLevel;
 }

@@ -29,7 +29,7 @@ public:
 	using RoomList = std::list<RoomData*>;
 	using RoomListRef = RoomList::iterator;
 
-	void LinkToPlayer(Player* pPlayer);
+	void PlacePlayerInMap();
 
 	sf::Vector2f GetStartingSpawnPoint(); // TODO: docs for LevelMap::GetStartingSpawnPoint
 	RoomData* GetStartingRoom(); // TODO: docs for LevelMap::GetStartingRoom
@@ -65,7 +65,6 @@ private:
 	std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
 	sf::Vector2i usedSize;
 	RoomList rooms;
-	Player* pPlayer;
 };
 
 #endif

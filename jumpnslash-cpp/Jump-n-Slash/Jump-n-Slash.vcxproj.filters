@@ -229,6 +229,18 @@
     <Filter Include="Source Files\Engine Code\Main Systems\Sprite System">
       <UniqueIdentifier>{b12ea975-1bac-460c-80e9-75027d87cd77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Commands">
+      <UniqueIdentifier>{3a72ef81-e17c-4285-b3d4-d3c385396ada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands">
+      <UniqueIdentifier>{9273f7d0-5896-4db7-863d-4b2a75273d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands">
+      <UniqueIdentifier>{b109499f-7439-4d6c-8294-75bc6f27f821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands">
+      <UniqueIdentifier>{3cd8cb72-318d-49f7-b8b9-cc3ade9ea0fe}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Game Code\Sword">
       <UniqueIdentifier>{4d852e8c-8ee3-4aa4-8a22-ae9c292a4f2c}</UniqueIdentifier>
     </Filter>
@@ -776,6 +788,39 @@
     </ClCompile>
     <ClCompile Include="Game Code\TilesetManager.cpp">
       <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandPos.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandPosSet.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandPosConn.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandPosMove.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandRot.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandRotChange.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandRotSet.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandScl.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandSclSet.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandSclChange.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1387,6 +1432,39 @@
     </ClInclude>
     <ClInclude Include="Game Code\TilesetManager.h">
       <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandPos.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandPosSet.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandPosConn.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandPosMove.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandRot.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandRotSet.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandRotChange.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandScl.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandSclSet.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandSclChange.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

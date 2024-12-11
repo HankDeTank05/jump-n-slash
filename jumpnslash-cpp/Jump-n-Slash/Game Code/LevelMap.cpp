@@ -21,13 +21,13 @@
 #include "GameDebugFlags.h"
 #include "RoomData.h"
 #include "PlayerAttorney.h"
+#include "GameManagerAttorney.h"
 
 LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid, Tileset* _pTileset)
 	: pTileset(_pTileset),
 	map(),
 	usedSize(0, 0),
-	rooms(),
-	pPlayer(nullptr)
+	rooms()
 {
 	std::map<std::string, std::list<sf::Vector2i>> tiles;
 
@@ -340,9 +340,10 @@ LevelMap::~LevelMap()
 	}
 }
 
-void LevelMap::LinkToPlayer(Player* _pPlayer)
+void LevelMap::PlacePlayerInMap()
 {
-	pPlayer = _pPlayer;
+	Player* pPlayer = GameManagerAttorney::LevelAccess::GetPlayer();
+	assert(pPlayer != nullptr);
 
 	// set player spawn point
 	PlayerAttorney::LevelAccess::SetCurrentRoom(pPlayer, rooms.front());
@@ -406,6 +407,9 @@ LevelTile* LevelMap::GetTileAtPos(sf::Vector2f worldPos)
 
 void LevelMap::OnNotify(ObserverEvent event)
 {
+	Player* pPlayer = GameManagerAttorney::LevelAccess::GetPlayer();
+	assert(pPlayer != nullptr);
+
 	switch (event)
 	{
 	case ObserverEvent::PlayerOutsideCurrentRoom:

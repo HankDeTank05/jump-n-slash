@@ -1,6 +1,0 @@
-Package: simdjson
-Feature: exceptions
-Architecture: x64-windows
-Multi-Arch: same
-Description: Enable exception-throwing interface
-Status: install ok half-installed

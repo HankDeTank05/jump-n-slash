@@ -4,10 +4,14 @@
 // language includes
 #include <map>
 #include <string>
+#include <queue>
 
 // library includes
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+
+// forward declarations
+class SpriteCommand;
 
 class Sprite
 {
@@ -21,7 +25,7 @@ public:
 
 	// stuff specific to this class
 
-	using Connector = std::pair<sf::Vector2f, float>; // landmark points on the sprite that can be attached to. every connection point has a position and a rotation
+	using Connector = sf::Vector2f; // landmark points on the sprite
 	using ConnectorMap = std::map<std::string, Connector>; // multiple connection points are allowed, and each one has a name
 
 	/*!
@@ -45,7 +49,7 @@ public:
 	* \see	Sprite::ModifyConnector
 	* \see	Sprite::GetConnector
 	*/
-	void AddConnector(const std::string& name, const sf::Vector2f& pos, float rot);
+	void AddConnector(const std::string& name, const sf::Vector2f& pos);
 	/*!
 	* \brief	Modify an existing connector on this sprite.
 	* 
@@ -62,7 +66,7 @@ public:
 	* \see	Sprite::AddConnector
 	* \see	Sprite::GetConnector
 	*/
-	void ModifyConnector(const std::string& name, const sf::Vector2f& pos, float rot);
+	void ModifyConnector(const std::string& name, const sf::Vector2f& pos);
 	/*!
 	* \brief	Get a connector from this sprite.
 	* 
@@ -132,9 +136,10 @@ private: // engine-only functions (accessible through attorney)
 	sf::Sprite* GetSprite();
 
 private:
-	sf::Sprite* pSprite;
+	sf::Sprite* pSprite; // the sf::Sprite to be manipulated/drawn
 	ConnectorMap connMap; // a map of the original connector data
 	ConnectorMap connMods; // a map of the modified connector data based on transformations
+	std::queue<SpriteCommand*> tformOps; // a queue of transform operations (commands) for processing at time of drawing
 };
 
 #endif
