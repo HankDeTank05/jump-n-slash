@@ -20,15 +20,13 @@
 
 // game includes
 #include "AssetLoader.h"
+#include "JsonParser.h"
 #include "GameManager.h"
 
 // game includes (designer controls)
 #include "ControlMapping.h"
 #include "ParamsPlayer.h"
 #include "ParamsDreamcatchers.h"
-
-//using namespace simdjson;
-//using json = nlohmann::json;
 
 void JumpSlashEngine::LoadResources()
 {
@@ -58,25 +56,30 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::GetSprite("player walk 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
 	SpriteManager::GetSprite("player walk 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f), 0.f);
 
-	// TODO: add weapon hold points on player jumping sprites
+	SpriteManager::GetSprite("player jump 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
+	SpriteManager::GetSprite("player jump 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
+	SpriteManager::GetSprite("player jump 3")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
+	SpriteManager::GetSprite("player jump 4")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
 	
-	// TODO: add weapon hold points on player falling sprites
+	SpriteManager::GetSprite("player fall 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
+	SpriteManager::GetSprite("player fall 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
+	SpriteManager::GetSprite("player fall 3")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
+	SpriteManager::GetSprite("player fall 4")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
 
-	// TODO: add weapon hold points on player attack sprites
+	SpriteManager::GetSprite("player attack 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
+	SpriteManager::GetSprite("player attack 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
+	SpriteManager::GetSprite("player attack 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
+	SpriteManager::GetSprite("player attack 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
 
 	SpriteManager::GetSprite("sword idle 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
 
-	// TODO: add hold point on sword swing sprites
+	SpriteManager::GetSprite("sword swing 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+	SpriteManager::GetSprite("sword swing 2")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+	SpriteManager::GetSprite("sword swing 3")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+	SpriteManager::GetSprite("sword swing 4")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
 
-	// parse the json file for level tiles to add
-	// vvv for nlohman/json vvv
-	//std::ifstream file("..\\..\\..\\tools\\formatting_rules.json");
-	//json data = json::parse(file);
-	// vvv for simdjson vvv
-	//ondemand::parser parser;
-	//padded_string json = padded_string::load("..\\..\\..\\tools\\formatting_rules.json");
-	//ondemand::document jsonData = parser.iterate(json);
-	//std::cout << "Tile size: " << jsonData["genericInfo"]["tileSize"] << std::endl;
+	JsonParser parser;
+	parser.ReadJsonFile("../../tools/formatting_rules.json");
 
 	TextureManager::LoadTexture("block solid", "leveltiles/block_solid.png");
 	SpriteManager::LoadSprite("block solid", "block solid");
@@ -102,11 +105,17 @@ void JumpSlashEngine::LoadResources()
 	//GridManager::LoadGrid("test", "test.txt");
 	//GridManager::LoadGrid("test 2", "test2.txt");
 
+	TextureManager::LoadTexture("paper mario spritesheet", "test/paper_mario.png");
+	SpriteManager::LoadSprite("paper mario body", "paper mario spritesheet", sf::IntRect(1022, 2564, 148, 135));
+	SpriteManager::LoadSprite("paper mario arm front", "paper mario spritesheet", sf::IntRect(105, 2569, 93, 105));
+	SpriteManager::LoadSprite("paper mario arm back", "paper mario spritesheet", sf::IntRect(200, 2570, 87, 95));
+	SpriteManager::LoadSprite("paper mario hand front", "paper mario spritesheet", sf::IntRect(37, 3789, 125, 114));
+	SpriteManager::LoadSprite("paper mario hand back", "paper mario spritesheet", sf::IntRect(748, 3963, 119, 119));
+
 	// asserts to make sure player parameters are set properly
-	assert(PLAYER_WALK_SPEED > 0.f);
-	assert(GRAVITY_WEIGHT > 0.f);
-	assert(JUMP_FORCE < 0.f);
-	assert(MAX_JUMP_HOLD_TIME >= 0.f);
+	assert(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED > 0.f);
+	assert(Movement::PLAYER_GRAVITY > 0.f);
+	assert(Movement::JUMP_RISING_SPEED > 0.f);
 
 	// asserts to make sure dreamcatcher parameters are set properly
 

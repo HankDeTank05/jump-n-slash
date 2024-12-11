@@ -3,6 +3,7 @@
 
 // forward declarations
 class CollisionObject;
+class CollisionVolume;
 
 class CollisionObjectAttorney
 {
@@ -15,6 +16,7 @@ public:
 		static void Register(CollisionObject* pCollidable);
 		static void Deregister(CollisionObject* pCollidable);
 	};
+	
 	class ColDispatch
 	{
 	private:
@@ -22,12 +24,21 @@ public:
 		friend class CollisionDispatch;
 		static void Collision(CollisionObject* pThis, CollisionObject* pOther);
 	};
+	
 	class NoColDispatch
 	{
 	private:
 		template <typename C1, typename C2>
 		friend class NoCollisionDispatch;
 		static void NoCollision(CollisionObject* pThis, CollisionObject* pOther);
+	};
+
+	class ColTestAccess
+	{
+	private:
+		friend class CollisionTestPairCommand;
+		friend class CollisionTestSelfCommand;
+		static const CollisionVolume& GetCollisionVolume(CollisionObject* pCollidable);
 	};
 };
 

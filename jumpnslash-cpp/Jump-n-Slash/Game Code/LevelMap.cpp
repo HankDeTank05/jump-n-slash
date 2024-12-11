@@ -22,8 +22,9 @@
 #include "RoomData.h"
 #include "PlayerAttorney.h"
 
-LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
-	: map(),
+LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid, Tileset* _pTileset)
+	: pTileset(_pTileset),
+	map(),
 	usedSize(0, 0),
 	rooms(),
 	pPlayer(nullptr)

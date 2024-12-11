@@ -5,12 +5,15 @@
 
 // game includes
 #include "GameDebugFlags.h"
+#include "SwordFSM.h"
+#include "SwordAttorney.h"
 
 void SwordStateSwing::Enter(Sword* pSword) const
 {
 	if (DEBUG_SWORD_STATE) std::cout << "Entered SwordStateSwing" << std::endl;
 
-	// register for collision???
+	SwordAttorney::StateAccess::RequestCollisionRegistration(pSword);
+	SwordAttorney::StateAccess::SetAnimationSwing(pSword);
 }
 
 void SwordStateSwing::Update(Sword* pSword, float deltaTime) const
@@ -22,7 +25,11 @@ const SwordState* SwordStateSwing::GetNextState(Sword* pSword) const
 {
 	const SwordState* pNextState = this;
 
-	// TODO: sword state change logic goes here
+	if (SwordAttorney::StateAccess::IsAttacking(pSword) == false)
+	{
+		SwordAttorney::StateAccess::RequestCollisionDeregistration(pSword);
+		pNextState = &SwordFSM::idle;
+	}
 
 	return pNextState;
 }

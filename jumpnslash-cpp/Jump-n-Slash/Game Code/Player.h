@@ -23,8 +23,9 @@ class PlayerMoveState;
 class PlayerControlStrategy;
 class LevelMap;
 class RoomData;
+class Sword;
 
-class Player : public Actor, /*public InputObject,*/ public Subject
+class Player : public Actor, public Subject
 {
 public:
 	Player() = delete;
@@ -38,19 +39,22 @@ public:
 
 	// alarm stuff
 	virtual void Alarm0() override;
-
-	// input stuff
-	//virtual void KeyPressed(sf::Keyboard::Key key) override;
-	//virtual void KeyReleased(sf::Keyboard::Key key) override;
+	virtual void Alarm1() override;
 
 	// collision stuff
 	virtual void OnCollisionEnter(CollisionObject* pOther) override;
 	virtual void OnCollisionDuring(CollisionObject* pOther) override;
 	virtual void OnCollisionExit(CollisionObject* pOther) override;
 
+	// gameobject stuff
+	virtual void OnSceneEntry() override;
+	virtual void OnSceneExit() override;
+
 private: // player accessors. for selective access only (thru attorney)
 	friend class PlayerAttorney;
 	bool IsApplyGravity();
+	bool IsReceivingSlashInput();
+	bool IsAttacking();
 
 private: // player mutators. for selective access only (thru attorney)
 
@@ -58,12 +62,16 @@ private: // player mutators. for selective access only (thru attorney)
 
 	void ProcessInputs(float deltaTime);
 	void SetControls(ControlScheme ctrl);
+	void ApplyGravity(float deltaTime);
+
 	void SetWalk(float direction);
 	void SetJump(bool enabled);
+	void SetSlash(bool enabled);
 
 	// other
 
 	void SetCurrentRoom(RoomData* pCurrentRoom);
+	void BeginSlashAtk();
 
 	// animation
 
@@ -71,17 +79,21 @@ private: // player mutators. for selective access only (thru attorney)
 	void SetAnimationWalk();
 	void SetAnimationJump();
 	void SetAnimationFall();
+	void SetAnimationAttack();
 
 private: // Member variables
 	PlayerControlStrategy* pCtrlStrat;
 	const PlayerMoveState* pCurrentState; // the current movement state
 	const PlayerMoveState* pPrevState; // the move state during the previous frame
+	Sword* pSword;
 	sf::Vector2f respawnPoint; // where the player will respawn after dying
-	//bool inputReceivedWalkLeft; // flag indicating if the walk left input is currently being received
-	//bool inputReceivedWalkRight; // flag indicating if the walk right input is currently being received
 	float inputWalkDir; // float in range [-1, 1] indicating which direction to walk and how fast
 	bool inputReceivedJump; // flag indicating if the jump input is currently being received
+	bool inputReceivedSlashAtk; // flag indicating if the slash attack input is currently being received
 	bool applyGravity; // flag indicating if gravity should be applied
+	bool attacking; // flag indicating if we're currently attacking
+	float heightBeforeJump; // the y-pos of the player before they jump (so we can cap the jump height properly)
+	float peakJumpHeight; // the y-pos of the player at the apex of their jump (so we cna cap the jump height properly)
 };
 
 #endif

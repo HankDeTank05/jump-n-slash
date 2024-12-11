@@ -8,6 +8,8 @@
 #include "PlayerMoveStateJumping.h"
 #include "PlayerMoveStateFalling.h"
 #include "PlayerMoveStateDashing.h"
+#include "PlayerMoveStateSlashAtk.h"
+#include "PlayerMoveStateDreamAtk.h"
 
 class PlayerMoveFSM
 {
@@ -17,6 +19,8 @@ public:
 	static const PlayerMoveStateJumping jumping;
 	static const PlayerMoveStateFalling falling;
 	static const PlayerMoveStateDashing dashing;
+	static const PlayerMoveStateSlashAtk slashAtk;
+	static const PlayerMoveStateDreamAtk dreamAtk;
 };
 
 #endif

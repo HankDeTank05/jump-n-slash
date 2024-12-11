@@ -12,6 +12,7 @@
 #include "Constants.h"
 
 // forward declarations
+class Tileset;
 class LevelTile;
 class RoomData;
 class Player;
@@ -20,7 +21,7 @@ class LevelMap : public Observer
 {
 public:
 	LevelMap() = delete;
-	LevelMap(std::vector<std::vector<std::string>>* grid);
+	LevelMap(std::vector<std::vector<std::string>>* grid, Tileset* pTileset);
 	LevelMap(const LevelMap& lm) = delete;
 	LevelMap& operator=(const LevelMap& lm) = delete;
 	virtual ~LevelMap();
@@ -60,6 +61,7 @@ public:
 	void DebugLevelScrollBounds(RoomData* pRoom);
 
 private:
+	Tileset* pTileset;
 	std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
 	sf::Vector2i usedSize;
 	RoomList rooms;

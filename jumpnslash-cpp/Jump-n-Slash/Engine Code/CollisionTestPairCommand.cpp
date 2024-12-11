@@ -6,6 +6,7 @@
 #include "CollisionVolume.h"
 #include "Math.h"
 #include "EngineDebugFlags.h"
+#include "CollisionObject.h"
 
 CollisionTestPairCommand::CollisionTestPairCommand(CollisionObjectGroup* _pGroup1, CollisionObjectGroup* _pGroup2,
 	CollisionDispatchBase* _pColDispatch, CollisionDispatchBase* _pNoColDispatch)
@@ -34,8 +35,8 @@ void CollisionTestPairCommand::Execute()
 	{
 		for (CollisionObjectGroup::CollisionObjectList::iterator it2 = list2.begin(); it2 != list2.end(); it2++)
 		{
-			const CollisionVolume& cv1 = (*it1)->GetCollisionVolume();
-			const CollisionVolume& cv2 = (*it2)->GetCollisionVolume();
+			const CollisionVolume& cv1 = CollisionObjectAttorney::ColTestAccess::GetCollisionVolume(*it1);
+			const CollisionVolume& cv2 = CollisionObjectAttorney::ColTestAccess::GetCollisionVolume(*it2);
 
 			if (Math::Intersect(cv1, cv2) == true)
 			{

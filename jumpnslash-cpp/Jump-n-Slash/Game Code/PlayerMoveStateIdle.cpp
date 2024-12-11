@@ -45,6 +45,10 @@ const PlayerMoveState* PlayerMoveStateIdle::GetNextState(Player* pPlayer) const
 	{
 		pNextState = &PlayerMoveFSM::walking;
 	}
+	else if (PlayerAttorney::StateAccess::IsReceivingSlashInput(pPlayer) == true)
+	{
+		pNextState = &PlayerMoveFSM::slashAtk;
+	}
 
 	return pNextState;
 }

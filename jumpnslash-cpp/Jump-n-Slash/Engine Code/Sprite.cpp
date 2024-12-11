@@ -50,12 +50,18 @@ void Sprite::ModifyConnector(const std::string& name, const sf::Vector2f& pos, f
 	connMods.emplace(name, connMap.at(name));
 }
 
-Sprite::Connector Sprite::GetConnector(const std::string& name)
+sf::Vector2f Sprite::GetConnector(const std::string& name)
 {
 	assert(connMap.count(name) > 0); // a connector with that name doesn't exist!
 	assert(connMods.count(name) > 0);
 
-	return connMods.at(name);
+	return /*pSprite->getPosition() +*/ connMods.at(name).first;
+}
+
+bool Sprite::HasConnector(const std::string& name)
+{
+	assert(connMap.count(name) == connMods.count(name));
+	return connMap.count(name) > 0;
 }
 
 void Sprite::DebugConnectors()
@@ -67,7 +73,7 @@ void Sprite::DebugConnectors()
 		float rot = (*it).second.second;
 		sf::Vector2f dir(cosf(rot), sinf(rot)); // TODO: trig functions bad!
 
-		sf::Color color = sf::Color::Red;
+		sf::Color color = sf::Color::White;
 
 		// draw the point
 		Visualizer::VisualizePoint(pos, color);
@@ -82,8 +88,8 @@ void Sprite::DebugConnectors()
 
 void Sprite::SetPositionByConnector(const std::string& name, const sf::Vector2f& pos)
 {
-	Sprite::Connector conn = GetConnector(name);
-	SetPosition(pos - conn.first);
+	sf::Vector2f conn = GetConnector(name);
+	SetPosition(pos - conn);
 }
 
 void Sprite::SetTexture(const sf::Texture& texture, bool resetRect)

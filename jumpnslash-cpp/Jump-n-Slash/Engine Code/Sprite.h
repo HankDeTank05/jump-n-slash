@@ -82,7 +82,9 @@ public:
 	* \see	Sprite::AddConnector
 	* \see	Sprite::ModifyConnector
 	*/
-	Connector GetConnector(const std::string& name);
+	sf::Vector2f GetConnector(const std::string& name);
+	// TODO: docs for Sprite::HasConnector
+	bool HasConnector(const std::string& name);
 
 	void DebugConnectors();
 

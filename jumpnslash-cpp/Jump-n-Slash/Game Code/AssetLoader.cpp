@@ -17,20 +17,12 @@
 #include "Constants.h"
 #include "ParamsPlayer.h"
 #include "GameDebugFlags.h"
+#include "TextParser.h"
 
 const std::string AssetLoader::COMMAND_TEXTURE = "texture";
 const std::string AssetLoader::COMMAND_SPRITE = "sprite";
 const std::string AssetLoader::COMMAND_ANIMATION = "animation";
 const std::string AssetLoader::COMMAND_GRID = "grid";
-
-const std::string AssetLoader::TYPE_STRING = "string";
-const std::string AssetLoader::TYPE_FLOAT = "float";
-const std::string AssetLoader::TYPE_INT = "int";
-const std::string AssetLoader::TYPE_BOOL = "bool";
-const std::string AssetLoader::TYPE_LIST_STRING = "list<" + AssetLoader::TYPE_STRING + ">";
-const std::string AssetLoader::TYPE_LIST_FLOAT = "list<" + AssetLoader::TYPE_FLOAT + ">";
-const std::string AssetLoader::TYPE_LIST_INT = "list<" + AssetLoader::TYPE_INT + ">";
-const std::string AssetLoader::TYPE_LIST_BOOL = "list<" + AssetLoader::TYPE_BOOL + ">";
 
 
 AssetLoader::AssetLoader()
@@ -40,36 +32,36 @@ AssetLoader::AssetLoader()
 	// define the "texture" command
 
 	std::list<std::string> textureArgs;
-	textureArgs.push_back(AssetLoader::TYPE_STRING); // texture key
-	textureArgs.push_back(AssetLoader::TYPE_STRING); // file name
-	textureArgs.push_back(AssetLoader::TYPE_BOOL); // smooth
+	textureArgs.push_back(TextParser::TYPE_STRING); // texture key
+	textureArgs.push_back(TextParser::TYPE_STRING); // file name
+	textureArgs.push_back(TextParser::TYPE_BOOL); // smooth
 	commands.emplace(AssetLoader::COMMAND_TEXTURE, textureArgs);
 
 	// define the "sprite" command
 
 	std::list<std::string> spriteArgs;
-	spriteArgs.push_back(AssetLoader::TYPE_STRING); // sprite key
-	spriteArgs.push_back(AssetLoader::TYPE_STRING); // texture key
-	spriteArgs.push_back(AssetLoader::TYPE_INT); // texture x origin
-	spriteArgs.push_back(AssetLoader::TYPE_INT); // texture y origin
-	spriteArgs.push_back(AssetLoader::TYPE_INT); // texture width
-	spriteArgs.push_back(AssetLoader::TYPE_INT); // texture height
+	spriteArgs.push_back(TextParser::TYPE_STRING); // sprite key
+	spriteArgs.push_back(TextParser::TYPE_STRING); // texture key
+	spriteArgs.push_back(TextParser::TYPE_INT); // texture x origin
+	spriteArgs.push_back(TextParser::TYPE_INT); // texture y origin
+	spriteArgs.push_back(TextParser::TYPE_INT); // texture width
+	spriteArgs.push_back(TextParser::TYPE_INT); // texture height
 	commands.emplace(AssetLoader::COMMAND_SPRITE, spriteArgs);
 
 	// define the "animation" command
 
 	std::list<std::string> animArgs;
-	animArgs.push_back(AssetLoader::TYPE_STRING); // animation key
-	animArgs.push_back(AssetLoader::TYPE_LIST_STRING); // list of sprite keys
+	animArgs.push_back(TextParser::TYPE_STRING); // animation key
+	animArgs.push_back(TextParser::TYPE_LIST_STRING); // list of sprite keys
 	// NOTE: there is no argument for animation fps here, since we set that in DesignerControls.h
-	animArgs.push_back(AssetLoader::TYPE_BOOL); // loop flag
+	animArgs.push_back(TextParser::TYPE_BOOL); // loop flag
 	commands.emplace(AssetLoader::COMMAND_ANIMATION, animArgs);
 
 	// define the "grid" command
 
 	std::list<std::string> gridArgs;
-	gridArgs.push_back(AssetLoader::TYPE_STRING); // grid key
-	gridArgs.push_back(AssetLoader::TYPE_STRING); // filename
+	gridArgs.push_back(TextParser::TYPE_STRING); // grid key
+	gridArgs.push_back(TextParser::TYPE_STRING); // filename
 	commands.emplace(AssetLoader::COMMAND_GRID, gridArgs);
 }
 
@@ -86,6 +78,7 @@ void AssetLoader::ReadAssetSetupFile()
 
 	std::ifstream assetSetupFile = std::ifstream(ASSET_SETUP_FILE);
 
+	// parse a line of text
 	while (std::getline(assetSetupFile, line))
 	{
 		int strIndex = 0;
@@ -95,13 +88,14 @@ void AssetLoader::ReadAssetSetupFile()
 		assert(currentChar != " "); // lines may not start with spaces!
 		assert(currentChar != "\t"); // lines may not start with tab characters!
 
+		// parse everything up to the first space character (command name)
 		while (currentChar != " ")
 		{
 			strIndex++;
 			currentChar = line.substr(strIndex, 1);
 		}
 
-		command = line.substr(0, strIndex);
+		command = line.substr(0, strIndex);	
 
 		assert(commands.count(command) > 0); // invalid command!
 		ParseCommand(line, command);
@@ -179,13 +173,13 @@ void AssetLoader::ParseTextureCommand(std::string line)
 	std::pair<std::string, int> result2;
 	std::pair<bool, int> result3;
 
-	result1 = ParseForString(line, startIndex);
+	result1 = TextParser::ParseForString(line, startIndex);
 	startIndex = result1.second;
 
-	result2 = ParseForString(line, startIndex);
+	result2 = TextParser::ParseForString(line, startIndex);
 	startIndex = result2.second + 1; // +1 so we skip the expected space
 
-	result3 = ParseForBool(line, startIndex);
+	result3 = TextParser::ParseForBool(line, startIndex);
 
 	std::string arg1 = result1.first;
 	std::string arg2 = result2.first;
@@ -205,22 +199,22 @@ void AssetLoader::ParseSpriteCommand(std::string line)
 	std::pair<int, int> result5;
 	std::pair<int, int> result6;
 
-	result1 = ParseForString(line, startIndex);
+	result1 = TextParser::ParseForString(line, startIndex);
 	startIndex = result1.second;
 
-	result2 = ParseForString(line, startIndex);
+	result2 = TextParser::ParseForString(line, startIndex);
 	startIndex = result2.second;
 
-	result3 = ParseForInt(line, startIndex);
+	result3 = TextParser::ParseForInt(line, startIndex);
 	startIndex = result3.second;
 
-	result4 = ParseForInt(line, startIndex);
+	result4 = TextParser::ParseForInt(line, startIndex);
 	startIndex = result4.second;
 
-	result5 = ParseForInt(line, startIndex);
+	result5 = TextParser::ParseForInt(line, startIndex);
 	startIndex = result5.second;
 
-	result6 = ParseForInt(line, startIndex);
+	result6 = TextParser::ParseForInt(line, startIndex);
 	startIndex = result6.second;
 
 	std::string arg1 = result1.first;
@@ -241,13 +235,13 @@ void AssetLoader::ParseAnimationCommand(std::string line)
 	std::pair<std::list<std::string>, int> result2;
 	std::pair<bool, int> result3;
 
-	result1 = ParseForString(line, startIndex);
+	result1 = TextParser::ParseForString(line, startIndex);
 	startIndex = result1.second + 1; // +1 to skip the expected space
 
-	result2 = ParseForListString(line, startIndex);
+	result2 = TextParser::ParseForListString(line, startIndex);
 	startIndex = result2.second + 1; // +1 to skip the expected space
 
-	result3 = ParseForBool(line, startIndex);
+	result3 = TextParser::ParseForBool(line, startIndex);
 	startIndex = result3.second;
 
 	std::string arg1 = result1.first;
@@ -265,148 +259,14 @@ void AssetLoader::ParseGridCommand(std::string line)
 	std::pair<std::string, int> result1;
 	std::pair<std::string, int> result2;
 
-	result1 = ParseForString(line, startIndex);
+	result1 = TextParser::ParseForString(line, startIndex);
 	startIndex = result1.second;
 	
-	result2 = ParseForString(line, startIndex);
+	result2 = TextParser::ParseForString(line, startIndex);
 	startIndex = result2.second;
 
 	std::string arg1 = result1.first;
 	std::string arg2 = result2.first;
 
 	GridManager::LoadGrid(arg1, arg2);
-}
-
-std::pair<std::string, int> AssetLoader::ParseForString(std::string line, int startIndex)
-{
-	std::string parsedString = "none";
-
-	int currentIndex = startIndex;
-
-	int stringStartIndex = -1;
-	int stringEndIndex = -1;
-
-	while (stringEndIndex == -1 && currentIndex < line.size())
-	{
-		std::string currentChar = line.substr(currentIndex, 1);
-		if (currentChar == "\"")
-		{
-			if (stringStartIndex == -1)
-			{
-				stringStartIndex = currentIndex + 1;
-			}
-			else if (stringEndIndex == -1)
-			{
-				assert(stringStartIndex > -1); // string start must already be set!
-				stringEndIndex = currentIndex;
-			}
-			else
-			{
-				assert(false); // how tf...?
-			}
-		}
-		currentIndex++;
-	}
-	assert(stringStartIndex > -1); // opening quotation mark was not found!
-	assert(stringEndIndex > -1); // closing quotation mark was not found!
-	assert(stringStartIndex < stringEndIndex); // idek how tf this could be triggered but sanity checks are always nice
-
-	parsedString = line.substr(stringStartIndex, stringEndIndex - stringStartIndex);
-
-	assert(parsedString != "none");
-	return std::pair<std::string, int>(parsedString, currentIndex); // return the parsed string and the new starting index
-}
-
-std::pair<int, int> AssetLoader::ParseForInt(std::string line, int startIndex)
-{
-	int parsedInt;
-	bool parseSuccessful = false;
-	int currentIndex = startIndex;
-	int numStartIndex = -1;
-	int numEndIndex = -1;
-
-	while (numEndIndex == -1 && currentIndex < line.size())
-	{
-		std::string currentChar = line.substr(currentIndex, 1);
-		int charAsciiVal = static_cast<int>(currentChar[0]);
-		if (48 <= charAsciiVal && charAsciiVal <= 57)
-		{
-			if (numStartIndex == -1)
-			{
-				numStartIndex = currentIndex;
-			}
-		}
-		else
-		{
-			if ((numStartIndex > -1 && numEndIndex == -1) || currentIndex == line.size() - 1)
-			{
-				numEndIndex = currentIndex;
-				//parseSuccessful = true;
-			}
-		}
-		currentIndex++;
-	}
-
-	std::string intString = line.substr(numStartIndex, numEndIndex - numStartIndex);
-	parsedInt = std::stoi(intString);
-
-	//assert(parseSuccessful);
-	return std::pair<int, int>(parsedInt, currentIndex);
-}
-
-std::pair<bool, int> AssetLoader::ParseForBool(std::string line, int startIndex)
-{
-	bool parseSuccessful = false;
-	bool parsedBool;
-	int currentIndex = startIndex;
-
-	if (line.substr(startIndex, 4) == "true")
-	{
-		parseSuccessful = true;
-		parsedBool = true;
-		currentIndex += 4;
-	}
-	else if (line.substr(startIndex, 5) == "false")
-	{
-		parseSuccessful = true;
-		parsedBool = false;
-		currentIndex += 5;
-	}
-
-	assert(parseSuccessful == true); // unable to parse boolean value!
-
-	return std::pair<bool, int>(parsedBool, currentIndex);
-}
-
-std::pair<std::list<std::string>, int> AssetLoader::ParseForListString(std::string line, int startIndex)
-{
-	int currentIndex = startIndex;
-
-	int listStartIndex = -1;
-	int listEndIndex = -1;
-
-	std::list<std::string> spriteKeyList;
-
-	while (listEndIndex == -1 && currentIndex < line.size())
-	{
-		std::string currentChar = line.substr(currentIndex, 1);
-		if (listStartIndex == -1 && currentChar == "[")
-		{
-			listStartIndex = currentIndex;
-			currentIndex++;
-		}
-		else if(listStartIndex > -1 && currentChar != "]")
-		{
-			std::pair<std::string, int> result = ParseForString(line, currentIndex);
-			spriteKeyList.push_back(result.first);
-			currentIndex = result.second;
-		}
-		else if (currentChar == "]")
-		{
-			assert(listStartIndex > -1);
-			listEndIndex = currentIndex;
-		}
-	}
-
-	return std::pair<std::list<std::string>, int>(spriteKeyList, currentIndex + 1);
 }

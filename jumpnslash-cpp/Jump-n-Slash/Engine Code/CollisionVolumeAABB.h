@@ -1,9 +1,11 @@
 #ifndef COLLISION_VOLUME_AABB_H
 #define COLLISION_VOLUME_AABB_H
 
-#include <SFML/Graphics/Rect.hpp>
-
+// engine includes
 #include "CollisionVolumeBoundingBox.h"
+
+// forward declarations
+class Sprite;
 
 class CollisionVolumeAABB : public CollisionVolumeBoundingBox
 {
@@ -14,7 +16,7 @@ public:
 	CollisionVolumeAABB& operator=(const CollisionVolumeAABB& cva) = delete;
 	virtual ~CollisionVolumeAABB() = default;
 
-	virtual void ComputeData(sf::Sprite* pSprite, const sf::Transform& tform) override;
+	virtual void ComputeData(Sprite* pSprite, const sf::Transform& tform) override;
 	virtual bool IntersectAccept(const CollisionVolume& other) const override;
 	virtual bool IntersectVisit(const CollisionVolumeBSphere& other) const override;
 	virtual bool IntersectVisit(const CollisionVolumeAABB& other) const override;

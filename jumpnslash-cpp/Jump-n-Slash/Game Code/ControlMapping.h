@@ -19,7 +19,7 @@ namespace Keyboard
 		const sf::Keyboard::Key JUMP = sf::Keyboard::Space;
 		const sf::Keyboard::Key WALK_LEFT = sf::Keyboard::Left;
 		const sf::Keyboard::Key WALK_RIGHT = sf::Keyboard::Right;
-		const sf::Keyboard::Key SLASH_ATK = sf::Keyboard::V; // not yet in use
+		const sf::Keyboard::Key SLASH_ATK = sf::Keyboard::V;
 		const sf::Keyboard::Key DREAM_ATK = sf::Keyboard::C; // not yet in use
 		const sf::Keyboard::Key DASH = sf::Keyboard::X; // not yet in use
 		const sf::Keyboard::Key PAUSE = sf::Keyboard::Backspace; // not yet in use

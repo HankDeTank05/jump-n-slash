@@ -5,6 +5,7 @@
 #include "Math.h"
 #include "ConvenienceFunctions.h"
 #include "EngineDebugFlags.h"
+#include "Sprite.h"
 
 CollisionVolumeBSphere::CollisionVolumeBSphere(sf::Vector2f _center, float _radius)
 	: center(_center),
@@ -28,10 +29,10 @@ float CollisionVolumeBSphere::GetRadiusSqr() const
 	return radius * radius;
 }
 
-void CollisionVolumeBSphere::ComputeData(sf::Sprite* pSprite, const sf::Transform& tform)
+void CollisionVolumeBSphere::ComputeData(Sprite* pSprite, const sf::Transform& tform)
 {
-	sf::Vector2f aabbPos = pSprite->getGlobalBounds().getPosition();
-	sf::Vector2f aabbSize = pSprite->getGlobalBounds().getSize();
+	sf::Vector2f aabbPos = pSprite->GetGlobalBounds().getPosition();
+	sf::Vector2f aabbSize = pSprite->GetGlobalBounds().getSize();
 	center = aabbPos + aabbSize * 0.5f;
 	radius = Math::Max(aabbSize.x, aabbSize.y) * 0.5f;
 }

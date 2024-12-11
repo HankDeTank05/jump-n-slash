@@ -10,6 +10,7 @@
 #include "TestScene.h"
 #include "ControlSelection.h"
 #include "PauseMenuScene.h"
+#include "CompoundSpriteScene.h"
 
 GameManager* GameManager::pInstance = nullptr;
 
@@ -68,6 +69,12 @@ void GameManager::privStartGame()
 	
 	/*
 	SceneManager::SetStartScene(new TestScene());
+	pCurrentState = &GameFSM::playing;
+	//*/
+	
+	/*
+	SceneManager::SetStartScene(new CompoundSpriteScene());
+	pCurrentState = &GameFSM::playing;
 	//*/
 }
 

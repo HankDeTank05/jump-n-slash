@@ -16,7 +16,7 @@ public:
 	AnimationComponent& operator=(const AnimationComponent& ao) = delete;
 	virtual ~AnimationComponent();
 
-	void DefineAnimationSet(AnimationSet* pAnimSet); // TODO: docs for AnimationComponent::DefineAnimationSet
+	void DefineAnimation(const std::string& animName, Animation* pAnim); // TODO: docs for AnimationComponent::DefineAnimation
 
 	void SetAnimation(const std::string& animName); // TODO: docs for AnimationComponent::SetAnimation
 	Sprite* GetCurrentFrame(); // TODO: docs for AnimationComponent::GetCurrentFrame

@@ -19,10 +19,10 @@ void PlayerMoveStateJumping::Update(Player* pPlayer, float deltaTime) const
 {
 	PlayerAttorney::StateAccess::ProcessInputs(pPlayer, deltaTime);
 	
-	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
-	{
-		PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
-	}
+	//if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer))
+	//{
+	//	PlayerAttorney::StateAccess::ApplyGravity(pPlayer, deltaTime);
+	//}
 	
 	// Player can move left or right while jumping
 	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).x > 0) // check for map collision moving right
@@ -43,7 +43,7 @@ const PlayerMoveState* PlayerMoveStateJumping::GetNextState(Player* pPlayer) con
 
 	// TODO: update state change logic to include PlayerMoveStateDashing (if applicable)
 	
-	if (PlayerAttorney::StateAccess::GetPosDelta(pPlayer).y > 0.0f || PlayerAttorney::StateAccess::IsHeadBonked(pPlayer))
+	if (PlayerAttorney::StateAccess::IsApplyGravity(pPlayer) || PlayerAttorney::StateAccess::IsHeadBonked(pPlayer))
 	{
 		pNextState = &PlayerMoveFSM::falling;
 	}

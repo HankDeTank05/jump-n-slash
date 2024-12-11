@@ -5,6 +5,7 @@
 #include "Visualizer.h"
 #include "ConvenienceFunctions.h"
 #include "EngineDebugFlags.h"
+#include "Sprite.h"
 
 CollisionVolumeAABB::CollisionVolumeAABB(const sf::Vector2f& min, const sf::Vector2f& max)
 	: CollisionVolumeBoundingBox(sf::Transform(), min, max)
@@ -12,7 +13,7 @@ CollisionVolumeAABB::CollisionVolumeAABB(const sf::Vector2f& min, const sf::Vect
 	// do nothing
 }
 
-void CollisionVolumeAABB::ComputeData(sf::Sprite* pSprite, const sf::Transform& _tform)
+void CollisionVolumeAABB::ComputeData(Sprite* pSprite, const sf::Transform& _tform)
 {
 	// do some obb stuff
 	
@@ -20,7 +21,7 @@ void CollisionVolumeAABB::ComputeData(sf::Sprite* pSprite, const sf::Transform& 
 
 	// adjust the aabb
 
-	sf::FloatRect aabb = pSprite->getGlobalBounds();
+	sf::FloatRect aabb = pSprite->GetGlobalBounds();
 	min = aabb.getPosition();
 	max = min + aabb.getSize();
 

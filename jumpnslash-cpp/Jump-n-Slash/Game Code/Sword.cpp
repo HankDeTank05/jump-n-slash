@@ -23,12 +23,11 @@ Sword::Sword(Player* _pPlayer)
 	pCurrentState(&SwordFSM::idle),
 	pPrevState(nullptr),
 	pSprite(nullptr),
-	pAnimComp(new AnimationComponent())
+	pAnimComp(new AnimationComponent()),
+	attack(false)
 {
-	AnimationSet* pAnimSet = new AnimationSet();
-	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("sword idle"));
-	pAnimSet->AddAnimation("swing", AnimationManager::GetAnimation("sword swing"));
-	pAnimComp->DefineAnimationSet(pAnimSet);
+	pAnimComp->DefineAnimation("idle", AnimationManager::GetAnimation("sword idle"));
+	pAnimComp->DefineAnimation("swing", AnimationManager::GetAnimation("sword swing"));
 
 	pAnimComp->SetAnimation("idle");
 	pSprite = pAnimComp->GetCurrentFrame();
@@ -36,8 +35,8 @@ Sword::Sword(Player* _pPlayer)
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
 	SetCollisionSprite(pSprite, VolumeType::AABB);
-	SetCollidableGroup<Sword>();
-	RequestCollisionRegistration();
+	SetCollisionObjectGroup<Sword>();
+	//RequestCollisionRegistration();
 }
 
 Sword::~Sword()
@@ -47,14 +46,21 @@ Sword::~Sword()
 
 void Sword::Update(float deltaTime)
 {
-	pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);
+	if (pCurrentState != pPrevState)
+	{
+		pCurrentState->Enter(this);
+	}
+	if (attack == true)
+	{
+		attack = false;
+	}
 
-	// TODO: call state update
+	pCurrentState->Update(this, deltaTime);
 
 	pSprite = pAnimComp->GetCurrentFrame();
 
-	pos = PlayerAttorney::SwordAccess::GetPos(pPlayer) + pPlayer->GetConnector("weapon hold").first;
+	pos = PlayerAttorney::SwordAccess::GetPos(pPlayer) + pPlayer->GetConnector("weapon hold");
 
 	// TODO: make this class derive from actor, so it can use the protected function that does this automagically
 	float facing = PlayerAttorney::SwordAccess::GetFacing(pPlayer);
@@ -73,7 +79,9 @@ void Sword::Update(float deltaTime)
 	pSprite->SetScale(sf::Vector2f(facing, 1.f));
 
 	pSprite->SetPositionByConnector("hold", pos);
-	// TODO: update collision data
+	UpdateCollisionData(pSprite);
+
+	pPrevState = pCurrentState;
 
 	if (DEBUG_CONNECTORS) pSprite->DebugConnectors();
 }
@@ -96,6 +104,16 @@ void Sword::OnCollisionDuring(CollisionObject* pOther)
 void Sword::OnCollisionExit(CollisionObject* pOther)
 {
 	if (DEBUG_COLLISION) std::cout << "Sword has exited collision" << std::endl;
+}
+
+void Sword::Attack()
+{
+	attack = true;
+}
+
+bool Sword::IsAttacking()
+{
+	return attack;
 }
 
 void Sword::SetAnimationIdle()

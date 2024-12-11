@@ -1,7 +1,11 @@
 #ifndef COLLISION_VOLUME_BSPHERE_H
 #define COLLISION_VOLUME_BSPHERE_H
 
+// engine includes
 #include "CollisionVolume.h"
+
+// forward declarations
+class Sprite;
 
 class CollisionVolumeBSphere : public CollisionVolume
 {
@@ -16,7 +20,7 @@ public:
 	float GetRadius() const;
 	float GetRadiusSqr() const;
 
-	virtual void ComputeData(sf::Sprite* pSprite, const sf::Transform& tform) override;
+	virtual void ComputeData(Sprite* pSprite, const sf::Transform& tform) override;
 	virtual bool IntersectAccept(const CollisionVolume& other) const override;
 	virtual bool IntersectVisit(const CollisionVolumeBSphere& other) const override;
 	virtual bool IntersectVisit(const CollisionVolumeAABB& other) const override;

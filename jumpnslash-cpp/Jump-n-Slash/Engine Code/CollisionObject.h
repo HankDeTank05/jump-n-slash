@@ -1,9 +1,6 @@
 #ifndef COLLISION_OBJECT_H
 #define COLLISION_OBJECT_H
 
-// library includes
-#include <SFML/Graphics/Sprite.hpp>
-
 // engine includes
 #include "CollisionManager.h"
 #include "CollisionObjectGroup.h"
@@ -25,9 +22,6 @@ public:
 	CollisionObject& operator=(const CollisionObject& co) = delete;
 	virtual ~CollisionObject();
 
-	// TODO: docs for CollisionObject::GetCollisionVolume
-	const CollisionVolume& GetCollisionVolume();
-
 
 protected:
 	enum class VolumeType
@@ -36,9 +30,27 @@ protected:
 		AABB
 	};
 
-	// TODO: docs for CollisionObject::SetCollidableGroup
+	/*!
+	* \brief	Set the group that this CollisionObject will be a part of.
+	* 
+	* This function is called when first creating an object. It includes the calling \c CollisionObject in a group of objects based
+	* on its type which should be tested for collision. Without calling this function, \c CollisionObject s will not be tested for collision.
+	* 
+	* \returns	Does not return anything.
+	* 
+	* \section example Example
+	* TODO: docs for CollisionObject::SetCollisionObjectGroup needs example code
+	* 
+	* \see	CollisionObject::RequestCollisionRegistration
+	* \see	CollisionObject::RequestCollisionDeregistration
+	* \see	CollisionObject::SetCollisionSprite
+	* \see	CollisionObject::UpdateCollisionData
+	* \see	CollisionObject::OnCollisionEnter
+	* \see	CollisionObject::OnCollisionDuring
+	* \see	CollisionObject::OnCollisionExit
+	*/
 	template <typename C>
-	void SetCollidableGroup()
+	void SetCollisionObjectGroup()
 	{
 		typeID = SceneAttorney::Collision::GetCollisionManager(SceneManager::GetCurrentScene())->GetTypeID<C>();
 	}
@@ -48,7 +60,7 @@ protected:
 	* 
 	* Call this function in a \c CollisionObject -derived class to let the engine know you would like to begin checking for collision with this object.
 	* 
-	* \note You must call SetCollidableGroup() on this object before calling this function!
+	* \note You must call SetCollisionObjectGroup() on this object before calling this function!
 	* 
 	* \note	This function is only accessible to classes deriving from \c CollisionObject .
 	* 
@@ -58,10 +70,10 @@ protected:
 	* \return	Does not return anything.
 	* 
 	* \section example Example
-	* TODO: create tutorial for how to use the collision system
+	* TODO: docs for CollisionObject::RequestCollisionRegistration needs example code
 	* 
 	* \see CollisionObject::GetCollisionVolume
-	* \see CollisionObject::SetCollidableGroup
+	* \see CollisionObject::SetCollisionObjectGroup
 	* \see CollisionObject::RequestCollisionDeregistration
 	* \see CollisionObject::SetCollisionSprite
 	* \see CollisionObject::UpdateCollisionData
@@ -83,10 +95,10 @@ protected:
 	* \return	Does not return anything.
 	* 
 	* \section example Example
-	* TODO: create tutorial for how to use the collision system
+	* TODO: docs for CollisionObject::RequestCollisionDeregistration needs example code
 	* 
 	* \see CollisionObject::GetCollisionVolume
-	* \see CollisionObject::SetCollidableGroup
+	* \see CollisionObject::SetCollisionObjectGroup
 	* \see CollisionObject::RequestCollisionRegistration
 	* \see CollisionObject::SetCollisionSprite
 	* \see CollisionObject::UpdateCollisionData
@@ -96,8 +108,16 @@ protected:
 	*/
 	void RequestCollisionDeregistration(); 
 
-	// TODO: docs for CollisionObject::SetCollisionSprite
+	/*!
+	* \brief	Sets the sprite which the chosen collision volume should be fit to.
+	* 
+	* This function uses a given sprite and chosen collision volume type to create the initial collision volume which will be used for collision testing.
+	* The chosen collision volume's size will be fit to be as small as possible while still encompassing the entire sprite.
+	* 
+	* \note	
+	*/
 	void SetCollisionSprite(Sprite* pSprite, VolumeType colVolType); 
+	void UpdateCollisionData();
 	// TODO: docs for CollisionObject::UpdateCollisionData
 	void UpdateCollisionData(Sprite* pSprite); 
 
@@ -107,6 +127,8 @@ protected:
 
 private:
 	friend class CollisionObjectAttorney;
+	const CollisionVolume& GetCollisionVolume();
+
 	void Register();
 	void Deregister();
 
@@ -121,7 +143,7 @@ private: // member variables
 	CollisionDeregistrationCommand* pDeregCmd;
 	CollisionVolume* pColVol;
 	VolumeType* pVolType;
-	sf::Sprite* pColSpr;
+	Sprite* pColSpr;
 	bool collisionThisFrame;
 	bool collisionPrevFrame;
 

@@ -35,6 +35,7 @@ public:
 		friend class InputObject;
 		friend class AlarmObject;
 		friend class CollisionObject;
+		friend class GameObject;
 		static void AddCommand(Scene* pScene, Command* pCmd);
 	};
 

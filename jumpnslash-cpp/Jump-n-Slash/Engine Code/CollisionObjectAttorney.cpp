@@ -1,5 +1,6 @@
 #include "CollisionObjectAttorney.h"
 
+// engine includes
 #include "CollisionObject.h"
 
 void CollisionObjectAttorney::Registration::Register(CollisionObject* pCollidable)
@@ -20,4 +21,9 @@ void CollisionObjectAttorney::ColDispatch::Collision(CollisionObject* pThis, Col
 void CollisionObjectAttorney::NoColDispatch::NoCollision(CollisionObject* pThis, CollisionObject* pOther)
 {
 	pThis->NoCollision(pOther);
+}
+
+const CollisionVolume& CollisionObjectAttorney::ColTestAccess::GetCollisionVolume(CollisionObject* pCollidable)
+{
+	return pCollidable->GetCollisionVolume();
 }

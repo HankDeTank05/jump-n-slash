@@ -78,4 +78,5 @@ void PlayerControlStrategy::GetInputs()
 {
 	PlayerAttorney::StrategyAccess::SetJump(pPlayer, jump);
 	PlayerAttorney::StrategyAccess::SetWalk(pPlayer, walk);
+	PlayerAttorney::StrategyAccess::SetSlash(pPlayer, slashAtk);
 }

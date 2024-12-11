@@ -1,6 +1,6 @@
-<tile type>_<tile name>.png
+<tileType>_<tileName>.png
 
-<tile type> must be one of the following...
+<tileType> must be one of the following...
 - indicator
 - block
 - platform

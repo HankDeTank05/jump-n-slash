@@ -4,7 +4,7 @@
 #include "TimeManager.h"
 
 AnimationComponent::AnimationComponent()
-	: pAnimSet(nullptr),
+	: pAnimSet(new AnimationSet()),
 	pCurrentAnim(nullptr),
 	currentFrameIt(),
 	animTimer(0.f)
@@ -14,23 +14,16 @@ AnimationComponent::AnimationComponent()
 
 AnimationComponent::~AnimationComponent()
 {
-	if (pAnimSet != nullptr)
-	{
-		delete pAnimSet;
-	}
+	delete pAnimSet;
 }
 
-void AnimationComponent::DefineAnimationSet(AnimationSet* _pAnimSet)
+void AnimationComponent::DefineAnimation(const std::string& animName, Animation* pAnim)
 {
-	assert(pAnimSet == nullptr); // can only define the animationset once
-
-	pAnimSet = _pAnimSet;
+	pAnimSet->AddAnimation(animName, pAnim);
 }
 
 void AnimationComponent::SetAnimation(const std::string& animName)
 {
-	assert(pAnimSet != nullptr);
-
 	pCurrentAnim = pAnimSet->GetAnimation(animName);
 	currentFrameIt = pCurrentAnim->GetFirstFrame();
 	animTimer = 0.f;
@@ -38,8 +31,6 @@ void AnimationComponent::SetAnimation(const std::string& animName)
 
 Sprite* AnimationComponent::GetCurrentFrame()
 {
-	assert(pAnimSet != nullptr);
-
 	animTimer += TimeManager::GetFrameTime();
 	if (pCurrentAnim->IsLooping() == true ||
 		(pCurrentAnim->IsLooping() == false && pCurrentAnim->IsLastFrame(currentFrameIt) == false))

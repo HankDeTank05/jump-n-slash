@@ -13,13 +13,7 @@
 #include "LevelMap.h"
 
 Actor::Actor(float _speed, LevelMap* _pLevel)
-	: pos(),
-	posDelta(0.f, 0.f),
-	width(0.f),
-	height(0.f),
-	speed(_speed),
-	pAnimComp(new AnimationComponent()),
-	pSprite(nullptr),
+	: speed(_speed),
 	pLevel(_pLevel),
 	pCurrentRoom(nullptr),
 	grounded(false),
@@ -34,36 +28,9 @@ Actor::~Actor()
 	delete pAnimComp;
 }
 
-void Actor::Draw()
-{
-	assert(pCurrentRoom != nullptr); // TODO: this is bad and stupid but Henry told me to do it (bitch)
-
-	Render(pSprite);
-}
-
-sf::Vector2f Actor::GetPos() const
-{
-	return pos;
-}
-
-sf::Vector2f Actor::GetPosDelta() const
-{
-	return posDelta;
-}
-
 LevelMap* Actor::GetLevel() const
 {
 	return pLevel;
-}
-
-float Actor::GetWidth() const
-{
-	return width;
-}
-
-float Actor::GetHeight() const
-{
-	return height;
 }
 
 bool Actor::IsGrounded() const
@@ -76,8 +43,9 @@ bool Actor::IsHeadBonked() const
 	return headBonked;
 }
 
-float Actor::GetFacing() const
+int Actor::GetFacing() const
 {
+	assert(facing == 1 || facing == -1);
 	return facing;
 }
 
@@ -405,28 +373,24 @@ void Actor::RaycastDown()
 	pos.y = minY;
 }
 
-void Actor::SetPosition(const sf::Vector2f& newPos)
+void Actor::FaceSprite()
 {
-	pos = newPos;
+	if (facing == 1)
+	{
+		pSprite->SetOrigin(sf::Vector2f(0.f, 0.f));
+	}
+	else if (facing == -1)
+	{
+		pSprite->SetOrigin(sf::Vector2f(width, 0.f));
+	}
+	else
+	{
+		assert(false);
+	}
+	pSprite->SetScale(sf::Vector2f(static_cast<float>(facing), 1.f));
 }
 
-void Actor::ApplyGravity(float deltaTime)
-{
-	posDelta.y += GRAVITY_WEIGHT * deltaTime;
-	//posDelta.y += GRAVITY_WEIGHT;
-}
-
-void Actor::SetWidth()
-{
-	width = abs(pSprite->GetTextureRect().getSize().x * pSprite->GetScale().x);
-}
-
-void Actor::SetHeight()
-{
-	height = abs(pSprite->GetTextureRect().getSize().y * pSprite->GetScale().y);
-}
-
-Sprite::Connector Actor::GetConnector(const std::string& name)
+sf::Vector2f Actor::GetConnector(const std::string& name)
 {
 	return pSprite->GetConnector(name);
 }
