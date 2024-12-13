@@ -10,11 +10,15 @@ class App:
     def __init__(self):
         self.readLocation = os.path.join("..","jumpnslash-cpp","Jump-n-Slash","assets","textures")
 
-        spriteFolders = os.listdir(self.readLocation)
+        self.spriteFolders = os.listdir(self.readLocation)
+        if "leveltiles" in self.spriteFolders:
+            self.spriteFolders.remove("leveltiles")
+
+        self.currentFolder = self.spriteFolders[1]
 
         self.spriteNamingConvention = "[a-z]+(_){1}[0-9]+([.]png){1}"
 
-        self.usingFolder = os.path.join(self.readLocation, "player")
+        self.usingFolder = os.path.join(self.readLocation, self.currentFolder)
 
         self.dirItems = os.listdir(self.usingFolder)
         sprites=[]
@@ -37,13 +41,13 @@ class App:
         # 1. main application
         self.root = Tk()
         self.root.title("Connector Editor")
-        self.root.minsize(width=1280, height=720)
+        # self.root.minsize(width=1280, height=720)
 
         ''' animation selector '''
 
         # 1.1. animation selector
         self.animSel = LabelFrame(self.root, text="Animation Selector")
-        self.animSel.grid(column=0, row=0)
+        self.animSel.grid(column=0, row=0, sticky=[N,S,E,W])
 
         # 1.1.1. animation selector title box
         self.animSelTitleBox = Label(self.animSel, text="Animations")
@@ -57,24 +61,25 @@ class App:
             btnText = list(self.anims.keys())[i]
             self.animListBtns.append(Button(self.animList, text=btnText, command=partial(self.SelectAnimation, list(self.anims.keys())[i])))
             self.animListBtns[i].grid(column=0,row=i)
-        #ANIM_LIST_SELECTION = list(anims.keys())[4] # the variable that controls which frames show up in the frame selector
         # TODO: create a command for the above buttons that sets this variable
 
+        """
         # 1.1.2.2. animation list scrollbar
-        self.animListScroll = Scrollbar(self.animSel, command=self.animList.yview)
-        self.animListScroll.grid(column=1, row=1)
+        self.animListScroll = Scrollbar(self.animSel, orient="vertical", command=self.animList.yview)
+        self.animListScroll.grid(column=1, row=1, sticky=[N,S])
         # TODO: make the scroll bar span the height of the parent widget
         # TODO: make the scroll bar work
+        """
 
         ''' animation editor '''
 
         # 1.2. animation editor
         self.animEdit = LabelFrame(self.root, text="Animation Editor")
-        self.animEdit.grid(column=1, row=0)
+        self.animEdit.grid(column=1, row=0, sticky=[N,S,E,W])
 
         # 1.2.1. frame selector
         self.frameSel = LabelFrame(self.animEdit, text="Frame Selector")
-        self.frameSel.grid(column=0, row=1)
+        self.frameSel.grid(column=0, row=1, sticky=[N,S,E,W])
 
         # 1.2.1.1. frame list
         self.frameList = Canvas(self.frameSel)
@@ -91,9 +96,11 @@ class App:
                 self.frameListBtnImgs[key].append(PhotoImage(file=imgPath)) # TODO: create the photoimage here
                 self.frameListBtns[key].append(Button(self.frameList, text=btnText, image=self.frameListBtnImgs[key][i], compound=TOP)) # TODO: create the button here
 
+        """
         # 1.2.1.2. frame list scroll bar
         self.frameListScroll = Scrollbar(self.frameSel, orient="horizontal", command=self.frameList.xview)
-        self.frameListScroll.grid(column=0, row=1)
+        self.frameListScroll.grid(column=0, row=1, sticky=[E,W])
+        """
 
         # 1.2.2. frame editor
         self.frameEdit = LabelFrame(self.animEdit, text="Frame Editor")
@@ -106,7 +113,7 @@ class App:
 
         # 1.2.2.2. point editor
         self.pointEdit = LabelFrame(self.frameEdit, text="Point Editor")
-        self.pointEdit.grid(column=1, row=0)
+        self.pointEdit.grid(column=1, row=0, sticky=[N,S,E,W])
 
         # 1.2.2.2.1. point editor title box
         self.pointEditTitleBox = Label(self.pointEdit, text="Points")
@@ -129,9 +136,11 @@ class App:
         setBtn = Button(pointBox, text="Set")
         setBtn.grid(column=2, row=1)
 
+        """
         # 1.2.2.2.3. point list scroll bar
-        self.pointListScroll = Scrollbar(self.pointEdit, command=self.pointList.yview)
-        self.pointListScroll.grid(column=1, row=1)
+        self.pointListScroll = Scrollbar(self.pointEdit, orient="vertical", command=self.pointList.yview)
+        self.pointListScroll.grid(column=1, row=1, sticky=[N,S])
+        """
 
 
     def SelectAnimation(self, anim: str) -> None:
