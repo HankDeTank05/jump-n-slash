@@ -20,12 +20,23 @@ class App:
         self.root.config(bg="black")
         # self.root.minsize(width = 1280, height = 720)
 
-        # create required variables
+        ########################################
+        # create required non-widget variables #
+        ########################################
 
         self.basePath: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets", "textures")
         self.basePath = os.path.abspath(self.basePath)
 
+        self.pointDataFilename: str = "points.json"
+
+        # a dict of point data for a given entity.
+        # this data will be loaded (or created, if it does not exist) when an entity is selected.
+        # it uses the structure described in this slide deck: https://docs.google.com/presentation/d/1PLaKS3PRtIwJiQ7IzcTYcf-TwL2bH8FPD6039gOLogA/edit#slide=id.g323f716582b_0_1
+        self.pointData: 
+
         self.navTree: dict[str, dict[str, list[str]]] = {}
+
+        # populate the navtree
         subdirectories: list[str] = jns.GetFoldersAtPath(self.basePath)
         for directory in subdirectories:
             # create a sub-dictionary for each directory in the textures folder
@@ -81,13 +92,15 @@ class App:
         self.currSpr: str = None
         self.sprPath: str = None
 
-        # create entity selector
+        ##########################
+        # create entity selector #
+        ##########################
 
         self.wEntitySelector: ttk.Frame = ttk.Frame(self.root)
         self.wEntitySelector.grid(column=0, row=0, rowspan=2, sticky="nsew")
 
         self.ES_wTitle: ttk.Label = ttk.Label(self.wEntitySelector, text="Entity Selector")
-        self.ES_wTitle.grid(column=0, row=0)
+        self.ES_wTitle.grid(column=0, row=0) # TODO: add columnspan=2 when a scroll bar gets added
 
         self.ES_wButtonList: tk.Canvas = tk.Canvas(self.wEntitySelector)
         self.ES_wButtonList.grid(column=0, row=1)
@@ -100,23 +113,27 @@ class App:
 
         # TODO: create vertical scroll bar for entity selector
 
-        # create animation selector
+        #############################
+        # create animation selector #
+        #############################
 
         self.wAnimationSelector: ttk.Frame = ttk.Frame(self.root)
         self.wAnimationSelector.grid(column=1, row=0, rowspan=2, sticky=[tk.N])
 
         self.AS_wTitle: ttk.Label = ttk.Label(self.wAnimationSelector, text="Animation Selector")
-        self.AS_wTitle.grid(column=0, row=0)
+        self.AS_wTitle.grid(column=0, row=0) # TODO: add columnspan=2 when a scroll bar gets added
 
         self.AS_wButtonList: tk.Canvas = tk.Canvas(self.wAnimationSelector)
         self.AS_wButtonList.grid(column=0, row=1)
 
-        # a list of all animation buttons that may be used at any point.
+        # a dict of all animation buttons that may be used at any point.
         # they will be added and removed from the GUI as needed, but all must be created on startup.
         # it uses the following structure:
         # key - a string, the entity name
         # value - a list of ttk Buttons, one button for each animation that entity has
         self.AS_buttonDict: dict[str, list[ttk.Button]] = {}
+
+        # populate the AS_buttonDict dictionary
         for entity in self.navTree.keys():
             self.AS_buttonDict[entity] = []
             animList: list[str] = list(self.navTree[entity].keys())
@@ -129,15 +146,17 @@ class App:
 
         # TODO: create vertical scroll bar for animation selector
 
-        # create sprite selector
+        ##########################
+        # create sprite selector #
+        ##########################
 
         self.wSpriteSelector: ttk.Frame = ttk.Frame(self.root)
-        self.wSpriteSelector.grid(column=2, row=1, columnspan=2)
+        self.wSpriteSelector.grid(column=2, row=1) # TODO: add columnspan=2 when a scroll bar gets added
 
         self.SS_wButtonList: tk.Canvas = tk.Canvas(self.wSpriteSelector)
         self.SS_wButtonList.grid(column=0, row=0)
 
-        # a list of all sprite buttons that may be used at any point.
+        # a dict of all sprite buttons that may be used at any point.
         # they will be added and removed from the GUI as needed, but all must be created on startup
         # it uses the following structure:
         # key1 - a string, the entity name
@@ -146,6 +165,8 @@ class App:
         #   value2 - a list of ttk Buttons, one button for each sprite/frame in that animation
         self.SS_buttonDict: dict[str, dict[str, list[ttk.Button]]] = {}
         self.SS_imgDict: dict[str, dict[str, list[tk.PhotoImage]]] = {}
+
+        # populate the SS_buttonDict and SS_imgDict dictionaries
         for entity in self.navTree.keys():
             self.SS_buttonDict[entity] = {}
             self.SS_imgDict[entity] = {}
@@ -164,13 +185,34 @@ class App:
 
         # TODO: create horizontal scroll bar for sprite selector
 
-        # create sprite viewer
+        ########################
+        # create sprite viewer #
+        ########################
 
-        # code goes here
+        self.wSpriteViewer: tk.Canvas = tk.Canvas(self.root)
+        self.wSpriteViewer.grid(column=2, row=0)
 
-        # create point editor
+        # more code goes here
 
-        # code goes here
+        #######################
+        # create point editor #
+        #######################
+
+        self.wPointEditor: ttk.Frame = ttk.Frame(self.root)
+        self.wPointEditor.grid(column=3, row=0)
+
+        self.PE_wTitle: ttk.Label = ttk.Label(self.wPointEditor, text="Point Editor")
+        self.PE_wTitle.grid(column=0, row=0) # TODO: add columnspan=2 when a scroll bar gets added
+
+        self.PE_wPointList: tk.Canvas = tk.Canvas(self.wPointEditor)
+        self.PE_wPointList.grid(column=0, row=1)
+
+        self.PE_wAddPointButton: ttk.Button = ttk.Button(self.wPointEditor, text="Add Point", default="disabled")
+        self.PE_wAddPointButton.grid(column=0, row=2)
+        # TODO: make it possible to enable this button
+        # TODO: add a command to be executed when this button is pressed
+
+        # TODO: create a vertical scroll bar for point editor
 
     def SelectEntity(self, entity: str) -> None:
         path: str = os.path.join(self.basePath, entity)
@@ -179,19 +221,17 @@ class App:
         self.currEntity = entity # set the current entity name
         self.animList = list(self.navTree[self.currEntity].keys()) # set the animation list
 
-        # remove existing buttons from the list, if necessary
-        if len(self.AS_activeButtonList) > 0:
-            for button in self.AS_activeButtonList:
-                button.grid_remove()
+        self.ClearButtonsAnimationSelector()
 
-        # add the new buttons to the list
-        self.AS_activeButtonList = self.AS_buttonDict[self.currEntity]
-        for i in range(len(self.AS_activeButtonList)):
-            # place the button in the GUI
-            self.AS_activeButtonList[i].grid(column=0, row=i)
+        self.AddButtonsAnimationSelector()
+
+        self.ClearButtonsSpriteSelector()
+
+        # TODO: load point data from a json file. if it doesn't exist, create one
 
         print(f"Entity \"{self.currEntity}\" selected")
 
+    '''function to select an animation (this will be called when an animation button is pressed)'''
     def SelectAnimation(self, anim: str) -> None:
         path: str = self.entityPath
         assert os.path.isdir(path), f"path is: {path}"
@@ -199,25 +239,53 @@ class App:
         self.currAnim = anim
         self.sprList = self.navTree[self.currEntity][self.currAnim]
 
-        # remove existing buttons from the list, if necessary
-        if len(self.SS_activeButtonList) > 0:
-            for button in self.SS_activeButtonList:
-                button.grid_remove()
+        self.ClearButtonsSpriteSelector()
 
-        # add the new buttons to the list
-        self.SS_activeButtonList = self.SS_buttonDict[self.currEntity][self.currAnim]
-        for i in range(len(self.SS_activeButtonList)):
-            # place the button in the gui
-            self.SS_activeButtonList[i].grid(column=i, row=0)
+        self.AddButtonsSpriteSelector()
         
         print(f"Animation \"{self.currAnim}\" selected")
 
+    '''function to select a sprite (this will be called when a sprite button is pressed)'''
     def SelectSprite(self, spr: str) -> None:
         path: str = os.path.join(self.animPath, spr)
         assert os.path.isfile(path), f"path is: {path}"
         self.sprPath = path
         self.currSpr = spr
         print(f"Sprite \"{self.currSpr}\" selected")
+
+    '''remove animation buttons from the animation selector GUI'''
+    def ClearButtonsAnimationSelector(self) -> None:
+        # remove existing buttons from the list of animation buttons, if necessary
+        if len(self.AS_activeButtonList) > 0:
+            for button in self.AS_activeButtonList:
+                button.grid_remove()
+
+    '''remove sprite buttons from the sprite selector GUI'''
+    def ClearButtonsSpriteSelector(self) -> None:
+        # remove existing buttons from the list, if necessary
+        if len(self.SS_activeButtonList) > 0:
+            for button in self.SS_activeButtonList:
+                button.grid_remove()
+
+    '''add animation buttons to animation selector GUI'''
+    def AddButtonsAnimationSelector(self) -> None:
+        # add the new buttons to the list
+        self.AS_activeButtonList = self.AS_buttonDict[self.currEntity]
+        for i in range(len(self.AS_activeButtonList)):
+            # place the button in the GUI
+            self.AS_activeButtonList[i].grid(column=0, row=i)
+
+    '''add sprite buttons to sprite selector GUI'''
+    def AddButtonsSpriteSelector(self) -> None:
+        # add the new buttons to the list
+        self.SS_activeButtonList = self.SS_buttonDict[self.currEntity][self.currAnim]
+        for i in range(len(self.SS_activeButtonList)):
+            # place the button in the gui
+            self.SS_activeButtonList[i].grid(column=i, row=0)
+
+    def LoadPointsFromJSON(self) -> None:
+        pass
+
 
     def Run(self) -> None:
         self.root.mainloop()

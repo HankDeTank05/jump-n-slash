@@ -13,12 +13,17 @@ READ_LOCATION_REL: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "a
 READ_LOCATION_ABS: str = os.path.abspath(READ_LOCATION_REL)
 
 # check this out if you forgot how regex works: https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf
+
 CONVENTION_ENTITY_ANIM: str = "[a-z]+"
 CONVENTION_ENTITY_FRAME: str = "[0-9]+"
 CONVENTION_ENTITY_FILETYPE: str = "([.]png){1}"
 CONVENTION_ENTITY: str = CONVENTION_ENTITY_ANIM + "(_){1}" + CONVENTION_ENTITY_FRAME + CONVENTION_ENTITY_FILETYPE
-CONVENTION_LEVELTILE: str = "" # TODO: create naming convention for leveltile files
-CONVENTION_LEVELDATA: str = "[a-z0-9]+([.]txt){1}"
+
+CONVENTION_LEVELTILE: str = "" # TODO: create a regex expression for the leveltile file naming convention
+
+CONVENTION_LEVELDATA_NAME: str = "[a-z0-9]+"
+CONVENTION_LEVELDATA_FILETYPE: str = "([.]txt){1}"
+CONVENTION_LEVELDATA: str = CONVENTION_LEVELDATA_NAME + CONVENTION_LEVELDATA_FILETYPE
 
 def GetReadPath() -> str:
     return READ_LOCATION_ABS

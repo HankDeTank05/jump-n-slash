@@ -4,7 +4,6 @@ class App:
 
 	def __init__(self):
 		self.root = Tk()
-		self.root.minsize(width=1280, height=720)
 		self.grid = Grid(self.root)
 
 	def Run(self):
