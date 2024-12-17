@@ -1,0 +1,6 @@
+shared functionality
+- list items in a directory
+- determine if something is a folder or a file
+- get file extensions
+- determine if something follows a naming convention or not
+- read/write json files
