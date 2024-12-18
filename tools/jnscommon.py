@@ -55,3 +55,17 @@ def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
     fileList: list[str] = GetFilesAtPath(path)
     return [file for file in fileList if re.match(namingConvention, file)]
 
+def PrintDict(data: dict, indent: int = 0) -> None:
+    for key in data.keys():
+        for i in range(indent):
+            print("\t", end="")
+        print(f"{key}: ", end="")
+        if isinstance(data[key], dict):
+            print("{")
+            PrintDict(data[key], indent + 1)
+            for i in range(indent):
+                print("\t", end="")
+            print("}")
+        else:
+            print(data[key])
+
