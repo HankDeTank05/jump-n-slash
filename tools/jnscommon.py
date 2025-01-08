@@ -14,19 +14,23 @@ READ_LOCATION_ABS: str = os.path.abspath(READ_LOCATION_REL)
 
 # check this out if you forgot how regex works: https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf
 
-CONVENTION_SPRITE_ENTITY_ANIM: str = "[a-z]+"
-CONVENTION_SPRITE_ENTITY_FRAME: str = "[0-9]+"
-CONVENTION_SPRITE_ENTITY_FILETYPE: str = "([.]png){1}"
-CONVENTION_SPRITE_ENTITY: str = CONVENTION_SPRITE_ENTITY_ANIM + "(_){1}" + CONVENTION_SPRITE_ENTITY_FRAME + CONVENTION_SPRITE_ENTITY_FILETYPE
+_CONVENTION_SPRITE_ENTITY_ANIM: str = "[a-z]+"
+_CONVENTION_SPRITE_ENTITY_FRAME: str = "[0-9]+"
+_CONVENTION_SPRITE_ENTITY_FILETYPE: str = "([.]png){1}"
+CONVENTION_SPRITE_ENTITY: str = _CONVENTION_SPRITE_ENTITY_ANIM + "(_){1}" + _CONVENTION_SPRITE_ENTITY_FRAME + _CONVENTION_SPRITE_ENTITY_FILETYPE
 
-CONVENTION_SPRITE_LEVELTILE_TYPE: str = "[a-z]+"
-CONVENTION_SPRITE_LEVELTILE_NAME: str = "[a-z0-9]+"
-CONVENTION_SPRITE_LEVELTILE_FILETYPE: str = "([.]png){1}"
-CONVENTION_SPRITE_LEVELTILE: str = CONVENTION_SPRITE_LEVELTILE_TYPE + "(_){1}" + CONVENTION_SPRITE_LEVELTILE_TYPE + CONVENTION_SPRITE_LEVELTILE_FILETYPE
+_CONVENTION_SPRITE_LEVELTILE_TYPE: str = "[a-z]+"
+_CONVENTION_SPRITE_LEVELTILE_NAME: str = "[a-z0-9]+"
+_CONVENTION_SPRITE_LEVELTILE_FILETYPE: str = "([.]png){1}"
+CONVENTION_SPRITE_LEVELTILE: str = _CONVENTION_SPRITE_LEVELTILE_TYPE + "(_){1}" + _CONVENTION_SPRITE_LEVELTILE_NAME + _CONVENTION_SPRITE_LEVELTILE_FILETYPE
 
-CONVENTION_LEVELDATA_NAME: str = "[a-z0-9]+"
-CONVENTION_LEVELDATA_FILETYPE: str = "([.]txt){1}"
-CONVENTION_LEVELDATA: str = CONVENTION_LEVELDATA_NAME + CONVENTION_LEVELDATA_FILETYPE
+_CONVENTION_LEVELDATA_NAME: str = "[a-z0-9]+"
+_CONVENTION_LEVELDATA_FILETYPE: str = "([.]txt){1}"
+CONVENTION_LEVELDATA: str = _CONVENTION_LEVELDATA_NAME + _CONVENTION_LEVELDATA_FILETYPE
+
+#####################
+# file system stuff #
+#####################
 
 def GetReadPath() -> str:
     return READ_LOCATION_ABS
@@ -58,17 +62,47 @@ def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
     fileList: list[str] = GetFilesAtPath(path)
     return [file for file in fileList if re.match(namingConvention, file)]
 
-def PrintDict(data: dict, indent: int = 0) -> None:
+#########################
+# packages/dependencies #
+#########################
+
+"""DOES NOT CURRENTLY WORK"""
+def CreateVirtualEnvironment() -> None:
+    pass
+
+"""CURRENTLY ONLY WORKS ON WINDOWS!!"""
+def PipInstall(pkgName: str) -> None:
+    os.system(f"pip install {pkgName}")
+
+#############################
+# debugging/printing/output #
+#############################
+
+def PrintDict(data: dict, indent: int = 0, printResult: bool = True) -> str:
+    output: str = ""
     for key in data.keys():
         for i in range(indent):
-            print("\t", end="")
-        print(f"{key}: ", end="")
+            #print("\t", end="")
+            output += "\t"
+        #print(f"{key}: ", end="")
+        output += f"{key}: "
         if isinstance(data[key], dict):
-            print("{")
-            PrintDict(data[key], indent + 1)
+            #print("{")
+            output += "{\n"
+            output += PrintDict(data[key], indent + 1, printResult=False)
             for i in range(indent):
-                print("\t", end="")
-            print("}")
+                #print("\t", end="")
+                output += "\t"
+            #print("}")
+            output += "}\n"
         else:
-            print(data[key])
+            #print(data[key])
+            output += f"{data[key]}\n"
+    
+    # print the resulting string
+    if printResult == True:
+        print(output)
+
+    # return the resulting string
+    return output
 
