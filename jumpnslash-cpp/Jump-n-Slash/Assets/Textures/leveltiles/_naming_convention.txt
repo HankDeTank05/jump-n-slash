@@ -1,13 +1,13 @@
-<tileType>_<tileName>.png
+<paletteName>_<tileName>.png
 
-<tileType> must be one of the following...
-- indicator
-- block
-- platform
-- background
-(if you would like to add more, please @ Henry in the discord)
+for <paletteName>, there are some specific designations...
+- placeholder (for tiles that need some visual representation, but have not been rendered by the artist(s) yet)
+- indicator (for tiles that do not appear or will be replaced when loaded into the game)
+other than the above two, palette names should be used to group tiles based on a shared aesthetic
 
 NOTES
 - Spritesheets will be created by the automator. You do not need to create your own.
-- Everything between angle brackets <shouldBeCamelCase>. Do not use underscores in names unless it's part of the naming convention.
+- Everything between angle brackets <shouldBeCamelCase>
+	- DO NOT use spaces in names!
+	- ONLY use underscores where they are designated specifically in the naming convention!
 - Files you would like to store in this folder but you don't want to be processed by asset automation should begin with a leading underscore.
