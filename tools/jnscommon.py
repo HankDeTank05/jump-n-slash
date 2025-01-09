@@ -13,17 +13,28 @@ READ_LOCATION_REL: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "a
 READ_LOCATION_ABS: str = os.path.abspath(READ_LOCATION_REL)
 
 # check this out if you forgot how regex works: https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf
-
+"""
+Entity sprite naming convention
+<animationName>_<frameNumber>.png
+"""
 _CONVENTION_SPRITE_ENTITY_ANIM: str = "[a-z]+"
 _CONVENTION_SPRITE_ENTITY_FRAME: str = "[0-9]+"
 _CONVENTION_SPRITE_ENTITY_FILETYPE: str = "([.]png){1}"
 CONVENTION_SPRITE_ENTITY: str = _CONVENTION_SPRITE_ENTITY_ANIM + "(_){1}" + _CONVENTION_SPRITE_ENTITY_FRAME + _CONVENTION_SPRITE_ENTITY_FILETYPE
 
-_CONVENTION_SPRITE_LEVELTILE_TYPE: str = "[a-z]+"
+"""
+Level tile sprite naming convention
+<paletteName>_<tileName>.png
+"""
+_CONVENTION_SPRITE_LEVELTILE_PALETTE: str = "[a-z]+"
 _CONVENTION_SPRITE_LEVELTILE_NAME: str = "[a-z0-9]+"
 _CONVENTION_SPRITE_LEVELTILE_FILETYPE: str = "([.]png){1}"
-CONVENTION_SPRITE_LEVELTILE: str = _CONVENTION_SPRITE_LEVELTILE_TYPE + "(_){1}" + _CONVENTION_SPRITE_LEVELTILE_NAME + _CONVENTION_SPRITE_LEVELTILE_FILETYPE
+CONVENTION_SPRITE_LEVELTILE: str = _CONVENTION_SPRITE_LEVELTILE_PALETTE + "(_){1}" + _CONVENTION_SPRITE_LEVELTILE_NAME + _CONVENTION_SPRITE_LEVELTILE_FILETYPE
 
+"""
+Level data naming convention
+<levelName>.txt
+"""
 _CONVENTION_LEVELDATA_NAME: str = "[a-z0-9]+"
 _CONVENTION_LEVELDATA_FILETYPE: str = "([.]txt){1}"
 CONVENTION_LEVELDATA: str = _CONVENTION_LEVELDATA_NAME + _CONVENTION_LEVELDATA_FILETYPE
@@ -68,10 +79,11 @@ def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
 
 """DOES NOT CURRENTLY WORK"""
 def CreateVirtualEnvironment() -> None:
-    pass
+    assert False
 
-"""CURRENTLY ONLY WORKS ON WINDOWS!!"""
+"""DOES NOT CURRENTLY WORK"""
 def PipInstall(pkgName: str) -> None:
+    assert False
     os.system(f"pip install {pkgName}")
 
 #############################
