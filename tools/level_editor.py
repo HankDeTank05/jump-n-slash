@@ -7,6 +7,7 @@ import jnscommon as jns
 """
 NOTE: IF RUNNING FROM VSCODE, "cd" TO THE FOLDER CONTAINING THIS FILE BEFORE RUNNING TO AVOID PATHING ISSUES
 - any class that is a GUI element, prepend "Gui" to the name of the class
+    - any class that is a GUI element(s) should take a parent widget in their constructor
     - any class that is a GUI element(s) should take a column, row, columnspan, and rowspan as four ints in their constructor
     - member variables of a class that are a widget should follow this convention: "self.w_<variableName>"
     - member variables of a class that are a collection of widgets should follow this convention "self.wc_<variableName>"
@@ -85,7 +86,7 @@ class Editor(tk.Tk):
         self.map = Map()
         self.camera_pos = (0, 0)
         self.brush_index = 0
-        filenames = jns.GetFilesWithConvention("../jumpnslash-cpp/Jump-n-Slash/Assets/textures/leveltiles",jns.CONVENTION_SPRITE_LEVELTILE)
+        filenames = jns.GetFilesWithConvention("../jumpnslash-cpp/Jump-n-Slash/Assets/textures/leveltiles",jns.CONVENTION_SPR_LEVELTILE)
         print (filenames)
 
         self.tile_images = [
@@ -204,6 +205,123 @@ class Editor(tk.Tk):
         else:
             self.destroy()
 
+class GuiGridView:
+
+    def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int) -> None:
+        ############################
+        # create the non-gui stuff #
+        ############################
+
+        # code goes here
+
+        ########################
+        # create the gui stuff #
+        ########################
+
+        # code goes here
+        pass
+
+class GuiEditorOptions:
+
+    def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int) -> None:
+        ############################
+        # create the non-gui stuff #
+        ############################
+
+        # code goes here
+
+        ########################
+        # create the gui stuff #
+        ########################
+
+        # code goes here
+        pass
+
+class GuiTileDetailsPanel:
+
+    def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int) -> None:
+        ############################
+        # create the non-gui stuff #
+        ############################
+
+        # code goes here
+
+        ########################
+        # create the gui stuff #
+        ########################
+
+        # code goes here
+        pass
+
+class GuiTilePalette:
+
+    def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int) -> None:
+        ############################
+        # create the non-gui stuff #
+        ############################
+
+        fileList: list[str] = jns.GetFilesWithConvention(jns.READ_LOCATION_TEXTURES_LEVELTILES, jns.CONVENTION_SPR_LEVELTILE)
+        prefixList: list[str] = []
+        self.notebookPageNames: list[str] = ["Placeholder", "Indicator"]
+
+        ########################
+        # create the gui stuff #
+        ########################
+
+        # create the notebook widget
+        self.w_notebook: ttk.Notebook = ttk.Notebook(parent)
+        self.w_notebook.grid(column=column, row=row, columnspan=columnspan, rowspan=rowspan)
+
+        # create one frame for each of the notebook page names
+        self.wc_notebookPageFrames: list[ttk.Frame] = []
+        for name in self.notebookPageNames:
+            self._AddNotebookPage(name)
+
+        # TODO: create the tile images inside of each notebook page
+
+    def _AddNotebookPage(self, pageName: str) -> None:
+        frame: ttk.Frame = ttk.Frame(self.w_notebook)
+        frame.grid(column=0, row=0)
+        self.w_notebook.add(frame, text=pageName)
+        self.wc_notebookPageFrames.append(frame)
+
+class GuiLevelEditorApp:
+
+    def __init__(self) -> None:
+        ############################
+        # create the non-gui stuff #
+        ############################
+
+        # code goes here
+
+        ########################
+        # create the gui stuff #
+        ########################
+
+        self.root: tk.Tk = tk.Tk()
+        self.root.title("Level Editor")
+
+        # create the menu bar
+        # TODO: code goes here
+
+        # create the grid view
+        self.wc_gridView: GuiGridView = GuiGridView(parent=self.root, column=0, row=0, columnspan=1, rowspan=1)
+
+        # create the editor options
+        self.wc_editorOptions: GuiEditorOptions = GuiEditorOptions(parent=self.root, column=0, row=1, columnspan=1, rowspan=1)
+
+        # create the tile details panel
+        self.wc_tileDetails: GuiTileDetailsPanel = GuiTileDetailsPanel(parent=self.root, column=1, row=0, columnspan=1, rowspan=2)
+        
+        # create the tile palette
+        self.wc_tilePalette: GuiTilePalette = GuiTilePalette(parent=self.root, column=0, row=2, columnspan=2, rowspan=1)
+
+
+    def Run(self) -> None:
+        self.root.mainloop()
+
 if __name__ == "__main__":
-    app = Editor()
-    app.mainloop()
+    # app = Editor()
+    # app.mainloop()
+    app: GuiLevelEditorApp = GuiLevelEditorApp()
+    app.Run()
