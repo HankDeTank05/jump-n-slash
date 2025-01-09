@@ -4,10 +4,23 @@ import json
 from PIL import Image, ImageTk
 import jnscommon as jns
 
+"""
+NOTE: IF RUNNING FROM VSCODE, "cd" TO THE FOLDER CONTAINING THIS FILE BEFORE RUNNING TO AVOID PATHING ISSUES
+- any class that is a GUI element, prepend "Gui" to the name of the class
+    - any class that is a GUI element(s) should take a column, row, columnspan, and rowspan as four ints in their constructor
+    - member variables of a class that are a widget should follow this convention: "self.w_<variableName>"
+    - member variables of a class that are a collection of widgets should follow this convention "self.wc_<variableName>"
+- variable names should always be in camelCase
+- always do type hints when declaring variables
+- use assert statements LIBERALLY
+- use TODO (and regular) comments liberally
+    - remember: use comments to describe the meaning of the code, not a restated version of the logic
+"""
+
 class Map:
     def __init__(self):
-        self.tiles = {}  # Store tile data: dict[tuple(int, int), int]
-        self.is_saved = True  # Track if the map has been saved
+        self.tiles: dict[tuple[int, int], int] = {}  # Store tile data: dict[tuple(int, int), int]
+        self.is_saved: bool = True  # Track if the map has been saved
 
         # Map dimensions
         self.x_min = 0

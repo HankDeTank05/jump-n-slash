@@ -9,8 +9,10 @@ more about python type hints: https://docs.python.org/3/library/typing.html
 python type hints cheat sheet: https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
 '''
 
-READ_LOCATION_REL: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets")
-READ_LOCATION_ABS: str = os.path.abspath(READ_LOCATION_REL)
+_READ_LOCATION_REL: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets")
+READ_LOCATION: str = os.path.abspath(_READ_LOCATION_REL)
+READ_LOCATION_TEXTURES_LEVELTILES: str = os.path.join(READ_LOCATION, "textures", "leveltiles")
+READ_LOCATION_LEVELDATA: str = os.path.join(READ_LOCATION, "leveldata")
 
 # check this out if you forgot how regex works: https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf
 """
@@ -79,11 +81,11 @@ def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
 
 """DOES NOT CURRENTLY WORK"""
 def CreateVirtualEnvironment() -> None:
-    assert False
+    assert False, "CreateVirtualEnvironment function does not work yet!"
 
 """DOES NOT CURRENTLY WORK"""
 def PipInstall(pkgName: str) -> None:
-    assert False
+    assert False, "PipInstall function does not work yet!"
     os.system(f"pip install {pkgName}")
 
 #############################
