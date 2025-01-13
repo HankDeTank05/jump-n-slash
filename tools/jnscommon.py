@@ -19,7 +19,7 @@ READ_LOCATION_LEVELDATA: str = os.path.join(READ_LOCATION, "leveldata")
 Entity sprite naming convention
 <animationName>_<frameNumber>.png
 """
-_CONVENTION_SPR_ENTITY_ANIM: str = "[a-z]+"
+_CONVENTION_SPR_ENTITY_ANIM: str = "[a-zA-Z]+"
 _CONVENTION_SPR_ENTITY_FRAME: str = "[0-9]+"
 _CONVENTION_SPR_ENTITY_FILETYPE: str = "([.]png){1}"
 CONVENTION_SPR_ENTITY: str = _CONVENTION_SPR_ENTITY_ANIM + "(_){1}" + _CONVENTION_SPR_ENTITY_FRAME + _CONVENTION_SPR_ENTITY_FILETYPE
@@ -28,8 +28,8 @@ CONVENTION_SPR_ENTITY: str = _CONVENTION_SPR_ENTITY_ANIM + "(_){1}" + _CONVENTIO
 Level tile sprite naming convention
 <paletteName>_<tileName>.png
 """
-_CONVENTION_SPR_LEVELTILE_PALETTE: str = "[a-z]+"
-_CONVENTION_SPR_LEVELTILE_NAME: str = "[a-z0-9]+"
+_CONVENTION_SPR_LEVELTILE_PALETTE: str = "[a-zA-Z]+"
+_CONVENTION_SPR_LEVELTILE_NAME: str = "[a-zA-Z0-9]+"
 _CONVENTION_SPR_LEVELTILE_FILETYPE: str = "([.]png){1}"
 CONVENTION_SPR_LEVELTILE: str = _CONVENTION_SPR_LEVELTILE_PALETTE + "(_){1}" + _CONVENTION_SPR_LEVELTILE_NAME + _CONVENTION_SPR_LEVELTILE_FILETYPE
 
@@ -37,7 +37,7 @@ CONVENTION_SPR_LEVELTILE: str = _CONVENTION_SPR_LEVELTILE_PALETTE + "(_){1}" + _
 Level tile data naming convention
 <tileName>_data.json
 """
-_CONVENTION_DATA_LEVELTILE_NAME: str = "[a-z]+"
+_CONVENTION_DATA_LEVELTILE_NAME: str = "[a-zA-Z]+"
 _CONVENTION_DATA_LEVELTILE_FILETYPE: str = "([.]json){1}"
 CONVENTION_DATA_LEVELTILE: str = _CONVENTION_DATA_LEVELTILE_NAME + "(_data){1}" + _CONVENTION_DATA_LEVELTILE_FILETYPE
 
@@ -45,7 +45,7 @@ CONVENTION_DATA_LEVELTILE: str = _CONVENTION_DATA_LEVELTILE_NAME + "(_data){1}" 
 Level data naming convention
 <levelName>.txt
 """
-_CONVENTION_DATA_LEVELDATA_NAME: str = "[a-z0-9]+"
+_CONVENTION_DATA_LEVELDATA_NAME: str = "[a-zA-Z0-9]+"
 _CONVENTION_DATA_LEVELDATA_FILETYPE: str = "([.]txt){1}"
 CONVENTION_DATA_LEVELDATA: str = _CONVENTION_DATA_LEVELDATA_NAME + _CONVENTION_DATA_LEVELDATA_FILETYPE
 
@@ -54,34 +54,34 @@ CONVENTION_DATA_LEVELDATA: str = _CONVENTION_DATA_LEVELDATA_NAME + _CONVENTION_D
 #####################
 
 def GetReadPath() -> str:
-    return READ_LOCATION_ABS
+	return READ_LOCATION_ABS
 
 def GetItemsAtPath(path: str) -> list[str]:
-    return os.listdir(path)
+	return os.listdir(path)
 
 def GetFilesAtPath(path: str) -> list[str]:
-    absPath: str = os.path.abspath(path)
-    items: list[str] = os.listdir(absPath)
-    return [item for item in items if os.path.isfile(os.path.join(absPath,item))]
+	absPath: str = os.path.abspath(path)
+	items: list[str] = os.listdir(absPath)
+	return [item for item in items if os.path.isfile(os.path.join(absPath,item))]
 
 def GetFoldersAtPath(path: str) -> list[str]:
-    absPath: str = os.path.abspath(path)
-    items: list[str] = os.listdir(absPath)
-    return [item for item in items if os.path.isdir(os.path.join(absPath,item))]
+	absPath: str = os.path.abspath(path)
+	items: list[str] = os.listdir(absPath)
+	return [item for item in items if os.path.isdir(os.path.join(absPath,item))]
 
 def GetFileType(path: str) -> str:
-    absPath: str = os.path.abspath(path)
-    assert os.path.isfile(absPath)
-    extension: str = ""
-    i: int = len(path) - 1
-    while path[i] != ".":
-        i -= 1
-    assert path[i] == "."
-    return path[i:]
+	absPath: str = os.path.abspath(path)
+	assert os.path.isfile(absPath)
+	extension: str = ""
+	i: int = len(path) - 1
+	while path[i] != ".":
+		i -= 1
+	assert path[i] == "."
+	return path[i:]
 
 def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
-    fileList: list[str] = GetFilesAtPath(path)
-    return [file for file in fileList if re.match(namingConvention, file)]
+	fileList: list[str] = GetFilesAtPath(path)
+	return [file for file in fileList if re.match(namingConvention, file)]
 
 #########################
 # packages/dependencies #
@@ -89,42 +89,42 @@ def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
 
 """DOES NOT CURRENTLY WORK"""
 def CreateVirtualEnvironment() -> None:
-    assert False, "CreateVirtualEnvironment function does not work yet!"
+	assert False, "CreateVirtualEnvironment function does not work yet!"
 
 """DOES NOT CURRENTLY WORK"""
 def PipInstall(pkgName: str) -> None:
-    assert False, "PipInstall function does not work yet!"
-    os.system(f"pip install {pkgName}")
+	assert False, "PipInstall function does not work yet!"
+	os.system(f"pip install {pkgName}")
 
 #############################
 # debugging/printing/output #
 #############################
 
 def PrintDict(data: dict, indent: int = 0, printResult: bool = True) -> str:
-    output: str = ""
-    for key in data.keys():
-        for i in range(indent):
-            #print("\t", end="")
-            output += "\t"
-        #print(f"{key}: ", end="")
-        output += f"{key}: "
-        if isinstance(data[key], dict):
-            #print("{")
-            output += "{\n"
-            output += PrintDict(data[key], indent + 1, printResult=False)
-            for i in range(indent):
-                #print("\t", end="")
-                output += "\t"
-            #print("}")
-            output += "}\n"
-        else:
-            #print(data[key])
-            output += f"{data[key]}\n"
-    
-    # print the resulting string
-    if printResult == True:
-        print(output)
+	output: str = ""
+	for key in data.keys():
+		for i in range(indent):
+			#print("\t", end="")
+			output += "\t"
+		#print(f"{key}: ", end="")
+		output += f"{key}: "
+		if isinstance(data[key], dict):
+			#print("{")
+			output += "{\n"
+			output += PrintDict(data[key], indent + 1, printResult=False)
+			for i in range(indent):
+				#print("\t", end="")
+				output += "\t"
+			#print("}")
+			output += "}\n"
+		else:
+			#print(data[key])
+			output += f"{data[key]}\n"
+	
+	# print the resulting string
+	if printResult == True:
+		print(output)
 
-    # return the resulting string
-    return output
+	# return the resulting string
+	return output
 
