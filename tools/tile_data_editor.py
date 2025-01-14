@@ -259,6 +259,7 @@ class GuiTileSkins:
 		# create the container canvas
 		self.w_canvas: tk.Canvas = tk.Canvas(parent)
 		self.w_canvas.grid(column=0, row=0)
+		# TODO: the list items in this canvas could use some padding to space them out from each other. figure out more specfically how to do this later
 
 		# create skin editor boxes
 		self.wc_skinEditors: list[GuiSkinEditor] = []
