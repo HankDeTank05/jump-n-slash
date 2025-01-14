@@ -83,6 +83,28 @@ def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
 	fileList: list[str] = GetFilesAtPath(path)
 	return [file for file in fileList if re.match(namingConvention, file)]
 
+################
+# string stuff #
+################
+
+def ConvertToCamelCase(toConvert: str) -> str:
+	# convert the string to all lowercase
+	result: str = toConvert.lower()
+	print(f"\"{result}\" will be converted to camelCase")
+	while True:
+		try:
+			spaceIndex: int = result.index(" ")
+		except ValueError:
+			break
+		else:
+			if spaceIndex == len(result) - 1:
+				result = result[:spaceIndex]
+			else:
+				result = result[:spaceIndex] + result[spaceIndex+1].upper() + result[spaceIndex+2:]
+			print(f"\"{result}\"")
+	
+	return result
+
 #########################
 # packages/dependencies #
 #########################
