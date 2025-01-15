@@ -1,0 +1,16 @@
+{
+    "name": "test",
+    "properties": {
+        "damage to player": 3.0,
+        "damage to enemies": 2.0,
+        "damage to npcs": 1.0,
+        "breakable": true,
+        "solid on top": true,
+        "solid on sides": true,
+        "solid on bottom": true
+    },
+    "skins": {
+        "placeholder": "placeholder_breakableBlock.png",
+        "placeholder2": "placeholder_breakableBlock.png"
+    }
+}

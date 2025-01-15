@@ -1,0 +1,15 @@
+{
+    "name": "solid block",
+    "properties": {
+        "damage to player": 0.0,
+        "damage to enemies": 0.0,
+        "damage to npcs": 0.0,
+        "breakable": false,
+        "solid on top": true,
+        "solid on sides": true,
+        "solid on bottom": true
+    },
+    "skins": {
+        "placeholder": "placeholder_solidBlock.png"
+    }
+}
