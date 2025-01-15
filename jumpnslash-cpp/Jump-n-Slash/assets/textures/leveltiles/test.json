@@ -1,5 +1,7 @@
 {
-    "name": "test",
+    "info": {
+        "name": "test"
+    },
     "properties": {
         "damage to player": 3.0,
         "damage to enemies": 2.0,
@@ -11,6 +13,7 @@
     },
     "skins": {
         "placeholder": "placeholder_breakableBlock.png",
-        "placeholder2": "placeholder_breakableBlock.png"
+        "placeholder2": "placeholder_hazardBlock.png",
+        "placeholder3": "placeholder_solidBlock.png"
     }
 }

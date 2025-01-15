@@ -1,5 +1,7 @@
 {
-    "name": "solid block",
+    "info": {
+        "name": "solid block"
+    },
     "properties": {
         "damage to player": 0.0,
         "damage to enemies": 0.0,

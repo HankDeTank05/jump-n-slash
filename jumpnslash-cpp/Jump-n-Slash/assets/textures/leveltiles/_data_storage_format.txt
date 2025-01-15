@@ -5,12 +5,8 @@ json. everything.
 example of how a json file would represent a breakable block
 file name: "breakableBlock_data.json"
 {
-	"name": "breakable block",
-	"skins": {
-		"placeholder": "placeholder_breakableBlock.png",
-		"forest": "forest_breakableBlock.png",
-		"sky": "sky_breakableBlock.png",
-		"lava": "lava_breakableBlock.png"
+	"info": {
+		"name": "breakable block"
 	},
 	"properties": {
 		"damage to player": 0.0,
@@ -20,5 +16,11 @@ file name: "breakableBlock_data.json"
 		"solid on top": "true",
 		"solid on sides": "true",
 		"solid on bottom": "true"
+	},
+	"skins": {
+		"placeholder": "placeholder_breakableBlock.png",
+		"forest": "forest_breakableBlock.png",
+		"sky": "sky_breakableBlock.png",
+		"lava": "lava_breakableBlock.png"
 	}
 }

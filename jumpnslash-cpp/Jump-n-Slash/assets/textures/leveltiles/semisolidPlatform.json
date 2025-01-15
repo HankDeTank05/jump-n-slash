@@ -1,5 +1,7 @@
 {
-    "name": "semisolid platform",
+    "info": {
+        "name": "semisolid platform"
+    },
     "properties": {
         "damage to player": 0.0,
         "damage to enemies": 0.0,

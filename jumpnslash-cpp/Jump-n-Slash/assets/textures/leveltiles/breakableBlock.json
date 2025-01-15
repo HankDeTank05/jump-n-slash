@@ -1,5 +1,7 @@
 {
-    "name": "breakable block",
+    "info": {
+        "name": "breakable block"
+    },
     "properties": {
         "damage to player": 0.0,
         "damage to enemies": 0.0,
