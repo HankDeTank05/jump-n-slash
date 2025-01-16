@@ -218,7 +218,7 @@ class Editor(tk.Tk):
 
 class GuiLayerSelector:
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -234,7 +234,6 @@ class GuiLayerSelector:
 		self.w_parentFrame.grid(column=column, row=row,
 						  columnspan=columnspan, rowspan=rowspan,
 						  padx=padx, pady=pady,
-						  ipadx=ipadx, ipady=ipady,
 						  sticky=sticky)
 
 
@@ -243,7 +242,7 @@ class GuiLayerSelector:
 
 class GuiGridView:
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -259,7 +258,6 @@ class GuiGridView:
 		self.w_parentFrame.grid(column=column, row=row,
 						  columnspan=columnspan, rowspan=rowspan,
 						  padx=padx, pady=pady,
-						  ipadx=ipadx, ipady=ipady,
 						  sticky=sticky)
 
 
@@ -268,7 +266,7 @@ class GuiGridView:
 
 class GuiEditorOptions:
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -284,7 +282,6 @@ class GuiEditorOptions:
 		self.w_parentFrame.grid(column=column, row=row,
 						  columnspan=columnspan, rowspan=rowspan,
 						  padx=padx, pady=pady,
-						  ipadx=ipadx, ipady=ipady,
 						  sticky=sticky)
 
 
@@ -293,7 +290,7 @@ class GuiEditorOptions:
 
 class GuiTileDetailsPanel:
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -309,7 +306,6 @@ class GuiTileDetailsPanel:
 		self.w_parentFrame.grid(column=column, row=row,
 						  columnspan=columnspan, rowspan=rowspan,
 						  padx=padx, pady=pady,
-						  ipadx=ipadx, ipady=ipady,
 						  sticky=sticky)
 
 		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
@@ -319,7 +315,7 @@ class GuiTileDetailsPanel:
 class GuiTilePalette:
 
 	# TODO: there are unfinished todos in here
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -352,7 +348,6 @@ class GuiTilePalette:
 		self.w_parentFrame.grid(column=column, row=row,
 						  columnspan=columnspan, rowspan=rowspan,
 						  padx=padx, pady=pady,
-						  ipadx=ipadx, ipady=ipady,
 						  sticky=sticky)
 
 		# create the notebook widget
@@ -417,9 +412,6 @@ class GuiLevelEditorApp:
 		
 		self._PADX: int = 0
 		self._PADY: int = 0
-		
-		self._IPADX: int = 0
-		self._IPADY: int = 0
 
 		########################
 		# create the gui stuff #
@@ -437,7 +429,6 @@ class GuiLevelEditorApp:
 															 column=0, row=0, # column/row position in the parent
 															 columnspan=1, rowspan=2, # column/row span
 															 padx=self._PADX, pady=self._PADY, # padding around the outside of this object's parent frame
-															 ipadx=self._IPADX, ipady=self._IPADY, # padding around the inside of this object's parent frame
 															 sticky="NSEW") # which sides should this object's parent frame stick to
 		
 		# create the grid view
@@ -445,7 +436,6 @@ class GuiLevelEditorApp:
 											  column=1, row=0,
 											  columnspan=1, rowspan=1,
 											  padx=self._PADX, pady=self._PADY,
-											  ipadx=self._IPADX, ipady=self._IPADY,
 											  sticky="NSEW")
 
 		# create the editor options
@@ -453,7 +443,6 @@ class GuiLevelEditorApp:
 															 column=1, row=1,
 															 columnspan=1, rowspan=1,
 															 padx=self._PADX, pady=self._PADY,
-															 ipadx=self._IPADX, ipady=self._IPADY,
 															 sticky="NSEW")
 
 		# create the tile details panel
@@ -461,7 +450,6 @@ class GuiLevelEditorApp:
 																 column=2, row=0,
 																 columnspan=1, rowspan=2,
 																 padx=self._PADX, pady=self._PADY,
-																 ipadx=self._IPADX, ipady=self._IPADY,
 																 sticky="NSEW")
 		
 		# create the tile palette
@@ -469,7 +457,6 @@ class GuiLevelEditorApp:
 													   column=0, row=2,
 													   columnspan=3, rowspan=1,
 													   padx=self._PADX, pady=self._PADY,
-													   ipadx=self._IPADX, ipady=self._IPADY,
 													   sticky="NSEW")
 
 	def Run(self) -> None:
