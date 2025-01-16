@@ -214,9 +214,13 @@ class Editor(tk.Tk):
 		else:
 			self.destroy()
 
-class GuiGridView:
+# above are the original classes used in the MVP prototype. they may be used in the final editor, or they may be removed
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int) -> None:
+# below are the classes that will be used for the editor
+
+class GuiLayerSelector:
+
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -226,13 +230,47 @@ class GuiGridView:
 		########################
 		# create the gui stuff #
 		########################
+		
+		# create the parent frame
+		self.w_parentFrame: ttk.LabelFrame = ttk.LabelFrame(parent, text="Layer Selector")
+		self.w_parentFrame.grid(column=column, row=row,
+						  columnspan=columnspan, rowspan=rowspan,
+						  padx=padx, pady=pady,
+						  ipadx=ipadx, ipady=ipady,
+						  sticky=sticky)
 
-		self.placeholderLabel: ttk.Label = ttk.Label(parent, text="Grid View coming soon")
-		self.placeholderLabel.grid(column=column, row=row)
+
+		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
+		self.w_placeholderLabel.grid(column=0, row=0)
+
+class GuiGridView:
+
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
+		############################
+		# create the non-gui stuff #
+		############################
+
+		# code goes here
+
+		########################
+		# create the gui stuff #
+		########################
+		
+		# create the parent frame
+		self.w_parentFrame: ttk.LabelFrame = ttk.LabelFrame(parent, text="Grid View")
+		self.w_parentFrame.grid(column=column, row=row,
+						  columnspan=columnspan, rowspan=rowspan,
+						  padx=padx, pady=pady,
+						  ipadx=ipadx, ipady=ipady,
+						  sticky=sticky)
+
+
+		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
+		self.w_placeholderLabel.grid(column=0, row=0)
 
 class GuiEditorOptions:
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -242,13 +280,22 @@ class GuiEditorOptions:
 		########################
 		# create the gui stuff #
 		########################
+		
+		# create the parent frame
+		self.w_parentFrame: ttk.LabelFrame = ttk.LabelFrame(parent, text="Editor Options")
+		self.w_parentFrame.grid(column=column, row=row,
+						  columnspan=columnspan, rowspan=rowspan,
+						  padx=padx, pady=pady,
+						  ipadx=ipadx, ipady=ipady,
+						  sticky=sticky)
 
-		self.placeholderLabel: ttk.Label = ttk.Label(parent, text="Editor Options coming soon")
-		self.placeholderLabel.grid(column=column, row=row)
+
+		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
+		self.w_placeholderLabel.grid(column=0, row=0)
 
 class GuiTileDetailsPanel:
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -258,17 +305,33 @@ class GuiTileDetailsPanel:
 		########################
 		# create the gui stuff #
 		########################
+		
+		# create the parent frame
+		self.w_parentFrame: ttk.LabelFrame = ttk.LabelFrame(parent, text="Tile Details Panel")
+		self.w_parentFrame.grid(column=column, row=row,
+						  columnspan=columnspan, rowspan=rowspan,
+						  padx=padx, pady=pady,
+						  ipadx=ipadx, ipady=ipady,
+						  sticky=sticky)
 
-		self.placeholderLabel: ttk.Label = ttk.Label(parent, text="Tile Details Panel coming soon")
-		self.placeholderLabel.grid(column=column, row=row)
+		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
+		self.w_placeholderLabel.grid(column=0, row=0)
 
+# TODO: there are unfinished todos in here
 class GuiTilePalette:
 
 	# TODO: there are unfinished todos in here
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, ipadx: int, ipady: int, sticky: str) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
+		
+		# constants
+		self._NOTEBOOK_PAGE_FRAME_PADX: int = 10
+		self._NOTEBOOK_PAGE_FRAME_PADY: int = 10
+		
+		self._TILE_PADX: int = 5
+		self._TILE_PADY: int = 5
 
 		# get a list of files that fit the naming convention
 		self.fileList: list[str] = jns.GetFilesWithConvention(jns.READ_LOCATION_TEXTURES_LEVELTILES, jns.CONVENTION_SPR_LEVELTILE)
@@ -285,10 +348,19 @@ class GuiTilePalette:
 		########################
 		# create the gui stuff #
 		########################
+		
+		# create the parent frame
+		self.w_parentFrame: ttk.LabelFrame = ttk.LabelFrame(parent, text="Tile Palette")
+		self.w_parentFrame.grid(column=column, row=row,
+						  columnspan=columnspan, rowspan=rowspan,
+						  padx=padx, pady=pady,
+						  ipadx=ipadx, ipady=ipady,
+						  sticky=sticky)
 
 		# create the notebook widget
-		self.w_notebook: ttk.Notebook = ttk.Notebook(parent)
-		self.w_notebook.grid(column=column, row=row, columnspan=columnspan, rowspan=rowspan)
+		self.w_notebook: ttk.Notebook = ttk.Notebook(self.w_parentFrame)
+		self.w_notebook.grid(column=0, row=0,
+					   sticky="NSEW")
 
 		# create one frame for each of the notebook page names
 		self.wc_notebookPageFrames: list[ttk.Frame] = []
@@ -305,7 +377,8 @@ class GuiTilePalette:
 
 	def _AddNotebookPage(self, pageName: str) -> None:
 		frame: ttk.Frame = ttk.Frame(self.w_notebook)
-		frame.grid(column=0, row=0)
+		frame.grid(column=0, row=0,
+			 padx=self._NOTEBOOK_PAGE_FRAME_PADX, pady=self._NOTEBOOK_PAGE_FRAME_PADY)
 		self.w_notebook.add(frame, text=pageName)
 		self.wc_notebookPageFrames.append(frame)
 
@@ -325,7 +398,8 @@ class GuiTilePalette:
 		
 		# create the button using the image that was just created
 		button: ttk.Button = ttk.Button(parentFrame, image=img, command=partial(self._SelectTile, filename)) 
-		button.grid(column=columnNum, row=0)
+		button.grid(column=columnNum, row=0,
+			  padx=self._TILE_PADX, pady=self._TILE_PADY)
 
 		# add the button to the dict
 		if pageName not in self.wc_tileButtons.keys():
@@ -347,6 +421,12 @@ class GuiLevelEditorApp:
 		self.camera_pos = (0, 0)
 		self.brush_index = 0
 
+		
+		self._PADX: int = 0
+		self._PADY: int = 0
+		
+		self._IPADX: int = 0
+		self._IPADY: int = 0
 
 		########################
 		# create the gui stuff #
@@ -355,6 +435,7 @@ class GuiLevelEditorApp:
 		self.root: tk.Tk = tk.Tk()
 		self.root.title("Level Editor")
 		self.root.geometry("1920x1080")
+		self.root.state("normal") # "normal" will be windowed, "zoomed" will be maximized
 
 		# create the menu bar
 		self.menu_bar = tk.Menu(self.root)
@@ -387,17 +468,46 @@ class GuiLevelEditorApp:
 		
 
 
+		
+		# create the layer selector
+		self.wc_layerSelector: GuiLayerSelector = GuiLayerSelector(parent=self.root, # the parent widget
+															 column=0, row=0, # column/row position in the parent
+															 columnspan=1, rowspan=2, # column/row span
+															 padx=self._PADX, pady=self._PADY, # padding around the outside of this object's parent frame
+															 ipadx=self._IPADX, ipady=self._IPADY, # padding around the inside of this object's parent frame
+															 sticky="NSEW") # which sides should this object's parent frame stick to
+		
 		# create the grid view
-		self.wc_gridView: GuiGridView = GuiGridView(parent=self.root, column=0, row=0, columnspan=1, rowspan=1)
+		self.wc_gridView: GuiGridView = GuiGridView(parent=self.root,
+											  column=1, row=0,
+											  columnspan=1, rowspan=1,
+											  padx=self._PADX, pady=self._PADY,
+											  ipadx=self._IPADX, ipady=self._IPADY,
+											  sticky="NSEW")
 
 		# create the editor options
-		self.wc_editorOptions: GuiEditorOptions = GuiEditorOptions(parent=self.root, column=0, row=1, columnspan=1, rowspan=1)
+		self.wc_editorOptions: GuiEditorOptions = GuiEditorOptions(parent=self.root,
+															 column=1, row=1,
+															 columnspan=1, rowspan=1,
+															 padx=self._PADX, pady=self._PADY,
+															 ipadx=self._IPADX, ipady=self._IPADY,
+															 sticky="NSEW")
 
 		# create the tile details panel
-		self.wc_tileDetails: GuiTileDetailsPanel = GuiTileDetailsPanel(parent=self.root, column=1, row=0, columnspan=1, rowspan=2)
+		self.wc_tileDetails: GuiTileDetailsPanel = GuiTileDetailsPanel(parent=self.root,
+																 column=2, row=0,
+																 columnspan=1, rowspan=2,
+																 padx=self._PADX, pady=self._PADY,
+																 ipadx=self._IPADX, ipady=self._IPADY,
+																 sticky="NSEW")
 		
 		# create the tile palette
-		self.wc_tilePalette: GuiTilePalette = GuiTilePalette(parent=self.root, column=0, row=2, columnspan=2, rowspan=1)
+		self.wc_tilePalette: GuiTilePalette = GuiTilePalette(parent=self.root,
+													   column=0, row=2,
+													   columnspan=3, rowspan=1,
+													   padx=self._PADX, pady=self._PADY,
+													   ipadx=self._IPADX, ipady=self._IPADY,
+													   sticky="NSEW")
 
 	def Run(self) -> None:
 		self.root.mainloop()
