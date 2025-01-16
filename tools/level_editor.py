@@ -2,6 +2,8 @@
 import json
 import os.path
 import tkinter as tk
+from tkinter import messagebox
+from tkinter import filedialog
 import tkinter.ttk as ttk
 from functools import partial
 
@@ -341,7 +343,10 @@ class GuiLevelEditorApp:
 		# create the non-gui stuff #
 		############################
 
-		# code goes here
+		self.map = Map()
+		self.camera_pos = (0, 0)
+		self.brush_index = 0
+
 
 		########################
 		# create the gui stuff #
@@ -349,9 +354,38 @@ class GuiLevelEditorApp:
 
 		self.root: tk.Tk = tk.Tk()
 		self.root.title("Level Editor")
+		self.root.geometry("1920x1080")
 
 		# create the menu bar
+		self.menu_bar = tk.Menu(self.root)
 		# TODO: code goes here
+
+		# File menu
+		file_menu = tk.Menu(self.menu_bar, tearoff=0)
+		file_menu.add_command(label="New", command=self.new_map)
+		file_menu.add_command(label="Save", command=self.save_map)
+		file_menu.add_command(label="Load", command=self.load_map)
+		file_menu.add_separator()
+		file_menu.add_command(label="Exit", command=self.on_exit)
+		self.menu_bar.add_cascade(label="File", menu=file_menu)
+	
+        # Edit menu
+		edit_menu = tk.Menu(self.menu_bar, tearoff=0)
+		edit_menu.add_command(label="Undo", command=self.undo_action)
+		edit_menu.add_command(label="Redo", command=self.redo_action)
+		edit_menu.add_separator()
+		edit_menu.add_command(label="Clear", command=self.clear_map)
+		self.menu_bar.add_cascade(label="Edit", menu=edit_menu)
+
+ 		# View menu
+		view_menu = tk.Menu(self.menu_bar, tearoff=0)
+		view_menu.add_command(label="Zoom In", command=self.zoom_in)
+		view_menu.add_command(label="Zoom Out", command=self.zoom_out)
+		view_menu.add_command(label="Reset Zoom", command=self.reset_zoom)
+		self.menu_bar.add_cascade(label="View", menu=view_menu)
+
+		
+
 
 		# create the grid view
 		self.wc_gridView: GuiGridView = GuiGridView(parent=self.root, column=0, row=0, columnspan=1, rowspan=1)
