@@ -15,6 +15,7 @@ import jnscommon as jns
 
 """
 NOTE: IF RUNNING FROM VSCODE, "cd" TO THE FOLDER CONTAINING THIS FILE BEFORE RUNNING TO AVOID PATHING ISSUES
+
 - any class that is a GUI element, prepend "Gui" to the name of the class
 	- any class that is a GUI element(s) should take a parent widget in their constructor
 	- any class that is a GUI element(s) should take a column, row, columnspan, and rowspan as four ints in their constructor
@@ -266,6 +267,18 @@ class GuiGridView:
 		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
 		self.w_placeholderLabel.grid(column=0, row=0)
 
+	########################
+	# whole-grid functions #
+	########################
+
+	# TODO: define this type hint more specifically
+	def GetDataForSaving(self) -> dict:
+		assert False
+
+	# TODO: define this type hint more specifically
+	def ReadLoadedData(self, data: dict) -> None:
+		assert False
+
 class GuiEditorOptions:
 
 	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
@@ -312,6 +325,8 @@ class GuiTileDetailsPanel:
 
 		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
 		self.w_placeholderLabel.grid(column=0, row=0)
+
+		# TODO: FOR NOW hard-code the tile to get details about. DO NOT worry about interacting with GuiTilePalette just yet
 
 # TODO: there are unfinished todos in here
 class GuiTilePalette:
@@ -412,13 +427,14 @@ class GuiLevelEditorApp:
 		# create the non-gui stuff #
 		############################
 
+		# constants
+		self._PADX: int = 0
+		self._PADY: int = 0
+
+		# non-constants
 		self.map = Map()
 		self.camera_pos = (0, 0)
 		self.brush_index = 0
-
-		
-		self._PADX: int = 0
-		self._PADY: int = 0
 
 		########################
 		# create the gui stuff #
@@ -426,40 +442,37 @@ class GuiLevelEditorApp:
 
 		self.root: tk.Tk = tk.Tk()
 		self.root.title("Level Editor")
-		self.root.geometry("1920x1080")
+		# self.root.geometry("1920x1080") # TODO: come back to this later once the editor is mostly finished
 		self.root.state("normal") # "normal" will be windowed, "zoomed" will be maximized
 
 		# create the menu bar
 		self.menu_bar:tk.Menu = tk.Menu(self.root)
 		# TODO: code goes here
+		self.menuBar = tk.Menu(self.root)
 
 		# File menu
-		file_menu = tk.Menu(self.menu_bar, tearoff=0)
-		file_menu.add_command(label="New", command=self.new_map)
-		file_menu.add_command(label="Save", command=self.save_map)
-		file_menu.add_command(label="Load", command=self.load_map)
-		file_menu.add_separator()
-		file_menu.add_command(label="Exit", command=self.on_exit)
-		self.menu_bar.add_cascade(label="File", menu=file_menu)
+		self.fileMenu = tk.Menu(self.menuBar, tearoff=0)
+		self.fileMenu.add_command(label="New", command=self.new_map)
+		self.fileMenu.add_command(label="Save", command=self.save_map)
+		self.fileMenu.add_command(label="Load", command=self.load_map)
+		self.fileMenu.add_separator()
+		self.fileMenu.add_command(label="Exit", command=self.on_exit)
+		self.menuBar.add_cascade(label="File", menu=file_menu)
 	
         # Edit menu
-		edit_menu = tk.Menu(self.menu_bar, tearoff=0)
-		edit_menu.add_command(label="Undo", command=self.undo_action)
-		edit_menu.add_command(label="Redo", command=self.redo_action)
-		edit_menu.add_separator()
-		edit_menu.add_command(label="Clear", command=self.clear_map)
-		self.menu_bar.add_cascade(label="Edit", menu=edit_menu)
+		self.editMenu = tk.Menu(self.menuBar, tearoff=0)
+		self.editMenu.add_command(label="Undo", command=self.undo_action)
+		self.editMenu.add_command(label="Redo", command=self.redo_action)
+		self.editMenu.add_separator()
+		self.editMenu.add_command(label="Clear", command=self.clear_map)
+		self.menuBar.add_cascade(label="Edit", menu=edit_menu)
 
  		# View menu
-		view_menu = tk.Menu(self.menu_bar, tearoff=0)
-		view_menu.add_command(label="Zoom In", command=self.zoom_in)
-		view_menu.add_command(label="Zoom Out", command=self.zoom_out)
-		view_menu.add_command(label="Reset Zoom", command=self.reset_zoom)
-		self.menu_bar.add_cascade(label="View", menu=view_menu)
-
-		
-
-
+		self.viewMenu = tk.Menu(self.menuBar, tearoff=0)
+		self.viewMenu.add_command(label="Zoom In", command=self.zoom_in)
+		self.viewMenu.add_command(label="Zoom Out", command=self.zoom_out)
+		self.viewMenu.add_command(label="Reset Zoom", command=self.reset_zoom)
+		self.menuBar.add_cascade(label="View", menu=view_menu)
 		
 		# create the layer selector
 		self.wc_layerSelector: GuiLayerSelector = GuiLayerSelector(parent=self.root, # the parent widget
@@ -495,6 +508,30 @@ class GuiLevelEditorApp:
 													   columnspan=3, rowspan=1,
 													   padx=self._PADX, pady=self._PADY,
 													   sticky="NSEW")
+
+	########################
+	# filesystem functions #
+	########################
+
+	def Save(self) -> None:
+		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, SAVE IT TO FILE AS IT WAS RECEIVED FROM GRIDVIEW
+		assert False
+
+	def Load(self) -> None:
+		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, PASS IT ALONG TO GRIDVIEW AS-IS
+		# TODO: load data from file
+		# TODO: pass data along to the GuiGridView
+		assert False
+
+	def _LoadFormatVersion1(self, data: dict) -> None:
+		assert False
+
+	def _LoadFormatVersion2(self, data: dict) -> None:
+		assert False
+
+	##################
+	# misc functions #
+	##################
 
 	def Run(self) -> None:
 		self.root.mainloop()
