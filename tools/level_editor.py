@@ -446,7 +446,6 @@ class GuiLevelEditorApp:
 		self.root.state("normal") # "normal" will be windowed, "zoomed" will be maximized
 
 		# create the menu bar
-		self.menu_bar:tk.Menu = tk.Menu(self.root)
 		# TODO: code goes here
 		self.menuBar = tk.Menu(self.root)
 
