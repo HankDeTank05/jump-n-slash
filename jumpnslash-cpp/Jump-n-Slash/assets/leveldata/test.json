@@ -1,0 +1,17 @@
+{
+    "Version": 1,
+    "Properties": {
+        "Size": [
+            10,
+            10
+        ]
+    },
+    "Layout": {
+        "placeholder_breakableBlock.png": [
+            [
+                0,
+                0
+            ]
+        ]
+    }
+}
