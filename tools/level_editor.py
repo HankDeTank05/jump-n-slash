@@ -229,9 +229,6 @@ class MapData:
 			for x in range(self.width):
 				self.grid[y].append(None)
 
-	def __init__(self, data: dict) -> None:
-		pass # TODO: construct map data from a dict
-
 	############
 	# mutators #
 	############
@@ -498,7 +495,7 @@ class GuiTileDetailsPanel:
 class GuiTilePalette:
 
 	# TODO: there are unfinished todos in here
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str, imgs: dict[str, tk.PhotoImage], selectTileCallback: any) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str, imgs: dict[str, tk.PhotoImage], fSelectBrushTileCallback: any) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -520,7 +517,7 @@ class GuiTilePalette:
 		self.notebookPageNames.sort()
 
 		# determine the currently selected tile
-		selectTileCallback(fileList[0])
+		fSelectBrushTileCallback(fileList[0])
 
 		########################
 		# create the gui stuff #
@@ -548,7 +545,7 @@ class GuiTilePalette:
 		for i in range(len(fileList)):
 			filename: str = fileList[i]
 			pageName: str = filename.split("_")[0] # TODO: there has to be a better way to do this than just duplicating the split code from above
-			self._AddTileToNotebookPage(pageName, filename, imgs[filename], i, selectTileCallback=selectTileCallback)
+			self._AddTileToNotebookPage(pageName, filename, imgs[filename], i, fSelectBrushTileCallback=fSelectBrushTileCallback)
 
 	def _AddNotebookPage(self, pageName: str) -> None:
 		frame: ttk.Frame = ttk.Frame(self.w_notebook)
@@ -557,7 +554,7 @@ class GuiTilePalette:
 		self.w_notebook.add(frame, text=pageName)
 		self.wc_notebookPageFrames.append(frame)
 
-	def _AddTileToNotebookPage(self, pageName: str, filename: str, img: tk.PhotoImage, columnNum: int, selectTileCallback: any) -> None:
+	def _AddTileToNotebookPage(self, pageName: str, filename: str, img: tk.PhotoImage, columnNum: int, fSelectBrushTileCallback: any) -> None:
 		assert pageName in self.notebookPageNames, f"Page name \"{pageName}\" not found!"
 		pageIndex: int = self.notebookPageNames.index(pageName)
 		parentFrame: ttk.Frame = self.wc_notebookPageFrames[pageIndex]
@@ -568,7 +565,7 @@ class GuiTilePalette:
 		self.tileImgs[pageName].append(img)
 		
 		# create the button using the image that was just created
-		button: ttk.Button = ttk.Button(parentFrame, image=img, command=partial(selectTileCallback, filename)) 
+		button: ttk.Button = ttk.Button(parentFrame, image=img, command=partial(fSelectBrushTileCallback, filename)) 
 		button.grid(column=columnNum, row=0,
 			  padx=self._TILE_PADX, pady=self._TILE_PADY)
 
@@ -654,7 +651,8 @@ class GuiLevelEditorApp:
 											  columnspan=1, rowspan=1,
 											  padx=self._PADX, pady=self._PADY,
 											  sticky="NSEW",
-											  fGetBrushTileCallback=self.GetBrushTileImg)
+											  fGetBrushTileCallback=self.GetBrushTileImg,
+											  fGetTileByNameCallback=self.GetTileByName)
 
 		# create the editor options
 		self.wc_editorOptions: GuiEditorOptions = GuiEditorOptions(parent=self.root,
@@ -677,8 +675,7 @@ class GuiLevelEditorApp:
 													   padx=self._PADX, pady=self._PADY,
 													   sticky="NSEW",
 													   imgs=self.tileImgs,
-													   fGetBrushTileCallback=self.SelectBrushTile,
-													   fGetTileByNameCallback=self.GetTileByName)
+													   fSelectBrushTileCallback=self.SelectBrushTile)
 		
 	###################
 	# setup functions #
