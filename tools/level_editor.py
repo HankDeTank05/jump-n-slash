@@ -310,7 +310,14 @@ class GuiTileDetailsPanel:
 		# create the non-gui stuff #
 		############################
 
-		# code goes here
+		# hardcoded test. Do not touch.
+		self.tile_data = {
+            "name": "Breakable Block",
+            "damage_to_player": 0,
+            "damage_to_enemies": 0,
+            "is_breakable": True,
+            "is_solid": True
+        }
 
 		########################
 		# create the gui stuff #
@@ -323,10 +330,40 @@ class GuiTileDetailsPanel:
 						  padx=padx, pady=pady,
 						  sticky=sticky)
 
-		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
-		self.w_placeholderLabel.grid(column=0, row=0)
+		#self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
+		#self.w_placeholderLabel.grid(column=0, row=0)
+  
+		# Tile Name
+		self.w_nameLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Name:")
+		self.w_nameLabel.grid(column=0, row=0, sticky="W", padx=10, pady=5)
+		self.w_nameValue: ttk.Label = ttk.Label(self.w_parentFrame, text=self.tile_data["name"])
+		self.w_nameValue.grid(column=1, row=0, sticky="W", padx=10, pady=5)
 
-		# TODO: FOR NOW hard-code the tile to get details about. DO NOT worry about interacting with GuiTilePalette just yet
+        # Damage to Player
+		self.w_damagePlayerLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Damage to Player:")
+		self.w_damagePlayerLabel.grid(column=0, row=1, sticky="W", padx=10, pady=5)
+		self.w_damagePlayerValue: ttk.Label = ttk.Label(self.w_parentFrame, text=self.tile_data["damage_to_player"])
+		self.w_damagePlayerValue.grid(column=1, row=1, sticky="W", padx=10, pady=5)
+
+        # Damage to Enemies
+		self.w_damageEnemiesLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Damage to Enemies:")
+		self.w_damageEnemiesLabel.grid(column=0, row=2, sticky="W", padx=10, pady=5)
+		self.w_damageEnemiesValue: ttk.Label = ttk.Label(self.w_parentFrame, text=self.tile_data["damage_to_enemies"])
+		self.w_damageEnemiesValue.grid(column=1, row=2, sticky="W", padx=10, pady=5)
+
+        # Breakable Status
+		self.w_breakableLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Breakable:")
+		self.w_breakableLabel.grid(column=0, row=3, sticky="W", padx=10, pady=5)
+		self.w_breakableValue: ttk.Label = ttk.Label(self.w_parentFrame, text="Yes" if self.tile_data["is_breakable"] else "No")
+		self.w_breakableValue.grid(column=1, row=3, sticky="W", padx=10, pady=5)
+
+        # Solid Status
+		self.w_solidLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Solid:")
+		self.w_solidLabel.grid(column=0, row=4, sticky="W", padx=10, pady=5)
+		self.w_solidValue: ttk.Label = ttk.Label(self.w_parentFrame, text="Yes" if self.tile_data["is_solid"] else "No")
+		self.w_solidValue.grid(column=1, row=4, sticky="W", padx=10, pady=5)
+
+		# TODO: Hard-coded the tile info. Still need to integrate into GUITilePalette.
 
 # TODO: there are unfinished todos in here
 class GuiTilePalette:
