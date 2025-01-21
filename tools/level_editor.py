@@ -493,7 +493,7 @@ class GuiLevelEditorApp:
 		self.fileMenu.add_command(label="Load", command=self.load_map)
 		self.fileMenu.add_separator()
 		self.fileMenu.add_command(label="Exit", command=self.on_exit)
-		self.menuBar.add_cascade(label="File", menu=file_menu)
+		self.menuBar.add_cascade(label="File", menu= self.fileMenu)
 	
         # Edit menu
 		self.editMenu = tk.Menu(self.menuBar, tearoff=0)
@@ -501,14 +501,17 @@ class GuiLevelEditorApp:
 		self.editMenu.add_command(label="Redo", command=self.redo_action)
 		self.editMenu.add_separator()
 		self.editMenu.add_command(label="Clear", command=self.clear_map)
-		self.menuBar.add_cascade(label="Edit", menu=edit_menu)
+		self.menuBar.add_cascade(label="Edit", menu= self.editMenu)
 
  		# View menu
 		self.viewMenu = tk.Menu(self.menuBar, tearoff=0)
 		self.viewMenu.add_command(label="Zoom In", command=self.zoom_in)
 		self.viewMenu.add_command(label="Zoom Out", command=self.zoom_out)
 		self.viewMenu.add_command(label="Reset Zoom", command=self.reset_zoom)
-		self.menuBar.add_cascade(label="View", menu=view_menu)
+		self.menuBar.add_cascade(label="View", menu= self.viewMenu)
+  
+  		# Trying something new here. Might delete later.
+		self.root.config(menu=self.menuBar)
 		
 		# create the layer selector
 		self.wc_layerSelector: GuiLayerSelector = GuiLayerSelector(parent=self.root, # the parent widget
