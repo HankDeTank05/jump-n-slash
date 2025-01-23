@@ -53,9 +53,6 @@ CONVENTION_DATA_LEVELDATA: str = _CONVENTION_DATA_LEVELDATA_NAME + _CONVENTION_D
 # file system stuff #
 #####################
 
-def GetReadPath() -> str:
-	return READ_LOCATION_ABS
-
 def GetItemsAtPath(path: str) -> list[str]:
 	return os.listdir(path)
 
