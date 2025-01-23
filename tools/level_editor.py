@@ -222,8 +222,8 @@ class MapData:
 	def __init__(self) -> None:
 		self.width = 10
 		self.height = 10
-		
 		self.grid: list[list[str | None]] = []
+
 		for y in range(self.height):
 			self.grid.append([])
 			for x in range(self.width):
@@ -315,6 +315,10 @@ class GuiLayerSelector:
 # TODO: unfinished TODOs in this class
 class GuiGridView:
 
+	BRUSH_MODE_NORMAL: str = "normal"
+	BRUSH_MODE_LINE: str = "line"
+
+	# TODO: unfinished TODOs in this function
 	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str, fGetBrushTileCallback: any, fGetTileByNameCallback: any) -> None:
 		############################
 		# create the non-gui stuff #
@@ -322,12 +326,13 @@ class GuiGridView:
 		
 		# constants
 		self.TILE_SIZE: int = 32
+		self.EMPTY_TAG: str = "empty"
 
 		# non-constants
+		self.brushMode: str = GuiGridView.BRUSH_MODE_NORMAL
 		self.mapData: MapData = MapData()
 		self.fGetBrushTile = fGetBrushTileCallback
 		self.fGetTileByName = fGetTileByNameCallback
-		self.editStack: list = []
 
 		########################
 		# create the gui stuff #
@@ -347,25 +352,33 @@ class GuiGridView:
 
 		# call a function when the left mouse button is clicked on the canvas
 		self.w_canvas.bind("<Button-1>", self._CanvasClicked)
+		# TODO: bind the right-click mouse button to the erase function. right-clicking to erase will erase according to the current brush mode!
 
 	####################
 	# canvas functions #
 	####################
 
 	def _InitCanvas(self) -> None:
-		numTiles: int = 10
-		for x in range(0, numTiles * self.TILE_SIZE, self.TILE_SIZE):
-			self.w_canvas.create_line(x, 0, x, numTiles * self.TILE_SIZE)
-		for y in range(0, numTiles * self.TILE_SIZE, self.TILE_SIZE):
-			self.w_canvas.create_line(0, y, numTiles * self.TILE_SIZE, y)
+		for y in range(self.mapData.height):
+			for x in range(self.mapData.width):
+				x0: int = x * self.TILE_SIZE
+				y0: int = y * self.TILE_SIZE
+				x1: int = x0 + self.TILE_SIZE - 1
+				y1: int = y0 + self.TILE_SIZE - 1
+				self.w_canvas.create_rectangle(x0, y0, x1, y1, tags=(self.EMPTY_TAG))
 
 	def _CanvasClicked(self, event) -> None:
-		self.WriteTile(self, event.x, event.y)
+		if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
+			self.WriteTile(event.x, event.y)
+		elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
+			assert False
+		else:
+			assert False
 
+	'''
+	write a single tile to the map data and draw it on the canvas
+	'''
 	def WriteTile(self, pixelX: int, pixelY: int) -> None:
-		# write the map data (as dict) to the edit stack
-		self.editStack.append(self.mapData.GetLayoutAsDict())
-
 		# get the grid coordinates
 		tileX: int = pixelX // self.TILE_SIZE
 		tileY: int = pixelY // self.TILE_SIZE
@@ -377,7 +390,18 @@ class GuiGridView:
 		self.mapData.WriteTile(currentImg.name, tileX, tileY)
 
 		# draw the image on the grid
-		self.w_canvas.create_image(tileX * self.TILE_SIZE, tileY * self.TILE_SIZE, image=currentImg, anchor='nw')
+		self.w_canvas.create_image(tileX * self.TILE_SIZE, tileY * self.TILE_SIZE, image=currentImg, anchor='nw', tags=(currentImg.name))
+
+	'''
+	write a line of tiles to the map data, and draw it on the canvas
+	'''
+	def WriteTileLine(self, pixelX0: int, pixelY0: int, pixelX1: int, pixelY1: int) -> None:
+		lineCoords: list[tuple[int, int]] = [] # a list of tuples (x,y) for each tile in the line to be drawn
+		# TODO: line algo to determine x/y's goes here
+		for pos in lineCoords:
+			x: int = pos[0]
+			y: int = pos[1]
+			self.WriteTile(x, y)
 
 	def _DrawCanvasFromLayoutData(self) -> None:
 		grid: list[list[str | None]] = self.mapData.GetGrid()
