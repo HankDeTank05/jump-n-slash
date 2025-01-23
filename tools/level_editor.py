@@ -217,6 +217,7 @@ class Editor(tk.Tk):
 
 # below are the classes that will be used for the editor
 
+# TODO: unfinished todos in this class
 class MapData:
 
 	def __init__(self) -> None:
@@ -250,6 +251,27 @@ class MapData:
 			for x in range(len(self.grid[y])):
 				if (x, y) not in writtenPositions:
 					self.grid[y][x] = None
+
+	# TODO: unfinished todos in this function
+	def Resize(self, newTileWidth: int, newTileHeight: int) -> None:
+		assert newTileWidth > 0
+		assert newTileHeight > 0
+
+		# TODO: when the width gets larger...
+		if newTileWidth > self.width:
+			assert False
+
+		# TODO: when the width gets smaller...
+		elif newTileWidth < self.width:
+			assert False
+
+		# TODO: when the height gets larger...
+		if newTileHeight > self.height:
+			assert False
+
+		# TODO: when the height gets smaller...
+		elif newTileHeight < self.height:
+			assert False
 
 	#############
 	# accessors #
@@ -347,12 +369,22 @@ class GuiGridView:
 
 		# create the canvas
 		self.w_canvas: tk.Canvas = tk.Canvas(self.w_parentFrame)
+		self._ResizeCanvas(10, 10)
 		self.w_canvas.grid(column=0, row=0, sticky="NSEW")
 		self._InitCanvas()
 
 		# call a function when the left mouse button is clicked on the canvas
 		self.w_canvas.bind("<Button-1>", self._CanvasClicked)
 		# TODO: bind the right-click mouse button to the erase function. right-clicking to erase will erase according to the current brush mode!
+
+		# create the canvas scrollbars
+		self.w_scrollH: ttk.Scrollbar = ttk.Scrollbar(self.w_parentFrame, orient=tk.HORIZONTAL)
+		self.w_scrollV: ttk.Scrollbar = ttk.Scrollbar(self.w_parentFrame, orient=tk.VERTICAL)
+		self.w_canvas.config(xscrollcommand=self.w_scrollH.set, yscrollcommand=self.w_scrollV.set)
+		self.w_scrollH.config(command=self.w_canvas.xview)
+		self.w_scrollV.config(command=self.w_canvas.yview)
+		self.w_scrollH.grid(column=0, row=1, stick="EW")
+		self.w_scrollV.grid(column=1, row=0, sticky="NS")
 
 	####################
 	# canvas functions #
@@ -410,6 +442,18 @@ class GuiGridView:
 				if grid[y][x] is not None:
 					img: tk.PhotoImage = self.fGetTileByName(grid[y][x])
 					self.w_canvas.create_image(x * self.TILE_SIZE, y * self.TILE_SIZE, image=img, anchor='nw')
+
+	def _ResizeCanvas(self, newTileWidth: int, newTileHeight: int) -> None:
+		self.mapData.Resize(newTileWidth, newTileHeight)
+		canvasLeftX: int = 0
+		canvasTopY: int = 0
+		canvasRightX: int = self.mapData.width * self.TILE_SIZE
+		canvasBottomY: int = self.mapData.height * self.TILE_SIZE
+		canvasPixWidth: int = canvasRightX - canvasLeftX
+		canvasPixHeight: int = canvasBottomY - canvasTopY
+		self.w_canvas.config(scrollregion=(canvasLeftX, canvasTopY, canvasRightX, canvasBottomY),
+					   width=min(canvasPixWidth, 1280), height=min(canvasPixHeight, 720))
+
 
 	########################
 	# whole-grid functions #
