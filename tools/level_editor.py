@@ -272,11 +272,12 @@ class GuiGridView:
 	########################
 
 	# TODO: define this type hint more specifically
-	def GetDataForSaving(self) -> dict:
+	#Don't know where you want to go with this. Maybe string? I seem to remember you mentioning string? Any could probably be replaced itself, I guess.
+	def GetDataForSaving(self) -> dict[str,any]:
 		assert False
 
 	# TODO: define this type hint more specifically
-	def ReadLoadedData(self, data: dict) -> None:
+	def ReadLoadedData(self, data: dict) -> dict[str,any]:
 		assert False
 
 class GuiEditorOptions:
