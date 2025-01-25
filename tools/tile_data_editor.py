@@ -578,13 +578,7 @@ class GuiTileDataEditor:
 		self.notebookPageNames: list[str] = ["Info", "Properties", "Skins"]
 		self.wc_notebookPageFrames: list[ttk.Frame] = []
 		for name in self.notebookPageNames:
-			self._AddNotebookPage(name)
-   
-		#create a scrollbar for each tile if needed.
-		self.scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.w_canvas.yview)
-		self.w_canvas.configure(yscrollcommand=self.scrollbar.set)
-		self.scrollbar.grid(column=1, row=0, sticky="NS")
-  
+			self._AddNotebookPage(name)  
   
 		self.wc_tileInfo: GuiTileInfo = None
 		self.wc_tileProps: GuiTileProperties = None

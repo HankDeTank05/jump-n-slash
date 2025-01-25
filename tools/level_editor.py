@@ -96,17 +96,15 @@ class Editor(tk.Tk):
 		self.map = Map()
 		self.camera_pos = (0, 0)
 		self.brush_index = 0
-		filenames = jns.GetFilesWithConvention("../jumpnslash-cpp/Jump-n-Slash/Assets/textures/leveltiles",jns.CONVENTION_SPR_LEVELTILE)
+		filenames = jns.GetFilesWithConvention(jns.READ_LOCATION_TEXTURES_LEVELTILES,jns.CONVENTION_SPR_LEVELTILE)
 		print (filenames)
 
 		self.tile_images = [
-			ImageTk.PhotoImage(Image.open("sprites/leveltiles/block_solid_32.png")),
-			ImageTk.PhotoImage(Image.open("sprites/leveltiles/block_breakable_32.png")),
-			ImageTk.PhotoImage(Image.open("sprites/leveltiles/block_hazard_32.png")),
-			ImageTk.PhotoImage(Image.open("sprites/leveltiles/platform_semisolid_32.png")),
+			ImageTk.PhotoImage(Image.open(os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, "placeholder_solidBlock.png"))),
+			ImageTk.PhotoImage(Image.open(os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, "placeholder_breakableBlock.png"))),
+			ImageTk.PhotoImage(Image.open(os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, "placeholder_hazardBlock.png"))),
+			ImageTk.PhotoImage(Image.open(os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, "placeholder_semisolidPlatform.png"))),
 		]
-		[
-			]
 
 		self.brush_labels = [
 			"Solid Block",
@@ -219,6 +217,99 @@ class Editor(tk.Tk):
 
 # below are the classes that will be used for the editor
 
+# TODO: unfinished todos in this class
+class MapData:
+
+	def __init__(self) -> None:
+		self.width = 10
+		self.height = 10
+		self.grid: list[list[str | None]] = []
+
+		for y in range(self.height):
+			self.grid.append([])
+			for x in range(self.width):
+				self.grid[y].append(None)
+
+	############
+	# mutators #
+	############
+
+	def PopulateGridWithData(self, data: dict[str, list[tuple[int, int]]]) -> None:
+		# keep track of grid positions that have been written to
+		writtenPositions: list[tuple[int, int]] = []
+
+		# write to the grid positions listed in the dict
+		for key in data.keys():
+			for pos in data[key]:
+				xPos: int = pos[0]
+				yPos: int = pos[1]
+				self.grid[yPos][xPos] = key
+				writtenPositions.append(pos)
+		
+		# clear any spaces which were not written to
+		for y in range(len(self.grid)):
+			for x in range(len(self.grid[y])):
+				if (x, y) not in writtenPositions:
+					self.grid[y][x] = None
+
+	# TODO: unfinished todos in this function
+	def Resize(self, newTileWidth: int, newTileHeight: int) -> None:
+		assert newTileWidth > 0
+		assert newTileHeight > 0
+
+		# TODO: when the width gets larger...
+		if newTileWidth > self.width:
+			assert False
+
+		# TODO: when the width gets smaller...
+		elif newTileWidth < self.width:
+			assert False
+
+		# TODO: when the height gets larger...
+		if newTileHeight > self.height:
+			assert False
+
+		# TODO: when the height gets smaller...
+		elif newTileHeight < self.height:
+			assert False
+
+	#############
+	# accessors #
+	#############
+
+	def GetLayoutAsDict(self) -> dict[str, list[tuple[int, int]]]:
+		layout: dict[str, list[tuple[int, int]]] = {}
+		for y in range(len(self.grid)):
+			for x in range(len(self.grid[y])):
+				# only write data if there is a tile at the current x/y pos
+				if self.grid[y][x] is not None:
+					tileFilename: str = self.grid[y][x]
+					if tileFilename not in layout.keys():
+						# if there is no key for this tile, create a list with one x/y tuple
+						layout[tileFilename] = [(x, y)]
+					else:
+						# if the tile already exists as a key, add the x/y tuple to the list
+						layout[tileFilename].append((x, y))
+		return layout
+
+	def GetPropertiesAsDict(self) -> dict:
+		props: dict = {
+			"Size": (self.width, self.height)
+		}
+		return props
+
+	############
+	# mutators #
+	############
+
+	def WriteTile(self, filename: str, gridX: int, gridY: int) -> None:
+		assert 0 <= gridX
+		assert gridX < len(self.grid[0])
+		assert 0 <= gridY
+		assert gridY < len(self.grid)
+
+		self.grid[gridY][gridX] = filename
+
 class GuiLayerSelector:
 
 	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
@@ -243,14 +334,27 @@ class GuiLayerSelector:
 		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
 		self.w_placeholderLabel.grid(column=0, row=0)
 
+# TODO: unfinished TODOs in this class
 class GuiGridView:
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
+	BRUSH_MODE_NORMAL: str = "normal"
+	BRUSH_MODE_LINE: str = "line"
+
+	# TODO: unfinished TODOs in this function
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str, fGetBrushTileCallback: any, fGetTileByNameCallback: any) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
+		
+		# constants
+		self.TILE_SIZE: int = 32
+		self.EMPTY_TAG: str = "empty"
 
-		# code goes here
+		# non-constants
+		self.brushMode: str = GuiGridView.BRUSH_MODE_NORMAL
+		self.mapData: MapData = MapData()
+		self.fGetBrushTile = fGetBrushTileCallback
+		self.fGetTileByName = fGetTileByNameCallback
 
 		########################
 		# create the gui stuff #
@@ -263,22 +367,111 @@ class GuiGridView:
 						  padx=padx, pady=pady,
 						  sticky=sticky)
 
+		# create the canvas
+		self.w_canvas: tk.Canvas = tk.Canvas(self.w_parentFrame)
+		self._ResizeCanvas(10, 10)
+		self.w_canvas.grid(column=0, row=0, sticky="NSEW")
+		self._InitCanvas()
 
-		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
-		self.w_placeholderLabel.grid(column=0, row=0)
+		# call a function when the left mouse button is clicked on the canvas
+		self.w_canvas.bind("<Button-1>", self._CanvasClicked)
+		# TODO: bind the right-click mouse button to the erase function. right-clicking to erase will erase according to the current brush mode!
+
+		# create the canvas scrollbars
+		self.w_scrollH: ttk.Scrollbar = ttk.Scrollbar(self.w_parentFrame, orient=tk.HORIZONTAL)
+		self.w_scrollV: ttk.Scrollbar = ttk.Scrollbar(self.w_parentFrame, orient=tk.VERTICAL)
+		self.w_canvas.config(xscrollcommand=self.w_scrollH.set, yscrollcommand=self.w_scrollV.set)
+		self.w_scrollH.config(command=self.w_canvas.xview)
+		self.w_scrollV.config(command=self.w_canvas.yview)
+		self.w_scrollH.grid(column=0, row=1, stick="EW")
+		self.w_scrollV.grid(column=1, row=0, sticky="NS")
+
+	####################
+	# canvas functions #
+	####################
+
+	def _InitCanvas(self) -> None:
+		for y in range(self.mapData.height):
+			for x in range(self.mapData.width):
+				x0: int = x * self.TILE_SIZE
+				y0: int = y * self.TILE_SIZE
+				x1: int = x0 + self.TILE_SIZE - 1
+				y1: int = y0 + self.TILE_SIZE - 1
+				self.w_canvas.create_rectangle(x0, y0, x1, y1, tags=(self.EMPTY_TAG))
+
+	def _CanvasClicked(self, event) -> None:
+		if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
+			self.WriteTile(event.x, event.y)
+		elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
+			assert False
+		else:
+			assert False
+
+	'''
+	write a single tile to the map data and draw it on the canvas
+	'''
+	def WriteTile(self, pixelX: int, pixelY: int) -> None:
+		# get the grid coordinates
+		tileX: int = pixelX // self.TILE_SIZE
+		tileY: int = pixelY // self.TILE_SIZE
+
+		# get the image to place on the grid
+		currentImg: tk.PhotoImage = self.fGetBrushTile()
+
+		# place the image in the map data
+		self.mapData.WriteTile(currentImg.name, tileX, tileY)
+
+		# draw the image on the grid
+		self.w_canvas.create_image(tileX * self.TILE_SIZE, tileY * self.TILE_SIZE, image=currentImg, anchor='nw', tags=(currentImg.name))
+
+	'''
+	write a line of tiles to the map data, and draw it on the canvas
+	'''
+	def WriteTileLine(self, pixelX0: int, pixelY0: int, pixelX1: int, pixelY1: int) -> None:
+		lineCoords: list[tuple[int, int]] = [] # a list of tuples (x,y) for each tile in the line to be drawn
+		# TODO: line algo to determine x/y's goes here
+		for pos in lineCoords:
+			x: int = pos[0]
+			y: int = pos[1]
+			self.WriteTile(x, y)
+
+	def _DrawCanvasFromLayoutData(self) -> None:
+		grid: list[list[str | None]] = self.mapData.GetGrid()
+		for y in range(len(grid)):
+			for x in range(len(grid[y])):
+				if grid[y][x] is not None:
+					img: tk.PhotoImage = self.fGetTileByName(grid[y][x])
+					self.w_canvas.create_image(x * self.TILE_SIZE, y * self.TILE_SIZE, image=img, anchor='nw')
+
+	def _ResizeCanvas(self, newTileWidth: int, newTileHeight: int) -> None:
+		self.mapData.Resize(newTileWidth, newTileHeight)
+		canvasLeftX: int = 0
+		canvasTopY: int = 0
+		canvasRightX: int = self.mapData.width * self.TILE_SIZE
+		canvasBottomY: int = self.mapData.height * self.TILE_SIZE
+		canvasPixWidth: int = canvasRightX - canvasLeftX
+		canvasPixHeight: int = canvasBottomY - canvasTopY
+		self.w_canvas.config(scrollregion=(canvasLeftX, canvasTopY, canvasRightX, canvasBottomY),
+					   width=min(canvasPixWidth, 1280), height=min(canvasPixHeight, 720))
+
 
 	########################
 	# whole-grid functions #
 	########################
 
 	# TODO: define this type hint more specifically
-	#Don't know where you want to go with this. Maybe string? I seem to remember you mentioning string? Any could probably be replaced itself, I guess.
-	def GetDataForSaving(self) -> dict[str,any]:
-		assert False
+	def GetDataForSaving(self) -> dict:
+		data: dict = {
+			"Version": 1,
+			"Properties": self.mapData.GetPropertiesAsDict(),
+			"Layout": self.mapData.GetLayoutAsDict()
+		}
+		return data
 
 	# TODO: define this type hint more specifically
-	def ReadLoadedData(self, data: dict) -> dict[str,any]:
-		assert False
+	def ReadLoadedData(self, data: dict) -> None:
+		self.mapData = MapData(data)
+		self._DrawCanvasFromLayoutData()
 
 class GuiEditorOptions:
 
@@ -370,7 +563,7 @@ class GuiTileDetailsPanel:
 class GuiTilePalette:
 
 	# TODO: there are unfinished todos in here
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str, imgs: dict[str, tk.PhotoImage], fSelectBrushTileCallback: any) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -383,16 +576,16 @@ class GuiTilePalette:
 		self._TILE_PADY: int = 5
 
 		# get a list of files that fit the naming convention
-		self.fileList: list[str] = jns.GetFilesWithConvention(jns.READ_LOCATION_TEXTURES_LEVELTILES, jns.CONVENTION_SPR_LEVELTILE)
+		fileList: list[str] = list(imgs.keys())
+		self.tileImgs: dict[str, list[tk.PhotoImage]] = {}
 
 		# get a list of unique palette names from the files
-		paletteSet: set[str] = set([filename.split("_")[0] for filename in self.fileList])
+		paletteSet: set[str] = set([filename.split("_")[0] for filename in fileList])
 		self.notebookPageNames: list[str] = list(paletteSet)
 		self.notebookPageNames.sort()
 
 		# determine the currently selected tile
-		self.currTile: str
-		self._SelectTile(self.fileList[0])
+		fSelectBrushTileCallback(fileList[0])
 
 		########################
 		# create the gui stuff #
@@ -416,12 +609,11 @@ class GuiTilePalette:
 			self._AddNotebookPage(name)
 
 		# create the tile images inside of each notebook page
-		self.tileImgs: dict[str, list[tk.PhotoImage]] = {}
 		self.wc_tileButtons: dict[str, list[ttk.Button]] = {}
-		for i in range(len(self.fileList)):
-			filename: str = self.fileList[i]
+		for i in range(len(fileList)):
+			filename: str = fileList[i]
 			pageName: str = filename.split("_")[0] # TODO: there has to be a better way to do this than just duplicating the split code from above
-			self._AddTileToNotebookPage(pageName, filename, i)
+			self._AddTileToNotebookPage(pageName, filename, imgs[filename], i, fSelectBrushTileCallback=fSelectBrushTileCallback)
 
 	def _AddNotebookPage(self, pageName: str) -> None:
 		frame: ttk.Frame = ttk.Frame(self.w_notebook)
@@ -430,14 +622,10 @@ class GuiTilePalette:
 		self.w_notebook.add(frame, text=pageName)
 		self.wc_notebookPageFrames.append(frame)
 
-	def _AddTileToNotebookPage(self, pageName: str, filename: str, columnNum: int) -> None:
+	def _AddTileToNotebookPage(self, pageName: str, filename: str, img: tk.PhotoImage, columnNum: int, fSelectBrushTileCallback: any) -> None:
 		assert pageName in self.notebookPageNames, f"Page name \"{pageName}\" not found!"
 		pageIndex: int = self.notebookPageNames.index(pageName)
 		parentFrame: ttk.Frame = self.wc_notebookPageFrames[pageIndex]
-
-		# create the image for the button
-		filePath: str = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, filename)
-		img: tk.PhotoImage = tk.PhotoImage(file=filePath)
 		
 		# add the image to the dict
 		if pageName not in self.tileImgs.keys():
@@ -445,7 +633,7 @@ class GuiTilePalette:
 		self.tileImgs[pageName].append(img)
 		
 		# create the button using the image that was just created
-		button: ttk.Button = ttk.Button(parentFrame, image=img, command=partial(self._SelectTile, filename)) 
+		button: ttk.Button = ttk.Button(parentFrame, image=img, command=partial(fSelectBrushTileCallback, filename)) 
 		button.grid(column=columnNum, row=0,
 			  padx=self._TILE_PADX, pady=self._TILE_PADY)
 
@@ -454,13 +642,18 @@ class GuiTilePalette:
 			self.wc_tileButtons[pageName] = []
 		self.wc_tileButtons[pageName].append(button)
 
-	def _SelectTile(self, filename: str) -> None:
-		self.currTile = filename
-		print(f"Selected tile: \"{self.currTile}\"")
+	def GetSelectedTile(self) -> str:
+		return self.currTile
 
+# TODO: unfinished todos in this class
 class GuiLevelEditorApp:
 
 	def __init__(self) -> None:
+		self.root: tk.Tk = tk.Tk()
+		self.root.title("Level Editor")
+		# self.root.geometry("1920x1080") # TODO: come back to this later once the editor is mostly finished
+		self.root.state("normal") # "normal" will be windowed, "zoomed" will be maximized
+
 		############################
 		# create the non-gui stuff #
 		############################
@@ -470,49 +663,48 @@ class GuiLevelEditorApp:
 		self._PADY: int = 0
 
 		# non-constants
-		self.map = Map()
-		self.camera_pos = (0, 0)
-		self.brush_index = 0
+		
+		fileList: list[str] = jns.GetFilesWithConvention(jns.READ_LOCATION_TEXTURES_LEVELTILES, jns.CONVENTION_SPR_LEVELTILE)
 
+		# a dict where the key is the filename, and the value is the corresponding tk.PhotoImage
+		self.tileImgs: dict[str, tk.PhotoImage] = {}
+		self._LoadAllImages(fileList)
+		# jns.PrintDict(self.tileImgs)
+
+		self.brushTile: str
+		
 		########################
 		# create the gui stuff #
 		########################
 
-		self.root: tk.Tk = tk.Tk()
-		self.root.title("Level Editor")
-		# self.root.geometry("1920x1080") # TODO: come back to this later once the editor is mostly finished
-		self.root.state("normal") # "normal" will be windowed, "zoomed" will be maximized
-
 		# create the menu bar
-		# TODO: code goes here
-		self.menuBar = tk.Menu(self.root)
+		self.root.option_add("*tearOff", tk.FALSE)
+		self.menuBar: tk.Menu = tk.Menu(self.root)
+		self.root.config(menu=self.menuBar)
 
 		# File menu
-		self.fileMenu = tk.Menu(self.menuBar, tearoff=0)
-		self.fileMenu.add_command(label="New", command=self.new_map)
-		self.fileMenu.add_command(label="Save", command=self.save_map)
-		self.fileMenu.add_command(label="Load", command=self.load_map)
+		self.fileMenu = tk.Menu(self.menuBar)
+		self.fileMenu.add_command(label="New") # TODO: add a command to make this do something
+		self.fileMenu.add_command(label="Save", command=self.Save)
+		self.fileMenu.add_command(label="Load", command=self.Load)
 		self.fileMenu.add_separator()
-		self.fileMenu.add_command(label="Exit", command=self.on_exit)
-		self.menuBar.add_cascade(label="File", menu= self.fileMenu)
+		self.fileMenu.add_command(label="Exit") # TODO: add a command to make this do something
+		self.menuBar.add_cascade(label="File", menu=self.fileMenu)
 	
         # Edit menu
-		self.editMenu = tk.Menu(self.menuBar, tearoff=0)
-		self.editMenu.add_command(label="Undo", command=self.undo_action)
-		self.editMenu.add_command(label="Redo", command=self.redo_action)
+		self.editMenu = tk.Menu(self.menuBar)
+		self.editMenu.add_command(label="Undo") # TODO: add a command to make this do something
+		self.editMenu.add_command(label="Redo") # TODO: add a command to make this do something
 		self.editMenu.add_separator()
-		self.editMenu.add_command(label="Clear", command=self.clear_map)
-		self.menuBar.add_cascade(label="Edit", menu= self.editMenu)
+		self.editMenu.add_command(label="Clear") # TODO: add a command to make this do something
+		self.menuBar.add_cascade(label="Edit", menu=self.editMenu)
 
  		# View menu
-		self.viewMenu = tk.Menu(self.menuBar, tearoff=0)
-		self.viewMenu.add_command(label="Zoom In", command=self.zoom_in)
-		self.viewMenu.add_command(label="Zoom Out", command=self.zoom_out)
-		self.viewMenu.add_command(label="Reset Zoom", command=self.reset_zoom)
-		self.menuBar.add_cascade(label="View", menu= self.viewMenu)
-  
-  		# Trying something new here. Might delete later.
-		self.root.config(menu=self.menuBar)
+		self.viewMenu = tk.Menu(self.menuBar)
+		self.viewMenu.add_command(label="Zoom In") # TODO: add a command to make this do something
+		self.viewMenu.add_command(label="Zoom Out") # TODO: add a command to make this do something
+		self.viewMenu.add_command(label="Reset Zoom") # TODO: add a command to make this do something
+		self.menuBar.add_cascade(label="View", menu=self.viewMenu)
 		
 		# create the layer selector
 		self.wc_layerSelector: GuiLayerSelector = GuiLayerSelector(parent=self.root, # the parent widget
@@ -526,7 +718,9 @@ class GuiLevelEditorApp:
 											  column=1, row=0,
 											  columnspan=1, rowspan=1,
 											  padx=self._PADX, pady=self._PADY,
-											  sticky="NSEW")
+											  sticky="NSEW",
+											  fGetBrushTileCallback=self.GetBrushTileImg,
+											  fGetTileByNameCallback=self.GetTileByName)
 
 		# create the editor options
 		self.wc_editorOptions: GuiEditorOptions = GuiEditorOptions(parent=self.root,
@@ -547,26 +741,67 @@ class GuiLevelEditorApp:
 													   column=0, row=2,
 													   columnspan=3, rowspan=1,
 													   padx=self._PADX, pady=self._PADY,
-													   sticky="NSEW")
+													   sticky="NSEW",
+													   imgs=self.tileImgs,
+													   fSelectBrushTileCallback=self.SelectBrushTile)
+		
+	###################
+	# setup functions #
+	###################
 
+	def _LoadAllImages(self, fileList: list[str]) -> None:
+		for filename in fileList:
+			filePath: str = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, filename)
+			self.tileImgs[filename] = tk.PhotoImage(file=filePath, name=filename)
+	
+	#################################
+	# gui interoperability funcions #
+	#################################
+
+	'''
+	called by the tile palette in order to select the brush tile
+	'''
+	def SelectBrushTile(self, tileFilename: str) -> None:
+		self.brushTile = tileFilename
+		print(f"Selected brush tile : \"{self.brushTile}\"")
+
+	'''
+	called by the grid view in order to paint the canvas with the brush tile
+	'''
+	def GetBrushTileImg(self) -> tk.PhotoImage:
+		return self.tileImgs[self.brushTile]
+
+	'''
+	called by various parts of the gui to retrieve an image by its filename
+	'''
+	def GetTileByName(self, filename: str) -> tk.PhotoImage:
+		assert filename in self.tileImgs.keys()
+		return self.tileImgs[filename]
+	
 	########################
 	# filesystem functions #
 	########################
 
+	# TODO: unfinished TODOs in this function
 	def Save(self) -> None:
 		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, SAVE IT TO FILE AS IT WAS RECEIVED FROM GRIDVIEW
-		assert False
+		data: dict = self.wc_gridView.GetDataForSaving()
+		filename: str = "test.json" # TODO: allow the user to pick the file name
+		filePath: str = os.path.join(jns.READ_LOCATION_LEVELDATA, filename)
+		with open(file=filePath, mode='w') as jsonFile:
+			json.dump(data, jsonFile, indent=4)
+		print(f"Saved file: \"{os.path.join(jns.READ_LOCATION_LEVELDATA, filename)}\"")
 
+	# TODO: unfinished TODOs in this function
 	def Load(self) -> None:
 		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, PASS IT ALONG TO GRIDVIEW AS-IS
-		# TODO: load data from file
+		# load data from file
+		data: dict
+		filename: str = "test.json"
+		filePath: str = os.path.join(jns.READ_LOCATION_LEVELDATA, filename)
+		with open(file=filePath, mode='r') as jsonFile:
+			data = json.load(jsonFile)
 		# TODO: pass data along to the GuiGridView
-		assert False
-
-	def _LoadFormatVersion1(self, data: dict) -> None:
-		assert False
-
-	def _LoadFormatVersion2(self, data: dict) -> None:
 		assert False
 
 	##################
