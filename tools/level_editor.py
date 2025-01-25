@@ -458,9 +458,9 @@ class GuiGridView:
 	########################
 	# whole-grid functions #
 	########################
-
-	# TODO: define this type hint more specifically
-	def GetDataForSaving(self) -> dict:
+ 
+  # Type hints added. Kind of meh on it, but it's fine.
+	def GetDataForSaving(self) -> dict[str,any]:
 		data: dict = {
 			"Version": 1,
 			"Properties": self.mapData.GetPropertiesAsDict(),
@@ -472,6 +472,7 @@ class GuiGridView:
 	def ReadLoadedData(self, data: dict) -> None:
 		self.mapData = MapData(data)
 		self._DrawCanvasFromLayoutData()
+
 
 class GuiEditorOptions:
 
