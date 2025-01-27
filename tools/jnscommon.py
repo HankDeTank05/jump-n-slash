@@ -80,6 +80,15 @@ def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
 	fileList: list[str] = GetFilesAtPath(path)
 	return [file for file in fileList if re.match(namingConvention, file)]
 
+# TODO: this function does not work yet
+def GetPartialName(name: str, partialConvention: str) -> str:
+	assert False
+	print(name)
+	print(partialConvention)
+	match = re.match(partialConvention, name)
+	print(match)
+	return match
+
 ################
 # string stuff #
 ################
@@ -101,6 +110,10 @@ def ConvertToCamelCase(toConvert: str) -> str:
 			print(f"\"{result}\"")
 	
 	return result
+
+# TODO: this function does not work yet
+def ConvertFromCamelCase(toConvert: str) -> str:
+	assert False
 
 #########################
 # packages/dependencies #

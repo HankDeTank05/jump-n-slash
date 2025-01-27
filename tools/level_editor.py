@@ -341,7 +341,7 @@ class GuiGridView:
 	BRUSH_MODE_LINE: str = "line"
 
 	# TODO: unfinished TODOs in this function
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str, fGetBrushTileCallback: any, fGetTileByNameCallback: any) -> None:
+	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str, fGetTileByNameCallback: any) -> None:
 		############################
 		# create the non-gui stuff #
 		############################
@@ -353,7 +353,7 @@ class GuiGridView:
 		# non-constants
 		self.brushMode: str = GuiGridView.BRUSH_MODE_NORMAL
 		self.mapData: MapData = MapData()
-		self.fGetBrushTile = fGetBrushTileCallback
+		self.brushTileImg: tk.PhotoImage # declare, don't define (will be defined externally)
 		self.fGetTileByName = fGetTileByNameCallback
 
 		########################
@@ -415,14 +415,11 @@ class GuiGridView:
 		tileX: int = pixelX // self.TILE_SIZE
 		tileY: int = pixelY // self.TILE_SIZE
 
-		# get the image to place on the grid
-		currentImg: tk.PhotoImage = self.fGetBrushTile()
-
 		# place the image in the map data
-		self.mapData.WriteTile(currentImg.name, tileX, tileY)
+		self.mapData.WriteTile(self.brushTileImg.name, tileX, tileY)
 
 		# draw the image on the grid
-		self.w_canvas.create_image(tileX * self.TILE_SIZE, tileY * self.TILE_SIZE, image=currentImg, anchor='nw', tags=(currentImg.name))
+		self.w_canvas.create_image(tileX * self.TILE_SIZE, tileY * self.TILE_SIZE, image=self.brushTileImg, anchor='nw', tags=(self.brushTileImg.name))
 
 	'''
 	write a line of tiles to the map data, and draw it on the canvas
@@ -454,6 +451,12 @@ class GuiGridView:
 		self.w_canvas.config(scrollregion=(canvasLeftX, canvasTopY, canvasRightX, canvasBottomY),
 					   width=min(canvasPixWidth, 1280), height=min(canvasPixHeight, 720))
 
+	###############################
+	# functions called by the app #
+	###############################
+
+	def SetCurrentBrushTile(self, img: tk.PhotoImage) -> None:
+		self.brushTileImg = img
 
 	########################
 	# whole-grid functions #
@@ -524,9 +527,6 @@ class GuiTileDetailsPanel:
 						  columnspan=columnspan, rowspan=rowspan,
 						  padx=padx, pady=pady,
 						  sticky=sticky)
-
-		#self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
-		#self.w_placeholderLabel.grid(column=0, row=0)
   
 		# Tile Name
 		self.w_nameLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Name:")
@@ -559,6 +559,17 @@ class GuiTileDetailsPanel:
 		self.w_solidValue.grid(column=1, row=4, sticky="W", padx=10, pady=5)
 
 		# TODO: Hard-coded the tile info. Still need to integrate into GUITilePalette.
+
+	# TODO: finish this function
+	def UpdateTileDetails(self, img: tk.PhotoImage) -> None:
+		# NOTE: currently, this is displaying the filename for the brush tile
+		# TODO: we want just the tile name (no "<paletteName>_" prefix, no ".png" suffix) so that we can look for "<tileName>.json" and read the tile's data from there
+		# TODO: we also want a second version of the <tileName> that's not in camel case so that the displayed name looks nice in the GUI
+		self.w_nameValue.config(text=img.name)
+		# self.w_damagePlayerValue.config(text="UPDATED DAMAGE TO PLAYER")
+		# self.w_damageEnemiesValue.config(text="UPDATED DAMAGE TO ENEMIES")
+		# self.w_breakableValue.config(text="UPDATED BREAKABILITY")
+		# self.w_solidValue.config(text="UPDATED SOLIDITY")
 
 # TODO: there are unfinished todos in here
 class GuiTilePalette:
@@ -672,7 +683,7 @@ class GuiLevelEditorApp:
 		self._LoadAllImages(fileList)
 		# jns.PrintDict(self.tileImgs)
 
-		self.brushTile: str
+		self.brushTileName: str
 		
 		########################
 		# create the gui stuff #
@@ -720,7 +731,6 @@ class GuiLevelEditorApp:
 											  columnspan=1, rowspan=1,
 											  padx=self._PADX, pady=self._PADY,
 											  sticky="NSEW",
-											  fGetBrushTileCallback=self.GetBrushTileImg,
 											  fGetTileByNameCallback=self.GetTileByName)
 
 		# create the editor options
@@ -736,7 +746,7 @@ class GuiLevelEditorApp:
 																 columnspan=1, rowspan=2,
 																 padx=self._PADX, pady=self._PADY,
 																 sticky="NSEW")
-		
+
 		# create the tile palette
 		self.wc_tilePalette: GuiTilePalette = GuiTilePalette(parent=self.root,
 													   column=0, row=2,
@@ -759,21 +769,27 @@ class GuiLevelEditorApp:
 	# gui interoperability funcions #
 	#################################
 
+	# TODO: unfinished todos in this function
 	'''
 	called by the tile palette in order to select the brush tile
 	'''
 	def SelectBrushTile(self, tileFilename: str) -> None:
-		self.brushTile = tileFilename
-		print(f"Selected brush tile : \"{self.brushTile}\"")
+		self.brushTileName = tileFilename
+		print(f"Selected brush tile : \"{self.brushTileName}\"")
+
+		# call a GuiGridView function to update the brush tile image
+		self.wc_gridView.SetCurrentBrushTile(self.GetBrushTileImg())
+		# TODO: call a GuiTileDetailsPanel function to update the tile details
+		self.wc_tileDetails.UpdateTileDetails(self.GetBrushTileImg())
 
 	'''
-	called by the grid view in order to paint the canvas with the brush tile
+	called by anyone who needs the image for the current brush tile
 	'''
 	def GetBrushTileImg(self) -> tk.PhotoImage:
-		return self.tileImgs[self.brushTile]
+		return self.tileImgs[self.brushTileName]
 
 	'''
-	called by various parts of the gui to retrieve an image by its filename
+	called by anyone who needs to retrieve an image by its filename
 	'''
 	def GetTileByName(self, filename: str) -> tk.PhotoImage:
 		assert filename in self.tileImgs.keys()
