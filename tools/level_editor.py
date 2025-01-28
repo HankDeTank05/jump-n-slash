@@ -217,7 +217,6 @@ class Editor(tk.Tk):
 
 # below are the classes that will be used for the editor
 
-# TODO: unfinished todos in this class
 class MapData:
 
 	VERSION_KEY: str = "Version"
@@ -277,7 +276,6 @@ class MapData:
 				# print(f"\"{tileFilename}\" at ({xPos}, {yPos})")
 				self.grid[yPos][xPos] = tileFilename
 
-	# TODO: unfinished todos in this function
 	def Resize(self, newTileWidth: int, newTileHeight: int) -> None:
 		# print("MapData.Resize()")
 		assert newTileWidth > 0
@@ -399,13 +397,11 @@ class GuiLayerSelector:
 		self.w_placeholderLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="coming soon")
 		self.w_placeholderLabel.grid(column=0, row=0)
 
-# TODO: unfinished TODOs in this class
 class GuiGridView:
 
 	BRUSH_MODE_NORMAL: str = "normal"
 	BRUSH_MODE_LINE: str = "line"
 
-	# TODO: unfinished TODOs in this function
 	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str, fGetTileByNameCallback: any) -> None:
 		############################
 		# create the non-gui stuff #
@@ -477,19 +473,21 @@ class GuiGridView:
 					canvasObject = self.w_canvas.create_image(x0, y0, image=self.fGetTileByName(tileFilename), anchor='nw')
 					self.SetCanvasObjectBindings(canvasObject)
 
-	def _CanvasClicked(self, event) -> None:
+	def _CanvasClicked(self, objectClicked, event) -> None:
 		# print("GuiGridView._CanvasClicked()")
+		print(event)
 		if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
-			self.WriteTile(event.x, event.y)
+			self.WriteTile(objectClicked, event.x, event.y)
 		elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
 			assert False
 		else:
 			assert False
 
-	def _CanvasErase(self, event) -> None:
+	def _CanvasErase(self, objectClicked, event) -> None:
 		# print("GuiGridView._CanvasErase")
+		print(event)
 		if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
-			self.EraseTile(event.x, event.y)
+			self.EraseTile(objectClicked, event.x, event.y)
 		elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
 			assert False
 		else:
@@ -498,11 +496,14 @@ class GuiGridView:
 	'''
 	write a single tile to the map data, and draw it on the canvas
 	'''
-	def WriteTile(self, pixelX: int, pixelY: int) -> None:
+	def WriteTile(self, objectClicked, pixelX: int, pixelY: int) -> None:
 		# get the grid coordinates
 		gridPos: tuple[int, int] = self.PixelToGridPos(pixelX, pixelY)
 		tileX: int = gridPos[0]
 		tileY: int = gridPos[1]
+
+		# delete the object that was clicked on
+		self.w_canvas.delete(objectClicked)
 
 		# place the image in the map data
 		self.mapData.WriteTile(self.brushTileImg.name, tileX, tileY)
@@ -514,7 +515,7 @@ class GuiGridView:
 	'''
 	erase a single tile from the map data, and erase it from the canvas as well
 	'''
-	def EraseTile(self, pixelX: int, pixelY: int) -> None:
+	def EraseTile(self, objectClicked, pixelX: int, pixelY: int) -> None:
 		# get the grid coordinates
 		gridPos: tuple[int, int] = self.PixelToGridPos(pixelX, pixelY)
 		tileX = gridPos[0]
@@ -523,7 +524,10 @@ class GuiGridView:
 		# erase the image from map data
 		self.mapData.WriteTile(None, tileX, tileY)
 
-		# erase the tile from the grid (replace it with an empty square and set its input bindings)
+		# delete the object that was clicked on
+		self.w_canvas.delete(objectClicked)
+
+		# replace the erased item with an empty square and set its input bindings
 		x0: int = tileX * self.TILE_SIZE
 		y0: int = tileY * self.TILE_SIZE
 		x1: int = x0 + self.TILE_SIZE - 1
@@ -534,7 +538,6 @@ class GuiGridView:
 	'''
 	write a line of tiles to the map data, and draw it on the canvas
 	'''
-	# TODO: unfinished todos in this function
 	def WriteTileLine(self, pixelX0: int, pixelY0: int, pixelX1: int, pixelY1: int) -> None:
 		lineCoords: list[tuple[int, int]] = [] # a list of tuples (x,y) for each tile in the line to be drawn
 		# TODO: line algo to determine x/y's goes here
@@ -545,10 +548,15 @@ class GuiGridView:
 
 	def _DrawCanvasFromLayoutData(self) -> None:
 		# print("GuiGridView._DrawCanvasFromLayoutData()")
+		
 		grid: list[list[str | None]] = self.mapData.GetGrid()
+		
+		# resize the canvas
 		width: int = self.mapData.GetWidth()
 		height: int = self.mapData.GetHeight()
 		self._ResizeCanvas(width, height)
+
+		# populate the canvas
 		for y in range(len(grid)):
 			for x in range(len(grid[y])):
 				if grid[y][x] is not None:
@@ -558,8 +566,6 @@ class GuiGridView:
 					canvasObject = self.w_canvas.create_image(x * self.TILE_SIZE, y * self.TILE_SIZE, image=img, anchor='nw')
 					self.SetCanvasObjectBindings(canvasObject)
 
-
-	# TODO: unfinished todos in this function
 	def _ResizeCanvas(self, newTileWidth: int, newTileHeight: int) -> None:
 		# print("GuiGridView._ResizeCanvas()")
 		self.mapData.Resize(newTileWidth, newTileHeight)
@@ -576,17 +582,16 @@ class GuiGridView:
 	# utility/helper functions #
 	############################
 
-	# TODO: unfinished todos in this function
 	def PixelToGridPos(self, pixelX: int, pixelY: int) -> tuple[int, int]:
 		# TODO: come back and adjust this logic when zoom functionality is added
 		return (pixelX // self.TILE_SIZE, pixelY // self.TILE_SIZE)
 
 	def SetCanvasObjectBindings(self, canvasObject) -> None:
-		# print(canvasObject)
-		self.w_canvas.tag_bind(canvasObject, "<Button-1>", self._CanvasClicked)
-		self.w_canvas.tag_bind(canvasObject, "<B1-Motion>", self._CanvasClicked)
-		self.w_canvas.tag_bind(canvasObject, "<Button-2>", self._CanvasErase)
-		self.w_canvas.tag_bind(canvasObject, "<B2-Motion>", self._CanvasErase)
+		print(canvasObject)
+		self.w_canvas.tag_bind(canvasObject, "<Button-1>", partial(self._CanvasClicked, canvasObject))
+		self.w_canvas.tag_bind(canvasObject, "<B1-Motion>", partial(self._CanvasClicked, canvasObject))
+		self.w_canvas.tag_bind(canvasObject, "<Button-3>", partial(self._CanvasErase, canvasObject))
+		self.w_canvas.tag_bind(canvasObject, "<B3-Motion>", partial(self._CanvasErase, canvasObject))
 
 	###############################
 	# functions called by the app #
@@ -696,8 +701,8 @@ class GuiTileDetailsPanel:
 
 		# TODO: Hard-coded the tile info. Still need to integrate into GUITilePalette.
 
-	# TODO: finish this function
 	def UpdateTileDetails(self, img: tk.PhotoImage) -> None:
+		# TODO: finish this function
 		# NOTE: currently, this is displaying the filename for the brush tile
 		# TODO: we want just the tile name (no "<paletteName>_" prefix, no ".png" suffix) so that we can look for "<tileName>.json" and read the tile's data from there
 		# TODO: we also want a second version of the <tileName> that's not in camel case so that the displayed name looks nice in the GUI
@@ -707,7 +712,6 @@ class GuiTileDetailsPanel:
 		# self.w_breakableValue.config(text="UPDATED BREAKABILITY")
 		# self.w_solidValue.config(text="UPDATED SOLIDITY")
 
-# TODO: there are unfinished todos in here
 class GuiTilePalette:
 
 	# TODO: there are unfinished todos in here
@@ -793,7 +797,6 @@ class GuiTilePalette:
 	def GetSelectedTile(self) -> str:
 		return self.currTile
 
-# TODO: unfinished todos in this class
 class GuiLevelEditorApp:
 
 	def __init__(self) -> None:
@@ -905,7 +908,6 @@ class GuiLevelEditorApp:
 	# gui interoperability funcions #
 	#################################
 
-	# TODO: unfinished todos in this function
 	'''
 	called by the tile palette in order to select the brush tile
 	'''
@@ -935,7 +937,6 @@ class GuiLevelEditorApp:
 	# filesystem functions #
 	########################
 
-	# TODO: unfinished TODOs in this function
 	def Save(self) -> None:
 		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, SAVE IT TO FILE AS IT WAS RECEIVED FROM GRIDVIEW
 		data: dict = self.wc_gridView.GetDataForSaving()
@@ -945,7 +946,6 @@ class GuiLevelEditorApp:
 			json.dump(data, jsonFile, indent=4)
 		print(f"Saved file: \"{os.path.join(jns.READ_LOCATION_LEVELDATA, filename)}\"")
 
-	# TODO: unfinished TODOs in this function
 	def Load(self) -> None:
 		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, PASS IT ALONG TO GRIDVIEW AS-IS
 		# load data from file
