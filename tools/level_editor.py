@@ -474,7 +474,7 @@ class GuiGridView:
 					imageToDraw: tk.PhotoImage = self.fGetTileByName(tileFilename)
 					self.DrawImageAtGridPos(imageToDraw, x, y)
 
-	def _CanvasClicked(self, event) -> None:
+	def _CanvasClicked(self, event: tk.Event) -> None:
 		# print("GuiGridView._CanvasClicked()")
 
 		# only do stuff if the mouse button is released or the cursor is in a new grid square
@@ -490,7 +490,7 @@ class GuiGridView:
 				assert False
 			self.UpdateLastMouseGridPos(event.x, event.y)
 
-	def _CanvasErase(self, event) -> None:
+	def _CanvasErase(self, event: tk.Event) -> None:
 		# print("GuiGridView._CanvasErase")
 
 		# only do stuff if the mouse button is released or the cursor is in a new grid square
@@ -632,7 +632,7 @@ class GuiGridView:
 		self.lastMouseGridY = gridPos[1]
 		print(f"last mouse grid pos : ({self.lastMouseGridX}, {self.lastMouseGridY})")
 
-	def _MouseButtonReleased(self, event) -> None:
+	def _MouseButtonReleased(self, event: tk.Event) -> None:
 		print(event)
 		self.mouseButtonReleased = True
 
@@ -879,8 +879,8 @@ class GuiLevelEditorApp:
 		# File menu
 		self.fileMenu = tk.Menu(self.menuBar)
 		self.fileMenu.add_command(label="New") # TODO: add a command to make this do something
-		self.fileMenu.add_command(label="Save", command=self.Save)
-		self.fileMenu.add_command(label="Load", command=self.Load)
+		self.fileMenu.add_command(label="Save (ctrl + s)", command=self.Save)
+		self.fileMenu.add_command(label="Open (ctrl + o)", command=self.Load)
 		self.fileMenu.add_separator()
 		self.fileMenu.add_command(label="Exit") # TODO: add a command to make this do something
 		self.menuBar.add_cascade(label="File", menu=self.fileMenu)
@@ -899,6 +899,8 @@ class GuiLevelEditorApp:
 		self.viewMenu.add_command(label="Zoom Out") # TODO: add a command to make this do something
 		self.viewMenu.add_command(label="Reset Zoom") # TODO: add a command to make this do something
 		self.menuBar.add_cascade(label="View", menu=self.viewMenu)
+
+		self.BindKeyboardShortcuts()
 		
 		# create the layer selector
 		self.wc_layerSelector: GuiLayerSelector = GuiLayerSelector(parent=self.root, # the parent widget
@@ -946,7 +948,46 @@ class GuiLevelEditorApp:
 		for filename in fileList:
 			filePath: str = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, filename)
 			self.tileImgs[filename] = tk.PhotoImage(file=filePath, name=filename)
-	
+
+	###############################
+	# keyboard shortcut functions #
+	###############################
+
+	def BindKeyboardShortcuts(self) -> None:
+		print("binding keyboard shortcuts")
+		# file menu
+		# TODO: bind ctrl+n to the "New" command
+		self.root.bind("<Control-s>", self.KeyboardShortcutSave)
+		self.root.bind("<Control-o>", self.KeyboardShortcutLoad)
+		# TODO: bind ctrl+x to the "Exit" command
+
+		# edit menu
+		# TODO: bind ctrl+z to the "Undo" command
+		# TODO: bind ctrl+y to the "Redo" command
+		# TODO: figure out a binding for the "Clear" command
+
+		# view menu
+		# TODO: bind ctrl+= to the "Zoom In" command
+		# TODO: bind ctrl+- to the "Zoom Out" command
+		# TODO: bind ctrl+r to the "Reset Zoom" command
+
+		# other commands
+		# TODO: bind ctrl+up to the "Move to Layer Above" command
+		# TODO: bind ctrl+down to the "Move to Layer Below" command
+		# TODO: bind ctrl+, to the "Switch to Palette Left" command
+		# TODO: bind ctrl+. to the "Switch to Palette Right" command
+		# TODO: bind ctrl+1 to the "Cursor Mode: Normal" command
+		# TODO: bind ctrl+2 to the "Cursor Mode: Line" command
+		# TODO: bind ctrl+3 to the "Cursor Mode: Fill" command
+		# TODO: bind ctrl+4 to the "Cursor Mode: Rectangle" command
+		# TODO: bind ctrl+5 to the "Cursor Mode: Circle" command
+
+	def KeyboardShortcutSave(self, event: tk.Event) -> None:
+		self.Save()
+
+	def KeyboardShortcutLoad(self, event: tk.Event) -> None:
+		self.Load()
+
 	#################################
 	# gui interoperability funcions #
 	#################################
@@ -987,7 +1028,7 @@ class GuiLevelEditorApp:
 		filePath: str = os.path.join(jns.READ_LOCATION_LEVELDATA, filename)
 		with open(file=filePath, mode='w') as jsonFile:
 			json.dump(data, jsonFile, indent=4)
-		print(f"Saved file: \"{os.path.join(jns.READ_LOCATION_LEVELDATA, filename)}\"")
+		print(f"Saved file: \"{filePath}\"")
 
 	def Load(self) -> None:
 		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, PASS IT ALONG TO GRIDVIEW AS-IS
@@ -997,6 +1038,7 @@ class GuiLevelEditorApp:
 		filePath: str = os.path.join(jns.READ_LOCATION_LEVELDATA, filename)
 		with open(file=filePath, mode='r') as jsonFile:
 			data = json.load(jsonFile)
+		print(f"Opened file: \"{filePath}\"")
 
 		# print(f"Loaded the following data from {filePath}")
 		# jns.PrintDict(data)
