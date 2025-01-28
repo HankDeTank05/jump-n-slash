@@ -262,29 +262,30 @@ class MapData:
 	############
 
 	def PopulateGridWithData(self, layoutData: dict[str, list[tuple[int, int]]]) -> None:
-		print("MapData.PopulateGridWithData()")
+		# print("MapData.PopulateGridWithData()")
+
 		# first, empty out the grid
 		for y in range(len(self.grid)):
 			for x in range(len(self.grid[y])):
 				self.grid[y][x] = None
 
 		# write to the grid positions listed in the dict
-		for key in layoutData.keys():
-			for pos in layoutData[key]:
+		for tileFilename in layoutData.keys():
+			for pos in layoutData[tileFilename]:
 				xPos: int = pos[0]
 				yPos: int = pos[1]
-				print(f"\"{key}\" at ({xPos}, {yPos})")
-				self.grid[yPos][xPos] = key
+				# print(f"\"{tileFilename}\" at ({xPos}, {yPos})")
+				self.grid[yPos][xPos] = tileFilename
 
 	# TODO: unfinished todos in this function
 	def Resize(self, newTileWidth: int, newTileHeight: int) -> None:
-		print("MapData.Resize()")
+		# print("MapData.Resize()")
 		assert newTileWidth > 0
 		assert newTileHeight > 0
 
 		# when the width gets larger...
 		if newTileWidth > self.width:
-			print(f"width will increase : {self.width} -> {newTileWidth}")
+			print(f"map width will increase : {self.width} -> {newTileWidth}")
 			# set self.width to the new width
 			self.width = newTileWidth
 			
@@ -296,7 +297,7 @@ class MapData:
 
 		# TODO: when the width gets smaller...
 		elif newTileWidth < self.width:
-			print(f"width will decrease : {self.width} -> {newTileWidth}")
+			print(f"map width will decrease : {self.width} -> {newTileWidth}")
 			# TODO: check the columns between the old width and the new width
 			# TODO: if there are any tiles (not None) in any of those columns...
 			# 			warn the user that tiles in those columns will be deleted (with a popup window)
@@ -306,7 +307,7 @@ class MapData:
 
 		# when the height gets larger...
 		if newTileHeight > self.height:
-			print(f"height will increase : {self.height} -> {newTileHeight}")
+			print(f"map height will increase : {self.height} -> {newTileHeight}")
 			# set self.height to the new height
 			self.height = newTileHeight
 
@@ -320,7 +321,7 @@ class MapData:
 
 		# TODO: when the height gets smaller...
 		elif newTileHeight < self.height:
-			print(f"height will decrease : {self.height} -> {newTileHeight}")
+			print(f"map height will decrease : {self.height} -> {newTileHeight}")
 			# TODO: check the rows between the old height and the new height
 			# TODO: if there are any tiles (not None) in any of those rows...
 			#			warn the user that tiles in those rows will be deleted (with a popup window)
@@ -419,7 +420,6 @@ class GuiGridView:
 		self.mapData: MapData = MapData()
 		self.brushTileImg: tk.PhotoImage # declare, don't define (will be defined externally)
 		self.fGetTileByName = fGetTileByNameCallback
-		self.canvasObjects: list[list[int]] = []
 
 		########################
 		# create the gui stuff #
@@ -458,7 +458,7 @@ class GuiGridView:
 	####################
 
 	def _InitCanvas(self) -> None:
-		print("GuiGridView._InitCanvas()")
+		# print("GuiGridView._InitCanvas()")
 		grid: list[list[str | None]] = self.mapData.GetGrid()
 		gridHeight: int = self.mapData.GetHeight()
 		gridWidth: int = self.mapData.GetWidth()
@@ -544,7 +544,7 @@ class GuiGridView:
 			self.WriteTile(x, y)
 
 	def _DrawCanvasFromLayoutData(self) -> None:
-		print("GuiGridView._DrawCanvasFromLayoutData()")
+		# print("GuiGridView._DrawCanvasFromLayoutData()")
 		grid: list[list[str | None]] = self.mapData.GetGrid()
 		width: int = self.mapData.GetWidth()
 		height: int = self.mapData.GetHeight()
@@ -552,8 +552,8 @@ class GuiGridView:
 		for y in range(len(grid)):
 			for x in range(len(grid[y])):
 				if grid[y][x] is not None:
-					tileFilename: str = grid[y][x]
-					print(f"drawing \"{tileFilename}\" at grid pos ({x}, {y}) on the canvas")
+					# tileFilename: str = grid[y][x]
+					# print(f"drawing \"{tileFilename}\" at grid pos ({x}, {y}) on the canvas")
 					img: tk.PhotoImage = self.fGetTileByName(grid[y][x])
 					canvasObject = self.w_canvas.create_image(x * self.TILE_SIZE, y * self.TILE_SIZE, image=img, anchor='nw')
 					self.SetCanvasObjectBindings(canvasObject)
@@ -561,7 +561,7 @@ class GuiGridView:
 
 	# TODO: unfinished todos in this function
 	def _ResizeCanvas(self, newTileWidth: int, newTileHeight: int) -> None:
-		print("GuiGridView._ResizeCanvas()")
+		# print("GuiGridView._ResizeCanvas()")
 		self.mapData.Resize(newTileWidth, newTileHeight)
 		canvasLeftX: int = 0
 		canvasTopY: int = 0
@@ -955,8 +955,8 @@ class GuiLevelEditorApp:
 		with open(file=filePath, mode='r') as jsonFile:
 			data = json.load(jsonFile)
 
-		print(f"Loaded the following data from {filePath}")
-		jns.PrintDict(data)
+		# print(f"Loaded the following data from {filePath}")
+		# jns.PrintDict(data)
 
 		# pass data along to the GuiGridView
 		self.wc_gridView.ReadLoadedData(data)
