@@ -416,6 +416,9 @@ class GuiGridView:
 		self.mapData: MapData = MapData()
 		self.brushTileImg: tk.PhotoImage # declare, don't define (will be defined externally)
 		self.fGetTileByName = fGetTileByNameCallback
+		self.lastMouseGridX: int = -1
+		self.lastMouseGridY: int = -1
+		self.mouseButtonReleased: bool = True
 
 		########################
 		# create the gui stuff #
@@ -433,12 +436,11 @@ class GuiGridView:
 		self.w_canvas.grid(column=0, row=0, sticky="NSEW")
 		self._InitCanvas()
 
-		# call a function when the left mouse button is clicked on the canvas
-		# self.w_canvas.bind("<Button-1>", self._CanvasClicked) # do stuff when clicking mouse1
-		# self.w_canvas.bind("<B1-Motion>", self._CanvasClicked) # do stuff when click-and-dragging mouse1
-		# self.w_canvas.bind("<Button-2>", self._CanvasErase) # do stuff when clicking mouse2
-		# self.w_canvas.bind("<B2-Motion>", self._CanvasErase) # do stuff when click-and-dragging mouse2
-		# TODO: bind the right-click mouse button to the erase function. right-clicking to erase will erase according to the current brush mode!
+		# call a function when the left mouse button is clicked-and-dragged
+		self.w_canvas.bind("<B1-Motion>", self._CanvasClicked) # do stuff when click-and-dragging mouse1
+		self.w_canvas.bind("<B3-Motion>", self._CanvasErase) # do stuff when click-and-dragging mouse2
+		self.w_canvas.bind("<B1-ButtonRelease>", self._MouseButtonReleased)
+		self.w_canvas.bind("<B3-ButtonRelease>", self._MouseButtonReleased)
 
 		# create the canvas scrollbars
 		self.w_scrollH: ttk.Scrollbar = ttk.Scrollbar(self.w_parentFrame, orient=tk.HORIZONTAL)
@@ -466,74 +468,74 @@ class GuiGridView:
 				if grid[y][x] is None:
 					x1: int = x0 + self.TILE_SIZE - 1
 					y1: int = y0 + self.TILE_SIZE - 1
-					canvasObject = self.w_canvas.create_rectangle(x0, y0, x1, y1, fill="white", tags=(self.EMPTY_TAG))
-					self.SetCanvasObjectBindings(canvasObject)
+					self.DrawSqaureAtGridPos(x, y)
 				else:
 					tileFilename: str = grid[y][x]
-					canvasObject = self.w_canvas.create_image(x0, y0, image=self.fGetTileByName(tileFilename), anchor='nw')
-					self.SetCanvasObjectBindings(canvasObject)
+					imageToDraw: tk.PhotoImage = self.fGetTileByName(tileFilename)
+					self.DrawImageAtGridPos(imageToDraw, x, y)
 
-	def _CanvasClicked(self, objectClicked, event) -> None:
+	def _CanvasClicked(self, event) -> None:
 		# print("GuiGridView._CanvasClicked()")
-		print(event)
-		if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
-			self.WriteTile(objectClicked, event.x, event.y)
-		elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
-			assert False
-		else:
-			assert False
 
-	def _CanvasErase(self, objectClicked, event) -> None:
+		# only do stuff if the mouse button is released or the cursor is in a new grid square
+		mouseGridPos: tuple[int, int] = self.PixelToGridPos(event.x, event.y)
+		if self.mouseButtonReleased == True or mouseGridPos[0] != self.lastMouseGridX or mouseGridPos[1] != self.lastMouseGridY:
+			self.mouseButtonReleased = False
+			print(event)
+			if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
+				self.WriteTile(event.x, event.y)
+			elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
+				assert False
+			else:
+				assert False
+			self.UpdateLastMouseGridPos(event.x, event.y)
+
+	def _CanvasErase(self, event) -> None:
 		# print("GuiGridView._CanvasErase")
-		print(event)
-		if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
-			self.EraseTile(objectClicked, event.x, event.y)
-		elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
-			assert False
-		else:
-			assert False
+
+		# only do stuff if the mouse button is released or the cursor is in a new grid square
+		mouseGridPos: tuple[int, int] = self.PixelToGridPos(event.x, event.y)
+		if self.mouseButtonReleased == True or mouseGridPos[0] != self.lastMouseGridX or mouseGridPos[1] != self.lastMouseGridY:
+			self.mouseButtonReleased = False
+			print(event)
+			# right-clicking to erase will erase according to the current brush mode!
+			if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
+				self.EraseTile(event.x, event.y)
+			elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
+				assert False
+			else:
+				assert False
+			self.UpdateLastMouseGridPos(event.x, event.y)
 
 	'''
 	write a single tile to the map data, and draw it on the canvas
 	'''
-	def WriteTile(self, objectClicked, pixelX: int, pixelY: int) -> None:
+	def WriteTile(self, pixelX: int, pixelY: int) -> None:
 		# get the grid coordinates
 		gridPos: tuple[int, int] = self.PixelToGridPos(pixelX, pixelY)
-		tileX: int = gridPos[0]
-		tileY: int = gridPos[1]
-
-		# delete the object that was clicked on
-		self.w_canvas.delete(objectClicked)
+		gridX: int = gridPos[0]
+		gridY: int = gridPos[1]
 
 		# place the image in the map data
-		self.mapData.WriteTile(self.brushTileImg.name, tileX, tileY)
+		self.mapData.WriteTile(self.brushTileImg.name, gridX, gridY)
 
-		# draw the image on the grid and set its input bindings
-		canvasObject = self.w_canvas.create_image(tileX * self.TILE_SIZE, tileY * self.TILE_SIZE, image=self.brushTileImg, anchor='nw', tags=(self.brushTileImg.name))
-		self.SetCanvasObjectBindings(canvasObject)
+		# draw the image
+		self.DrawImageAtGridPos(self.brushTileImg, gridX, gridY)
 
 	'''
 	erase a single tile from the map data, and erase it from the canvas as well
 	'''
-	def EraseTile(self, objectClicked, pixelX: int, pixelY: int) -> None:
+	def EraseTile(self, pixelX: int, pixelY: int) -> None:
 		# get the grid coordinates
 		gridPos: tuple[int, int] = self.PixelToGridPos(pixelX, pixelY)
-		tileX = gridPos[0]
-		tileY = gridPos[1]
+		gridX = gridPos[0]
+		gridY = gridPos[1]
 
 		# erase the image from map data
-		self.mapData.WriteTile(None, tileX, tileY)
+		self.mapData.WriteTile(None, gridX, gridY)
 
-		# delete the object that was clicked on
-		self.w_canvas.delete(objectClicked)
-
-		# replace the erased item with an empty square and set its input bindings
-		x0: int = tileX * self.TILE_SIZE
-		y0: int = tileY * self.TILE_SIZE
-		x1: int = x0 + self.TILE_SIZE - 1
-		y1: int = y0 + self.TILE_SIZE - 1
-		canvasObject = self.w_canvas.create_rectangle(x0, y0, x1, y1, fill="white", tags=(self.EMPTY_TAG))
-		self.SetCanvasObjectBindings(canvasObject)
+		# draw an empty square
+		self.DrawSqaureAtGridPos(gridX, gridY)
 
 	'''
 	write a line of tiles to the map data, and draw it on the canvas
@@ -548,23 +550,20 @@ class GuiGridView:
 
 	def _DrawCanvasFromLayoutData(self) -> None:
 		# print("GuiGridView._DrawCanvasFromLayoutData()")
-		
 		grid: list[list[str | None]] = self.mapData.GetGrid()
-		
-		# resize the canvas
 		width: int = self.mapData.GetWidth()
 		height: int = self.mapData.GetHeight()
 		self._ResizeCanvas(width, height)
-
-		# populate the canvas
+		self.w_canvas.delete('all')
 		for y in range(len(grid)):
 			for x in range(len(grid[y])):
 				if grid[y][x] is not None:
 					# tileFilename: str = grid[y][x]
 					# print(f"drawing \"{tileFilename}\" at grid pos ({x}, {y}) on the canvas")
 					img: tk.PhotoImage = self.fGetTileByName(grid[y][x])
-					canvasObject = self.w_canvas.create_image(x * self.TILE_SIZE, y * self.TILE_SIZE, image=img, anchor='nw')
-					self.SetCanvasObjectBindings(canvasObject)
+					self.DrawImageAtGridPos(img, x, y)
+				else:
+					self.DrawSqaureAtGridPos(x, y)
 
 	def _ResizeCanvas(self, newTileWidth: int, newTileHeight: int) -> None:
 		# print("GuiGridView._ResizeCanvas()")
@@ -588,10 +587,54 @@ class GuiGridView:
 
 	def SetCanvasObjectBindings(self, canvasObject) -> None:
 		print(canvasObject)
-		self.w_canvas.tag_bind(canvasObject, "<Button-1>", partial(self._CanvasClicked, canvasObject))
-		self.w_canvas.tag_bind(canvasObject, "<B1-Motion>", partial(self._CanvasClicked, canvasObject))
-		self.w_canvas.tag_bind(canvasObject, "<Button-3>", partial(self._CanvasErase, canvasObject))
-		self.w_canvas.tag_bind(canvasObject, "<B3-Motion>", partial(self._CanvasErase, canvasObject))
+		self.w_canvas.tag_bind(canvasObject, "<Button-1>", self._CanvasClicked)
+		self.w_canvas.tag_bind(canvasObject, "<Button-3>", self._CanvasErase)
+		# NOTE: click-and-drag functionality is bound to the canvas itself, not the objects on it
+
+	def DrawImageAtGridPos(self, image: tk.PhotoImage, gridX: int, gridY: int) -> None:
+		# delete what was there before
+		objectTag: str = f"{gridX},{gridY}"
+		itemsWithTag: list = self.w_canvas.find_withtag(objectTag)
+		# print(itemsWithTag)
+		assert len(itemsWithTag) == 0 or len(itemsWithTag) == 1
+		self.w_canvas.delete(objectTag)
+		# print(f"deleted {len(itemsWithTag)} items with tag \"{objectTag}\"")
+
+		# draw the image on the grid and set its input bindings
+		canvasObject = self.w_canvas.create_image(gridX * self.TILE_SIZE, gridY * self.TILE_SIZE,
+											image=image,
+											anchor='nw',
+											tags=(image.name, objectTag))
+		self.SetCanvasObjectBindings(canvasObject)
+
+	def DrawSqaureAtGridPos(self, gridX, gridY) -> None:
+		# delete what was there before
+		objectTag: str = f"{gridX},{gridY}"
+		itemsWithTag: list = self.w_canvas.find_withtag(objectTag)
+		# print(itemsWithTag)
+		assert len(itemsWithTag) == 0 or len(itemsWithTag) == 1
+		self.w_canvas.delete(objectTag)
+		# print(f"deleted {len(itemsWithTag)} items with tag \"{objectTag}\"")
+
+		# replace the erased item with an empty square and set its input bindings
+		x0: int = gridX * self.TILE_SIZE
+		y0: int = gridY * self.TILE_SIZE
+		x1: int = x0 + self.TILE_SIZE - 1
+		y1: int = y0 + self.TILE_SIZE - 1
+		canvasObject = self.w_canvas.create_rectangle(x0, y0, x1, y1,
+												fill="white",
+												tags=(self.EMPTY_TAG, objectTag))
+		self.SetCanvasObjectBindings(canvasObject)
+
+	def UpdateLastMouseGridPos(self, pixelX: int, pixelY: int) -> None:
+		gridPos: tuple[int, int] = self.PixelToGridPos(pixelX, pixelY)
+		self.lastMouseGridX = gridPos[0]
+		self.lastMouseGridY = gridPos[1]
+		print(f"last mouse grid pos : ({self.lastMouseGridX}, {self.lastMouseGridY})")
+
+	def _MouseButtonReleased(self, event) -> None:
+		print(event)
+		self.mouseButtonReleased = True
 
 	###############################
 	# functions called by the app #
