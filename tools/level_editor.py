@@ -220,62 +220,126 @@ class Editor(tk.Tk):
 # TODO: unfinished todos in this class
 class MapData:
 
-	def __init__(self) -> None:
-		self.width = 10
-		self.height = 10
+	VERSION_KEY: str = "Version"
+	PROPS_KEY: str = "Properties"
+	PROPS_SIZE_KEY: str = "Size"
+	LAYOUT_KEY: str = "Layout"
+
+	def __init__(self, data: None | dict = None) -> None:
+		# this 2d list contains the filename of the tile or "None" if there is no tile there
+		# it should be indexed as self.grid[y][x]
 		self.grid: list[list[str | None]] = []
 
-		for y in range(self.height):
-			self.grid.append([])
-			for x in range(self.width):
-				self.grid[y].append(None)
+		self.width: int = 0
+		self.height: int = 0
+
+		# if we're creating a blank map
+		if data is None:
+			print("Constructing blank MapData object")
+			self.width = 40
+			self.height = 20
+
+			for y in range(self.height):
+				self.grid.append([])
+				for x in range(self.width):
+					self.grid[y].append(None)
+
+		# if we're creating a map from json data
+		else:
+			print("Constructing MapData object from data")
+			fileFormatVer: int = dict[MapData.VERSION_KEY]
+
+			properties: dict[str, any] = data[MapData.PROPS_KEY]
+			incomingWidth: int = properties[MapData.PROPS_SIZE_KEY][0]
+			incomingHeight: int = properties[MapData.PROPS_SIZE_KEY][1]
+			self.Resize(incomingWidth, incomingHeight)
+
+			layout: dict[str, list[tuple[int, int]]] = data[MapData.LAYOUT_KEY]
+			self.PopulateGridWithData(layout)
 
 	############
 	# mutators #
 	############
 
-	def PopulateGridWithData(self, data: dict[str, list[tuple[int, int]]]) -> None:
-		# keep track of grid positions that have been written to
-		writtenPositions: list[tuple[int, int]] = []
-
-		# write to the grid positions listed in the dict
-		for key in data.keys():
-			for pos in data[key]:
-				xPos: int = pos[0]
-				yPos: int = pos[1]
-				self.grid[yPos][xPos] = key
-				writtenPositions.append(pos)
-		
-		# clear any spaces which were not written to
+	def PopulateGridWithData(self, layoutData: dict[str, list[tuple[int, int]]]) -> None:
+		print("MapData.PopulateGridWithData()")
+		# first, empty out the grid
 		for y in range(len(self.grid)):
 			for x in range(len(self.grid[y])):
-				if (x, y) not in writtenPositions:
-					self.grid[y][x] = None
+				self.grid[y][x] = None
+
+		# write to the grid positions listed in the dict
+		for key in layoutData.keys():
+			for pos in layoutData[key]:
+				xPos: int = pos[0]
+				yPos: int = pos[1]
+				print(f"\"{key}\" at ({xPos}, {yPos})")
+				self.grid[yPos][xPos] = key
 
 	# TODO: unfinished todos in this function
 	def Resize(self, newTileWidth: int, newTileHeight: int) -> None:
+		print("MapData.Resize()")
 		assert newTileWidth > 0
 		assert newTileHeight > 0
 
-		# TODO: when the width gets larger...
+		# when the width gets larger...
 		if newTileWidth > self.width:
-			assert False
+			print(f"width will increase : {self.width} -> {newTileWidth}")
+			# set self.width to the new width
+			self.width = newTileWidth
+			
+			# add columns until the width of the grid is equal to self.width
+			for y in range(len(self.grid)):
+				while len(self.grid[y]) < self.width:
+					self.grid[y].append(None)
+				assert len(self.grid[y]) == self.width
 
 		# TODO: when the width gets smaller...
 		elif newTileWidth < self.width:
-			assert False
+			print(f"width will decrease : {self.width} -> {newTileWidth}")
+			# TODO: check the columns between the old width and the new width
+			# TODO: if there are any tiles (not None) in any of those columns...
+			# 			warn the user that tiles in those columns will be deleted (with a popup window)
+			# TODO: if they choose to continue with resizing...
+			#			set self.width to the new width
+			#			delete columns until the width of the grid is equal to self.width
 
-		# TODO: when the height gets larger...
+		# when the height gets larger...
 		if newTileHeight > self.height:
-			assert False
+			print(f"height will increase : {self.height} -> {newTileHeight}")
+			# set self.height to the new height
+			self.height = newTileHeight
+
+			# add rows until the height of the grid is equal to self.height
+			while len(self.grid) < self.height:
+				self.grid.append([])
+				for x in range(self.width):
+					self.grid[-1].append(None)
+				assert len(self.grid[-1]) == self.width
+			assert len(self.grid) == self.height
 
 		# TODO: when the height gets smaller...
 		elif newTileHeight < self.height:
-			assert False
+			print(f"height will decrease : {self.height} -> {newTileHeight}")
+			# TODO: check the rows between the old height and the new height
+			# TODO: if there are any tiles (not None) in any of those rows...
+			#			warn the user that tiles in those rows will be deleted (with a popup window)
+			# TODO: if they choose to continue with resizing...
+			#			set self.height to the new height
+			#			delete rows until the height of the grid is equal to self.height
 
 	#############
 	# accessors #
 	#############
+
+	def GetGrid(self) -> list[list[str | None]]:
+		return self.grid
+	
+	def GetWidth(self) -> int:
+		return self.width
+	
+	def GetHeight(self) -> int:
+		return self.height
 
 	def GetLayoutAsDict(self) -> dict[str, list[tuple[int, int]]]:
 		layout: dict[str, list[tuple[int, int]]] = {}
@@ -292,9 +356,9 @@ class MapData:
 						layout[tileFilename].append((x, y))
 		return layout
 
-	def GetPropertiesAsDict(self) -> dict:
+	def GetPropertiesAsDict(self) -> dict[str, tuple[int, int]]:
 		props: dict = {
-			"Size": (self.width, self.height)
+			MapData.PROPS_SIZE_KEY: (self.width, self.height)
 		}
 		return props
 
@@ -355,6 +419,7 @@ class GuiGridView:
 		self.mapData: MapData = MapData()
 		self.brushTileImg: tk.PhotoImage # declare, don't define (will be defined externally)
 		self.fGetTileByName = fGetTileByNameCallback
+		self.canvasObjects: list[list[int]] = []
 
 		########################
 		# create the gui stuff #
@@ -369,12 +434,14 @@ class GuiGridView:
 
 		# create the canvas
 		self.w_canvas: tk.Canvas = tk.Canvas(self.w_parentFrame)
-		self._ResizeCanvas(10, 10)
 		self.w_canvas.grid(column=0, row=0, sticky="NSEW")
 		self._InitCanvas()
 
 		# call a function when the left mouse button is clicked on the canvas
-		self.w_canvas.bind("<Button-1>", self._CanvasClicked)
+		# self.w_canvas.bind("<Button-1>", self._CanvasClicked) # do stuff when clicking mouse1
+		# self.w_canvas.bind("<B1-Motion>", self._CanvasClicked) # do stuff when click-and-dragging mouse1
+		# self.w_canvas.bind("<Button-2>", self._CanvasErase) # do stuff when clicking mouse2
+		# self.w_canvas.bind("<B2-Motion>", self._CanvasErase) # do stuff when click-and-dragging mouse2
 		# TODO: bind the right-click mouse button to the erase function. right-clicking to erase will erase according to the current brush mode!
 
 		# create the canvas scrollbars
@@ -391,15 +458,27 @@ class GuiGridView:
 	####################
 
 	def _InitCanvas(self) -> None:
-		for y in range(self.mapData.height):
-			for x in range(self.mapData.width):
+		print("GuiGridView._InitCanvas()")
+		grid: list[list[str | None]] = self.mapData.GetGrid()
+		gridHeight: int = self.mapData.GetHeight()
+		gridWidth: int = self.mapData.GetWidth()
+		self._ResizeCanvas(gridWidth, gridHeight)
+		for y in range(gridHeight):
+			for x in range(gridWidth):
 				x0: int = x * self.TILE_SIZE
 				y0: int = y * self.TILE_SIZE
-				x1: int = x0 + self.TILE_SIZE - 1
-				y1: int = y0 + self.TILE_SIZE - 1
-				self.w_canvas.create_rectangle(x0, y0, x1, y1, tags=(self.EMPTY_TAG))
+				if grid[y][x] is None:
+					x1: int = x0 + self.TILE_SIZE - 1
+					y1: int = y0 + self.TILE_SIZE - 1
+					canvasObject = self.w_canvas.create_rectangle(x0, y0, x1, y1, fill="white", tags=(self.EMPTY_TAG))
+					self.SetCanvasObjectBindings(canvasObject)
+				else:
+					tileFilename: str = grid[y][x]
+					canvasObject = self.w_canvas.create_image(x0, y0, image=self.fGetTileByName(tileFilename), anchor='nw')
+					self.SetCanvasObjectBindings(canvasObject)
 
 	def _CanvasClicked(self, event) -> None:
+		# print("GuiGridView._CanvasClicked()")
 		if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
 			self.WriteTile(event.x, event.y)
 		elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
@@ -407,23 +486,55 @@ class GuiGridView:
 		else:
 			assert False
 
+	def _CanvasErase(self, event) -> None:
+		# print("GuiGridView._CanvasErase")
+		if self.brushMode == GuiGridView.BRUSH_MODE_NORMAL:
+			self.EraseTile(event.x, event.y)
+		elif self.brushMode == GuiGridView.BRUSH_MODE_LINE:
+			assert False
+		else:
+			assert False
+
 	'''
-	write a single tile to the map data and draw it on the canvas
+	write a single tile to the map data, and draw it on the canvas
 	'''
 	def WriteTile(self, pixelX: int, pixelY: int) -> None:
 		# get the grid coordinates
-		tileX: int = pixelX // self.TILE_SIZE
-		tileY: int = pixelY // self.TILE_SIZE
+		gridPos: tuple[int, int] = self.PixelToGridPos(pixelX, pixelY)
+		tileX: int = gridPos[0]
+		tileY: int = gridPos[1]
 
 		# place the image in the map data
 		self.mapData.WriteTile(self.brushTileImg.name, tileX, tileY)
 
-		# draw the image on the grid
-		self.w_canvas.create_image(tileX * self.TILE_SIZE, tileY * self.TILE_SIZE, image=self.brushTileImg, anchor='nw', tags=(self.brushTileImg.name))
+		# draw the image on the grid and set its input bindings
+		canvasObject = self.w_canvas.create_image(tileX * self.TILE_SIZE, tileY * self.TILE_SIZE, image=self.brushTileImg, anchor='nw', tags=(self.brushTileImg.name))
+		self.SetCanvasObjectBindings(canvasObject)
+
+	'''
+	erase a single tile from the map data, and erase it from the canvas as well
+	'''
+	def EraseTile(self, pixelX: int, pixelY: int) -> None:
+		# get the grid coordinates
+		gridPos: tuple[int, int] = self.PixelToGridPos(pixelX, pixelY)
+		tileX = gridPos[0]
+		tileY = gridPos[1]
+
+		# erase the image from map data
+		self.mapData.WriteTile(None, tileX, tileY)
+
+		# erase the tile from the grid (replace it with an empty square and set its input bindings)
+		x0: int = tileX * self.TILE_SIZE
+		y0: int = tileY * self.TILE_SIZE
+		x1: int = x0 + self.TILE_SIZE - 1
+		y1: int = y0 + self.TILE_SIZE - 1
+		canvasObject = self.w_canvas.create_rectangle(x0, y0, x1, y1, fill="white", tags=(self.EMPTY_TAG))
+		self.SetCanvasObjectBindings(canvasObject)
 
 	'''
 	write a line of tiles to the map data, and draw it on the canvas
 	'''
+	# TODO: unfinished todos in this function
 	def WriteTileLine(self, pixelX0: int, pixelY0: int, pixelX1: int, pixelY1: int) -> None:
 		lineCoords: list[tuple[int, int]] = [] # a list of tuples (x,y) for each tile in the line to be drawn
 		# TODO: line algo to determine x/y's goes here
@@ -433,14 +544,24 @@ class GuiGridView:
 			self.WriteTile(x, y)
 
 	def _DrawCanvasFromLayoutData(self) -> None:
+		print("GuiGridView._DrawCanvasFromLayoutData()")
 		grid: list[list[str | None]] = self.mapData.GetGrid()
+		width: int = self.mapData.GetWidth()
+		height: int = self.mapData.GetHeight()
+		self._ResizeCanvas(width, height)
 		for y in range(len(grid)):
 			for x in range(len(grid[y])):
 				if grid[y][x] is not None:
+					tileFilename: str = grid[y][x]
+					print(f"drawing \"{tileFilename}\" at grid pos ({x}, {y}) on the canvas")
 					img: tk.PhotoImage = self.fGetTileByName(grid[y][x])
-					self.w_canvas.create_image(x * self.TILE_SIZE, y * self.TILE_SIZE, image=img, anchor='nw')
+					canvasObject = self.w_canvas.create_image(x * self.TILE_SIZE, y * self.TILE_SIZE, image=img, anchor='nw')
+					self.SetCanvasObjectBindings(canvasObject)
 
+
+	# TODO: unfinished todos in this function
 	def _ResizeCanvas(self, newTileWidth: int, newTileHeight: int) -> None:
+		print("GuiGridView._ResizeCanvas()")
 		self.mapData.Resize(newTileWidth, newTileHeight)
 		canvasLeftX: int = 0
 		canvasTopY: int = 0
@@ -449,7 +570,23 @@ class GuiGridView:
 		canvasPixWidth: int = canvasRightX - canvasLeftX
 		canvasPixHeight: int = canvasBottomY - canvasTopY
 		self.w_canvas.config(scrollregion=(canvasLeftX, canvasTopY, canvasRightX, canvasBottomY),
-					   width=min(canvasPixWidth, 1280), height=min(canvasPixHeight, 720))
+					   width=min(canvasPixWidth, 1280), height=min(canvasPixHeight, 720)) # TODO: replace the 1280 and 720 with numbers calculated based on the user's screen size
+
+	############################
+	# utility/helper functions #
+	############################
+
+	# TODO: unfinished todos in this function
+	def PixelToGridPos(self, pixelX: int, pixelY: int) -> tuple[int, int]:
+		# TODO: come back and adjust this logic when zoom functionality is added
+		return (pixelX // self.TILE_SIZE, pixelY // self.TILE_SIZE)
+
+	def SetCanvasObjectBindings(self, canvasObject) -> None:
+		# print(canvasObject)
+		self.w_canvas.tag_bind(canvasObject, "<Button-1>", self._CanvasClicked)
+		self.w_canvas.tag_bind(canvasObject, "<B1-Motion>", self._CanvasClicked)
+		self.w_canvas.tag_bind(canvasObject, "<Button-2>", self._CanvasErase)
+		self.w_canvas.tag_bind(canvasObject, "<B2-Motion>", self._CanvasErase)
 
 	###############################
 	# functions called by the app #
@@ -461,21 +598,20 @@ class GuiGridView:
 	########################
 	# whole-grid functions #
 	########################
- 
-  # Type hints added. Kind of meh on it, but it's fine.
-	def GetDataForSaving(self) -> dict[str,any]:
+
+	# Type hints added. Kind of meh on it, but it's fine.
+	def GetDataForSaving(self) -> dict[str, any]:
 		data: dict = {
-			"Version": 1,
-			"Properties": self.mapData.GetPropertiesAsDict(),
-			"Layout": self.mapData.GetLayoutAsDict()
+			MapData.VERSION_KEY: 1,
+			MapData.PROPS_KEY: self.mapData.GetPropertiesAsDict(),
+			MapData.LAYOUT_KEY: self.mapData.GetLayoutAsDict()
 		}
 		return data
 
-	# TODO: define this type hint more specifically
-	def ReadLoadedData(self, data: dict) -> None:
+	def ReadLoadedData(self, data: dict[str, any]) -> None:
+		print("GuiGridView.ReadLoadedData()")
 		self.mapData = MapData(data)
 		self._DrawCanvasFromLayoutData()
-
 
 class GuiEditorOptions:
 
@@ -813,13 +949,17 @@ class GuiLevelEditorApp:
 	def Load(self) -> None:
 		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, PASS IT ALONG TO GRIDVIEW AS-IS
 		# load data from file
-		data: dict
+		data: dict[str, any]
 		filename: str = "test.json"
 		filePath: str = os.path.join(jns.READ_LOCATION_LEVELDATA, filename)
 		with open(file=filePath, mode='r') as jsonFile:
 			data = json.load(jsonFile)
-		# TODO: pass data along to the GuiGridView
-		assert False
+
+		print(f"Loaded the following data from {filePath}")
+		jns.PrintDict(data)
+
+		# pass data along to the GuiGridView
+		self.wc_gridView.ReadLoadedData(data)
 
 	##################
 	# misc functions #
