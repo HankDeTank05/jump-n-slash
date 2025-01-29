@@ -692,14 +692,8 @@ class GuiTileDetailsPanel:
 		# create the non-gui stuff #
 		############################
 
-		# hardcoded test. Do not touch.
-		self.tile_data = {
-            "name": "Breakable Block",
-            "damage_to_player": 0,
-            "damage_to_enemies": 0,
-            "is_breakable": True,
-            "is_solid": True
-        }
+		self.tile_data = {}
+		self.tile_image = None
 
 		########################
 		# create the gui stuff #
@@ -711,6 +705,9 @@ class GuiTileDetailsPanel:
 						  columnspan=columnspan, rowspan=rowspan,
 						  padx=padx, pady=pady,
 						  sticky=sticky)
+		# Icon Name
+		self.w_tileIcon = tk.Label(self.w_parentFrame, text="No Image", width=10, height=5, relief="solid")
+		self.w_tileIcon.grid(column=0, row=0, columnspan=2, pady=10)
   
 		# Tile Name
 		self.w_nameLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Name:")
@@ -742,7 +739,7 @@ class GuiTileDetailsPanel:
 		self.w_solidValue: ttk.Label = ttk.Label(self.w_parentFrame, text="Yes" if self.tile_data["is_solid"] else "No")
 		self.w_solidValue.grid(column=1, row=4, sticky="W", padx=10, pady=5)
 
-		# TODO: Hard-coded the tile info. Still need to integrate into GUITilePalette.
+		# TODO: Still need to integrate into GUITilePalette.
 
 	def UpdateTileDetails(self, img: tk.PhotoImage) -> None:
 		# TODO: finish this function
