@@ -12,6 +12,7 @@ python type hints cheat sheet: https://mypy.readthedocs.io/en/stable/cheat_sheet
 _READ_LOCATION_REL: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets")
 READ_LOCATION: str = os.path.abspath(_READ_LOCATION_REL)
 READ_LOCATION_TEXTURES_LEVELTILES: str = os.path.join(READ_LOCATION, "textures", "leveltiles")
+READ_LOCATION_TEXTURES_ENTITIES: str = os.path.join(READ_LOCATION, "textures", "entities")
 READ_LOCATION_LEVELDATA: str = os.path.join(READ_LOCATION, "leveldata")
 
 # check this out if you forgot how regex works: https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf
