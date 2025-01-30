@@ -508,7 +508,7 @@ class App:
             currDirectory: str = os.path.join(self.basePath, entityName)
 
             # get a list of files in the directory
-            files: list[str] = jns.GetFilesWithConvention(currDirectory, jns.CONVENTION_SPRITE_ENTITY)
+            files: list[str] = jns.GetFilesWithConvention(currDirectory, jns.CONVENTION_SPR_ENTITY)
             animations: list[str] = [] # create an empty animation list, to be populated momentarily
             for file in files:
                 # get the animation name by splitting the file name at the underscore and only keeping the first substring
