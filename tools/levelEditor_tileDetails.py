@@ -9,14 +9,8 @@ class GuiTileDetailsPanel:
 		# create the non-gui stuff #
 		############################
 
-		# hardcoded test. Do not touch.
-		self.tile_data = {
-            "name": "Breakable Block",
-            "damage_to_player": 0,
-            "damage_to_enemies": 0,
-            "is_breakable": True,
-            "is_solid": True
-        }
+		self.tile_data = {}  
+		self.tile_image = None  
 
 		########################
 		# create the gui stuff #
@@ -59,9 +53,25 @@ class GuiTileDetailsPanel:
 		self.w_solidValue: ttk.Label = ttk.Label(self.w_parentFrame, text="Yes" if self.tile_data["is_solid"] else "No")
 		self.w_solidValue.grid(column=1, row=4, sticky="W", padx=10, pady=5)
 
-		# TODO: Hard-coded the tile info. Still need to integrate into GUITilePalette.
+		# TODO:Still need to integrate into GUITilePalette.
 
 	def UpdateTileDetails(self, img: tk.PhotoImage) -> None:
+     
+		tileName = img.name 
+  
+  		# Extract the tile name (remove palette name and file extension)
+		tileBaseName = tileName.split("_")[-1].replace(".png", "")
+  
+		if os.path.exists(tileJsonPath):
+    	
+     
+     
+     
+     	else:
+			print(f"Warning: No JSON data found for tile: {tileBaseName}")
+		
+
+     
 		# TODO: finish this function
 		# NOTE: currently, this is displaying the filename for the brush tile
 		# TODO: we want just the tile name (no "<paletteName>_" prefix, no ".png" suffix) so that we can look for "<tileName>.json" and read the tile's data from there

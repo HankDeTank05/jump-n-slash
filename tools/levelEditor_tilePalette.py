@@ -27,6 +27,7 @@ class GuiTilePalette:
 		self.notebookPageNames.sort()
 
 		# determine the currently selected tile
+		self.currTile: str = fileList[0] # Need to initalize for GetSelectedTile.
 		fSelectBrushTileCallback(fileList[0])
 
 		########################
