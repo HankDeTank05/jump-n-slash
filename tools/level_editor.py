@@ -7,25 +7,37 @@ from tkinter import filedialog
 import tkinter.ttk as ttk
 from functools import partial
 
-# module imports
-from PIL import Image, ImageTk
-
 # game imports
 import jnscommon as jns
+
+# module imports
+try:
+	from PIL import Image, ImageTk
+except ModuleNotFoundError:
+	jns.PipInstall("PIL")
+	from PIL import Image, ImageTk
 
 """
 NOTE: IF RUNNING FROM VSCODE, "cd" TO THE FOLDER CONTAINING THIS FILE BEFORE RUNNING TO AVOID PATHING ISSUES
 
-- any class that is a GUI element, prepend "Gui" to the name of the class
+- any class that is a GUI element, append the word "View" to the name of the class
 	- any class that is a GUI element(s) should take a parent widget in their constructor
 	- any class that is a GUI element(s) should take a column, row, columnspan, and rowspan as four ints in their constructor
 	- member variables of a class that are a widget should follow this convention: "self.w_<variableName>"
 	- member variables of a class that are a collection of widgets should follow this convention "self.wc_<variableName>"
-- variable names should always be in camelCase
-- always do type hints when declaring variables
+- variable naming conventions
+	- variable names should always be in camelCase
+	- always do type hints when declaring variables
+- ALL MEMBER VARIABLES ARE PRIVATE
+	- private member variables should begin with a leading underscore, as is convention in Python (ex: self._privateMemberVar, self.publicMemberVar)
+	- UNLESS you find yourself writing both an accessor fucntion and a mutator function that are simply assigning and returning
+		- then AND ONLY THEN should a member variable be public
+	- NOTE: if your accessors are more complicated than a single-line return, AND your mutators are more complicated than a single-line variable assignment...
+		- KEEP THE MEMBER VARIABLE THAT IT'S AFFECTING PRIVATE. complicated accessors and mutators have a purpose because they simplify complex operations down to a single function call
 - use assert statements LIBERALLY
 - use TODO (and regular) comments liberally
 	- remember: use comments to describe the meaning of the code, not a restated version of the logic
+	- FOR TODO COMMENTS: after the "TODO:", put the person's name in parentheses if this todo is meant to be completed by someone specific. (ex: "TODO: (henry) add a command to this button")
 """
 
 class Map:

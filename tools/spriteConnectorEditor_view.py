@@ -10,7 +10,7 @@ class View:
 
 	def __init__(self, parent: tk.Tk) -> None:
 		self.entitySelector: EntitySelectorView = EntitySelectorView(parent)
-		self.animSelector: AnimationSelectorView = AnimationSelectorView(parent)	
+		self.animSelector: AnimationSelectorView = AnimationSelectorView(parent)
 		self.sprSelector: SpriteSelectorView = SpriteSelectorView(parent)
 		self.ptSelector: PointSelectorView = PointSelectorView(parent)
 
