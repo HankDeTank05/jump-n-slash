@@ -892,72 +892,94 @@ class GuiEditorOptions:
 		self.w_placeholderLabel.grid(column=0, row=0)
 
 class GuiTileDetailsPanel:
+    """
+    GUI panel for displaying details about the selected tile.
+    Reads JSON tile data and displays relevant properties.
+    """
 
-	def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
-		############################
-		# create the non-gui stuff #
-		############################
+    def __init__(self, parent: any, column: int, row: int, columnspan: int, rowspan: int, padx: int, pady: int, sticky: str) -> None:
+        
+        ############################
+        # Create the non-GUI stuff #
+        ############################
+        self.tile_data = {}
+        self.tile_image = None
 
-		self.tile_data = {}
-		self.tile_image = None
+        ########################
+        # Create the GUI stuff #
+        ########################
+        
+        # Create the parent frame
+        self.w_parentFrame: ttk.LabelFrame = ttk.LabelFrame(parent, text="Tile Details Panel")
+        self.w_parentFrame.grid(column=column, row=row,
+                                columnspan=columnspan, rowspan=rowspan,
+                                padx=padx, pady=pady, sticky=sticky)
 
-		########################
-		# create the gui stuff #
-		########################
-		
-		# create the parent frame
-		self.w_parentFrame: ttk.LabelFrame = ttk.LabelFrame(parent, text="Tile Details Panel")
-		self.w_parentFrame.grid(column=column, row=row,
-						  columnspan=columnspan, rowspan=rowspan,
-						  padx=padx, pady=pady,
-						  sticky=sticky)
-		# Icon Name
-		self.w_tileIcon = tk.Label(self.w_parentFrame, text="No Image", width=10, height=5, relief="solid")
-		self.w_tileIcon.grid(column=0, row=0, columnspan=2, pady=10)
-  
-		# Tile Name
-		self.w_nameLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Name:")
-		self.w_nameLabel.grid(column=0, row=0, sticky="W", padx=10, pady=5)
-		# self.w_nameValue: ttk.Label = ttk.Label(self.w_parentFrame, text=self.tile_data["name"])
-		# self.w_nameValue.grid(column=1, row=0, sticky="W", padx=10, pady=5)
+        # Tile Icon
+        self.w_tileIcon = tk.Label(self.w_parentFrame, text="No Image", width=10, height=5, relief="solid")
+        self.w_tileIcon.grid(column=0, row=0, columnspan=2, pady=10)
+
+        # Tile Name
+        self.w_nameLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Name:")
+        self.w_nameLabel.grid(column=0, row=1, sticky="W", padx=10, pady=5)
+        self.w_nameValue: ttk.Label = ttk.Label(self.w_parentFrame, text="N/A")
+        self.w_nameValue.grid(column=1, row=1, sticky="W", padx=10, pady=5)
 
         # Damage to Player
-		self.w_damagePlayerLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Damage to Player:")
-		self.w_damagePlayerLabel.grid(column=0, row=1, sticky="W", padx=10, pady=5)
-		# self.w_damagePlayerValue: ttk.Label = ttk.Label(self.w_parentFrame, text=self.tile_data["damage_to_player"])
-		# self.w_damagePlayerValue.grid(column=1, row=1, sticky="W", padx=10, pady=5)
+        self.w_damagePlayerLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Damage to Player:")
+        self.w_damagePlayerLabel.grid(column=0, row=2, sticky="W", padx=10, pady=5)
+        self.w_damagePlayerValue: ttk.Label = ttk.Label(self.w_parentFrame, text="0")
+        self.w_damagePlayerValue.grid(column=1, row=2, sticky="W", padx=10, pady=5)
 
         # Damage to Enemies
-		self.w_damageEnemiesLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Damage to Enemies:")
-		self.w_damageEnemiesLabel.grid(column=0, row=2, sticky="W", padx=10, pady=5)
-		# self.w_damageEnemiesValue: ttk.Label = ttk.Label(self.w_parentFrame, text=self.tile_data["damage_to_enemies"])
-		# self.w_damageEnemiesValue.grid(column=1, row=2, sticky="W", padx=10, pady=5)
+        self.w_damageEnemiesLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Damage to Enemies:")
+        self.w_damageEnemiesLabel.grid(column=0, row=3, sticky="W", padx=10, pady=5)
+        self.w_damageEnemiesValue: ttk.Label = ttk.Label(self.w_parentFrame, text="0")
+        self.w_damageEnemiesValue.grid(column=1, row=3, sticky="W", padx=10, pady=5)
 
         # Breakable Status
-		self.w_breakableLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Breakable:")
-		self.w_breakableLabel.grid(column=0, row=3, sticky="W", padx=10, pady=5)
-		# self.w_breakableValue: ttk.Label = ttk.Label(self.w_parentFrame, text="Yes" if self.tile_data["is_breakable"] else "No")
-		# self.w_breakableValue.grid(column=1, row=3, sticky="W", padx=10, pady=5)
+        self.w_breakableLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Breakable:")
+        self.w_breakableLabel.grid(column=0, row=4, sticky="W", padx=10, pady=5)
+        self.w_breakableValue: ttk.Label = ttk.Label(self.w_parentFrame, text="No")
+        self.w_breakableValue.grid(column=1, row=4, sticky="W", padx=10, pady=5)
 
         # Solid Status
-		self.w_solidLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Solid:")
-		self.w_solidLabel.grid(column=0, row=4, sticky="W", padx=10, pady=5)
-		# self.w_solidValue: ttk.Label = ttk.Label(self.w_parentFrame, text="Yes" if self.tile_data["is_solid"] else "No")
-		# self.w_solidValue.grid(column=1, row=4, sticky="W", padx=10, pady=5)
+        self.w_solidLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Solid:")
+        self.w_solidLabel.grid(column=0, row=5, sticky="W", padx=10, pady=5)
+        self.w_solidValue: ttk.Label = ttk.Label(self.w_parentFrame, text="No")
+        self.w_solidValue.grid(column=1, row=5, sticky="W", padx=10, pady=5)
 
-		# TODO: Still need to integrate into GUITilePalette.
+    #############################
+    # Update Tile Details Panel #
+    #############################
 
-	def UpdateTileDetails(self, img: tk.PhotoImage) -> None:
-		# TODO: finish this function
-		# NOTE: currently, this is displaying the filename for the brush tile
-		# TODO: we want just the tile name (no "<paletteName>_" prefix, no ".png" suffix) so that we can look for "<tileName>.json" and read the tile's data from there
-		# TODO: we also want a second version of the <tileName> that's not in camel case so that the displayed name looks nice in the GUI
-		# self.w_nameValue.config(text=img.name)
-		# self.w_damagePlayerValue.config(text="UPDATED DAMAGE TO PLAYER")
-		# self.w_damageEnemiesValue.config(text="UPDATED DAMAGE TO ENEMIES")
-		# self.w_breakableValue.config(text="UPDATED BREAKABILITY")
-		# self.w_solidValue.config(text="UPDATED SOLIDITY")
-		pass
+    def UpdateTileDetails(self, img: tk.PhotoImage) -> None:
+        
+        #Reads the JSON file for the selected tile and updates the GUI.
+        tileName = img.name 
+        tileBaseName = jns.ConvertToCamelCase(tileName.split("_")[-1].replace(".png", ""))
+        tileJsonPath = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, tileBaseName + "_data.json")
+
+        # if JSON exists...
+        if os.path.exists(tileJsonPath):
+            with open(tileJsonPath, "r") as jsonFile:
+                self.tile_data = json.load(jsonFile)
+
+                # Update fields
+                self.w_nameValue.config(text=self.tile_data.get("name", "Unknown"))
+                self.w_damagePlayerValue.config(text=str(self.tile_data.get("damage to player", 0)))
+                self.w_damageEnemiesValue.config(text=str(self.tile_data.get("damage to enemies", 0)))
+                self.w_breakableValue.config(text="Yes" if self.tile_data.get("breakable", False) else "No")
+                self.w_solidValue.config(text="Yes" if self.tile_data.get("solid on sides", False) else "No")
+
+                # Load and display tile icon
+                self.tile_image = img
+                self.w_tileIcon.config(image=self.tile_image)
+                self.w_tileIcon.image = self.tile_image  # Keep reference
+        else:
+            print(f"Warning: No JSON data found for tile: {tileBaseName}")
+            #self.ResetDetails()
+			# Hope to work on a reset function tommorow. I think that might be ideal, but could be in the Tile data editor too.
 
 class GuiTilePalette:
 
