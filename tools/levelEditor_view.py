@@ -2,6 +2,7 @@
 import tkinter as tk
 
 # game imports
+from levelEditor_view_menuBarAndShortcuts import MenuBar
 from levelEditor_view_tilePalette import TilePaletteView
 from levelEditor_view_tileDetails import TileDetailsView
 from levelEditor_view_editorOptions import EditorOptionsView
@@ -12,7 +13,7 @@ class View:
 
 	def __init__(self, parent: tk.Tk) -> None:
 		# create the menu bar
-		# TODO: (henry) carry over menu bar gui code
+		self.menuBar: MenuBar = MenuBar(parent)
 
 		# create the other gui elements
 		self.tilePalette: TilePaletteView = TilePaletteView(parent,
