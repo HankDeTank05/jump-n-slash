@@ -9,9 +9,57 @@ class MenuBar:
 		parent.option_add("*tearOff", tk.FALSE)
 		self.menuBar: tk.Menu = tk.Menu(parent)
 		parent.config(menu=self.menuBar)
-		
-		# set up the submenus
-		self._SetupFileMenu(parent)
+
+		self._menu_opts: list[MenuCascade] = [
+			MenuBarCascade("File", self.menuBar, [
+				MenuCommand("New"),
+				MenuSeparator(),
+				MenuCommand("Save"),
+				MenuCommand("Save as..."),
+				MenuSeparator(),
+				MenuCommand("Open"),
+				MenuCascade("Open recent", [
+					MenuCommand("Recent 1"),
+					MenuCommand("Recent 2"),
+					MenuCommand("Recent 3")
+				])
+			]),
+			MenuBarCascade("Edit", self.menuBar, [
+				MenuCommand("Copy"),
+				MenuCommand("Cut"),
+				MenuCommand("Paste"),
+				MenuCommand("Clear"),
+				MenuSeparator(),
+				MenuCommand("Undo"),
+				MenuCommand("Redo"),
+				MenuSeparator(),
+				MenuCascade("Brush mode", MenuRadioSet(tk.IntVar(), [
+					MenuCommand("Normal"),
+					MenuCommand("Fill"),
+					MenuCommand("Line"),
+					MenuCommand("Rectangle"),
+					MenuCommand("Circle")
+				])),
+				MenuSeparator(),
+				MenuCommand("Switch to layer above"),
+				MenuCommand("Switch to layer below"),
+				MenuCommand("Switch to palette left"),
+				MenuCommand("Switch to palette right")
+			]),
+			MenuBarCascade("View", self.menuBar, [
+				MenuCommand("Zoom in"),
+				MenuCommand("Zoom out"),
+				MenuCommand("Reset zoom"),
+				MenuSeparator(),
+				MenuChecker("Show gridlines", tk.BooleanVar()),
+				MenuCascade("Show coordinates", MenuRadioSet(tk.IntVar(), [
+					MenuCommand("Never"),
+					MenuCommand("On mouse-over"),
+					MenuCommand("Always"),
+					MenuCommand("Hybrid")
+				]))
+			])
+		]
 
 	##################
 	# setup funcions #
@@ -21,23 +69,23 @@ class MenuBar:
 		self._fileMenu: tk.Menu = tk.Menu(self.menuBar)
 		self.menuBar.add_cascade(label="File", menu=self._fileMenu)
 
-		self._file_new: MenuAction = MenuAction(label="New", accelerator="Ctrl N", kbShortcut="<Control-n>")
+		self._file_new: MenuCommand = MenuCommand(label="New", accelerator="Ctrl N", kbShortcut="<Control-n>")
 		self._file_new.AddToParent(parentMenu=self._fileMenu, enabled=False)
 		# TODO: bind the keyboard shortcut for file>new
 
 		self._fileMenu.add_separator()
 
-		self._file_save: MenuAction = MenuAction(label="Save", accelerator="Ctrl S", kbShortcut="<Control-s>")
+		self._file_save: MenuCommand = MenuCommand(label="Save", accelerator="Ctrl S", kbShortcut="<Control-s>")
 		self._file_save.AddToParent(parentMenu=self._fileMenu, enabled=True)
 		# TODO: bind the keyboard shortcut for file>save
 		
-		self._file_saveAs: MenuAction = MenuAction(label="Save As...", accelerator="Ctrl Shift S", kbShortcut="<Control-Shift-s>")
+		self._file_saveAs: MenuCommand = MenuCommand(label="Save As...", accelerator="Ctrl Shift S", kbShortcut="<Control-Shift-s>")
 		self._file_saveAs.AddToParent(parentMenu=self._fileMenu, enabled=False)
 		# TODO: bind the keyboard shortcut for file>save as
 
 		self._fileMenu.add_separator()
 
-		self._file_open: MenuAction = MenuAction(label="Open", accelerator="Ctrl O", kbShortcut="<Control-o>")
+		self._file_open: MenuCommand = MenuCommand(label="Open", accelerator="Ctrl O", kbShortcut="<Control-o>")
 		self._file_open.AddToParent(parentMenu=self._fileMenu, enabled=True)
 		# TODO: bind the keyboard shortcut for file>open
 
@@ -52,7 +100,7 @@ class MenuBar:
 
 		self._fileMenu.add_separator()
 
-		self._file_quit: MenuAction = MenuAction(label="Quit", accelerator="Ctrl Q", kbShortcut="<Control-q>")
+		self._file_quit: MenuCommand = MenuCommand(label="Quit", accelerator="Ctrl Q", kbShortcut="<Control-q>")
 		self._file_quit.AddToParent(parentMenu=self._fileMenu, enabled=False)
 		# TODO: bind the keyboard shortcut for file>quit
 
@@ -143,16 +191,12 @@ class MenuBar:
 
 	# TODO: (henry) find a better way to bind these keyboard shortcuts
 
-class MenuAction:
+class MenuCommand:
 
-	def __init__(self, label: str, accelerator: str, kbShortcut: str) -> None:
+	def __init__(self, label: str, accelerator: str | None = None, kbShortcut: str | None = None) -> None:
 		self._label = label
 		self._accel = accelerator
 		self._short = kbShortcut
-
-	def AddAndBind(self, root: tk.Tk, callback, parentMenu: tk.Menu, enabled: bool = True) -> None:
-		self.AddToParent(parentMenu, enabled)
-		self.Bind(root, callback)
 
 	def AddToParent(self, parentMenu: tk.Menu, enabled: bool) -> None:
 		parentMenu.add_command(label=self._label, accelerator=self._accel)
@@ -162,6 +206,7 @@ class MenuAction:
 			self.DisableMenuOption(parentMenu)
 
 	def Bind(self, root: tk.Tk, callback) -> None:
+		assert self._accel is not None and self._short is not None
 		root.bind(self._short, callback)
 
 	# TODO: add a function to unbind a keyboard shortcut
@@ -175,7 +220,55 @@ class MenuAction:
 	def ToggleEnabled(self, parentMenu: tk.Menu) -> None:
 		assert False
 
+class MenuSeparator:
+
+	def __init__(self):
+		pass
+
+	def Add(self, parentMenu: tk.Menu) -> None:
+		parentMenu.add_separator()
+
+class MenuChecker:
+
+	def __init__(self, label: str, var: tk.BooleanVar) -> None:
+		self._label: str = label
+
+class MenuRadioSet:
+
+	def __init__(self, var: tk.IntVar, options: list[MenuCommand]) -> None:
+		pass
+
 class MenuCascade:
 
-	def __init__(self, label: str) -> None:
-		self._label = label
+	def __init__(self, label: str, subOptions: list[MenuCommand] | MenuRadioSet) -> None:
+		self._label: str = label
+
+		# TODO: populate the sub-options
+
+	def SetParentMenu(self, parentMenu: tk.Menu) -> None:
+		self._menu: tk.Menu = tk.Menu(parentMenu)
+
+class MenuBarCascade:
+
+	def __init__(self, label: str, menuBar: tk.Menu, subOptions: list[MenuCommand | MenuCascade | MenuSeparator]) -> None:
+		self._label: str = label
+		self._menu: tk.Menu = tk.Menu(menuBar)
+		menuBar.add_cascade(label=self._label, menu=self._menu)
+
+		# TODO: populate the sub-options
+		# print(self._label)
+		for opt in subOptions:
+			if isinstance(opt, MenuCommand):
+				# print(f"\tcommand: {opt._label}")
+				opt.AddToParent(parentMenu=self._menu, enabled=False)
+			elif isinstance(opt, MenuCascade):
+				# print(f"\tcascade: {opt._label}")
+				pass
+			elif isinstance(opt, MenuChecker):
+				# print(f"\tchecker: {opt._label}")
+				pass
+			elif isinstance(opt, MenuSeparator):
+				# print(f"\tseparator")
+				opt.Add(self._menu)
+			else:
+				assert False
