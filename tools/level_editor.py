@@ -990,8 +990,20 @@ class GuiTileDetailsPanel:
                 self.w_tileIcon.image = self.tile_image  # Keep reference
         else:
             print(f"Warning: No JSON data found for tile: {tileBaseName}")
-            #self.ResetDetails()
-			# Hope to work on a reset function tommorow. I think that might be ideal, but could be in the Tile data editor too.
+            self.ResetDetails()
+            
+    def ResetDetails(self):
+        
+        #Resets tile details to default values.
+        
+        self.tile_data = {
+            "name": "Unknown",
+            "damage to player": 0,
+            "damage to enemies": 0,
+            "breakable": False,
+            "solid on sides": False
+        }
+			# This should work. Error handling ftw.
 
 class GuiTilePalette:
 
