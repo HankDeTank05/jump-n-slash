@@ -43,8 +43,8 @@ class Sprite:
 	KEY_W: str = "w"
 	KEY_H: str = "h"
 
-	def __init__(self, filename: str, srcTexKey: str, x: int, y: int, w: int, h: int) -> None:
-		self._sprKey: str = jns.GetAdjustedFilename(filename)
+	def __init__(self, entityName: str, filename: str, srcTexKey: str, x: int, y: int, w: int, h: int) -> None:
+		self._sprKey: str = entityName + " " + jns.GetAdjustedFilename(filename)
 		self._srcTexKey: str = srcTexKey
 		self._x: int = x
 		self._y: int = y
@@ -144,7 +144,13 @@ class EntitySpritesheet:
 	use data generated on construction to actually write or create the spritesheet as an image file in the filesystem
 	"""
 	def CreateSheet(self) -> None:
-		pass
+		sheet = Image.new(mode="RGBA", size=(self._width, self._height))
+		for filename in self._filenames:
+			sprFilePath: str = os.path.join(self._outputFilePath, filename)
+			coords: tuple[int, int] = (self._data[filename][0], self._data[filename][1])
+			with Image.open(sprFilePath) as spr:
+				sheet.paste(im=spr, box=coords)
+		sheet.save(os.path.join(self._outputFilePath, self._outputFilename))
 
 class TileSpritesheet:
 
@@ -164,13 +170,12 @@ def CreateData() -> dict:
 	entityNames: list[str] = jns.GetFoldersAtPath(jns.PATH_ASSETS_TEXTURES_ENTITIES)
 	for entityName in entityNames:
 		entityPath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_ENTITIES, entityName)
-		print(f"entity path: \"{entityPath}\"")
 		spriteFilenames: list[str] = jns.GetFilesWithConvention(entityPath, jns.CONVENTION_SPR_ENTITY)
-		print(spriteFilenames)
 		
 		# part 1a: generate texture data for entity sprites
 		sheet: EntitySpritesheet = EntitySpritesheet(entityName, spriteFilenames)
 		result[KEY_TEXTURES].append(sheet.GetDict())
+		sheet.CreateSheet()
 
 		# part 1b: generate sprite data for entity sprites
 		for filename in spriteFilenames:
@@ -179,7 +184,7 @@ def CreateData() -> dict:
 			y: int = coords[1]
 			w: int = coords[2]
 			h: int = coords[3]
-			spr: Sprite = Sprite(filename, sheet.GetKey(), x, y, w, h)
+			spr: Sprite = Sprite(entityName, filename, sheet.GetKey(), x, y, w, h)
 			result[KEY_SPRITES].append(spr.GetDict())
 
 	# part 2a: generate texture data for leveltile sprites
