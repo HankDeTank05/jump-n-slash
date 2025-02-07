@@ -108,14 +108,14 @@ class Editor(tk.Tk):
 		self.map = Map()
 		self.camera_pos = (0, 0)
 		self.brush_index = 0
-		filenames = jns.GetFilesWithConvention(jns.READ_LOCATION_TEXTURES_LEVELTILES,jns.CONVENTION_SPR_LEVELTILE)
+		filenames = jns.GetFilesWithConvention(jns.PATH_ASSETS_TEXTURES_LEVELTILES,jns.CONVENTION_SPR_LEVELTILE)
 		print (filenames)
 
 		self.tile_images = [
-			ImageTk.PhotoImage(Image.open(os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, "placeholder_solidBlock.png"))),
-			ImageTk.PhotoImage(Image.open(os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, "placeholder_breakableBlock.png"))),
-			ImageTk.PhotoImage(Image.open(os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, "placeholder_hazardBlock.png"))),
-			ImageTk.PhotoImage(Image.open(os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, "placeholder_semisolidPlatform.png"))),
+			ImageTk.PhotoImage(Image.open(os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, "placeholder_solidBlock.png"))),
+			ImageTk.PhotoImage(Image.open(os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, "placeholder_breakableBlock.png"))),
+			ImageTk.PhotoImage(Image.open(os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, "placeholder_hazardBlock.png"))),
+			ImageTk.PhotoImage(Image.open(os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, "placeholder_semisolidPlatform.png"))),
 		]
 
 		self.brush_labels = [
@@ -1109,7 +1109,7 @@ class GuiLevelEditorApp:
 		self.DEFAULT_SHOW_COORDS: int = 1 # 0=never, 1=on mouse-over, 2=always
 
 		# non-constants
-		fileList: list[str] = jns.GetFilesWithConvention(jns.READ_LOCATION_TEXTURES_LEVELTILES, jns.CONVENTION_SPR_LEVELTILE)
+		fileList: list[str] = jns.GetFilesWithConvention(jns.PATH_ASSETS_TEXTURES_LEVELTILES, jns.CONVENTION_SPR_LEVELTILE)
 		self.tileImgs: dict[str, tk.PhotoImage] = {} # a dict where the key is the filename, and the value is the corresponding tk.PhotoImage
 		self._LoadAllImages(fileList)
 		# jns.PrintDict(self.tileImgs)
@@ -1169,7 +1169,7 @@ class GuiLevelEditorApp:
 
 	def _LoadAllImages(self, fileList: list[str]) -> None:
 		for filename in fileList:
-			filePath: str = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, filename)
+			filePath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, filename)
 			self.tileImgs[filename] = tk.PhotoImage(file=filePath, name=filename)
 
 	def _SetupMenuBar(self) -> None:
@@ -1360,7 +1360,7 @@ class GuiLevelEditorApp:
 		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, SAVE IT TO FILE AS IT WAS RECEIVED FROM GRIDVIEW
 		data: dict = self.wc_gridView.GetDataForSaving()
 		filename: str = "test.json" # TODO: allow the user to pick the file name
-		filePath: str = os.path.join(jns.READ_LOCATION_LEVELDATA, filename)
+		filePath: str = os.path.join(jns.PATH_ASSETS_LEVELDATA, filename)
 		with open(file=filePath, mode='w') as jsonFile:
 			json.dump(data, jsonFile, indent=4)
 		print(f"Saved file: \"{filePath}\"")
@@ -1370,7 +1370,7 @@ class GuiLevelEditorApp:
 		# load data from file
 		data: dict[str, any]
 		filename: str = "test.json"
-		filePath: str = os.path.join(jns.READ_LOCATION_LEVELDATA, filename)
+		filePath: str = os.path.join(jns.PATH_ASSETS_LEVELDATA, filename)
 		with open(file=filePath, mode='r') as jsonFile:
 			data = json.load(jsonFile)
 		print(f"Opened file: \"{filePath}\"")

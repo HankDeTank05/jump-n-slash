@@ -329,7 +329,7 @@ class GuiSkinEditor:
 		self.skinFilename: str
 		if skinFilename is not None:
 			self.skinFilename = skinFilename
-			self.skinFilePath: str = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, self.skinFilename)
+			self.skinFilePath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, self.skinFilename)
 		else:
 			self.skinFilePath = self._InitSelectFile()
 			self.skinFilename = self.skinFilePath.split("/")[-1]
@@ -409,11 +409,11 @@ class GuiSkinEditor:
 		self.w_frame.grid(column=column, row=row)
 
 	def _InitSelectFile(self) -> str:
-		return filedialog.askopenfilename(initialdir=jns.READ_LOCATION_TEXTURES_LEVELTILES, filetypes=[("PNG images", "*.png")])
+		return filedialog.askopenfilename(initialdir=jns.PATH_ASSETS_TEXTURES_LEVELTILES, filetypes=[("PNG images", "*.png")])
 
 	def _SelectFile(self) -> None:
 		# load the image
-		self.skinFilePath: str = filedialog.askopenfilename(initialdir=jns.READ_LOCATION_TEXTURES_LEVELTILES, filetypes=[("PNG images", "*.png")])
+		self.skinFilePath: str = filedialog.askopenfilename(initialdir=jns.PATH_ASSETS_TEXTURES_LEVELTILES, filetypes=[("PNG images", "*.png")])
 		self.icon = tk.PhotoImage(file=self.skinFilePath)
 		
 		# update the file name in the gui
@@ -619,7 +619,7 @@ class GuiTileDataEditor:
 		
 	def _Read(self) -> None:
 		# read a selected json file
-		filePath: str = filedialog.askopenfilename(initialdir=jns.READ_LOCATION_TEXTURES_LEVELTILES, filetypes=[("JSON files", "*.json")])
+		filePath: str = filedialog.askopenfilename(initialdir=jns.PATH_ASSETS_TEXTURES_LEVELTILES, filetypes=[("JSON files", "*.json")])
 		print(f"opening file: \"{filePath}\"")
 
 		with open(filePath, "r") as jsonFile:
@@ -642,7 +642,7 @@ class GuiTileDataEditor:
 		}
 		filename: str = jns.ConvertToCamelCase(self.wc_tileInfo.GetTileName()) + ".json"
 		print(f"filename: \"{filename}\"")
-		filePath: str = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, filename)
+		filePath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, filename)
 		print(f"filePath: \"{filePath}\"")
 		with open(filePath, "w") as jsonFile:
 			json.dump(data, jsonFile, indent=4)

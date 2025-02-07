@@ -14,7 +14,7 @@ class Model:
 		self._selectedAnim: str = ""
 		self._selectedSpr: str = ""
 		# lists
-		self._entityList: list[str] = jns.GetFoldersAtPath(jns.READ_LOCATION_TEXTURES_ENTITIES)
+		self._entityList: list[str] = jns.GetFoldersAtPath(jns.PATH_ASSETS_TEXTURES_ENTITIES)
 		self._animList: list[str] = []
 		self._sprList: list[str] = []
 		self._ptList: list[Point] = []
@@ -52,10 +52,11 @@ class Model:
 			# point data is stored by entity, so we can load point data once the entity has been selected
 			if self._pointData is not None:
 				assert self._pointData.HasUnsavedChanges() == False # TODO: raise a popup warning about unsaved changes (instead of having this assert)
-			entityPath: str = os.path.join(jns.READ_LOCATION_TEXTURES_ENTITIES, entityName)
+			entityPath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_ENTITIES, entityName)
 			self._pointData = PointData(entityPath)
 
 			# generate a list of animations for the current entity
+			entityPath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_ENTITIES, entityName)
 			entityFilenames: list[str] = jns.GetFilesWithConvention(entityPath, jns.CONVENTION_SPR_ENTITY)
 
 			for entityFilename in entityFilenames:
@@ -74,7 +75,7 @@ class Model:
 			# NOTE: we do NOT clear out self._sprImgDict because we may want to access the images multiple times
 
 			# generate a list of sprite filenames for the current animation
-			entityPath: str = os.path.join(jns.READ_LOCATION_TEXTURES_ENTITIES, self._selectedEntity)
+			entityPath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_ENTITIES, self._selectedEntity)
 			entityFilenames: list[str] = jns.GetFilesWithConvention(entityPath, jns.CONVENTION_SPR_ENTITY)
 
 			for entityFilename in entityFilenames:

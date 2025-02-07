@@ -1,3 +1,4 @@
+import copy
 import os
 import os.path
 import re
@@ -9,11 +10,12 @@ more about python type hints: https://docs.python.org/3/library/typing.html
 python type hints cheat sheet: https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html
 '''
 
-_READ_LOCATION_REL: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets")
-READ_LOCATION: str = os.path.abspath(_READ_LOCATION_REL)
-READ_LOCATION_TEXTURES_LEVELTILES: str = os.path.join(READ_LOCATION, "textures", "leveltiles")
-READ_LOCATION_TEXTURES_ENTITIES: str = os.path.join(READ_LOCATION, "textures", "entities")
-READ_LOCATION_LEVELDATA: str = os.path.join(READ_LOCATION, "leveldata")
+_PATH_ASSETS_REL: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets")
+PATH_ASSETS: str = os.path.abspath(_PATH_ASSETS_REL)
+PATH_ASSETS_LEVELDATA: str = os.path.join(PATH_ASSETS, "leveldata")
+PATH_ASSETS_TEXTURES: str = os.path.join(PATH_ASSETS, "textures")
+PATH_ASSETS_TEXTURES_LEVELTILES: str = os.path.join(PATH_ASSETS_TEXTURES, "leveltiles")
+PATH_ASSETS_TEXTURES_ENTITIES: str = os.path.join(PATH_ASSETS_TEXTURES, "entities")
 
 # check this out if you forgot how regex works: https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf
 """
@@ -84,6 +86,27 @@ def GetFilesWithConvention(path: str, namingConvention: str) -> list[str]:
 ################
 # string stuff #
 ################
+
+def GetAdjustedFilename(toAdjust: str) -> str:
+	result: str = copy.deepcopy(toAdjust)
+
+	# replace underscores with spaces
+	while "_" in result:
+		i: int = result.index("_")
+		result = result[:i] + " " + result[i+1:]
+		print(result)
+
+	if "." in result:
+		# remove file extension
+		i: int = len(result) - 1
+		while result[i] != ".":
+			i -= 1
+		assert result[i] == "."
+		result = result[:i]
+		print(result)
+	
+	return result
+
 
 def ConvertToCamelCase(toConvert: str) -> str:
 	# convert the string to all lowercase

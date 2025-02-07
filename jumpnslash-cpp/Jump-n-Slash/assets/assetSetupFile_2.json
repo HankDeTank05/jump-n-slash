@@ -1,0 +1,422 @@
+{
+    "textures": [
+        {
+            "key": "enemy spritesheet",
+            "path": "..\\jumpnslash-cpp\\Jump-n-Slash\\assets\\textures\\entities\\enemy\\enemy_spritesheet.png",
+            "smooth": false
+        },
+        {
+            "key": "player spritesheet",
+            "path": "..\\jumpnslash-cpp\\Jump-n-Slash\\assets\\textures\\entities\\player\\player_spritesheet.png",
+            "smooth": false
+        },
+        {
+            "key": "sword spritesheet",
+            "path": "..\\jumpnslash-cpp\\Jump-n-Slash\\assets\\textures\\entities\\sword\\sword_spritesheet.png",
+            "smooth": false
+        }
+    ],
+    "sprites": [
+        {
+            "key": "idle 1",
+            "source texture key": "enemy spritesheet",
+            "x": 0,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "idle 2",
+            "source texture key": "enemy spritesheet",
+            "x": 32,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "idle 3",
+            "source texture key": "enemy spritesheet",
+            "x": 64,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "idle 4",
+            "source texture key": "enemy spritesheet",
+            "x": 96,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "attack 1",
+            "source texture key": "player spritesheet",
+            "x": 0,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "attack 2",
+            "source texture key": "player spritesheet",
+            "x": 32,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "attack 3",
+            "source texture key": "player spritesheet",
+            "x": 64,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "attack 4",
+            "source texture key": "player spritesheet",
+            "x": 96,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "fall 1",
+            "source texture key": "player spritesheet",
+            "x": 0,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "fall 2",
+            "source texture key": "player spritesheet",
+            "x": 32,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "fall 3",
+            "source texture key": "player spritesheet",
+            "x": 64,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "fall 4",
+            "source texture key": "player spritesheet",
+            "x": 96,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "idle 1",
+            "source texture key": "player spritesheet",
+            "x": 0,
+            "y": 64,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "idle 2",
+            "source texture key": "player spritesheet",
+            "x": 32,
+            "y": 64,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "idle 3",
+            "source texture key": "player spritesheet",
+            "x": 64,
+            "y": 64,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "idle 4",
+            "source texture key": "player spritesheet",
+            "x": 96,
+            "y": 64,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "jump 1",
+            "source texture key": "player spritesheet",
+            "x": 0,
+            "y": 96,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "jump 2",
+            "source texture key": "player spritesheet",
+            "x": 32,
+            "y": 96,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "jump 3",
+            "source texture key": "player spritesheet",
+            "x": 64,
+            "y": 96,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "jump 4",
+            "source texture key": "player spritesheet",
+            "x": 96,
+            "y": 96,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testJump 0",
+            "source texture key": "player spritesheet",
+            "x": 0,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testJump 1",
+            "source texture key": "player spritesheet",
+            "x": 32,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testJump 2",
+            "source texture key": "player spritesheet",
+            "x": 64,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testJump 3",
+            "source texture key": "player spritesheet",
+            "x": 96,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testJump 4",
+            "source texture key": "player spritesheet",
+            "x": 128,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testJump 5",
+            "source texture key": "player spritesheet",
+            "x": 160,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testJump 6",
+            "source texture key": "player spritesheet",
+            "x": 192,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testJump 7",
+            "source texture key": "player spritesheet",
+            "x": 224,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testLegIdle 0",
+            "source texture key": "player spritesheet",
+            "x": 0,
+            "y": 160,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testLegIdle 1",
+            "source texture key": "player spritesheet",
+            "x": 32,
+            "y": 160,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testLegIdle 2",
+            "source texture key": "player spritesheet",
+            "x": 64,
+            "y": 160,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testLegIdle 3",
+            "source texture key": "player spritesheet",
+            "x": 96,
+            "y": 160,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 0",
+            "source texture key": "player spritesheet",
+            "x": 0,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 1",
+            "source texture key": "player spritesheet",
+            "x": 32,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 2",
+            "source texture key": "player spritesheet",
+            "x": 64,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 3",
+            "source texture key": "player spritesheet",
+            "x": 96,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 4",
+            "source texture key": "player spritesheet",
+            "x": 128,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 5",
+            "source texture key": "player spritesheet",
+            "x": 160,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 6",
+            "source texture key": "player spritesheet",
+            "x": 192,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 7",
+            "source texture key": "player spritesheet",
+            "x": 224,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "testWalk 8",
+            "source texture key": "player spritesheet",
+            "x": 256,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "walk 1",
+            "source texture key": "player spritesheet",
+            "x": 0,
+            "y": 224,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "walk 2",
+            "source texture key": "player spritesheet",
+            "x": 32,
+            "y": 224,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "walk 3",
+            "source texture key": "player spritesheet",
+            "x": 64,
+            "y": 224,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "walk 4",
+            "source texture key": "player spritesheet",
+            "x": 96,
+            "y": 224,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "idle 1",
+            "source texture key": "sword spritesheet",
+            "x": 0,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "swing 1",
+            "source texture key": "sword spritesheet",
+            "x": 0,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "swing 2",
+            "source texture key": "sword spritesheet",
+            "x": 32,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "swing 3",
+            "source texture key": "sword spritesheet",
+            "x": 64,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "key": "swing 4",
+            "source texture key": "sword spritesheet",
+            "x": 96,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        }
+    ],
+    "leveldata": []
+}
