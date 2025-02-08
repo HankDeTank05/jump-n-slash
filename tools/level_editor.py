@@ -236,7 +236,7 @@ class MapData:
 	PROPS_SIZE_KEY: str = "Size"
 	LAYOUT_KEY: str = "Layout"
 
-	def __init__(self, data: None | dict = None) -> None:
+	def __init__(self, data: dict | None = None) -> None:
 		# this 2d list contains the filename of the tile or "None" if there is no tile there
 		# it should be indexed as self.grid[y][x]
 		self.grid: list[list[str | None]] = []
@@ -479,7 +479,7 @@ class GuiGridView:
 		self.InitCanvas()
 
 		# call a function when the left mouse button is clicked-and-dragged
-		self.w_canvas.bind("<B1-Motion>", self._CanvasClicked) # do stuff when click-and-dragging mouse1
+		self.w_canvas.bind("<B1-Motion>", self._CanvasDraw) # do stuff when click-and-dragging mouse1
 		self.w_canvas.bind("<B3-Motion>", self._CanvasErase) # do stuff when click-and-dragging mouse2
 		self.w_canvas.bind("<B1-ButtonRelease>", self._MouseButtonReleased) # do stuff when left mouse button is released
 		self.w_canvas.bind("<B3-ButtonRelease>", self._MouseButtonReleased) # do stuff when right mouse button is released
@@ -511,8 +511,8 @@ class GuiGridView:
 				self._DrawSqaureAtGridPos(x, y)
 		self._DrawViewOptions()
 
-	def _CanvasClicked(self, event: tk.Event) -> None:
-		# print("GuiGridView._CanvasClicked()")
+	def _CanvasDraw(self, event: tk.Event) -> None:
+		# print("GuiGridView._CanvasDraw()")
 
 		# only do stuff if the mouse button is released or the cursor is in a new grid square
 		mouseGridPos: tuple[int, int] = self._ScreenPixelToGridPos(event.x, event.y)
@@ -762,7 +762,7 @@ class GuiGridView:
 
 	def _SetCanvasObjectBindings(self, canvasObject) -> None:
 		# print(canvasObject)
-		self.w_canvas.tag_bind(canvasObject, "<Button-1>", self._CanvasClicked)
+		self.w_canvas.tag_bind(canvasObject, "<Button-1>", self._CanvasDraw)
 		self.w_canvas.tag_bind(canvasObject, "<Button-3>", self._CanvasErase)
 		# NOTE: click-and-drag functionality is bound to the canvas itself, not the drawn canvas objects
 
@@ -801,9 +801,15 @@ class GuiGridView:
 	# tag generation functions #
 	############################
 
+	"""
+	used on tile images when drawn to a given grid position
+	"""
 	def _GetPositionTag(self, gridX: int, gridY: int) -> str:
 		return f"{gridX},{gridY}"
 
+	"""
+	used on text (such as coordinate numbers) when drawn to a specific grid pos
+	"""
 	def _GetUniqueCoordsTag(self, gridX: int, gridY: int) -> str:
 		return f"{GuiGridView.COORDS_TAG} : {self._GetPositionTag(gridX, gridY)}"
 
@@ -970,7 +976,7 @@ class GuiTileDetailsPanel:
         #Reads the JSON file for the selected tile and updates the GUI.
         tileName = img.name 
         tileBaseName = jns.ConvertToCamelCase(tileName.split("_")[-1].replace(".png", ""))
-        tileJsonPath = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, tileBaseName + "_data.json")
+        tileJsonPath = os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, tileBaseName + "_data.json")
 
         # if JSON exists...
         if os.path.exists(tileJsonPath):

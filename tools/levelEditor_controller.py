@@ -34,5 +34,4 @@ class Controller:
 					img: tk.PhotoImage = files[filename]
 					self.view.tilePalette.AddTileToNotebookPage(pageName, img, callback=None)
 
-	# TODO: (henry) tile palette controller code
 	# TODO: (len) tile details controller code

@@ -14,7 +14,7 @@ class TileDetailsView:
 		self.w_parentFrame: ttk.LabelFrame = ttk.LabelFrame(parent, text="Tile Details Panel")
 		self.w_parentFrame.grid(column=column, row=row,
 								columnspan=columnspan, rowspan=rowspan,
-								padx=padx, pady=pady, sticky=sticky)
+								sticky=sticky)
   #shit. I'll need to import pad as well.
 
 		# Tile Icon
@@ -55,14 +55,10 @@ class TileDetailsView:
     # Update Tile Details Panel #
     #############################
 
-	def update_tile_details(self, tile_data: dict, img: tk.PhotoImage) -> None:
+	def UpdateTileDetails(self, tile_data: dict, img: tk.PhotoImage) -> None:
 
 		self.w_nameValue.config(text=tile_data.get("name", "Unknown"))
 		self.w_damagePlayerValue.config(text=str(tile_data.get("damage to player", 0)))
 		self.w_damageEnemiesValue.config(text=str(tile_data.get("damage to enemies", 0)))
 		self.w_breakableValue.config(text="Yes" if tile_data.get("breakable", False) else "No")
 		self.w_solidValue.config(text="Yes" if tile_data.get("solid on sides", False) else "No")
-
-        # Update the displayed tile icon
-		self.w_tileIcon.config(image=img)
-		self.w_tileIcon.image = img  # Keep reference
