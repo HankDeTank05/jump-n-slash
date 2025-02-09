@@ -69,8 +69,8 @@
     <ClCompile Include="Engine Code\GamepadBtnDeregistrationCommand.cpp" />
     <ClCompile Include="Engine Code\GamepadBtnListener.cpp" />
     <ClCompile Include="Engine Code\GamepadBtnRegistrationCommand.cpp" />
-    <ClCompile Include="Engine Code\GridManager.cpp" />
-    <ClCompile Include="Engine Code\GridManagerAttorney.cpp" />
+    <ClCompile Include="Engine Code\MapManager.cpp" />
+    <ClCompile Include="Engine Code\MapManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\InputManager.cpp" />
     <ClCompile Include="Engine Code\InputObject.cpp" />
     <ClCompile Include="Engine Code\InputObjectAttorney.cpp" />
@@ -123,6 +123,8 @@
     <ClCompile Include="Engine Code\Subject.cpp" />
     <ClCompile Include="Engine Code\TextureManager.cpp" />
     <ClCompile Include="Engine Code\TextureManagerAttorney.cpp" />
+    <ClCompile Include="Engine Code\Tileset.cpp" />
+    <ClCompile Include="Engine Code\TilesetManager.cpp" />
     <ClCompile Include="Engine Code\TimeManager.cpp" />
     <ClCompile Include="Engine Code\TimeManagerAttorney.cpp" />
     <ClCompile Include="Engine Code\UpdateObject.cpp" />
@@ -147,6 +149,7 @@
     <ClCompile Include="Engine Code\VizCmdTextPool.cpp" />
     <ClCompile Include="Game Code\Actor.cpp" />
     <ClCompile Include="Game Code\AssetLoader.cpp" />
+    <ClCompile Include="Game Code\AssetLoader2.cpp" />
     <ClCompile Include="Game Code\BlockBreakable.cpp" />
     <ClCompile Include="Game Code\BlockHazard.cpp" />
     <ClCompile Include="Game Code\BlockSolid.cpp" />
@@ -194,6 +197,7 @@
     <ClCompile Include="Game Code\PlayerMoveStateWalking.cpp" />
     <ClCompile Include="Game Code\ResumeGameCommand.cpp" />
     <ClCompile Include="Game Code\RoomData.cpp" />
+    <ClCompile Include="Game Code\SpriteLoadCommand.cpp" />
     <ClCompile Include="Game Code\Sword.cpp" />
     <ClCompile Include="Game Code\SwordAttorney.cpp" />
     <ClCompile Include="Game Code\SwordFSM.cpp" />
@@ -202,8 +206,7 @@
     <ClCompile Include="Game Code\TestClass.cpp" />
     <ClCompile Include="Game Code\TestScene.cpp" />
     <ClCompile Include="Game Code\TextParser.cpp" />
-    <ClCompile Include="Game Code\Tileset.cpp" />
-    <ClCompile Include="Game Code\TilesetManager.cpp" />
+    <ClCompile Include="Game Code\TextureLoadCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\AlarmDeregistrationCommand.h" />
@@ -267,8 +270,8 @@
     <ClInclude Include="Engine Code\GamepadBtnDeregistrationCommand.h" />
     <ClInclude Include="Engine Code\GamepadBtnListener.h" />
     <ClInclude Include="Engine Code\GamepadBtnRegistrationCommand.h" />
-    <ClInclude Include="Engine Code\GridManager.h" />
-    <ClInclude Include="Engine Code\GridManagerAttorney.h" />
+    <ClInclude Include="Engine Code\MapManager.h" />
+    <ClInclude Include="Engine Code\MapManagerAttorney.h" />
     <ClInclude Include="Engine Code\InputEvent.h" />
     <ClInclude Include="Engine Code\InputManager.h" />
     <ClInclude Include="Engine Code\InputObject.h" />
@@ -328,6 +331,8 @@
     <ClInclude Include="Engine Code\Subject.h" />
     <ClInclude Include="Engine Code\TextureManager.h" />
     <ClInclude Include="Engine Code\TextureManagerAttorney.h" />
+    <ClInclude Include="Engine Code\Tileset.h" />
+    <ClInclude Include="Engine Code\TilesetManager.h" />
     <ClInclude Include="Engine Code\TimeManager.h" />
     <ClInclude Include="Engine Code\TimeManagerAttorney.h" />
     <ClInclude Include="Engine Code\TreeTraversal.h" />
@@ -352,7 +357,10 @@
     <ClInclude Include="Engine Code\VizCmdSegPool.h" />
     <ClInclude Include="Engine Code\VizCmdTextPool.h" />
     <ClInclude Include="Game Code\Actor.h" />
+    <ClInclude Include="Game Code\AnimationLoadCommand.h" />
+    <ClInclude Include="Game Code\AssetLoadCommand.h" />
     <ClInclude Include="Game Code\AssetLoader.h" />
+    <ClInclude Include="Game Code\AssetLoader2.h" />
     <ClInclude Include="Game Code\BlockBreakable.h" />
     <ClInclude Include="Game Code\BlockHazard.h" />
     <ClInclude Include="Game Code\BlockSolid.h" />
@@ -376,6 +384,7 @@
     <ClInclude Include="Game Code\GameStateMenu.h" />
     <ClInclude Include="Game Code\GameStatePlaying.h" />
     <ClInclude Include="Game Code\GhostDreamcatcher.h" />
+    <ClInclude Include="Game Code\MapLoadCommand.h" />
     <ClInclude Include="Game Code\JsonNodeBase.h" />
     <ClInclude Include="Game Code\JsonNodeList.h" />
     <ClInclude Include="Game Code\JsonNodeStr.h" />
@@ -409,6 +418,7 @@
     <ClInclude Include="Game Code\PlayerMoveStateWalking.h" />
     <ClInclude Include="Game Code\ResumeGameCommand.h" />
     <ClInclude Include="Game Code\RoomData.h" />
+    <ClInclude Include="Game Code\SpriteLoadCommand.h" />
     <ClInclude Include="Game Code\Sword.h" />
     <ClInclude Include="Game Code\SwordAttorney.h" />
     <ClInclude Include="Game Code\SwordFSM.h" />
@@ -418,8 +428,7 @@
     <ClInclude Include="Game Code\TestClass.h" />
     <ClInclude Include="Game Code\TestScene.h" />
     <ClInclude Include="Game Code\TextParser.h" />
-    <ClInclude Include="Game Code\Tileset.h" />
-    <ClInclude Include="Game Code\TilesetManager.h" />
+    <ClInclude Include="Game Code\TextureLoadCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Game Code\4_CreatingGameObject.txt" />

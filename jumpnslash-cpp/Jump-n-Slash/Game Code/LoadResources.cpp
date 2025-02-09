@@ -1,25 +1,18 @@
 #include "../Engine Code/JumpSlashEngine.h"
 
-// language includes
-//#include <fstream>
-//#include <iostream>
-
-// library includes
-//#include <nlohmann/json.hpp>
-//#include <simdjson.h>
-
 // engine includes
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/FontManager.h"
-#include "../Engine Code/GridManager.h"
+#include "../Engine Code/MapManager.h"
 #include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Animation.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/Sprite.h"
 
 // game includes
-#include "AssetLoader.h"
+//#include "AssetLoader.h"
+#include "AssetLoader2.h"
 #include "JsonParser.h"
 #include "GameManager.h"
 
@@ -35,14 +28,18 @@ void JumpSlashEngine::LoadResources()
 	FontManager::LoadFont("consolas", "consola.ttf");
 	FontManager::LoadFont("delfino", "Delfino.ttf");
 
-	AssetLoader loader;
-	loader.ReadAssetSetupFile();
+	//AssetLoader loader;
+	//loader.ReadAssetSetupFile();
+
+	AssetLoader2 loader2;
+	loader2.ReadAssetSetupFile();
+	loader2.LoadAssets();
 
 	// ^^^ the AssetLoader automates a lot, but...
 	// anything that isn't/can't be automated should happen below vvv
 
-	AnimationManager::GetAnimation("player jump")->SetLoop(false);
-	AnimationManager::GetAnimation("player fall")->SetLoop(false);
+	//AnimationManager::GetAnimation("player jump")->SetLoop(false);
+	//AnimationManager::GetAnimation("player fall")->SetLoop(false);
 
 	// set connectors for player sprites
 
@@ -56,54 +53,30 @@ void JumpSlashEngine::LoadResources()
 	SpriteManager::GetSprite("player walk 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f));
 	SpriteManager::GetSprite("player walk 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 16.f));
 
-	SpriteManager::GetSprite("player jump 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
-	SpriteManager::GetSprite("player jump 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
-	SpriteManager::GetSprite("player jump 3")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
-	SpriteManager::GetSprite("player jump 4")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f), 0.f);
+	SpriteManager::GetSprite("player jump 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f));
+	SpriteManager::GetSprite("player jump 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f));
+	SpriteManager::GetSprite("player jump 3")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f));
+	SpriteManager::GetSprite("player jump 4")->AddConnector("weapon hold", sf::Vector2f(26.f, 5.f));
 	
-	SpriteManager::GetSprite("player fall 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
-	SpriteManager::GetSprite("player fall 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
-	SpriteManager::GetSprite("player fall 3")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
-	SpriteManager::GetSprite("player fall 4")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f), 0.f);
+	SpriteManager::GetSprite("player fall 1")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f));
+	SpriteManager::GetSprite("player fall 2")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f));
+	SpriteManager::GetSprite("player fall 3")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f));
+	SpriteManager::GetSprite("player fall 4")->AddConnector("weapon hold", sf::Vector2f(26.f, 26.f));
 
-	SpriteManager::GetSprite("player attack 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
-	SpriteManager::GetSprite("player attack 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
-	SpriteManager::GetSprite("player attack 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
-	SpriteManager::GetSprite("player attack 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f), 0.f);
+	SpriteManager::GetSprite("player attack 1")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f));
+	SpriteManager::GetSprite("player attack 2")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f));
+	SpriteManager::GetSprite("player attack 3")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f));
+	SpriteManager::GetSprite("player attack 4")->AddConnector("weapon hold", sf::Vector2f(31.f, 15.f));
 
 	SpriteManager::GetSprite("sword idle 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f));
 
-	SpriteManager::GetSprite("sword swing 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
-	SpriteManager::GetSprite("sword swing 2")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
-	SpriteManager::GetSprite("sword swing 3")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
-	SpriteManager::GetSprite("sword swing 4")->AddConnector("hold", sf::Vector2f(0.f, 23.f), 0.f);
+	SpriteManager::GetSprite("sword swing 1")->AddConnector("hold", sf::Vector2f(0.f, 23.f));
+	SpriteManager::GetSprite("sword swing 2")->AddConnector("hold", sf::Vector2f(0.f, 23.f));
+	SpriteManager::GetSprite("sword swing 3")->AddConnector("hold", sf::Vector2f(0.f, 23.f));
+	SpriteManager::GetSprite("sword swing 4")->AddConnector("hold", sf::Vector2f(0.f, 23.f));
 
-	JsonParser parser;
-	parser.ReadJsonFile("../../tools/formatting_rules.json");
-
-	TextureManager::LoadTexture("block solid", "leveltiles/block_solid.png");
-	SpriteManager::LoadSprite("block solid", "block solid");
-
-	TextureManager::LoadTexture("platform semisolid", "leveltiles/platform_semisolid.png");
-	SpriteManager::LoadSprite("platform semisolid", "platform semisolid");
-
-	TextureManager::LoadTexture("indicator room height", "leveltiles/indicator_roomHeight.png");
-	SpriteManager::LoadSprite("indicator room height", "indicator room height");
-
-	TextureManager::LoadTexture("indicator room origin", "leveltiles/indicator_roomOrigin.png");
-	SpriteManager::LoadSprite("indicator room origin", "indicator room origin");
-
-	TextureManager::LoadTexture("indicator room origin start", "leveltiles/indicator_roomOriginStart.png");
-	SpriteManager::LoadSprite("indicator room origin start", "indicator room origin start");
-
-	TextureManager::LoadTexture("indicator room width", "leveltiles/indicator_roomWidth.png");
-	SpriteManager::LoadSprite("indicator room width", "indicator room width");
-
-	TextureManager::LoadTexture("indicator spawn player right", "leveltiles/indicator_spawnPlayerRight.png");
-	SpriteManager::LoadSprite("indicator spawn player right", "indicator spawn player right");
-
-	//GridManager::LoadGrid("test", "test.txt");
-	//GridManager::LoadGrid("test 2", "test2.txt");
+	//MapManager::LoadMap("test", "test.txt");
+	MapManager::LoadMap("test 2", "test2.txt");
 
 	TextureManager::LoadTexture("paper mario spritesheet", "test/paper_mario.png");
 	SpriteManager::LoadSprite("paper mario body", "paper mario spritesheet", sf::IntRect(1022, 2564, 148, 135));

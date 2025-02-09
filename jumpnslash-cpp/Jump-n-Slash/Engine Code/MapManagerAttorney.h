@@ -1,7 +1,7 @@
 #ifndef GRID_MANAGER_ATTORNEY_H
 #define GRID_MANAGER_ATTORNEY_H
 
-class GridManagerAttorney
+class MapManagerAttorney
 {
 public:
 	class Termination

@@ -100,9 +100,6 @@
     <Filter Include="Source Files\Engine Code\Asset Managers\Font Manager">
       <UniqueIdentifier>{e6525ae9-845f-40a8-8983-4bf36f7072c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine Code\Asset Managers\Grid Manager">
-      <UniqueIdentifier>{9f71b241-f18f-4cab-b051-a7b7e3ce3c80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine Code\Asset Managers\Sprite Manager">
       <UniqueIdentifier>{e917a951-3980-4f00-9c79-c128e9159c2a}</UniqueIdentifier>
     </Filter>
@@ -135,9 +132,6 @@
     </Filter>
     <Filter Include="Source Files\Engine Code\Asset Managers\Animation Manager">
       <UniqueIdentifier>{45197d60-b3e8-47b9-a365-65de532c418f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Level Data\Tileset">
-      <UniqueIdentifier>{55712ed0-db1a-4a8e-ab06-52db385587cb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game Code\Actors\Player">
       <UniqueIdentifier>{03005a24-48dc-482f-bf47-4221183d0c1f}</UniqueIdentifier>
@@ -261,6 +255,21 @@
     </Filter>
     <Filter Include="Source Files\Game Code\Tools\JsonParser">
       <UniqueIdentifier>{22134239-2c6c-4b33-bfa2-e1875ce1b666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Tools\Asset Loader 2">
+      <UniqueIdentifier>{405abf7d-b863-420e-bfb3-8279da4fa93f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Tools\Asset Loader 2\Commands">
+      <UniqueIdentifier>{ee378375-7556-496f-908b-9b9911ec9ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Map Manager">
+      <UniqueIdentifier>{9f71b241-f18f-4cab-b051-a7b7e3ce3c80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Tileset System">
+      <UniqueIdentifier>{accb8f24-cca6-4381-bc3d-5d81d9da88b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Tileset Manager">
+      <UniqueIdentifier>{a8fa3a1b-abfc-4bc1-9f86-198ea9c32cee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -432,11 +441,11 @@
     <ClCompile Include="Engine Code\FontManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Font Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\GridManager.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    <ClCompile Include="Engine Code\MapManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Map Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\GridManagerAttorney.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    <ClCompile Include="Engine Code\MapManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Map Manager</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\SpriteManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Sprite Manager</Filter>
@@ -783,12 +792,6 @@
     <ClCompile Include="Game Code\JsonNodeStr.cpp">
       <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\Tileset.cpp">
-      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\TilesetManager.cpp">
-      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
-    </ClCompile>
     <ClCompile Include="Engine Code\SpriteCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
     </ClCompile>
@@ -821,6 +824,21 @@
     </ClCompile>
     <ClCompile Include="Engine Code\SpriteCommandSclChange.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\AssetLoader2.cpp">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\TextureLoadCommand.cpp">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\SpriteLoadCommand.cpp">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Tileset.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Tileset System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\TilesetManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Tileset Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1007,11 +1025,11 @@
     <ClInclude Include="Engine Code\FontManager.h">
       <Filter>Source Files\Engine Code\Asset Managers\Font Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\GridManagerAttorney.h">
-      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    <ClInclude Include="Engine Code\MapManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Map Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\GridManager.h">
-      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    <ClInclude Include="Engine Code\MapManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Map Manager</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\SpriteManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers\Sprite Manager</Filter>
@@ -1096,9 +1114,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\AnimationManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\Tileset.h">
-      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\CollisionObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
@@ -1430,9 +1445,6 @@
     <ClInclude Include="Game Code\JsonNodeList.h">
       <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\TilesetManager.h">
-      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\SpriteCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
     </ClInclude>
@@ -1465,6 +1477,30 @@
     </ClInclude>
     <ClInclude Include="Engine Code\SpriteCommandSclChange.h">
       <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AssetLoader2.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AssetLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\TextureLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\SpriteLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AnimationLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MapLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Tileset.h">
+      <Filter>Source Files\Engine Code\Main Systems\Tileset System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TilesetManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Tileset Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

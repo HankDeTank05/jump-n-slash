@@ -64,7 +64,7 @@ public: // public api functions
 	* 
 	* \see	TextureManager
 	* \see	SpriteManager
-	* \see	GridManager
+	* \see	MapManager
 	*/
 	static void LoadFont(std::string key, std::string filename);
 	/*!
@@ -78,7 +78,7 @@ public: // public api functions
 	* 
 	* \see	TextureManager
 	* \see	SpriteManager
-	* \see	GridManager
+	* \see	MapManager
 	*/
 	static sf::Font* GetFont(std::string key); // TODO: docs for FontManager::GetFont needs example code
 

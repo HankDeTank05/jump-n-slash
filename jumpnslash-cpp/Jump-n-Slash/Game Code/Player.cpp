@@ -33,7 +33,7 @@
 #include "SwordAttorney.h"
 
 Player::Player()
-	: Actor(PLAYER_WALK_SPEED),
+	: Actor(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED),
 	pCtrlStrat(nullptr),
 	pCurrentState(&PlayerMoveFSM::idle),
 	pPrevState(nullptr),
@@ -59,8 +59,6 @@ Player::Player()
 	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
 	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
 	
-
-	pAnimComp->DefineAnimationSet(pAnimSet);
 	pAnimComp->SetAnimation("idle");
 
 	pSprite = pAnimComp->GetCurrentFrame();
@@ -235,9 +233,6 @@ void Player::PlaceInMap()
 void Player::OnSceneEntry()
 {
 	SetControls(ControlManager::GetControlScheme());
-
-	// connect to map
-	pLevel->LinkToPlayer(this);
 
 	// do animation stuff
 	pAnimComp->DefineAnimation("idle", AnimationManager::GetAnimation("player idle"));

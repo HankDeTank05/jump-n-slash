@@ -23,8 +23,8 @@
 #include "PlayerAttorney.h"
 #include "GameManagerAttorney.h"
 
-LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid, Tileset* _pTileset)
-	: pTileset(_pTileset),
+LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid/*, Tileset* _pTileset*/)
+	: /*pTileset(_pTileset),*/
 	map(),
 	usedSize(0, 0),
 	rooms()

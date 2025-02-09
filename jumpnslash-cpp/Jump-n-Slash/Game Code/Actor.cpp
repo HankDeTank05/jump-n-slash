@@ -14,11 +14,7 @@
 #include "GameManagerAttorney.h"
 
 Actor::Actor(float _speed)
-	: pos(),
-	posDelta(0.f, 0.f),
-	width(0.f),
-	height(0.f),
-	speed(_speed),
+	: speed(_speed),
 	pAnimComp(new AnimationComponent()),
 	pSprite(nullptr),
 	pCurrentRoom(nullptr),
@@ -34,13 +30,6 @@ Actor::~Actor()
 	delete pAnimComp;
 }
 
-void Actor::Draw()
-{
-	assert(pCurrentRoom != nullptr); // TODO: this is bad and stupid but Henry told me to do it (bitch)
-
-	Render(pSprite);
-}
-
 sf::Vector2f Actor::GetPos() const
 {
 	return pos;
@@ -54,11 +43,6 @@ sf::Vector2f Actor::GetPosDelta() const
 float Actor::GetWidth() const
 {
 	return width;
-}
-
-float Actor::GetHeight() const
-{
-	return height;
 }
 
 float Actor::GetHeight() const

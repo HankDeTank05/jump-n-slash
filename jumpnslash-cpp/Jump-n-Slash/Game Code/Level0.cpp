@@ -1,7 +1,7 @@
 #include "Level0.h"
 
 // engine includes
-#include "../Engine Code/GridManager.h"
+#include "../Engine Code/MapManager.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/Camera.h"
 
@@ -38,20 +38,20 @@ Level0::~Level0()
 
 void Level0::Init()
 {
-	pMap = new LevelMap(GridManager::GetGrid("test2"));
+	pMap = new LevelMap(MapManager::GetMap("test 2"));
 	GameManagerAttorney::SceneAccess::SetLevel(pMap);
 
 	pPlayer = new Player();
 	GameManagerAttorney::SceneAccess::SetPlayer(pPlayer);
 
-	pSword = new Sword(pPlayer);
+	//pSword = new Sword(pPlayer);
 	pEnemy = new Enemy();
 
 	pPlayer->PlaceInMap();
 	pPlayer->AddObserver(pMap);
 
 	SetCollisionPair<Player, Enemy>();
-	SetCollisionPair<Sword, Enemy>();
+	//SetCollisionPair<Sword, Enemy>();
 
 	float viewWidth = ROOM_TILE_WIDTH * TILE_SIZE_F;
 	float viewHeight = ROOM_TILE_HEIGHT * TILE_SIZE_F;

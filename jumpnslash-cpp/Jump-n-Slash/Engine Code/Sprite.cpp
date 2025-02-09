@@ -56,7 +56,7 @@ sf::Vector2f Sprite::GetConnector(const std::string& name)
 	assert(connMap.count(name) > 0); // a connector with that name doesn't exist!
 	assert(connMods.count(name) > 0);
 
-	return /*pSprite->getPosition() +*/ connMods.at(name).first;
+	return /*pSprite->getPosition() +*/ connMods.at(name);
 }
 
 bool Sprite::HasConnector(const std::string& name)

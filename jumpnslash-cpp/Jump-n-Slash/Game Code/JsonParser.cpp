@@ -14,17 +14,6 @@
 #include "JsonNodeList.h"
 #include "JsonNodeStr.h"
 
-JsonParser::JsonParser()
-	: pHead(new JsonNodeList("json file"))
-{
-	// do nothing
-}
-
-JsonParser::~JsonParser()
-{
-	delete pHead;
-}
-
 void JsonParser::ReadJsonFile(std::string path)
 {
 	// parse a json file
@@ -34,7 +23,7 @@ void JsonParser::ReadJsonFile(std::string path)
 
 	std::ifstream jsonFile(path);
 
-	JsonNodeBase* pParentNode = pHead;
+	JsonNodeBase* pParentNode = nullptr;
 
 	int prevIndentLevel = -1;
 
@@ -61,36 +50,41 @@ void JsonParser::ReadJsonFile(std::string path)
 			currentChar = line.substr(strIndex, 1);
 		}
 
+		// find the position of the colon
+
 		size_t colonPos = line.find(":");
 		if (colonPos != std::string::npos)
 		{
 			// find the key on this line
 
 			size_t keyStartIndex = colonPos - 2;
+			// minus 1: the closing quote for the key. minus 2: the last character of the key
+			
 			int keyLen = 1;
+
+			// loop backwards (to the left) through the key until we reach the first character of the key
 			while (line.substr(keyStartIndex - 1, 1) != "\"")
 			{
 				keyStartIndex--;
 				keyLen++;
 			}
-			assert(line.substr(keyStartIndex - 1, 1) == "\"");
-			std::string key = line.substr(keyStartIndex, keyLen);
+			assert(line.substr(keyStartIndex - 1, 1) == "\""); // sanity check: make sure the character immediately to the left is the opening quote of the key
+			std::string key = line.substr(keyStartIndex, keyLen); // create the key
 
 			// find the value on this line
 
 			size_t valStartIndex = colonPos + 2;
+			// plus 1: space character following colon. plus 2: character to determine value type
 			currentChar = line.substr(valStartIndex, 1);
 			if (currentChar == "{")
 			{
-				// value is a sublist
-
-				JsonNodeList* pListNode = new JsonNodeList(key);
-				assert(pParentNode != nullptr);
-
-				pParentNode->AddChild(pListNode);
-				pListNode->SetParentNode(pParentNode);
-
-				pParentNode = pListNode;
+				assert(true); // value is a sub-map
+				// TODO: determine value type (key type is string)
+			}
+			else if (currentChar == "[")
+			{
+				assert(true); // value is a list of some kind
+				// TODO: determine element type
 			}
 			else if (currentChar == "\"")
 			{
@@ -102,15 +96,16 @@ void JsonParser::ReadJsonFile(std::string path)
 					valEndIndex++;
 				}
 				std::string val = line.substr(valStartIndex, valEndIndex + 1 - valStartIndex);
-
-				JsonNodeStr* pStrNode = new JsonNodeStr(key, val);
-				assert(pParentNode != nullptr);
-				pParentNode->AddChild(pStrNode);
+			}
+			else if (currentChar == "t" || currentChar == "f")
+			{
+				assert(true); // value is a boolean
 			}
 			else if (currentChar == "0" || currentChar == "1" || currentChar == "2" || currentChar == "3" ||currentChar == "4" ||
 				currentChar == "5" || currentChar == "6" || currentChar == "7" || currentChar == "8" || currentChar == "9")
 			{
 				assert(true); // value is a number
+				// TODO: determine if it's int or float
 			}
 			else
 			{
@@ -133,9 +128,4 @@ void JsonParser::ReadJsonFile(std::string path)
 	}
 
 	std::cout << "Done parsing json file" << std::endl;
-}
-
-JsonNodeList* JsonParser::GetData()
-{
-	return pHead;
 }

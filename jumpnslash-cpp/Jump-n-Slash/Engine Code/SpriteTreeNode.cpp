@@ -34,7 +34,7 @@ void SpriteTreeNode::AddChild(bool inFront, const std::string& connName, const s
 	// create a connector on this sprite if it doesn't already exist
 	if (pSprite->HasConnector(connName) == false)
 	{
-		pSprite->AddConnector(connName, connPosOnParent, 0.f);
+		pSprite->AddConnector(connName, connPosOnParent);
 	}
 
 	MapKey key(inFront, connName);
@@ -48,7 +48,7 @@ void SpriteTreeNode::AddChild(bool inFront, const std::string& connName, const s
 	// add the child node to the map entry for this connector name
 	children.at(key).push_back(pChild);
 
-	pChild->pSprite->AddConnector(connName, connPosOnChild, 0.f);
+	pChild->pSprite->AddConnector(connName, connPosOnChild);
 }
 
 SpriteTreeNode::NodeList SpriteTreeNode::TraversePreorder()

@@ -11,7 +11,7 @@
 #include "../Engine Code/TextureManager.h"
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/AnimationManager.h"
-#include "../Engine Code/GridManager.h"
+#include "../Engine Code/MapManager.h"
 
 // game includes
 #include "Constants.h"
@@ -268,5 +268,5 @@ void AssetLoader::ParseGridCommand(std::string line)
 	std::string arg1 = result1.first;
 	std::string arg2 = result2.first;
 
-	GridManager::LoadGrid(arg1, arg2);
+	MapManager::LoadMap(arg1, arg2);
 }

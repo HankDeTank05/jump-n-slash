@@ -6,7 +6,7 @@
 // engine includes
 #include "TextureManagerAttorney.h"
 #include "SpriteManagerAttorney.h"
-#include "GridManagerAttorney.h"
+#include "MapManagerAttorney.h"
 #include "AnimationManagerAttorney.h"
 #include "VisualizerAttorney.h"
 #include "FontManagerAttorney.h"
@@ -157,7 +157,7 @@ void JumpSlashEngine::UnloadContent()
 	// asset managers
 	TextureManagerAttorney::Termination::Terminate();
 	SpriteManagerAttorney::Termination::Terminate();
-	GridManagerAttorney::Termination::Terminate();
+	MapManagerAttorney::Termination::Terminate();
 	FontManagerAttorney::Termination::Terminate();
 	AnimationManagerAttorney::Termination::Terminate();
 

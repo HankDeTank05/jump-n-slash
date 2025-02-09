@@ -1,10 +1,10 @@
-#include "GridManager.h"
+#include "MapManager.h"
 
 #include <fstream>
 
-GridManager* GridManager::pInstance = nullptr;
+MapManager* MapManager::pInstance = nullptr;
 
-GridManager::~GridManager()
+MapManager::~MapManager()
 {
 	for (std::map<std::string, std::vector<std::vector<std::string>>*>::iterator it = grids.begin(); it != grids.end(); it++)
 	{
@@ -14,32 +14,32 @@ GridManager::~GridManager()
 	grids.clear();
 }
 
-GridManager& GridManager::Instance()
+MapManager& MapManager::Instance()
 {
 	if (pInstance == nullptr)
 	{
-		pInstance = new GridManager();
+		pInstance = new MapManager();
 	}
 	return *pInstance;
 }
 
-void GridManager::LoadGrid(std::string key, std::string filename)
+void MapManager::LoadMap(std::string key, std::string filename)
 {
 	Instance().privLoadGrid(key, filename);
 }
 
-std::vector<std::vector<std::string>>* GridManager::GetGrid(std::string key)
+std::vector<std::vector<std::string>>* MapManager::GetMap(std::string key)
 {
 	return Instance().privGetGrid(key);
 }
 
-void GridManager::Terminate()
+void MapManager::Terminate()
 {
 	delete pInstance;
 	pInstance = nullptr;
 }
 
-void GridManager::privLoadGrid(std::string key, std::string filename)
+void MapManager::privLoadGrid(std::string key, std::string filename)
 {
 	assert(grids.count(key) == 0); // no duplicate keys!
 
@@ -74,7 +74,7 @@ void GridManager::privLoadGrid(std::string key, std::string filename)
 	grids.emplace(key, grid);
 }
 
-std::vector<std::vector<std::string>>* GridManager::privGetGrid(std::string key)
+std::vector<std::vector<std::string>>* MapManager::privGetGrid(std::string key)
 {
 	assert(grids.count(key) > 0); // if this assert got triggered, the key was not found in the map
 

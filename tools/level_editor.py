@@ -476,14 +476,16 @@ class GuiGridView:
 		# create the canvas
 		self.w_canvas: tk.Canvas = tk.Canvas(self.w_parentFrame)
 		self.w_canvas.grid(column=0, row=0, sticky="NSEW")
-		self.InitCanvas()
+		self.InitCanvas() # CONTROLLER
 
+		# vvv CONTROLLER vvv
 		# call a function when the left mouse button is clicked-and-dragged
 		self.w_canvas.bind("<B1-Motion>", self._CanvasDraw) # do stuff when click-and-dragging mouse1
 		self.w_canvas.bind("<B3-Motion>", self._CanvasErase) # do stuff when click-and-dragging mouse2
 		self.w_canvas.bind("<B1-ButtonRelease>", self._MouseButtonReleased) # do stuff when left mouse button is released
 		self.w_canvas.bind("<B3-ButtonRelease>", self._MouseButtonReleased) # do stuff when right mouse button is released
 		self.w_canvas.bind("<Motion>", self._MouseMoved) # do stuff when the mouse cursor moves
+		# ^^^ CONTROLLER ^^^
 
 		# create the canvas scrollbars
 		self.w_scrollH: ttk.Scrollbar = ttk.Scrollbar(self.w_parentFrame, orient=tk.HORIZONTAL)
@@ -1366,7 +1368,7 @@ class GuiLevelEditorApp:
 		# NOTE: DO NOT MODIFY THE LOADED DATA IN ANY WAY, SAVE IT TO FILE AS IT WAS RECEIVED FROM GRIDVIEW
 		data: dict = self.wc_gridView.GetDataForSaving()
 		filename: str = "test.json" # TODO: allow the user to pick the file name
-		filePath: str = os.path.join(jns.PATH_ASSETS_LEVELDATA, filename)
+		filePath: str = os.path.join(jns.PATH_ASSETS_LEVELS, filename)
 		with open(file=filePath, mode='w') as jsonFile:
 			json.dump(data, jsonFile, indent=4)
 		print(f"Saved file: \"{filePath}\"")
@@ -1376,7 +1378,7 @@ class GuiLevelEditorApp:
 		# load data from file
 		data: dict[str, any]
 		filename: str = "test.json"
-		filePath: str = os.path.join(jns.PATH_ASSETS_LEVELDATA, filename)
+		filePath: str = os.path.join(jns.PATH_ASSETS_LEVELS, filename)
 		with open(file=filePath, mode='r') as jsonFile:
 			data = json.load(jsonFile)
 		print(f"Opened file: \"{filePath}\"")

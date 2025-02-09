@@ -12,10 +12,12 @@ python type hints cheat sheet: https://mypy.readthedocs.io/en/stable/cheat_sheet
 
 _PATH_ASSETS_REL: str = os.path.join("..", "jumpnslash-cpp", "Jump-n-Slash", "assets")
 PATH_ASSETS: str = os.path.abspath(_PATH_ASSETS_REL)
-PATH_ASSETS_LEVELDATA: str = os.path.join(PATH_ASSETS, "leveldata")
+PATH_ASSETS_LEVELS: str = os.path.join(PATH_ASSETS, "levels")
 PATH_ASSETS_TEXTURES: str = os.path.join(PATH_ASSETS, "textures")
 PATH_ASSETS_TEXTURES_LEVELTILES: str = os.path.join(PATH_ASSETS_TEXTURES, "leveltiles")
 PATH_ASSETS_TEXTURES_ENTITIES: str = os.path.join(PATH_ASSETS_TEXTURES, "entities")
+_GAME_PATH_ASSETS_TEXTURES_ENTITIES: str = os.path.join("entities")
+_GAME_PATH_ASSETS_TEXTURES_LEVELTILES: str = os.path.join("leveltiles")
 
 # check this out if you forgot how regex works: https://www.dataquest.io/wp-content/uploads/2019/03/python-regular-expressions-cheat-sheet.pdf
 """

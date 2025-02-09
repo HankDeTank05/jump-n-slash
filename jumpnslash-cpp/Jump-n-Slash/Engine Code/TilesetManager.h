@@ -4,9 +4,10 @@
 // language includes
 #include <map>
 #include <string>
+#include <list>
 
 // forward declarations
-class JsonNodeList;
+class Sprite;
 class Tileset;
 
 class TilesetManager // this class is written as a singleton
@@ -22,13 +23,17 @@ private:
 	static TilesetManager& Instance();
 
 public: // API functions
-	static void LoadTileset(std::string key, JsonNodeList* pJsonData);
+	static void LoadTileset(std::string tsKey, std::list<std::string> paletteNames, std::list<std::string> sprKeyList);
+	static void LoadTileset(std::string tsKey, std::list<std::string> paletteNames, std::list<Sprite*> sprList);
+	static Tileset* GetTileset(std::string tsKey);
 
 private: // internal-only API functions (accessible thru attorney)
 	static void Terminate();
 
 private: // API backend functions
-	void privLoadTileset(std::string key, JsonNodeList* pJsonData);
+	void privLoadTileset(std::string tsKey, std::list<std::string> paletteNames, std::list<std::string> sprKeyList);
+	void privLoadTileset(std::string tsKey, std::list<std::string> paletteNames, std::list<Sprite*> sprList);
+	Tileset* privGetTileset(std::string tsKey);
 
 private: // member variables
 	std::map<std::string, Tileset*> sets;

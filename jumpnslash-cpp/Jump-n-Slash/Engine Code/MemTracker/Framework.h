@@ -93,7 +93,7 @@
 
 
 // Comment out this line to turn off memory tracking
-#define MEM_TRACKER_ENABLED
+//#define MEM_TRACKER_ENABLED
 
 // default warning... please setup correctly
 #ifndef WINDOWS_TARGET_PLATFORM

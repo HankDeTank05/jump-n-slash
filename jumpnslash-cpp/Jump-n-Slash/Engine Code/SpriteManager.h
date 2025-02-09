@@ -40,7 +40,7 @@ public: // api functions
 	* \see	SpriteManager::GetSprite
 	* 
 	* \see	TextureManager
-	* \see	GridManager
+	* \see	MapManager
 	* \see	FontManager
 	*/
 	static void LoadSprite(std::string key, sf::Texture* pTex); // TODO: docs for SpriteManager::LoadSprite(key, pTex) needs example code
@@ -61,7 +61,7 @@ public: // api functions
 	* \see	SpriteManager::GetSprite
 	* 
 	* \see	TextureManager
-	* \see	GridManager
+	* \see	MapManager
 	* \see	FontManager
 	*/
 	static void LoadSprite(std::string key, sf::Texture* pTex, sf::IntRect spriteRect); // TODO: docs for SpriteManager::LoadSprite(key, pTex, spriteRect) need example code
@@ -81,7 +81,7 @@ public: // api functions
 	* \see	SpriteManager::GetSprite
 	* 
 	* \see	TextureManager
-	* \see	GridManager
+	* \see	MapManager
 	* \see	FontManager
 	*/
 	static void LoadSprite(std::string key, std::string texKey); // TODO: docs for SpriteManager::LoadSprite(key, texKey) needs example code
@@ -102,7 +102,7 @@ public: // api functions
 	* \see	SpriteManager::GetSprite
 	* 
 	* \see	TextureManager
-	* \see	GridManager
+	* \see	MapManager
 	* \see	FontManager
 	*/
 	static void LoadSprite(std::string key, std::string texKey, sf::IntRect spriteRect); // TODO: docs for SpriteManager::LoadSprite(key, texKey, spriteRect) needs example code
@@ -121,7 +121,7 @@ public: // api functions
 	* \see	SpriteManager::LoadSprite(std::string key, std::string texKey, sf::IntRect spriteRect)
 	* 
 	* \see	TextureManager
-	* \see	GridManager
+	* \see	MapManager
 	* \see	FontManager
 	*/
 	static Sprite* GetSprite(std::string key); // TODO: docs for SpriteManager::GetSprite(key) needs example code
