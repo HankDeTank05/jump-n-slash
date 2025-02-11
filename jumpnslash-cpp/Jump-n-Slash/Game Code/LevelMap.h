@@ -1,14 +1,18 @@
 #ifndef LEVEL_MAP_H
 #define LEVEL_MAP_H
 
+// language includes
 #include <array>
 #include <list>
 #include <vector>
 
+// library includes
 #include <SFML/System/Vector2.hpp>
 
+// engine includes
 #include "../Engine Code/Observer.h"
 
+// game includes
 #include "Constants.h"
 
 // forward declarations
@@ -21,7 +25,7 @@ class LevelMap : public Observer
 {
 public:
 	LevelMap() = delete;
-	LevelMap(std::vector<std::vector<std::string>>* grid/*, Tileset* pTileset*/);
+	LevelMap(std::vector<std::vector<std::string>>* grid);
 	LevelMap(const LevelMap& lm) = delete;
 	LevelMap& operator=(const LevelMap& lm) = delete;
 	virtual ~LevelMap();
@@ -61,7 +65,6 @@ public:
 	void DebugLevelScrollBounds(RoomData* pRoom);
 
 private:
-	//Tileset* pTileset;
 	std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
 	sf::Vector2i usedSize;
 	RoomList rooms;

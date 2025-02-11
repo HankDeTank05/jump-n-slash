@@ -7,17 +7,20 @@
 // engine includes
 #include "../Engine Code/UpdateObject.h"
 #include "../Engine Code/DrawObject.h"
+#include "../Engine Code/Tileset.h"
 
 class LevelTile : public DrawObject
 {
 public:
 	LevelTile() = delete;
-	LevelTile(sf::Vector2f pos, Sprite* pSprite, bool solidOnTop, bool solidOnSides, bool solidOnBottom, bool breakable);
+	LevelTile(sf::Vector2f pos, Tileset* pTileset);
 	LevelTile(const LevelTile& lt) = delete;
 	LevelTile& operator=(const LevelTile& lt) = delete;
 	virtual ~LevelTile();
 
 	virtual void Draw() override final;
+
+	// accessors
 
 	bool IsSolidOnTop() const;
 	bool IsSolidOnSides() const;
@@ -28,6 +31,7 @@ public:
 
 private:
 	sf::Vector2f pos;
+	Tileset* pTileset;
 	Sprite* pSprite;
 	bool solidOnTop;
 	bool solidOnSides;
