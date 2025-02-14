@@ -1,6 +1,7 @@
 # language imports
 import tkinter as tk
 import os.path
+import json
 
 # game imports
 import jnscommon as jns
@@ -45,8 +46,29 @@ class Model:
 		assert filename in list(self._tileImgs.keys()), f"Trying to set invalid tile filename as the brush tile: \"{filename}\""
 		self._brushTileName = filename
 
-	# TODO: (len) tile details data code
+	
 
+class TileDetailsModel:
+    
+    # Manages tile data, loads from JSON, and provides structured data for the VIEW.
+    # Model responsible for handling tile data from JSON files.
+
+	def __init__(self):
+		self.tile_data = {}
+   
+	def load_tile_data(self, tile_name: str) -> dict:
+
+		tile_base_name = jns.ConvertToCamelCase(tile_name.replace(".png", ""))
+		tile_json_path = os.path.join(jns.READ_LOCATION_TEXTURES_LEVELTILES, tile_base_name + "_data.json")
+
+		if os.path.exists(tile_json_path):
+			with open(tile_json_path, "r") as json_file:
+				self.tile_data = json.load(json_file)
+		else:
+			print(f"Warning: No JSON data found for tile: {tile_base_name}")
+			self.tile_data = {}  # Reset data
+
+		return self.tile_data
 class MapData:
 
 	VERSION_KEY: str = "Version"
