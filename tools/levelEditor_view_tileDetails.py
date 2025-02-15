@@ -33,27 +33,27 @@ class TileDetailsView:
 		self.w_damagePlayerValue: ttk.Label = ttk.Label(self.w_parentFrame, text="0")
 		self.w_damagePlayerValue.grid(column=1, row=2, sticky="W", padx=10, pady=5)
 
-        # Damage to Enemies
+		# Damage to Enemies
 		self.w_damageEnemiesLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Damage to Enemies:")
 		self.w_damageEnemiesLabel.grid(column=0, row=3, sticky="W", padx=10, pady=5)
 		self.w_damageEnemiesValue: ttk.Label = ttk.Label(self.w_parentFrame, text="0")
 		self.w_damageEnemiesValue.grid(column=1, row=3, sticky="W", padx=10, pady=5)
 
-        # Breakable Status
+		# Breakable Status
 		self.w_breakableLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Breakable:")
 		self.w_breakableLabel.grid(column=0, row=4, sticky="W", padx=10, pady=5)
 		self.w_breakableValue: ttk.Label = ttk.Label(self.w_parentFrame, text="No")
 		self.w_breakableValue.grid(column=1, row=4, sticky="W", padx=10, pady=5)
 
-        # Solid Status
+		# Solid Status
 		self.w_solidLabel: ttk.Label = ttk.Label(self.w_parentFrame, text="Solid:")
 		self.w_solidLabel.grid(column=0, row=5, sticky="W", padx=10, pady=5)
 		self.w_solidValue: ttk.Label = ttk.Label(self.w_parentFrame, text="No")
 		self.w_solidValue.grid(column=1, row=5, sticky="W", padx=10, pady=5)
 
-    #############################
-    # Update Tile Details Panel #
-    #############################
+	#############################
+	# Update Tile Details Panel #
+	#############################
 
 	def UpdateTileDetails(self, tile_data: dict, img: tk.PhotoImage) -> None:
 

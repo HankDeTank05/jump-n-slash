@@ -1,50 +1,50 @@
+# language imports
 import tkinter as tk
+from functools import partial
 
 # Game imports
-from levelEditor_model import Model, TileDetailsModel
-from levelEditor_view import View, GuiTileDetailsPanel
+from levelEditor_model import Model
+from levelEditor_view import View
 
 class Controller:
 
-    def __init__(self, model: Model, view: View) -> None:
-        self.model: Model = model
-        self.view: View = view
-        self.tile_details_model = TileDetailsModel()  # Tile details model
-        self.tile_details_panel = GuiTileDetailsPanel(self.view.root, column=1, row=0, columnspan=1, rowspan=1, padx=10, pady=10, sticky="NSEW")  # Tile Details GUI
-        self._InitTilePalette()
+	def __init__(self, model: Model, view: View) -> None:
+		self.model: Model = model
+		self.view: View = view
+		self._InitTilePalette()
 		self._InitGridView()
 
 	##########################
 	# tile palette functions #
 	##########################
 
-    def _InitTilePalette(self) -> None:
-        #Initialize the tile palette by fetching tile images from the model and setting up the view accordingly.
-        
-        # Get a list of tile filenames and their corresponding images
-        files: dict[str, tk.PhotoImage] = self.model.GetTileImages()
+	def _InitTilePalette(self) -> None:
+		#Initialize the tile palette by fetching tile images from the model and setting up the view accordingly.
+		
+		# Get a list of tile filenames and their corresponding images
+		files: dict[str, tk.PhotoImage] = self.model.GetTileImages()
 
-        pageNames: list[str] = list(set([filename.split("_")[0] for filename in files.keys()]))
-        pageNames.sort()
-        print(f"Palette tab names: {pageNames}")
+		pageNames: list[str] = list(set([filename.split("_")[0] for filename in files.keys()]))
+		pageNames.sort()
+		print(f"Palette tab names: {pageNames}")
 
-        # Create the notebook pages for tile palettes
-        self.view.tilePalette.AddNotebookPages(pageNames)
+		# Create the notebook pages for tile palettes
+		self.view.tilePalette.AddNotebookPages(pageNames)
 
-        # Add buttons for each tile
-        for pageName in pageNames:
-            for filename in files.keys():
-                if pageName in filename:
-                    img: tk.PhotoImage = files[filename]
-                    self.view.tilePalette.AddTileToNotebookPage(pageName, img, callback=self.SelectTile)
+		# Add buttons for each tile
+		for pageName in pageNames:
+			for filename in files.keys():
+				if pageName in filename:
+					img: tk.PhotoImage = files[filename]
+					self.view.tilePalette.AddTileToNotebookPage(pageName, img, callback=partial(self.SelectTile, img))
 
-    def SelectTile(self, img: tk.PhotoImage) -> None:
-        
-        # Called when a tile is selected. Loads tile data and updates the details panel.
-    
-        tile_name = img.name
-        tile_data = self.tile_details_model.load_tile_data(tile_name)
-        self.tile_details_panel.update_tile_details(tile_data, img)
+	def SelectTile(self, img: tk.PhotoImage) -> None:
+		
+		# Called when a tile is selected. Loads tile data and updates the details panel.
+	
+		tile_name = img.name
+		tile_data = self.model.LoadTileData(tile_name)
+		self.view.tileDetails.UpdateTileDetails(tile_data, img)
 
 	#######################
 	# grid view functions #
