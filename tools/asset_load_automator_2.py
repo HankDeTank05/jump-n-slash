@@ -86,7 +86,7 @@ class EntitySpritesheet:
 		self._width: int = 0
 		self._height: int = 0
 
-		self._outputFilename: str = f"{entityName}_spritesheet.png"
+		self._outputFilename: str = "spritesheet.png"
 
 		self._outputFilePath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_ENTITIES, entityName)
 		self._texture: Texture = Texture(os.path.join("entities", entityName), self._outputFilename, False) # TODO: don't hard-code this to have no smoothing
@@ -122,7 +122,8 @@ class EntitySpritesheet:
 					if h > tallestHeight:
 						tallestHeight = h
 			# update sheet size
-			self._width += xPos
+			if xPos > self._width:
+				self._width = xPos
 			self._height += tallestHeight
 			# prep to start a new row
 			xPos = 0
@@ -168,7 +169,7 @@ class TileSpritesheet:
 		self._width: int = 0
 		self._height: int = 0
 
-		self._outputFilename: str = f"tiles_spritesheet.png"
+		self._outputFilename: str = "spritesheet.png"
 
 		self._outputFilePath: str = jns.PATH_ASSETS_TEXTURES_LEVELTILES
 		self._texture: Texture = Texture("leveltiles", self._outputFilename, False) # TODO: don't hard code this to have no smoothing
