@@ -153,9 +153,6 @@
     <ClCompile Include="Game Code\Actor.cpp" />
     <ClCompile Include="Game Code\AssetLoader.cpp" />
     <ClCompile Include="Game Code\AssetLoader2.cpp" />
-    <ClCompile Include="Game Code\BlockBreakable.cpp" />
-    <ClCompile Include="Game Code\BlockHazard.cpp" />
-    <ClCompile Include="Game Code\BlockSolid.cpp" />
     <ClCompile Include="Game Code\ChangeControlsMenu.cpp" />
     <ClCompile Include="Game Code\CompoundSpriteScene.cpp" />
     <ClCompile Include="Game Code\CompSprTest.cpp" />
@@ -184,7 +181,6 @@
     <ClCompile Include="Game Code\MenuControlStrategy.cpp" />
     <ClCompile Include="Game Code\PauseMenu.cpp" />
     <ClCompile Include="Game Code\PauseMenuScene.cpp" />
-    <ClCompile Include="Game Code\PlatformSemisolid.cpp" />
     <ClCompile Include="Game Code\Player.cpp" />
     <ClCompile Include="Game Code\PlayerMoveStateDreamAtk.cpp" />
     <ClCompile Include="Game Code\PlayerMoveStateSlashAtk.cpp" />
@@ -406,6 +402,8 @@
     <ClInclude Include="Game Code\ParamsPlayer.h" />
     <ClInclude Include="Game Code\PauseMenu.h" />
     <ClInclude Include="Game Code\PauseMenuScene.h" />
+    <ClInclude Include="Game Code\PlatformBouncy.h" />
+    <ClInclude Include="Game Code\PlatformBreakable.h" />
     <ClInclude Include="Game Code\PlatformSemisolid.h" />
     <ClInclude Include="Game Code\Player.h" />
     <ClInclude Include="Game Code\PlayerMoveStateDreamAtk.h" />

@@ -18,7 +18,10 @@ class MapTile : public DrawObject
 {
 public:
 	MapTile() = delete;
-	MapTile(Tileset* pTileset, std::string skinName);
+	MapTile(Tileset* pTileset, std::string skinName,
+		bool solidOnTop, bool solidOnSides, bool solidOnBottom,
+		bool breakable, bool bouncy,
+		float damageToPlayer, float damageToEnemies);
 	MapTile(const MapTile& mt) = delete;
 	MapTile& operator=(const MapTile& mt) = delete;
 	virtual ~MapTile() = default;
@@ -30,10 +33,35 @@ public:
 	void SetAppearance(std::string skinName);
 	void SetPos(sf::Vector2f newPos);
 
+	// accessors
+
+	bool IsSolidOnTop() const;
+	bool IsSolidOnSides() const;
+	bool IsSolidOnBottom() const;
+
+	bool IsBouncy() const;
+	bool IsBreakable() const;
+
+	float GetDamageToPlayer() const;
+	float GetDamageToEnemies() const;
+
 private:
 	Tileset* pTileset;
 	Sprite* pSprite;
 	sf::Vector2f pos;
+
+	// tile properties
+
+	bool solidOnTop;
+	bool solidOnSides;
+	bool solidOnBottom;
+
+	bool breakable;
+	bool bouncy;
+
+	float damageToPlayer;
+	float damageToEnemies;
+
 };
 
 #endif

@@ -9,6 +9,7 @@
 #include "../Engine Code/Animation.h"
 #include "../Engine Code/SceneManager.h"
 #include "../Engine Code/Sprite.h"
+#include "../Engine Code/TilesetManager.h"
 
 // game includes
 //#include "AssetLoader.h"
@@ -77,13 +78,6 @@ void JumpSlashEngine::LoadResources()
 
 	//MapManager::LoadMap("test", "test.txt");
 	MapManager::LoadMap("test 2", "test2.txt");
-
-	TextureManager::LoadTexture("paper mario spritesheet", "test/paper_mario.png");
-	SpriteManager::LoadSprite("paper mario body", "paper mario spritesheet", sf::IntRect(1022, 2564, 148, 135));
-	SpriteManager::LoadSprite("paper mario arm front", "paper mario spritesheet", sf::IntRect(105, 2569, 93, 105));
-	SpriteManager::LoadSprite("paper mario arm back", "paper mario spritesheet", sf::IntRect(200, 2570, 87, 95));
-	SpriteManager::LoadSprite("paper mario hand front", "paper mario spritesheet", sf::IntRect(37, 3789, 125, 114));
-	SpriteManager::LoadSprite("paper mario hand back", "paper mario spritesheet", sf::IntRect(748, 3963, 119, 119));
 
 	// asserts to make sure player parameters are set properly
 	assert(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED > 0.f);
