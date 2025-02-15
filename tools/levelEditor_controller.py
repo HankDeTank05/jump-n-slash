@@ -12,6 +12,11 @@ class Controller:
 		self.view: View = view
 
 		self._InitTilePalette()
+		self._InitGridView()
+
+	##########################
+	# tile palette functions #
+	##########################
 
 	def _InitTilePalette(self) -> None:
 		# get a list of tile filenames
@@ -35,3 +40,20 @@ class Controller:
 					self.view.tilePalette.AddTileToNotebookPage(pageName, img, callback=None)
 
 	# TODO: (len) tile details controller code
+
+	#######################
+	# grid view functions #
+	#######################
+
+	def _InitGridView(self) -> None:
+		grid: list[list[str | None]] = self.model.GetMapGrid()
+		width: int = self.model.GetMapWidth()
+		height: int = self.model.GetMapHeight()
+
+		self.model.ResizeMap(width, height)
+		self.view.gridView.ResizeCanvas(width * self.model.TILE_SIZE, height * self.model.TILE_SIZE)
+
+		for y in range(height):
+			for x in range(width):
+				assert grid[y][x] is None
+				self.view.gridView.DrawSquareAtGridPos(x, y, self.model.TILE_SIZE)

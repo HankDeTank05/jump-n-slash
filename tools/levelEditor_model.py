@@ -8,6 +8,19 @@ import jnscommon as jns
 class Model:
 
 	def __init__(self) -> None:
+		#############
+		# constants #
+		#############
+
+		self.TILE_SIZE: int = 32
+		
+		self.BRUSH_MODE_NORMAL: str = "normal"
+		self.BRUSH_MODE_LINE: str = "line"
+
+		#################
+		# non-constants #
+		#################
+		
 		#               filename    corresponding image to be used
 		#                    vvv  vvvvvvvvvvvvv
 		self._tileImgs: dict[str, tk.PhotoImage] = {} # TODO: at some point we need to switch from tk.PhotoImage over to PIL images
@@ -18,7 +31,13 @@ class Model:
 
 		self._tileData: dict # TODO: (len) specify type hint more in detail
 
+		# stuff for gridview
 		self._mapData: MapData = MapData()
+		self._brushMode: str = self.BRUSH_MODE_NORMAL
+		self._lastClickedGridX: int = -1
+		self._lastClickedGridY: int = -1
+		self._lastHoveredGridX: int = -1
+		self._lastHoveredGridY: int = -1
 
 	######################
 	# internal functions #
@@ -37,6 +56,15 @@ class Model:
 	def GetTileImages(self) -> dict[str, tk.PhotoImage]:
 		return self._tileImgs
 
+	def GetMapGrid(self) -> list[list[str | None]]:
+		return self._mapData.GetGrid()
+	
+	def GetMapWidth(self) -> int:
+		return self._mapData.GetWidth()
+	
+	def GetMapHeight(self) -> int:
+		return self._mapData.GetHeight()
+
 	############
 	# mutators #
 	############
@@ -44,6 +72,9 @@ class Model:
 	def SelectBrushTile(self, filename: str) -> None:
 		assert filename in list(self._tileImgs.keys()), f"Trying to set invalid tile filename as the brush tile: \"{filename}\""
 		self._brushTileName = filename
+
+	def ResizeMap(self, newTileWidth: int, newTileHeight: int) -> None:
+		self._mapData.Resize(newTileWidth, newTileHeight)
 
 	# TODO: (len) tile details data code
 
@@ -107,7 +138,6 @@ class MapData:
 				self.grid[yPos][xPos] = tileFilename
 
 	def Resize(self, newTileWidth: int, newTileHeight: int) -> None:
-		assert False
 		# print("MapData.Resize()")
 		assert newTileWidth > 0
 		assert newTileHeight > 0

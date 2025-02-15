@@ -49,8 +49,11 @@ class TilePaletteView:
 
 		# create the button and place it in its parent frame
 		button: ttk.Button = ttk.Button(parentFrame, image=img, command=callback)
-		columnNum: int = len(self._wc_tileButtons[pageName])
-		button.grid(column=columnNum, row=0)
+		MAX_COLUMNS: int = 25 # TODO: come back and make this a dynamically generated number based on screen size
+		listLen: int = len(self._wc_tileButtons[pageName])
+		columnNum: int = listLen % MAX_COLUMNS
+		rowNum: int = listLen // MAX_COLUMNS
+		button.grid(column=columnNum, row=rowNum)
 
 		# add the button to the dict
 		self._wc_tileButtons[pageName].append(button)

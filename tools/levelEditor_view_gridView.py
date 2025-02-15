@@ -8,6 +8,18 @@ import jnscommon as jns
 class GridView:
 
 	def __init__(self, parent: tk.Tk, column: int, row: int, columnspan: int = 1, rowspan: int = 1, sticky: str = "NSEW") -> None:
+
+		#############
+		# constants #
+		#############
+
+		self._EMPTY_TAG: str = "empty"
+		self._GRIDLINE_TAG: str = "gridline"
+		self._COORDS_TAG: str = "coords"
+
+		###################
+		# everything else #
+		###################
 		
 		# create the parent frame and place it in the gui
 		self._w_parentFrame: ttk.Labelframe = ttk.Labelframe(parent, text="Grid View")
@@ -32,5 +44,69 @@ class GridView:
 		self._w_scrollH.grid(column=0, row=1, sticky="NSEW")
 		self._w_scrollV.grid(column=1, row=0, sticky="NSEW")
 
-	def ResizeCanvas(self, newTileWidth: int, newTileHeight: int) -> None:
-		pass
+	#####################
+	# private functions #
+	#####################
+
+	def _GetPosTag(self, gridX: int, gridY: int) -> str:
+		return f"{gridX},{gridY}"
+	
+	def _SetCanvasObjectBindings(self, canvasObject) -> None:
+		self._w_canvas.tag_bind(canvasObject, "<Button-1>", self._CanvasDraw)
+		self._w_canvas.tag_bind(canvasObject, "<Button-3>", self._CanvasErase)
+
+	def _CanvasDraw(self, event: tk.Event) -> None:
+		print(f"canvas draw at pixel ({event.x}, {event.y})")
+		# TODO: finish this function
+
+	def _CanvasErase(self, event: tk.Event) -> None:
+		print(f"canvas erase at pixel ({event.x}, {event.y})")
+		# TODO: finish this function
+
+	####################
+	# public functions #
+	####################
+
+	def ResizeCanvas(self, newPixelWidth: int, newPixelHeight: int) -> None:
+		canvasLeftX: int = 0
+		canvasTopY: int = 0
+		canvasRightX: int = newPixelWidth
+		canvasBottomY: int = newPixelHeight
+		self._w_canvas.config(scrollregion=(canvasLeftX, canvasTopY, canvasRightX, canvasBottomY),
+						width=min(newPixelWidth, 1280), height=min(newPixelHeight, 720)) # TODO: replace the 1280 and 720 with numbers calculated based on the user's screen size
+		
+	def DrawImageAtGridPos(self, image: tk.PhotoImage, gridX: int, gridY: int, tileSize: int) -> None:
+		# delete what was there before
+		objectTag: str = self._GetPosTag(gridX, gridY)
+		itemsWithTag: list = self._w_canvas.find_withtag(objectTag)
+		print(itemsWithTag)
+		assert len(itemsWithTag) == 0 or len(itemsWithTag) == 1
+		self._w_canvas.delete(objectTag)
+		print(f"deleted {len(itemsWithTag)} items with tag \"{objectTag}\"")
+
+		# draw the image on the grid and set its input bindings
+		canvasObject = self._w_canvas.create_image(gridX * tileSize, gridY * tileSize,
+											 image=image,
+											 anchor='nw',
+											 tags=(image.name, objectTag))
+		self._SetCanvasObjectBindings(canvasObject)
+		
+	def DrawSquareAtGridPos(self, gridX: int, gridY: int, tileSize: int) -> None:
+		# delete what was there before
+		objectTag: str = self._GetPosTag(gridX, gridY)
+		itemsWithTag: list = self._w_canvas.find_withtag(objectTag)
+		# print(itemsWithTag)
+		assert len(itemsWithTag) == 0 or len(itemsWithTag) == 1
+		self._w_canvas.delete(objectTag)
+		# print(f"deleted {len(itemsWithTag)} items with tag \"{objectTag}\"")
+
+		# replace erased item with an empty square and set its input bindings
+		x0: int = gridX * tileSize
+		y0: int = gridY * tileSize
+		x1: int = x0 + tileSize - 1
+		y1: int = y0 + tileSize - 1
+		canvasObject = self._w_canvas.create_rectangle(x0, y0, x1, y1,
+												 fill="white", # fill the square with white
+												 width=0, # TODO: should squares have no outline?
+												 tags=(self._EMPTY_TAG, objectTag))
+		self._SetCanvasObjectBindings(canvasObject)
