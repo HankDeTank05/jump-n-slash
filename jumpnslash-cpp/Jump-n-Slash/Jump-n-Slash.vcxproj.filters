@@ -274,6 +274,9 @@
     <Filter Include="Source Files\Game Code\Map Data\Old System\LeveTile dervied classes">
       <UniqueIdentifier>{52280e2c-ba7a-40e8-838d-256cc8d2b504}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game Code\Map Data\Tiles">
+      <UniqueIdentifier>{ef8707cc-4427-40bd-94fe-b93ecba18e71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine Code\JumpSlashEngine.cpp">
@@ -371,18 +374,6 @@
     </ClCompile>
     <ClCompile Include="Game Code\PlayerAttorney.cpp">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\BlockBreakable.cpp">
-      <Filter>Source Files\Game Code\Map Data\Old System\LeveTile dervied classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\BlockHazard.cpp">
-      <Filter>Source Files\Game Code\Map Data\Old System\LeveTile dervied classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\BlockSolid.cpp">
-      <Filter>Source Files\Game Code\Map Data\Old System\LeveTile dervied classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\PlatformSemisolid.cpp">
-      <Filter>Source Files\Game Code\Map Data\Old System\LeveTile dervied classes</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\EngineAttorney.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
@@ -840,9 +831,6 @@
     <ClCompile Include="Game Code\LevelTile.cpp">
       <Filter>Source Files\Game Code\Map Data\Old System</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\LevelMap.cpp">
-      <Filter>Source Files\Game Code\Map Data\Old System</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\RoomData.cpp">
       <Filter>Source Files\Game Code\Map Data\Old System</Filter>
     </ClCompile>
@@ -853,6 +841,9 @@
       <Filter>Source Files\Game Code\Map Data</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\ActivatableAttorney.cpp">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\LevelMap.cpp">
       <Filter>Source Files\Game Code\Map Data</Filter>
     </ClCompile>
   </ItemGroup>
@@ -964,18 +955,6 @@
     </ClInclude>
     <ClInclude Include="Game Code\PlayerAttorney.h">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\BlockBreakable.h">
-      <Filter>Source Files\Game Code\Map Data\Old System\LeveTile dervied classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\BlockHazard.h">
-      <Filter>Source Files\Game Code\Map Data\Old System\LeveTile dervied classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\PlatformSemisolid.h">
-      <Filter>Source Files\Game Code\Map Data\Old System\LeveTile dervied classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\BlockSolid.h">
-      <Filter>Source Files\Game Code\Map Data\Old System\LeveTile dervied classes</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\EngineAttorney.h">
       <Filter>Source Files\Engine Code\Core Files</Filter>
@@ -1517,9 +1496,6 @@
     <ClInclude Include="Game Code\LevelTile.h">
       <Filter>Source Files\Game Code\Map Data\Old System</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\LevelMap.h">
-      <Filter>Source Files\Game Code\Map Data\Old System</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\RoomData.h">
       <Filter>Source Files\Game Code\Map Data\Old System</Filter>
     </ClInclude>
@@ -1531,6 +1507,27 @@
     </ClInclude>
     <ClInclude Include="Game Code\ActivatableAttorney.h">
       <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\LevelMap.h">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\BlockSolid.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\BlockBreakable.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\BlockHazard.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlatformSemisolid.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlatformBreakable.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlatformBouncy.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

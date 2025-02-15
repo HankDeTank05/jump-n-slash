@@ -1,18 +1,13 @@
 #ifndef BLOCK_BREAKABLE_H
 #define BLOCK_BREAKABLE_H
 
-#include "LevelTile.h"
-
-class BlockBreakable : public LevelTile
+class BlockBreakable
 {
 public:
-	BlockBreakable() = delete;
-	BlockBreakable(sf::Vector2f pos);
+	BlockBreakable();
 	BlockBreakable(const BlockBreakable& bb) = delete;
 	BlockBreakable& operator=(const BlockBreakable& bb) = delete;
-	virtual ~BlockBreakable();
-
-	void Break();
+	virtual ~BlockBreakable() = default;
 };
 
 #endif

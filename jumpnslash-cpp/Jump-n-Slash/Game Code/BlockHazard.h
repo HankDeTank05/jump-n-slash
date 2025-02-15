@@ -1,16 +1,13 @@
 #ifndef BLOCK_HAZARD_H
 #define BLOCK_HAZARD_H
 
-#include "LevelTile.h"
-
-class BlockHazard : public LevelTile
+class BlockHazard
 {
 public:
-	BlockHazard() = delete;
-	BlockHazard(sf::Vector2f pos);
+	BlockHazard();
 	BlockHazard(const BlockHazard& bh) = delete;
 	BlockHazard& operator=(const BlockHazard& bh) = delete;
-	virtual ~BlockHazard();
+	virtual ~BlockHazard() = default;
 };
 
 #endif
