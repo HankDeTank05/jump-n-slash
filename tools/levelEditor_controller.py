@@ -22,9 +22,10 @@ class Controller:
 		#Initialize the tile palette by fetching tile images from the model and setting up the view accordingly.
 		
 		# Get a list of tile filenames and their corresponding images
-		files: dict[str, tk.PhotoImage] = self.model.GetTileImages()
+		# files: dict[str, tk.PhotoImage] = self.model.GetTileImages()
+		filenames: list[str] = self.model.GetAllTileFilenames()
 
-		pageNames: list[str] = list(set([filename.split("_")[0] for filename in files.keys()]))
+		pageNames: list[str] = list(set([filename.split("_")[0] for filename in filenames]))
 		pageNames.sort()
 		print(f"Palette tab names: {pageNames}")
 
@@ -33,18 +34,20 @@ class Controller:
 
 		# Add buttons for each tile
 		for pageName in pageNames:
-			for filename in files.keys():
+			for filename in filenames:
 				if pageName in filename:
-					img: tk.PhotoImage = files[filename]
+					print(filename)
+					img: tk.PhotoImage = self.model.GetTileImg(filename)
 					self.view.tilePalette.AddTileToNotebookPage(pageName, img, callback=partial(self.SelectTile, img))
 
 	def SelectTile(self, img: tk.PhotoImage) -> None:
 		
 		# Called when a tile is selected. Loads tile data and updates the details panel.
 	
-		tile_name = img.name
-		tile_data = self.model.LoadTileData(tile_name)
-		self.view.tileDetails.UpdateTileDetails(tile_data, img)
+		tileFilename = img.name
+		self.model.SelectBrushTile(tileFilename)
+		tileData = self.model.LoadTileData(tileFilename)
+		self.view.tileDetails.UpdateTileDetails(tileData, img)
 
 	#######################
 	# grid view functions #
@@ -61,4 +64,21 @@ class Controller:
 		for y in range(height):
 			for x in range(width):
 				assert grid[y][x] is None
-				self.view.gridView.DrawSquareAtGridPos(x, y, self.model.TILE_SIZE)
+				self.view.gridView.CanvasErase(x, y, self.model.TILE_SIZE,
+										   partial(self.GridWrite, x, y),
+										   partial(self.GridErase, x, y))
+
+	def GridWrite(self, gridX: int, gridY: int, event: tk.Event) -> None:
+		print(f"GridWrite at {gridX},{gridY}")
+		self.view.gridView.CanvasDraw(self.model.GetBrushTileImg(),
+								gridX, gridY, self.model.TILE_SIZE,
+								partial(self.GridWrite, gridX, gridY),
+								partial(self.GridErase, gridX, gridY))
+		self.model.WriteToMap(gridX, gridY)
+
+	def GridErase(self, gridX: int, gridY: int, event: tk.Event) -> None:
+		print(f"GridErase at {gridX},{gridY}")
+		self.view.gridView.CanvasErase(gridX, gridY, self.model.TILE_SIZE,
+								 partial(self.GridWrite, gridX, gridY),
+								 partial(self.GridErase, gridX, gridY))
+		self.model.EraseFromMap(gridX, gridY)

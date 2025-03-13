@@ -25,8 +25,8 @@ class TilePaletteView:
 		self._wc_notebookPageFrames: dict[str, ttk.Frame] = {}
 
 		# create the notebook button collection
-		#							page name    list of buttons on that page
-		#								   vvv  vvvvvvvvvvvvvvvv
+		#					page name    list of buttons on that page
+		#						   vvv  vvvvvvvvvvvvvvvv
 		self._wc_tileButtons: dict[str, list[ttk.Button]] = {}
 
 	def AddNotebookPages(self, pageNames: list[str]) -> None:

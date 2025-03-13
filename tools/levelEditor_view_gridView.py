@@ -51,16 +51,18 @@ class GridView:
 	def _GetPosTag(self, gridX: int, gridY: int) -> str:
 		return f"{gridX},{gridY}"
 	
-	def _SetCanvasObjectBindings(self, canvasObject) -> None:
-		self._w_canvas.tag_bind(canvasObject, "<Button-1>", self._CanvasDraw)
-		self._w_canvas.tag_bind(canvasObject, "<Button-3>", self._CanvasErase)
+	def _SetCanvasObjectBindings(self, canvasObject, drawBinding, eraseBinding) -> None:
+		self._w_canvas.tag_bind(canvasObject, "<Button-1>", drawBinding)
+		self._w_canvas.tag_bind(canvasObject, "<Button-3>", eraseBinding)
 
-	def _CanvasDraw(self, event: tk.Event) -> None:
-		print(f"canvas draw at pixel ({event.x}, {event.y})")
+	def CanvasDraw(self, image: tk.PhotoImage, gridX: int, gridY: int, tileSize: int, drawBinding, eraseBinding) -> None:
+		print(f"canvas draw at pixel ({gridX * tileSize}, {gridY * tileSize})")
+		self._DrawImageAtGridPos(image, gridX, gridY, tileSize, drawBinding, eraseBinding)
 		# TODO: finish this function
 
-	def _CanvasErase(self, event: tk.Event) -> None:
-		print(f"canvas erase at pixel ({event.x}, {event.y})")
+	def CanvasErase(self, gridX: int, gridY: int, tileSize: int, drawBinding, eraseBinding) -> None:
+		print(f"canvas erase at pixel ({gridX * tileSize}, {gridY * tileSize})")
+		self._DrawSquareAtGridPos(gridX, gridY, tileSize, drawBinding, eraseBinding)
 		# TODO: finish this function
 
 	####################
@@ -73,9 +75,10 @@ class GridView:
 		canvasRightX: int = newPixelWidth
 		canvasBottomY: int = newPixelHeight
 		self._w_canvas.config(scrollregion=(canvasLeftX, canvasTopY, canvasRightX, canvasBottomY),
-						width=min(newPixelWidth, 1280), height=min(newPixelHeight, 720)) # TODO: replace the 1280 and 720 with numbers calculated based on the user's screen size
+						width=min(newPixelWidth, 1280), height=min(newPixelHeight, 720))
+		# TODO: replace the 1280 and 720 with numbers calculated based on the user's screen size
 		
-	def DrawImageAtGridPos(self, image: tk.PhotoImage, gridX: int, gridY: int, tileSize: int) -> None:
+	def _DrawImageAtGridPos(self, image: tk.PhotoImage, gridX: int, gridY: int, tileSize: int, drawBinding, eraseBinding) -> None:
 		# delete what was there before
 		objectTag: str = self._GetPosTag(gridX, gridY)
 		itemsWithTag: list = self._w_canvas.find_withtag(objectTag)
@@ -89,9 +92,9 @@ class GridView:
 											 image=image,
 											 anchor='nw',
 											 tags=(image.name, objectTag))
-		self._SetCanvasObjectBindings(canvasObject)
+		self._SetCanvasObjectBindings(canvasObject, drawBinding, eraseBinding)
 		
-	def DrawSquareAtGridPos(self, gridX: int, gridY: int, tileSize: int) -> None:
+	def _DrawSquareAtGridPos(self, gridX: int, gridY: int, tileSize: int, drawBinding, eraseBinding) -> None:
 		# delete what was there before
 		objectTag: str = self._GetPosTag(gridX, gridY)
 		itemsWithTag: list = self._w_canvas.find_withtag(objectTag)
@@ -109,4 +112,4 @@ class GridView:
 												 fill="white", # fill the square with white
 												 width=0, # TODO: should squares have no outline?
 												 tags=(self._EMPTY_TAG, objectTag))
-		self._SetCanvasObjectBindings(canvasObject)
+		self._SetCanvasObjectBindings(canvasObject, drawBinding, eraseBinding)

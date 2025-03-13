@@ -60,12 +60,19 @@ class Model:
 	#############
 	# Accessors #
 	#############
-
-	def GetTileImages(self) -> dict[str, tk.PhotoImage]:
-		return self._tileImgs
+	
+	def GetAllTileFilenames(self) -> list[str]:
+		return list(self._tileImgs.keys())
+	
+	def GetTileImg(self, filename: str) -> tk.PhotoImage:
+		assert filename in self._tileImgs.keys()
+		return self._tileImgs[filename]
 
 	def GetBrushTileName(self) -> str:
 		return self._brushTileName
+
+	def GetBrushTileImg(self) -> tk.PhotoImage:
+		return self._tileImgs[self._brushTileName]
 
 	def GetMapGrid(self) -> list[list[str | None]]:
 		return self._mapData.GetGrid()
@@ -90,7 +97,6 @@ class Model:
 	def ResizeMap(self, newTileWidth: int, newTileHeight: int) -> None:
 		self._mapData.Resize(newTileWidth, newTileHeight)
 
-
 	"""
 	Loads tile properties from a JSON file.
 	tile_name: The name of the tile without prefix or file extension.
@@ -98,19 +104,29 @@ class Model:
 	"""
 	def LoadTileData(self, tileFilename: str) -> dict:
 		print(f"loading data for the following tile: \"{tileFilename}\"")
-		tileBaseName: str = jns.GetSprTilePartialName(tileFilename, jns.PART_TILENAME)
+		tileBaseName: str = tileFilename
+		tileBaseName = tileBaseName.split("_")[1] # remove the palette prefix from the filename
+		tileBaseName = tileBaseName[:-4] # remove the file extension from the filename
 		print(f"tile base name: \"{tileBaseName}\"")
-		tileJsonPath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, tileBaseName + "_data.json")
+		tileDataFilename: str = tileBaseName + ".json"
+		tileJsonPath: str = os.path.join(jns.PATH_ASSETS_TEXTURES_LEVELTILES, tileDataFilename)
 
 		if os.path.exists(tileJsonPath):
 			with open(tileJsonPath, "r") as jsonFile:
 				self.tileData = json.load(jsonFile)
 		else:
-			print(f"Warning: No JSON data found for tile: {tileBaseName}")
+			print(f"Warning: No JSON data found for tile \"{tileBaseName}\" (filename: \"{tileDataFilename}\")")
 			self.tileData = {}  # Reset data
 
 		return self.tileData
 
+	def WriteToMap(self, gridX: int, gridY: int) -> None:
+		print(f"write to map at grid pos ({gridX}, {gridY})")
+		self._mapData.WriteTile(self._brushTileName, gridX, gridY)
+
+	def EraseFromMap(self, gridX: int, gridY: int) -> None:
+		print(f"erase from map at grid pos ({gridX}, {gridY})")
+		self._mapData.EraseTile(gridX, gridY)
 
 class MapData:
 	
@@ -232,9 +248,17 @@ class MapData:
 					layout.setdefault(tile, []).append((x, y))
 		return layout
 
+	'''
+	Places a tile on the grid at the given position.
+	'''
 	def WriteTile(self, filename: str, gridX: int, gridY: int) -> None:
-
-		# Places a tile on the grid at the given position.
-		
+		assert filename is not None
 		if 0 <= gridX < self.width and 0 <= gridY < self.height:
 			self.grid[gridY][gridX] = filename
+
+	'''
+	Erases a tile from the grid at the given position.
+	'''
+	def EraseTile(self, gridX: int, gridY: int) -> None:
+		if 0 <= gridX < self.width and 0 <= gridY < self.height:
+			self.grid[gridY][gridX] = None
