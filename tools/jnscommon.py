@@ -54,37 +54,6 @@ _CONVENTION_DATA_LEVELDATA_NAME: str = "[a-zA-Z0-9]+"
 _CONVENTION_DATA_LEVELDATA_FILETYPE: str = "([.]txt){1}"
 CONVENTION_DATA_LEVELDATA: str = _CONVENTION_DATA_LEVELDATA_NAME + _CONVENTION_DATA_LEVELDATA_FILETYPE
 
-# 1st level keys
-_CATEGORY_SPR: str = "spr"
-_CATEGORY_DATA: str = "data"
-
-# 2nd level keys
-_OBJ_ENTITY: str = "entity"
-_OBJ_TILE: str = "tile"
-_OBJ_LEVEL: str = "level"
-
-# 3rd level keys
-PART_PALETTENAME: str = "palette"
-_PART_JOINER: str = "joiner"
-PART_TILENAME: str = "tile"
-PART_FILEEXT: str = "file extension"
-
-conventions: dict = {
-	_CATEGORY_SPR: {
-		_OBJ_ENTITY: {},
-		_OBJ_TILE: {
-			PART_PALETTENAME: "[a-zA-Z]+",
-			_PART_JOINER: "(_){1}",
-			PART_TILENAME: "[a-zA-Z0-9]+",
-			PART_FILEEXT: "([.]png){1}"
-		}
-	},
-	_CATEGORY_DATA: {
-		_OBJ_TILE: {},
-		_OBJ_LEVEL: {}
-	}
-}
-
 #####################
 # file system stuff #
 #####################
@@ -161,79 +130,6 @@ def ConvertToCamelCase(toConvert: str) -> str:
 # TODO: this function does not work yet
 def ConvertFromCamelCase(toConvert: str) -> str:
 	assert False
-
-###############
-# conventions #
-###############
-
-'''
-returns the regex pattern for the entity sprite naming convention
-'''
-def GetConventionSprEntity() -> str:
-	pass
-
-def GetConventionSprTile(part: str | None = None) -> str:
-	conv: dict = conventions[_CATEGORY_SPR][_OBJ_TILE]
-
-	palName: str = conv[PART_PALETTENAME]
-	joiner: str = conv[_PART_JOINER]
-	tileName: str = conv[PART_TILENAME]
-	fileExt: str = conv[PART_FILEEXT]
-
-	if part is None:
-		return palName + joiner + tileName + fileExt
-	elif part == PART_PALETTENAME:
-		return palName + joiner
-	elif part == PART_TILENAME:
-		return joiner + tileName
-	elif part == PART_FILEEXT:
-		return fileExt
-	else:
-		assert False
-	
-def GetSprTilePartialName(fullName: str, partName: str) -> None:
-	conv: str = GetConventionSprTile()
-	# make sure the name they gave matches the naming convention for tile sprite filenames
-	assert re.match(conv, fullName) is not None
-
-	partConv: str = GetConventionSprTile(partName)
-
-	# make sure the partial convention they gave is indeed a partial convention
-	assert partConv in conv
-
-	print(fullName)
-	print(partConv)
-	match: re.Match[str] | None = re.match(partConv, fullName)
-	print(match)
-	assert match is not None
-	partialName: str = match[0]
-
-	return partialName
-
-def GetConventionDataTile() -> str:
-	pass
-
-def GetConventionDataLevel() -> str:
-	pass
-
-def GetPartialConvention(fullConvention, partConvention: str) -> str:
-	pass
-
-def GetPartialName(fullName: str, fullConvention: str, partName: str) -> str:
-	assert re.match(fullConvention, fullName) is not None
-	if fullConvention == CONVENTION_SPR_ENTITY:
-		pass
-	elif fullConvention == CONVENTION_SPR_LEVELTILE:
-		if partName.lower() == "palette name":
-			re.match()
-		elif partName.lower() == "tile name":
-			re.match()
-		elif partName.lower() == "file extension" or partName.lower() == "file type":
-			pass
-	elif fullConvention == CONVENTION_DATA_LEVELTILE:
-		pass
-	elif fullConvention == CONVENTION_DATA_LEVELDATA:
-		pass
 
 #########################
 # packages/dependencies #
