@@ -3,8 +3,8 @@ import tkinter as tk
 from functools import partial
 
 # Game imports
-from levelEditor_model import Model
-from levelEditor_view import View
+from model import Model
+from view import View
 
 class Controller:
 
