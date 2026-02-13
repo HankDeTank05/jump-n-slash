@@ -1,10 +1,11 @@
 #include "CollisionVolumeAABB.h"
 
+// engine includes
 #include "Math.h"
 #include "Visualizer.h"
 #include "ConvenienceFunctions.h"
-
-#include "../Game Code/DebugFlags.h"
+#include "EngineDebugFlags.h"
+#include "Sprite.h"
 
 CollisionVolumeAABB::CollisionVolumeAABB(const sf::Vector2f& min, const sf::Vector2f& max)
 	: CollisionVolumeBoundingBox(sf::Transform(), min, max)
@@ -12,17 +13,7 @@ CollisionVolumeAABB::CollisionVolumeAABB(const sf::Vector2f& min, const sf::Vect
 	// do nothing
 }
 
-const sf::Vector2f& CollisionVolumeAABB::GetMin() const
-{
-	return min;
-}
-
-const sf::Vector2f& CollisionVolumeAABB::GetMax() const
-{
-	return max;
-}
-
-void CollisionVolumeAABB::ComputeData(sf::Sprite* pSprite, const sf::Transform& _tform)
+void CollisionVolumeAABB::ComputeData(Sprite* pSprite, const sf::Transform& _tform)
 {
 	// do some obb stuff
 	
@@ -30,7 +21,7 @@ void CollisionVolumeAABB::ComputeData(sf::Sprite* pSprite, const sf::Transform& 
 
 	// adjust the aabb
 
-	sf::FloatRect aabb = pSprite->getGlobalBounds();
+	sf::FloatRect aabb = pSprite->GetGlobalBounds();
 	min = aabb.getPosition();
 	max = min + aabb.getSize();
 

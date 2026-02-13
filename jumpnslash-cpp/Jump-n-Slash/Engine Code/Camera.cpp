@@ -1,6 +1,7 @@
 #include "Camera.h"
 
-#include "../Game Code/Constants.h"
+// engine includes
+#include "EngineConstants.h"
 #include "EngineAttorney.h"
 
 Camera::Camera(float centerX, float centerY)

@@ -1,10 +1,13 @@
 #include "Enemy.h"
 
+// engine includes
 #include "../Engine Code/AnimationSet.h"
 #include "../Engine Code/AnimationManager.h"
+#include "../Engine Code/Sprite.h"
 
+// game includes
 #include "Constants.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 
 Enemy::Enemy()
 	: pos(10 * TILE_SIZE_F, 18 * TILE_SIZE_F),
@@ -12,17 +15,14 @@ Enemy::Enemy()
 	pSprite(nullptr),
 	animComp()
 {
-	AnimationSet* pAnimSet = new AnimationSet();
+	animComp.DefineAnimation("idle", AnimationManager::GetAnimation("enemy idle"));
 
-	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("enemy idle"));
-
-	animComp.DefineAnimationSet(pAnimSet);
 	animComp.SetAnimation("idle");
 
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
 
-	SetCollidableGroup<Enemy>();
+	SetCollisionObjectGroup<Enemy>();
 	pSprite = animComp.GetCurrentFrame();
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
 	RequestCollisionRegistration();
@@ -36,14 +36,15 @@ Enemy::~Enemy()
 void Enemy::Update(float deltaTime)
 {
 	pSprite = animComp.GetCurrentFrame();
-	pSprite->setPosition(pos);
+	pSprite->SetPosition(pos);
 	UpdateCollisionData(pSprite);
+	if (DEBUG_CONNECTORS) pSprite->DebugConnectors();
 }
 
 void Enemy::Draw()
 {
 	assert(pSprite != nullptr);
-	Render(*pSprite);
+	Render(pSprite);
 }
 
 void Enemy::OnCollisionEnter(CollisionObject* pOther)

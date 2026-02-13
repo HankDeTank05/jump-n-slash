@@ -1,14 +1,17 @@
 #include "DrawObject.h"
 
+// language includes
 #include <cassert>
 
+// engine includes
 #include "EngineAttorney.h"
 #include "DrawRegistrationCommand.h"
 #include "DrawDeregistrationCommand.h"
 #include "SceneAttorney.h"
 #include "SceneManager.h"
-//#include "SceneGraphNode.h"
-//#include "SceneGraphNodeAttorney.h"
+#include "SpriteAttorney.h"
+#include "EngineDebugFlags.h"
+#include "Sprite.h"
 
 DrawObject::DrawObject()
 	: regState(RegistrationState::CURRENTLY_DEREGISTERED),
@@ -40,6 +43,12 @@ void DrawObject::Render(sf::Drawable& drawable)
 void DrawObject::Render(const sf::Drawable& drawable, const sf::Transform& tform)
 {
 	EngineAttorney::GameWindow::GetWindow().draw(drawable, tform);
+}
+
+void DrawObject::Render(Sprite* pSprite)
+{
+	EngineAttorney::GameWindow::GetWindow().draw(*SpriteAttorney::GameObjectAccess::GetSprite(pSprite));
+	//if (DEBUG_CONNECTORS) pSprite->DebugConnectors();
 }
 
 void DrawObject::Render(sf::Vertex* array, int vtexCount)

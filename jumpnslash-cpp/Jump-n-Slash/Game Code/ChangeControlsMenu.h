@@ -1,8 +1,8 @@
 #ifndef CHANGE_CONTROLS_MENU_H
 #define CHANGE_CONTROLS_MENU_H
 
-// game includes
-#include "Menu.h"
+// engine includes
+#include "../Engine Code/Menu.h"
 
 // forward declarations
 class MenuManager;

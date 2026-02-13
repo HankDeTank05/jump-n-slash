@@ -1,8 +1,10 @@
 #include "LevelMap.h"
 
+// language includes
 #include <string>
 #include <vector>
 
+// engine includes
 #include "../Engine Code/JumpSlashEngine.h"
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/Visualizer.h"
@@ -10,20 +12,21 @@
 #include "../Engine Code/Camera.h"
 #include "../Engine Code/ConvenienceFunctions.h"
 
+// game includes
 #include "BlockBreakable.h"
 #include "BlockHazard.h"
 #include "BlockSolid.h"
 #include "PlatformSemisolid.h"
 #include "Constants.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 #include "RoomData.h"
 #include "PlayerAttorney.h"
+#include "GameManagerAttorney.h"
 
 LevelMap::LevelMap(std::vector<std::vector<std::string>>* grid)
 	: map(),
 	usedSize(0, 0),
-	rooms(),
-	pPlayer(nullptr)
+	rooms()
 {
 	std::map<std::string, std::list<sf::Vector2i>> tiles;
 
@@ -336,9 +339,10 @@ LevelMap::~LevelMap()
 	}
 }
 
-void LevelMap::LinkToPlayer(Player* _pPlayer)
+void LevelMap::PlacePlayerInMap()
 {
-	pPlayer = _pPlayer;
+	Player* pPlayer = GameManagerAttorney::LevelAccess::GetPlayer();
+	assert(pPlayer != nullptr);
 
 	// set player spawn point
 	PlayerAttorney::LevelAccess::SetCurrentRoom(pPlayer, rooms.front());
@@ -402,6 +406,9 @@ LevelTile* LevelMap::GetTileAtPos(sf::Vector2f worldPos)
 
 void LevelMap::OnNotify(ObserverEvent event)
 {
+	Player* pPlayer = GameManagerAttorney::LevelAccess::GetPlayer();
+	assert(pPlayer != nullptr);
+
 	switch (event)
 	{
 	case ObserverEvent::PlayerOutsideCurrentRoom:

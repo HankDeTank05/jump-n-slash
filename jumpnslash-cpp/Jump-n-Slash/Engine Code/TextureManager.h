@@ -75,7 +75,7 @@ public: // api functions
 	* \see	TextureManager::GetTexture
 	* 
 	* \see	SpriteManager
-	* \see	GridManager
+	* \see	MapManager
 	* \see	FontManager
 	*/
 	static void LoadTexture(std::string key, std::string filename, bool smooth = true);
@@ -107,7 +107,7 @@ public: // api functions
 	* \see	TextureManager::LoadTexture
 	* 
 	* \see	SpriteManager
-	* \see	GridManager
+	* \see	MapManager
 	* \see	FontManager
 	*/
 	static sf::Texture* GetTexture(std::string key);

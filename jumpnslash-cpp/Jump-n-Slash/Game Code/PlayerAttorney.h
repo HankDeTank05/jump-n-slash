@@ -14,10 +14,12 @@ public:
 	class StateAccess
 	{
 	private:
-		friend class PlayerStateIdle;
-		friend class PlayerStateWalking;
-		friend class PlayerStateJumping;
-		friend class PlayerStateFalling;
+		friend class PlayerMoveStateIdle;
+		friend class PlayerMoveStateWalking;
+		friend class PlayerMoveStateJumping;
+		friend class PlayerMoveStateFalling;
+		friend class PlayerMoveStateDashing;
+		friend class PlayerMoveStateSlashAtk;
 
 		// accessors
 
@@ -25,6 +27,8 @@ public:
 		static bool IsGrounded(Player* pPlayer);
 		static bool IsHeadBonked(Player* pPlayer);
 		static bool IsApplyGravity(Player* pPlayer);
+		static bool IsReceivingSlashInput(Player* pPlayer);
+		static bool IsAttacking(Player* pPlayer);
 
 		// mutators
 
@@ -36,10 +40,13 @@ public:
 		static void ApplyGravity(Player* pPlayer, float deltaTime);
 		static void ProcessInputs(Player* pPlayer, float deltaTime);
 
+		static void BeginSlashAtk(Player* pPlayer);
+
 		static void SetAnimationIdle(Player* pPlayer);
 		static void SetAnimationWalk(Player* pPlayer);
 		static void SetAnimationJump(Player* pPlayer);
 		static void SetAnimationFall(Player* pPlayer);
+		static void SetAnimationAttack(Player* pPlayer);
 	};
 	class LevelAccess
 	{
@@ -60,7 +67,7 @@ public:
 	private:
 		friend class Sword;
 		static sf::Vector2f GetPos(Player* pPlayer);
-		static float GetFacing(Player* pPlayer);
+		static int GetFacing(Player* pPlayer);
 	};
 	class StrategyAccess
 	{
@@ -71,6 +78,7 @@ public:
 
 		static void SetWalk(Player* pPlayer, float direction);
 		static void SetJump(Player* pPlayer, bool enabled);
+		static void SetSlash(Player* pPlayer, bool enabled);
 	};
 };
 

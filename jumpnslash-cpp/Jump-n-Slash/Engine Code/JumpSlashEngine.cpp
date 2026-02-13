@@ -6,7 +6,7 @@
 // engine includes
 #include "TextureManagerAttorney.h"
 #include "SpriteManagerAttorney.h"
-#include "GridManagerAttorney.h"
+#include "MapManagerAttorney.h"
 #include "AnimationManagerAttorney.h"
 #include "VisualizerAttorney.h"
 #include "FontManagerAttorney.h"
@@ -15,15 +15,31 @@
 #include "TimeManagerAttorney.h"
 #include "TimeManager.h"
 #include "ControlManagerAttorney.h"
+#include "EngineQuitCommandBase.h"
+#include "EngineQuitCommand.h"
+#include "EngineDontQuitCommand.h"
 
 // game includes
-#include "../Game Code/Constants.h" // TODO: this is awful form. make a separate one for the engine!
+#include "EngineConstants.h" 
 
 JumpSlashEngine* JumpSlashEngine::pInstance = nullptr;
 
+JumpSlashEngine::JumpSlashEngine()
+	: window(),
+	winName(),
+	winWidth(),
+	winHeight(),
+	pQuitCmd(new EngineQuitCommand()),
+	pDontQuitCmd(new EngineDontQuitCommand()),
+	pCmdToExe(pDontQuitCmd)
+{
+	// do nothing
+}
+
 JumpSlashEngine::~JumpSlashEngine()
 {
-	// do nothing?
+	delete pDontQuitCmd;
+	delete pQuitCmd;
 }
 
 JumpSlashEngine& JumpSlashEngine::Instance()
@@ -82,11 +98,22 @@ void JumpSlashEngine::privRun()
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			switch (event.type)
 			{
-				window.close();
+			case sf::Event::Closed:
+				// quit if the window is closed thru the OS
+				QuitGame();
+				break;
+			case sf::Event::KeyPressed:
+				// quit if the escape key was pressed
+				if (event.key.code == sf::Keyboard::Escape) QuitGame();
+				break;
+			default:
+				break;
 			}
 		}
+		// quit if the game or engine requested it
+		pCmdToExe->Execute();
 	}
 	UnloadContent();
 }
@@ -130,7 +157,7 @@ void JumpSlashEngine::UnloadContent()
 	// asset managers
 	TextureManagerAttorney::Termination::Terminate();
 	SpriteManagerAttorney::Termination::Terminate();
-	GridManagerAttorney::Termination::Terminate();
+	MapManagerAttorney::Termination::Terminate();
 	FontManagerAttorney::Termination::Terminate();
 	AnimationManagerAttorney::Termination::Terminate();
 
@@ -156,6 +183,16 @@ void JumpSlashEngine::SetView(sf::View view)
 	Instance().privSetView(view);
 }
 
+void JumpSlashEngine::RequestQuitGame()
+{
+	Instance().privRequestQuitGame();
+}
+
+void JumpSlashEngine::QuitGame()
+{
+	Instance().privQuitGame();
+}
+
 sf::RenderWindow& JumpSlashEngine::privGetWindow()
 {
 	return window;
@@ -164,4 +201,15 @@ sf::RenderWindow& JumpSlashEngine::privGetWindow()
 void JumpSlashEngine::privSetView(sf::View view)
 {
 	window.setView(view);
+}
+
+void JumpSlashEngine::privRequestQuitGame()
+{
+	pCmdToExe = pQuitCmd;
+}
+
+void JumpSlashEngine::privQuitGame()
+{
+	// TODO: potentially put an autosave function here
+	window.close();
 }

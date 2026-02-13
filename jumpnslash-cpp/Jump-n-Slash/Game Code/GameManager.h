@@ -3,6 +3,8 @@
 
 // forward declarations
 class GameState;
+class Player;
+class LevelMap;
 
 class GameManager // this class is written as a singleton
 {
@@ -21,11 +23,16 @@ public: // API functions
 	static void PauseGame();
 	static void ResumeFromPause();
 
-private: // internal-only API functions
+private: // selective access API functions
 	friend class GameManagerAttorney;
 	static void Terminate();
 
 	static void QuitGame();
+
+	static void SetPlayer(Player* pPlayer);
+	static void SetLevel(LevelMap* pLevel);
+	static Player* GetPlayer();
+	static LevelMap* GetMap();
 
 private: // API backend functions
 	void privStartGame();
@@ -34,8 +41,15 @@ private: // API backend functions
 
 	void privQuitGame();
 
+	void privSetPlayer(Player* pPlayer);
+	void privSetLevel(LevelMap* pLevel);
+	Player* privGetPlayer();
+	LevelMap* privGetLevel();
+
 private: // member variables
 	const GameState* pCurrentState;
+	Player* pPlayer;
+	LevelMap* pLevel;
 
 };
 

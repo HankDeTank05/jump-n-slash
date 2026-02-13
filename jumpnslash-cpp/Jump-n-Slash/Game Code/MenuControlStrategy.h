@@ -21,6 +21,6 @@ protected:
 	bool navUp;
 	bool navDown;
 	bool select;
-}
+};
 
 #endif

@@ -5,6 +5,9 @@
 
 // forward declarations
 class Scene;
+class EngineQuitCommandBase;
+class EngineQuitCommand;
+class EngineDontQuitCommand;
 
 class JumpSlashEngine // this class is written as a singleton
 {
@@ -12,7 +15,7 @@ private:
 
 	static JumpSlashEngine* pInstance;
 
-	JumpSlashEngine() = default;
+	JumpSlashEngine();
 	JumpSlashEngine(const JumpSlashEngine& jse) = delete;
 	JumpSlashEngine& operator=(const JumpSlashEngine& jse) = delete;
 	virtual ~JumpSlashEngine();
@@ -43,6 +46,9 @@ private: // engine-only api functions
 	static sf::RenderWindow& GetWindow();
 	static void SetView(sf::View view);
 
+	static void RequestQuitGame();
+	static void QuitGame();
+
 private: // private api backend functions
 	void privSetWindowName(sf::String winName);
 	void privSetWindowSize(int winWidth, int winHeight);
@@ -51,6 +57,9 @@ private: // private api backend functions
 
 	sf::RenderWindow& privGetWindow();
 	void privSetView(sf::View view);
+
+	void privRequestQuitGame();
+	void privQuitGame();
 
 private:
 	void Initialize();
@@ -103,6 +112,9 @@ private: // member variables
 	sf::String winName;
 	int winWidth;
 	int winHeight;
+	EngineQuitCommand* pQuitCmd;
+	EngineDontQuitCommand* pDontQuitCmd;
+	EngineQuitCommandBase* pCmdToExe;
 	
 };
 

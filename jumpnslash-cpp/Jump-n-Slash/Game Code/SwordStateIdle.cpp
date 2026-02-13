@@ -1,9 +1,12 @@
 #include "SwordStateIdle.h"
 
+// language includes
 #include <iostream>
 
-#include "DebugFlags.h"
+// game includes
+#include "GameDebugFlags.h"
 #include "SwordFSM.h"
+#include "SwordAttorney.h"
 
 SwordStateIdle::SwordStateIdle(const SwordStateIdle& ssi)
 {
@@ -14,7 +17,7 @@ void SwordStateIdle::Enter(Sword* pSword) const
 {
 	if (DEBUG_SWORD_STATE) std::cout << "Entered SwordStateIdle" << std::endl;
 
-	// deregister for collision???
+	SwordAttorney::StateAccess::SetAnimationIdle(pSword);
 }
 
 void SwordStateIdle::Update(Sword* pSword, float deltaTime) const
@@ -26,7 +29,10 @@ const SwordState* SwordStateIdle::GetNextState(Sword* pSword) const
 {
 	const SwordState* pNextState = this;
 
-	// TODO: sword state change logic goes here
+	if (SwordAttorney::StateAccess::IsAttacking(pSword))
+	{
+		pNextState = &SwordFSM::swing;
+	}
 
 	return pNextState;
 }

@@ -19,9 +19,35 @@ private:
 public:
 	using DrawListRef = DrawList::iterator;
 
-	// TODO: docs for DrawManager::Register
-	DrawListRef Register(DrawObject* pDrawable); 
-	// TODO: docs for DrawManager::Deregister
+	/*!
+	* \brief	Adds \c DrawObject to draw list.
+	*
+	* Adds a \c DrawObject to the DrawManager's list of DrawObjects.
+	*
+	* \note		This function is primarily called through use of the draw registration system.
+	*
+	* \param[in]	pDrawable	A \c DrawObject.
+	*
+	* \return	Returns an iterator pointing to the DrawObjects position in the DrawList.
+	*
+	* \see DrawObject::RequestDrawRegistration
+	* \see DrawObject::RequestDrawDeregistration
+	*/	DrawListRef Register(DrawObject* pDrawable);
+	
+	/*!
+	* \brief	Removes \c DrawObject from draw list.
+	* 
+	* Removes a \c DrawObject from the DrawManager's list of DrawObjects.  
+	* 
+	* \note		This function is primarily called through use of the draw deregistration system. 
+	* 
+	* \param[in]	drawListRef		A DrawList iterator.  
+	* 
+	* \return	Does not return anything. 
+	* 
+	* \see DrawObject::RequestDrawRegistration
+	* \see DrawObject::RequestDrawDeregistration
+	*/
 	void Deregister(DrawListRef drawListRef); 
 
 	void Draw();

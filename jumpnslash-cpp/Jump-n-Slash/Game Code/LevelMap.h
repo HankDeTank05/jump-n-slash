@@ -1,17 +1,22 @@
 #ifndef LEVEL_MAP_H
 #define LEVEL_MAP_H
 
+// language includes
 #include <array>
 #include <list>
 #include <vector>
 
+// library includes
 #include <SFML/System/Vector2.hpp>
 
+// engine includes
 #include "../Engine Code/Observer.h"
 
+// game includes
 #include "Constants.h"
 
 // forward declarations
+class Tileset;
 class LevelTile;
 class RoomData;
 class Player;
@@ -28,7 +33,7 @@ public:
 	using RoomList = std::list<RoomData*>;
 	using RoomListRef = RoomList::iterator;
 
-	void LinkToPlayer(Player* pPlayer);
+	void PlacePlayerInMap();
 
 	sf::Vector2f GetStartingSpawnPoint(); // TODO: docs for LevelMap::GetStartingSpawnPoint
 	RoomData* GetStartingRoom(); // TODO: docs for LevelMap::GetStartingRoom
@@ -63,7 +68,6 @@ private:
 	std::array<std::array<LevelTile*, MAX_LEVEL_SIZE>, MAX_LEVEL_SIZE> map;
 	sf::Vector2i usedSize;
 	RoomList rooms;
-	Player* pPlayer;
 };
 
 #endif

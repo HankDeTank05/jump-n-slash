@@ -2,7 +2,7 @@
 
 #include "../Engine Code/ControllerInputs.h"
 
-#include "DesignerControls.h"
+#include "ControlMapping.h"
 
 PlayerControlDualSense::PlayerControlDualSense(Player* pPlayer)
 	: PlayerControlStrategy(pPlayer, ControlScheme::DualSense)
@@ -15,19 +15,19 @@ void PlayerControlDualSense::GamepadBtnPressed(int gamepadIndex, int btnNum)
 	DualSenseButton btn = static_cast<DualSenseButton>(btnNum);
 	switch (btn)
 	{
-	case DS_GAME_JUMP:
+	case DualSense::Game::JUMP:
 		jump = true;
 		break;
-	case DS_GAME_SLASH_ATK:
+	case DualSense::Game::SLASH_ATK:
 		slashAtk = true;
 		break;
-	case DS_GAME_DREAM_ATK:
+	case DualSense::Game::DREAM_ATK:
 		dreamAtk = true;
 		break;
-	case DS_GAME_DASH:
+	case DualSense::Game::DASH:
 		dash = true;
 		break;
-	case DS_GAME_PAUSE:
+	case DualSense::Game::PAUSE:
 		assert(false);
 		break;
 	default:
@@ -40,16 +40,16 @@ void PlayerControlDualSense::GamepadBtnReleased(int gamepadIndex, int btnNum)
 	DualSenseButton btn = static_cast<DualSenseButton>(btnNum);
 	switch (btn)
 	{
-	case DS_GAME_JUMP:
+	case DualSense::Game::JUMP:
 		jump = false;
 		break;
-	case DS_GAME_SLASH_ATK:
+	case DualSense::Game::SLASH_ATK:
 		slashAtk = false;
 		break;
-	case DS_GAME_DREAM_ATK:
+	case DualSense::Game::DREAM_ATK:
 		dreamAtk = false;
 		break;
-	case DS_GAME_DASH:
+	case DualSense::Game::DASH:
 		dash = false;
 		break;
 	default:
@@ -62,8 +62,8 @@ void PlayerControlDualSense::GamepadAxisMoved(int gamepadIndex, sf::Joystick::Ax
 	DualSenseAxis spAxis = static_cast<DualSenseAxis>(axis);
 	switch (spAxis)
 	{
-	case DS_GAME_WALK:
-	case DS_GAME_WALK_ALT:
+	case DualSense::Game::WALK:
+	case DualSense::Game::WALK_ALT:
 		walk = axisState;
 		break;
 	default:

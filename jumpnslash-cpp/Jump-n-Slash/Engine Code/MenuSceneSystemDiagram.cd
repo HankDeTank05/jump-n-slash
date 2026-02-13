@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Menu">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ACYAAAQAAQJAAgIAAAAAwACACQCIMAAABAIiAgCQCEA=</HashCode>
+      <FileName>Engine Code\Menu.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pMgr" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MenuAttorney">
+    <Position X="4.25" Y="2.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="MenuAttorney::MenuManagerAccess">
+        <TypeIdentifier>
+          <NewMemberFileName>Engine Code\MenuAttorney.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine Code\MenuAttorney.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuCommand" Collapsed="true">
+    <Position X="14" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAIAhAAAAAAA=</HashCode>
+      <FileName>Engine Code\MenuCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuManager">
+    <Position X="7.25" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAAgAACEAAAAAAAAAABQAAABAAAIAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Engine Code\MenuManager.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pCurrentMenu" />
+      <Field Name="pStartingMenu" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MenuScene">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIgAAACAACAAAAAAAAAAAAAAAAAAIAAAAAiAAAAAAE=</HashCode>
+      <FileName>Engine Code\MenuScene.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pMenuMgr" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EnterSubmenuCommand" Collapsed="true">
+    <Position X="14.75" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAASAAAAABACAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Engine Code\EnterSubmenuCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExitSubmenuCommand" Collapsed="true">
+    <Position X="10.5" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAQAAAAAAACAAAAAAAAAAAAgAAIAAAA=</HashCode>
+      <FileName>Engine Code\ExitSubmenuCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuitGameCommand" Collapsed="true">
+    <Position X="12.75" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAEAAQAAAAAgAAAAAAA=</HashCode>
+      <FileName>Engine Code\QuitGameCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResumeGameCommand" Collapsed="true">
+    <Position X="17" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAIAAAAIAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Game Code\ResumeGameCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

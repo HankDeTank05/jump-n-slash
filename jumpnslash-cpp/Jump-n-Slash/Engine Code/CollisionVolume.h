@@ -2,13 +2,13 @@
 #define COLLISION_VOLUME_H
 
 #include <SFML/Graphics/Transform.hpp>
-#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Color.hpp>
 
 // forward declarations
 class CollisionVolumeBSphere;
 class CollisionVolumeAABB;
 class CollisionVolumeOBB;
+class Sprite;
 
 class CollisionVolume
 {
@@ -18,7 +18,7 @@ public:
 	CollisionVolume& operator=(const CollisionVolume& cv) = delete;
 	virtual ~CollisionVolume() = default;
 
-	virtual void ComputeData(sf::Sprite* pSprite, const sf::Transform& tform) = 0;
+	virtual void ComputeData(Sprite* pSprite, const sf::Transform& tform) = 0;
 	virtual bool IntersectAccept(const CollisionVolume& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeBSphere& other) const = 0;
 	virtual bool IntersectVisit(const CollisionVolumeAABB& other) const = 0;

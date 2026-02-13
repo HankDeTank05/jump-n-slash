@@ -1,5 +1,6 @@
 #include "PlayerAttorney.h"
 
+// game includes
 #include "Player.h"
 
 sf::Vector2f PlayerAttorney::StateAccess::GetPosDelta(Player* pPlayer)
@@ -20,6 +21,16 @@ bool PlayerAttorney::StateAccess::IsHeadBonked(Player* pPlayer)
 bool PlayerAttorney::StateAccess::IsApplyGravity(Player* pPlayer)
 {
 	return pPlayer->IsApplyGravity();
+}
+
+bool PlayerAttorney::StateAccess::IsReceivingSlashInput(Player* pPlayer)
+{
+	return pPlayer->IsReceivingSlashInput();
+}
+
+bool PlayerAttorney::StateAccess::IsAttacking(Player* pPlayer)
+{
+	return pPlayer->IsAttacking();
 }
 
 void PlayerAttorney::StateAccess::RaycastRight(Player* pPlayer)
@@ -52,6 +63,11 @@ void PlayerAttorney::StateAccess::ProcessInputs(Player* pPlayer, float deltaTime
 	pPlayer->ProcessInputs(deltaTime);
 }
 
+void PlayerAttorney::StateAccess::BeginSlashAtk(Player* pPlayer)
+{
+	pPlayer->BeginSlashAtk();
+}
+
 void PlayerAttorney::StateAccess::SetAnimationIdle(Player* pPlayer)
 {
 	pPlayer->SetAnimationIdle();
@@ -70,6 +86,11 @@ void PlayerAttorney::StateAccess::SetAnimationJump(Player* pPlayer)
 void PlayerAttorney::StateAccess::SetAnimationFall(Player* pPlayer)
 {
 	pPlayer->SetAnimationFall();
+}
+
+void PlayerAttorney::StateAccess::SetAnimationAttack(Player* pPlayer)
+{
+	pPlayer->SetAnimationAttack();
 }
 
 sf::Vector2f PlayerAttorney::LevelAccess::GetPos(Player* pPlayer)
@@ -92,7 +113,7 @@ sf::Vector2f PlayerAttorney::SwordAccess::GetPos(Player* pPlayer)
 	return pPlayer->GetPos();
 }
 
-float PlayerAttorney::SwordAccess::GetFacing(Player* pPlayer)
+int PlayerAttorney::SwordAccess::GetFacing(Player* pPlayer)
 {
 	return pPlayer->GetFacing();
 }
@@ -105,4 +126,9 @@ void PlayerAttorney::StrategyAccess::SetWalk(Player* pPlayer, float direction)
 void PlayerAttorney::StrategyAccess::SetJump(Player* pPlayer, bool enabled)
 {
 	pPlayer->SetJump(enabled);
+}
+
+void PlayerAttorney::StrategyAccess::SetSlash(Player* pPlayer, bool enabled)
+{
+	pPlayer->SetSlash(enabled);
 }

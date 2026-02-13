@@ -1,15 +1,19 @@
 #ifndef VISUALIZER_H
 #define VISUALIZER_H
 
+// language incudes
 #include <list>
 
+// library includes
 #include <SFML/Graphics/CircleShape.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
+#include <SFML/System/String.hpp>
+#include <SFML/Graphics/Text.hpp>
 
+// engine includes
 #include "DrawObject.h"
-
-#include "../Game Code/Constants.h"
+#include "EngineConstants.h"
 
 // forward declarations
 class VisualizerCommand;

@@ -1,16 +1,20 @@
 #include "Sword.h"
 
+// language includes
 #include <iostream>
 
+// engine includes
 #include "../Engine Code/AnimationComponent.h"
 #include "../Engine Code/AnimationSet.h"
 #include "../Engine Code/AnimationManager.h"
+#include "../Engine Code/Sprite.h"
 
+// game includes
 #include "PlayerAttorney.h"
 #include "SwordFSM.h"
-#include "DebugFlags.h"
+#include "GameDebugFlags.h"
 #include "Constants.h"
-#include "PlayerAttorney.h"
+#include "Player.h"
 
 Sword::Sword(Player* _pPlayer)
 	: pPlayer(_pPlayer),
@@ -19,12 +23,11 @@ Sword::Sword(Player* _pPlayer)
 	pCurrentState(&SwordFSM::idle),
 	pPrevState(nullptr),
 	pSprite(nullptr),
-	pAnimComp(new AnimationComponent())
+	pAnimComp(new AnimationComponent()),
+	attack(false)
 {
-	AnimationSet* pAnimSet = new AnimationSet();
-	pAnimSet->AddAnimation("idle", AnimationManager::GetAnimation("sword idle"));
-	pAnimSet->AddAnimation("swing", AnimationManager::GetAnimation("sword swing"));
-	pAnimComp->DefineAnimationSet(pAnimSet);
+	pAnimComp->DefineAnimation("idle", AnimationManager::GetAnimation("sword idle"));
+	pAnimComp->DefineAnimation("swing", AnimationManager::GetAnimation("sword swing"));
 
 	pAnimComp->SetAnimation("idle");
 	pSprite = pAnimComp->GetCurrentFrame();
@@ -32,8 +35,8 @@ Sword::Sword(Player* _pPlayer)
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
 	SetCollisionSprite(pSprite, VolumeType::AABB);
-	SetCollidableGroup<Sword>();
-	RequestCollisionRegistration();
+	SetCollisionObjectGroup<Sword>();
+	//RequestCollisionRegistration();
 }
 
 Sword::~Sword()
@@ -43,18 +46,49 @@ Sword::~Sword()
 
 void Sword::Update(float deltaTime)
 {
-	pPrevState = pCurrentState;
 	pCurrentState = pCurrentState->GetNextState(this);
+	if (pCurrentState != pPrevState)
+	{
+		pCurrentState->Enter(this);
+	}
+	if (attack == true)
+	{
+		attack = false;
+	}
+
+	pCurrentState->Update(this, deltaTime);
 
 	pSprite = pAnimComp->GetCurrentFrame();
 
-	pos = PlayerAttorney::SwordAccess::GetPos(pPlayer) + playerPosOffset;
-	pSprite->setPosition(pos);
+	pos = PlayerAttorney::SwordAccess::GetPos(pPlayer) + pPlayer->GetConnector("weapon hold");
+
+	// TODO: make this class derive from actor, so it can use the protected function that does this automagically
+	float facing = PlayerAttorney::SwordAccess::GetFacing(pPlayer);
+	if (facing == 1)
+	{
+		pSprite->SetOrigin(sf::Vector2f(0.f, 0.f));
+	}
+	else if (facing == -1)
+	{
+		pSprite->SetOrigin(sf::Vector2f(TILE_SIZE_F, 0.f));
+	}
+	else
+	{
+		assert(false);
+	}
+	pSprite->SetScale(sf::Vector2f(facing, 1.f));
+
+	pSprite->SetPositionByConnector("hold", pos);
+	UpdateCollisionData(pSprite);
+
+	pPrevState = pCurrentState;
+
+	if (DEBUG_CONNECTORS) pSprite->DebugConnectors();
 }
 
 void Sword::Draw()
 {
-	Render(*pSprite);
+	Render(pSprite);
 }
 
 void Sword::OnCollisionEnter(CollisionObject* pOther)
@@ -70,6 +104,16 @@ void Sword::OnCollisionDuring(CollisionObject* pOther)
 void Sword::OnCollisionExit(CollisionObject* pOther)
 {
 	if (DEBUG_COLLISION) std::cout << "Sword has exited collision" << std::endl;
+}
+
+void Sword::Attack()
+{
+	attack = true;
+}
+
+bool Sword::IsAttacking()
+{
+	return attack;
 }
 
 void Sword::SetAnimationIdle()

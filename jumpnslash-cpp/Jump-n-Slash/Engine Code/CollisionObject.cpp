@@ -1,11 +1,14 @@
 #include "CollisionObject.h"
 
+// engine includes
 #include "CollisionRegistrationCommand.h"
 #include "CollisionDeregistrationCommand.h"
 #include "CollisionObjectGroup.h"
 #include "CollisionVolumeAABB.h"
 #include "CollisionVolumeBSphere.h"
 #include "Math.h"
+#include "SpriteAttorney.h"
+#include "Sprite.h"
 
 CollisionObject::CollisionObject()
 	: typeID(CollisionManager::JNSID_UNDEFINED),
@@ -53,22 +56,22 @@ void CollisionObject::RequestCollisionDeregistration()
 	regState = RegistrationState::PENDING_DEREGISTRATION;
 }
 
-void CollisionObject::SetCollisionSprite(sf::Sprite* pSprite, VolumeType colVolType)
+void CollisionObject::SetCollisionSprite(Sprite* pSprite, VolumeType colVolType)
 {
 	pColSpr = pSprite;
 	pVolType = &colVolType;
 	if (colVolType == VolumeType::BSphere)
 	{
-		sf::Vector2f aabbPos = pSprite->getLocalBounds().getPosition();
-		sf::Vector2f aabbSize = pSprite->getLocalBounds().getSize();
+		sf::Vector2f aabbPos = pColSpr->GetLocalBounds().getPosition();
+		sf::Vector2f aabbSize = pColSpr->GetLocalBounds().getSize();
 		sf::Vector2f center = aabbPos + aabbSize * 0.5f;
 		float radius = Math::Max(aabbSize.x, aabbSize.y) * 0.5f;
 		pColVol = new CollisionVolumeBSphere(center, radius);
 	}
 	else if (colVolType == VolumeType::AABB)
 	{
-		sf::Vector2f min = pSprite->getGlobalBounds().getPosition();
-		sf::Vector2f max = min + pSprite->getGlobalBounds().getSize();
+		sf::Vector2f min = pColSpr->GetGlobalBounds().getPosition();
+		sf::Vector2f max = min + pColSpr->GetGlobalBounds().getSize();
 		pColVol = new CollisionVolumeAABB(min, max);
 	}
 	else
@@ -77,10 +80,16 @@ void CollisionObject::SetCollisionSprite(sf::Sprite* pSprite, VolumeType colVolT
 	}
 }
 
-void CollisionObject::UpdateCollisionData(sf::Sprite* pSprite)
+void CollisionObject::UpdateCollisionData()
 {
-	pColSpr = pSprite; // TODO: doing this is necessary because of how animation works, which might invalidate the existence of pColSpr as a member variable. Consider removing it.
-	pColVol->ComputeData(pColSpr, pColSpr->getTransform());
+	pColVol->ComputeData(pColSpr, pColSpr->GetTransform());
+}
+
+void CollisionObject::UpdateCollisionData(Sprite* pSprite)
+{
+	// TODO: doing this is necessary because of how animation works, which might invalidate the existence of pColSpr as a member variable. Consider removing it.
+	pColSpr = pSprite;
+	UpdateCollisionData();
 }
 
 void CollisionObject::Collision(CollisionObject* pOther)

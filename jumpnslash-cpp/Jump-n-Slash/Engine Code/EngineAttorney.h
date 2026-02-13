@@ -18,6 +18,20 @@ public:
 		static sf::RenderWindow& GetWindow();
 		static void SetView(sf::View view);
 	};
+	class QuitGameAccess
+	{
+	private:
+		friend class QuitGameCommand;
+		friend class GameManager;
+		static void RequestQuitGame();
+	};
+	class CommandAccess
+	{
+	private:
+		friend class EngineQuitCommand;
+		friend class EngineDontQuitCommand;
+		static void QuitGame();
+	};
 };
 
 #endif

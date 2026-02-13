@@ -1,7 +1,7 @@
 #include "Visualizer.h"
 
+// engine includes
 #include "FontManager.h"
-
 #include "VizCmdFactory.h"
 #include "VisualizerCommand.h"
 #include "VisualizerCommandPoint.h"
@@ -10,8 +10,7 @@
 #include "VisualizerCommandSegment.h"
 #include "VisualizerCommandText.h"
 #include "EngineAttorney.h"
-
-#include "../Game Code/Constants.h"
+#include "EngineConstants.h"
 
 Visualizer* Visualizer::pInstance = nullptr;
 

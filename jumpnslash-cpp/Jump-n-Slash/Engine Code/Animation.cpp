@@ -43,8 +43,10 @@ bool Animation::IsLastFrame(Iterator it)
 	return tempIt == frames.end();
 }
 
-void Animation::AddFrame(sf::Sprite* pNextFrame)
+void Animation::AddFrame(Sprite* pNextFrame)
 {
+	// TODO: make sure all animation frames have the same number and name of connectors
+
 	frames.push_back(pNextFrame);
 }
 

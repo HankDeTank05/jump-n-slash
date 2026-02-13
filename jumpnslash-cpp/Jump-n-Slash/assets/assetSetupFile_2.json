@@ -1,0 +1,1006 @@
+{
+    "textures": [
+        {
+            "key": "spritesheet",
+            "path": "entities/enemy/spritesheet.png",
+            "smooth": false
+        },
+        {
+            "key": "spritesheet",
+            "path": "entities/player/spritesheet.png",
+            "smooth": false
+        },
+        {
+            "key": "spritesheet",
+            "path": "entities/sword/spritesheet.png",
+            "smooth": false
+        },
+        {
+            "key": "spritesheet",
+            "path": "leveltiles/spritesheet.png",
+            "smooth": false
+        }
+    ],
+    "sprites": [
+        {
+            "sprKey": "enemy idle 1",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "enemy idle 2",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "enemy idle 3",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "enemy idle 4",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player attack 1",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player attack 2",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player attack 3",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player attack 4",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player fall 1",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player fall 2",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player fall 3",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player fall 4",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player idle 1",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 64,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player idle 2",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 64,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player idle 3",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 64,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player idle 4",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 64,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player jump 1",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 96,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player jump 2",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 96,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player jump 3",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 96,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player jump 4",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 96,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testJump 0",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testJump 1",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testJump 2",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testJump 3",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testJump 4",
+            "texKey": "spritesheet",
+            "x": 128,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testJump 5",
+            "texKey": "spritesheet",
+            "x": 160,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testJump 6",
+            "texKey": "spritesheet",
+            "x": 192,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testJump 7",
+            "texKey": "spritesheet",
+            "x": 224,
+            "y": 128,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testLegIdle 0",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 160,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testLegIdle 1",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 160,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testLegIdle 2",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 160,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testLegIdle 3",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 160,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 0",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 1",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 2",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 3",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 4",
+            "texKey": "spritesheet",
+            "x": 128,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 5",
+            "texKey": "spritesheet",
+            "x": 160,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 6",
+            "texKey": "spritesheet",
+            "x": 192,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 7",
+            "texKey": "spritesheet",
+            "x": 224,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player testWalk 8",
+            "texKey": "spritesheet",
+            "x": 256,
+            "y": 192,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player walk 1",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 224,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player walk 2",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 224,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player walk 3",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 224,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "player walk 4",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 224,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "sword idle 1",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "sword swing 1",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "sword swing 2",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "sword swing 3",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "sword swing 4",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "indicator roomHeight",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "indicator roomOrigin",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "indicator roomWidth",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "indicator spawnEnemyLeft",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "indicator spawnEnemyRight",
+            "texKey": "spritesheet",
+            "x": 128,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "indicator spawnPlayerLeft",
+            "texKey": "spritesheet",
+            "x": 160,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "indicator spawnPlayerRight",
+            "texKey": "spritesheet",
+            "x": 192,
+            "y": 0,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder GrappleSwitchRightOn",
+            "texKey": "spritesheet",
+            "x": 0,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder GrappleSwitchUpOn",
+            "texKey": "spritesheet",
+            "x": 32,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder bouncePlatform",
+            "texKey": "spritesheet",
+            "x": 64,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder breakableBlock",
+            "texKey": "spritesheet",
+            "x": 96,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder breakablePlatform",
+            "texKey": "spritesheet",
+            "x": 128,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder doorClosed",
+            "texKey": "spritesheet",
+            "x": 160,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder doorOpen",
+            "texKey": "spritesheet",
+            "x": 192,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder foliageBlock",
+            "texKey": "spritesheet",
+            "x": 224,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleHold",
+            "texKey": "spritesheet",
+            "x": 256,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCcwDownOff",
+            "texKey": "spritesheet",
+            "x": 288,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCcwDownOn",
+            "texKey": "spritesheet",
+            "x": 320,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCcwLeftOff",
+            "texKey": "spritesheet",
+            "x": 352,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCcwLeftOn",
+            "texKey": "spritesheet",
+            "x": 384,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCcwRightOff",
+            "texKey": "spritesheet",
+            "x": 416,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCcwRightOn",
+            "texKey": "spritesheet",
+            "x": 448,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCcwUpOff",
+            "texKey": "spritesheet",
+            "x": 480,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCcwUpOn",
+            "texKey": "spritesheet",
+            "x": 512,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCwDownOff",
+            "texKey": "spritesheet",
+            "x": 544,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCwDownOn",
+            "texKey": "spritesheet",
+            "x": 576,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCwLeftOff",
+            "texKey": "spritesheet",
+            "x": 608,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCwLeftOn",
+            "texKey": "spritesheet",
+            "x": 640,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCwRightOff",
+            "texKey": "spritesheet",
+            "x": 672,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCwRightOn",
+            "texKey": "spritesheet",
+            "x": 704,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCwUpOff",
+            "texKey": "spritesheet",
+            "x": 736,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleLeverCwUpOn",
+            "texKey": "spritesheet",
+            "x": 768,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleSwing",
+            "texKey": "spritesheet",
+            "x": 800,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleSwitchDownOff",
+            "texKey": "spritesheet",
+            "x": 832,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleSwitchDownOn",
+            "texKey": "spritesheet",
+            "x": 864,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleSwitchLeftOff",
+            "texKey": "spritesheet",
+            "x": 896,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleSwitchLeftOn",
+            "texKey": "spritesheet",
+            "x": 928,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleSwitchRightOff",
+            "texKey": "spritesheet",
+            "x": 960,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder grappleSwitchUpOff",
+            "texKey": "spritesheet",
+            "x": 992,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder hazardBlock",
+            "texKey": "spritesheet",
+            "x": 1024,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder ladder",
+            "texKey": "spritesheet",
+            "x": 1056,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder minecart",
+            "texKey": "spritesheet",
+            "x": 1088,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pistonDownIn",
+            "texKey": "spritesheet",
+            "x": 1120,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pistonDownOut",
+            "texKey": "spritesheet",
+            "x": 1152,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pistonLeftIn",
+            "texKey": "spritesheet",
+            "x": 1184,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pistonLeftOut",
+            "texKey": "spritesheet",
+            "x": 1216,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pistonRightIn",
+            "texKey": "spritesheet",
+            "x": 1248,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pistonRightOut",
+            "texKey": "spritesheet",
+            "x": 1280,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pistonUpIn",
+            "texKey": "spritesheet",
+            "x": 1312,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pistonUpOut",
+            "texKey": "spritesheet",
+            "x": 1344,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pushSwitchDownOff",
+            "texKey": "spritesheet",
+            "x": 1376,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pushSwitchDownOn",
+            "texKey": "spritesheet",
+            "x": 1408,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pushSwitchLeftOff",
+            "texKey": "spritesheet",
+            "x": 1440,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pushSwitchLeftOn",
+            "texKey": "spritesheet",
+            "x": 1472,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pushSwitchRightOff",
+            "texKey": "spritesheet",
+            "x": 1504,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pushSwitchRightOn",
+            "texKey": "spritesheet",
+            "x": 1536,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pushSwitchUpOff",
+            "texKey": "spritesheet",
+            "x": 1568,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder pushSwitchUpOn",
+            "texKey": "spritesheet",
+            "x": 1600,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder railBackSlash",
+            "texKey": "spritesheet",
+            "x": 1632,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder railFlat",
+            "texKey": "spritesheet",
+            "x": 1664,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder railForwardSlash",
+            "texKey": "spritesheet",
+            "x": 1696,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder semisolidPlatform",
+            "texKey": "spritesheet",
+            "x": 1728,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder solidBlock",
+            "texKey": "spritesheet",
+            "x": 1760,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentDown",
+            "texKey": "spritesheet",
+            "x": 1792,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentDownLeft",
+            "texKey": "spritesheet",
+            "x": 1824,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentDownRight",
+            "texKey": "spritesheet",
+            "x": 1856,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentLeft",
+            "texKey": "spritesheet",
+            "x": 1888,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentNone",
+            "texKey": "spritesheet",
+            "x": 1920,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentRight",
+            "texKey": "spritesheet",
+            "x": 1952,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentUp",
+            "texKey": "spritesheet",
+            "x": 1984,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentUpLeft",
+            "texKey": "spritesheet",
+            "x": 2016,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        },
+        {
+            "sprKey": "placeholder waterCurrentUpRight",
+            "texKey": "spritesheet",
+            "x": 2048,
+            "y": 32,
+            "w": 32,
+            "h": 32
+        }
+    ],
+    "animations": [],
+    "tilesets": [],
+    "levels": [],
+    "fonts": []
+}

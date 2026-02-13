@@ -1,0 +1,26 @@
+every tile will have different in-game properties and multiple different skins, so this file designates how that data should be defined
+
+json. everything.
+
+example of how a json file would represent a breakable block
+file name: "breakableBlock_data.json"
+{
+	"info": {
+		"name": "breakable block"
+	},
+	"properties": {
+		"damage to player": 0.0,
+		"damage to enemies": 0.0,
+		"damage to npcs": 0.0,
+		"breakable": "true",
+		"solid on top": "true",
+		"solid on sides": "true",
+		"solid on bottom": "true"
+	},
+	"skins": {
+		"placeholder": "placeholder_breakableBlock.png",
+		"forest": "forest_breakableBlock.png",
+		"sky": "sky_breakableBlock.png",
+		"lava": "lava_breakableBlock.png"
+	}
+}

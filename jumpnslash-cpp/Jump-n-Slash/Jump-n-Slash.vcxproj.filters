@@ -85,12 +85,6 @@
     <Filter Include="Source Files\Game Code\Scenes">
       <UniqueIdentifier>{5e9b3079-2e05-4406-b849-155b97e9c9f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Level Data">
-      <UniqueIdentifier>{1eb88e99-537a-41b8-b56a-d933290b1e45}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Level Data\LeveTile dervied classes">
-      <UniqueIdentifier>{52280e2c-ba7a-40e8-838d-256cc8d2b504}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine Code\Debug Systems\Visualizer System\Commands">
       <UniqueIdentifier>{048b4331-6afa-4e42-aee7-c2fa0db848f4}</UniqueIdentifier>
     </Filter>
@@ -100,9 +94,6 @@
     <Filter Include="Source Files\Engine Code\Asset Managers\Font Manager">
       <UniqueIdentifier>{e6525ae9-845f-40a8-8983-4bf36f7072c4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine Code\Asset Managers\Grid Manager">
-      <UniqueIdentifier>{9f71b241-f18f-4cab-b051-a7b7e3ce3c80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Engine Code\Asset Managers\Sprite Manager">
       <UniqueIdentifier>{e917a951-3980-4f00-9c79-c128e9159c2a}</UniqueIdentifier>
     </Filter>
@@ -111,9 +102,6 @@
     </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scene Management">
       <UniqueIdentifier>{a5ade6b3-e40b-43fd-b0de-62685db80ab3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scenes">
-      <UniqueIdentifier>{d097332a-c047-408f-b7b4-e29381258dc2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Engine Code\Tools and Conveniences">
       <UniqueIdentifier>{954d1eef-d3bf-4d20-b589-1d27c9b4107d}</UniqueIdentifier>
@@ -139,14 +127,8 @@
     <Filter Include="Source Files\Engine Code\Asset Managers\Animation Manager">
       <UniqueIdentifier>{45197d60-b3e8-47b9-a365-65de532c418f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Level Data\Tileset">
-      <UniqueIdentifier>{55712ed0-db1a-4a8e-ab06-52db385587cb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Code\Actors\Player">
       <UniqueIdentifier>{03005a24-48dc-482f-bf47-4221183d0c1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Actors\Player\FSM + States">
-      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Collision System\Commands">
       <UniqueIdentifier>{53d4d415-d90e-4c33-9bcc-5e113ec647ea}</UniqueIdentifier>
@@ -159,12 +141,6 @@
     </Filter>
     <Filter Include="Source Files\Game Code\Enemy">
       <UniqueIdentifier>{6034212f-3ecc-492a-b83b-4d7cb259cc2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Sword">
-      <UniqueIdentifier>{4d852e8c-8ee3-4aa4-8a22-ae9c292a4f2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Sword\FSM + States">
-      <UniqueIdentifier>{ccef38b6-441b-4e2a-99f6-b7ca8319fa5c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game Code\Actors\Player\Control Strategy">
       <UniqueIdentifier>{18029e27-0d72-42ec-982e-ac71a5cd629a}</UniqueIdentifier>
@@ -187,23 +163,11 @@
     <Filter Include="Source Files\Game Code\Scenes\LevelScene">
       <UniqueIdentifier>{d1e5d5ff-6af0-4d66-9f82-ef2cbdf0dbbb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Game Code\Scenes\MenuScene">
-      <UniqueIdentifier>{130bee99-e083-447e-9d13-89c3a168bfc0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Game Code\Game Management">
       <UniqueIdentifier>{2f7e37d4-28b4-4a37-9674-f27970ee4283}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Game Code\Game Management\FSM + States">
       <UniqueIdentifier>{1168bd8d-a799-4cf4-9a0e-22adbd5e9bb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Scenes\MenuScene\Pause Menu Scene">
-      <UniqueIdentifier>{f38f8dfd-ed6e-420b-bb72-485ec97a192d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Scenes\MenuScene\Menu Commands">
-      <UniqueIdentifier>{310e41b1-4fd1-48f5-8366-c496720b7f36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Game Code\Scenes\MenuScene\Menus">
-      <UniqueIdentifier>{a0c68726-5f69-4963-b611-e0dfb360250c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Draw System\Commands">
       <UniqueIdentifier>{109ec4c9-76fd-4ac9-aec8-f7e69ee45bdd}</UniqueIdentifier>
@@ -213,6 +177,105 @@
     </Filter>
     <Filter Include="Source Files\Engine Code\Main Systems\GameObject System\Update System\Commands">
       <UniqueIdentifier>{53adc85c-9744-4837-9cde-67ab40fbf730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scene">
+      <UniqueIdentifier>{d097332a-c047-408f-b7b4-e29381258dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem">
+      <UniqueIdentifier>{b90001cd-af3d-43eb-a74a-c53f7a60356e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem\Commands">
+      <UniqueIdentifier>{1dd5d754-6f18-4934-9b02-29765ebf31f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Scene System\Scene\Scene Base System">
+      <UniqueIdentifier>{d7b0333d-a22e-488a-9348-c1c964c2d82f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\Menu Scenes">
+      <UniqueIdentifier>{130bee99-e083-447e-9d13-89c3a168bfc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene">
+      <UniqueIdentifier>{f38f8dfd-ed6e-420b-bb72-485ec97a192d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Core Files\Commands">
+      <UniqueIdentifier>{147c121f-aefa-45af-a51f-4dcbf9ac6510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\Menu Scenes\Commands">
+      <UniqueIdentifier>{310e41b1-4fd1-48f5-8366-c496720b7f36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Scenes\Menu Scenes\Menus">
+      <UniqueIdentifier>{a0c68726-5f69-4963-b611-e0dfb360250c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Dreamcatcher System">
+      <UniqueIdentifier>{f52aedb8-cb79-4b39-b8df-d72ab47361b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player\Movement FSM + States">
+      <UniqueIdentifier>{a91cb912-3c4a-4854-be59-441def18561c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Designer Controls">
+      <UniqueIdentifier>{445aa9ec-4e28-49e9-b432-b0892ca6f838}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System">
+      <UniqueIdentifier>{b12ea975-1bac-460c-80e9-75027d87cd77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Commands">
+      <UniqueIdentifier>{3a72ef81-e17c-4285-b3d4-d3c385396ada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands">
+      <UniqueIdentifier>{9273f7d0-5896-4db7-863d-4b2a75273d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands">
+      <UniqueIdentifier>{b109499f-7439-4d6c-8294-75bc6f27f821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands">
+      <UniqueIdentifier>{3cd8cb72-318d-49f7-b8b9-cc3ade9ea0fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Sword">
+      <UniqueIdentifier>{4d852e8c-8ee3-4aa4-8a22-ae9c292a4f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Sword\FSM + States">
+      <UniqueIdentifier>{ccef38b6-441b-4e2a-99f6-b7ca8319fa5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Actors\Player\Animation FSM + States">
+      <UniqueIdentifier>{3cb9aea3-edff-4d13-b90c-6605e80ab8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites">
+      <UniqueIdentifier>{e958c73b-19fe-4f7f-a8c2-98b8b06bfdf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Tools">
+      <UniqueIdentifier>{c0556000-1ed2-4741-a859-08120274542d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Tools\Text Parsing">
+      <UniqueIdentifier>{7cd385d6-7b1f-4c98-9c3a-28d8020ea36a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Tools\JsonParser">
+      <UniqueIdentifier>{22134239-2c6c-4b33-bfa2-e1875ce1b666}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Tools\Asset Loader 2">
+      <UniqueIdentifier>{405abf7d-b863-420e-bfb3-8279da4fa93f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Tools\Asset Loader 2\Commands">
+      <UniqueIdentifier>{ee378375-7556-496f-908b-9b9911ec9ffa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Map Manager">
+      <UniqueIdentifier>{9f71b241-f18f-4cab-b051-a7b7e3ce3c80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Main Systems\Tileset System">
+      <UniqueIdentifier>{accb8f24-cca6-4381-bc3d-5d81d9da88b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine Code\Asset Managers\Tileset Manager">
+      <UniqueIdentifier>{a8fa3a1b-abfc-4bc1-9f86-198ea9c32cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Map Data">
+      <UniqueIdentifier>{1eb88e99-537a-41b8-b56a-d933290b1e45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Map Data\Old System">
+      <UniqueIdentifier>{a34e99e2-3dc5-4066-a96e-349e4a7eded3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Map Data\Old System\LeveTile dervied classes">
+      <UniqueIdentifier>{52280e2c-ba7a-40e8-838d-256cc8d2b504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Code\Map Data\Tiles">
+      <UniqueIdentifier>{ef8707cc-4427-40bd-94fe-b93ecba18e71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -288,17 +351,17 @@
     <ClCompile Include="Engine Code\MouseCursorDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Input System\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerStateIdle.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveStateIdle.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerStateWalking.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveStateWalking.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerStateJumping.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveStateJumping.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerStateFalling.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveStateFalling.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\Player.cpp">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
@@ -306,29 +369,11 @@
     <ClCompile Include="Game Code\Level0.cpp">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\PlayerFSM.cpp">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClCompile Include="Game Code\PlayerMoveFSM.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\PlayerAttorney.cpp">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\LevelMap.cpp">
-      <Filter>Source Files\Game Code\Level Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\LevelTile.cpp">
-      <Filter>Source Files\Game Code\Level Data</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\BlockBreakable.cpp">
-      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\BlockHazard.cpp">
-      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\BlockSolid.cpp">
-      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\PlatformSemisolid.cpp">
-      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\EngineAttorney.cpp">
       <Filter>Source Files\Engine Code\Core Files</Filter>
@@ -384,11 +429,11 @@
     <ClCompile Include="Engine Code\FontManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Font Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\GridManager.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    <ClCompile Include="Engine Code\MapManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Map Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine Code\GridManagerAttorney.cpp">
-      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    <ClCompile Include="Engine Code\MapManagerAttorney.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Map Manager</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\SpriteManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Sprite Manager</Filter>
@@ -401,15 +446,6 @@
     </ClCompile>
     <ClCompile Include="Engine Code\TextureManagerAttorney.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Texture Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\RegistrationBroker.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\Scene.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine Code\SceneAttorney.cpp">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\SceneManager.cpp">
       <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
@@ -428,9 +464,6 @@
     </ClCompile>
     <ClCompile Include="Engine Code\Math.cpp">
       <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\RoomData.cpp">
-      <Filter>Source Files\Game Code\Level Data</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\Subject.cpp">
       <Filter>Source Files\Engine Code\Design Patterns\Observer</Filter>
@@ -461,9 +494,6 @@
     </ClCompile>
     <ClCompile Include="Engine Code\ConvenienceFunctions.cpp">
       <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\AssetLoader.cpp">
-      <Filter>Source Files\Game Code\Misc. files</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\AnimationManager.cpp">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
@@ -600,9 +630,6 @@
     <ClCompile Include="Game Code\LevelScene.cpp">
       <Filter>Source Files\Game Code\Scenes\LevelScene</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\Menu.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\GameManager.cpp">
       <Filter>Source Files\Game Code\Game Management</Filter>
     </ClCompile>
@@ -618,41 +645,11 @@
     <ClCompile Include="Game Code\GameManagerAttorney.cpp">
       <Filter>Source Files\Game Code\Game Management</Filter>
     </ClCompile>
-    <ClCompile Include="Game Code\MenuScene.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
-    </ClCompile>
     <ClCompile Include="Game Code\PauseMenuScene.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Pause Menu Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\MenuManager.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\ResumeGameCommand.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\EnterSubmenuCommand.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\ExitSubmenuCommand.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\ChangeControlsCommand.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\QuitGameCommand.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\PauseMenu.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\ChangeControlsMenu.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
-    </ClCompile>
-    <ClCompile Include="Game Code\MenuAttorney.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene</Filter>
     </ClCompile>
     <ClCompile Include="Game Code\MenuControlStrategy.cpp">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Engine Code\DrawDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System\Commands</Filter>
@@ -672,6 +669,183 @@
     <ClCompile Include="Engine Code\UpdateDeregistrationCommand.cpp">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Engine Code\EnterSubmenuCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\ExitSubmenuCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\QuitGameCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\RegistrationBroker.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\Scene Base System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Scene.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\Scene Base System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SceneAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\Scene Base System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Menu.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MenuAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MenuManager.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MenuScene.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ChangeControlsMenu.cpp">
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PauseMenu.cpp">
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\EngineQuitCommand.cpp">
+      <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\EngineDontQuitCommand.cpp">
+      <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ResumeGameCommand.cpp">
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerMoveStateDashing.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Sprite.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GameObject.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GameObjectAttorney.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GameObjectRegistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\GameObjectDeregistrationCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerMoveStateSlashAtk.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\PlayerMoveStateDreamAtk.cpp">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\CompoundSpriteScene.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Engine Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\CompSprTest.cpp">
+      <Filter>Source Files\Game Code\Misc. files\Engine Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\CompoundSprite.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteTreeNode.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\MultiSprite.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\SwordAttorney.cpp">
+      <Filter>Source Files\Game Code\Sword</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\TextParser.cpp">
+      <Filter>Source Files\Game Code\Tools\Text Parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\AssetLoader.cpp">
+      <Filter>Source Files\Game Code\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonParser.cpp">
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonNodeBase.cpp">
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonNodeList.cpp">
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\JsonNodeStr.cpp">
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommand.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandPos.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandPosSet.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandPosConn.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandPosMove.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandRot.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandRotChange.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandRotSet.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandScl.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandSclSet.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\SpriteCommandSclChange.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\AssetLoader2.cpp">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\TextureLoadCommand.cpp">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\SpriteLoadCommand.cpp">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\Tileset.cpp">
+      <Filter>Source Files\Engine Code\Main Systems\Tileset System</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine Code\TilesetManager.cpp">
+      <Filter>Source Files\Engine Code\Asset Managers\Tileset Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\MapTile.cpp">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\LevelTile.cpp">
+      <Filter>Source Files\Game Code\Map Data\Old System</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\RoomData.cpp">
+      <Filter>Source Files\Game Code\Map Data\Old System</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Activator.cpp">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\Activatable.cpp">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\ActivatableAttorney.cpp">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Game Code\LevelMap.cpp">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine Code\JumpSlashEngine.h">
@@ -688,9 +862,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\DrawObject.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\DesignerControls.h">
-      <Filter>Source Files\Game Code</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\DrawObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System</Filter>
@@ -764,44 +935,26 @@
     <ClInclude Include="Game Code\Player.h">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerStateIdle.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveStateIdle.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerFSM.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveFSM.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerStateWalking.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveStateWalking.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerStateJumping.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveStateJumping.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\PlayerStateFalling.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+    <ClInclude Include="Game Code\PlayerMoveStateFalling.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\Level0.h">
       <Filter>Source Files\Game Code\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerAttorney.h">
       <Filter>Source Files\Game Code\Actors\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\LevelMap.h">
-      <Filter>Source Files\Game Code\Level Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\LevelTile.h">
-      <Filter>Source Files\Game Code\Level Data</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\BlockBreakable.h">
-      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\BlockHazard.h">
-      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\PlatformSemisolid.h">
-      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\BlockSolid.h">
-      <Filter>Source Files\Game Code\Level Data\LeveTile dervied classes</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\EngineAttorney.h">
       <Filter>Source Files\Engine Code\Core Files</Filter>
@@ -845,7 +998,7 @@
     <ClInclude Include="Engine Code\VizCmdFactoryAttorney.h">
       <Filter>Source Files\Engine Code\Debug Systems\Visualizer System\Command Recycling</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\DebugFlags.h">
+    <ClInclude Include="Game Code\GameDebugFlags.h">
       <Filter>Source Files\Game Code</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\VisualizerCommandText.h">
@@ -860,11 +1013,11 @@
     <ClInclude Include="Engine Code\FontManager.h">
       <Filter>Source Files\Engine Code\Asset Managers\Font Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\GridManagerAttorney.h">
-      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    <ClInclude Include="Engine Code\MapManagerAttorney.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Map Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine Code\GridManager.h">
-      <Filter>Source Files\Engine Code\Asset Managers\Grid Manager</Filter>
+    <ClInclude Include="Engine Code\MapManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Map Manager</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\SpriteManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers\Sprite Manager</Filter>
@@ -877,15 +1030,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\TextureManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers\Texture Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\Scene.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\RegistrationBroker.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine Code\SceneAttorney.h">
-      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\SceneManager.h">
       <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene Management</Filter>
@@ -904,9 +1048,6 @@
     </ClInclude>
     <ClInclude Include="Engine Code\Math.h">
       <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\RoomData.h">
-      <Filter>Source Files\Game Code\Level Data</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\Command.h">
       <Filter>Source Files\Engine Code\Design Patterns\Command</Filter>
@@ -953,17 +1094,11 @@
     <ClInclude Include="Engine Code\ConvenienceFunctions.h">
       <Filter>Source Files\Engine Code\Tools and Conveniences</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\AssetLoader.h">
-      <Filter>Source Files\Game Code\Misc. files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine Code\AnimationManager.h">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\AnimationManagerAttorney.h">
       <Filter>Source Files\Engine Code\Asset Managers\Animation Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\Tileset.h">
-      <Filter>Source Files\Game Code\Level Data\Tileset</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\CollisionObjectAttorney.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Collision System</Filter>
@@ -1016,9 +1151,6 @@
     <ClInclude Include="Game Code\SwordFSM.h">
       <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\SwordState.h">
-      <Filter>Source Files\Game Code\Sword</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\SwordStateIdle.h">
       <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
     </ClInclude>
@@ -1053,7 +1185,7 @@
       <Filter>Source Files\Game Code\Control Mapping &amp; Management</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerMoveState.h">
-      <Filter>Source Files\Game Code\Actors\Player\FSM + States</Filter>
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PlayerControlStrategy.h">
       <Filter>Source Files\Game Code\Actors\Player\Control Strategy</Filter>
@@ -1109,15 +1241,6 @@
     <ClInclude Include="Game Code\LevelScene.h">
       <Filter>Source Files\Game Code\Scenes\LevelScene</Filter>
     </ClInclude>
-    <ClInclude Include="Game Code\MenuScene.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\Menu.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\MenuCommand.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
-    </ClInclude>
     <ClInclude Include="Game Code\GameManager.h">
       <Filter>Source Files\Game Code\Game Management</Filter>
     </ClInclude>
@@ -1137,37 +1260,10 @@
       <Filter>Source Files\Game Code\Game Management</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\PauseMenuScene.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Pause Menu Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\MenuManager.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\ResumeGameCommand.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\EnterSubmenuCommand.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\ExitSubmenuCommand.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\ChangeControlsCommand.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\QuitGameCommand.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menu Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\PauseMenu.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\ChangeControlsMenu.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene\Menus</Filter>
-    </ClInclude>
-    <ClInclude Include="Game Code\MenuAttorney.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Pause Menu Scene</Filter>
     </ClInclude>
     <ClInclude Include="Game Code\MenuControlStrategy.h">
-      <Filter>Source Files\Game Code\Scenes\MenuScene</Filter>
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Engine Code\DrawDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Draw System\Commands</Filter>
@@ -1186,6 +1282,252 @@
     </ClInclude>
     <ClInclude Include="Engine Code\UpdateDeregistrationCommand.h">
       <Filter>Source Files\Engine Code\Main Systems\GameObject System\Update System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\EnterSubmenuCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\ExitSubmenuCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\QuitGameCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SceneAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\Scene Base System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\RegistrationBroker.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\Scene Base System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Scene.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\Scene Base System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Menu.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MenuAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MenuCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MenuManager.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MenuScene.h">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PauseMenu.h">
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ChangeControlsMenu.h">
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\EngineQuitCommandBase.h">
+      <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\EngineQuitCommand.h">
+      <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\EngineDontQuitCommand.h">
+      <Filter>Source Files\Engine Code\Core Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ResumeGameCommand.h">
+      <Filter>Source Files\Game Code\Scenes\Menu Scenes\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Dreamcatcher.h">
+      <Filter>Source Files\Game Code\Dreamcatcher System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\GhostDreamcatcher.h">
+      <Filter>Source Files\Game Code\Dreamcatcher System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerMoveStateDashing.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\EngineConstants.h">
+      <Filter>Source Files\Engine Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ControlMapping.h">
+      <Filter>Source Files\Game Code\Designer Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ParamsDreamcatchers.h">
+      <Filter>Source Files\Game Code\Designer Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ParamsPlayer.h">
+      <Filter>Source Files\Game Code\Designer Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\SwordState.h">
+      <Filter>Source Files\Game Code\Sword\FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Sprite.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\EngineDebugFlags.h">
+      <Filter>Source Files\Engine Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GameObject.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GameObjectAttorney.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GameObjectRegistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\GameObjectDeregistrationCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\GameObject System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerAnimState.h">
+      <Filter>Source Files\Game Code\Actors\Player\Animation FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerAnimFSM.h">
+      <Filter>Source Files\Game Code\Actors\Player\Animation FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerMoveStateSlashAtk.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlayerMoveStateDreamAtk.h">
+      <Filter>Source Files\Game Code\Actors\Player\Movement FSM + States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\CompoundSpriteScene.h">
+      <Filter>Source Files\Game Code\Misc. files\Engine Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\CompSprTest.h">
+      <Filter>Source Files\Game Code\Misc. files\Engine Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\CompoundSprite.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteTreeNode.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\MultiSprite.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Compound Sprites</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TreeTraversal.h">
+      <Filter>Source Files\Engine Code\Misc. files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\SwordAttorney.h">
+      <Filter>Source Files\Game Code\Sword</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\TextParser.h">
+      <Filter>Source Files\Game Code\Tools\Text Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AssetLoader.h">
+      <Filter>Source Files\Game Code\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonParser.h">
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonNodeBase.h">
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonNodeStr.h">
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\JsonNodeList.h">
+      <Filter>Source Files\Game Code\Tools\JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommand.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandPos.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandPosSet.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandPosConn.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandPosMove.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Position Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandRot.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandRotSet.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandRotChange.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Rotation Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandScl.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandSclSet.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\SpriteCommandSclChange.h">
+      <Filter>Source Files\Engine Code\Main Systems\Sprite System\Commands\Scale Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AssetLoader2.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AssetLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\TextureLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\SpriteLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\AnimationLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MapLoadCommand.h">
+      <Filter>Source Files\Game Code\Tools\Asset Loader 2\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\Tileset.h">
+      <Filter>Source Files\Engine Code\Main Systems\Tileset System</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine Code\TilesetManager.h">
+      <Filter>Source Files\Engine Code\Asset Managers\Tileset Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\MapTile.h">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\TileProperties.h">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\LevelTile.h">
+      <Filter>Source Files\Game Code\Map Data\Old System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\RoomData.h">
+      <Filter>Source Files\Game Code\Map Data\Old System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Activator.h">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\Activatable.h">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\ActivatableAttorney.h">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\LevelMap.h">
+      <Filter>Source Files\Game Code\Map Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\BlockSolid.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\BlockBreakable.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\BlockHazard.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlatformSemisolid.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlatformBreakable.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game Code\PlatformBouncy.h">
+      <Filter>Source Files\Game Code\Map Data\Tiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1207,5 +1549,10 @@
     <Text Include="Game Code\HelpfulReferenceResources.txt">
       <Filter>Source Files\Game Code\Misc. files\Extra Documentation</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine Code\MenuSceneSystemDiagram.cd">
+      <Filter>Source Files\Engine Code\Main Systems\Scene System\Scene\MenuScene Subsystem</Filter>
+    </None>
   </ItemGroup>
 </Project>

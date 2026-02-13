@@ -1,9 +1,12 @@
 #include "TestClass.h"
 
+// engine includes
 #include "../Engine Code/JumpSlashEngine.h"
-#include "Constants.h"
-#include "DebugFlags.h"
 #include "../Engine Code/Visualizer.h"
+
+// game includes
+#include "Constants.h"
+#include "GameDebugFlags.h"
 
 TestClass::TestClass()
 	: circle(64.0f),

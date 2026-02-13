@@ -308,7 +308,109 @@ void Mario::KeyReleased(sf::Keyboard::Key key)
 
 \section go_alarmSystem The Alarm System (coming soon)
 
-\section go_collisionSystem The Collision System (coming soon)
+\section go_collisionSystem The Collision System
+
+The collision system is the most complicated game object system in this engine. It is very important it be used correctly, otherwise it will not work.
+In order to properly set up the collision system, this tutorial will walk you through step-by-step to set up everything necessary.
+
+\subsection go_collisionSystem_part1 Part 1
+
+Let's create a scene where two objects will collide with each other, and the two objects that will collide.
+
+\code
+// Level1.h
+#ifndef LEVEL_1_H
+#define LEVEL_1_H
+
+#include "../Engine Code/Scene/h"
+
+// forward declarations
+class Mario;
+class Goomba;
+
+class Level1 : public Scene
+{
+public:
+	Level1();
+	virtual ~Level1();
+
+	virtual void Init() override;
+	virtual void End() override;
+
+private:
+	Mario* pMario;
+	Goomba* pGoomba;
+}
+
+#endif
+\endcode
+\code
+// Level1.cpp
+#include "Level1.h"
+
+Level1::Level1()
+	: pMario(nullptr),
+	pGoomba(nullptr)
+{
+	// do nothing
+}
+
+Level1::~Level1()
+{
+	// ... some code ...
+}
+
+void Level1::Init()
+{
+	pMario = new Mario();
+	pGoomba = new Goomba();
+}
+
+void Level1::End()
+{
+	delete pMario;
+	pMario = nullptr;
+
+	delete pGoomba;
+	pGoomba = nullptr;
+}
+\endcode
+\code
+// Mario.h
+#ifndef MARIO_H
+#define MARIO_H
+
+// library includes
+#include <SFML/Graphics/Sprite.hpp>
+
+// engine includes
+#include "../Engine Code/DrawObject.h"
+#include "../Engine Code/CollisionObject.h"
+
+class Mario : public CollisionObject, public DrawObject
+{
+public:
+	Mario();
+	virtual ~Mario();
+
+	// collision stuff
+	virtual void OnCollisionEnter(CollisionObject* pOther) override;
+	virtual void OnCollisionDuring(CollisionObject* pOther) override;
+	virtual void OnCollisionExit(CollisionObject* pOther) override;
+
+private:
+	Sprite* pSprite;
+}
+
+#endif
+\endcode
+\code
+// Mario.cpp
+#include "Mario.h"
+
+Mario::Mario()
+	: pSprite()
+\endcode
 
 TODO: documentation for CreatingGameObject tutorial is incomplete
 

@@ -1,7 +1,9 @@
 #include "Player.h"
 
+// language includes
 #include <iostream>
 
+// engine includes
 #include "../Engine Code/SpriteManager.h"
 #include "../Engine Code/AnimationManager.h"
 #include "../Engine Code/Visualizer.h"
@@ -10,15 +12,15 @@
 #include "../Engine Code/Camera.h"
 #include "../Engine Code/AnimationSet.h"
 #include "../Engine Code/Animation.h"
-#include "../Engine Code/Math.h"
 #include "../Engine Code/ConvenienceFunctions.h"
 #include "../Engine Code/ControlManager.h"
 
+// game includes
 #include "Constants.h"
-#include "DebugFlags.h"
-#include "DesignerControls.h"
+#include "GameDebugFlags.h"
+#include "ParamsPlayer.h"
 #include "PlayerMoveState.h"
-#include "PlayerFSM.h"
+#include "PlayerMoveFSM.h"
 #include "LevelMap.h"
 #include "LevelTile.h"
 #include "RoomData.h"
@@ -26,25 +28,28 @@
 #include "PlayerControlSwitchPro.h"
 #include "PlayerControlDualSense.h"
 #include "ControllerDebugger.h"
+#include "GameManagerAttorney.h"
+#include "Sword.h"
+#include "SwordAttorney.h"
 
-Player::Player(LevelMap* pLevel)
-	: Actor(PLAYER_WALK_SPEED, pLevel),
+Player::Player()
+	: Actor(Movement::GROUNDED_HORIZONTAL_MOVE_SPEED),
 	pCtrlStrat(nullptr),
-	pCurrentState(&PlayerFSM::idle),
+	pCurrentState(&PlayerMoveFSM::idle),
 	pPrevState(nullptr),
+	pSword(new Sword(this)),
 	respawnPoint(),
-	//inputReceivedWalkLeft(false),
-	//inputReceivedWalkRight(false),
 	inputWalkDir(0.f),
 	inputReceivedJump(false),
-	applyGravity(true)
+	inputReceivedSlashAtk(false),
+	applyGravity(true),
+	attacking(false),
+	heightBeforeJump(0.f),
+	peakJumpHeight(heightBeforeJump)
 {	
 	assert(pCurrentState != nullptr);
 
 	SetControls(ControlManager::GetControlScheme());
-
-	// connect to map
-	pLevel->LinkToPlayer(this);
 
 	// do animation stuff
 	AnimationSet* pAnimSet = new AnimationSet();
@@ -54,8 +59,6 @@ Player::Player(LevelMap* pLevel)
 	pAnimSet->AddAnimation("jump", AnimationManager::GetAnimation("player jump"));
 	pAnimSet->AddAnimation("fall", AnimationManager::GetAnimation("player fall"));
 	
-
-	pAnimComp->DefineAnimationSet(pAnimSet);
 	pAnimComp->SetAnimation("idle");
 
 	pSprite = pAnimComp->GetCurrentFrame();
@@ -65,12 +68,12 @@ Player::Player(LevelMap* pLevel)
 	// register with the engine
 	RequestUpdateRegistration();
 	RequestDrawRegistration();
-	//RequestKeyRegistration(KB_GAME_JUMP, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_GAME_JUMP, KeyEvent::KeyRelease);
-	//RequestKeyRegistration(KB_GAME_WALK_LEFT, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_GAME_WALK_LEFT, KeyEvent::KeyRelease);
-	//RequestKeyRegistration(KB_GAME_WALK_RIGHT, KeyEvent::KeyPress);
-	//RequestKeyRegistration(KB_GAME_WALK_RIGHT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(JUMP, KeyEvent::KeyPress);
+	//RequestKeyRegistration(JUMP, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(WALK_LEFT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(WALK_LEFT, KeyEvent::KeyRelease);
+	//RequestKeyRegistration(WALK_RIGHT, KeyEvent::KeyPress);
+	//RequestKeyRegistration(WALK_RIGHT, KeyEvent::KeyRelease);
 
 	SetCollisionSprite(pSprite, VolumeType::BSphere);
 }
@@ -78,11 +81,11 @@ Player::Player(LevelMap* pLevel)
 Player::~Player()
 {
 	delete pCtrlStrat;
+	delete pSword;
 }
 
 void Player::Update(float deltaTime)
 {
-	assert(pLevel != nullptr);
 	assert(pCurrentRoom != nullptr);
 
 	// update the inputs
@@ -95,7 +98,7 @@ void Player::Update(float deltaTime)
 		pCurrentState->Enter(this);
 	}
 
-	// update player based on the current move state
+	// move player
 	pCurrentState->Update(this, deltaTime);
 
 	// check if we're still inside the room
@@ -121,25 +124,10 @@ void Player::Update(float deltaTime)
 	}
 
 	// update the sprite
-	assert(pSprite != nullptr);
-	pSprite = pAnimComp->GetCurrentFrame();
-	SetWidth();
-	SetHeight();
+	UpdateSprite();
 
-	if (facing == 1)
-	{
-		pSprite->setOrigin(0.f, 0.f);
-	}
-	else if (facing == -1)
-	{
-		pSprite->setOrigin(width, 0.f);
-	}
-	else
-	{
-		assert(false);
-	}
-	pSprite->setScale(sf::Vector2f(static_cast<float>(facing), 1.f));
-	pSprite->setPosition(pos);
+	FaceSprite();
+	pSprite->SetPosition(pos);
 	UpdateCollisionData(pSprite);
 
 	// update the previous state for the next frame
@@ -169,49 +157,53 @@ void Player::Update(float deltaTime)
 		Visualizer::VisualizeText(Convenience::ConvertToString(tempPosDelta), textPos, posDeltaColor);
 		Visualizer::VisualizeSegment(pos + halfTileDelta, pos + halfTileDelta + tempPosDelta, posDeltaColor);
 	}
-	if (DEBUG_PLAYER_STATE)
+	if (DEBUG_PLAYER_MOVE_STATE)
 	{
 		std::string stateStr;
-		if (pCurrentState == &PlayerFSM::falling) stateStr = "fall";
-		else if (pCurrentState == &PlayerFSM::idle) stateStr = "idle";
-		else if (pCurrentState == &PlayerFSM::jumping) stateStr = "jump";
-		else if (pCurrentState == &PlayerFSM::walking) stateStr = "walk";
+		if (pCurrentState == &PlayerMoveFSM::falling) stateStr = "fall";
+		else if (pCurrentState == &PlayerMoveFSM::idle) stateStr = "idle";
+		else if (pCurrentState == &PlayerMoveFSM::jumping) stateStr = "jump";
+		else if (pCurrentState == &PlayerMoveFSM::walking) stateStr = "walk";
+		else if (pCurrentState == &PlayerMoveFSM::slashAtk) stateStr = "slashAtk";
 		else assert(false); // just in case we add any states and forget to update the debug code, this'll crash to remind us
 		sf::Vector2f textPos = Math::ConvertScreenToWorldSpace(sf::Vector2i(0, VIZ_DEFAULT_TEXT_SIZE * 2));
 		Visualizer::VisualizeText(stateStr, textPos, sf::Color::Cyan);
 	}
 	if (DEBUG_LEVEL_SCROLL_BOUNDS)
 	{
-		pLevel->DebugLevelScrollBounds(pCurrentRoom);
+		LevelMap* pMap = GameManagerAttorney::PlayerAccess::GetMap();
+		pMap->DebugLevelScrollBounds(pCurrentRoom);
 	}
 	if (DEBUG_CONTROLLER_INPUT)
 	{
 		ControllerDebugger::DisplayDebugInfo();
 	}
+	if (DEBUG_CONNECTORS) pSprite->DebugConnectors();
 }
 
 void Player::Alarm0()
 {
+	assert(false);
 	applyGravity = true;
 }
 
-//void Player::KeyPressed(sf::Keyboard::Key key)
-//{
-//	switch (key)
-//	{
-//	case KB_GAME_WALK_LEFT:
-//		//inputReceivedWalkLeft = true;
+void Player::Alarm1()
+{
+	assert(pCurrentState == &PlayerMoveFSM::slashAtk);
+	attacking = false;
+}
+
 //		inputWalkDir -= 1.f;
 //		if (inputWalkDir < -1.f) inputWalkDir = -1.f;
 //		facing = -1;
 //		break;
-//	case KB_GAME_WALK_RIGHT:
+//	case WALK_RIGHT:
 //		//inputReceivedWalkRight = true;
 //		inputWalkDir += 1.f;
 //		if (inputWalkDir > 1.f) inputWalkDir = 1.f;
 //		facing = 1;
 //		break;
-//	case KB_GAME_JUMP:
+//	case JUMP:
 //		inputReceivedJump = true;
 //		break;
 //	}
@@ -221,17 +213,51 @@ void Player::Alarm0()
 //{
 //	switch (key)
 //	{
-//	case KB_GAME_WALK_LEFT:
+//	case WALK_LEFT:
 //		//inputReceivedWalkLeft = false;
 //		inputWalkDir += 1.f;
 //		if (inputWalkDir < 0.f) inputWalkDir = 0.f;
 //		break;
-//	case KB_GAME_WALK_RIGHT:
+//	case WALK_RIGHT:
 //		//inputReceivedWalkRight = false;
 //		inputWalkDir -= 1.f;
 //		if (inputWalkDir > 0.f) inputWalkDir = 0.f;
 //		break;
-//	case KB_GAME_JUMP:
+void Player::PlaceInMap()
+{
+	LevelMap* pLevel = GameManagerAttorney::PlayerAccess::GetMap();
+	assert(pLevel != nullptr);
+	pLevel->PlacePlayerInMap();
+}
+
+void Player::OnSceneEntry()
+{
+	SetControls(ControlManager::GetControlScheme());
+
+	// do animation stuff
+	pAnimComp->DefineAnimation("idle", AnimationManager::GetAnimation("player idle"));
+	pAnimComp->DefineAnimation("walk", AnimationManager::GetAnimation("player walk"));
+	pAnimComp->DefineAnimation("jump", AnimationManager::GetAnimation("player jump"));
+	pAnimComp->DefineAnimation("fall", AnimationManager::GetAnimation("player fall"));
+	pAnimComp->DefineAnimation("attack", AnimationManager::GetAnimation("player attack"));
+
+	pAnimComp->SetAnimation("idle");
+
+	pSprite = pAnimComp->GetCurrentFrame();
+	SetWidth();
+	SetHeight();
+
+	SetCollisionObjectGroup<Player>();
+	SetCollisionSprite(pSprite, VolumeType::BSphere);
+	RequestCollisionRegistration();
+}
+
+void Player::OnSceneExit()
+{
+	RequestCollisionDeregistration();
+}
+
+//	case JUMP:
 //		inputReceivedJump = false;
 //		break;
 //	}
@@ -242,6 +268,16 @@ bool Player::IsApplyGravity()
 	return applyGravity;
 }
 
+bool Player::IsReceivingSlashInput()
+{
+	return inputReceivedSlashAtk;
+}
+
+bool Player::IsAttacking()
+{
+	return attacking;
+}
+
 void Player::OnCollisionEnter(CollisionObject* pOther)
 {
 	if (DEBUG_COLLISION) std::cout << "Player has entered collision" << std::endl;
@@ -249,7 +285,7 @@ void Player::OnCollisionEnter(CollisionObject* pOther)
 
 void Player::OnCollisionDuring(CollisionObject* pOther)
 {
-	// do nothing
+	//if (DEBUG_COLLISION) std::cout << "Player is currently colliding" << std::endl;
 }
 
 void Player::OnCollisionExit(CollisionObject* pOther)
@@ -261,11 +297,35 @@ void Player::ProcessInputs(float deltaTime)
 {
 	posDelta.x = speed * inputWalkDir * deltaTime;
 
-	if (grounded && inputReceivedJump)
+	if (inputReceivedJump == true && heightBeforeJump - peakJumpHeight <= Movement::MAX_JUMP_HEIGHT)
 	{
-		posDelta.y = JUMP_FORCE * deltaTime;
-		applyGravity = false; // temporarily stop applying gravity to allow variable height jumping
-		RequestAlarmRegistration(AlarmID::Alarm0, MAX_JUMP_HOLD_TIME);
+		if (grounded)
+		{
+			posDelta.y = -Movement::JUMP_RISING_SPEED * deltaTime;
+			applyGravity = false; // temporarily stop applying gravity to allow variable height jumping
+			heightBeforeJump = pos.y;
+		}
+		else if(pos.y < peakJumpHeight)
+		{
+			peakJumpHeight = pos.y;
+			//std::cout << peakJumpHeight << std::endl;
+		}
+	}
+	else if(inputReceivedJump == false || heightBeforeJump - peakJumpHeight > Movement::MAX_JUMP_HEIGHT)
+	{
+		// the following if block is what makes the player begin descending the moment they release the jump button
+		if (applyGravity == false)
+		{
+			posDelta.y = 0.f;
+		}
+
+		applyGravity = true;
+		
+		if (grounded)
+		{
+			heightBeforeJump = pos.y;
+			peakJumpHeight = heightBeforeJump;
+		}
 	}
 }
 
@@ -294,6 +354,11 @@ void Player::SetControls(ControlScheme ctrl)
 	}
 }
 
+void Player::ApplyGravity(float deltaTime)
+{
+	posDelta.y += Movement::PLAYER_GRAVITY * deltaTime;
+}
+
 void Player::SetWalk(float direction)
 {
 	assert(-1.f <= direction);
@@ -315,12 +380,27 @@ void Player::SetJump(bool enabled)
 	inputReceivedJump = enabled;
 }
 
+void Player::SetSlash(bool enabled)
+{
+	inputReceivedSlashAtk = enabled;
+}
+
 void Player::SetCurrentRoom(RoomData* _pCurrentRoom)
 {
 	pCurrentRoom = _pCurrentRoom;
 	if (pCurrentRoom->HasPlayerSpawn())
 	{
 		respawnPoint = *(pCurrentRoom->GetPlayerSpawnPoint());
+	}
+}
+
+void Player::BeginSlashAtk()
+{
+	if (attacking == false) // only allow attacks if you're not currently attacking
+	{
+		SwordAttorney::PlayerAccess::Attack(pSword);
+		RequestAlarmRegistration(AlarmID::Alarm1, SlashAtk::SLASH_ACTIVE_TIME);
+		attacking = true;
 	}
 }
 
@@ -342,4 +422,9 @@ void Player::SetAnimationJump()
 void Player::SetAnimationFall()
 {
 	pAnimComp->SetAnimation("fall");
+}
+
+void Player::SetAnimationAttack()
+{
+	pAnimComp->SetAnimation("attack");
 }
